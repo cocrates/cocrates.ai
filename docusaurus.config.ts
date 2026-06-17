@@ -12,7 +12,7 @@ const config: Config = {
   },
 
   url: 'https://cocrates.github.io',
-  baseUrl: '/cocrates/',
+  baseUrl: '/cocrates.ai/',
 
   organizationName: 'cocrates',
   projectName: 'cocrates',
@@ -30,7 +30,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          editUrl: 'https://github.com/cocrates/cocrates/tree/main/',
+          editUrl: 'https://github.com/cocrates/cocrates.ai/tree/main/',
         },
         blog: false,
         theme: {
@@ -59,7 +59,7 @@ const config: Config = {
           label: '문서',
         },
         {
-          href: 'https://github.com/cocrates/cocrates',
+          href: 'https://github.com/cocrates/cocrates.ai',
           label: 'GitHub',
           position: 'right',
         },
@@ -82,7 +82,7 @@ const config: Config = {
           items: [
             {
               label: 'GitHub',
-              href: 'https://github.com/cocrates/cocrates',
+              href: 'https://github.com/cocrates/cocrates.ai',
             },
           ],
         },
