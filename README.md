@@ -2,7 +2,7 @@
 
 Docusaurus 기반 문서 사이트입니다. GitHub Pages에 배포됩니다.
 
-- **사이트 URL**: https://cocrates.github.io/cocrates/
+- **사이트 URL**: https://cocrates.github.io/cocrates.ai/
 
 ## 로컬 개발
 
@@ -11,7 +11,7 @@ npm install
 npm start
 ```
 
-브라우저에서 http://localhost:3000/cocrates/ 로 접속합니다.
+브라우저에서 http://localhost:3000/cocrates.ai/ 로 접속합니다.
 
 ## 빌드
 
