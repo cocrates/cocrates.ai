@@ -11,8 +11,8 @@ const config: Config = {
     v4: true,
   },
 
-  url: 'https://cocrates.github.io',
-  baseUrl: '/cocrates.ai/',
+  url: 'https://cocrates.ai',
+  baseUrl: '/',
 
   organizationName: 'cocrates',
   projectName: 'cocrates',
@@ -37,12 +37,12 @@ const config: Config = {
       'zh-Hans': {
         label: '中文',
         htmlLang: 'zh-Hans',
-        baseUrl: '/cocrates.ai/cn/',
+        baseUrl: '/cn/',
       },
       id: {
         label: 'Bahasa Indonesia',
         htmlLang: 'id',
-        baseUrl: '/cocrates.ai/id/',
+        baseUrl: '/id/',
       },
     },
   },
