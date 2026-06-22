@@ -19,7 +19,7 @@ function HomepageHeader() {
         </Heading>
         <p className={clsx('hero__subtitle', styles.heroTagline)}>
           <Translate id="homepage.tagline">
-            AI에게 맡기지 말고, AI를 지휘하라
+            AI를 사용하는 올바른 방법
           </Translate>
         </p>
         <p className={styles.heroLead}>
@@ -30,8 +30,7 @@ function HomepageHeader() {
           </span>
           <span className={styles.heroLeadLine}>
             <Translate id="homepage.lead.secondary">
-              더 나은 산출물은 더 좋은 모델, 더 좋은 프롬프트가 아니라 더 깊은
-              검토에서 나온다.
+              AI에게만 맡기지 않고, 함께 검토하며 만들어가는 도구다.
             </Translate>
           </span>
         </p>

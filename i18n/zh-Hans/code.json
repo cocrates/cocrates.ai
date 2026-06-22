@@ -6,13 +6,13 @@
     "message": "安装 Cocrates"
   },
   "homepage.tagline": {
-    "message": "不要把工作交给 AI，要指挥 AI。"
+    "message": "正确使用 AI 的方法"
   },
   "homepage.lead.primary": {
     "message": "Cocrates 是让你提问、设计并验证的 Agent Harness。"
   },
   "homepage.lead.secondary": {
-    "message": "更好的产出不来自更好的模型或更好的提示词，而来自更深的审视。"
+    "message": "不要把工作交给 AI——通过共同审视一起创造的方法。"
   },
   "homepage.description": {
     "message": "Cocrates — 与 AI 一起设计、验证并成长的 Agent Harness。"

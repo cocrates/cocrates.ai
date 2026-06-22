@@ -1,29 +1,89 @@
-# Cocrates
+# Cocrates Harness - How to Use AI the Right Way
 
-Docusaurus 기반 문서 사이트입니다. GitHub Pages에 배포됩니다.
+Cocrates = Co-Socrates
 
-- **사이트 URL**: https://cocrates.ai/
+* You become Socrates, questioning what AI misses, what it does not know, and what it tries to skip too quickly.
+* AI also becomes Socrates, turning vague requests into structure and producing outputs against criteria you designed together.
 
-## 로컬 개발
+## OpenCode Plugin
+
+Cocrates is an agent harness implemented as an [OpenCode](https://opencode.ai) plugin. It combines a core **Cocrates Agent** with pluggable **Skills** — each skill encodes a specialized workflow for a specific kind of deliverable or activity.
+
+> *The unexamined code is not worth generating.*
+
+Here, `code` means any final artifact you ask AI to produce: software, documents, presentations, analysis reports, study notes, design documents, images, and other finished work.
+
+### Architecture
+
+Cocrates separates shared principles from task-specific procedures:
+
+| Layer | Location | Role |
+|-------|----------|------|
+| **Cocrates Agent** | [`cocrates.md`](https://cocrates.ai/cocrates.md) | Persona, principles, intent recognition, skill selection, task management, and guardrails |
+| **Skills** | `skills/*/SKILL.md` | Independent, task-specific workflows — loaded and followed when the agent infers the right intent |
+
+Two core activity pipelines are defined in the agent:
+
+- **Generation** — ADR → Spec → generation → verification
+- **Learning** — education → knowledge capture → reflection
+
+### Install
+
+Ask your AI assistant in OpenCode to install the harness:
+
+```
+Install Cocrates Harness following https://cocrates.ai/install.md
+```
+
+Full installation guide: [cocrates.ai/docs/installation](https://cocrates.ai/docs/installation)
+
+### Skills
+
+The `skills/` directory ships with the following built-in skills. The Cocrates Agent selects a skill based on inferred user intent — not on specific trigger words.
+
+| Skill | Purpose |
+|-------|---------|
+| **education** | Socratic 1:1 learning coach — turn-based missions that guide retrieval and metacognition toward active creation (Bloom's Create level) |
+| **knowledge-capture** | Persist what the user actually understood and confirmed into the knowledge base (`kb/`) |
+| **reflection** | Socratic understanding review — surfaces what the user knows well, misunderstands, or is missing |
+| **adr-writing** | Create Any Decision Records — compare alternatives and tradeoffs for a specific concern before committing |
+| **spec-writing** | Consolidate requests, decisions, and constraints into a living Spec document for one deliverable |
+| **spec-driven-generation** | Produce artifacts (software, documents, images, presentations, etc.) strictly from Spec documents |
+| **spec-driven-verification** | Verify generated artifacts against Spec documents item by item |
+| **generating-skill-creation** | Author a new artifact-generation skill with Snowflake stages and approval gates |
+| **document-authoring** | Write general Markdown documents via Snowflake progressive elaboration |
+| **blog-series-authoring** | Plan and write a progressive blog series (overview → outline → episodes) |
+
+### Examples
+
+| Path | Description |
+|------|-------------|
+| [`examples/blog/`](examples/blog/) | A multi-episode blog series introducing Cocrates Harness, written with `blog-series-authoring` |
+| [`examples/jsondb/`](examples/jsondb/) | A JSON database (Go) built end-to-end with `spec-driven-generation` — includes specs, ADRs, and verification |
+| [`examples/kb/`](examples/kb/) | Knowledge base entries captured from Socratic learning sessions (e.g. Bloom's Taxonomy) |
+
+## cocrates.ai
+
+Documentation site built with Docusaurus and deployed to GitHub Pages.
+
+- **Site URL**: https://cocrates.ai/
+
+### Local Development
 
 ```bash
 npm install
 npm start
 ```
 
-브라우저에서 http://localhost:3000/ 로 접속합니다.
+Open http://localhost:3000/ in your browser.
 
-## 빌드
+### Build
 
 ```bash
 npm run build
 npm run serve
 ```
 
-## 배포
+### Deployment
 
-`main` 브랜치에 push하면 GitHub Actions가 자동으로 GitHub Pages에 배포합니다.
-
-최초 배포 시 GitHub 저장소 설정에서 **Settings → Pages → Build and deployment → Source**를 **GitHub Actions**로 선택해야 합니다.
-
-사용자 지정 도메인(`cocrates.ai`) 연결 후 **Settings → Pages → Enforce HTTPS**를 활성화하세요. 인증서 발급까지 최대 24시간 걸릴 수 있습니다.
+Pushing to the `main` branch triggers GitHub Actions to deploy automatically to GitHub Pages.

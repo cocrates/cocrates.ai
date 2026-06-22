@@ -6,13 +6,13 @@
     "message": "Install Cocrates"
   },
   "homepage.tagline": {
-    "message": "Do not hand work to AI. Lead it."
+    "message": "How to Use AI the Right Way"
   },
   "homepage.lead.primary": {
     "message": "Cocrates is an Agent Harness that makes you question, design, and verify."
   },
   "homepage.lead.secondary": {
-    "message": "Better outputs come not from better models or better prompts, but from deeper review."
+    "message": "Don't hand work to AI — build together through review."
   },
   "homepage.description": {
     "message": "Cocrates — Agent Harness for designing, reviewing, and growing with AI."
