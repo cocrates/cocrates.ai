@@ -1,0 +1,96 @@
+---
+sidebar_position: 9
+---
+
+# EP9. Socratic Learning Skills
+
+## 🕵️‍♂️ The 3-Block Mission Engine and Codifying Ignorance
+
+Last episode we covered the three pillars of Cocrates learning (midwifery, Bloom's taxonomy, ZPD scaffolding) and the pipeline concept.
+
+Now we open the **actual skill spec files** (`.opencode/skills/*/SKILL.md`) and see how philosophy becomes precise workflow.
+
+---
+
+## 🧗‍♂️ Education Skill: No Spoon-Feeding and the 3-Block Engine
+
+* **Path:** `.opencode/skills/education/SKILL.md`
+
+Top law: **never deliver a complete answer or full solution in one turn (No Spoon-feeding).** Every response follows a strict **3-block structure**:
+
+```markdown
+### 💡 [Concept Briefing]
+- Core idea in 1–3 sentences, everyday analogy (≤20% of the turn)
+
+### 💻 [Thought Lab]
+- Practical example or scenario with deliberate flaws or gaps
+
+### 🔥 [MISSION]
+- Exactly one cognitive task for the user's next turn
+
+```
+
+Cocrates never spoils the mission answer or next hint—it holds the dialogue in an **incomplete state** until you fill the gap.
+
+### 📊 Difficulty via Bloom's 2D Matrix
+
+Bloom is Y-axis (cognitive process: Remember → Create) × X-axis (knowledge dimension: factual → metacognitive).
+
+* **No simultaneous jump on both axes:** Raise cognitive depth within the same knowledge dimension, or widen knowledge dimension at the same cognitive level—not both at once.
+* **Push & Pull:** Default **Pull**—high challenge so you draw knowledge in. On **cognitive collapse**, switch to **Push** and lower the step.
+
+---
+
+## 💾 Knowledge Capture Skill: Preserving Wrong Assumptions and Ignorance
+
+* **Path:** `.opencode/skills/knowledge-capture/SKILL.md`
+
+After missions, *"summarize"* persists insights as markdown under `kb/`. Rule: **no long lecture notes or full code**—only minimal units for **recall**.
+
+The highlight: **`## Wrong Assumptions / Gaps`**
+
+> **"Record of ignorance."** What you wrongly believed matters more for long-term memory than what you newly learned.
+> 
+> 
+
+### 🔄 Merge Strategy Against Duplication
+
+Don't spawn duplicate files blindly. Search for existing KB on the topic; if found, **merge** new insight under `## Update History` without overwriting.
+
+---
+
+## 🕵️‍♂️ Reflection Skill: The Harsh, Objective Interviewer
+
+* **Path:** `.opencode/skills/reflection/SKILL.md`
+
+On *"evaluate me"* or *"test me"*, Cocrates drops the friendly coach mask for a strict **interviewer**.
+
+It uses `kb/{topic}.md` as the rubric. No rote *"What is the definition of X?"*
+
+* "Explain this principle using an example from a completely different domain (e.g. payments)."
+* "Where does this principle break in this code scenario?"
+* "That **wrong assumption (Gap)** in your KB—are you repeating it here?"
+
+### 🛑 When Gaps Appear: Don't Teach
+
+If you freeze or contradict yourself, Cocrates **does not lecture mid-evaluation**. Gaps go on the ⚠️ list; at session end it may ask: *"Open a separate Education session on this?"*
+
+---
+
+## 📝 Three-Line Summary
+
+1. **Education:** 3-block turns (Briefing → Lab → MISSION) force active thinking in an incomplete state.
+2. **Knowledge Capture:** Rejects summaries; **preserves wrong assumptions** for recall-centered KB.
+3. **Reflection:** Uses KB as rubric; application and counterexamples separate real knowledge from pretense.
+
+---
+
+## 🎬 Coming Up Next
+
+We've covered Learning pipeline specs. Next axis: **architecture-driven artifact generation**. Why Cocrates locks the generate button and insists on ADR first—we'll dig in.
+
+> **"Knowing the answer and structuring it so it doesn't collapse are different achievements."**
+
+---
+
+*This series introduces the Cocrates Harness framework. Cocrates is an agent harness designed for Socratic dialogue so users keep agency and grow.*

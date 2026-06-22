@@ -1,0 +1,97 @@
+---
+sidebar_position: 11
+---
+
+# EP11. Architecture-Driven Generation Skills
+
+## 🏛️ Four Specialist Units and Breaking Silent Defaults
+
+Last episode: why architecture-less generation is dangerous, and how ASR and ADR anchor vague documents.
+
+This episode opens four core skills under `.opencode/skills/*/SKILL.md`—each with principles and hard constraints.
+
+---
+
+## 1. adr-writing: "Why We Decided This"
+
+* **Core rule:** `1 ADR file = 1 concern`
+
+ADR here isn't only software "Architecture Decision Record"—it's **Any Decision Record**: opening move of a report, slide flow, any structural choice affecting the artifact.
+
+* **No fake alternatives:** Biased "straw man B to make A shine" is forbidden. Each of 2–3 options must be real with balanced trade-offs.
+* **No prose walls:** Long narrative blocks decisions. Name + 2–4 concise bullets per option for at-a-glance comparison.
+* **Approval gate:** New ADRs start as `proposed` in `adr/`; only after explicit user approval (*"OK, go with B"*) do they become `approved`—audit trail.
+
+---
+
+## 2. spec-writing: "What We Agreed to Build"
+
+* **Core rule:** `Self-containment`
+
+After ADR decisions, `spec-writing` writes the final blueprint. **One spec file must be enough** to know what to build and how.
+
+* **No ADR references inside spec:** Links like *"see adr/01-database.md"* are forbidden. ADR is the *why* history; spec is the *what* now—only finalized requirements, no behind-the-scenes debate.
+* **Verifiable bullets:** One bullet = one requirement or constraint—so verification can pass/fail clearly.
+
+---
+
+## 3. spec-driven-generation: "Build to the Blueprint"
+
+* **Core rule:** `Spec is the only constitution and authority`
+
+Outputs text or code—but **knows when to stop** before generating.
+
+### 🛑 ASR Readiness Gate
+
+*"Give me output now, no design"* triggers the gate. Instead of generating, Cocrates demands architectural decisions across **eight universal ASR categories**:
+
+> **Eight universal ASR categories:** ① purpose & audience, ② artifact form, ③ scope boundaries, ④ quality bar, ⑤ constraints, ⑥ structure & composition, ⑦ integration & dependencies, ⑧ process & stages
+> 
+> 
+
+If the first prompt conflicts with the later spec, **spec always wins**—the deliberated blueprint is the real intent.
+
+---
+
+## 4. spec-driven-verification: "Compare to the Blueprint"
+
+* **Core rule:** `Dual-purpose verification (Deviation & Undocumented ASR)`
+
+After generation, microscope mode: did we match spec (**Deviation**)? Did AI add undeclared structure (**Undocumented ASR**)?
+
+```
+- Deviation: Violates explicit spec (e.g. "PostgreSQL" but MongoDB used) → [must fix]
+- Undocumented ASR: Not in spec but present in output (e.g. AI-added subsection) → [user choice]
+
+```
+
+### 🧐 Handling Undocumented ASR
+
+AI's improvisation isn't always wrong—sometimes it's better. The crime is **black-boxing it without user awareness**. Verification reports to `verification/` and asks: **Confirm? Update spec? Fix?**
+
+---
+
+## 📊 Four-Skill Summary Matrix
+
+| Skill | Core role | Output path | Hard prohibitions |
+| --- | --- | --- | --- |
+| **`adr-writing`** | Per-concern alternatives & decision | `adr/{concern-slug}.md` | Fake alternatives, prose essays |
+| **`spec-writing`** | Merge approved decisions into one blueprint | `spec/{requirement-slug}.md` | ADR links inside spec |
+| **`spec-driven-generation`** | Generate from finalized spec only | Artifact body files | Generate without spec (gate required) |
+| **`spec-driven-verification`** | Spec match + undocumented structure scan | `verification/{requirement-slug}.md` | Fix without user confirm |
+
+---
+
+## 🎬 Coming Up Next
+
+`ADR → Spec → Generation → Verification` applies flexibly to any artifact.
+
+What if the domain is **highly specific and repetitive**—slide decks, blog series? Instead of reviewing eight universal categories every time, **mint a dedicated skill on the spot**.
+
+Next: **`generating-skill-creation`**—the meta-engine that skillifies architecture itself.
+
+> **"Who masters architecture holds sovereignty over output. The best architecture gets encoded as an automated skill."**
+
+---
+
+*This series introduces the Cocrates Harness framework. Cocrates is an agent harness designed for Socratic dialogue so users keep agency and grow.*

@@ -1,166 +1,164 @@
 ---
 name: document-authoring
 description: >-
-  일반 Markdown 문서(설명문, 보고서, 제안서, 분석서, 개요서, 정리 자료 등) 생성 요청 시
-  선택한다. `blog-series-authoring`(블로그 시리즈·연재·멀티파트), `presentation-authoring`
-  (슬라이드 발표자료), `education`(학습·개념 이해), `knowledge-capture`(학습 기록)보다
-  적합하지 않은 단일·일반 문서 작성에 사용한다. 짧은 대화형 응답이나 Markdown이 아닌
-  산출물에는 사용하지 않는다. 개요 → 구조 → 섹션 생성 → 통합 → 최종 검토의 Snowflake
-  방식으로 점진적 구체화하며, 각 단계에서 사용자 승인 후에만 다음 단계로 진행한다.
+  Select when the user requests a general Markdown document (explanatory text,
+  reports, proposals, analyses, overviews, reference notes, etc.). Write the
+  requested document using Snowflake progressive elaboration: outline → structure
+  → section drafting → integration → final review.
 compatibility: opencode
 metadata:
   agent: cocrates
 ---
 
-# Document Authoring — 일반 문서 생성 스킬
+# Document Authoring — General Document Writing Skill
 
-## 핵심 원칙
+## Core Principles
 
-1. **Snowflake 점진적 구체화:** 개요 → 구조 → 섹션 생성 → 통합 → 최종 검토 순서로 문서를 완성한다.
-2. **사용자 승인 게이트:** 각 단계(P1~P5)마다 사용자가 검토하고 승인한 후에만 다음 단계로 넘어간다.
-3. **맞춤형 문서 구성:** 문서의 목적과 독자, 전달할 메시지에 따라 가장 적합한 구성 방식을 사용자와 협의하여 결정한다.
-   - 설득/제안 → 서론-본론-결론
-   - 스토리/사례 중심 → 기승전결
-   - 문제 해결 → 문제-원인-해결-제안
-   - 비교/분석 → 기준-대안-평가-결론
-   - 절차/방법 → 단계별 순서
-   - 기타 사용자 정의 구성
-4. **섹션 단위 작성 및 검토:** 각 섹션을 순차적으로 작성하고 검토하여 품질을 확보한다.
-5. **문서의 목적 명확화:** 생성을 시작하기 전에 문서의 목적, 독자, 핵심 메시지를 명확히 한다.
+1. **Snowflake progressive elaboration:** Complete the document in order: outline → structure → section drafting → integration → final review.
+2. **User approval gates:** Proceed to the next phase (P1–P5) only after the user has reviewed and approved the current one.
+3. **Tailored document structure:** Agree with the user on the best structure for the document's purpose, audience, and message.
+   - Persuasion / proposal → introduction–body–conclusion
+   - Story / case-driven → narrative arc (setup, development, turn, conclusion)
+   - Problem solving → problem–cause–solution–proposal
+   - Comparison / analysis → criteria–alternatives–evaluation–conclusion
+   - Procedure / how-to → step-by-step sequence
+   - Other user-defined structures
+4. **Section-by-section drafting and review:** Write and review each section sequentially to ensure quality.
+5. **Clarify document purpose:** Before starting, make the document's purpose, audience, and core message explicit.
 
-## 작업 위치
+## Working Directory
 
-모든 중간 산출물과 최종 문서는 다음 경로에 저장한다.
+Save all intermediate artifacts and the final document under:
 
 ```text
 docs/{slug}/
-  ├── outline.md              # P1: 개요 (메타정보 + 목차)
-  ├── structure.md            # P2: 구조 설계 (섹션별 키포인트 + 구성 방식)
-  ├── sections/               # P3: 섹션별 본문
+  ├── outline.md              # P1: Outline (metadata + table of contents)
+  ├── structure.md            # P2: Structure design (key points per section + structure choice)
+  ├── sections/               # P3: Section bodies
   │   ├── 01-introduction.md
   │   ├── 02-main-point-1.md
   │   └── ...
-  └── {slug}.md               # P4: 통합 최종 문서
+  └── {slug}.md               # P4: Integrated final document
 ```
 
-`{slug}`는 문서 주제를 설명하는 영문자-하이픈(소문자 kebab-case) 식별자다. 사용자가 명시하지 않으면 Cocrates가 제안하고 사용자가 승인한다.
+`{slug}` is a lowercase kebab-case identifier that describes the document topic. If the user does not specify one, Cocrates proposes it and the user approves it.
 
-## 중간 산출물 정의
+## Intermediate Artifact Definitions
 
 ### outline.md
 
-문서의 전체 개요. 다음을 포함한다.
+The document's overall outline. Include:
 
 ```markdown
-# 문서 개요
+# Document Outline
 
-## 메타정보
-- 제목: (문서 제목)
-- 작성일: (날짜)
-- 버전: 0.1
-- 독자: (대상 독자)
-- 목적: (이 문서를 왜 작성하는가)
-- 핵심 메시지: (독자가 얻어갈 핵심 내용)
+## Metadata
+- Title: (document title)
+- Date: (date)
+- Version: 0.1
+- Audience: (target readers)
+- Purpose: (why this document is being written)
+- Core message: (what readers should take away)
 
-## 목차
-1. (섹션 1 제목)
-2. (섹션 2 제목)
-3. (섹션 3 제목)
+## Table of Contents
+1. (Section 1 title)
+2. (Section 2 title)
+3. (Section 3 title)
    ...
 ```
 
 ### structure.md
 
-각 섹션의 핵심 포인트와 문서 구성 방식을 정의한다.
+Defines key points per section and the document's structural approach.
 
 ```markdown
-# 구조 설계
+# Structure Design
 
-## 구성 방식
-(선택한 구성 방식과 그 이유)
+## Structural Approach
+(Chosen structure and rationale)
 
-## 섹션별 키포인트
-### 1. (섹션 제목)
-- 핵심 포인트:
-- 포함할 내용:
-- 분량 예상:
+## Key Points by Section
+### 1. (Section title)
+- Key points:
+- Content to include:
+- Estimated length:
 
-### 2. (섹션 제목)
+### 2. (Section title)
 ...
 ```
 
 ### sections/NN-{name}.md
 
-각 섹션의 본문 내용. 섹션 번호(NN)와 이름(name)을 포함한다.
+Body content for each section. Include the section number (NN) and name.
 
 ```markdown
-# (섹션 제목)
+# (Section title)
 
-(본문 내용 - Markdown 형식)
+(Body content in Markdown)
 ```
 
-### {slug}.md (최종 문서)
+### {slug}.md (final document)
 
-모든 섹션을 병합한 완전한 문서. 메타정보, 목차, 전체 본문을 포함한다.
+The complete document with all sections merged. Include metadata, table of contents, and full body.
 
-## 단계별 절차
+## Phase-by-Phase Procedure
 
-### P1: 개요 설계
+### P1: Outline Design
 
-**목적:** 문서의 목적, 범위, 독자, 핵심 메시지, 목차를 정의한다.
+**Purpose:** Define the document's purpose, scope, audience, core message, and table of contents.
 
-**절차:**
-1. 사용자 요청을 바탕으로 문서의 목적과 독자를 확인한다.
-2. 필요시 Socratic 질문으로 불명확한 부분을 명확히 한다.
-3. outline.md를 작성하여 사용자에게 제시한다.
-4. 사용자가 검토하고 승인하면 P2로 넘어간다.
-5. 사용자가 수정을 요청하면 반영한 후 다시 제시한다.
+**Procedure:**
+1. Confirm the document's purpose and audience from the user's request.
+2. Use Socratic questions when needed to clarify ambiguities.
+3. Draft `outline.md` and present it to the user.
+4. After the user reviews and approves, proceed to P2.
+5. If the user requests changes, apply them and present again.
 
-**사용자 검토 질문:**
-- 문서의 목적이 요청 의도와 일치하나요?
-- 목차에 빠지거나 불필요한 섹션이 있나요?
-- 핵심 메시지가 문서의 목적을 잘 반영하나요?
+**User review questions:**
+- Does the document's purpose match the request?
+- Are any sections missing or unnecessary in the table of contents?
+- Does the core message reflect the document's purpose well?
 
-**승인 조건:** 사용자가 "승인", "좋아", "다음 단계" 등 명시적 동의를 표현한다.
-
----
-
-### P2: 구조 설계
-
-**목적:** 각 섹션의 핵심 포인트와 문서의 구성 방식을 설계한다.
-
-**절차:**
-1. 문서의 목적과 내용에 가장 적합한 구성 방식을 사용자와 협의하여 선택한다.
-   - 구성 방식 예시: 서론-본론-결론, 기승전결, 문제-원인-해결-제안 등
-   - 사용자가 명확히 선호하는 방식이 없으면 Cocrates가 추천하고 사용자가 선택한다.
-2. 각 섹션의 핵심 포인트와 포함할 내용을 정의한다.
-3. structure.md를 작성하여 사용자에게 제시한다.
-4. 사용자가 검토하고 승인하면 P3로 넘어간다.
-
-**사용자 검토 질문:**
-- 선택한 구성 방식이 문서의 목적에 적합한가요?
-- 각 섹션의 핵심 포인트가 전달하려는 메시지를 잘 담고 있나요?
-- 섹션의 순서와 흐름이 논리적인가요?
-- 추가하거나 제거할 섹션이 있나요?
-
-**승인 조건:** 사용자가 "승인", "좋아", "다음 단계" 등 명시적 동의를 표현한다.
+**Approval condition:** The user explicitly agrees with phrases such as "approved", "looks good", or "next step".
 
 ---
 
-### P3: 섹션 생성
+### P2: Structure Design
 
-**목적:** 각 섹션의 본문을 순차적으로 작성하고 검토한다.
+**Purpose:** Design key points per section and the document's structural approach.
 
-**절차:**
-1. structure.md에 정의된 순서대로 첫 번째 섹션부터 시작한다.
-2. 해당 섹션의 본문을 Markdown으로 작성하여 사용자에게 제시한다.
-3. 사용자가 검토한다.
-   - 승인: 다음 섹션으로 넘어간다.
-   - 수정 요청: 수정 사항을 반영한 후 다시 제시한다.
-4. 모든 섹션이 완료될 때까지 반복한다.
-5. 각 섹션은 `docs/{slug}/sections/NN-{name}.md` 파일로 저장한다.
+**Procedure:**
+1. Agree with the user on the structure best suited to the document's purpose and content.
+   - Examples: introduction–body–conclusion, narrative arc, problem–cause–solution–proposal, etc.
+   - If the user has no clear preference, Cocrates recommends options and the user chooses.
+2. Define key points and content to include for each section.
+3. Draft `structure.md` and present it to the user.
+4. After the user reviews and approves, proceed to P3.
 
-**파일 명명 규칙:**
+**User review questions:**
+- Is the chosen structure appropriate for the document's purpose?
+- Do each section's key points carry the intended message?
+- Is the section order and flow logical?
+- Are there sections to add or remove?
+
+**Approval condition:** The user explicitly agrees with phrases such as "approved", "looks good", or "next step".
+
+---
+
+### P3: Section Drafting
+
+**Purpose:** Draft and review each section's body sequentially.
+
+**Procedure:**
+1. Start with the first section in the order defined in `structure.md`.
+2. Draft the section body in Markdown and present it to the user.
+3. The user reviews.
+   - Approved: proceed to the next section.
+   - Revision requested: apply changes and present again.
+4. Repeat until all sections are complete.
+5. Save each section to `docs/{slug}/sections/NN-{name}.md`.
+
+**File naming convention:**
 ```
 sections/01-introduction.md
 sections/02-background.md
@@ -168,77 +166,77 @@ sections/03-analysis.md
 sections/04-conclusion.md
 ```
 
-**섹션 작성 기준:**
-- 각 섹션은 독립적으로 읽어도 이해 가능하도록 작성한다.
-- 필요에 따라 표, 코드 블록, 인용, 리스트 등 Markdown 요소를 활용한다.
-- 섹션 간의 흐름과 연결을 고려한다.
-- 섹션 분량은 내용에 따라 적절히 조절한다(불필요하게 길거나 짧지 않게).
+**Section drafting guidelines:**
+- Write each section so it stands alone and remains understandable.
+- Use Markdown elements as needed: tables, code blocks, quotes, lists, etc.
+- Consider flow and connections between sections.
+- Adjust section length appropriately for the content (neither unnecessarily long nor short).
 
-**사용자 검토 질문:**
-- 이 섹션의 내용이 핵심 포인트를 잘 전달하나요?
-- 추가·수정·삭제할 부분이 있나요?
-- 다음 섹션으로 넘어가도 될까요?
+**User review questions:**
+- Does this section convey its key points well?
+- Anything to add, revise, or remove?
+- May we proceed to the next section?
 
-**승인 조건:** 사용자가 해당 섹션에 대해 "승인", "좋아", "다음" 등 명시적 동의를 표현한다.
-
----
-
-### P4: 문서 통합
-
-**목적:** 모든 섹션을 하나의 완전한 문서로 병합한다.
-
-**절차:**
-1. 모든 섹션 파일을 순서대로 읽어 하나의 문서로 통합한다.
-2. 문서 서두에 메타정보(제목, 작성일, 버전)와 목차를 추가한다.
-3. 섹션 간 이음매가 자연스럽도록 필요한 경우 연결 문장을 추가한다.
-4. 통합된 문서를 `docs/{slug}/{slug}.md`에 저장한다.
-5. 사용자에게 통합 완료를 알리고 P5로 안내한다.
-
-**승인 조건:** 자동 진행 (사용자 별도 승인 불필요, P5에서 최종 검토)
+**Approval condition:** The user explicitly agrees for that section with phrases such as "approved", "looks good", or "next".
 
 ---
 
-### P5: 최종 검토
+### P4: Document Integration
 
-**목적:** 완성된 문서 전체를 검토하고 최종 승인을 받는다.
+**Purpose:** Merge all sections into one complete document.
 
-**절차:**
-1. 통합된 최종 문서의 내용을 요약하여 사용자에게 제시한다.
-2. 문서 전체에 대한 검토를 요청한다.
-3. 사용자가 검토하고 최종 승인하면 문서 생성이 완료된다.
-4. 수정 요청이 있으면 해당 섹션(P3)부터 다시 진행한다.
+**Procedure:**
+1. Read all section files in order and integrate them into a single document.
+2. Add metadata (title, date, version) and a table of contents at the top.
+3. Add transitional sentences where needed so section boundaries read naturally.
+4. Save the integrated document to `docs/{slug}/{slug}.md`.
+5. Notify the user that integration is complete and guide them to P5.
 
-**사용자 검토 질문:**
-- 문서의 목적이 최종 문서에 충실히 반영되었나요?
-- 전체적인 흐름과 구성이 논리적이고 일관된가요?
-- 문장, 표현, 오탈자 등에 문제는 없나요?
-- 이 문서를 최종 승인하시겠습니까?
+**Approval condition:** Automatic progression (no separate user approval; final review happens in P5).
 
-**승인 조건:** 사용자가 명시적으로 "승인", "완료", "좋아" 등 최종 승인 의사를 표현한다.
+---
 
-## 대화 규칙
+### P5: Final Review
 
-1. 현재 단계(P1~P5)를 항상 명시하여 사용자가 진행 상황을 인지할 수 있게 한다.
-2. 각 단계의 검토 질문을 사용자에게 제시할 때 모든 질문을 한꺼번에 던지지 말고, 가장 중요한 1~2개부터 자연스럽게 묻는다.
-3. 사용자가 "일단 만들어줘"라고 해도 개요(P1)나 구조(P2)가 불명확하면 먼저 질문하여 명확히 한다.
-4. 섹션 생성(P3) 중 사용자가 이전 섹션의 수정을 요청하면, 해당 섹션으로 돌아가 수정한 후 다시 제시한다.
-5. 사용자의 선호나 경험을 존중하며, 지나치게 많은 질문으로 부담을 주지 않는다.
-6. 문서의 언어는 사용자의 요청 언어(한국어, 영어 등)를 따른다.
+**Purpose:** Review the complete document and obtain final approval.
 
-## 금지 사항
+**Procedure:**
+1. Summarize the integrated final document and present it to the user.
+2. Request a full-document review.
+3. When the user reviews and gives final approval, document creation is complete.
+4. If revisions are requested, return to the relevant section(s) in P3 and continue from there.
 
-- P1(개요)이나 P2(구조) 사용자 승인 없이 본문 생성(P3) 시작
-- 섹션의 사용자 승인 없이 다음 섹션으로 넘어가기
-- P5(최종 검토) 사용자 승인 없이 문서 생성 완료 처리
-- 중간 산출물(outline.md, structure.md, sections/*.md)을 파일로 저장하지 않고 채팅에만 남기기
-- 문서 생성 중 갑자기 소프트웨어 코드나 다른 유형의 산출물 생성
-- 사용자가 승인하지 않은 내용을 문서에 포함시키기
-- 전용 스킬이 더 적합한 문서 유형(블로그 시리즈, 발표자료 등)에 이 스킬 사용
+**User review questions:**
+- Is the document's purpose faithfully reflected in the final document?
+- Is the overall flow and structure logical and consistent?
+- Are there issues with wording, phrasing, or typos?
+- Do you approve this document as final?
 
-## 완료 조건
+**Approval condition:** The user explicitly expresses final approval with phrases such as "approved", "done", or "looks good".
 
-- `docs/{slug}/{slug}.md` 최종 문서 파일이 생성됨
-- P1~P5의 모든 단계를 거쳐 사용자가 최종 승인함
-- 모든 중간 산출물(outline.md, structure.md, sections/*.md)이 파일로 저장됨
-- 문서의 목적, 독자, 핵심 메시지가 문서에 명확히 반영됨
-- 사용자가 문서의 내용과 구조를 설명할 수 있음
+## Conversation Rules
+
+1. Always state the current phase (P1–P5) so the user can track progress.
+2. When presenting review questions, do not dump every question at once; start naturally with the one or two most important.
+3. Even if the user says "just write it", clarify outline (P1) or structure (P2) first when they are unclear.
+4. During section drafting (P3), if the user requests changes to a previous section, return to that section, revise, and present again.
+5. Respect the user's preferences and experience; avoid overwhelming them with too many questions.
+6. Write the document in the language the user requests (Korean, English, etc.).
+
+## Prohibited Actions
+
+- Starting body drafting (P3) without user approval of P1 (outline) or P2 (structure)
+- Moving to the next section without user approval of the current section
+- Marking document creation complete without user approval in P5 (final review)
+- Leaving intermediate artifacts (`outline.md`, `structure.md`, `sections/*.md`) only in chat without saving them as files
+- Suddenly generating software code or other deliverable types mid-document workflow
+- Including content the user has not approved
+- Using this skill for document types better served by dedicated skills (blog series, slide decks, etc.)
+
+## Completion Criteria
+
+- Final document file `docs/{slug}/{slug}.md` exists
+- All phases P1–P5 completed with user final approval
+- All intermediate artifacts (`outline.md`, `structure.md`, `sections/*.md`) saved as files
+- Document purpose, audience, and core message are clearly reflected in the document
+- The user can explain the document's content and structure

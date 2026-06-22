@@ -1,0 +1,127 @@
+---
+sidebar_position: 3
+---
+
+# EP3. 安装 Cocrates Harness
+
+## 🛠️ 五分钟拥有你的「AI 教练」
+
+两集下来，我们已内化：同样的 AI 因态度不同而结果不同——保留主导权意味着恪守**「未经审视的代码，不值得生成。」**
+
+那如何把 **Cocrates Harness**——把这套苏格拉底哲学落到你机器上的工具——真正跑起来？
+
+听起来复杂？其实不然。花五分钟——我们带你完成简单安装。睁大眼睛，跟着做！🚀
+
+---
+
+## 🧩 Cocrates Harness 是插件
+
+首先：Cocrates Harness 不是独立应用。它作为**插件**运行在 **opencode** 上。
+
+* **opencode：** 运行和管理 AI agent 的平台
+* **@cocrates/cocrates-harness：** 把 Cocrates 的 Agent 与 Skills 带到舞台上的插件
+
+架构清晰。安装分三步：**安装 opencode → 添加插件 → 复制 skill 文件**。完成。
+
+---
+
+## 🛠️ 步骤 1. 安装 opencode（选你喜欢的方式）
+
+opencode 提供三种运行方式。选适合你的。
+
+| 安装方式 | 适合人群 | 说明 |
+| --- | --- | --- |
+| **opencode terminal** | 喜欢在终端使用 Claude/GPT 的 TUI 用户 | 键盘优先的文本界面 |
+| **opencode desktop** | 习惯 Cursor / VS Code 的用户 | 简洁的 GUI 编辑器（目前为 beta） |
+| **opencode extension** | 离不开现有 IDE 的用户 | 为 Cursor 或 VS Code 添加扩展 |
+
+👉 各系统下载：[opencode.ai/download](https://opencode.ai/download)
+
+> **💡 前辈的实用建议！**
+>
+> 若终端界面（TUI）不习惯，别犹豫——用 **VS Code 或 Cursor 扩展**。尤其配合 **OpenChamber 扩展**，可获得类似 VS Code Copilot 或 Cursor 的精美 GUI——最容易上手。
+>
+> 1. 安装 [opencode terminal](https://opencode.ai/download)。
+> 2. 安装 [VS Code](https://code.visualstudio.com)。
+> 3. 安装 OpenChamber 扩展（见下图）。
+>
+> ![OpenChamber Extension](/img/openchamber-extension.png)
+>
+
+---
+
+## ⚙️ 步骤 2. 添加 cocrates-harness 插件
+
+舞台搭好——该安装 Cocrates 了。只需小改 opencode 配置。
+
+在 `~/.config/opencode/` 找到 `opencode.jsonc`。（若设置了 `OPENCODE_CONFIG_DIR`，用该路径。）
+
+打开文件，在 `plugin` 中加入 cocrates：
+
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": ["@cocrates/cocrates-harness"]
+}
+
+```
+
+两步完成。插件已连接。
+
+---
+
+## 📚 步骤 3. 复制「Skill」文件
+
+光有插件不够——Cocrates 的真正力量在 **Skills**：教育、架构驱动生成等工作流定义。
+
+Skill 文件在 [Cocrates GitHub 仓库](https://github.com/cocrates/cocrates.ai/tree/main/skills) 的 `skills/` 文件夹。全部复制到你机器的 `~/.config/opencode/skills/`。设置完成。
+
+### 😎 「太麻烦——能让 AI 帮我吗？」
+
+**当然可以。你是总监。** 安装 opencode 后，对着运行窗口庄重地说一句：
+
+> 👤 **「按 [https://cocrates.ai/install.md](pathname:///install.md) 指南安装 Cocrates Harness。」**
+> 
+> ![Cocrates Harness Installed](/img/cocrates-harness-installed.png)
+>
+
+能干的 agent 可按指南处理——插件配置、skill 下载、复制——替你搞定。不必手动逛 GitHub。好时代。
+
+---
+
+## 🎉 安装完成——你的第一次对话
+
+安装结束后，轻启 opencode。在 Agent 列表中选择并激活 **Cocrates Agent**。
+
+表面已就绪。但记住：**只安装不会让你的编码人生 180° 翻转。** Cocrates 是教练，不是贩卖机。
+
+它等你加入对话——审查骨架、认真思考、有主导权地决定。
+
+准备好时，向 Cocrates 抛出第一个问题：
+
+> 💬 **「讲讲 Bloom's taxonomy。」**
+> 
+
+---
+
+## 📌 要点回顾
+
+1. **插件架构：** Cocrates Harness 作为 opencode 上的插件运行。
+2. **多种 UI：** 终端、桌面或 IDE 扩展——新手默认：VS Code + OpenChamber 很稳。
+3. **作弊式安装：** 不想手动配置？一句话：按 [install.md](pathname:///install.md) 安装。
+
+---
+
+## 🎬 下期预告
+
+你问了 Bloom's taxonomy？别指望像别的 AI 那样一堵教科书文字。
+
+Cocrates 不会直接给答案——它会悄悄塞给你**第一个任务**，附带一个刻意留有瑕疵的例子。
+
+下一集：通过真实对话脚本，体验 Cocrates 的三步学习流水线——`Education` → `Knowledge Capture` → `Reflection`。
+
+与发人深省的 AI 的第一次会面——值得等待。下期见！🦉
+
+---
+
+*本系列介绍 Cocrates Harness 框架。Cocrates 是为苏格拉底式对话设计的 agent harness，使用户保留主导权并持续成长。*

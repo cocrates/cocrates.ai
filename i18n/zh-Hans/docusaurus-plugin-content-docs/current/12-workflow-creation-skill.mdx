@@ -1,0 +1,102 @@
+---
+sidebar_position: 12
+---
+
+# EP12. 工作流创建技能
+
+## 🏛️ 元引擎与七步元雪花
+
+近几集：从空白页经 ASR、ADR、Spec，到增量搭建。
+
+那条**通用流水线**假设结构起初并不清晰。但对**幻灯片**或**技术博客系列**等有成熟、可重复工作流的场景，每次都重跑通用 ASR/ADR 很浪费。
+
+于是 **`generating-skill-creation`**——设计 `document-authoring`、`presentation-authoring` 等专用技能。不是制品本身——而是**生产它的配方**。打开这个元技能的核心。
+
+---
+
+## 🧩 拆解制品的五棱镜
+
+被要求设计新生成技能时，`generating-skill-creation` 把目标拆成**五个维度**：
+
+| 组件 | 角色 | 博客系列示例 | 图像生成示例 |
+| --- | --- | --- | --- |
+| **Assignment & Constraints** | 范围、质量门槛、禁忌、成功标准 | 系列主题、受众、集数 | 分辨率、格式、色彩限制 |
+| **Context & Rules** | 领域规则、世界观、风格指南 | 平台规范、语气 | 品牌指南、色板 |
+| **Entities** | 可复用构建块 | 各集正文、大纲 | 图标、标志、角色素材 |
+| **Space & Placement** | 物理/视觉布局 | 系列弧中的集序 | 画布布局、对象摆放 |
+| **Structure & Flow** | 层级内容与层次 | Intro → body → conclusion | 图层顺序、视觉层次 |
+
+---
+
+## ❄️ 七步元雪花流水线
+
+Cocrates 不扔一次性提示词 blob。在 **Snowflake 严控**下——`detail design` 锁定前禁止 `generation`——跑七步：
+
+```
+[1. Kernel] ─→ [2. Components] ─→ [3. Frame] ─→ [4. Outline] ─→ [5. Spec] ─→ [6. Skill] ─→ [7. Verification]
+
+```
+
+### 1. Kernel（一句话定义）
+
+一句话说清身份与使命。若摇摆，不进下一步。
+
+> *"This skill helps produce [artifact type] in [situation] through [reviewable stages]."*
+> 
+
+### 2. Components（维度识别）
+
+用五棱镜盘点技能须处理什么。
+
+### 3. Frame（工作流设计）
+
+设计新技能的 5 步 Snowflake 工作流、中间文件树、用户批准关卡。
+
+### 4. Outline（分阶段规格）
+
+每阶段：**Input、Creation activity、Completion criteria、Review questions、Approval criteria**——让中间产物落盘，而非留在易逝对话里。
+
+### 5. Spec（组装规格）
+
+锁定 frontmatter、何时使用、流程、对话规则、禁止项，供最终 `.SKILL.md`。
+
+### 6. Skill（生成技能文件）
+
+仅从已批 Spec 构建 `.opencode/skills/{skill-slug}/SKILL.md`。
+
+### 7. Verification（Harness 检查）
+
+确认文件遵守 Harness 规则且可正确运行。
+
+---
+
+## 🚫 元引擎禁止项
+
+`generating-skill-creation` 运行期间，智能体不得：
+
+* 因尚无合适技能就粗略生成最终制品。
+* 不经多维分析就填 SKILL.md 模板。
+* 设计缺少用户审阅/批准关卡的技能。
+* 中间产物只留在对话、不落文件隔离。
+
+---
+
+## 📝 三行摘要
+
+1. `generating-skill-creation` 给系统加**配方**——不是一次性菜肴。
+2. 五维度——任务、上下文、实体、空间、结构——产出精确专用工作流。
+3. 专用技能在重复请求时自动加载，并与用户共同演进。
+
+---
+
+## 🎬 下期预告
+
+你已掌握 Learning → 制品生成 → 元技能编写。
+
+架构理解之后——用户应持守什么**承诺**，Harness 如何**可持续演进**？倒数第二集收束全弧。
+
+> **「你把技能编码进系统的那一刻，你的诀窍就刻进 AI 的基因。」**
+
+---
+
+*本系列介绍 Cocrates Harness 框架。Cocrates 是为苏格拉底式对话设计的智能体 Harness，让用户保持主体性并持续成长。*

@@ -1,0 +1,96 @@
+---
+sidebar_position: 9
+---
+
+# EP9. 苏格拉底式学习技能
+
+## 🕵️‍♂️ 三块任务引擎与无知的编码
+
+上一集讲了 Cocrates 学习的三大支柱（助产术、布鲁姆分类法、ZPD 脚手架）与流水线概念。
+
+这一集打开**实际技能规格文件**（`.opencode/skills/*/SKILL.md`），看哲学如何变成精确工作流。
+
+---
+
+## 🧗‍♂️ Education 技能：不喂答案与三块引擎
+
+* **路径：** `.opencode/skills/education/SKILL.md`
+
+最高法则：**单轮绝不交付完整答案或完整解法（No Spoon-feeding）。** 每轮回复严格遵循**三块结构**：
+
+```markdown
+### 💡 [Concept Briefing]
+- Core idea in 1–3 sentences, everyday analogy (≤20% of the turn)
+
+### 💻 [Thought Lab]
+- Practical example or scenario with deliberate flaws or gaps
+
+### 🔥 [MISSION]
+- Exactly one cognitive task for the user's next turn
+
+```
+
+Cocrates 从不剧透任务答案或下一提示——对话保持**未完成**，直到你填补缺口。
+
+### 📊 借布鲁姆二维矩阵调难度
+
+布鲁姆：Y 轴（认知过程：记忆 → 创造）× X 轴（知识维度：事实性 → 元认知）。
+
+* **两轴不同时跳：** 在同一知识维度内加深认知，或在同一认知层级拓宽知识——不能同时拔高。
+* **Push & Pull：** 默认 **Pull**——高挑战，让你主动汲取。出现**认知崩溃**时切 **Push**，降低台阶。
+
+---
+
+## 💾 Knowledge Capture 技能：保留错误假设与无知
+
+* **路径：** `.opencode/skills/knowledge-capture/SKILL.md`
+
+任务结束后，「总结一下」把洞见存成 `kb/` 下的 markdown。规则：**不要长篇笔记或完整代码**——只留便于**回忆**的最小单元。
+
+亮点：**`## Wrong Assumptions / Gaps`**
+
+> **「无知的记录。」** 你曾信错什么，往往比新学到什么更利于长期记忆。
+> 
+> 
+
+### 🔄 防重复的合并策略
+
+别盲目新建重复文件。先搜该主题的现有 KB；若已有，在 `## Update History` 下**合并**新洞见，不覆盖。
+
+---
+
+## 🕵️‍♂️ Reflection 技能：严苛、客观的面试官
+
+* **路径：** `.opencode/skills/reflection/SKILL.md`
+
+听到「评价我」或「考考我」，Cocrates 摘下友好教练面具，变成严格的**面试官**。
+
+以 `kb/{topic}.md` 为评分尺。不会机械地问「X 的定义是什么？」
+
+* 「用完全不同领域的例子（如支付）解释这条原则。」
+* 「在这段代码场景里，这条原则在哪里失效？」
+* 「你 KB 里那条**错误假设（Gap）**——这里又在重复吗？」
+
+### 🛑 出现缺口时：不讲课
+
+若你卡住或自相矛盾，Cocrates **评估中途不讲课**。缺口记入 ⚠️ 列表；会话结束可能问：*「要单独开一场 Education 吗？」*
+
+---
+
+## 📝 三行摘要
+
+1. **Education：** 三块轮次（Briefing → Lab → MISSION）在未完成状态下逼你主动思考。
+2. **Knowledge Capture：** 拒绝摘要式堆砌；**保留错误假设**，做以回忆为中心的 KB。
+3. **Reflection：** 以 KB 为尺；应用与反例区分真知识与装懂。
+
+---
+
+## 🎬 下期预告
+
+学习流水线规格讲完。下一轴：**架构驱动的制品生成**。为何 Cocrates 锁住生成按钮、坚持先写 ADR——深入拆解。
+
+> **「知道答案，与把它结构化成不塌的体系，是两件不同的事。」**
+
+---
+
+*本系列介绍 Cocrates Harness 框架。Cocrates 是为苏格拉底式对话设计的智能体 Harness，让用户保持主体性并持续成长。*

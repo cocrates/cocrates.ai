@@ -1,0 +1,102 @@
+---
+sidebar_position: 12
+---
+
+# EP12. Skill Pembuatan Alur Kerja
+
+## 🏛️ Meta-Engine dan Meta Snowflake 7 Langkah
+
+Episode terakhir: dari halaman kosong melalui ASR, ADR, Spec, hingga pembangunan bertahap.
+
+**Pipeline generik** itu mengasumsikan struktur tidak jelas di awal. Tapi untuk **deck slide** atau **seri blog teknis** dengan alur kerja terbukti dan berulang, menjalankan ASR/ADR universal setiap kali boros.
+
+Masuk **`generating-skill-creation`**—merancang skill khusus seperti `document-authoring` dan `presentation-authoring`. Bukan artefaknya—**resep** untuk menghasilkannya. Mari buka jantung meta-skill ini.
+
+---
+
+## 🧩 Lima Prisma untuk Mendekomposisi Artefak
+
+Ketika diminta merancang skill generasi baru, `generating-skill-creation` merobek target menjadi **lima dimensi**:
+
+| Komponen | Peran | Contoh seri blog | Contoh generasi gambar |
+| --- | --- | --- | --- |
+| **Assignment & Constraints** | Ruang lingkup, standar kualitas, tabu, kriteria sukses | Tema seri, audiens, jumlah episode | Resolusi, format, batas warna |
+| **Context & Rules** | Aturan domain, world-building, panduan gaya | Norma platform, nada | Panduan merek, palet |
+| **Entities** | Blok bangunan yang dapat digunakan kembali | Isi episode, outline | Ikon, logo, aset karakter |
+| **Space & Placement** | Tata letak fisik/visual | Urutan episode dalam alur seri | Tata letak kanvas, penempatan objek |
+| **Structure & Flow** | Konten hierarkis dan hierarki | Intro → isi → kesimpulan | Urutan layer, hierarki visual |
+
+---
+
+## ❄️ Pipeline Meta Snowflake 7 Langkah
+
+Cocrates tidak melempar blob prompt sekali pakai. Di bawah **kontrol ketat Snowflake**—tanpa `generation` hingga `detail design` terkunci—ia menjalankan tujuh langkah:
+
+```
+[1. Kernel] ─→ [2. Components] ─→ [3. Frame] ─→ [4. Outline] ─→ [5. Spec] ─→ [6. Skill] ─→ [7. Verification]
+
+```
+
+### 1. Kernel (Definisi satu kalimat)
+
+Identitas dan misi dalam satu kalimat. Jika goyah, tidak ada langkah berikutnya.
+
+> *"Skill ini membantu menghasilkan [jenis artefak] dalam [situasi] melalui [tahap yang dapat ditinjau]."*
+> 
+
+### 2. Components (Identifikasi dimensi)
+
+Katalog apa yang harus ditangani skill menggunakan lima prisma.
+
+### 3. Frame (Desain alur kerja)
+
+Rancang alur kerja Snowflake 5 langkah skill baru, pohon file perantara, dan gerbang persetujuan pengguna.
+
+### 4. Outline (Spesifikasi per tahap)
+
+Untuk setiap tahap: **Input, Aktivitas pembuatan, Kriteria penyelesaian, Pertanyaan tinjauan, Kriteria persetujuan**—agar perantara mendarat di disk, bukan di chat yang tidak stabil.
+
+### 5. Spec (Rakit spesifikasi)
+
+Kunci frontmatter, kapan digunakan, prosedur, aturan dialog, larangan untuk `.SKILL.md` final.
+
+### 6. Skill (Hasilkan file skill)
+
+Hanya dari spec yang disetujui, bangun `.opencode/skills/{skill-slug}/SKILL.md`.
+
+### 7. Verification (Pemeriksaan harness)
+
+Konfirmasi file mematuhi aturan harness dan berjalan dengan benar.
+
+---
+
+## 🚫 Larangan Meta-Engine
+
+Saat `generating-skill-creation` berjalan, agent tidak dapat:
+
+* Menghasilkan artefak akhir secara kasar karena belum ada skill yang cocok.
+* Mengisi template SKILL.md tanpa analisis multi-dimensi.
+* Merancang skill tanpa gerbang tinjauan/persetujuan pengguna.
+* Membiarkan perantara hanya di chat tanpa isolasi file.
+
+---
+
+## 📝 Ringkasan Tiga Baris
+
+1. `generating-skill-creation` menambahkan **resep** ke sistem—bukan hidangan sekali pakai.
+2. Lima dimensi—assignment, konteks, entitas, ruang, struktur—menghasilkan alur kerja khusus yang presisi.
+3. Skill khusus dimuat otomatis untuk permintaan berulang dan berkembang bersama pengguna.
+
+---
+
+## 🎬 Selanjutnya
+
+Anda telah menguasai Learning → Generasi Artefak → Penulisan Meta Skill.
+
+Dengan arsitektur dipahami—**komitmen** apa yang harus dipegang pengguna, dan bagaimana harness **berkembang berkelanjutan**? Episode kedua dari terakhir menutup busur.
+
+> **"Saat Anda mengkodekan skill dalam sistem, know-how Anda terukir ke dalam gen AI."**
+
+---
+
+*Seri ini memperkenalkan framework Cocrates Harness. Cocrates adalah agent harness yang dirancang untuk dialog Sokratik agar pengguna menjaga kendali dan berkembang.*

@@ -1,0 +1,482 @@
+{
+  "homepage.getStarted": {
+    "message": "了解结果为何不同"
+  },
+  "homepage.install": {
+    "message": "安装 Cocrates"
+  },
+  "homepage.tagline": {
+    "message": "不要把工作交给 AI，要指挥 AI。"
+  },
+  "homepage.lead.primary": {
+    "message": "Cocrates 是让你提问、设计并验证的 Agent Harness。"
+  },
+  "homepage.lead.secondary": {
+    "message": "更好的产出不来自更好的模型或更好的提示词，而来自更深的审视。"
+  },
+  "homepage.description": {
+    "message": "Cocrates — 与 AI 一起设计、验证并成长的 Agent Harness。"
+  },
+  "homepage.section.meaning": {
+    "message": "如何在 AI 时代夺回控制权"
+  },
+  "homepage.section.install": {
+    "message": "立即开始"
+  },
+  "homepage.section.usage": {
+    "message": "这样用，差异一目了然"
+  },
+  "homepage.section.docs": {
+    "message": "Cocrates 十四讲之旅"
+  },
+  "homepage.meaning.coSocrates": {
+    "message": "共同苏格拉底"
+  },
+  "homepage.meaning.user": {
+    "message": "你成为苏格拉底，追问 AI 遗漏了什么、不知道什么、想匆匆跳过什么。"
+  },
+  "homepage.meaning.ai": {
+    "message": "AI 也成为苏格拉底，把模糊请求变成结构，并按你们共同设计的标准产出结果。"
+  },
+  "homepage.meaning.quote": {
+    "message": "Cocrates 不是替你思考的工具，而是帮你想得更深、决定更清、成长更快的 Harness。"
+  },
+  "homepage.install.intro": {
+    "message": "安装 {opencodeLink} 后，按下图所示让 AI 安装 Cocrates Harness。"
+  },
+  "homepage.install.prompt": {
+    "message": "按照 https://cocrates.ai/install.md 安装 Cocrates Harness"
+  },
+  "homepage.install.detail": {
+    "message": "详细安装步骤请参阅"
+  },
+  "homepage.install.guide": {
+    "message": "安装指南"
+  },
+  "homepage.install.detailSuffix": {
+    "message": "。"
+  },
+  "homepage.usage.learn": {
+    "message": "问你想学的内容。在倾倒答案之前，Cocrates 会提出让你自己理解的问题。通过回答问题，你加深理解。"
+  },
+  "homepage.usage.build": {
+    "message": "让它帮你构建。在写代码之前，Cocrates 揭示必须先做哪些决定。通过审视这些决定，你能创造出想要的东西。"
+  },
+  "homepage.usage.growth": {
+    "message": "通过这个过程，你成为能够指挥 AI 产出期望结果的人。"
+  },
+  "homepage.docs.intro": {
+    "message": "从「同一 AI 为何产生不同结果」开始，到「如何正确使用 AI」的宣言结束。"
+  },
+  "homepage.ep1.title": {
+    "message": "同一 LLM，不同结果"
+  },
+  "homepage.ep1.summary": {
+    "message": "同样的 AI 工具为何产出不同结果？差异始于用户态度，而非模型。"
+  },
+  "homepage.ep2.title": {
+    "message": "未经审视的代码不值得生成。"
+  },
+  "homepage.ep2.summary": {
+    "message": "若无法理解、判断并认可 AI 的产出，它尚不是你的成果。"
+  },
+  "homepage.ep3.title": {
+    "message": "安装 Cocrates Harness"
+  },
+  "homepage.ep3.summary": {
+    "message": "安装 Cocrates Harness 并开始使用，简单快捷。"
+  },
+  "homepage.ep4.title": {
+    "message": "苏格拉底式学习实践"
+  },
+  "homepage.ep4.summary": {
+    "message": "不要抄答案，通过回答问题发现你尚未理解之处。"
+  },
+  "homepage.ep5.title": {
+    "message": "架构驱动生成实践"
+  },
+  "homepage.ep5.summary": {
+    "message": "不要立刻动手。先决定，写入规格，再生成，逐项验证。"
+  },
+  "homepage.ep6.title": {
+    "message": "工作流创建实践"
+  },
+  "homepage.ep6.summary": {
+    "message": "与 AI 一起设计可复用的生成流程，而非一次性产出。"
+  },
+  "homepage.ep7.title": {
+    "message": "Cocrates Harness 结构"
+  },
+  "homepage.ep7.summary": {
+    "message": "用 Agent 与 Skills 替代万能提示词，按工作类型分离结构。"
+  },
+  "homepage.ep8.title": {
+    "message": "苏格拉底式学习活动原则"
+  },
+  "homepage.ep8.summary": {
+    "message": "Cocrates 为何不直接讲解而先提问？了解促使用户成长的原则。"
+  },
+  "homepage.ep9.title": {
+    "message": "苏格拉底式学习活动技能"
+  },
+  "homepage.ep9.summary": {
+    "message": "学习、记录、再验证。看三个技能如何把知识变成你的。"
+  },
+  "homepage.ep10.title": {
+    "message": "架构驱动生成活动原则"
+  },
+  "homepage.ep10.summary": {
+    "message": "好产出来自架构。了解基于架构生成产出的一般工作流。"
+  },
+  "homepage.ep11.title": {
+    "message": "架构驱动生成活动技能"
+  },
+  "homepage.ep11.summary": {
+    "message": "深入理解决策、规格、生成与验证技能如何守护质量。"
+  },
+  "homepage.ep12.title": {
+    "message": "工作流创建技能"
+  },
+  "homepage.ep12.summary": {
+    "message": "定义你如何要求 AI 工作。探索设计技能的元技能。"
+  },
+  "homepage.ep13.title": {
+    "message": "正确使用 Cocrates Harness"
+  },
+  "homepage.ep13.summary": {
+    "message": "Cocrates 不是成品，它与用户共同演进。"
+  },
+  "homepage.ep14.title": {
+    "message": "Cocrates Harness 用户宣言"
+  },
+  "homepage.ep14.summary": {
+    "message": "拒绝盲从、保持控制、与 AI 持续成长的宣言。"
+  },
+  "theme.ErrorPageContent.title": {
+    "message": "页面崩溃了。",
+    "description": "The title of the fallback page when the page crashed"
+  },
+  "theme.blog.archive.title": {
+    "message": "归档",
+    "description": "The page & hero title of the blog archive page"
+  },
+  "theme.blog.archive.description": {
+    "message": "归档",
+    "description": "The page & hero description of the blog archive page"
+  },
+  "theme.BackToTopButton.buttonAriaLabel": {
+    "message": "回到顶部",
+    "description": "The ARIA label for the back to top button"
+  },
+  "theme.blog.paginator.navAriaLabel": {
+    "message": "博客列表分页导航",
+    "description": "The ARIA label for the blog pagination"
+  },
+  "theme.blog.paginator.newerEntries": {
+    "message": "较新文章",
+    "description": "The label used to navigate to the newer blog posts page (previous page)"
+  },
+  "theme.blog.paginator.olderEntries": {
+    "message": "较旧文章",
+    "description": "The label used to navigate to the older blog posts page (next page)"
+  },
+  "theme.blog.post.paginator.navAriaLabel": {
+    "message": "博客文章分页导航",
+    "description": "The ARIA label for the blog posts pagination"
+  },
+  "theme.blog.post.paginator.newerPost": {
+    "message": "较新文章",
+    "description": "The blog post button label to navigate to the newer/previous post"
+  },
+  "theme.blog.post.paginator.olderPost": {
+    "message": "较旧文章",
+    "description": "The blog post button label to navigate to the older/next post"
+  },
+  "theme.tags.tagsPageLink": {
+    "message": "查看所有标签",
+    "description": "The label of the link targeting the tag list page"
+  },
+  "theme.colorToggle.ariaLabel.mode.system": {
+    "message": "跟随系统",
+    "description": "The name for the system color mode"
+  },
+  "theme.colorToggle.ariaLabel.mode.light": {
+    "message": "浅色模式",
+    "description": "The name for the light color mode"
+  },
+  "theme.colorToggle.ariaLabel.mode.dark": {
+    "message": "深色模式",
+    "description": "The name for the dark color mode"
+  },
+  "theme.colorToggle.ariaLabel": {
+    "message": "切换深色/浅色模式（当前为 {mode}）",
+    "description": "The ARIA label for the color mode toggle"
+  },
+  "theme.docs.breadcrumbs.navAriaLabel": {
+    "message": "面包屑导航",
+    "description": "The ARIA label for the breadcrumbs"
+  },
+  "theme.docs.paginator.navAriaLabel": {
+    "message": "文档页面",
+    "description": "The ARIA label for the docs pagination"
+  },
+  "theme.docs.paginator.previous": {
+    "message": "上一页",
+    "description": "The label used to navigate to the previous doc"
+  },
+  "theme.docs.paginator.next": {
+    "message": "下一页",
+    "description": "The label used to navigate to the next doc"
+  },
+  "theme.docs.tagDocListPageTitle.nDocsTagged": {
+    "message": "一篇文档已标记|{count} 篇文档已标记",
+    "description": "Pluralized label for \"{count} docs tagged\". Use as much plural forms (separated by \"|\") as your language support (see https://www.unicode.org/cldr/cldr-aux/charts/34/supplemental/language_plural_rules.html)"
+  },
+  "theme.docs.tagDocListPageTitle": {
+    "message": "{nDocsTagged}，标签为「{tagName}」",
+    "description": "The title of the page for a docs tag"
+  },
+  "theme.docs.versionBadge.label": {
+    "message": "版本：{versionLabel}"
+  },
+  "theme.docs.versions.unreleasedVersionLabel": {
+    "message": "这是 {siteTitle} {versionLabel} 版本的未发布文档。",
+    "description": "The label used to tell the user that he's browsing an unreleased doc version"
+  },
+  "theme.docs.versions.unmaintainedVersionLabel": {
+    "message": "这是 {siteTitle} {versionLabel} 的文档，已不再积极维护。",
+    "description": "The label used to tell the user that he's browsing an unmaintained doc version"
+  },
+  "theme.docs.versions.latestVersionSuggestionLabel": {
+    "message": "如需最新文档，请参阅 {latestVersionLink}（{versionLabel}）。",
+    "description": "The label used to tell the user to check the latest version"
+  },
+  "theme.docs.versions.latestVersionLinkLabel": {
+    "message": "最新版本",
+    "description": "The label used for the latest version suggestion link label"
+  },
+  "theme.common.editThisPage": {
+    "message": "编辑此页",
+    "description": "The link label to edit the current page"
+  },
+  "theme.common.headingLinkTitle": {
+    "message": "{heading} 的直接链接",
+    "description": "Title for link to heading"
+  },
+  "theme.lastUpdated.atDate": {
+    "message": " 于 {date}",
+    "description": "The words used to describe on which date a page has been last updated"
+  },
+  "theme.lastUpdated.byUser": {
+    "message": " 由 {user}",
+    "description": "The words used to describe by who the page has been last updated"
+  },
+  "theme.lastUpdated.lastUpdatedAtBy": {
+    "message": "最后更新{atDate}{byUser}",
+    "description": "The sentence used to display when a page has been last updated, and by who"
+  },
+  "theme.NotFound.title": {
+    "message": "页面未找到",
+    "description": "The title of the 404 page"
+  },
+  "theme.navbar.mobileVersionsDropdown.label": {
+    "message": "版本",
+    "description": "The label for the navbar versions dropdown on mobile view"
+  },
+  "theme.tags.tagsListLabel": {
+    "message": "标签：",
+    "description": "The label alongside a tag list"
+  },
+  "theme.AnnouncementBar.closeButtonAriaLabel": {
+    "message": "关闭",
+    "description": "The ARIA label for close button of announcement bar"
+  },
+  "theme.admonition.caution": {
+    "message": "注意",
+    "description": "The default label used for the Caution admonition (:::caution)"
+  },
+  "theme.admonition.danger": {
+    "message": "危险",
+    "description": "The default label used for the Danger admonition (:::danger)"
+  },
+  "theme.admonition.info": {
+    "message": "信息",
+    "description": "The default label used for the Info admonition (:::info)"
+  },
+  "theme.admonition.note": {
+    "message": "备注",
+    "description": "The default label used for the Note admonition (:::note)"
+  },
+  "theme.admonition.tip": {
+    "message": "提示",
+    "description": "The default label used for the Tip admonition (:::tip)"
+  },
+  "theme.admonition.warning": {
+    "message": "警告",
+    "description": "The default label used for the Warning admonition (:::warning)"
+  },
+  "theme.blog.sidebar.navAriaLabel": {
+    "message": "博客最近文章导航",
+    "description": "The ARIA label for recent posts in the blog sidebar"
+  },
+  "theme.DocSidebarItem.expandCategoryAriaLabel": {
+    "message": "展开侧边栏分类「{label}」",
+    "description": "The ARIA label to expand the sidebar category"
+  },
+  "theme.DocSidebarItem.collapseCategoryAriaLabel": {
+    "message": "收起侧边栏分类「{label}」",
+    "description": "The ARIA label to collapse the sidebar category"
+  },
+  "theme.IconExternalLink.ariaLabel": {
+    "message": "（在新标签页中打开）",
+    "description": "The ARIA label for the external link icon"
+  },
+  "theme.NavBar.navAriaLabel": {
+    "message": "主导航",
+    "description": "The ARIA label for the main navigation"
+  },
+  "theme.NotFound.p1": {
+    "message": "找不到您要访问的页面。",
+    "description": "The first paragraph of the 404 page"
+  },
+  "theme.NotFound.p2": {
+    "message": "请联系链接到原 URL 的网站所有者，告知链接已失效。",
+    "description": "The 2nd paragraph of the 404 page"
+  },
+  "theme.navbar.mobileLanguageDropdown.label": {
+    "message": "语言",
+    "description": "The label for the mobile language switcher dropdown"
+  },
+  "theme.TOCCollapsible.toggleButtonLabel": {
+    "message": "本页目录",
+    "description": "The label used by the button on the collapsible TOC component"
+  },
+  "theme.blog.post.readMore": {
+    "message": "阅读更多",
+    "description": "The label used in blog post item excerpts to link to full blog posts"
+  },
+  "theme.blog.post.readMoreLabel": {
+    "message": "阅读更多关于 {title}",
+    "description": "The ARIA label for the link to full blog posts from excerpts"
+  },
+  "theme.blog.post.readingTime.plurals": {
+    "message": "1 分钟阅读|{readingTime} 分钟阅读",
+    "description": "Pluralized label for \"{readingTime} min read\". Use as much plural forms (separated by \"|\") as your language support (see https://www.unicode.org/cldr/cldr-aux/charts/34/supplemental/language_plural_rules.html)"
+  },
+  "theme.CodeBlock.copy": {
+    "message": "复制",
+    "description": "The copy button label on code blocks"
+  },
+  "theme.CodeBlock.copied": {
+    "message": "已复制",
+    "description": "The copied button label on code blocks"
+  },
+  "theme.CodeBlock.copyButtonAriaLabel": {
+    "message": "复制代码到剪贴板",
+    "description": "The ARIA label for copy code blocks button"
+  },
+  "theme.CodeBlock.wordWrapToggle": {
+    "message": "切换自动换行",
+    "description": "The title attribute for toggle word wrapping button of code block lines"
+  },
+  "theme.docs.breadcrumbs.home": {
+    "message": "首页",
+    "description": "The ARIA label for the home page in the breadcrumbs"
+  },
+  "theme.docs.sidebar.collapseButtonTitle": {
+    "message": "收起侧边栏",
+    "description": "The title attribute for collapse button of doc sidebar"
+  },
+  "theme.docs.sidebar.collapseButtonAriaLabel": {
+    "message": "收起侧边栏",
+    "description": "The title attribute for collapse button of doc sidebar"
+  },
+  "theme.docs.sidebar.navAriaLabel": {
+    "message": "文档侧边栏",
+    "description": "The ARIA label for the sidebar navigation"
+  },
+  "theme.docs.sidebar.closeSidebarButtonAriaLabel": {
+    "message": "关闭导航栏",
+    "description": "The ARIA label for close button of mobile sidebar"
+  },
+  "theme.navbar.mobileSidebarSecondaryMenu.backButtonLabel": {
+    "message": "← 返回主菜单",
+    "description": "The label of the back button to return to main menu, inside the mobile navbar sidebar secondary menu (notably used to display the docs sidebar)"
+  },
+  "theme.docs.sidebar.toggleSidebarButtonAriaLabel": {
+    "message": "切换导航栏",
+    "description": "The ARIA label for hamburger menu button of mobile navigation"
+  },
+  "theme.navbar.mobileDropdown.collapseButton.expandAriaLabel": {
+    "message": "展开下拉菜单",
+    "description": "The ARIA label of the button to expand the mobile dropdown navbar item"
+  },
+  "theme.navbar.mobileDropdown.collapseButton.collapseAriaLabel": {
+    "message": "收起下拉菜单",
+    "description": "The ARIA label of the button to collapse the mobile dropdown navbar item"
+  },
+  "theme.docs.sidebar.expandButtonTitle": {
+    "message": "展开侧边栏",
+    "description": "The ARIA label and title attribute for expand button of doc sidebar"
+  },
+  "theme.docs.sidebar.expandButtonAriaLabel": {
+    "message": "展开侧边栏",
+    "description": "The ARIA label and title attribute for expand button of doc sidebar"
+  },
+  "theme.blog.post.plurals": {
+    "message": "一篇文章|{count} 篇文章",
+    "description": "Pluralized label for \"{count} posts\". Use as much plural forms (separated by \"|\") as your language support (see https://www.unicode.org/cldr/cldr-aux/charts/34/supplemental/language_plural_rules.html)"
+  },
+  "theme.blog.tagTitle": {
+    "message": "{nPosts} 篇，标签为「{tagName}」",
+    "description": "The title of the page for a blog tag"
+  },
+  "theme.blog.author.pageTitle": {
+    "message": "{authorName} - {nPosts}",
+    "description": "The title of the page for a blog author"
+  },
+  "theme.blog.authorsList.pageTitle": {
+    "message": "作者",
+    "description": "The title of the authors page"
+  },
+  "theme.blog.authorsList.viewAll": {
+    "message": "查看所有作者",
+    "description": "The label of the link targeting the blog authors page"
+  },
+  "theme.blog.author.noPosts": {
+    "message": "该作者尚未发表任何文章。",
+    "description": "The text for authors with 0 blog post"
+  },
+  "theme.contentVisibility.unlistedBanner.title": {
+    "message": "未列出页面",
+    "description": "The unlisted content banner title"
+  },
+  "theme.contentVisibility.unlistedBanner.message": {
+    "message": "此页面未列出。搜索引擎不会索引，只有拥有直接链接的用户可以访问。",
+    "description": "The unlisted content banner message"
+  },
+  "theme.contentVisibility.draftBanner.title": {
+    "message": "草稿页面",
+    "description": "The draft content banner title"
+  },
+  "theme.contentVisibility.draftBanner.message": {
+    "message": "此页面为草稿，仅在开发环境可见，不会包含在生产构建中。",
+    "description": "The draft content banner message"
+  },
+  "theme.docs.DocCard.categoryDescription.plurals": {
+    "message": "1 项|{count} 项",
+    "description": "The default description for a category card in the generated index about how many items this category includes"
+  },
+  "theme.ErrorPageContent.tryAgain": {
+    "message": "重试",
+    "description": "The label of the button to try again rendering when the React error boundary captures an error"
+  },
+  "theme.common.skipToMainContent": {
+    "message": "跳到主要内容",
+    "description": "The skip to content label used for accessibility, allowing to rapidly navigate to main content with keyboard tab/enter navigation"
+  },
+  "theme.tags.tagsPageTitle": {
+    "message": "标签",
+    "description": "The title of the tag list page"
+  }
+}

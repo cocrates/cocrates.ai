@@ -4,7 +4,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'Cocrates',
-  tagline: '생각하고, 기록하고, 나누는 공간',
+  tagline: 'AI에게 맡기지 말고, AI를 지휘하라',
   favicon: 'img/logo.svg',
 
   future: {
@@ -19,9 +19,32 @@ const config: Config = {
 
   onBrokenLinks: 'throw',
 
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
+
   i18n: {
     defaultLocale: 'ko',
-    locales: ['ko'],
+    locales: ['ko', 'en', 'zh-Hans', 'id'],
+    localeConfigs: {
+      ko: {
+        label: '한국어',
+      },
+      en: {
+        label: 'English',
+      },
+      'zh-Hans': {
+        label: '中文',
+        htmlLang: 'zh-Hans',
+        baseUrl: '/cocrates.ai/cn/',
+      },
+      id: {
+        label: 'Bahasa Indonesia',
+        htmlLang: 'id',
+        baseUrl: '/cocrates.ai/id/',
+      },
+    },
   },
 
   presets: [
@@ -30,7 +53,6 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          editUrl: 'https://github.com/cocrates/cocrates.ai/tree/main/',
         },
         blog: false,
         theme: {
@@ -59,6 +81,10 @@ const config: Config = {
           label: '문서',
         },
         {
+          type: 'localeDropdown',
+          position: 'right',
+        },
+        {
           href: 'https://github.com/cocrates/cocrates.ai',
           label: 'GitHub',
           position: 'right',
@@ -67,27 +93,8 @@ const config: Config = {
     },
     footer: {
       style: 'dark',
-      links: [
-        {
-          title: '문서',
-          items: [
-            {
-              label: '시작하기',
-              to: '/docs/intro',
-            },
-          ],
-        },
-        {
-          title: '링크',
-          items: [
-            {
-              label: 'GitHub',
-              href: 'https://github.com/cocrates/cocrates.ai',
-            },
-          ],
-        },
-      ],
-      copyright: `Copyright © ${new Date().getFullYear()} Cocrates. Built with Docusaurus.`,
+      links: [],
+      copyright: `Copyright © ${new Date().getFullYear()} Cocrates.`,
     },
     prism: {
       theme: prismThemes.github,

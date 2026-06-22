@@ -1,0 +1,18 @@
+{
+  "title": {
+    "message": "Cocrates",
+    "description": "The title in the navbar"
+  },
+  "logo.alt": {
+    "message": "Cocrates Logo",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.문서": {
+    "message": "文档",
+    "description": "Navbar item with label 문서"
+  },
+  "item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Navbar item with label GitHub"
+  }
+}

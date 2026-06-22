@@ -1,0 +1,137 @@
+---
+sidebar_position: 6
+---
+
+# EP6. Building a Architecture-driven Workflow
+
+## 🛠️ Teach AI "How to Write Reports," Not "Write a Report"
+
+"AI, create a skill for writing explanations or reports."
+
+A typical AI might list tips: *"1. Lead with the conclusion..."* Generic writing advice.
+
+Cocrates hears this as **designing a standardized workflow engine**—not a one-off document. A **shared behavior contract** so every future document is produced structurally, without repeated trial and error.
+
+This episode traces how an idea becomes the `document-authoring` skill through **Kernel → Frame → Outline → Spec → Skill → Verification**.
+
+---
+
+## 🏎️ Step 1. Kernel — One Sentence for Core Purpose
+
+Cocrates hates vague prompts. When the user said "a general document skill," three sharp questions flew back.
+
+> 🦉 **Cocrates:** "What kind of reports? Who's the audience? What file format for output?"
+> 👤 **User:** "General documents, any reader. Markdown (.md) files."
+> 
+> 
+
+From that skeleton, one constitutional sentence—the **Kernel**:
+
+> 🎯 **Kernel:** This skill helps produce Markdown explanations/reports through reviewable stages.
+> 
+> 
+
+---
+
+## 🧱 Step 2. Frame — Skeleton and File Tree
+
+Direction set—time to design hierarchy. Cocrates proposed metadata, outline, body (sections/subsections), conclusion, appendix.
+
+To stop work from evaporating in chat, we fixed a **file tree** that isolates intermediate artifacts by stage:
+
+```
+docs/{slug}/
+├── outline.md              # Stage 1: overview and metadata
+├── structure.md            # Stage 2: section key points
+├── sections/               # Stage 3: section bodies
+│   ├── 01-introduction.md
+│   └── 02-main-point-1.md
+└── {slug}.md               # Stage 4: final integrated document
+
+```
+
+*"Safer to write section by section with review than one giant draft?"* User agreed—the minimum unit of work was set.
+
+---
+
+## 📈 Step 3. Outline — Breaking AI's Silent Default (The Dramatic Moment)
+
+While detailing procedural steps (P1–P5), Cocrates revealed a **silent default**.
+
+> 🦉 **Cocrates:** "We'll naturally produce **introduction → body → conclusion** in order, right?"
+> 
+> 
+
+The user hit the brakes hard.
+
+> 👤 **User:** "**Not always.** Purpose might call for narrative arc, problem-solution structure, or something else. Composition must flex to the goal."
+> 
+> 
+
+Not mere feedback—Cocrates elevated it to a core principle: **map structure to purpose every time.** Human intuition flexing AI's rigid default—a perfect collaboration moment.
+
+---
+
+## 📜 Step 4. Spec — Rulebook and Prohibitions
+
+Agreements became a final **Spec** with **six composition options** codified:
+
+* **Persuasion / proposal:** intro–body–conclusion
+* **Story / case:** narrative arc
+* **Problem solving:** problem–cause–solution–proposal
+* **Compare / analyze:** criteria–alternatives–evaluation–conclusion
+
+Plus seven **anti-patterns**:
+
+> 🛑 e.g. **Never start body writing before user approves outline (P1) and structure (P2)**; never leave intermediates only in chat without saving files.
+> 
+> 
+
+---
+
+## 🛠️ Steps 5–6. Skill Creation and Verification
+
+Approved spec became `.opencode/skills/document-authoring/SKILL.md`.
+
+Harness verification ran immediately—seven strict checks:
+
+* Force intermediate structure before final? → ✅ **PASS**
+* Gates block progress without user approval? → ✅ **PASS**
+* Completion criteria and prohibitions concrete? → ✅ **PASS**
+
+**All seven passed.** The workflow skill was registered.
+
+---
+
+## 🚀 Skill Built: What Changes When You Say "Write a Report"
+
+Now ask casually: *"Write a blockchain market research report."* No more stitched web-search mush. Cocrates leads by the new rules:
+
+1. **[P1]** "Let's fix audience and purpose first. Approve `outline.md`."
+2. **[P2]** "This is technical analysis—'compare/analyze' format fits. Agree?"
+3. **[P3]** "Section 1 (criteria) is written to file. Your review?"
+
+You no longer depend on lottery output—you **control design stages and approve** a high-quality deliverable.
+
+---
+
+## 📝 Three-Line Summary
+
+1. **Skill creation teaches AI how to work**—a more durable asset than one-off answers.
+2. **Human input sets the class of skill.** *"Not always intro–body–conclusion"* turned rigid AI bones into flexible master architecture.
+3. **Unexamined output isn't worth generating.** Snowflake stages, saved intermediates, approval gates—that's structural workflow.
+
+---
+
+## 🎬 Coming Up Next
+
+Learning (Ep4), generation (Ep5), skill creation (Ep6)—you've covered Cocrates Harness' core cycle.
+
+Time to open the hood: **architecture and how the pieces mesh.** Next episode dissects the framework's heart.
+
+> **"To own the tool, you must see its internal architecture."**
+>
+
+---
+
+*This series introduces the Cocrates Harness framework. Cocrates is an agent harness designed for Socratic dialogue so users keep agency and grow.*

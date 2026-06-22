@@ -1,0 +1,482 @@
+{
+  "homepage.getStarted": {
+    "message": "Lihat mengapa hasilnya berbeda"
+  },
+  "homepage.install": {
+    "message": "Instal Cocrates"
+  },
+  "homepage.tagline": {
+    "message": "Jangan serahkan pekerjaan pada AI. Pimpin AI."
+  },
+  "homepage.lead.primary": {
+    "message": "Cocrates adalah Agent Harness yang membuat Anda bertanya, merancang, dan memverifikasi."
+  },
+  "homepage.lead.secondary": {
+    "message": "Output yang lebih baik datang bukan dari model yang lebih baik atau prompt yang lebih baik, melainkan dari tinjauan yang lebih mendalam."
+  },
+  "homepage.description": {
+    "message": "Cocrates — Agent Harness untuk merancang, meninjau, dan berkembang bersama AI."
+  },
+  "homepage.section.meaning": {
+    "message": "Cara Mengambil Kembali Kendali di Era AI"
+  },
+  "homepage.section.install": {
+    "message": "Mulai Sekarang"
+  },
+  "homepage.section.usage": {
+    "message": "Coba Cara Ini dan Perbedaannya Terlihat"
+  },
+  "homepage.section.docs": {
+    "message": "Perjalanan 14 Bagian Melalui Cocrates"
+  },
+  "homepage.meaning.coSocrates": {
+    "message": "Co-Socrates"
+  },
+  "homepage.meaning.user": {
+    "message": "Anda menjadi Socrates, mempertanyakan apa yang AI lewatkan, apa yang tidak diketahuinya, dan apa yang terlalu cepat dilewatinya."
+  },
+  "homepage.meaning.ai": {
+    "message": "AI juga menjadi Socrates, mengubah permintaan yang samar menjadi struktur dan menghasilkan output berdasarkan kriteria yang Anda rancang bersama."
+  },
+  "homepage.meaning.quote": {
+    "message": "Cocrates bukan alat yang berpikir menggantikan Anda. Ini adalah harness yang membantu Anda berpikir lebih dalam, memutuskan lebih jelas, dan berkembang lebih cepat."
+  },
+  "homepage.install.intro": {
+    "message": "Instal {opencodeLink}, lalu minta AI untuk menginstal Cocrates Harness seperti yang ditunjukkan di bawah."
+  },
+  "homepage.install.prompt": {
+    "message": "Instal Cocrates Harness mengikuti https://cocrates.ai/install.md"
+  },
+  "homepage.install.detail": {
+    "message": "Untuk instalasi terperinci, lihat"
+  },
+  "homepage.install.guide": {
+    "message": "panduan instalasi"
+  },
+  "homepage.install.detailSuffix": {
+    "message": "."
+  },
+  "homepage.usage.learn": {
+    "message": "Tanyakan apa yang ingin Anda pelajari. Sebelum memberikan jawaban, Cocrates mengajukan pertanyaan yang membuat Anda memahaminya sendiri. Dengan menjawab pertanyaan tersebut, Anda memperdalam pemahaman."
+  },
+  "homepage.usage.build": {
+    "message": "Minta untuk membangun sesuatu. Sebelum menulis kode, Cocrates mengungkapkan keputusan mana yang harus dibuat terlebih dahulu. Dengan meninjau keputusan tersebut, Anda dapat menciptakan apa yang Anda inginkan."
+  },
+  "homepage.usage.growth": {
+    "message": "Melalui proses itu, Anda menjadi seseorang yang dapat memimpin AI untuk menghasilkan hasil yang diinginkan."
+  },
+  "homepage.docs.intro": {
+    "message": "Dimulai dengan mengapa AI yang sama menghasilkan hasil berbeda, dan berakhir dengan manifesto untuk menggunakan AI dengan benar."
+  },
+  "homepage.ep1.title": {
+    "message": "LLM yang Sama, Hasil Berbeda"
+  },
+  "homepage.ep1.summary": {
+    "message": "Mengapa alat AI yang sama menghasilkan hasil berbeda? Perbedaannya dimulai dari sikap pengguna, bukan modelnya."
+  },
+  "homepage.ep2.title": {
+    "message": "Kode yang tidak diperiksa tidak layak dihasilkan."
+  },
+  "homepage.ep2.summary": {
+    "message": "Jika Anda tidak dapat memahami, menilai, dan menyetujui apa yang dibuat AI, itu belum menjadi output Anda."
+  },
+  "homepage.ep3.title": {
+    "message": "Menginstal Cocrates Harness"
+  },
+  "homepage.ep3.summary": {
+    "message": "Instal Cocrates Harness dan gunakan. Mudah dan sederhana."
+  },
+  "homepage.ep4.title": {
+    "message": "Praktik Pembelajaran Sokratik"
+  },
+  "homepage.ep4.summary": {
+    "message": "Alih-alih menyalin jawaban, tanggapi pertanyaan dan temukan apa yang belum Anda pahami."
+  },
+  "homepage.ep5.title": {
+    "message": "Praktik Generasi Berbasis Arsitektur"
+  },
+  "homepage.ep5.summary": {
+    "message": "Jangan langsung membangun. Putuskan dulu, ikat dalam spesifikasi, hasilkan, lalu verifikasi satu per satu."
+  },
+  "homepage.ep6.title": {
+    "message": "Praktik Pembuatan Alur Kerja"
+  },
+  "homepage.ep6.summary": {
+    "message": "Rancang bukan output sekali pakai, melainkan prosedur generasi yang dapat digunakan kembali bersama AI."
+  },
+  "homepage.ep7.title": {
+    "message": "Struktur Cocrates Harness"
+  },
+  "homepage.ep7.summary": {
+    "message": "Gunakan Agent dan Skills alih-alih satu prompt universal, memisahkan struktur setiap jenis pekerjaan."
+  },
+  "homepage.ep8.title": {
+    "message": "Prinsip Aktivitas Pembelajaran Sokratik"
+  },
+  "homepage.ep8.summary": {
+    "message": "Mengapa Cocrates mengajukan pertanyaan alih-alih langsung menjelaskan? Pelajari prinsip yang membuat pengguna berkembang."
+  },
+  "homepage.ep9.title": {
+    "message": "Skills Aktivitas Pembelajaran Sokratik"
+  },
+  "homepage.ep9.summary": {
+    "message": "Belajar, catat, dan verifikasi lagi. Lihat bagaimana tiga skills mengubah pengetahuan menjadi milik Anda."
+  },
+  "homepage.ep10.title": {
+    "message": "Prinsip Aktivitas Generasi Berbasis Arsitektur"
+  },
+  "homepage.ep10.summary": {
+    "message": "Output yang baik datang dari arsitektur. Pelajari alur kerja umum menghasilkan output berbasis arsitektur."
+  },
+  "homepage.ep11.title": {
+    "message": "Skills Aktivitas Generasi Berbasis Arsitektur"
+  },
+  "homepage.ep11.summary": {
+    "message": "Pelajari lebih dalam bagaimana skills keputusan, spesifikasi, generasi, dan verifikasi melindungi kualitas."
+  },
+  "homepage.ep12.title": {
+    "message": "Skill Pembuatan Alur Kerja"
+  },
+  "homepage.ep12.summary": {
+    "message": "Ciptakan cara Anda meminta AI bekerja. Jelajahi meta-skill yang merancang skills."
+  },
+  "homepage.ep13.title": {
+    "message": "Menggunakan Cocrates Harness dengan Benar"
+  },
+  "homepage.ep13.summary": {
+    "message": "Cocrates bukan produk jadi. Ia berkembang bersama pengguna."
+  },
+  "homepage.ep14.title": {
+    "message": "Manifesto Pengguna Cocrates Harness"
+  },
+  "homepage.ep14.summary": {
+    "message": "Deklarasi untuk menolak kepercayaan buta, menjaga kendali, dan terus berkembang bersama AI."
+  },
+  "theme.ErrorPageContent.title": {
+    "message": "Halaman ini mengalami crash.",
+    "description": "The title of the fallback page when the page crashed"
+  },
+  "theme.blog.archive.title": {
+    "message": "Arsip",
+    "description": "The page & hero title of the blog archive page"
+  },
+  "theme.blog.archive.description": {
+    "message": "Arsip",
+    "description": "The page & hero description of the blog archive page"
+  },
+  "theme.BackToTopButton.buttonAriaLabel": {
+    "message": "Gulir kembali ke atas",
+    "description": "The ARIA label for the back to top button"
+  },
+  "theme.blog.paginator.navAriaLabel": {
+    "message": "Navigasi halaman daftar blog",
+    "description": "The ARIA label for the blog pagination"
+  },
+  "theme.blog.paginator.newerEntries": {
+    "message": "Entri lebih baru",
+    "description": "The label used to navigate to the newer blog posts page (previous page)"
+  },
+  "theme.blog.paginator.olderEntries": {
+    "message": "Entri lebih lama",
+    "description": "The label used to navigate to the older blog posts page (next page)"
+  },
+  "theme.blog.post.paginator.navAriaLabel": {
+    "message": "Navigasi halaman posting blog",
+    "description": "The ARIA label for the blog posts pagination"
+  },
+  "theme.blog.post.paginator.newerPost": {
+    "message": "Posting lebih baru",
+    "description": "The blog post button label to navigate to the newer/previous post"
+  },
+  "theme.blog.post.paginator.olderPost": {
+    "message": "Posting lebih lama",
+    "description": "The blog post button label to navigate to the older/next post"
+  },
+  "theme.tags.tagsPageLink": {
+    "message": "Lihat semua tag",
+    "description": "The label of the link targeting the tag list page"
+  },
+  "theme.colorToggle.ariaLabel.mode.system": {
+    "message": "mode sistem",
+    "description": "The name for the system color mode"
+  },
+  "theme.colorToggle.ariaLabel.mode.light": {
+    "message": "mode terang",
+    "description": "The name for the light color mode"
+  },
+  "theme.colorToggle.ariaLabel.mode.dark": {
+    "message": "mode gelap",
+    "description": "The name for the dark color mode"
+  },
+  "theme.colorToggle.ariaLabel": {
+    "message": "Beralih antara mode gelap dan terang (saat ini {mode})",
+    "description": "The ARIA label for the color mode toggle"
+  },
+  "theme.docs.breadcrumbs.navAriaLabel": {
+    "message": "Breadcrumb",
+    "description": "The ARIA label for the breadcrumbs"
+  },
+  "theme.docs.paginator.navAriaLabel": {
+    "message": "Halaman dokumen",
+    "description": "The ARIA label for the docs pagination"
+  },
+  "theme.docs.paginator.previous": {
+    "message": "Sebelumnya",
+    "description": "The label used to navigate to the previous doc"
+  },
+  "theme.docs.paginator.next": {
+    "message": "Berikutnya",
+    "description": "The label used to navigate to the next doc"
+  },
+  "theme.docs.tagDocListPageTitle.nDocsTagged": {
+    "message": "Satu dokumen dengan tag|{count} dokumen dengan tag",
+    "description": "Pluralized label for \"{count} docs tagged\". Use as much plural forms (separated by \"|\") as your language support (see https://www.unicode.org/cldr/cldr-aux/charts/34/supplemental/language_plural_rules.html)"
+  },
+  "theme.docs.tagDocListPageTitle": {
+    "message": "{nDocsTagged} dengan \"{tagName}\"",
+    "description": "The title of the page for a docs tag"
+  },
+  "theme.docs.versionBadge.label": {
+    "message": "Versi: {versionLabel}"
+  },
+  "theme.docs.versions.unreleasedVersionLabel": {
+    "message": "Ini adalah dokumentasi yang belum dirilis untuk {siteTitle} versi {versionLabel}.",
+    "description": "The label used to tell the user that he's browsing an unreleased doc version"
+  },
+  "theme.docs.versions.unmaintainedVersionLabel": {
+    "message": "Ini adalah dokumentasi untuk {siteTitle} {versionLabel}, yang tidak lagi dipelihara secara aktif.",
+    "description": "The label used to tell the user that he's browsing an unmaintained doc version"
+  },
+  "theme.docs.versions.latestVersionSuggestionLabel": {
+    "message": "Untuk dokumentasi terbaru, lihat {latestVersionLink} ({versionLabel}).",
+    "description": "The label used to tell the user to check the latest version"
+  },
+  "theme.docs.versions.latestVersionLinkLabel": {
+    "message": "versi terbaru",
+    "description": "The label used for the latest version suggestion link label"
+  },
+  "theme.common.editThisPage": {
+    "message": "Edit halaman ini",
+    "description": "The link label to edit the current page"
+  },
+  "theme.common.headingLinkTitle": {
+    "message": "Tautan langsung ke {heading}",
+    "description": "Title for link to heading"
+  },
+  "theme.lastUpdated.atDate": {
+    "message": " pada {date}",
+    "description": "The words used to describe on which date a page has been last updated"
+  },
+  "theme.lastUpdated.byUser": {
+    "message": " oleh {user}",
+    "description": "The words used to describe by who the page has been last updated"
+  },
+  "theme.lastUpdated.lastUpdatedAtBy": {
+    "message": "Terakhir diperbarui{atDate}{byUser}",
+    "description": "The sentence used to display when a page has been last updated, and by who"
+  },
+  "theme.NotFound.title": {
+    "message": "Halaman Tidak Ditemukan",
+    "description": "The title of the 404 page"
+  },
+  "theme.navbar.mobileVersionsDropdown.label": {
+    "message": "Versi",
+    "description": "The label for the navbar versions dropdown on mobile view"
+  },
+  "theme.tags.tagsListLabel": {
+    "message": "Tag:",
+    "description": "The label alongside a tag list"
+  },
+  "theme.AnnouncementBar.closeButtonAriaLabel": {
+    "message": "Tutup",
+    "description": "The ARIA label for close button of announcement bar"
+  },
+  "theme.admonition.caution": {
+    "message": "peringatan",
+    "description": "The default label used for the Caution admonition (:::caution)"
+  },
+  "theme.admonition.danger": {
+    "message": "bahaya",
+    "description": "The default label used for the Danger admonition (:::danger)"
+  },
+  "theme.admonition.info": {
+    "message": "info",
+    "description": "The default label used for the Info admonition (:::info)"
+  },
+  "theme.admonition.note": {
+    "message": "catatan",
+    "description": "The default label used for the Note admonition (:::note)"
+  },
+  "theme.admonition.tip": {
+    "message": "tip",
+    "description": "The default label used for the Tip admonition (:::tip)"
+  },
+  "theme.admonition.warning": {
+    "message": "peringatan",
+    "description": "The default label used for the Warning admonition (:::warning)"
+  },
+  "theme.blog.sidebar.navAriaLabel": {
+    "message": "Navigasi posting blog terbaru",
+    "description": "The ARIA label for recent posts in the blog sidebar"
+  },
+  "theme.DocSidebarItem.expandCategoryAriaLabel": {
+    "message": "Perluas kategori sidebar '{label}'",
+    "description": "The ARIA label to expand the sidebar category"
+  },
+  "theme.DocSidebarItem.collapseCategoryAriaLabel": {
+    "message": "Ciutkan kategori sidebar '{label}'",
+    "description": "The ARIA label to collapse the sidebar category"
+  },
+  "theme.IconExternalLink.ariaLabel": {
+    "message": "(buka di tab baru)",
+    "description": "The ARIA label for the external link icon"
+  },
+  "theme.NavBar.navAriaLabel": {
+    "message": "Utama",
+    "description": "The ARIA label for the main navigation"
+  },
+  "theme.NotFound.p1": {
+    "message": "Kami tidak dapat menemukan apa yang Anda cari.",
+    "description": "The first paragraph of the 404 page"
+  },
+  "theme.NotFound.p2": {
+    "message": "Silakan hubungi pemilik situs yang menautkan Anda ke URL asli dan beri tahu mereka bahwa tautannya rusak.",
+    "description": "The 2nd paragraph of the 404 page"
+  },
+  "theme.navbar.mobileLanguageDropdown.label": {
+    "message": "Bahasa",
+    "description": "The label for the mobile language switcher dropdown"
+  },
+  "theme.TOCCollapsible.toggleButtonLabel": {
+    "message": "Di halaman ini",
+    "description": "The label used by the button on the collapsible TOC component"
+  },
+  "theme.blog.post.readMore": {
+    "message": "Baca selengkapnya",
+    "description": "The label used in blog post item excerpts to link to full blog posts"
+  },
+  "theme.blog.post.readMoreLabel": {
+    "message": "Baca selengkapnya tentang {title}",
+    "description": "The ARIA label for the link to full blog posts from excerpts"
+  },
+  "theme.blog.post.readingTime.plurals": {
+    "message": "Satu menit baca|{readingTime} menit baca",
+    "description": "Pluralized label for \"{readingTime} min read\". Use as much plural forms (separated by \"|\") as your language support (see https://www.unicode.org/cldr/cldr-aux/charts/34/supplemental/language_plural_rules.html)"
+  },
+  "theme.CodeBlock.copy": {
+    "message": "Salin",
+    "description": "The copy button label on code blocks"
+  },
+  "theme.CodeBlock.copied": {
+    "message": "Disalin",
+    "description": "The copied button label on code blocks"
+  },
+  "theme.CodeBlock.copyButtonAriaLabel": {
+    "message": "Salin kode ke clipboard",
+    "description": "The ARIA label for copy code blocks button"
+  },
+  "theme.CodeBlock.wordWrapToggle": {
+    "message": "Alihkan word wrap",
+    "description": "The title attribute for toggle word wrapping button of code block lines"
+  },
+  "theme.docs.breadcrumbs.home": {
+    "message": "Halaman beranda",
+    "description": "The ARIA label for the home page in the breadcrumbs"
+  },
+  "theme.docs.sidebar.collapseButtonTitle": {
+    "message": "Ciutkan sidebar",
+    "description": "The title attribute for collapse button of doc sidebar"
+  },
+  "theme.docs.sidebar.collapseButtonAriaLabel": {
+    "message": "Ciutkan sidebar",
+    "description": "The title attribute for collapse button of doc sidebar"
+  },
+  "theme.docs.sidebar.navAriaLabel": {
+    "message": "Sidebar dokumen",
+    "description": "The ARIA label for the sidebar navigation"
+  },
+  "theme.docs.sidebar.closeSidebarButtonAriaLabel": {
+    "message": "Tutup bilah navigasi",
+    "description": "The ARIA label for close button of mobile sidebar"
+  },
+  "theme.navbar.mobileSidebarSecondaryMenu.backButtonLabel": {
+    "message": "← Kembali ke menu utama",
+    "description": "The label of the back button to return to main menu, inside the mobile navbar sidebar secondary menu (notably used to display the docs sidebar)"
+  },
+  "theme.docs.sidebar.toggleSidebarButtonAriaLabel": {
+    "message": "Alihkan bilah navigasi",
+    "description": "The ARIA label for hamburger menu button of mobile navigation"
+  },
+  "theme.navbar.mobileDropdown.collapseButton.expandAriaLabel": {
+    "message": "Perluas dropdown",
+    "description": "The ARIA label of the button to expand the mobile dropdown navbar item"
+  },
+  "theme.navbar.mobileDropdown.collapseButton.collapseAriaLabel": {
+    "message": "Ciutkan dropdown",
+    "description": "The ARIA label of the button to collapse the mobile dropdown navbar item"
+  },
+  "theme.docs.sidebar.expandButtonTitle": {
+    "message": "Perluas sidebar",
+    "description": "The ARIA label and title attribute for expand button of doc sidebar"
+  },
+  "theme.docs.sidebar.expandButtonAriaLabel": {
+    "message": "Perluas sidebar",
+    "description": "The ARIA label and title attribute for expand button of doc sidebar"
+  },
+  "theme.blog.post.plurals": {
+    "message": "Satu posting|{count} posting",
+    "description": "Pluralized label for \"{count} posts\". Use as much plural forms (separated by \"|\") as your language support (see https://www.unicode.org/cldr/cldr-aux/charts/34/supplemental/language_plural_rules.html)"
+  },
+  "theme.blog.tagTitle": {
+    "message": "{nPosts} dengan tag \"{tagName}\"",
+    "description": "The title of the page for a blog tag"
+  },
+  "theme.blog.author.pageTitle": {
+    "message": "{authorName} - {nPosts}",
+    "description": "The title of the page for a blog author"
+  },
+  "theme.blog.authorsList.pageTitle": {
+    "message": "Penulis",
+    "description": "The title of the authors page"
+  },
+  "theme.blog.authorsList.viewAll": {
+    "message": "Lihat semua penulis",
+    "description": "The label of the link targeting the blog authors page"
+  },
+  "theme.blog.author.noPosts": {
+    "message": "Penulis ini belum menulis posting apa pun.",
+    "description": "The text for authors with 0 blog post"
+  },
+  "theme.contentVisibility.unlistedBanner.title": {
+    "message": "Halaman tidak terdaftar",
+    "description": "The unlisted content banner title"
+  },
+  "theme.contentVisibility.unlistedBanner.message": {
+    "message": "Halaman ini tidak terdaftar. Mesin pencari tidak akan mengindeksnya, dan hanya pengguna yang memiliki tautan langsung yang dapat mengaksesnya.",
+    "description": "The unlisted content banner message"
+  },
+  "theme.contentVisibility.draftBanner.title": {
+    "message": "Halaman draf",
+    "description": "The draft content banner title"
+  },
+  "theme.contentVisibility.draftBanner.message": {
+    "message": "Halaman ini adalah draf. Hanya akan terlihat di dev dan dikecualikan dari build produksi.",
+    "description": "The draft content banner message"
+  },
+  "theme.docs.DocCard.categoryDescription.plurals": {
+    "message": "1 item|{count} item",
+    "description": "The default description for a category card in the generated index about how many items this category includes"
+  },
+  "theme.ErrorPageContent.tryAgain": {
+    "message": "Coba lagi",
+    "description": "The label of the button to try again rendering when the React error boundary captures an error"
+  },
+  "theme.common.skipToMainContent": {
+    "message": "Lewati ke konten utama",
+    "description": "The skip to content label used for accessibility, allowing to rapidly navigate to main content with keyboard tab/enter navigation"
+  },
+  "theme.tags.tagsPageTitle": {
+    "message": "Tag",
+    "description": "The title of the tag list page"
+  }
+}

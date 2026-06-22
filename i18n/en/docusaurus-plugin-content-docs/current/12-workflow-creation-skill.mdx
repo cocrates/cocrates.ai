@@ -1,0 +1,102 @@
+---
+sidebar_position: 12
+---
+
+# EP12. Workflow Creation Skill
+
+## 🏛️ The Meta-Engine and 7-Step Meta Snowflake
+
+Recent episodes: from blank page through ASR, ADR, Spec, to incremental build-out.
+
+That **generic pipeline** assumes structure isn't obvious upfront. But for **slide decks** or **tech blog series** with proven, repeatable workflows, re-running universal ASR/ADR every time is wasteful.
+
+Enter **`generating-skill-creation`**—designing dedicated skills like `document-authoring` and `presentation-authoring`. Not the artifact—the **recipe** for producing it. Let's open this meta-skill's heart.
+
+---
+
+## 🧩 Five Prisms for Decomposing Artifacts
+
+When asked to design a new generation skill, `generating-skill-creation` tears the target into **five dimensions**:
+
+| Component | Role | Blog series example | Image generation example |
+| --- | --- | --- | --- |
+| **Assignment & Constraints** | Scope, quality bar, taboos, success criteria | Series theme, audience, episode count | Resolution, format, color limits |
+| **Context & Rules** | Domain rules, world-building, style guide | Platform norms, tone | Brand guidelines, palette |
+| **Entities** | Reusable building blocks | Episode bodies, outlines | Icons, logos, character assets |
+| **Space & Placement** | Physical/visual layout | Episode order in series arc | Canvas layout, object placement |
+| **Structure & Flow** | Hierarchical content and hierarchy | Intro → body → conclusion | Layer order, visual hierarchy |
+
+---
+
+## ❄️ 7-Step Meta Snowflake Pipeline
+
+Cocrates doesn't throw a one-off prompt blob. Under **Snowflake strict control**—no `generation` until `detail design` is locked—it runs seven steps:
+
+```
+[1. Kernel] ─→ [2. Components] ─→ [3. Frame] ─→ [4. Outline] ─→ [5. Spec] ─→ [6. Skill] ─→ [7. Verification]
+
+```
+
+### 1. Kernel (One-sentence definition)
+
+Identity and mission in one sentence. If it wobbles, no next step.
+
+> *"This skill helps produce [artifact type] in [situation] through [reviewable stages]."*
+> 
+
+### 2. Components (Dimension identification)
+
+Catalog what the skill must handle using the five prisms.
+
+### 3. Frame (Workflow design)
+
+Design the new skill's 5-step Snowflake workflow, intermediate file tree, and user approval gates.
+
+### 4. Outline (Per-stage specification)
+
+For each stage: **Input, Creation activity, Completion criteria, Review questions, Approval criteria**—so intermediates land on disk, not in volatile chat.
+
+### 5. Spec (Assemble specification)
+
+Lock frontmatter, when to use, procedures, dialogue rules, prohibitions for final `.SKILL.md`.
+
+### 6. Skill (Generate skill file)
+
+From approved spec only, build `.opencode/skills/{skill-slug}/SKILL.md`.
+
+### 7. Verification (Harness check)
+
+Confirm the file obeys harness rules and runs correctly.
+
+---
+
+## 🚫 Meta-Engine Prohibitions
+
+While `generating-skill-creation` runs, the agent cannot:
+
+* Roughly generate final artifacts because no skill fits yet.
+* Fill a SKILL.md template without multi-dimensional analysis.
+* Design skills missing user review/approval gates.
+* Leave intermediates only in chat without file isolation.
+
+---
+
+## 📝 Three-Line Summary
+
+1. `generating-skill-creation` adds **recipes** to the system—not one-off dishes.
+2. Five dimensions—assignment, context, entities, space, structure—yield precise dedicated workflows.
+3. Dedicated skills auto-load for repeat requests and evolve with the user.
+
+---
+
+## 🎬 Coming Up Next
+
+You've mastered Learning → Artifact Generation → Meta Skill authoring.
+
+With architecture understood—what **commitment** should users hold, and how does the harness **evolve sustainably**? The penultimate episode closes the arc.
+
+> **"The moment you encode a skill in the system, your know-how is etched into AI's genes."**
+
+---
+
+*This series introduces the Cocrates Harness framework. Cocrates is an agent harness designed for Socratic dialogue so users keep agency and grow.*
