@@ -19,7 +19,7 @@ Cocrates separates shared principles from task-specific procedures:
 
 | Layer | Location | Role |
 |-------|----------|------|
-| **Cocrates Agent** | [`cocrates.md`](https://cocrates.ai/cocrates.md) | Persona, principles, intent recognition, skill selection, task management, and guardrails |
+| **Cocrates Agent** | [`cocrates.md`](static/cocrates.md) | Persona, principles, intent recognition, skill selection, task management, and guardrails |
 | **Skills** | `skills/*/SKILL.md` | Independent, task-specific workflows — loaded and followed when the agent infers the right intent |
 
 Two core activity pipelines are defined in the agent:
@@ -58,9 +58,9 @@ The `skills/` directory ships with the following built-in skills. The Cocrates A
 
 | Path | Description |
 |------|-------------|
-| [`examples/blog/`](examples/blog/) | A multi-episode blog series introducing Cocrates Harness, written with `blog-series-authoring` |
-| [`examples/jsondb/`](examples/jsondb/) | A JSON database (Go) built end-to-end with `spec-driven-generation` — includes specs, ADRs, and verification |
-| [`examples/kb/`](examples/kb/) | Knowledge base entries captured from Socratic learning sessions (e.g. Bloom's Taxonomy) |
+| [`examples/blog/`](https://github.com/cocrates/cocrates.ai/tree/main/examples/blog) | A multi-episode blog series introducing Cocrates Harness, written with `blog-series-authoring` |
+| [`examples/jsondb/`](https://github.com/cocrates/cocrates.ai/tree/main/examples/jsondb) | A JSON database (Go) built end-to-end with `spec-driven-generation` — includes specs, ADRs, and verification |
+| [`examples/kb/`](https://github.com/cocrates/cocrates.ai/tree/main/examples/kb) | Knowledge base entries captured from Socratic learning sessions (e.g. Bloom's Taxonomy) |
 
 ## cocrates.ai
 
