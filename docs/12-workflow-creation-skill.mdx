@@ -10,7 +10,7 @@ sidebar_position: 12
 
 이 범용적인 파이프라인은 '구조가 명확하지 않은 상황'을 철저히 전제합니다. 그런데 만약 "슬라이드 덱 발표 자료"나 "테크 블로그 시리즈"처럼 이미 검증되고 정형화된 고유의 빌드업 워크플로우가 있는 산출물이라면 어떨까요? ASR을 식별하고 ADR을 검토하는 일은 비효율적일 것입니다.
 
-바로 이러한 특정 산출물 맞춤형 전용 스킬(`document-authoring`, `presentation-authoring` 등)들을 필요에 따라 설계하고 생성하는 존재가 바로 `generating-skill-creation`입니다. 최종 산출물이 아니라 그 산출물을 생성하는 절차 자체를 설계하고 박제하는 '메타-스킬(Meta-Skill)'의 심장을 열어보겠습니다.
+바로 이러한 특정 산출물 맞춤형 전용 스킬(`document-authoring`, `presentation-authoring` 등)들을 필요에 따라 설계하고 생성하는 존재가 바로 `generating-skill-creation`입니다. 최종 산출물이 아니라 그 산출물을 생성하는 절차 자체를 설계하고 박제하는 '메타-스킬'의 심장을 열어보겠습니다.
 
 ---
 
@@ -30,7 +30,7 @@ sidebar_position: 12
 
 ## ❄️ 7단계 Meta Snowflake 파이프라인
 
-스킬을 저작할 때 Cocrates는 일회성 프롬프트 뭉치를 툭 던지지 않습니다. 설계도가 완전히 확정(`detail design`)되기 전까지는 실제 코드나 마크다운 파일을 생성(`generation`)하지 않는다는 **Snowflake 엄격 통제 규칙** 하에 총 7단계의 빌드 프로세스를 밟습니다.
+스킬을 저작할 때 Cocrates는 일회성 프롬프트 뭉치를 툭 던지지 않습니다. 설계도가 완전히 확정되기 전까지는 실제 코드나 마크다운 파일을 생성하지 않는다는 **Snowflake 엄격 통제 규칙** 하에 총 7단계의 빌드 프로세스를 밟습니다.
 
 ```
 [1. Kernel] ─→ [2. Components] ─→ [3. Frame] ─→ [4. Outline] ─→ [5. Spec] ─→ [6. Skill] ─→ [7. Verification]
