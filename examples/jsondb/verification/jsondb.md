@@ -3,7 +3,7 @@
 **Spec:** spec/jsondb.md
 **Artifact(s):** cocrates/jsondb/ (12 source files, Go module)
 **Verified:** 2026-06-20
-**Summary:** 70 pass, 1 fail, 0 partial, 1 not-verifiable
+**Summary:** 71 pass, 1 fail, 0 partial, 0 not-verifiable
 
 ## Inventory
 
