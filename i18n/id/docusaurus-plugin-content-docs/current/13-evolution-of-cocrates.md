@@ -101,7 +101,7 @@ Putus loop? Pengguna berhenti tumbuh → Cocrates stagnan. Tidak perbarui Cocrat
 
 Cocrates adalah open source. Semua kode dan prompt publik.
 
-**github.com/cocrates/cocrates.ai**
+[**github.com/cocrates/cocrates.ai**](https://github.com/cocrates/cocrates.ai)
 
 Anda tidak harus tetap konsumen. Anda bisa berkontribusi—bagikan skill, perbaiki bug, usulkan prompt yang lebih baik.
 

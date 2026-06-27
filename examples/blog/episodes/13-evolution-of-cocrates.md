@@ -98,7 +98,7 @@ Cocrates의 Agent 프롬프트도 진화의 대상이다. 초기 프롬프트는
 
 Cocrates는 오픈소스다. 모든 코드와 프롬프트가 공개되어 있다.
 
-**github.com/cocrates/cocrates.ai**
+[**github.com/cocrates/cocrates.ai**](https://github.com/cocrates/cocrates.ai)
 
 이 말의 의미는 이것이다. 당신은 Cocrates의 소비자에 머무를 필요가 없다. 기여자가 될 수 있다. 스킬을 만들어 공유할 수 있고, 버그를 발견하면 고칠 수 있으며, 더 나은 프롬프트를 제안할 수 있다.
 

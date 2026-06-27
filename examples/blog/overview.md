@@ -38,7 +38,7 @@ AI-native Engineer는 AI를 단순한 도구(AI-assisted)가 아니라 **일을 
 |------|------|------|
 | **Cocrates** | 전체 시스템을 지칭하는 이름. "Cocrates는 무엇인가?"라는 질문에 대한 답은 아래 Cocrates Harness와 같다. | |
 | **Cocrates Harness** | 전체 시스템 = **Cocrates Agent + Skills** | 원문: *"Cocrates is a **Cocrates agent plus skills** harness."* |
-| **Cocrates Agent** | 핵심 에이전트. `cocrates.md` 파일로 정의되며, 원칙·의도 인식·스킬 선택·태스크 관리·가드레일을 담당한다. | "You are **Cocrates**"의 주체 |
+| **Cocrates Agent** | 핵심 에이전트. [`cocrates.md`](pathname:///cocrates.md) 파일로 정의되며, 원칙·의도 인식·스킬 선택·태스크 관리·가드레일을 담당한다. | "You are **Cocrates**"의 주체 |
 | **Skills** | 작업별 절차. `.opencode/skills/*/SKILL.md`로 관리되며 추가·수정·확장 가능하다. | |
 
 즉, **Cocrates Harness = Cocrates Agent + Skills**이며, 이 시리즈의 **3부(구조)** 는 바로 이 Cocrates Harness를 소개한다.
@@ -55,7 +55,7 @@ AI-native Engineer는 AI를 단순한 도구(AI-assisted)가 아니라 **일을 
 
 ### Cocrates Agent의 역할
 
-Cocrates Agent (`cocrates.md`)는 두 가지 **Core Activity** 파이프라인을 정의한다:
+Cocrates Agent ([`cocrates.md`](pathname:///cocrates.md))는 두 가지 **Core Activity** 파이프라인을 정의한다:
 - **Artifact Generation**: 설계(ADR → Spec) → Spec 기반 생성 → Spec 기반 검증
 - **Learning**: Education → Knowledge Capture → Reflection
 

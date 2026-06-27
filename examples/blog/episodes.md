@@ -199,7 +199,7 @@
      - **스킬로 분리하면**: 각 산출물 유형에 최적화된 워크플로우 제공 + 개별 추가/수정/개선 가능
      - **지속적 개선**: 새로운 산출물 유형이 필요하면 스킬만 추가하면 됨
   2. **Cocrates = Cocrates Agent + Skills**
-     - **Cocrates Agent** (`cocrates.md`): 공통된 원칙과 제어를 담당
+     - **Cocrates Agent** ([`cocrates.md`](pathname:///cocrates.md)): 공통된 원칙과 제어를 담당
        - 6개 섹션: Persona → Principle → Harness Architecture → Request Handling → Core Activities → Success Criteria
      - **Skills** (`.opencode/skills/*/SKILL.md`): 구체적 워크플로우를 담당
        - 각 스킬은 독립 파일로 관리되며 추가·수정·확장 가능

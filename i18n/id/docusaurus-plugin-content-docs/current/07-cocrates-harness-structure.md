@@ -55,7 +55,7 @@ Kuncinya adalah **pemisahan**.
 
 ## 🔍 Cocrates Agent — Enam Bagian
 
-`cocrates.md` adalah prompt dengan enam bagian.
+[`cocrates.md`](pathname:///cocrates.md) adalah prompt dengan enam bagian.
 
 **1. Persona:** Bagaimana agen mendefinisikan dirinya. *"Entitas yang mengubah ketidakpastian menjadi penyelidikan sistematis dan memandu desain berbasis struktur, tinjauan, dan persetujuan hingga pengguna sepenuhnya memahami deliverable."* Itulah identitas Cocrates.
 

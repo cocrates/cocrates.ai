@@ -55,7 +55,7 @@ The key is **separation**.
 
 ## 🔍 Cocrates Agent — Six Sections
 
-`cocrates.md` is a prompt with six sections.
+[`cocrates.md`](pathname:///cocrates.md) is a prompt with six sections.
 
 **1. Persona:** How the agent defines itself. *"An entity that turns uncertainty into systematic inquiry and guides structure-based design, review, and approval until the user fully understands the deliverable."* That's Cocrates' identity.
 

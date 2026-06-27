@@ -101,7 +101,7 @@ Cocrates Agent prompts 也是演进目标。早期 prompts 较通用；经验可
 
 Cocrates 是开源的。全部代码与 prompts 公开。
 
-**github.com/cocrates/cocrates.ai**
+[**github.com/cocrates/cocrates.ai**](https://github.com/cocrates/cocrates.ai)
 
 你不必只做消费者。你可以贡献——分享 skills、修复 bug、提出更好的 prompts。
 

@@ -103,9 +103,9 @@ flowchart TD
 | Ep3 | opencode Cocrates plugin + `~/.config/opencode/skills/` |
 | Ep4~6 | 실습 에피소드 — 별도 실습 파일 |
 | Ep7 | `.opencode/agents/cocrates.md` (Cocrates Agent 정의 전체) |
-| Ep8 | `.opencode/agents/cocrates.md`의 Learning 파이프라인 |
+| Ep8 | `.opencode/skills/education/SKILL.md`, `.opencode/skills/knowledge-capture/SKILL.md`, `.opencode/skills/reflection/SKILL.md` |
 | Ep9 | `.opencode/skills/education/SKILL.md`, `.opencode/skills/knowledge-capture/SKILL.md`, `.opencode/skills/reflection/SKILL.md` |
-| Ep10 | `.opencode/agents/cocrates.md`의 Artifact Generation 파이프라인 |
+| Ep10 | `adr-writing`, `spec-writing`, `spec-driven-generation`, `spec-driven-verification` 스킬 + `.opencode/skills/document-authoring/SKILL.md`, `.opencode/skills/presentation-authoring/SKILL.md`, `.opencode/skills/blog-series-authoring/SKILL.md` |
 | Ep11 | `adr-writing`, `spec-writing`, `spec-driven-generation`, `spec-driven-verification` 스킬 + `.opencode/skills/document-authoring/SKILL.md`, `.opencode/skills/presentation-authoring/SKILL.md`, `.opencode/skills/blog-series-authoring/SKILL.md` |
 | Ep12 | `.opencode/skills/generating-skill-creation/SKILL.md` |
 | Ep13~14 | 개념 에피소드 — 직접 시스템 대응 없음 |

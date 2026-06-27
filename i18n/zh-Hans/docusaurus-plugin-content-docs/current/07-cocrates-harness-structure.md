@@ -55,7 +55,7 @@ Cocrates 不是一个巨大 prompt。它是**两层 harness**。
 
 ## 🔍 Cocrates Agent — 六个 Section
 
-`cocrates.md` 是一个含六个 section 的 prompt。
+[`cocrates.md`](pathname:///cocrates.md) 是一个含六个 section 的 prompt。
 
 **1. Persona：** Agent 如何定义自己。*"将不确定性转化为系统化探究，并引导基于结构的设计、审查与批准，直到用户完全理解交付物。"* 这是 Cocrates 的身份。
 

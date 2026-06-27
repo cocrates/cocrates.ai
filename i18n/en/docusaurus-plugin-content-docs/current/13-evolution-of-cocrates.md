@@ -101,7 +101,7 @@ Break the loop? User stops growing → Cocrates stagnates. Don't update Cocrates
 
 Cocrates is open source. All code and prompts are public.
 
-**github.com/cocrates/cocrates.ai**
+[**github.com/cocrates/cocrates.ai**](https://github.com/cocrates/cocrates.ai)
 
 You don't have to stay a consumer. You can contribute—share skills, fix bugs, propose better prompts.
 
