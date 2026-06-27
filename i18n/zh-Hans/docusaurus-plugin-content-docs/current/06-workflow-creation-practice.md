@@ -144,7 +144,7 @@ Spec 之后，Cocrates 创建 `.opencode/skills/document-authoring/SKILL.md`。
 
 有了 skill，体验完全改变。
 
-**之前：** *"写一份报告"* → AI  wildly 生成 → 用户被动接受
+**之前：** *"写一份报告"* → AI 随意生成 → 用户被动接受
 
 **之后：** *"写一份项目回顾"* → `document-authoring` 激活 → P1 起各阶段与用户协作 → 每步审查批准 → 一致质量
 

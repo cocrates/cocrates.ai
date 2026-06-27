@@ -195,7 +195,7 @@ Education（学习）→ Knowledge Capture（记录）→ Reflection（验证）
 
 > *"Develop jsondb in cocrates/jsondb."*
 
-当你让 AI "构建" 时，Cocrates 如何回应？不只是代码生成—— remarkable 的过程展开。
+当你让 AI "构建" 时，Cocrates 如何回应？不只是代码生成——一个值得关注的过程会展开。
 
 ---
 

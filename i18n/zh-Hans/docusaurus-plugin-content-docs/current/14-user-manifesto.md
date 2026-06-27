@@ -1,7 +1,7 @@
 ---
 sidebar_position: 14
 ---
-# EP14. Cocrates 用户宣言
+# EP14. Cocrates Harness 用户宣言
 
 ![Cocrates 用户宣言](/img/14-user-manifesto.png)
 
@@ -9,13 +9,13 @@ sidebar_position: 14
 
 这是一份**宣言**。
 
-十三集我们同行——从 EP1 的 *"How many AI teammates do you have?"* 到 EP13 的 *"user and framework mutual evolution."*
+十三集我们同行——从 EP1 的 *"How many AI teammates do you have?"* 到 EP13 的*"用户与框架的相互演进。"*
 
-That journey 有一个 aim：
+这段旅程有一个目标：
 
 **让你成为 AI原生型工程师。**
 
-今天，在终点，我们将十三集 condensed 成七条诫命。不是 summary——是 **declaration**。你在 AI 时代作为工程师的 commitment。
+今天，在终点，我们将十三集凝练成七条诫命。不是摘要——是**宣言**。你在 AI 时代作为工程师的承诺。
 
 ---
 
@@ -25,89 +25,89 @@ That journey 有一个 aim：
 
 **哲学 1. "The unexamined code is not worth generating."**
 
-EP2 opening principle。未经审查的产出不 worth creating。无论 AI 结果多好，若你没理解并 review，它没有 value。没有这，就没有 AI-native engineer。
+EP2 开篇原则。未经审查的产出不值得创造。无论 AI 结果多好，若你没理解并审查，它没有价值。没有这一条，就没有 AI原生型工程师。
 
 **哲学 2. "I know I know nothing."**
 
-Socrates。*"Knowing that I know nothing is the beginning of wisdom."* 在 AI 时代更强。AI 持有 vast knowledge——但 admitting what you don't know 开始 real learning。Don't hide ignorance；ask。That's first step of growth。
+苏格拉底。*"Knowing that I know nothing is the beginning of wisdom."（自知无知是智慧的开始。）* 在 AI 时代更强。AI 拥有海量知识——但承认你不知道什么，才是真实学习的开始。不要隐藏 ignorance；提问。那是成长的第一步。
 
 **哲学 3. "Harness Ignorance."**
 
-Don't fear ignorance——**use it**。当你 discover what you don't know，你可以 ignore 或 learn。Cocrates helps you choose learn。Ignorance 不是 obstacle——是 fuel for growth。
+不要恐惧 ignorance——**驾驭它**。当你发现不知道的东西，你可以忽略或学习。Cocrates 帮你选择学习。Ignorance 不是障碍——是成长的燃料。
 
 ---
 
 ## 📜 用户宣言 — 七条诫命
 
-我 declare，作为 AI-native engineer，我将遵守以下七条诫命：
+我宣告，作为 AI原生型工程师，我将遵守以下七条诫命：
 
 ### 诫命 1. 我不盲目请求。
 
 *"I do not blindly request."*
 
-我不知道要什么时，不会向 AI 请求。请求前我问自己：*"What do I really want? Why?"* 在 assign work 给 AI 之前 clarify purpose 与 scope。
+我不知道要什么时，不会向 AI 请求。请求前我问自己：*"我真正想要什么？为什么？"* 在把工作交给 AI 之前，先明确目的与范围。
 
 ### 诫命 2. 我不盲目信任。
 
 *"I do not blindly trust."*
 
-我不会 take AI output on faith。AI 按概率生成 most plausible answer——不一定是 right one。Until review（U→A→E→A），that output 对我不存在。
+我不会凭 faith 接受 AI 产出。AI 按概率生成最 plausible 的答案——不一定是正确的。在审查（U→A→E→A）完成之前，那份产出对我不存在。
 
 ### 诫命 3. 我不交出控制。
 
 *"I do not surrender control."*
 
-Final decision 始终在我。AI 可 propose、analyze、generate——但 **approval** 只属于我。无论 AI 多 capable，final accountability 是我的。我不 hand that to AI。
+最终决定始终在我。AI 可以 propose、analyze、generate——但 **approval（批准）** 只属于我。无论 AI 多 capable，最终 accountability 是我的。我不把这一点交给 AI。
 
 ### 诫命 4. 我不复制即运行。
 
 *"I do not copy and run."*
 
-我不会 paste 不理解的 code。Every line 必须在进入 project 前 understood。Ununderstood code 后来变 problems——guaranteed。
+我不会粘贴不理解的 code。每一行在进入 project 之前必须被理解。不理解的 code 后来会变成问题——这是必然的。
 
 ### 诫命 5. 我不隐藏 ignorance。
 
 *"I do not hide my ignorance."*
 
-不知道时，我不会 ashamed。我问 AI：*"I didn't understand this part—please explain."* Admitting ignorance 不是 weakness——是最强 starting point for growth。
+不知道时，我不会羞愧。我问 AI：*"I didn't understand this part—please explain."* 承认 ignorance 不是 weakness——是最强的成长起点。
 
 ### 诫命 6. 我始终反思与学习。
 
 *"I always reflect and learn."*
 
-一天结束我 review 今天的 AI conversations。*"What did I learn? Where did I find ignorance? How can I do better tomorrow?"* Experience without reflection 只是 elapsed time。
+一天结束我回顾今天的 AI 对话。*"我学到了什么？在哪里发现了 ignorance？明天如何做得更好？"* 没有反思的经验只是流逝的时间。
 
 ### 诫命 7. 我始终为成长而战。
 
 *"I always fight for my growth."*
 
-我不会 settle for comfort。不会 satisfied 只 delegate familiar tasks 给 AI。我 take harder challenges 并 push to understand deeper。Growth 不会 by itself happen——你 fight for it。
+我不会安于舒适。不会满足于只把熟悉任务 delegate 给 AI。我接受更难挑战，推动更深理解。成长不会自己发生——你要为它而战。
 
 ---
 
 ## 🦉 Cocrates Harness + 用户宣言 = AI原生型工程师
 
-Declare 七条诫命不是 end。
+宣告七条诫命不是终点。
 
-**Tool 与 will 必须一起。**
+**工具与意志必须同行。**
 
-Cocrates Harness 是 **tool**——enable architecture-driven generation、enforce review 与 approval、support learning through creation。
+Cocrates Harness 是**工具**——实现 architecture-driven generation、强制 review 与 approval、通过 creation 支持 learning。
 
-User Manifesto 是 **will**——不 blindly follow、不 surrender control、commit to continuous growth。
+User Manifesto 是**意志**——不盲目跟随、不交出控制、承诺持续成长。
 
-**Cocrates Harness + User Manifesto = AI-native engineer.**
+**Cocrates Harness + User Manifesto = AI原生型工程师。**
 
-Great tool without will 是 hollow。Strong will without tool 难 practice。Together，true AI-native engineer emerges。
+有工具无意志是空洞的。有意志无工具难以践行。两者结合，真正的 AI原生型工程师 才会出现。
 
-AI-native engineer 可以 without limit expand capability——从 one engineer 到 three、ten——按你的 skill lead AI teammates。
+AI原生型工程师 可以无限扩展能力——从一名工程师到三名、十名——按你的 skill 带领 AI teammates。
 
 ---
 
 ## 🔄 循环回归 — 终点是起点
 
-Every journey ends。The end begins again。
+每一段旅程都会结束。结束也是新的开始。
 
-EP1 以 opens：
+EP1 开篇：
 
 > *"How many AI teammates do you have?"*
 
@@ -116,30 +116,30 @@ EP14，最后一集，回归 first principle：
 > **"The unexamined code is not worth generating."**
 > **"未经审查的产出，不值得创造。"**
 
-That one line 是系列 start——也是 end。
+这一句话是系列的开始——也是结束。
 
-Whether you use Cocrates、another tool、或 no tool——这些 principles 与七条诫命不变。Because 这不是 about tool 的 declaration——是 about **如何在 AI 时代作为工程师生活** 的 declaration。
+无论你用 Cocrates、其他工具、还是不用工具——这些原则与七条诫命不变。因为这不是关于工具的宣言——是关于**如何在 AI 时代作为工程师生活**的宣言。
 
 ---
 
 ## 📌 要点回顾 — 全系列
 
 1. **三种哲学。** Unexamined code；I know I know nothing；Harness Ignorance。
-2. **七条诫命。** No blind request、trust、surrender；no copy-run 或 hiding ignorance；always reflect 并 fight for growth。
-3. **Cocrates Harness + User Manifesto = AI-native engineer。** Tool plus will enables unlimited expansion。
-4. **循环回归。** 终点是起点。First principle 是 last。
+2. **七条诫命。** 不盲目请求、信任、交出控制；不复制即运行、不隐藏 ignorance；始终反思并为成长而战。
+3. **Cocrates Harness + User Manifesto = AI原生型工程师。** 工具加意志，使能力无限扩展。
+4. **循环回归。** 终点是起点。第一原则也是最后一句。
 
 ---
 
-**Final question.**
+**最后一个问题。**
 
-系列 began with one question：
+系列始于一个问题：
 
 > *"How many AI teammates do you have?"*
 
-Now ask yourself——你应该能 answer：
+现在问自己——你应该能回答：
 
-*"It depends on my capability. I'm growing now. Tomorrow I can lead more teammates than today."*
+*"取决于我的能力。我正在成长。明天我能带领比今天更多的队友。"*
 
 ---
 
