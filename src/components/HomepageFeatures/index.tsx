@@ -30,7 +30,7 @@ const EpisodeList: EpisodeItem[] = [
     ep: 'EP2',
     title: translate({
       id: 'homepage.ep2.title',
-      message: '검토하지 않은 산출물은 생성할 가치가 없다.',
+      message: '검토하지 않은 산출물의 무가치론',
     }),
     summary: translate({
       id: 'homepage.ep2.summary',
@@ -69,7 +69,7 @@ const EpisodeList: EpisodeItem[] = [
     ep: 'EP5',
     title: translate({
       id: 'homepage.ep5.title',
-      message: '구조 기반 산출물 생성 실습',
+      message: '구조 기반 생성 실습',
     }),
     summary: translate({
       id: 'homepage.ep5.summary',
@@ -82,7 +82,7 @@ const EpisodeList: EpisodeItem[] = [
     ep: 'EP6',
     title: translate({
       id: 'homepage.ep6.title',
-      message: '구조 기반 워크플로우 스킬 생성 실습',
+      message: '구조 기반 스킬 생성 실습',
     }),
     summary: translate({
       id: 'homepage.ep6.summary',
@@ -108,7 +108,7 @@ const EpisodeList: EpisodeItem[] = [
     ep: 'EP8',
     title: translate({
       id: 'homepage.ep8.title',
-      message: '소크라테스식 학습 활동',
+      message: '소크라테스식 학습 원리',
     }),
     summary: translate({
       id: 'homepage.ep8.summary',
@@ -121,7 +121,7 @@ const EpisodeList: EpisodeItem[] = [
     ep: 'EP9',
     title: translate({
       id: 'homepage.ep9.title',
-      message: '소크라테스식 학습 활동 스킬',
+      message: '소크라테스식 학습 스킬',
     }),
     summary: translate({
       id: 'homepage.ep9.summary',
@@ -134,7 +134,7 @@ const EpisodeList: EpisodeItem[] = [
     ep: 'EP10',
     title: translate({
       id: 'homepage.ep10.title',
-      message: '구조 기반 산출물 생성 활동',
+      message: '구조 기반 생성 원리',
     }),
     summary: translate({
       id: 'homepage.ep10.summary',
@@ -147,7 +147,7 @@ const EpisodeList: EpisodeItem[] = [
     ep: 'EP11',
     title: translate({
       id: 'homepage.ep11.title',
-      message: '구조 기반 산출물 생성 활동 스킬',
+      message: '구조 기반 생성 스킬',
     }),
     summary: translate({
       id: 'homepage.ep11.summary',
@@ -160,7 +160,7 @@ const EpisodeList: EpisodeItem[] = [
     ep: 'EP12',
     title: translate({
       id: 'homepage.ep12.title',
-      message: '구조 기반 워크플로우 생성 스킬',
+      message: '구조 기반 스킬 생성 원리',
     }),
     summary: translate({
       id: 'homepage.ep12.summary',
@@ -186,7 +186,7 @@ const EpisodeList: EpisodeItem[] = [
     ep: 'EP14',
     title: translate({
       id: 'homepage.ep14.title',
-      message: 'Cocrates Harness 사용자 선언문',
+      message: 'Cocrates 사용자 선언문',
     }),
     summary: translate({
       id: 'homepage.ep14.summary',

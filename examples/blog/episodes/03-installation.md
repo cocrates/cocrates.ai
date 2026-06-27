@@ -1,112 +1,183 @@
-# EP3. Cocrates Harness 설치: 5분 만에 내 컴퓨터에 'AI 코치' 들여놓기
+# EP3. Cocrates Harness 설치
 
-지난 두 편의 에피소드를 통해 우리는 같은 AI라도 사용자의 태도에 따라 결과가 완전히 달라진다는 것, 그리고 주도권을 쥐기 위해서는 "검토되지 않은 산출물은 생성할 가치가 없다"는 원칙을 지켜야 한다는 것을 가슴 깊이 새겼습니다.
-
-그렇다면 이 소크라테스식 철학을 내 컴퓨터 위에서 실현해 줄 도구, **Cocrates Harness**는 어떻게 시작해야 할까요?
-
-복잡할 것 같다고요? 전혀요. 딱 5분만 투자하면 끝나는 초간단 설치법을 지금부터 친절하게 안내해 드릴 테니 눈 크게 뜨고 따라오세요! 🚀
+![Cocrates Install Procedure](/img/03-installation.png)
 
 ---
 
-## 🧩 Cocrates Harness의 정체는 '플러그인'입니다
+Ep2에서 우리는 하나의 강력한 선언을 했다.
 
-가장 먼저 알아야 할 점은 Cocrates Harness가 단독으로 실행되는 프로그램이 아니라는 것입니다. 얘는 'opencode'라는 멋진 플랫폼 위에서 살아 숨 쉬는 **플러그인**이에요.
+> "The unexamined code is not worth generating."
+> 검토되지 않은 산출물은 생성할 가치가 없다.
 
-* **opencode:** AI 에이전트를 실행하고 든든하게 관리해 주는 무대(플랫폼)
-* **@cocrates/cocrates-harness:** 그 무대 위에서 Cocrates만의 특별한 능력(Agent와 Skills)을 뽐내는 배우(플러그인)
+원칙은 분명하다. AI가 만든 모든 것은 검토(U→A→E→A)를 거쳐야 하고, 무지를 방치하지 말아야 한다.
 
-구조가 참 명확하죠? 그래서 우리의 설치 미션은 딱 3단계로 나뉩니다. **opencode를 깔고 → 플러그인을 심고 → 스킬 파일을 복사하면 끝**입니다.
+그런데, 한 가지 현실적인 질문이 남아 있다.
 
----
+*"원칙은 알겠다. 그런데 도대체 어떻게 시작하지?"*
 
-## 🛠️ Step 1. opencode 설치하기 (취향대로 골라잡기)
-
-opencode는 여러분의 작업 스타일을 존중하여 총 세 가지 실행 방식을 제공합니다. 이 중 마음에 드는 옷을 골라 입으시면 됩니다.
-
-| 설치 방식 | 추천 대상 | 특징 |
-| --- | --- | --- |
-| **opencode 터미널** | Claude/GPT TUI 환경을 사랑하는 힙스터 | 터미널 기반, 키보드 중심의 텍스트 UI (TUI) |
-| **opencode 데스크탑** | Cursor나 VS Code 스타일이 손에 익은 분 | 깔끔한 GUI 에디터 환경 (현재 베타 버전) |
-| **opencode 확장** | 기존에 쓰던 Cursor/VS Code를 포기 못 하는 분 | 원래 쓰던 IDE 환경에 확장 기능만 쏙 추가 |
-
-👉 상세한 OS별 다운로드 방법은 공식 사이트([opencode.ai/download](https://opencode.ai/download))를 참고해 주세요.
-
-> **💡 선배의 꿀팁 조언!**
->
-> 만약 터미널 환경(TUI)이 낯설다면, 고민하지 말고 **VS Code나 Cursor 환경**에서 확장 기능을 쓰시는 걸 적극 추천합니다. 특히 **OpenChamber** 확장을 함께 설치하면 VS Code의 Copilot이나 Cursor와 똑 닮은 예쁜 GUI 환경을 맛볼 수 있어 가장 편안하게 시작할 수 있습니다.
->
+오늘 우리는 그 질문에 답한다. 설치는 5분이면 끝난다. 하지만 진짜 시작은 설치 후라는 것, 그 점을 꼭 기억하길 바란다.
 
 ---
 
-## ⚙️ Step 2. cocrates-harness 플러그인 심기
+## 🎭 Cocrates Harness의 정체
 
-무대가 준비되었으니 이제 Cocrates를 심을 차례입니다. opencode의 설정 파일 하나만 살짝 수정해 주면 됩니다.
+먼저 Cocrates Harness의 정체부터 명확히 하고 넘어가자.
 
-보통 `~/.config/opencode/` 디렉토리에 가면 `opencode.jsonc`라는 설정 파일이 기다리고 있을 겁니다. (환경변수 `OPENCODE_CONFIG_DIR`을 설정하셨다면 그 경로로 가시면 됩니다.)
+Cocrates Harness는 단독으로 실행되는 프로그램이 아니다. **opencode**라는 플랫폼 위에서 동작하는 **플러그인**이다.
 
-이 파일을 열고 `plugin` 항목에 아래와 같이 슬쩍 한 줄을 추가해 주세요.
+비유하자면 이렇다. opencode는 **무대**이고, Cocrates Harness는 그 무대 위에서 공연하는 **배우**다. 무대가 없으면 배우도 설 자리가 없다.
 
-```json
-{
-  "$schema": "https://opencode.ai/config.json",
-  "plugin": ["@cocrates/cocrates-harness"]
-}
+그래서 Cocrates의 설치는 3단계로 이루어진다.
 
+**하나,** opencode를 설치하고.
+**둘,** Cocrates 플러그인을 설정하고.
+**셋,** 스킬 파일을 준비한다.
+
+이 세 가지만 기억하라. 설치는 생각보다 훨씬 간단하다.
+
+---
+
+## 🖥️ 3가지 UI 선택지
+
+opencode를 사용하는 방법은 세 가지가 있다. 자신의 환경에 맞게 선택하면 된다.
+
+### 1) opencode 터미널 (TUI)
+터미널 환경에서 키보드 중심으로 사용한다. CLI에 익숙한 사용자에게 추천.
+
+### 2) opencode 데스크탑 (베타)
+설치형 GUI 앱. 아직 베타 버전이라 기능이나 안정성 면에서 불편한 점이 있을 수 있다.
+
+### 3) VS Code 또는 Cursor + OpenChamber 확장 ⭐ (추천)
+VS Code나 Cursor에 익숙하다면, Copilot이나 Cursor를 쓰는 것처럼 자연스럽게 Cocrates를 사용할 수 있다. VS Code + OpenChamber도 opencode가 설치되어 있어야 동작한다는 점을 기억하자.
+
+---
+
+## ⚙️ Step 1 — opencode 설치
+
+### macOS / Linux
+
+터미널을 열고 다음 한 줄만 입력하면 된다.
+
+```bash
+curl -fsSL https://opencode.ai/install | bash
 ```
 
-벌써 2단계까지 마스터하셨습니다! 플러그인 연결 완료입니다.
+curl이 설치 스크립트를 안전하게 다운로드하고, bash가 그 스크립트를 바로 실행한다. 그러면 opencode 바이너리가 자동으로 설치된다.
+
+설치가 끝나면 확인해보자.
+
+```bash
+opencode --version
+```
+
+버전이 출력되면 성공이다. 혹시 *"command not found"*가 뜨면 PATH에 `~/.local/bin`을 추가하면 된다.
+
+### Windows
+
+Windows에도 curl은 기본 내장되어 있지만, bash는 기본적으로 없다. 대신 **Chocolatey**라는 Windows용 패키지 매니저를 사용한다.
+
+먼저 PowerShell을 **관리자 권한**으로 실행하고, Chocolatey를 설치한다.
+
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+```
+
+Chocolatey가 설치되었다면, opencode 설치는 단 한 줄이다.
+
+```powershell
+choco install opencode
+```
+
+그리고 `opencode --version`으로 확인한다.
+
+### VS Code + OpenChamber 확장 설치
+
+opencode CLI 설치는 끝났다. 그런데 터미널 UI가 어색하다면, VS Code + **OpenChamber** 확장을 설치하자.
+
+1. 아직 VS Code가 없다면 [code.visualstudio.com](https://code.visualstudio.com)에서 다운로드해 설치한다.
+2. VS Code를 실행하고, 확장 아이콘(Ctrl+Shift+X)을 클릭한 다음 검색창에 **"OpenChamber"**를 입력하고 설치 버튼을 누른다.
+
+OpenChamber를 이용하면, 마치 VS Code의 Copilot이나 Cursor를 쓰는 것처럼 VS Code 안에서 Cocrates를 사용할 수 있다.
+
+![OpenChamber Extension](/img/openchamber-extension.png)
 
 ---
 
-## 📚 Step 3. 핵심 무기인 'Skill' 파일 복사하기
+## 🔧 Step 2-3 — Plugin 설정 + Skill 파일
 
-플러그인만 덜렁 있으면 Cocrates가 힘을 쓰지 못합니다. 왜냐하면 Cocrates의 진짜 뇌섹녀 같은 매력은 '스킬(Skills)'에서 나오기 때문이죠. 스킬은 교육, 구조기반 산출물 생성 등 각각의 워크플로우를 정의해 둔 마법서 같은 파일들입니다.
+opencode를 설치한 후, AI에게 Cocrates Harness 설치를 요청하는 방법이 가장 간단하다.
 
-스킬 파일들은 [Cocrates 공식 GitHub 저장소](https://www.google.com/search?q=https://github.com/cocrates/cocrates.ai/tree/main/skills)의 `skills/` 폴더에 예쁘게 모여 있습니다. 이 폴더 안의 모든 내용을 내 컴퓨터의 `~/.config/opencode/skills/` 디렉토리로 복사해 넣어주시면 세팅 끝입니다!
+Cocrates를 실행하고 다음과 같이 요청한다.
 
-### 😎 "잠깐, 귀찮은데 AI한테 시키면 안 되나요?"
+*"https://cocrates.ai/install.md 파일을 근거로 Cocrates Harness를 설치해 줘."*
 
-**당연히 됩니다! 우리는 AI를 지휘하는 디렉터니까요.** opencode를 설치한 다음, 실행 창에 대고 근엄하게 한마디만 던져보세요.
+그럼 AI가 알아서 처리한다. GitHub 저장소에서 스킬 파일을 찾아 다운로드하고, opencode.jsonc에 플러그인 설정을 추가하고, 모든 걸 알아서 처리한다.
 
-> 👤 **"[https://cocrates.ai/install.md](https://cocrates.ai/install.md) 파일을 근거로 Cocrates Harness를 설치해 줘."**
-> 
+> ![Cocrates Harness Installed](/img/cocrates-harness-installed.png)
 
-그럼 똑똑한 AI가 이 가이드를 찰떡같이 알아듣고 플러그인 설정부터 스킬 파일 다운로드 및 복사까지 알아서 대행해 줍니다. 파일 찾으러 깃허브를 방황할 필요가 전혀 없죠. 세상 참 좋아졌습니다.
+**하지만. 여기서 끝이 아니다.**
 
----
+AI가 설치했다고 해서 그냥 넘어가면, 그것은 AI-assisted일 뿐이다. **AI가 설치한 내용을 검토하고 승인하는 것.** 그것이 진짜 AI-native Engineer다.
 
-## 🎉 설치 완료, 그리고 설레는 첫 대화
+### 설치 확인
 
-설치가 잘 끝났다면 opencode를 가볍게 재시작해 줍니다. 그리고 Agent 목록에서 자랑스러운 **Cocrates Agent**를 선택해 활성화해 주세요!
+Cocrates Harness는 두 가지로 구성된다. **Plugin**과 **Skill.** 이 두 가지만 확인하면 설치가 제대로 되었는지 알 수 있다.
 
-자, 겉모습은 다 갖춰졌습니다. 하지만 잊지 마세요. **설치만 해둔다고 해서 여러분의 코딩 인생이 저절로 180도 바뀌지는 않습니다.** Cocrates는 자판기가 아니라 코치이니까요.
+**Plugin 확인.** `~/.config/opencode/opencode.jsonc` 파일을 열어보자. 그 안에 `"plugin": ["@cocrates/cocrates-harness"]`가 있는가? 있으면 통과.
 
-Cocrates는 여러분이 대화에 참여하고, 뼈대를 검토하고, 머리를 싸매며 결정 내리는 주도적인 순간을 목마르게 기다리고 있습니다.
+**Skill 확인.** `~/.config/opencode/skills/` 디렉토리를 열어보자. adr-writing, spec-writing, education 등 여러 스킬 파일들이 있는가? 있으면 통과.
 
-준비가 되셨다면, 활성화된 Cocrates에게 가볍게 첫 질문을 툭 던지며 대화를 시작해 보세요.
+이 두 가지만 확인하면 된다. AI가 알아서 잘 설치했다면, 여러분은 확인하고 승인만 하면 끝.
 
-> 💬 **"블룸의 분류학에 대해 알려줘."**
-> 
+둘 다 정상이면, opencode를 재시작하고 Cocrates Agent를 선택하라. 활성화 완료다.
 
 ---
 
-## 📌 오늘의 핵심 요약
+## 🦉 첫 대화 — 진짜는 지금부터
 
-1. **플러그인 기반 구조:** Cocrates Harness는 opencode라는 플랫폼 위에서 플러그인으로 돌아갑니다.
-2. **다양한 UI 지원:** 터미널, 데스크탑, IDE 확장 중 마음에 드는 것을 고르되, 초보자는 VS Code+OpenChamber 조합을 강추합니다!
-3. **치트키 설치법:** 직접 설정하기 귀찮다면 AI에게 "install.md 근거로 설치해 줘" 한 문장이면 끝납니다.
+설치 완료! 이제 모든 준비가 끝났다. 진짜를 경험할 시간이다.
+
+Cocrates에게 첫 질문을 던져보자.
+
+> **"블룸의 분류학에 대해 알려줘."**
+
+그런데, 한 가지 미리 말씀드리자면... Cocrates는 일반 AI와 다를 것이다.
+
+보통 AI는 바로 장문의 설명을 내놓겠지만, Cocrates는 그러지 않는다. 은근슬쩍 오류가 섞인 예시와 함께, 여러분에게 첫 번째 미션을 던질 것이다.
+
+**설치만으로 끝나지 않는다. 진짜는 지금부터다.**
+
+---
+
+## 📌 오늘의 핵심
+
+1. **Cocrates는 opencode 플러그인이다.** opencode라는 플랫폼 위에서 동작하며, Plugin + Skill 두 가지로 구성된다.
+2. **권장 설치는 opencode + VS Code + OpenChamber 확장이다.** VS Code와 OpenChamber로 GUI 환경에서 Cocrates를 사용할 수 있다.
+3. **설치는 AI에게 요청하고, 설치 후 확인하라.** "install.md를 근거로 설치해 줘" 한 마디면 된다. 단, 설치 후 Plugin과 Skill이 제대로 있는지 반드시 확인하라. AI의 동작을 확인하고 검토하는 습관이 필요하다.
+
+---
+
+**스스로에게 질문하자.**
+
+- 지금 opencode가 설치되어 있는가?
+- Cocrates Agent가 활성화되어 있는가?
+- 첫 질문을 던질 준비가 되었는가?
+
+세 질문에 모두 Yes라면, 여러분은 이미 AI-native Engineer의 첫걸음을 내디딘 것이다.
 
 ---
 
 ## 🎬 다음 편 예고
 
-"블룸의 분류학에 대해 알려줘"라고 물어보셨나요? 아마 다른 AI들처럼 논문 같은 설명글을 길게 늘어놓지 않을 겁니다.
+오늘 우리는 도구를 준비했다. Cocrates Harness를 설치하고, Plugin과 Skill을 확인했으며, 첫 질문을 던질 준비를 마쳤다.
 
-Cocrates는 정답을 알려주는 대신, **은근슬쩍 오류가 섞인 예시와 함께 여러분에게 첫 번째 미션**을 던질 테니까요.
+하지만 원칙을 아는 것과 실천하는 것은 다르다. 도구를 가지는 것과 사용하는 것도 다르다.
 
-다음 에피소드에서는 이 당돌한 AI 코치와 함께 `Education` → `Knowledge Capture` → `Reflection`으로 이어지는 Cocrates만의 짜릿한 3단계 학습 파이프라인을 실제 대화 스크립트와 함께 생생하게 경험해 보겠습니다.
+다음 에피소드, Ep4에서는 드디어 Cocrates와의 **첫 번째 진짜 대화**를 경험한다.
 
-생각 유발 유도형 AI와의 첫 만남, 기대하셔도 좋습니다! 다음 편에서 만나요! 🦉
+"블룸의 분류학에 대해 알려줘"라고 물었을 때, Cocrates가 어떻게 반응하는지, Education → Knowledge Capture → Reflection으로 이어지는 3단계 학습 파이프라인을 실제 대화와 함께 생생하게 보여주겠다.
+
+생각 유발 유도형 AI와의 첫 만남. 기대하셔도 좋다.
 
 ---
 

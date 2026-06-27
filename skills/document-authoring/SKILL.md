@@ -1,10 +1,12 @@
 ---
 name: document-authoring
 description: >-
-  Select when the user requests a general Markdown document (explanatory text,
-  reports, proposals, analyses, overviews, reference notes, etc.). Write the
-  requested document using Snowflake progressive elaboration: outline → structure
-  → section drafting → integration → final review.
+  Select when the user requests a substantial general Markdown document that
+  benefits from progressive elaboration (e.g., multi-section reports, proposals,
+  analyses, overviews, reference notes, etc.). Do NOT select for simple
+  summaries, information lookups, brief explanations, or raw content dumps —
+  those should be written directly as Markdown files without this skill's
+  workflow.
 compatibility: opencode
 metadata:
   agent: cocrates
@@ -33,7 +35,7 @@ Save all intermediate artifacts and the final document under:
 ```text
 docs/{slug}/
   ├── outline.md              # P1: Outline (metadata + table of contents)
-  ├── structure.md            # P2: Structure design (key points per section + structure choice)
+  ├── sections.md             # P2: Structure design (key points per section + structure choice)
   ├── sections/               # P3: Section bodies
   │   ├── 01-introduction.md
   │   ├── 02-main-point-1.md
@@ -67,7 +69,7 @@ The document's overall outline. Include:
    ...
 ```
 
-### structure.md
+### sections.md
 
 Defines key points per section and the document's structural approach.
 
@@ -132,7 +134,7 @@ The complete document with all sections merged. Include metadata, table of conte
    - Examples: introduction–body–conclusion, narrative arc, problem–cause–solution–proposal, etc.
    - If the user has no clear preference, Cocrates recommends options and the user chooses.
 2. Define key points and content to include for each section.
-3. Draft `structure.md` and present it to the user.
+3. Draft `sections.md` and present it to the user.
 4. After the user reviews and approves, proceed to P3.
 
 **User review questions:**
@@ -150,7 +152,7 @@ The complete document with all sections merged. Include metadata, table of conte
 **Purpose:** Draft and review each section's body sequentially.
 
 **Procedure:**
-1. Start with the first section in the order defined in `structure.md`.
+1. Start with the first section in the order defined in `sections.md`.
 2. Draft the section body in Markdown and present it to the user.
 3. The user reviews.
    - Approved: proceed to the next section.
@@ -228,7 +230,7 @@ sections/04-conclusion.md
 - Starting body drafting (P3) without user approval of P1 (outline) or P2 (structure)
 - Moving to the next section without user approval of the current section
 - Marking document creation complete without user approval in P5 (final review)
-- Leaving intermediate artifacts (`outline.md`, `structure.md`, `sections/*.md`) only in chat without saving them as files
+- Leaving intermediate artifacts (`outline.md`, `sections.md`, `sections/*.md`) only in chat without saving them as files
 - Suddenly generating software code or other deliverable types mid-document workflow
 - Including content the user has not approved
 - Using this skill for document types better served by dedicated skills (blog series, slide decks, etc.)
@@ -237,6 +239,6 @@ sections/04-conclusion.md
 
 - Final document file `docs/{slug}/{slug}.md` exists
 - All phases P1–P5 completed with user final approval
-- All intermediate artifacts (`outline.md`, `structure.md`, `sections/*.md`) saved as files
+- All intermediate artifacts (`outline.md`, `sections.md`, `sections/*.md`) saved as files
 - Document purpose, audience, and core message are clearly reflected in the document
 - The user can explain the document's content and structure
