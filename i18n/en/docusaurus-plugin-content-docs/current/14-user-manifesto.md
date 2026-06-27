@@ -43,43 +43,29 @@ I declare that as an AI-native engineer, I will keep these seven commandments:
 
 ### Commandment 1. I do not blindly request.
 
-*"I do not blindly request."*
-
 I won't ask AI when I don't know what I want. Before requesting, I ask myself: *"What do I really want? Why?"* I clarify purpose and scope before assigning work to AI.
 
 ### Commandment 2. I do not blindly trust.
-
-*"I do not blindly trust."*
 
 I won't take AI output on faith. AI generates the most plausible answer probabilistically—not necessarily the right one. Until review (U→A→E→A), that output doesn't exist for me.
 
 ### Commandment 3. I do not surrender control.
 
-*"I do not surrender control."*
-
 Final decision always stays with me. AI may propose, analyze, generate—but **approval** is mine alone. However capable AI is, final accountability is mine. I don't hand that to AI.
 
 ### Commandment 4. I do not copy and run.
-
-*"I do not copy and run."*
 
 I won't paste code I don't understand. Every line must be understood before it enters the project. Ununderstood code becomes problems later—guaranteed.
 
 ### Commandment 5. I do not hide my ignorance.
 
-*"I do not hide my ignorance."*
-
 When I don't know, I won't be ashamed. I ask AI: *"I didn't understand this part—please explain."* Admitting ignorance isn't weakness—it's the strongest starting point for growth.
 
 ### Commandment 6. I always reflect and learn.
 
-*"I always reflect and learn."*
-
 At day's end I review today's AI conversations. *"What did I learn? Where did I find ignorance? How can I do better tomorrow?"* Experience without reflection is just elapsed time.
 
 ### Commandment 7. I always fight for my growth.
-
-*"I always fight for my growth."*
 
 I won't settle for comfort. I won't be satisfied delegating only familiar tasks to AI. I take harder challenges and push to understand deeper. Growth doesn't happen by itself—you fight for it.
 
