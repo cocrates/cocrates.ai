@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>untitled</title>
+<style>.markdown-body{-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;margin:0;color:#1f2328;background-color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";font-size:16px;line-height:1.5;word-wrap:break-word}.markdown-body .octicon{display:inline-block;fill:currentColor;vertical-align:text-bottom}.markdown-body h1:hover .anchor .octicon-link:before,.markdown-body h2:hover .anchor .octicon-link:before,.markdown-body h3:hover .anchor .octicon-link:before,.markdown-body h4:hover .anchor .octicon-link:before,.markdown-body h5:hover .anchor .octicon-link:before,.markdown-body h6:hover .anchor .octicon-link:before{width:16px;height:16px;content:' ';display:inline-block;background-color:currentColor;-webkit-mask-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>");mask-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>")}.markdown-body details,.markdown-body figcaption,.markdown-body figure{display:block}.markdown-body summary{display:list-item}.markdown-body [hidden]{display:none!important}.markdown-body a{background-color:transparent;color:#0969da;text-decoration:none}.markdown-body abbr[title]{border-bottom:none;-webkit-text-decoration:underline dotted;text-decoration:underline dotted}.markdown-body b,.markdown-body strong{font-weight:600}.markdown-body dfn{font-style:italic}.markdown-body h1{margin:.67em 0;font-weight:600;padding-bottom:.3em;font-size:2em;border-bottom:1px solid #d7dde3}.markdown-body mark{background-color:#fff8c5;color:#1f2328}.markdown-body small{font-size:90%}.markdown-body sub,.markdown-body sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}.markdown-body sub{bottom:-.25em}.markdown-body sup{top:-.5em}.markdown-body img{border-style:none;max-width:100%;box-sizing:content-box;background-color:#fff}.markdown-body code,.markdown-body kbd,.markdown-body pre,.markdown-body samp{font-family:monospace;font-size:1em}.markdown-body figure{margin:1em 40px}.markdown-body hr{box-sizing:content-box;overflow:hidden;background:0 0;border-bottom:1px solid #d7dde3;height:.25em;padding:0;margin:24px 0;background-color:#d0d7de;border:0}.markdown-body input{font:inherit;margin:0;overflow:visible;font-family:inherit;font-size:inherit;line-height:inherit}.markdown-body [type=button],.markdown-body [type=reset],.markdown-body [type=submit]{-webkit-appearance:button;appearance:button}.markdown-body [type=checkbox],.markdown-body [type=radio]{box-sizing:border-box;padding:0}.markdown-body [type=number]::-webkit-inner-spin-button,.markdown-body [type=number]::-webkit-outer-spin-button{height:auto}.markdown-body [type=search]::-webkit-search-cancel-button,.markdown-body [type=search]::-webkit-search-decoration{-webkit-appearance:none;appearance:none}.markdown-body ::-webkit-input-placeholder{color:inherit;opacity:.54}.markdown-body ::-webkit-file-upload-button{-webkit-appearance:button;appearance:button;font:inherit}.markdown-body a:hover{text-decoration:underline}.markdown-body ::placeholder{color:#6e7781;opacity:1}.markdown-body hr::before{display:table;content:""}.markdown-body hr::after{display:table;clear:both;content:""}.markdown-body table{border-spacing:0;border-collapse:collapse;display:block;width:max-content;max-width:100%;overflow:auto}.markdown-body td,.markdown-body th{padding:0}.markdown-body details summary{cursor:pointer}.markdown-body details:not([open])>:not(summary){display:none!important}.markdown-body [role=button]:focus,.markdown-body a:focus,.markdown-body input[type=checkbox]:focus,.markdown-body input[type=radio]:focus{outline:2px solid #0969da;outline-offset:-2px;box-shadow:none}.markdown-body [role=button]:focus:not(:focus-visible),.markdown-body a:focus:not(:focus-visible),.markdown-body input[type=checkbox]:focus:not(:focus-visible),.markdown-body input[type=radio]:focus:not(:focus-visible){outline:solid 1px transparent}.markdown-body [role=button]:focus-visible,.markdown-body a:focus-visible,.markdown-body input[type=checkbox]:focus-visible,.markdown-body input[type=radio]:focus-visible{outline:2px solid #0969da;outline-offset:-2px;box-shadow:none}.markdown-body a:not([class]):focus,.markdown-body a:not([class]):focus-visible,.markdown-body input[type=checkbox]:focus,.markdown-body input[type=checkbox]:focus-visible,.markdown-body input[type=radio]:focus,.markdown-body input[type=radio]:focus-visible{outline-offset:0}.markdown-body kbd{display:inline-block;padding:3px 5px;font:11px ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;line-height:10px;color:#1f2328;vertical-align:middle;background-color:#f6f8fa;border:solid 1px rgba(175,184,193,.2);border-bottom-color:rgba(175,184,193,.2);border-radius:6px;box-shadow:inset 0 -1px 0 rgba(175,184,193,.2)}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{margin-top:24px;margin-bottom:16px;font-weight:600;line-height:1.25}.markdown-body h2{font-weight:600;padding-bottom:.3em;font-size:1.5em;border-bottom:1px solid #d7dde3}.markdown-body h3{font-weight:600;font-size:1.25em}.markdown-body h4{font-weight:600;font-size:1em}.markdown-body h5{font-weight:600;font-size:.875em}.markdown-body h6{font-weight:600;font-size:.85em;color:#656d76}.markdown-body p{margin-top:0;margin-bottom:10px}.markdown-body blockquote{margin:0;padding:0 1em;color:#656d76;border-left:.25em solid #d0d7de}.markdown-body ol,.markdown-body ul{margin-top:0;margin-bottom:0;padding-left:2em}.markdown-body ol ol,.markdown-body ul ol{list-style-type:lower-roman}.markdown-body ol ol ol,.markdown-body ol ul ol,.markdown-body ul ol ol,.markdown-body ul ul ol{list-style-type:lower-alpha}.markdown-body dd{margin-left:0}.markdown-body code,.markdown-body samp,.markdown-body tt{font-family:ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;font-size:12px}.markdown-body pre{margin-top:0;margin-bottom:0;font-family:ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;font-size:12px;word-wrap:normal}.markdown-body .octicon{display:inline-block;overflow:visible!important;vertical-align:text-bottom;fill:currentColor}.markdown-body input::-webkit-inner-spin-button,.markdown-body input::-webkit-outer-spin-button{margin:0;-webkit-appearance:none;appearance:none}.markdown-body .mr-2{margin-right:8px!important}.markdown-body::before{display:table;content:""}.markdown-body::after{display:table;clear:both;content:""}.markdown-body>:first-child{margin-top:0!important}.markdown-body>:last-child{margin-bottom:0!important}.markdown-body a:not([href]){color:inherit;text-decoration:none}.markdown-body .absent{color:#d1242f}.markdown-body .anchor{float:left;padding-right:4px;margin-left:-20px;line-height:1}.markdown-body .anchor:focus{outline:0}.markdown-body blockquote,.markdown-body details,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-top:0;margin-bottom:16px}.markdown-body blockquote>:first-child{margin-top:0}.markdown-body blockquote>:last-child{margin-bottom:0}.markdown-body h1 .octicon-link,.markdown-body h2 .octicon-link,.markdown-body h3 .octicon-link,.markdown-body h4 .octicon-link,.markdown-body h5 .octicon-link,.markdown-body h6 .octicon-link{color:#1f2328;vertical-align:middle;visibility:hidden}.markdown-body h1:hover .anchor,.markdown-body h2:hover .anchor,.markdown-body h3:hover .anchor,.markdown-body h4:hover .anchor,.markdown-body h5:hover .anchor,.markdown-body h6:hover .anchor{text-decoration:none}.markdown-body h1:hover .anchor .octicon-link,.markdown-body h2:hover .anchor .octicon-link,.markdown-body h3:hover .anchor .octicon-link,.markdown-body h4:hover .anchor .octicon-link,.markdown-body h5:hover .anchor .octicon-link,.markdown-body h6:hover .anchor .octicon-link{visibility:visible}.markdown-body h1 code,.markdown-body h1 tt,.markdown-body h2 code,.markdown-body h2 tt,.markdown-body h3 code,.markdown-body h3 tt,.markdown-body h4 code,.markdown-body h4 tt,.markdown-body h5 code,.markdown-body h5 tt,.markdown-body h6 code,.markdown-body h6 tt{padding:0 .2em;font-size:inherit}.markdown-body summary h1,.markdown-body summary h2,.markdown-body summary h3,.markdown-body summary h4,.markdown-body summary h5,.markdown-body summary h6{display:inline-block}.markdown-body summary h1 .anchor,.markdown-body summary h2 .anchor,.markdown-body summary h3 .anchor,.markdown-body summary h4 .anchor,.markdown-body summary h5 .anchor,.markdown-body summary h6 .anchor{margin-left:-40px}.markdown-body summary h1,.markdown-body summary h2{padding-bottom:0;border-bottom:0}.markdown-body ol.no-list,.markdown-body ul.no-list{padding:0;list-style-type:none}.markdown-body ol[type="a s"]{list-style-type:lower-alpha}.markdown-body ol[type="A s"]{list-style-type:upper-alpha}.markdown-body ol[type="i s"]{list-style-type:lower-roman}.markdown-body ol[type="I s"]{list-style-type:upper-roman}.markdown-body ol[type="1"]{list-style-type:decimal}.markdown-body div>ol:not([type]){list-style-type:decimal}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-top:0;margin-bottom:0}.markdown-body li>p{margin-top:16px}.markdown-body li+li{margin-top:.25em}.markdown-body dl{padding:0}.markdown-body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:600}.markdown-body dl dd{padding:0 16px;margin-bottom:16px}.markdown-body table th{font-weight:600}.markdown-body table td,.markdown-body table th{padding:6px 13px;border:1px solid #d0d7de}.markdown-body table td>:last-child{margin-bottom:0}.markdown-body table tr{background-color:#fff;border-top:1px solid #d7dde3}.markdown-body table tr:nth-child(2n){background-color:#f6f8fa}.markdown-body table img{background-color:transparent}.markdown-body img[align=right]{padding-left:20px}.markdown-body img[align=left]{padding-right:20px}.markdown-body .emoji{max-width:none;vertical-align:text-top;background-color:transparent}.markdown-body span.frame{display:block;overflow:hidden}.markdown-body span.frame>span{display:block;float:left;width:auto;padding:7px;margin:13px 0 0;overflow:hidden;border:1px solid #d0d7de}.markdown-body span.frame span img{display:block;float:left}.markdown-body span.frame span span{display:block;padding:5px 0 0;clear:both;color:#1f2328}.markdown-body span.align-center{display:block;overflow:hidden;clear:both}.markdown-body span.align-center>span{display:block;margin:13px auto 0;overflow:hidden;text-align:center}.markdown-body span.align-center span img{margin:0 auto;text-align:center}.markdown-body span.align-right{display:block;overflow:hidden;clear:both}.markdown-body span.align-right>span{display:block;margin:13px 0 0;overflow:hidden;text-align:right}.markdown-body span.align-right span img{margin:0;text-align:right}.markdown-body span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}.markdown-body span.float-left span{margin:13px 0 0}.markdown-body span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}.markdown-body span.float-right>span{display:block;margin:13px auto 0;overflow:hidden;text-align:right}.markdown-body code,.markdown-body tt{padding:.2em .4em;margin:0;font-size:85%;white-space:break-spaces;background-color:rgba(175,184,193,.2);border-radius:6px}.markdown-body code br,.markdown-body tt br{display:none}.markdown-body del code{text-decoration:inherit}.markdown-body samp{font-size:85%}.markdown-body pre code{font-size:100%}.markdown-body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}.markdown-body .highlight{margin-bottom:16px}.markdown-body .highlight pre{margin-bottom:0;word-break:normal}.markdown-body .highlight pre,.markdown-body pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;color:#1f2328;background-color:#f6f8fa;border-radius:6px}.markdown-body pre code,.markdown-body pre tt{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}.markdown-body .csv-data td,.markdown-body .csv-data th{padding:5px;overflow:hidden;font-size:12px;line-height:1;text-align:left;white-space:nowrap}.markdown-body .csv-data .blob-num{padding:10px 8px 9px;text-align:right;background:#fff;border:0}.markdown-body .csv-data tr{border-top:0}.markdown-body .csv-data th{font-weight:600;background:#f6f8fa;border-top:0}.markdown-body [data-footnote-ref]::before{content:"["}.markdown-body [data-footnote-ref]::after{content:"]"}.markdown-body .footnotes{font-size:12px;color:#656d76;border-top:1px solid #d0d7de}.markdown-body .footnotes ol{padding-left:16px}.markdown-body .footnotes ol ul{display:inline-block;padding-left:16px;margin-top:16px}.markdown-body .footnotes li{position:relative}.markdown-body .footnotes li:target::before{position:absolute;top:-8px;right:-8px;bottom:-8px;left:-24px;pointer-events:none;content:"";border:2px solid #0969da;border-radius:6px}.markdown-body .footnotes li:target{color:#1f2328}.markdown-body .footnotes .data-footnote-backref g-emoji{font-family:monospace}.markdown-body .pl-c{color:#57606a}.markdown-body .pl-c1,.markdown-body .pl-s .pl-v{color:#0550ae}.markdown-body .pl-e,.markdown-body .pl-en{color:#6639ba}.markdown-body .pl-s .pl-s1,.markdown-body .pl-smi{color:#24292f}.markdown-body .pl-ent{color:#116329}.markdown-body .pl-k{color:#cf222e}.markdown-body .pl-pds,.markdown-body .pl-s,.markdown-body .pl-s .pl-pse .pl-s1,.markdown-body .pl-sr,.markdown-body .pl-sr .pl-cce,.markdown-body .pl-sr .pl-sra,.markdown-body .pl-sr .pl-sre{color:#0a3069}.markdown-body .pl-smw,.markdown-body .pl-v{color:#953800}.markdown-body .pl-bu{color:#82071e}.markdown-body .pl-ii{color:#f6f8fa;background-color:#82071e}.markdown-body .pl-c2{color:#f6f8fa;background-color:#cf222e}.markdown-body .pl-sr .pl-cce{font-weight:700;color:#116329}.markdown-body .pl-ml{color:#3b2300}.markdown-body .pl-mh,.markdown-body .pl-mh .pl-en,.markdown-body .pl-ms{font-weight:700;color:#0550ae}.markdown-body .pl-mi{font-style:italic;color:#24292f}.markdown-body .pl-mb{font-weight:700;color:#24292f}.markdown-body .pl-md{color:#82071e;background-color:#ffebe9}.markdown-body .pl-mi1{color:#116329;background-color:#dafbe1}.markdown-body .pl-mc{color:#953800;background-color:#ffd8b5}.markdown-body .pl-mi2{color:#eaeef2;background-color:#0550ae}.markdown-body .pl-mdr{font-weight:700;color:#8250df}.markdown-body .pl-ba{color:#57606a}.markdown-body .pl-sg{color:#8c959f}.markdown-body .pl-corl{text-decoration:underline;color:#0a3069}.markdown-body g-emoji{display:inline-block;min-width:1ch;font-family:"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";font-size:1em;font-style:normal!important;font-weight:400;line-height:1;vertical-align:-.075em}.markdown-body g-emoji img{width:1em;height:1em}.markdown-body .task-list-item{list-style-type:none}.markdown-body .task-list-item label{font-weight:400}.markdown-body .task-list-item.enabled label{cursor:pointer}.markdown-body .task-list-item+.task-list-item{margin-top:4px}.markdown-body .task-list-item .handle{display:none}.markdown-body .task-list-item-checkbox{margin:0 .2em .25em -1.4em;vertical-align:middle}.markdown-body .contains-task-list:dir(rtl) .task-list-item-checkbox{margin:0 -1.6em .25em .2em}.markdown-body .contains-task-list{position:relative}.markdown-body .contains-task-list:focus-within .task-list-item-convert-container,.markdown-body .contains-task-list:hover .task-list-item-convert-container{display:block;width:auto;height:24px;overflow:visible;clip:auto}.markdown-body ::-webkit-calendar-picker-indicator{filter:invert(50%)}.markdown-body .markdown-alert{padding:8px 16px;margin-bottom:16px;color:inherit;border-left:.25em solid #d0d7de}.markdown-body .markdown-alert>:first-child{margin-top:0}.markdown-body .markdown-alert>:last-child{margin-bottom:0}.markdown-body .markdown-alert .markdown-alert-title{display:flex;font-weight:500;align-items:center;line-height:1}.markdown-body .markdown-alert.markdown-alert-note{border-left-color:#0969da}.markdown-body .markdown-alert.markdown-alert-note .markdown-alert-title{color:#0969da}.markdown-body .markdown-alert.markdown-alert-important{border-left-color:#8250df}.markdown-body .markdown-alert.markdown-alert-important .markdown-alert-title{color:#8250df}.markdown-body .markdown-alert.markdown-alert-warning{border-left-color:#9a6700}.markdown-body .markdown-alert.markdown-alert-warning .markdown-alert-title{color:#9a6700}.markdown-body .markdown-alert.markdown-alert-tip{border-left-color:#1f883d}.markdown-body .markdown-alert.markdown-alert-tip .markdown-alert-title{color:#1a7f37}.markdown-body .markdown-alert.markdown-alert-caution{border-left-color:#cf222e}.markdown-body .markdown-alert.markdown-alert-caution .markdown-alert-title{color:#d1242f}
+pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}/*!
+  Theme: GitHub
+  Description: Light theme as seen on github.com
+  Author: github.com
+  Maintainer: @Hirse
+  Updated: 2021-05-15
+
+  Outdated base version: https://github.com/primer/github-syntax-light
+  Current colors taken from GitHub's CSS
+*/.hljs{color:#24292e;background:#fff}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#d73a49}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#6f42c1}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#005cc5}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#032f62}.hljs-built_in,.hljs-symbol{color:#e36209}.hljs-code,.hljs-comment,.hljs-formula{color:#6a737d}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#22863a}.hljs-subst{color:#24292e}.hljs-section{color:#005cc5;font-weight:700}.hljs-bullet{color:#735c0f}.hljs-emphasis{color:#24292e;font-style:italic}.hljs-strong{color:#24292e;font-weight:700}.hljs-addition{color:#22863a;background-color:#f0fff4}.hljs-deletion{color:#b31d28;background-color:#ffeef0}</style>
+<style>
+.markdown-body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  font-size: 15px;
+  line-height: 1.75;
+}
+.markdown-body h1 {
+  font-size: 1.875em;
+  border-bottom: none;
+  font-weight: 700;
+}
+.markdown-body h2 {
+  font-size: 1.5em;
+  border-bottom: none;
+  font-weight: 600;
+  margin-top: 2em;
+}
+.markdown-body h3 {
+  font-size: 1.25em;
+  border-bottom: none;
+}
+.markdown-body code:not(pre code) {
+  background: rgba(135,131,120,.15) !important;
+  color: #eb5757 !important;
+  border-radius: 4px;
+  padding: 0.15em 0.4em;
+  font-size: 0.88em;
+}
+
+.markdown-body pre { border-radius: 6px; border: none !important; }
+.markdown-body blockquote { border-left: 3px solid currentColor; }
+.markdown-body hr { border: none; border-top: 1px solid var(--border, #e5e7eb); }
+.md-toc { border-radius: 8px; }
+.md-toc a { color: var(--text-2); }
+</style>
+<style></style>
+<style>
+body {
+  margin: 0; padding: 40px 20px;
+  background: #fff;
+  display: flex; justify-content: center;
+}
+.markdown-body {
+  max-width: 960px; width: 100%;
+  padding: 32px;
+  font-size: 15px; line-height: 1.7;
+  color: #1f2328;
+}
+.code-block-wrapper {
+  position: relative; margin: 16px 0; border-radius: 8px;
+  overflow: hidden; border: 1px solid #d1d9e0;
+  background: #f6f8fa;
+}
+.code-block-wrapper pre { margin: 0 !important; border: none !important; border-radius: 0 !important; }
+.code-block-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 4px 6px 4px 14px; min-height: 32px;
+  background: #f0f3f6;
+  border-bottom: 1px solid #d1d9e0;
+}
+.code-block-lang {
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.5px; color: #656d76;
+}
+.code-copy-btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 11px; font-weight: 500; cursor: pointer;
+  color: #656d76;
+  background: transparent; border: 1px solid transparent;
+  border-radius: 6px; padding: 4px 10px;
+}
+.code-copy-btn:hover {
+  color: #1f2328;
+  background: #fff;
+  border-color: #d1d9e0;
+}
+.code-copy-btn.copied { color: #22c55e; }
+</style>
+</head>
+<body>
+<article class="markdown-body"><h1 id="-2-">한글 창제로 배우는 블룸의 분류학 — 지식 차원 × 인지 과정 2차원 매트릭스 완전 이해</h1>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>슬러그</strong></td>
+<td><code>bloom-taxonomy-hangul</code></td>
+</tr>
+<tr>
+<td><strong>작성일</strong></td>
+<td>2026-06-26</td>
+</tr>
+<tr>
+<td><strong>버전</strong></td>
+<td>1.0</td>
+</tr>
+<tr>
+<td><strong>독자</strong></td>
+<td>Bloom의 분류학을 처음 접하거나 개념을 명확히 정리하려는 학습자/교육자</td>
+</tr>
+<tr>
+<td><strong>목적</strong></td>
+<td>한글(훈민정음) 창제의 과학적 원리를 구체적인 사례로 삼아, Bloom의 분류학(Anderson &amp; Krathwohl, 2001)의 두 축 — 지식 차원(Knowledge Dimension)과 인지 과정(Cognitive Process) — 을 명확히 구분하여 설명한다</td>
+</tr>
+<tr>
+<td><strong>핵심 메시지</strong></td>
+<td>Bloom의 분류학은 단순한 단계의 사다리가 아니라, <strong>무엇을 아는가(지식)</strong> 와 <strong>그것을 어떻게 다루는가(인지)</strong> 의 2차원 매트릭스이며, 한글 창제 사례를 통해 각 셀(cell)이 구체적으로 이해될 수 있다</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="">목차</h2>
+<ol>
+<li><a href="#section-1">서론 — Bloom의 분류학을 왜 2차원으로 이해해야 하는가</a></li>
+<li><a href="#section-2">지식 차원(Knowledge Dimension) — 한글 창제로 보는 네 가지 지식 유형</a><ul>
+<li>2.1 <a href="#section-2-1">사실적 지식(Factual Knowledge)</a></li>
+<li>2.2 <a href="#section-2-2">개념적 지식(Conceptual Knowledge)</a></li>
+<li>2.3 <a href="#section-2-3">절차적 지식(Procedural Knowledge)</a></li>
+<li>2.4 <a href="#section-2-4">메타인지적 지식(Metacognitive Knowledge)</a></li>
+</ul>
+</li>
+<li><a href="#section-3">인지 과정(Cognitive Process) — 한글 창제 사례의 여섯 수준</a><ul>
+<li>3.1 <a href="#section-3-1">기억(Remember)</a></li>
+<li>3.2 <a href="#section-3-2">이해(Understand)</a></li>
+<li>3.3 <a href="#section-3-3">적용(Apply)</a></li>
+<li>3.4 <a href="#section-3-4">분석(Analyze)</a></li>
+<li>3.5 <a href="#section-3-5">평가(Evaluate)</a></li>
+<li>3.6 <a href="#section-3-6">창출(Create)</a></li>
+</ul>
+</li>
+<li><a href="#section-4">2차원 매트릭스 통합 — 지식 × 인지 과정이 만나는 구체적 사례</a></li>
+<li><a href="#section-5">결론 — 요약 및 교육적 시사점</a></li>
+</ol>
+<hr>
+<h1 id="section-1">1. 서론 — Bloom의 분류학을 왜 2차원으로 이해해야 하는가</h1>
+<h2 id="-quot-quot-">문제 제기: "기억보다 창출이 중요하다"는 말의 함정</h2>
+<p>Bloom의 분류학(Bloom's Taxonomy)은 교육 분야에서 가장 널리 인용되는 프레임워크 중 하나입니다. 많은 사람들이 "단순히 외우는 것(Remember)보다 창의적으로 무언가를 만들어내는 것(Create)이 더 고차원적인 사고다"는 식으로 받아들입니다. 이는 맞는 말이지만 <strong>불완전한 이해</strong>입니다.</p>
+<p>왜일까요? 어떤 대상을 창출(Create)하기 위해서는 그 대상에 대한 사실적 지식을 기억하고, 원리를 이해하고, 구성 요소를 분석하고, 대안을 평가하는 능력이 <strong>모두 내재되어 있어야 합니다.</strong> 즉, 인지 과정은 단순한 계단식 위계가 아니라 <strong>상위 수준이 하위 수준을 포함하는 포괄 관계</strong>입니다.</p>
+<p>더 중요한 문제는 이것이 <strong>한 축</strong>에 불과하다는 점입니다.</p>
+<h2 id="anderson-amp-krathwohl2001-">Anderson &amp; Krathwohl(2001)의 개정: 두 번째 차원의 발견</h2>
+<p>Bloom의 원래 분류학(1956)은 인지 과정만을 다루었습니다. 2001년 Anderson &amp; Krathwohl이 개정하면서 추가한 가장 큰 변화는 <strong>지식 차원(Knowledge Dimension)</strong> 이라는 두 번째 축입니다. 이로써 Bloom의 분류학은 단순한 '사고의 깊이'만을 측정하는 도구에서, <strong>'무엇에 대해 사고하는가'</strong> 까지 고려하는 2차원 매트릭스로 확장되었습니다.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>인지 과정(Cognitive Process)</strong> →</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>지식 차원(Knowledge Dimension)</strong> ↓</td>
+<td>기억 → 이해 → 적용 → 분석 → 평가 → 창출</td>
+</tr>
+<tr>
+<td>사실적(Factual)</td>
+<td></td>
+</tr>
+<tr>
+<td>개념적(Conceptual)</td>
+<td><em>여기 24개의 셀이 각각 독립된 학습 목표가 된다</em></td>
+</tr>
+<tr>
+<td>절차적(Procedural)</td>
+<td></td>
+</tr>
+<tr>
+<td>메타인지적(Metacognitive)</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>지식 차원이 없으면 "같은 '분석(Analyze)'이라도 사실을 분석하는 것과 개념을 분석하는 것은 어떻게 다른가?"라는 질문에 답할 수 없습니다.</p>
+<h2 id="-">왜 하필 한글(훈민정음)인가?</h2>
+<p>이 문서는 Bloom 분류학의 2차원 매트릭스를 설명하기 위해 <strong>한글(훈민정음) 창제의 과학적 원리</strong>를 사례로 사용합니다. 그 이유는 세 가지입니다.</p>
+<ol>
+<li><strong>다양한 지식 차원을 자연스럽게 포함한다.</strong> 한글 창제에는 연도·인물 같은 사실(Factual)부터 발음 기관의 상형 원리(Conceptual), 자모 조합 규칙(Procedural), 백성의 인지적 한계를 고려한 전략적 설계(Metacognitive)까지 네 가지 지식 차원이 모두 존재합니다.</li>
+<li><strong>인지 과정을 뚜렷이 구분할 수 있다.</strong> 같은 주제(한글)를 가지고 암기에서 창출까지 여섯 인지 과정의 예시를 일관성 있게 구성할 수 있습니다.</li>
+<li><strong>실제로 존재하는 체계이다.</strong> 가상의 예시가 아닌 역사적 실체를 다루므로 학습자의 이해와 기억에 더 오래 남습니다.</li>
+</ol>
+<p>이제 한글 창제의 사례를 통해 지식 차원과 인지 과정을 각각 살펴본 뒤, 마지막에 두 축이 교차하는 2차원 매트릭스를 종합적으로 제시하겠습니다.</p>
+<hr>
+<h1 id="section-2">2. 지식 차원(Knowledge Dimension) — 한글 창제로 보는 네 가지 지식 유형</h1>
+<p>지식 차원은 <strong>'무엇을 아는가'</strong> 에 대한 분류입니다. Anderson &amp; Krathwohl(2001)은 지식을 네 가지 유형으로 구분합니다. 이 장에서는 한글 창제의 사례를 통해 각 지식 유형을 구체적으로 살펴보겠습니다.</p>
+<hr>
+<h1 id="section-2-1">2.1 사실적 지식(Factual Knowledge) — 한글 창제의 기본 데이터</h1>
+<h2 id="">정의</h2>
+<p>사실적 지식은 특정 분야의 기본적인 요소 — 용어, 구체적인 사실, 데이터 — 에 대한 지식입니다. 이 지식은 보통 논쟁의 여지가 없으며, 분야에 입문하기 위해 가장 먼저 접하게 되는 정보들입니다. Bloom의 분류학에서 지식 차원의 가장 기초층을 이룹니다.</p>
+<h2 id="-">한글 창제의 사실적 지식</h2>
+<p>한글 창제와 관련된 사실적 지식의 예는 다음과 같습니다.</p>
+<h3 id="-">역사적 사실</h3>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>창제 연도</td>
+<td>1443년(세종 25년)</td>
+</tr>
+<tr>
+<td>반포 연도</td>
+<td>1446년(세종 28년), 《훈민정음》 반포</td>
+</tr>
+<tr>
+<td>창제자</td>
+<td>조선 제4대 국왕 세종대왕(이도)</td>
+</tr>
+<tr>
+<td>참여자</td>
+<td>집현전 학자들(정인지, 성삼문, 신숙주 등)</td>
+</tr>
+<tr>
+<td>기록물</td>
+<td>《훈민정음 해례본》(국보 제70호)</td>
+</tr>
+</tbody></table>
+<h3 id="-">문자 체계의 용어</h3>
+<ul>
+<li><strong>초성</strong>: 음절의 첫 자음 (예: '한'의 'ㅎ')</li>
+<li><strong>중성</strong>: 음절의 모음 (예: '한'의 'ㅏ')</li>
+<li><strong>종성</strong>: 음절의 끝 자음 (예: '한'의 'ㄴ')</li>
+<li><strong>자음</strong>: 소리를 내는 기관의 모양을 본뜬 글자 (ㄱ, ㄴ, ㄷ, ㄹ...)</li>
+<li><strong>모음</strong>: 천·지·인의 형상을 본뜬 글자 (ㆍ, ㅡ, ㅣ와 그 결합)</li>
+<li><strong>훈민정음</strong>: "백성을 가르치는 바른 소리"라는 의미의 문자 이름</li>
+</ul>
+<p>이러한 사실적 지식은 <strong>암기</strong>할 수 있는 수준의 정보입니다. "세종이 1443년에 한글을 만들었다"는 말은 참/거짓 판별이 명확한 사실입니다.</p>
+<h2 id="-">지식 차원의 시작점</h2>
+<p>사실적 지식은 그 자체로는 단편적이지만, 상위 지식 차원(개념적·절차적·메타인지적)을 구성하는 <strong>재료</strong> 역할을 합니다. 사실 없이 개념을 세울 수 없고, 개념 없이 절차를 이해할 수 없습니다. 다음 절에서는 이 사실들이 어떤 원리와 관계로 체계화되는지 살펴보겠습니다.</p>
+<hr>
+<h1 id="section-2-2">2.2 개념적 지식(Conceptual Knowledge) — 한글 창제에 담긴 원리와 철학</h1>
+<h2 id="">정의</h2>
+<p>개념적 지식은 개별 사실들이 어떻게 조직되고 구조화되는지에 대한 지식입니다. 분류와 범주, 원리와 일반화, 이론과 모델이 여기에 속합니다. 사실적 지식이 <strong>벽돌</strong>이라면, 개념적 지식은 그 벽돌을 쌓는 <strong>설계도</strong>에 비유할 수 있습니다.</p>
+<h2 id="-">한글 창제의 개념적 지식</h2>
+<p>한글은 단순한 문자가 아니라, <strong>소리(음성)를 분석하고 이를 시각적 기호로 체계화한 과학적 설계</strong>입니다. 그 핵심 원리들은 다음과 같습니다.</p>
+<h3 id="1-">1. 상형의 원리 — 발음 기관을 본뜨다</h3>
+<p>한글 자음의 모양은 사람의 발음 기관 형태를 추상화하여 만들었습니다. 이는 세계의 어떤 문자 체계에서도 찾아보기 어려운 독창적인 접근입니다.</p>
+<table>
+<thead>
+<tr>
+<th>자음</th>
+<th>발음 기관</th>
+<th>제자 원리</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ㄱ</td>
+<td>혀뿌리(연구개)</td>
+<td>혀뿌리가 목구멍을 막는 모양을 본뜸</td>
+</tr>
+<tr>
+<td>ㄴ</td>
+<td>혀끝(치경)</td>
+<td>혀끝이 윗잇몸에 닿는 모양을 본뜸</td>
+</tr>
+<tr>
+<td>ㅁ</td>
+<td>입술(양순)</td>
+<td>입 모양을 본뜸</td>
+</tr>
+<tr>
+<td>ㅅ</td>
+<td>이(치아)</td>
+<td>이빨 모양을 본뜸</td>
+</tr>
+<tr>
+<td>ㅇ</td>
+<td>목구멍(후두)</td>
+<td>목구멍의 모양을 본뜸</td>
+</tr>
+</tbody></table>
+<h3 id="2-">2. 가획의 원리 — 획을 더하여 소리를 더 강하게</h3>
+<p>기본 자음에 획을 추가하면 소리가 더 거세지거나(유기음) 더 강하게 발음됩니다. 이는 문자 체계가 소리의 음성학적 속성과 <strong>체계적으로 연결</strong>되어 있음을 보여줍니다.</p>
+<div class="code-block-wrapper"><div class="code-block-header"><span class="code-block-lang">scss</span><button class="code-copy-btn" type="button" aria-label="Copy"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span class="code-copy-label">Copy</span></button></div><pre><code data-highlighted="yes" class="hljs language-scss">ㄱ → ㅋ (획 추가 → 기음이 섞인 소리)
+ㄴ → ㄷ → ㅌ (혀끝 소리 → 더 강한 소리)
+ㅁ → ㅂ → ㅍ (입술 소리 → 더 강한 소리)
+ㅅ → ㅈ → ㅊ (잇소리 → 더 강한 소리)
+ㅇ → ㆆ → ㅎ (목구멍 소리 → 더 강한 소리)
+</code></pre></div>
+<h3 id="3-">3. 천·지·인 삼재의 모음 철학</h3>
+<p>모음은 동양 철학의 삼재(三才) 사상을 바탕으로 설계되었습니다.</p>
+<ul>
+<li><strong>ㆍ (아래아)</strong>: 하늘(天) — 둥글고 열려 있는 모양</li>
+<li><strong>ㅡ</strong>: 땅(地) — 평평하고 고른 모양</li>
+<li><strong>ㅣ</strong>: 사람(人) — 서 있는 모양</li>
+</ul>
+<p>이 세 기본 모음의 조합으로 모든 한글 모음이 생성됩니다.</p>
+<h3 id="4-">4. 애민정신과 위민사상 — 창제의 철학적 토대</h3>
+<p>세종이 한글을 창제한 근본 동기는 <strong>백성을 사랑하고(애민, 愛民), 백성을 중심에 두는(위민, 爲民)</strong> 정치 철학입니다. 《훈민정음》 서문의 유명한 구절이 이를 잘 드러냅니다.</p>
+<blockquote>
+<p>"백성이 이르고자 하는 바가 있어도 제 뜻을 펴지 못하는 자가 많다. 내가 이를 가엾게 여겨 새로 스물여덟 글자를 만드니, 사람마다 쉽게 익혀 날마다 쓰는 데 편하게 하라."</p>
+</blockquote>
+<p>이는 단순한 사실을 넘어, '왜 한글이 만들어졌는가'라는 인과적 관계와 '문자와 통치 철학'이라는 추상적 연결을 포함하는 <strong>개념적 지식</strong>입니다.</p>
+<h2 id="-">사실에서 개념으로의 도약</h2>
+<p>사실적 지식이 "ㄱ은 혀뿌리를 본떴다"라는 개별 데이터라면, 개념적 지식은 "한글 자음의 자형은 조음 위치에 따라 체계적으로 설계되었고, 이는 보편적인 발음 기관의 형태학에 기반한다"는 <strong>일반화된 원리</strong>입니다. 개념적 지식을 가지면 새로운 자음(예: 외국어의 특수 발음)이 어떻게 설계되었을지 추론할 수도 있습니다.</p>
+<hr>
+<h1 id="section-2-3">2.3 절차적 지식(Procedural Knowledge) — 한글을 만들고 적용하는 방법</h1>
+<h2 id="">정의</h2>
+<p>절차적 지식은 <strong>무엇을 어떻게 하는가(how-to)</strong> 에 대한 지식입니다. 특정한 방법, 기술, 알고리즘, 기법을 다루며, 개념적 지식이 '원리를 아는 것'이라면 절차적 지식은 '그 원리를 실행에 옮기는 방법을 아는 것'입니다.</p>
+<p>개념적 지식이 "이 레스토랑의 셰프는 손님의 취향을 고려한다"는 철학이라면, 절차적 지식은 "재료를 손질하고, 조리하고, 플레이팅하는 단계적 과정"입니다.</p>
+<h2 id="-">한글 창제의 절차적 지식</h2>
+<h3 id="1-">1. 글자 생성 절차: 분절 → 조합(모아쓰기)</h3>
+<p>한글은 소리를 <strong>분절(segment)</strong> 한 뒤 <strong>조합(assemble)</strong> 하는 두 단계의 절차를 따릅니다.</p>
+<p><strong>1단계: 분절</strong><br>말소리를 가장 작은 단위인 자음과 모음으로 쪼갭니다.</p>
+<div class="code-block-wrapper"><div class="code-block-header"><span class="code-block-lang">swift</span><button class="code-copy-btn" type="button" aria-label="Copy"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span class="code-copy-label">Copy</span></button></div><pre><code data-highlighted="yes" class="hljs language-swift"><span class="hljs-regexp">/한/</span> <span class="hljs-operator">→</span> <span class="hljs-regexp">/ㅎ/</span>(초성) <span class="hljs-operator">+</span> <span class="hljs-regexp">/ㅏ/</span>(중성) <span class="hljs-operator">+</span> <span class="hljs-regexp">/ㄴ/</span>(종성)
+</code></pre></div>
+<p><strong>2단계: 조합(모아쓰기)</strong><br>분절된 자음과 모음을 하나의 음절 블록으로 모아 씁니다.</p>
+<div class="code-block-wrapper"><div class="code-block-header"><span class="code-block-lang">undefined</span><button class="code-copy-btn" type="button" aria-label="Copy"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span class="code-copy-label">Copy</span></button></div><pre><code data-highlighted="yes" class="hljs language-undefined">ㅎ + ㅏ + ㄴ → 한
+</code></pre></div>
+<p>이 모아쓰기 방식은 알파벳처럼 자소를 일렬로 늘어놓는 방식과 달리, 음절 단위로 시각적 덩어리를 형성하여 <strong>독서 속도와 의미 인식에 유리</strong>합니다. 이 절차를 알면 어떤 한국어 발음이든 한글로 표기할 수 있습니다.</p>
+<h3 id="2-">2. 검증 절차: 용비어천가와 불경 언해</h3>
+<p>세종은 한글이 실제로 소리를 정확히 표현할 수 있는지 검증하기 위해 체계적인 절차를 거쳤습니다.</p>
+<p><strong>① 시범 창작</strong>: 한글로 최초의 장편 문헌인 《용비어천가》를 지어, 문자 체계가 실제 언어 생활에서 작동하는지 시험했습니다.</p>
+<p><strong>② 번역(언해)을 통한 확장</strong>: 불경을 한글로 번역(언해)하여 추상적 개념과 학술적 내용도 표현할 수 있음을 입증했습니다.</p>
+<p><strong>③ 반포와 교육</strong>: 1446년에 정식 반포하고, 백성들이 쉽게 배울 수 있도록 보급 절차를 체계화했습니다.</p>
+<h3 id="3-">3. 자음 추가 생성 절차: 가획의 규칙 적용</h3>
+<p>새로운 소리를 표기해야 할 때, 한글은 가획의 원리를 절차적으로 적용하여 새로운 글자를 만들 수 있습니다. 예를 들어, 기본자 ㄱ에 획을 더해 ㅋ을 만들고, 다시 획을 더해 ㄲ을 만드는 방식입니다.</p>
+<div class="code-block-wrapper"><div class="code-block-header"><span class="code-block-lang">scss</span><button class="code-copy-btn" type="button" aria-label="Copy"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span class="code-copy-label">Copy</span></button></div><pre><code data-highlighted="yes" class="hljs language-scss">기본자 → 획추가(거센소리) → 획중복(된소리)
+ㄱ      → ㅋ               → ㄲ
+ㄷ      → ㅌ               → ㄸ
+ㅂ      → ㅍ               → ㅃ
+ㅈ      → ㅊ               → ㅉ
+</code></pre></div>
+<p>이 절차를 알면 기존에 없던 새로운 소리(예: 외래어의 특수 발음)도 체계적으로 표기할 수 있습니다.</p>
+<h2 id="-">개념과 절차의 관계</h2>
+<p>개념적 지식이 "자음은 발음 기관을 본떴고, 획을 더하면 소리가 강해진다"는 <strong>원리</strong>라면, 절차적 지식은 "ㄱ을 기본으로 해서 획을 하나 더 그어 ㅋ을 만들고, 이 원리를 모든 자음 계열에 순차적으로 적용한다"는 <strong>실행 방법</strong>입니다. 개념은 '무엇'과 '왜'를, 절차는 '어떻게'를 다룹니다.</p>
+<hr>
+<h1 id="section-2-4">2.4 메타인지적 지식(Metacognitive Knowledge) — 자신의 앎에 대한 전략적 인식</h1>
+<h2 id="">정의</h2>
+<p>메타인지적 지식은 <strong>인지에 관한 지식</strong>, 즉 자신의 인지 과정과 그 과정을 통제하는 전략에 대한 지식입니다. Bloom 분류학의 지식 차원 중 가장 높은 수준에 위치하며, 세 가지 하위 유형으로 나뉩니다.</p>
+<table>
+<thead>
+<tr>
+<th>하위 유형</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>전략적 지식</strong></td>
+<td>어떤 과제에 어떤 학습/사고 전략이 효과적인지 아는 것</td>
+</tr>
+<tr>
+<td><strong>과제에 관한 지식</strong></td>
+<td>과제의 성격과 난이도를 판단하는 것</td>
+</tr>
+<tr>
+<td><strong>자기 인식(Self-knowledge)</strong></td>
+<td>자신의 강점, 약점, 선호하는 방식을 아는 것</td>
+</tr>
+</tbody></table>
+<p>간단한 비유: <strong>절차적 지식</strong>이 "자동차를 운전하는 방법"이라면, <strong>메타인지적 지식</strong>은 "나는 비 오는 날 야간 운전에 취약하므로, 그럴 때는 속도를 줄이고 차간 거리를 더 넉넉히 확보해야 한다"는 <strong>자신의 운전 능력에 대한 전략적 인식</strong>입니다.</p>
+<h2 id="-">한글 창제에서의 메타인지적 지식</h2>
+<p>흥미롭게도, 세종대왕의 한글 창제 과정에는 메타인지적 지식의 세 가지 하위 유형이 모두 뚜렷이 나타납니다.</p>
+<h3 id="1-quot-quot">1. 전략적 지식: "열흘이면 배울 수 있게"</h3>
+<p>세종은 문자를 설계할 때 <strong>학습 전략의 효율성</strong> 자체를 설계 기준으로 삼았습니다.</p>
+<blockquote>
+<p>"지혜로운 사람은 아침나절이 되기 전에 깨우치고, 어리석은 사람도 열흘이면 배울 수 있게 하였다."</p>
+</blockquote>
+<p>이것은 단순한 자부심이 아니라 <strong>"사람들은 문자를 어떻게 학습하는가?"에 대한 전략적 분석</strong>의 결과입니다. 즉, 세종은:</p>
+<ul>
+<li>기존 한자가 실패한 이유가 <strong>인지적 과부하</strong> 때문임을 간파하고</li>
+<li>음소 단위의 <strong>작은 학습 단위</strong>로 쪼갠 뒤</li>
+<li>발음 기관이라는 <strong>시각적 연상 장치</strong>를 제공하여 기억을 돕고</li>
+<li>모아쓰기를 통해 <strong>의미 처리를 병렬화</strong>하는</li>
+</ul>
+<p>등의 학습 전략을 문자 체계 자체에 내장했습니다. 이는 '무엇을 아는가'를 넘어 <strong>'인간이 어떻게 효과적으로 아는가'에 대한 지식</strong>입니다.</p>
+<h3 id="2-quot-quot">2. 과제에 관한 지식: "한자는 백성을 위한 문자가 아니다"</h3>
+<p>세종은 당면 과제의 본질을 정확히 진단했습니다.</p>
+<ul>
+<li><strong>과제의 성격</strong>: 단순히 "문자를 만드는 것"이 아니라 <strong>"평범한 백성이 쉽게 배울 수 있는 문자를 만드는 것"</strong></li>
+<li><strong>난이도 판단</strong>: 한자를 개량하는 방식으로는 해결할 수 없고, <strong>완전히 새로운 체계를 창안해야 함</strong>을 인식</li>
+<li><strong>제약 조건 인식</strong>: 사대부의 반발(최만리의 상소 등)이라는 정치적 제약과, 문자의 사회적 수용에 필요한 조건을 동시에 고려</li>
+</ul>
+<p>이는 "무엇을 해야 하는가"뿐 아니라 <strong>"이 과제의 본질과 난이도는 무엇인가"</strong> 를 아는 메타인지적 판단입니다.</p>
+<h3 id="3-quot-quot">3. 자기 인식: "내가 모르는 것을 안다"</h3>
+<p>세종은 자신과 조선의 한계를 정확히 인식하고 있었습니다.</p>
+<ul>
+<li><strong>자신의 통치 철학 인식</strong>: 유교 군주로서 백성의 삶을 책임져야 한다는 소명 의식</li>
+<li><strong>기존 체계의 한계 인식</strong>: 한자가 중국어에는 적합하나 한국어의 구조와는 맞지 않음을 간파</li>
+<li><strong>지식의 공백 인식</strong>: 기존 학문 체계로는 백성의 고통을 해결할 수 없음을 인정하고, 새로운 접근이 필요함을 자각</li>
+</ul>
+<h3 id="-">메타인지적 지식의 독특한 위상</h3>
+<p>메타인지적 지식은 다른 세 지식 차원(사실적·개념적·절차적)과 근본적으로 다릅니다. 그것은 <strong>지식에 관한 지식(knowledge about knowledge)</strong> 입니다. 세종이 단순히 한글 창제 절차(절차적 지식)를 아는 것에 그치지 않고, <strong>백성의 인지적 한계를 배려한 전략을 체계에 내장한 것</strong>은 이 차원의 진정한 의미를 보여줍니다.</p>
+<blockquote>
+<p><strong>요약</strong>: 사실적 지식은 '무엇'을, 개념적 지식은 '왜'를, 절차적 지식은 '어떻게'를 안다면, 메타인지적 지식은 <strong>'내가 그것을 어떻게 알고 있으며, 어떻게 더 잘 알 수 있는가'</strong> 를 아는 것입니다.</p>
+</blockquote>
+<hr>
+<h1 id="section-3">3. 인지 과정(Cognitive Process) — 한글 창제 사례의 여섯 수준</h1>
+<p>2장에서 지식 차원(무엇을 아는가)을 살펴보았습니다. 이제 인지 과정(어떻게 사고하는가)의 여섯 수준을 한글 창제 사례를 통해 알아보겠습니다. 각 인지 과정은 이전 수준을 포함하는 위계를 이루며, 같은 지식이라도 어떤 인지 과정으로 다루느냐에 따라 사고의 깊이가 달라집니다.</p>
+<hr>
+<h1 id="section-3-1">3.1 기억(Remember) — 관련 지식을 장기기억에서 인출하기</h1>
+<h2 id="">정의</h2>
+<p>기억(Remember)은 Bloom 분류학의 인지 과정 중 가장 기본적인 수준입니다. 장기기억에 저장된 지식을 인출(retrieve)하는 능력을 말합니다. 이 수준에서는 지식의 의미를 깊이 이해하거나 변형할 필요 없이, 있는 그대로 재생하거나 인식하면 됩니다.</p>
+<h2 id="-3939-">한글 창제 사례의 '기억' 수준</h2>
+<p>한글의 과학적 원리에 대해 '기억' 수준에 해당하는 활동은 다음과 같습니다.</p>
+<h3 id="-">사실적 지식 × 기억</h3>
+<ul>
+<li>"훈민정음은 몇 년도에 반포되었는가?" → <strong>1446년</strong>이라고 암기하여 답한다.</li>
+<li>"한글의 초성, 중성, 종성을 설명하라" → 용어의 정의를 그대로 재생한다.</li>
+<li>"다섯 가지 기본 자음과 그 발음 기관을 대응하라" → ㄱ(혀뿌리), ㄴ(혀끝), ㅁ(입술), ㅅ(이), ㅇ(목구멍)을 암기하여 나열한다.</li>
+</ul>
+<h3 id="-">개념적 지식 × 기억</h3>
+<ul>
+<li>"상형의 원리를 정의하라" → "발음 기관의 모양을 본떠 글자를 만들었다"는 정의를 암기하여 말한다.</li>
+<li>"가획의 원리가 무엇인가" → "기본 자음에 획을 더하여 소리를 더 강하게 만드는 원리"라고 교과서적 정의를 재생한다.</li>
+</ul>
+<h3 id="-">절차적 지식 × 기억</h3>
+<ul>
+<li>"한글 모아쓰기의 순서를 말하라" → 초성 → 중성 → 종성 순으로 결합한다는 단계를 암기하여 나열한다.</li>
+</ul>
+<h3 id="-">메타인지적 지식 × 기억</h3>
+<ul>
+<li>"세종이 한글을 설계할 때 고려한 학습 전략을 나열하라" → 학습 단위 축소, 시각적 연상 장치 제공, 모아쓰기를 통한 병렬 처리 등 전략의 명칭을 암기하여 재생한다.</li>
+</ul>
+<h2 id="3939-">'기억'의 역할과 한계</h2>
+<p>기억은 모든 고차 인지 과정의 <strong>기초</strong>입니다. 분석하거나 창출하기 위해서는 먼저 관련 사실과 개념을 기억할 수 있어야 합니다. 그러나 <strong>기억 자체는 이해, 적용, 분석, 평가, 창출을 보장하지 않습니다.</strong> 단순히 연도와 원리를 외우는 것만으로는 한글의 과학성을 진정으로 이해했다고 말할 수 없습니다. 이는 다음 인지 과정들로 이어질 때 비로소 의미를 갖습니다.</p>
+<hr>
+<h1 id="section-3-2">3.2 이해(Understand) — 의미를 구성하고 설명하기</h1>
+<h2 id="">정의</h2>
+<p>이해(Understand)는 기억(Remember)의 다음 수준으로, 암기한 지식의 <strong>의미를 구성(construct meaning)</strong> 하는 인지 과정입니다. 단순히 정보를 재생하는 것을 넘어, 자신의 언어로 바꾸고, 요약하고, 비교하고, 설명할 수 있어야 합니다. 대표적인 하위 유형으로 해석(interpreting), 예시 들기(exemplifying), 분류(classifying), 요약(summarizing), 비교(comparing), 설명(explaining) 등이 있습니다.</p>
+<h2 id="-3939-">한글 창제 사례의 '이해' 수준</h2>
+<h3 id="-">사실적 지식 → 이해</h3>
+<ul>
+<li>단순히 "1443년"이라는 연도를 암기하는 대신, "세종이 즉위한 지 25년 차인 1443년에 문자 창제가 완료되었고, 3년 후인 1446년에 정식 반포했으니, 창제와 반포 사이에는 검증과 보완의 기간이 있었다"고 <strong>자신의 언어로 설명</strong>할 수 있다.</li>
+<li>암기한 사실들 사이의 시간적 관계를 구성하여 맥락화할 수 있다.</li>
+</ul>
+<h3 id="-">개념적 지식 → 이해</h3>
+<ul>
+<li>"상형의 원리"를 단순 정의 암기가 아닌, <strong>"왜 ㄱ은 혀뿌리 모양이고 ㄴ은 혀끝 모양인지 그 이유를 풀어 설명</strong>할 수 있다.</li>
+<li>가획의 원리를 <strong>자신의 언어로 요약</strong>할 수 있다: "기본 글자에 획을 추가하면 소리가 더 세지는 체계적인 관계가 있다."</li>
+<li>천·지·인 삼재 철학이 모음 체계에 어떻게 반영되었는지를 <strong>비유를 들어 설명</strong>할 수 있다.</li>
+</ul>
+<h3 id="-">절차적 지식 → 이해</h3>
+<ul>
+<li>모아쓰기 절차를 단순히 단계로 암기하는 대신, <strong>"왜 일렬로 쓰지 않고 하나의 덩어리로 모아 쓰는지 그 이유를 설명</strong>할 수 있다.</li>
+<li>"알파벳은 자소를 일렬로 배열하지만, 한글은 음절 단위로 블록화한다. 이렇게 하면 같은 정보량을 더 적은 시각적 공간에 담을 수 있고, 음절 단위의 패턴 인식이 가능해져 읽기 속도가 빨라진다"고 <strong>원리와 연결지어 설명</strong>할 수 있다.</li>
+</ul>
+<h3 id="-">메타인지적 지식 → 이해</h3>
+<ul>
+<li>세종이 선택한 학습 전략의 효과를 <strong>다른 사례에 비추어 설명</strong>할 수 있다. 예를 들어 "세종이 한글을 설계하면서 쓴 '작은 학습 단위로 쪼개기' 전략은 현대의 'Chunking' 이론과 일치한다"고 연결 지을 수 있다.</li>
+<li>"백성이 열흘이면 배운다"는 말의 함의를 <strong>전략적 관점에서 해석</strong>할 수 있다: 단순한 시간 개념이 아니라 <strong>인지적 접근성의 설계 철학</strong>임을 이해한다.</li>
+</ul>
+<h2 id="3939-">'이해'의 중요성</h2>
+<p>이해는 암기(기억)와 적용 사이의 <strong>가교</strong> 역할을 합니다. 같은 지식이라도 이해 없이 적용하려 하면 기계적인 따라하기에 그치고, 이해를 바탕으로 적용하면 새로운 상황에서도 융통성 있게 대처할 수 있습니다. 예를 들어, 한글의 모아쓰기 원리를 이해한 사람은 낯선 외국어의 발음도 한글 표기 규칙에 맞게 옮길 수 있습니다.</p>
+<hr>
+<h1 id="section-3-3">3.3 적용(Apply) — 배운 절차를 새로운 상황에서 수행하기</h1>
+<h2 id="">정의</h2>
+<p>적용(Apply)은 배운 지식이나 절차를 <strong>새로운 맥락이나 문제에 대입하여 실행</strong>하는 인지 과정입니다. 이해가 '의미를 아는 것'이라면, 적용은 <strong>그 의미를 실제로 사용하는 것</strong>입니다. 주어진 절차(procedure)를 따라 수행하거나, 학습한 원리를 새로운 상황에 대입하는 하위 유형으로 나뉩니다.</p>
+<h2 id="-3939-">한글 창제 사례의 '적용' 수준</h2>
+<h3 id="-">절차적 지식 → 적용</h3>
+<p><strong>절차적 지식은 적용과 가장 자연스럽게 연결됩니다.</strong> 절차는 본질적으로 '실행하기 위해' 존재하기 때문입니다.</p>
+<ul>
+<li><p><strong>예시 1 — 새로운 외래어 표기</strong>: 한글의 자모 분절 및 모아쓰기 규칙을 활용하여, 조선 시대에는 없었던 현대 외래어를 한글로 표기해본다.</p>
+<ul>
+<li>'Computer' → ㅋ + ㅓ + ㅁ + ㅍ + ㅠ + ㅌ + ㅓ → <strong>컴퓨터</strong></li>
+<li>'Sandwich' → ㅅ + ㅏ + ㄴ + ㄷ + ㅟ + ㅊ → <strong>샌드위치</strong></li>
+<li>처음 들어보는 소리(예: 'Thriller'의 'Thr')도 한글의 자모 조합 규칙을 적용하여 표기할 수 있다.</li>
+</ul>
+</li>
+<li><p><strong>예시 2 — 새로운 글자 만들기</strong>: 가획의 원리를 절차적으로 적용하여, 현대 음성학에 등장하는 낯선 소리를 표기하기 위한 새로운 글자를 체계적으로 설계해본다.</p>
+</li>
+</ul>
+<h3 id="-">메타인지적 지식 → 적용</h3>
+<ul>
+<li>세종의 '인지적 접근성 극대화 전략'을 현대의 다른 맥락에 적용해본다.<ul>
+<li><strong>디지털 리터러시 교육</strong>: "어르신들이 스마트폰 앱을 쉽게 배울 수 있도록, 세종이 한글을 설계할 때 썼던 전략(작은 학습 단위, 시각적 연상, 패턴 인식)을 모바일 UI 가이드라인으로 재해석해본다."</li>
+<li><strong>공공 정보 디자인</strong>: "세종이 백성의 이해 수준을 고려해 문자를 단순화한 것처럼, 복잡한 행정 용어를 쉬운 말로 바꾸는 '공공언어 개선 지침'을 만든다."</li>
+</ul>
+</li>
+</ul>
+<h3 id="-">적용이 가능한 이유</h3>
+<p>적용이 가능한 이유는 이해가 선행되었기 때문입니다. 한글의 모아쓰기 원리를 <strong>이해</strong>했기 때문에, 처음 보는 외래어(예: 'Quantum')에도 그 규칙을 <strong>적용</strong>할 수 있습니다. 이해 없는 적용은 단순한 패턴 매칭에 불과하며, 규칙의 경계 조건에서 실패합니다. 예를 들어 'Know'의 'K' 묵음 처리 같은 예외 상황에서는 이해가 있어야 올바르게 적용할 수 있습니다.</p>
+<blockquote>
+<p><strong>핵심 구분</strong>: '이해'는 "모아쓰기가 소리의 음절 단위를 시각적으로 묶는 방식이다"를 설명하는 것이고, '적용'은 "처음 보는 단어 'Strengths'를 한글로 써보라"는 과제를 실제로 수행하는 것입니다.</p>
+</blockquote>
+<hr>
+<h1 id="section-3-4">3.4 분석(Analyze) — 요소를 분해하여 관계와 구조 파악하기</h1>
+<h2 id="">정의</h2>
+<p>분석(Analyze)은 정보를 구성 요소로 <strong>분해(decompose)</strong> 하고, 요소들 간의 관계와 전체 구조를 파악하는 인지 과정입니다. 적용이 '주어진 절차를 실행하는 것'이라면, 분석은 <strong>'그것이 왜 그렇게 작동하는지 내부 구조를 들여다보는 것'</strong> 입니다. 하위 유형으로 요소 구분(differentiating), 조직화(organizing), 귀인(attributing)이 있습니다.</p>
+<h2 id="-3939-">한글 창제 사례의 '분석' 수준</h2>
+<h3 id="-">사실적·개념적 지식 → 분석: 문자 체계 비교</h3>
+<ul>
+<li><strong>과제</strong>: 한글과 세계의 다른 문자 체계(한자, 알파벳, 일본어 가나)를 <strong>문자학적 구조 기준으로 분류하고 비교</strong>한다.</li>
+<li><strong>분석 내용</strong>:<ul>
+<li>알파벳: <strong>음소-철자 대응</strong>(phoneme-grapheme) 관계 — 소리의 최소 단위를 글자에 대응</li>
+<li>한자: <strong>형태-의미 대응</strong>(logographic) 관계 — 글자가 의미를 직접 표현</li>
+<li>한글: <strong>음소-자질 대응</strong>(featural) 관계 — 글자의 모양이 <strong>발음 기관의 특징(자질)</strong> 을 반영</li>
+</ul>
+</li>
+<li><strong>분석 결과 도출</strong>: 한글은 단순한 음소문자가 아니라, 자질문자(featural writing system)로서 다른 문자 체계와 <strong>구조적으로 차별화</strong>됨을 논증할 수 있다.</li>
+</ul>
+<h3 id="-">개념적 지식 → 분석: 상반된 논리의 대조</h3>
+<ul>
+<li><strong>과제</strong>: 세종의 애민정신(愛民精神)과 최만리의 반대 상소에 담긴 논리를 각각 분해하여 대조한다.</li>
+<li><strong>분석 내용</strong>:<ul>
+<li>세종의 논리: "문자는 백성을 위한 도구다 → 백성이 어려워하면 더 쉬운 문자를 만들어야 한다 → 한글 창제는 군주의 의무다"</li>
+<li>최만리의 논리: "문자는 중국의 성인(聖人)이 만든 것이다 → 새로운 문자를 만드는 것은 사대(事大)의 예에 어긋난다 → 한글 창제는 명분을 해친다"</li>
+</ul>
+</li>
+<li><strong>분석 결과</strong>: 같은 정치적 맥락에서 <strong>전제와 결론이 어떻게 다른지</strong>, 각각의 숨겨진 가정을 드러낼 수 있다.</li>
+</ul>
+<h3 id="-">절차적 지식 → 분석: 절차의 효율성 평가 준비</h3>
+<ul>
+<li><strong>과제</strong>: 한글의 모아쓰기 절차를 <strong>음절 인식의 인지적 처리 과정</strong> 측면에서 분석한다.</li>
+<li><strong>분석 내용</strong>: 알파벳의 선형 배열이 좌뇌의 순차 처리를 요구하는 반면, 한글의 블록화는 <strong>시각적 패턴 인식(우뇌)</strong> 을 동시에 활용하게 한다. 이 차이를 실험 연구나 이론에 기대어 분석할 수 있다.</li>
+</ul>
+<h3 id="-">분석의 위치</h3>
+<p>분석은 적용과 평가 사이에서 <strong>전환점</strong> 역할을 합니다. 적용이 '주어진 도구를 사용하는 것'이라면, 분석은 <strong>'그 도구의 내부를 열어보고 설계를 이해하는 것'</strong> 입니다. 분석이 있어야 비로소 평가(판단)와 창출(새로운 설계)이 가능해집니다.</p>
+<hr>
+<h1 id="section-3-5">3.5 평가(Evaluate) — 기준에 따라 비판적으로 판단하기</h1>
+<h2 id="">정의</h2>
+<p>평가(Evaluate)는 명시적 <strong>기준(criteria)과 표준(standards)</strong> 에 근거하여 판단을 내리는 인지 과정입니다. 단순한 '의견 말하기'가 아니라, <strong>근거를 가지고 옳고 그름, 좋고 나쁨, 적절하고 부적절함을 논증</strong>하는 것입니다. 하위 유형으로 비판(checking)과 논평(critiquing)이 있습니다.</p>
+<p>분석이 '요소를 분해하여 보는 것'이라면, 평가는 <strong>'그렇게 본 결과를 토대로 가치 판단을 내리는 것'</strong> 입니다.</p>
+<h2 id="-3939-">한글 창제 사례의 '평가' 수준</h2>
+<h3 id="-">사실적 지식 → 평가: 한글의 국제적 위상 판단</h3>
+<ul>
+<li><strong>과제</strong>: 유네스코가 문맹 퇴치에 기여한 인물이나 단체에 수여하는 상의 이름이 '세종대왕 문해상(King Sejong Literacy Prize)'인 것이 <strong>근거에 비추어 적절한가</strong> 평가한다.</li>
+<li><strong>평가 기준</strong>:<ol>
+<li>한글은 실제로 문맹 퇴치에 기여했는가? (역사적 데이터)</li>
+<li>세종의 철학(애민정신)은 문맹 퇴치의 가치와 부합하는가?</li>
+<li>다른 후보(예: 다른 문자 창제자)와 비교할 때 세종이 가장 적절한가?</li>
+</ol>
+</li>
+<li><strong>평가 방법</strong>: 각 기준에 대해 근거를 제시하고, 종합적으로 판단한다. 예를 들어 "한글 창제 이후 조선의 문해율 추정치"와 "문자 학습에 걸리는 시간(한자는 수년, 한글은 수일~수주)"을 근거로 제시할 수 있다.</li>
+</ul>
+<h3 id="-">개념적·메타인지적 지식 → 평가: 역사적 가상 시나리오 판단</h3>
+<ul>
+<li><strong>과제</strong>: "만약 세종이 한글을 창제하지 않고 한자를 계속 사용했다면, 조선의 문해율과 신분 제도는 어떻게 변했을까?"라는 질문에 대해 <strong>역사적·사회적 기준을 세워 자신의 의견을 논증</strong>한다.</li>
+<li><strong>고려할 기준</strong>:<ul>
+<li>문자 접근성이 신분 이동에 미치는 영향</li>
+<li>한자의 학습 곡선이 계층 구조에 기여한 정도</li>
+<li>조선 후기 실학 운동의 문자적 기반</li>
+</ul>
+</li>
+<li><strong>평가 결과 예시</strong>: "한글이 없었다면 조선의 문해율은 10% 미만에 머물렀을 것이고, 신분제는 더 경직되었을 것이다. 근거로는 한글 창제 후 민간 문서(언간, 소설 등)의 폭발적 증가를 들 수 있다."</li>
+</ul>
+<h3 id="-">절차적 지식 → 평가: 한글 표기법의 일관성 판단</h3>
+<ul>
+<li><strong>과제</strong>: 현대 한글 맞춤법(특히 표준어 규정)이 훈민정음의 원리를 얼마나 충실히 따르고 있는지 <strong>일관성 기준으로 평가</strong>한다.</li>
+<li><strong>평가 기준</strong>: 소리와 글자의 일대일 대응 원칙, 역사적 표기와의 연속성, 예외 규칙의 합리성</li>
+<li><strong>평가 예시</strong>: "된소리 표기(ㄲ, ㄸ, ㅃ, ㅆ, ㅉ)는 가획의 원리(획 중복 = 소리 강화)와 일관되나, 'ㄹ' 받침의 다양한 발음(ㄹ→ㄷ 현상 등)은 표기와 소리의 괴리를 보여주므로 원칙의 일관성이 부분적으로 훼손되었다."</li>
+</ul>
+<h3 id="-">평가와 의견의 차이</h3>
+<p>평가는 단순한 의견(opinion)과 다릅니다. 의견은 "한글이 정말 대단한 문자인 것 같아요"에서 멈추지만, 평가는 <strong>"한글은 학습 시간(수일) 대비 정보 밀도라는 기준에서 세계 문자 중 최상위권에 속하며, 유네스코 문해상의 이름이 세종대왕인 것은 역사적·교육적 근거에 비추어 적절하다"</strong> 는 식으로 판단의 <strong>근거</strong>를 제시합니다.</p>
+<hr>
+<h1 id="section-3-6">3.6 창출(Create) — 요소를 재조합하여 새로운 가치 창출하기</h1>
+<h2 id="">정의</h2>
+<p>창출(Create)은 Bloom 분류학 인지 과정의 <strong>최상위 수준</strong>입니다. 요소들을 재조합하여 <strong>새롭고 일관된 전체(novel coherent whole)</strong> 를 만들어내거나, <strong>독창적인 산물(original product)</strong> 을 생성하는 인지 과정입니다. 하위 유형으로 생성(generating), 계획(planning), 생산(producing)이 있습니다.</p>
+<p><strong>중요한 점</strong>: 창출은 이전의 모든 인지 과정(기억→이해→적용→분석→평가)을 <strong>포함</strong>합니다. 창출을 하려면 관련 지식을 기억하고, 원리를 이해하고, 방법을 적용하고, 구조를 분석하고, 대안을 평가할 수 있어야 합니다. 창출은 이 모든 능력이 <strong>종합적으로 발휘</strong>될 때 가능합니다.</p>
+<h2 id="-3939-">한글 창제 사례의 '창출' 수준</h2>
+<h3 id="-">모든 지식 차원의 융합</h3>
+<p>창출은 단일 지식 차원에 국한되지 않습니다. 사실적·개념적·절차적·메타인지적 지식이 모두 동원되어 새로운 결과물을 만듭니다.</p>
+<h4 id="-1-">예시 1: 한글의 원리를 응용한 새로운 코딩 언어 설계</h4>
+<ul>
+<li><strong>사용된 지식</strong>:<ul>
+<li><strong>개념적</strong>: 상형의 원리 — 개념을 시각적 형태와 연결</li>
+<li><strong>절차적</strong>: 조합 규칙 — 기본 요소를 결합하여 복합 의미 생성</li>
+<li><strong>메타인지적</strong>: 접근성 전략 — 초보자가 쉽게 배울 수 있는 인터페이스 설계</li>
+</ul>
+</li>
+<li><strong>창출 결과물</strong>: "한글의 자음·모음 결합 방식을 차용한, 비프로그래머도 직관적으로 사용할 수 있는 도메인 특화 언어(Domain-Specific Language)의 프로토타입을 기획한다."<ul>
+<li>예: ㄱ(가져오기)+ㅏ(데이터)+ㅇ(출력) → "가다"라는 시각적 명령어</li>
+</ul>
+</li>
+</ul>
+<h4 id="-2-">예시 2: 한글 창제를 소재로 한 역사 드라마 대본 창작</h4>
+<ul>
+<li><strong>사용된 지식</strong>:<ul>
+<li><strong>사실적</strong>: 역사적 인물, 연대기, 사건</li>
+<li><strong>개념적</strong>: 애민정신과 사대주의의 갈등이라는 주제</li>
+<li><strong>메타인지적</strong>: 세종과 최만리 등 인물의 전략적 사고와 내적 갈등</li>
+</ul>
+</li>
+<li><strong>창출 결과물</strong>: 훈민정음 창제 과정에서 벌어진 정치적 갈등을 다룬 4부작 드라마의 <strong>시놉시스와 1화 대본</strong>을 창작한다.</li>
+</ul>
+<h4 id="-3-">예시 3: 한글 기반의 새로운 타이포그래피 시스템</h4>
+<ul>
+<li><strong>사용된 지식</strong>:<ul>
+<li><strong>절차적</strong>: 자모 분절과 조합 규칙</li>
+<li><strong>개념적</strong>: 상형과 가획의 원리</li>
+<li><strong>메타인지적</strong>: 시각적 인지 효율성 전략</li>
+</ul>
+</li>
+<li><strong>창출 결과물</strong>: 한글 자모의 기본 형태에서 출발하여, 가획의 원리를 확장한 <strong>새로운 실험적 폰트 패밀리</strong>와 그 디자인 시스템을 설계한다.</li>
+</ul>
+<h3 id="-">창출이 포함하는 하위 과정</h3>
+<p>창출은 단순히 '뭔가 새롭게 만드는 것'이 아니라, 다음과 같은 하위 과정을 포함합니다:</p>
+<ol>
+<li><strong>생성(Generating)</strong>: 가능한 아이디어나 가설을 다양하게 제시 — "한글의 원리로 무엇을 만들 수 있을까?"</li>
+<li><strong>계획(Planning)</strong>: 생성된 아이디어 중에서 선택하고 실행 방법을 설계</li>
+<li><strong>생산(Producing)</strong>: 실제로 결과물을 구체화하여 산출</li>
+</ol>
+<h2 id="-">인지 과정의 최종 목적지</h2>
+<p>Bloom 분류학에서 창출이 최상위에 위치하는 이유는, <strong>이전의 모든 인지 과정을 통합하여 실제 가치를 창출</strong>하기 때문입니다. 한글의 과학적 원리를 아는 것(기억)에서 시작하여, 그것을 이해하고, 적용하고, 분석하고, 평가한 후에야 비로소 <strong>그 원리를 바탕으로 새로운 무엇인가를 만들어낼 수 있습니다.</strong></p>
+<blockquote>
+<p><strong>비유</strong>: 기억은 벽돌을 쌓아둔 것이고, 이해는 설계도를 읽는 것이며, 적용은 설계도대로 짓는 것이고, 분석은 구조를 해체하여 검토하는 것이며, 평가는 건물의 안전성을 판단하는 것입니다. 그리고 창출은 <strong>전혀 새로운 건축 양식을 설계하여 세상에 없던 건물을 짓는 것</strong>입니다.</p>
+</blockquote>
+<hr>
+<h1 id="section-4">4. 2차원 매트릭스 통합 — 지식 × 인지 과정이 만나는 구체적 사례</h1>
+<h2 id="-">매트릭스의 의미</h2>
+<p>지금까지 우리는 <strong>지식 차원(Knowledge Dimension)</strong> 과 <strong>인지 과정(Cognitive Process)</strong> 을 각각의 축으로 살펴보았습니다. 그러나 Bloom 분류학의 진정한 힘은 이 두 축이 교차하는 <strong>24개의 셀(4 × 6)</strong> 에서 나옵니다. 각 셀은 독립된 학습 목표가 될 수 있으며, 같은 지식이라도 어떤 인지 과정으로 다루느냐에 따라 사고의 깊이가 완전히 달라집니다.</p>
+<p>아래 표는 한글 창제 사례를 통해 24개 셀을 모두 구체적인 활동으로 채운 것입니다. 각 셀의 예시는 <strong>해당 지식 차원의 내용을 해당 인지 과정으로 다룰 때</strong> 어떤 학습 활동이 되는지 보여줍니다.</p>
+<h2 id="-">통합 매트릭스</h2>
+<table>
+<thead>
+<tr>
+<th>지식 차원 \ 인지 과정</th>
+<th><strong>기억 (Remember)</strong></th>
+<th><strong>이해 (Understand)</strong></th>
+<th><strong>적용 (Apply)</strong></th>
+<th><strong>분석 (Analyze)</strong></th>
+<th><strong>평가 (Evaluate)</strong></th>
+<th><strong>창출 (Create)</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>사실적 (Factual)</strong></td>
+<td>훈민정음 반포 연도(1446년)를 암기하여 말한다</td>
+<td>창제(1443년)와 반포(1446년) 사이에 3년의 검증 기간이 있었던 이유를 설명한다</td>
+<td>반포 연도를 기준으로 세종 즉위 <strong>후 몇 년 차인지 계산</strong>하여 답한다</td>
+<td>훈민정음 해례본에 기록된 창제 과정의 <strong>단계를 연대기별로 분해</strong>한다</td>
+<td>유네스코 세종대왕 문해상의 명칭이 <strong>역사적 사실에 비추어 적절한지 판단</strong>한다</td>
+<td>한글 창제 과정을 소재로 한 <strong>역사 연대표 인포그래픽</strong>을 새로 설계한다</td>
+</tr>
+<tr>
+<td><strong>개념적 (Conceptual)</strong></td>
+<td>상형의 원리를 <strong>정의대로 암송</strong>한다</td>
+<td>상형의 원리를 <strong>자신의 언어로 설명</strong>하고 예를 든다</td>
+<td>상형의 원리를 적용하여 <strong>가상의 새로운 문자를 체계적으로 분류</strong>한다</td>
+<td>한글의 상형 원리와 알파벳의 음소 원리를 <strong>비교·대조</strong>한다</td>
+<td>"한글이 세계에서 가장 과학적인 문자인가?"라는 주장을 <strong>논리적으로 평가</strong>한다</td>
+<td>상형 원리와 현대 음성학을 결합한 <strong>새로운 필기체계</strong>를 제안한다</td>
+</tr>
+<tr>
+<td><strong>절차적 (Procedural)</strong></td>
+<td>모아쓰기 <strong>규칙의 단계를 순서대로 나열</strong>한다</td>
+<td>모아쓰기 규칙이 <strong>알파벳 일렬 배열보다 읽기에 유리한 이유</strong>를 요약한다</td>
+<td>처음 보는 외래어('Quantum')를 <strong>한글 표기 규칙에 따라 써본다</strong></td>
+<td>모아쓰기와 알파벳 일렬 배열의 <strong>인지적 처리 과정 차이</strong>를 분석한다</td>
+<td>현대 한글 맞춤법의 예외 규칙이 <strong>훈민정음 원리와 일관되는지 판단</strong>한다</td>
+<td>한글의 조합 방식을 응용한 <strong>새로운 코딩 언어의 문법 체계</strong>를 설계한다</td>
+</tr>
+<tr>
+<td><strong>메타인지적 (Metacognitive)</strong></td>
+<td>세종이 사용한 학습 전략의 <strong>명칭을 암기</strong>한다</td>
+<td>"열흘이면 배운다"는 말의 <strong>전략적 함의를 해석</strong>한다</td>
+<td>세종의 전략을 현대 <strong>디지털 리터러시 교육에 적용</strong>한다</td>
+<td>세종의 전략과 현대 <strong>Chunking 이론의 공통점과 차이점</strong>을 분석한다</td>
+<td>세종의 문자 설계 전략이 <strong>현대 UX 디자인 원칙과 비교해 얼마나 효과적인지 평가</strong>한다</td>
+<td>세종의 접근성 전략을 바탕으로 한 <strong>포용적 UI 디자인 가이드라인</strong>을 창안한다</td>
+</tr>
+</tbody></table>
+<h2 id="-">매트릭스의 가로 읽기와 세로 읽기</h2>
+<h3 id="-">가로 읽기: 같은 지식, 다른 인지 깊이</h3>
+<p>같은 지식 차원의 행(row)을 가로로 따라가면, <strong>같은 내용을 다루지만 사고의 깊이가 달라짐</strong>을 볼 수 있습니다.</p>
+<p>예를 들어 <strong>절차적 지식</strong> 행을 가로로 읽어보면:</p>
+<table>
+<thead>
+<tr>
+<th>기억</th>
+<th>이해</th>
+<th>적용</th>
+<th>분석</th>
+<th>평가</th>
+<th>창출</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>규칙 단계를 줄줄 외움</td>
+<td>규칙이 효과적인 이유를 설명함</td>
+<td>규칙을 새 단어에 적용해 봄</td>
+<td>다른 체계와 처리 방식을 비교함</td>
+<td>규칙의 일관성을 비판적으로 검토함</td>
+<td>규칙을 응용한 새 체계를 창안함</td>
+</tr>
+</tbody></table>
+<p>같은 '모아쓰기 규칙'이라는 주제라도, 기억 수준에서는 단순 암기로 끝나지만 창출 수준에서는 그 원리를 확장하여 전혀 새로운 체계를 만들어냅니다.</p>
+<h3 id="-">세로 읽기: 같은 인지 깊이, 다른 지식 유형</h3>
+<p>같은 인지 과정의 열(column)을 세로로 따라가면, <strong>같은 수준의 사고라도 어떤 종류의 지식을 다루는지에 따라 활동의 성격이 달라짐</strong>을 볼 수 있습니다.</p>
+<p>예를 들어 <strong>분석(Analyze)</strong> 열을 세로로 읽어보면:</p>
+<table>
+<thead>
+<tr>
+<th>지식 차원</th>
+<th>분석 활동의 차이</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>사실적</td>
+<td>사건의 시간적 인과 관계를 분해한다</td>
+</tr>
+<tr>
+<td>개념적</td>
+<td>두 체계(한글 vs 알파벳)의 구조적 차이를 비교한다</td>
+</tr>
+<tr>
+<td>절차적</td>
+<td>두 표기 방식의 인지적 처리 과정을 비교한다</td>
+</tr>
+<tr>
+<td>메타인지적</td>
+<td>두 전략의 이론적 기반을 분석한다</td>
+</tr>
+</tbody></table>
+<p>이 차이는 교육 설계에서 중요한 시사점을 줍니다. "분석 능력을 키우겠다"고 할 때, <strong>무엇을 분석할 것인가(지식 차원)</strong> 에 따라 구체적인 학습 활동이 완전히 달라져야 합니다.</p>
+<h2 id="-">매트릭스가 주는 교육적 통찰</h2>
+<ol>
+<li><strong>단일 인지 과정 훈련은 충분하지 않다.</strong> '분석'만 가르친다고 분석 능력이 생기는 것이 아니라, 어떤 지식 차원에서 분석할지도 함께 명시해야 합니다.</li>
+<li><strong>수업 설계의 정밀도가 높아진다.</strong> "한글을 배운다"는 모호한 목표 대신, "한글의 개념적 지식을 평가할 수 있다"처럼 <strong>구체적인 셀을 목표로 삼을 수 있습니다.</strong></li>
+<li><strong>학습자의 현재 위치와 다음 목표가 명확해진다.</strong> 학습자가 "한글의 개념을 암기"하는 수준(사실적×기억)이라면, 다음 목표는 "한글의 개념을 자신의 말로 설명하는 것"(개념적×이해)이 됩니다.</li>
+</ol>
+<hr>
+<h1 id="section-5">5. 결론 — 요약 및 교육적 시사점</h1>
+<h2 id="">요약</h2>
+<p>이 문서는 한글(훈민정음) 창제의 과학적 원리를 구체적인 사례로 삼아, Bloom의 분류학(Anderson &amp; Krathwohl, 2001)을 2차원 매트릭스로 이해하는 방법을 살펴보았습니다.</p>
+<h3 id="-3939">지식 차원: 네 가지 '무엇'</h3>
+<table>
+<thead>
+<tr>
+<th>지식 차원</th>
+<th>한글 사례의 핵심</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>사실적(Factual)</strong></td>
+<td>1443년 창제, 1446년 반포, 초·중·종성 구성, 참여 인물</td>
+</tr>
+<tr>
+<td><strong>개념적(Conceptual)</strong></td>
+<td>상형·가획의 원리, 천지인 철학, 애민·위민 정신</td>
+</tr>
+<tr>
+<td><strong>절차적(Procedural)</strong></td>
+<td>자모 분절 → 모아쓰기 규칙, 검증 및 보급 절차</td>
+</tr>
+<tr>
+<td><strong>메타인지적(Metacognitive)</strong></td>
+<td>백성의 인지 한계를 고려한 전략적 설계, 상황 판단력</td>
+</tr>
+</tbody></table>
+<h3 id="-3939">인지 과정: 여섯 가지 '어떻게'</h3>
+<table>
+<thead>
+<tr>
+<th>인지 과정</th>
+<th>한글 사례의 핵심 질문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>기억(Remember)</strong></td>
+<td>"한글은 언제 만들어졌는가?" — 사실을 인출한다</td>
+</tr>
+<tr>
+<td><strong>이해(Understand)</strong></td>
+<td>"왜 ㄱ은 혀뿌리 모양일까?" — 의미를 구성한다</td>
+</tr>
+<tr>
+<td><strong>적용(Apply)</strong></td>
+<td>"처음 보는 외래어를 한글로 써보라" — 절차를 실행한다</td>
+</tr>
+<tr>
+<td><strong>분석(Analyze)</strong></td>
+<td>"한글과 알파벳의 구조적 차이는 무엇인가?" — 요소를 분해한다</td>
+</tr>
+<tr>
+<td><strong>평가(Evaluate)</strong></td>
+<td>"세종대왕 문해상은 적절한가?" — 기준에 따라 판단한다</td>
+</tr>
+<tr>
+<td><strong>창출(Create)</strong></td>
+<td>"한글의 원리를 응용한 새 체계를 설계하라" — 새 가치를 창출한다</td>
+</tr>
+</tbody></table>
+<h3 id="-">통합 매트릭스</h3>
+<p>이 두 축이 만나는 24개의 셀은 각각 독립된 구체적 학습 목표가 됩니다. 같은 '분석'이라도 사실을 분석하는 것과 개념을 분석하는 것은 전혀 다른 인지 활동이며, 같은 '절차적 지식'이라도 암기하는 것과 창출하는 것은 하늘과 땅 차이입니다.</p>
+<h2 id="-">교육적 시사점</h2>
+<h3 id="1-39-39-">1. '상위 인지 과정 = 더 중요함'은 오해</h3>
+<p>Bloom 분류학에 대한 가장 흔한 오해는 "창출이 가장 중요하고 기억은 낮은 수준이니 덜 중요하다"는 생각입니다. 그러나 창출은 기억을 포함하며, 기억 없이 창출은 공중누각입니다. 중요한 것은 <strong>무엇을 어떤 깊이로 다룰지 맥락에 맞게 설계하는 것</strong>입니다.</p>
+<h3 id="2-">2. 교육 설계의 정밀한 기준 제공</h3>
+<p>"비판적 사고를 가르친다"는 막연한 목표는 매트릭스 안에서 "한글의 절차적 지식을 분석할 수 있다"처럼 구체화됩니다. 이는 교수자에게는 명확한 수업 설계의 기준을, 학습자에게는 자신의 현재 위치와 다음 목표를 제공합니다.</p>
+<h3 id="3-">3. 지식 차원의 중요성</h3>
+<p>많은 교육 과정이 인지 과정(기억→이해→적용→...)에만 초점을 맞추고 지식 차원을 간과합니다. 그러나 같은 '이해'라도 사실적 지식을 이해하는 것과 절차적 지식을 이해하는 것은 다른 교수 전략을 요구합니다. 지식 차원은 단순한 내용의 구분이 아니라, <strong>인지 과정의 성격 자체를 규정하는 중요한 축</strong>입니다.</p>
+<h2 id="-">한글 사례가 특별한 이유</h2>
+<p>이 문서의 사례인 한글 창제는 Bloom 분류학의 모든 차원과 과정을 설명할 수 있는 <strong>자연스러운 마이크로코즘(microcosm)</strong> 입니다. 한글 안에는:</p>
+<ul>
+<li>암기할 수 있는 사실(사실적)</li>
+<li>체계화된 원리(개념적)</li>
+<li>따라 할 수 있는 규칙(절차적)</li>
+<li>'배우는 사람'을 고려한 전략(메타인지적)</li>
+</ul>
+<p>이 모두가 존재하며, 각각을 다른 인지 깊이로 다룰 수 있습니다. 이는 Bloom 분류학이 추상적 이론이 아니라, 실제 교육 현장과 지식의 세계를 정밀하게 분석하는 <strong>실용적인 도구</strong>임을 보여줍니다.</p>
+<blockquote>
+<p><strong>최종 메시지</strong>: Bloom의 분류학은 '무엇을(지식)' '얼마나 깊이(인지)' 다룰 것인가를 동시에 고려하는 2차원의 프레임입니다. 한글 창제 사례는 이 프레임이 어떻게 구체적인 학습 활동으로 연결되는지 보여주는 살아있는 예시입니다.</p>
+</blockquote>
+</article>
+<script>
+document.querySelectorAll('.code-copy-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var pre=btn.closest('.code-block-wrapper').querySelector('pre');
+    navigator.clipboard.writeText(pre.textContent).then(function(){
+      var label=btn.querySelector('.code-copy-label');
+      var svg=btn.querySelector('svg');
+      label.textContent='Copied!';
+      svg.innerHTML='<polyline points="20 6 9 17 4 12"/>';
+      btn.classList.add('copied');
+      setTimeout(function(){
+        label.textContent='Copy';
+        svg.innerHTML='<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>';
+        btn.classList.remove('copied');
+      },2000);
+    });
+  });
+});
+</script>
+</body>
+</html>
