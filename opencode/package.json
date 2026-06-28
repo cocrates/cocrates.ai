@@ -16,8 +16,9 @@
   ],
   "scripts": {
     "generate:agents": "tsx src/agents/generate-specs.ts",
+    "prepare": "npm run generate:agents",
     "build": "npm run generate:agents && tsc",
-    "dev": "tsc --watch",
+    "dev": "npm run generate:agents && tsc --watch",
     "typecheck": "npm run generate:agents && tsc --noEmit",
     "clean": "rm -rf dist",
     "prepublishOnly": "npm run build"

@@ -35,6 +35,31 @@ npm run dev
 }
 ```
 
+버전 없이 패키지 이름만 적으면 OpenCode가 `@latest`로 해석합니다. 첫 설치 시점의 버전이 `~/.cache/opencode/packages/`에 캐시되며, npm에 새 버전이 올라와도 **자동 갱신되지 않을 수 있습니다**.
+
+특정 버전을 고정하려면:
+
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": ["@cocrates/cocrates-harness@0.1.2"]
+}
+```
+
+최신 버전으로 갱신하려면:
+
+```bash
+opencode plugin add @cocrates/cocrates-harness -f
+```
+
+또는 캐시를 삭제한 뒤 OpenCode를 다시 시작합니다.
+
+```bash
+rm -rf ~/.cache/opencode/packages/@cocrates/cocrates-harness@latest
+```
+
+> `opencode.json`의 `"autoupdate"`는 OpenCode 앱 자체 업데이트용이며, npm 플러그인 갱신과는 별개입니다.
+
 ### 로컬 빌드 결과로
 
 ```bash
