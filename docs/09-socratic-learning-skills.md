@@ -52,7 +52,7 @@ education 스킬의 첫 번째 규칙은 이것이다.
 > ```
 >
 > **🔥 [MISSION]**
-> `MySQLDatabase`를 `PostgresDatabase`로 바꾸면 무엇이 깨질까요? DIP를 위반하는 의존 방향을 하나 찾아 자신의 말로 설명해 보세요.
+> `MySQLDatabase`를 `PostgresDatabase`로 바꾸면 무엇이 깨질까요? DIP를 위반하는 의존 방향을 하나 찾아 설명해 보세요.
 
 정답을 주지 않는다. 다음 미션의 답을 미리 알려주지도 않는다. 사용자의 답변을 기다린다.
 

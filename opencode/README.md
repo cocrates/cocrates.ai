@@ -41,12 +41,14 @@ npm run dev
 npm run build
 ```
 
-`opencode.json`에 절대 경로로 등록:
+저장소 루트의 `opencode.jsonc`가 로컬 플러그인과 `skills/` 경로를 프로젝트 설정으로 등록합니다. 이 저장소에서 OpenCode를 실행하면 자동으로 적용됩니다.
+
+다른 프로젝트에서 단독으로 쓸 때는 `opencode.json`에 절대 경로로 등록:
 
 ```json
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["file:///home/you/work/cocrates/opencode/dist/index.js"]
+  "plugin": ["file:///home/you/work/cocrates.ai/opencode/dist/index.js"]
 }
 ```
 
@@ -56,13 +58,6 @@ npm run build
 
 `opencode/**` 변경 시 `.github/workflows/opencode-plugin.yml`이 빌드를 검증합니다.
 
-### npm 배포
-
-```bash
-cd opencode
-npm publish --access public
-```
-
 ### GitHub Release
 
 `opencode-v*` 태그를 push하면 빌드 산출물이 Release에 첨부됩니다.
@@ -70,4 +65,11 @@ npm publish --access public
 ```bash
 git tag opencode-v0.1.0
 git push origin opencode-v0.1.0
+```
+
+### npm 배포
+
+```bash
+cd opencode
+npm publish --access public
 ```

@@ -1,6 +1,6 @@
 {
   "name": "@cocrates/cocrates-harness",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Cocrates Harness OpenCode Plugin",
   "type": "module",
   "main": "./dist/index.js",
