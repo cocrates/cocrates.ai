@@ -4,7 +4,9 @@ description: >-
   Creates Any Decision Records (ADR) for the user to analyze, review, and
   approve among alternatives for a specific concern before committing. Select
   when the user asks for options, tradeoffs, a recommended direction, or needs
-  to decide among valid approaches — architectural or otherwise.
+  to decide among valid approaches — architectural or otherwise. Explicitly
+  identifies and guides the user through downstream/derived concerns that
+  arise from a chosen solution.
 compatibility: opencode
 metadata:
   agent: cocrates
@@ -45,10 +47,6 @@ Before saving, check the `adr/` directory.
 - If found, **do not create a new file** — **supplement and merge** into the existing ADR, or set `Status: superseded` and link to a replacing ADR when the concern is reframed
 - If not found, create a new `{concern-slug}.md`
 
-**Similar-concern examples:**
-- `item-db.md` ↔ `item-storage-database.md` → same concern, merge into one
-- `auth-method.md` updated because OAuth scope changed → supplement existing file or supersede with clear link
-
 ---
 
 ## Workflow
@@ -56,96 +54,38 @@ Before saving, check the `adr/` directory.
 ### 1. Identify the Concern
 
 Clarify the **concern** — the specific question the user must resolve — and why it matters now.
-
-Capture briefly:
-
-- **Concern** — one clear question (e.g. *"Which database should we use for item storage?"*)
-- **Context** — what constraints, goals, or prior decisions apply?
-- **Stakes** — what does resolving this concern affect downstream?
-
-If multiple independent concerns exist, create **separate ADR files** — one concern per file, each with its own options.
+Capture briefly: **Concern**, **Context**, and **Stakes** (what does resolving this concern affect downstream?).
 
 ### 2. Enumerate Viable Options
 
-Present **at least 2–3 valid options**. More is fine when each option is genuinely distinct and worth considering.
-
-**Option writing rules:**
-
-- Use **bullet points**, not long prose paragraphs
-- Each option: **name + 2–4 bullets** covering what it is, key benefit, key cost or risk
-- Options must be **real alternatives** the user could actually choose — not strawmen or a single disguised recommendation
-- Include a "do nothing / defer" option only when it is truly viable
-
-**Bad (too verbose):**
-> Option A would involve implementing a comprehensive microservices architecture where each bounded context is deployed independently, which provides excellent scalability but requires significant operational overhead…
-
-**Good (concise bullets):**
-
-Concern: *Which database should we use for item storage?*
-
-> **Option A — MySQL**
-> - Relational store; mature ecosystem
-> - Pro: strong consistency, familiar SQL tooling
-> - Con: rigid schema for highly variable item attributes
->
-> **Option B — MongoDB**
-> - Document store; flexible per-item schema
-> - Pro: fits heterogeneous item shapes
-> - Con: fewer join patterns; consistency model differs from SQL
+Present **at least 2–3 valid options** using concise **bullet points** (name + 2–4 bullets covering what it is, pro, and con). Options must be real, non-strawman alternatives.
 
 ### 3. Compare Tradeoffs
 
-After options, add a short **Tradeoffs** section:
-
-- Comparison table or bullet pairs (option ↔ consequence)
-- Non-obvious constraints, dependencies, or reversibility
-- Agent recommendation (optional, clearly labeled) — never substitute for user approval
-
-Keep this section scannable. The goal is decision support, not a white paper.
+Add a short, scannable **Tradeoffs** section (comparison table or bullet pairs) and an optional agent recommendation.
 
 ### 4. Save ADR File
 
-Write the ADR using the template below. Set `Status: proposed`.
-
-Save to `adr/{concern-slug}.md`.
+Write the ADR using the template below. Set `Status: proposed` and save to `adr/{concern-slug}.md`.
 
 ### 5. User Review Gate
 
-After saving, ask the user to review and approve.
+Ask the user to review and approve via structured Socratic guidance. Do not mark as approved without explicit user confirmation.
 
-Example prompts:
+### 6. Record Approval & Identify Downstream Concerns
 
-- *"Please review `adr/item-storage-database.md`. Is the concern framed correctly? Are the options complete and fairly stated? Which option do you approve?"*
-- *"Option B is recommended because … — do you approve B, or prefer another option?"*
+When the user approves an option:
+1. Set `Status: approved`.
+2. Fill **Decision** with the chosen option and a one-line rationale.
+3. Record `Approved: YYYY-MM-DD`.
+4. **Identify Downstream Concerns (Crucial):** Analyze the approved solution and proactively identify **derived questions or operational details** that must be answered next.
+   - *Example:* If the user approves **"Introducing Redis Cache"** for performance, the agent must immediately identify downstream concerns such as **Cache Eviction Policy (TTL/LRU)** and **Cache Size/Memory Limit**.
+5. Record these under **`## Downstream Concerns`** in the file template to maintain architectural lineage.
 
-**Do not:**
+### 7. Chain or Hand Off
 
-- Mark a decision as approved without explicit user confirmation
-- Proceed to `spec-writing` before approval
-- Collapse multiple options into a single "obvious" choice without presenting alternatives
-
-### 6. Record Approval
-
-When the user approves:
-
-1. Set `Status: approved`
-2. Fill **Decision** with the chosen option and one-line rationale (user's words when possible)
-3. Record `Approved: YYYY-MM-DD`
-4. Notify the user of the updated path
-
-If the user rejects all options or requests new ones, revise the ADR and return to step 2.
-
-### 7. Hand Off to Spec Writing
-
-After **all blocking ADRs for the current design scope** are approved, load and follow the **`spec-writing`** skill.
-
-Transfer to spec-writing:
-
-- Every approved decision as a **fully stated specification** (what to build — not a reference to an ADR)
-- Constraints and rejected options worth documenting (briefly, in the Spec)
-- Open questions deferred to spec or a later ADR
-
-ADR files remain the **decision audit trail** — for understanding alternatives and selection rationale. The Spec becomes the **single, self-contained source of truth** for generation; downstream steps must not require reading ADRs.
+- **If Downstream Concerns are critical:** Ask the user if they want to immediately open a subsequent ADR to address the newly generated questions (e.g., *"Now that we decided to use a Cache, what should our Eviction Policy be?"*).
+- **If all blocking concerns are resolved:** Load and follow the **`spec-writing`** skill to consolidate approved decisions into the self-contained Spec.
 
 ---
 
@@ -168,7 +108,6 @@ proposed | approved | rejected | superseded
 {Leave empty while Status is proposed. After approval: chosen option + one-line rationale.}
 
 ## Options
-
 ### Option A — {Short Name}
 - {What it is}
 - Pro: {key benefit}
@@ -179,27 +118,24 @@ proposed | approved | rejected | superseded
 - Pro: {key benefit}
 - Con: {key cost or risk}
 
-### Option C — {Short Name}
-- {What it is}
-- Pro: {key benefit}
-- Con: {key cost or risk}
-
 ## Tradeoffs
-| | Option A | Option B | Option C |
-|---|----------|----------|----------|
-| {dimension} | … | … | … |
-
-- {Additional note on reversibility, dependencies, or timing}
+| | Option A | Option B |
+|---|----------|----------|
+| {dimension} | … | … |
 
 ## Recommendation (optional)
-- {Agent suggestion and why — not a substitute for user approval}
+- {Agent suggestion and why}
 
 ## Consequences
 - {What follows if the approved option is chosen}
 - {What we are explicitly not doing}
 
+## Downstream Concerns
+- {List new questions triggered by this approval that require future decisions}
+- {e.g., If Cache approved -> [ ] Define Cache TTL policy, [ ] Determine Max Memory limit}
+
 ## Related
-- {Link to other adr files, specs, or kb files}
+- {Links to parent ADRs, downstream ADRs, or specs}
 
 ## Tags
 `tag-one`, `tag-two`
@@ -208,94 +144,74 @@ proposed | approved | rejected | superseded
 - YYYY-MM-DD: {option chosen, by user confirmation}
 ```
 
-Omit empty sections except **Concern**, **Options** (required, minimum 2), and **Status**.
-
 ---
 
-## Example (abbreviated)
+## Example (Chained/Derived Concerns)
 
-File: `adr/item-storage-database.md`
+File: `adr/application-performance-cache.md`
 
 ```markdown
-# Item Storage Database
+# Application Performance Cache
 
 ## Concern
-Which database should we use for item storage?
+How should we improve response latency for the item catalog API?
 
 ## Status
 approved
 
 ## Context
-- Item attributes vary by category; some fields are optional
-- Team has SQL experience; no existing NoSQL operations practice
-- Expected volume: moderate; single-region deployment
+- Database read operations are hitting high CPU limits during peak hours.
+- Item catalog data changes infrequently (a few times a day).
 
 ## Decision
-**Option B — PostgreSQL**
-User-approved: relational integrity for core fields plus JSONB for variable attributes.
+**Option A — In-Memory Redis Cache**
+User-approved: Offload read traffic from the primary DB using a dedicated caching layer.
 
 ## Options
+### Option A — In-Memory Redis Cache
+- Deploy a standalone Redis instance in front of the DB.
+- Pro: Sub-millisecond read latency, high throughput.
+- Con: Introduces network hop and data stale risk.
 
-### Option A — MySQL
-- Relational store; wide hosting support
-- Pro: familiar SQL; strong ecosystem
-- Con: less flexible for heterogeneous item attributes without schema churn
+### Option B — Database Read Replicas
+- Scale horizontally by adding DB replica nodes.
+- Pro: Familiar SQL pooling; zero application caching logic needed.
+- Con: Higher infrastructure cost; eventual consistency lag.
 
-### Option B — PostgreSQL
-- Relational store with JSONB for semi-structured fields
-- Pro: schema where it matters; flexibility where needed
-- Con: slightly more complex queries for mixed relational/document access
+## Downstream Concerns
+- [ ] **Cache Eviction & TTL Policy:** How long should catalog data live? How do we handle manual invalidation? (Triggers next ADR)
+- [ ] **Cache Size & Memory Constraints:** What happens when memory is full?
 
-### Option C — MongoDB
-- Document store; one document per item
-- Pro: natural fit for varying item shapes
-- Con: team learning curve; different consistency and query patterns
-
-## Tradeoffs
-| | MySQL | PostgreSQL | MongoDB |
-|---|-------|------------|---------|
-| Variable item fields | Migrations | JSONB | Native |
-| Team familiarity | High | High | Low |
-| Relational integrity | Strong | Strong | Weaker |
-
-## Consequences
-- Items stored in PostgreSQL; variable attributes in JSONB columns
-- MongoDB driver and ops tooling not introduced
-
-## Tags
-`database`, `item-storage`, `persistence`
+## Related
+- Follow-up needed: `adr/cache-eviction-policy.md`
 
 ## Approved
-- 2026-06-19: Option B, user confirmed
+- 2026-06-29: Option A, user confirmed
 ```
 
 ---
 
 ## Dialogue Rules
 
-1. **State the current step** (identify concern → enumerate options → save → review → approve → spec handoff).
-2. After saving, report the **file path** and what to review.
-3. Ask Socratic questions when the concern is vague — before drafting options.
-4. When the user says "just pick one," still present 2–3 viable options with tradeoffs; then recommend and ask for approval.
-5. Multiple ADRs may run in sequence; track which concerns are still `proposed` vs `approved`.
+1. **State the current step** (identify concern → enumerate options → save → review → approve → identify downstream concerns → chain/spec handoff).
+2. **Proactive Chaining Guidance:** When a user approves an option, congratulate the choice and **immediately present the next 1–2 critical sub-questions** that logically follow, offering to draft the next ADR right away.
+   - *Example:* *"Great choice! You've decided to implement a Cache for performance optimization, and I have recorded this approval in `adr/application-performance-cache.md`. By introducing a cache, we now have downstream concerns that need attention: **1) Cache Eviction & TTL Policy**, and **2) Cache Size & Memory Constraints**. Would you like to proceed with drafting the next ADR for the Cache Eviction Policy right away?"*
+3. When the user says "just pick one," still present alternatives with tradeoffs, recommend, and explicitly highlight what downstream obligations that choice brings.
 
 ---
 
 ## Prohibitions
 
-- Fewer than **2 viable options** in an ADR
-- Long narrative option descriptions instead of concise bullets
-- Marking `approved` without explicit user confirmation
-- Duplicating the same concern across multiple ADR files
+- Fewer than **2 viable options** in an ADR.
+- Closing an ADR loop **without identifying or asking about downstream consequences/derived concerns** inherent to the chosen solution.
+- Marking `approved` without explicit user confirmation.
 
 ---
 
 ## Completion Criteria
 
-- Concern identified and stated as a clear question
-- ADR saved at `adr/{concern-slug}.md` with **≥ 2 viable options** in bullet form
-- User has reviewed and **explicitly approved** the decision (or requested revision)
-- `Status`, **Decision**, and **Approved** sections updated accordingly
-- User informed of next step: **`spec-writing`** to consolidate approved decisions into the spec
-
-After handoff, the spec-writing skill owns consolidation; this skill does not write the spec itself.
+- Concern identified and stated as a clear question.
+- ADR saved at `adr/{concern-slug}.md` with **≥ 2 viable options**.
+- User has reviewed and **explicitly approved** the decision.
+- **Downstream Concerns** triggered by the approved option are explicitly enumerated in the file.
+- User guided on whether to chain into a follow-up ADR or hand off to spec-writing.    
