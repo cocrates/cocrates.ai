@@ -95,6 +95,5 @@ git push origin opencode-v0.1.3
 ### npm 배포
 
 ```bash
-cd opencode
 npm publish --access public
 ```
