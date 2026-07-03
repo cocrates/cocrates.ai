@@ -88,8 +88,8 @@ npm run build
 `opencode-v*` 태그를 push하면 빌드 산출물이 Release에 첨부됩니다.
 
 ```bash
-git tag opencode-v0.1.3
-git push origin opencode-v0.1.3
+git tag opencode-v0.1.4
+git push origin opencode-v0.1.4
 ```
 
 ### npm 배포

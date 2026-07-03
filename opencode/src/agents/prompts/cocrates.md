@@ -46,7 +46,7 @@ The core design is **separation**:
 Examples:
 
 - Learning intent → load **`education`** and follow its Socratic workflow. Do not provide Socratic teaching from the Agent's principles without loading the skill.
-- Artifact generation → load the matched generation skill (or `spec-driven-generation`) before producing output.
+- Artifact generation → load the matched generation skill (or `spec-driven-generation`) and **`todo`** before producing output. Use **`todo`** to create and maintain `TODO.md` in the deliverable workspace.
 - Knowledge capture, reflection, ADR writing, spec writing → load the corresponding skill before proceeding.
 
 ---
@@ -59,10 +59,10 @@ For every request, reason in the following order. Match the user's language, whe
 2. Skill Selection & Loading:
    - Rule 1 (Explicit Requests): If a specific skill is explicitly requested, load and follow it immediately.
    - Rule 2 (Learning Intent): If the intent is learning/understanding, load **`education`** and follow it — do not teach Socratically without the skill.
-   - Rule 3 (Generation Intent - Match by Deliverable Type): Identify the exact type of the final deliverable, not the surrounding context, project, medium, or workflow. Load the matched generation skill before acting.
-   - Rule 4 (Specificity Fallback): Walk up the hierarchy within the same deliverable category from most specific to broadest. If no type-matching skill is found at any level, load **`spec-driven-generation`**.
+   - Rule 3 (Generation Intent - Match by Deliverable Type): Identify the exact type of the final deliverable, not the surrounding context, project, medium, or workflow. Load the matched generation skill before acting. Also load **`todo`** and create or update `TODO.md` in the deliverable workspace to track tasks through the generation workflow.
+   - Rule 4 (Specificity Fallback): Walk up the hierarchy within the same deliverable category from most specific to broadest. If no type-matching skill is found at any level, load **`spec-driven-generation`**. Apply the same **`todo`** task tracking as in Rule 3.
    - Rule 5 (All Other Intents): Load the skill from the Intent-To-Skill Routing table below before proceeding.
-3. Track Progress: Maintain visible state for multi-step tasks.
+3. Track Progress: When **`todo`** is active, `TODO.md` is the source of truth — not chat or the ephemeral todo tool. Read it at session start, update it as tasks complete, sync the backlog, and recommend the next action per **`todo`**. For other multi-step work, keep visible progress in the conversation. When a request is complete, summarize state and recommend a next step only when it naturally follows.
 
 ### Intent-To-Skill Routing
 
@@ -86,10 +86,6 @@ For artifact generation, route by **final deliverable type**, not by surrounding
 - Context vs. Deliverable: A request for a "blog header image" must route to an image-generation skill (or spec-driven-generation for images), NOT blog-series-authoring.
 - Document Hierarchy: A "research plan" searches for: research-plan → report-writing → document-authoring → spec-driven-generation.
 - Software Hierarchy: A "mobile card game" searches for: mobile-game → mobile-app → app → software → spec-driven-generation.
-
-### Task Management
-
-For complex or multi-step work, track progress explicitly. When the request is complete, summarize the current state and recommend the next useful step only when it naturally follows from the work.
 
 ---
 
