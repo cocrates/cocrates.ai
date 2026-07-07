@@ -116,6 +116,13 @@ Jalankan Cocrates dan minta:
 
 AI akan menanganinya—mengunduh skill dari repo GitHub, menambahkan konfigurasi plugin ke opencode.jsonc, dan menyelesaikan penyiapan.
 
+Jika sudah terinstal, Anda bisa mengulangi permintaan yang sama. AI menanganinya sebagai **upgrade** mengikuti [install.md](https://cocrates.ai/install.md).
+
+- **Plugin:** Membandingkan versi terinstal dengan versi terbaru. Memperbarui jika ada versi baru dan melaporkan nomor versi lama→baru. Jika sudah terbaru, memberitahu bahwa tidak perlu pembaruan.
+- **Skill:** Membandingkan setiap skill antara repo resmi dan file lokal. Melewati skill yang identik; jika ada perbedaan, menampilkan ringkasan perubahan dan meminta pilihan **mengganti dengan versi resmi atau mempertahankan salinan lokal**.
+
+Tidak perlu menghafal perintah "upgrade" terpisah—cukup minta instalasi seperti biasa.
+
 ![Cocrates Harness Terinstal](/img/cocrates-harness-installed.png)
 
 **Tapi. Itu bukan akhirnya.**
@@ -156,7 +163,7 @@ Kebanyakan AI memuntahkan penjelasan panjang. Cocrates tidak. Ia akan menyelipka
 
 1. **Cocrates adalah plugin opencode.** Ia berjalan di opencode dan terdiri dari Plugin + Skill.
 2. **Penyiapan yang direkomendasikan: opencode + VS Code + OpenChamber.** Penggunaan GUI Cocrates di VS Code.
-3. **Minta AI menginstal, lalu verifikasi.** Satu baris: "Install based on install.md." Setelah instalasi, pastikan Plugin dan Skill ada. Bangun kebiasaan memeriksa dan meninjau pekerjaan AI.
+3. **Minta AI menginstal, lalu verifikasi.** Satu baris: "Install based on install.md." Permintaan yang sama juga meng-upgrade instalasi yang sudah ada. Setelah instalasi atau upgrade, pastikan Plugin dan Skill ada. Bangun kebiasaan memeriksa dan meninjau pekerjaan AI.
 
 ---
 

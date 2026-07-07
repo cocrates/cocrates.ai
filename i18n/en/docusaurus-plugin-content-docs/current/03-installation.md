@@ -116,6 +116,13 @@ Run Cocrates and request:
 
 AI will handle it—download skills from the GitHub repo, add plugin config to opencode.jsonc, and finish setup.
 
+If Cocrates Harness is already installed, you can repeat the same request. AI treats it as an **upgrade** following [install.md](https://cocrates.ai/install.md).
+
+- **Plugin:** Compares the installed version with the latest. Updates when a newer version is available and reports the old and new version numbers. If already up to date, it tells you so.
+- **Skill:** Compares each skill between the official repository and your local files. Skips identical skills; when differences exist, shows a summary of changes and asks whether to **replace with the official version or keep your local copy**.
+
+You do not need a separate "upgrade" command—just request installation as usual.
+
 ![Cocrates Harness Installed](/img/cocrates-harness-installed.png)
 
 **But. That's not the end.**
@@ -156,7 +163,7 @@ Most AIs dump a long explanation. Cocrates won't. It'll slip in subtly flawed ex
 
 1. **Cocrates is an opencode plugin.** It runs on opencode and consists of Plugin + Skill.
 2. **Recommended setup: opencode + VS Code + OpenChamber.** GUI use of Cocrates in VS Code.
-3. **Ask AI to install, then verify.** One line: "Install based on install.md." After install, confirm Plugin and Skill are in place. Build the habit of checking and reviewing AI's work.
+3. **Ask AI to install, then verify.** One line: "Install based on install.md." The same request also upgrades an existing installation. After install or upgrade, confirm Plugin and Skill are in place. Build the habit of checking and reviewing AI's work.
 
 ---
 
