@@ -35,16 +35,18 @@ Check for an existing installation:
 | Signal | Location |
 |--------|----------|
 | Plugin configured | `OPENCODE_CONFIG/opencode.jsonc` contains `@cocrates/cocrates-harness` in the `plugin` array |
-| Plugin cached | `~/.cache/opencode/packages/` contains a `@cocrates/cocrates-harness@*` directory |
+| Plugin cached | `~/.cache/opencode/packages/` contains a directory matching `*cocrates-harness*` |
 | Skills present | `OPENCODE_CONFIG/skills/` contains one or more Cocrates skill subdirectories (e.g. `education/`, `spec-writing/`) |
 
-If **any** of the above is true, proceed with the **upgrade flow** in Steps 1–2. Otherwise, perform a **fresh install**.
+If **skills** are already present in Step 0, use skill **reconciliation** in Step 2b. Otherwise, use Step 2a. **Step 1 is the same** for both fresh install and upgrade.
 
 ---
 
-## Step 1: Configure or upgrade the OpenCode plugin
+## Step 1: Install or upgrade the OpenCode plugin
 
-Edit `opencode.jsonc` in `OPENCODE_CONFIG`. Add `"@cocrates/cocrates-harness"` to the `plugin` array if it is missing. If other plugins are already listed, append this entry without removing them.
+Fresh install and upgrade use the **same command**. The only difference is whether a previous version exists in the cache for comparison.
+
+The CLI command adds `"@cocrates/cocrates-harness"` to `opencode.jsonc` automatically (`-g`). You can also edit the config manually if needed:
 
 ```json
 {
@@ -53,68 +55,50 @@ Edit `opencode.jsonc` in `OPENCODE_CONFIG`. Add `"@cocrates/cocrates-harness"` t
 }
 ```
 
-Create the config directory and file if they do not exist.
+Create the config directory and file if they do not exist. For config details, see **https://opencode.ai/docs/config/**
 
-For config details, see **https://opencode.ai/docs/config/**
-
-### 1a. Fresh install
-
-When the plugin entry was **not** present in Step 0:
-
-1. Ensure `"@cocrates/cocrates-harness"` is in the `plugin` array.
-2. Run:
+1. Read the **current version** from the OpenCode cache — do **not** rely on `npm` being installed:
 
    ```bash
-   opencode plugin add @cocrates/cocrates-harness -f
+   find ~/.cache/opencode/packages -maxdepth 1 -type d -name '*cocrates-harness*'
    ```
 
-3. Report the installed version (see **Version reporting** below).
+   Read `version` from `package.json` inside the matching directory. Typical locations:
 
-### 1b. Upgrade (already installed)
+   ```
+   ~/.cache/opencode/packages/@cocrates+cocrates-harness@0.1.4/package.json
+   ~/.cache/opencode/packages/@cocrates/cocrates-harness@0.1.4/package.json
+   ```
 
-When the plugin entry **was** present in Step 0:
+   Notes:
+   - OpenCode caches npm plugins under `~/.cache/opencode/packages/`. The exact directory name may use `+` or `/` in the scope — use `find` rather than assuming one format.
+   - If several cache directories exist, prefer the one referenced by your config or the most recently modified.
+   - If a version pin exists in `opencode.jsonc` (e.g. `"@cocrates/cocrates-harness@0.1.2"`), record it as additional context.
+   - If no cache entry exists, treat the current version as `unknown` and continue.
 
-1. Determine the **currently installed version** (try in order):
-   - Read `version` from `package.json` inside `~/.cache/opencode/packages/@cocrates/cocrates-harness@*/` (use the most recently modified directory if several exist).
-   - If a version pin exists in `opencode.jsonc` (e.g. `"@cocrates/cocrates-harness@0.1.2"`), use that version.
-   - If neither is available, report `unknown`.
-
-2. Determine the **latest published version**:
+2. **Install or upgrade** with the OpenCode CLI (OpenCode fetches the latest release — no `npm` CLI required):
 
    ```bash
-   npm view @cocrates/cocrates-harness version
+   opencode plugin @cocrates/cocrates-harness -g -f
    ```
 
-3. Compare versions and report to the user **before** upgrading:
+   | Flag | Meaning |
+   |------|---------|
+   | `-g` / `--global` | Install into the global OpenCode config (`~/.config/opencode/`) |
+   | `-f` / `--force` | Replace an existing plugin version and fetch the latest release |
 
-   | Situation | Action |
-   |-----------|--------|
-   | Installed `<` latest | Tell the user: `Upgrading plugin: {installed} → {latest}`. Then upgrade. |
-   | Installed `=` latest | Tell the user: `Plugin is already at the latest version ({latest}). No plugin upgrade needed.` Skip the upgrade command. |
-   | Installed `>` latest or comparison unclear | Explain what you found and ask the user how to proceed. |
+3. Re-read `version` from `package.json` in `~/.cache/opencode/packages/` after the command completes.
 
-4. To upgrade when a newer version is available:
+4. Compare before and after, then report to the user:
 
-   ```bash
-   opencode plugin add @cocrates/cocrates-harness -f
-   ```
+   | Before | After | Report |
+   |--------|-------|--------|
+   | `unknown` | `{version}` | `Plugin installed: {version}` |
+   | `{old}` | `{new}` (different) | `Plugin upgraded: {old} → {new}` |
+   | `{version}` | `{version}` (same) | `Plugin already up to date: {version}` |
+   | Could not determine | — | Report what you found in the cache and whether the command succeeded |
 
-   If the command does not refresh the cache, also remove the stale cache and retry:
-
-   ```bash
-   rm -rf ~/.cache/opencode/packages/@cocrates/cocrates-harness@latest
-   opencode plugin add @cocrates/cocrates-harness -f
-   ```
-
-5. After upgrade, re-read the cached `package.json` and confirm the new version. Report: `Plugin upgraded: {old} → {new}` or `Plugin version unchanged: {version}`.
-
-### Version reporting
-
-Always show the user explicit version numbers, for example:
-
-- `Plugin installed: 0.1.4`
-- `Plugin upgraded: 0.1.2 → 0.1.4`
-- `Plugin already up to date: 0.1.4`
+Always show explicit version numbers read from `~/.cache/opencode/packages/`. Do **not** use `npm view` or other npm CLI commands — `npm` may not be installed on the user's machine.
 
 ---
 
@@ -188,35 +172,58 @@ Skills may contain user edits. **Never blindly overwrite** the entire skills dir
    - subdirectories under `/tmp/cocrates.ai/skills/`
    - subdirectories under `OPENCODE_CONFIG/skills/` that look like Cocrates skills (contain `SKILL.md` or match known skill names)
 
-3. **For each skill**, compare the installed copy with the official copy:
+3. **For each skill**, compare **every file** under the skill directory tree — not only `SKILL.md`. A skill may include supporting files and subdirectories (e.g. `workflow/01-define.md`, `renderer/marp.md`). Compare the full folder recursively:
 
    ```bash
    diff -rq OPENCODE_CONFIG/skills/{skill-name}/ /tmp/cocrates.ai/skills/{skill-name}/
+   ```
+
+   Also list all files explicitly when building the report:
+
+   ```bash
+   find OPENCODE_CONFIG/skills/{skill-name}/ -type f | sort
+   find /tmp/cocrates.ai/skills/{skill-name}/ -type f | sort
+   ```
+
+   For each differing file, run a content diff to identify what changed:
+
+   ```bash
+   diff -u OPENCODE_CONFIG/skills/{skill-name}/{path} /tmp/cocrates.ai/skills/{skill-name}/{path}
    ```
 
    Classify each skill:
 
    | Status | Meaning |
    |--------|---------|
-   | **identical** | No differences — no action needed |
+   | **identical** | All files match — no action needed |
    | **missing locally** | Exists in official repo but not installed — safe to add |
    | **missing upstream** | Exists locally but not in official repo — likely user-only; do not delete without asking |
-   | **different** | Files differ — **requires user decision** |
+   | **different** | One or more files added, removed, or modified — **requires user decision** |
+
+   When a skill is **different**, record per-file changes:
+
+   | Change type | Example |
+   |-------------|---------|
+   | **modified** | `SKILL.md`, `workflow/05-generation.md` |
+   | **added** (official only) | `workflow/09-release.md` |
+   | **removed** (local only) | `notes/local-tweaks.md` |
 
 4. **Report a summary table** to the user before changing anything:
 
    ```
    Skill reconciliation summary
    ────────────────────────────
-   ✓ education                     — up to date
-   + presentation-authoring        — new (will be added)
+   ✓ education                     — up to date (4 files)
+   + presentation-authoring        — new (will be added, 6 files)
    ⚠ spec-writing                  — differs (3 files changed)
-   ⚠ novel-authoring               — differs (12 files changed; local only edits suspected)
+       modified: SKILL.md, workflow/02-plan.md
+       added:    workflow/09-release.md
+   ⚠ novel-authoring               — differs (12 files changed; local edits suspected)
    ```
 
-5. **For skills marked `different`**, show a concise diff summary so the user can choose wisely:
-   - List changed, added, and removed file paths.
-   - For text files, include a short excerpt of what changed (e.g. first few diff hunks or a one-line description per file: "workflow step reordered", "new evaluation criteria added").
+5. **For skills marked `different`**, show a concise per-file diff summary so the user can choose wisely:
+   - List every **added**, **removed**, and **modified** file path under the skill folder.
+   - For each modified text file, include a short description of what changed (e.g. first few diff hunks, or a one-line summary per file: "workflow step reordered", "new evaluation criteria added").
    - Do **not** dump entire files unless the user asks.
 
 6. **Ask the user for each differing skill** (or offer a batch choice):
@@ -283,4 +290,4 @@ Perform Step 0, then Steps 1–3. On a machine that already has Cocrates Harness
 
 > Upgrade Cocrates Harness.
 
-Same procedure — always run Step 0 first, then plugin version check (Step 1b) and skill reconciliation (Step 2b).
+Same procedure — always run Step 0 first, then Step 1 (plugin) and skill reconciliation (Step 2b) when skills already exist.
