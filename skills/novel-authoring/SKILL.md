@@ -218,7 +218,7 @@ Episode numbers are **local to their parent chapter** — `chapters/001-foo/001-
 5. Present, don't dump — highlight changes
 6. One artifact, one approval
 7. After release, prompt next chapter — wait at each step
-8. Propose **design evaluation** after chapter design approval; **Reader-Editor** (default) + **Literary Critic** for chapter 001
+8. Propose **design evaluation** after chapter design approval; **Reader-Editor** (default) + **Literary Critic** for chapter 001; offer **Literary Awards Juror** when user targets awards, contests, or literary prestige
 9. Critique → design → prose (never patch prose without design update — including Literary Craft fields)
 10. Match user's language in messages and artifacts
 

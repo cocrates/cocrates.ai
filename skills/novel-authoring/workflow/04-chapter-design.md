@@ -50,7 +50,7 @@ The chapter file governs the **whole publication unit**:
 ## Architecture References
 | Type | Artifact | Usage |
 |------|----------|-------|
-| Part | `parts/{nnn}-{part-slug}.md` | Chapter List; part arc |
+| Part | `parts/{nnn}-{part-slug}.md` | Chapter List (Role + Hook to Next); part arc |
 | Character | `characters/{name}.md` | |
 | Location | `locations/{name}.md` | |
 | World | `world-bible.md` / `world/{aspect}.md` | |
@@ -263,7 +263,7 @@ If a Key Event reads like it could be pasted into `manuscripts/`, it is **too de
 - Expand profiles beyond architecture files
 - Contradict `story-so-far.md`
 - Ignore active threads without Hold reason
-- Override parent chapter catalog scope (role/conflict in part Chapter List)
+- Override parent chapter catalog scope (role/conflict/Hook to Next in part Chapter List)
 - Create top-level `episodes/` files — episodes nest under chapter folder only
 
 ---

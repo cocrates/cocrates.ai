@@ -92,6 +92,8 @@ Lists every planned chapter in the part. Chapter count may differ from the appro
 
 **No episode column** — episode structure is decided per chapter at stage ④.
 
+**Chapter List is the flow map** — each row's Role (what the chapter does) and Hook to Next (what pulls into the next) let you review momentum across the part before chapter detail design. Read the Hook column top-to-bottom: consecutive chapters should connect; gaps or dead ends need fixing here.
+
 ```markdown
 # Part {nnn}: {Title}
 
@@ -99,10 +101,11 @@ Lists every planned chapter in the part. Chapter count may differ from the appro
 ## Core Conflict
 
 ## Chapter List
-| Ch | Title | Role | Key POV |
-|----|-------|------|---------|
-| 001 | {Title} | {one-line role} | {character} |
-| 002 | {Title} | ... | ... |
+| Ch | Title | Role | Key POV | Hook to Next |
+|----|-------|------|---------|--------------|
+| 001 | {Title} | {one-line role} | {character} | {question / tension / unanswered beat that carries into Ch 002} |
+| 002 | {Title} | ... | ... | {→ Ch 003} |
+| {last} | {Title} | ... | ... | {→ next part, or closing beat if series end} |
 
 ## Part Arc
 ## Part Hooks
@@ -111,6 +114,11 @@ Lists every planned chapter in the part. Chapter count may differ from the appro
 
 ## Character Arcs Advanced
 ```
+
+**Hook to Next vs Part Hooks / chapter catalog Closing hook:**
+- **Hook to Next** (Chapter List column) — handoff *between* chapters inside the part; required for every row so part-level flow can be reviewed in one table.
+- **Part Hooks** — part entry/exit only (first chapter open, last chapter close).
+- **Chapter catalog / stage ④ Closing hook** — refine the row's Hook to Next when designing that chapter; keep them aligned.
 
 ---
 
@@ -160,6 +168,7 @@ When architecture reveals a different part structure than planned:
 - [ ] Every character in early chapters has `characters.md` entry + profile
 - [ ] Every location in early chapters has `locations.md` entry + profile
 - [ ] Each part file has a complete Chapter List for that part's story arc
+- [ ] Every Chapter List row has Role + Hook to Next; consecutive hooks connect without gaps
 - [ ] Each early chapter has a catalog file under `chapters/`
 - [ ] No Episode List or episode count in part or chapter catalog files
 - [ ] No nested episode files exist yet (those are stage ④)

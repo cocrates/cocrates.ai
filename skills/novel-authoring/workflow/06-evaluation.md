@@ -35,6 +35,7 @@ Load:
 - `chapters/{nnn}-{chapter-slug}.md`
 - Every file in `chapters/{nnn}-{chapter-slug}/`
 - `overview.md`, architecture references, continuity (ch 002+)
+- **Literary Awards Juror:** also `parts/{nnn}-{part-slug}.md` for work-level context; fill **Literary Awards Juror Checks (Design)** before persona critique
 
 ### Manuscript Evaluation
 
@@ -43,6 +44,8 @@ Propose after chapter manuscript approval:
 > *"Chapter {nnn} manuscript is ready. Shall we evaluate it? We'll start with validation against criteria. Would you also like a critique from a specific critic persona?"*
 
 Load design files + `manuscripts/{nnn}-{chapter-slug}.md`.
+
+**Literary Awards Juror:** When this persona is requested, fill **Literary Awards Juror Checks** in the evaluation file (design and/or manuscript section) before the persona critique. Load parent `parts/{nnn}-{part-slug}.md` and `overview.md` for work-level context.
 
 ---
 
@@ -99,6 +102,18 @@ Load design files + `manuscripts/{nnn}-{chapter-slug}.md`.
 | Antagonist plausibility | | |
 | Closing image specified | | |
 
+### Literary Awards Juror Checks (Design)
+{Include when Literary Awards Juror persona is requested — see Persona Reference}
+
+| Check | Result | Evidence |
+|-------|--------|----------|
+| Theme & vision earned (not asserted) | ✅ / ⚠️ / ❌ | |
+| Original perspective or form planned | | |
+| Human insight beyond plot mechanics | | |
+| Artistic integrity — no planned didacticism or sentimentality | | |
+| Chapter advances part/series literary arc | | |
+| Competition readiness at design scope | | {What jurors would praise / hesitate over / reject} |
+
 ### Design Critique
 {Persona critique if requested}
 
@@ -150,6 +165,18 @@ Load design files + `manuscripts/{nnn}-{chapter-slug}.md`.
 | Antagonist plausibility | | |
 | Closing scene over statement | | |
 
+### Literary Awards Juror Checks (Manuscript)
+{Include when Literary Awards Juror persona is requested — see Persona Reference}
+
+| Check | Result | Evidence |
+|-------|--------|----------|
+| Theme & vision embodied in prose | ✅ / ⚠️ / ❌ | |
+| Originality visible on the page | | |
+| Human insight lands beyond plot | | |
+| Artistic integrity — no sentimentality, didacticism, or ornamental prose | | |
+| Chapter contributes to work-level coherence in sequence | | |
+| Competition readiness | | {Praise / hesitate / reject — with revision priorities} |
+
 ### Manuscript Critique
 {Persona critique if requested}
 
@@ -177,10 +204,21 @@ Load design files + `manuscripts/{nnn}-{chapter-slug}.md`.
 |---------|-------|-----------------|
 | **Genre Critic** | Genre conventions, tropes | Always |
 | **Literary Critic** | Prose rhythm, motif, sensory-emotional craft, dialogue voice | **Recommended for ch 001** and after major rewrites |
+| **Literary Awards Juror** | Thematic depth, originality, artistic integrity, moral complexity, language as literary art, work-level coherence, lasting literary merit — criteria typical of major prizes and competition judging | **Recommended** when targeting awards, contests, or literary prestige; major part/manuscript milestones |
 | **Plot Expert** | Pacing, causality, structure | **Recommended for design evaluation** |
 | **Character Critic** | Arc, motivation, voice | Character-driven works |
 | **Reader-Editor** | Engagement, exposition restraint | **Default for serialization** |
 | **Setting/Lore Expert** | World consistency, info-dumping | **Required for ch 001** |
+
+**Literary Critic vs Literary Awards Juror:** Critic = craft execution on the page. Juror = whether the work *as literature* earns lasting merit — theme, vision, insight, and form at work/part level, not only line-level polish.
+
+**Literary Awards Juror critique should cover:**
+- **Theme & vision** — Is the central concern substantial, coherent, and earned (not asserted)?
+- **Originality** — What is genuinely new in perspective, form, or moral imagination?
+- **Human insight** — Does the work illuminate condition, society, or consciousness beyond plot?
+- **Artistic integrity** — Are ambition, structure, and language aligned — no sentimentality, didacticism, or ornamental prose?
+- **Work-level coherence** — Do part/chapter arcs accumulate into a whole greater than serial entertainment?
+- **Competition readiness** — What would jurors praise, hesitate over, or reject — with concrete revision priorities?
 
 Critique may be requested at any stage (part, character web, series level) — produce appropriate `evaluations/{scope}.md`.
 
