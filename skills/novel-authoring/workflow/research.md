@@ -11,7 +11,7 @@ Can be initiated at any point — planning, architecture, chapter design, or rev
 | Chapter design | *"What does a Mongolian steppe look like in winter?"* |
 | Revision | *"Check if this sword technique is realistic."* |
 
-Save under `novels/{title-slug}/research/{topic-slug}.md`:
+Save under `novels/{title-slug}/docs/{topic-slug}.md`:
 
 ```markdown
 # Research: {Topic}
