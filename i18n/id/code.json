@@ -29,6 +29,12 @@
   "homepage.section.docs": {
     "message": "Perjalanan 14 Bagian Melalui Cocrates"
   },
+  "homepage.section.media": {
+    "message": "Kursus & Video"
+  },
+  "homepage.inflearn.banner.alt": {
+    "message": "Kursus Inflearn: Cara Menggunakan AI dengan Benar — Cocrates"
+  },
   "homepage.meaning.coSocrates": {
     "message": "Co-Socrates"
   },

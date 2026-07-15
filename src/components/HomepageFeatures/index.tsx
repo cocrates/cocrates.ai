@@ -1,6 +1,8 @@
 import type {ReactNode} from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Heading from '@theme/Heading';
 import Translate, {translate} from '@docusaurus/Translate';
 import styles from './styles.module.css';
@@ -234,6 +236,33 @@ function EpisodeCard({ep, title, summary, to}: EpisodeItem) {
   );
 }
 
+function InflearnBanner() {
+  const {
+    i18n: {currentLocale},
+  } = useDocusaurusContext();
+  const isKorean = currentLocale === 'ko';
+  const bannerSrc = useBaseUrl(
+    isKorean
+      ? '/img/cocrates-inflearn-banner.png'
+      : '/img/cocrates-inflearn-banner-en.png',
+  );
+  const href = isKorean ? 'https://inf.run/nm2dW' : 'https://inf.run/she9D';
+  const alt = translate({
+    id: 'homepage.inflearn.banner.alt',
+    message: '인프런 강의: AI를 사용하는 올바른 방법 — Cocrates',
+  });
+
+  return (
+    <a
+      className={styles.inflearnBanner}
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer">
+      <img src={bannerSrc} alt={alt} width={1279} height={321} />
+    </a>
+  );
+}
+
 export default function HomepageFeatures(): ReactNode {
   return (
     <>
@@ -353,6 +382,17 @@ export default function HomepageFeatures(): ReactNode {
           {EpisodeList.map(item => (
             <EpisodeCard key={item.ep} {...item} />
           ))}
+        </div>
+      </Section>
+
+      <Section
+        id="media"
+        title={translate({
+          id: 'homepage.section.media',
+          message: '강의와 영상',
+        })}>
+        <div className={styles.mediaStack}>
+          <InflearnBanner />
         </div>
       </Section>
     </>

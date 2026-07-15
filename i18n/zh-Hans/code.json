@@ -29,6 +29,12 @@
   "homepage.section.docs": {
     "message": "Cocrates 十四讲之旅"
   },
+  "homepage.section.media": {
+    "message": "课程与视频"
+  },
+  "homepage.inflearn.banner.alt": {
+    "message": "Inflearn 课程：正确使用 AI 的方法 — Cocrates"
+  },
   "homepage.meaning.coSocrates": {
     "message": "共同苏格拉底"
   },
