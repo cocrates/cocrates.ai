@@ -83,19 +83,32 @@ html.docs-doc-page {
 }
 
 html[lang='ko'] {
-  --doc-sidebar-width: calc(300px * 0.9);
+  --cocrates-doc-sidebar-scale: 0.9;
 }
 
 html[lang='en'] {
-  --doc-sidebar-width: calc(300px * 1.2);
+  --cocrates-doc-sidebar-scale: 1.2;
 }
 
 html[lang='zh-Hans'] {
-  --doc-sidebar-width: calc(300px * 0.8);
+  --cocrates-doc-sidebar-scale: 0.8;
 }
 
 html[lang='id'] {
-  --doc-sidebar-width: calc(300px * 1.2);
+  --cocrates-doc-sidebar-scale: 1.2;
+}
+
+html {
+  --doc-sidebar-width: calc(300px * var(--cocrates-doc-sidebar-scale, 1));
+}
+
+html.plugin-id-novel {
+  --cocrates-novel-sidebar-scale: 0.8;
+  --doc-sidebar-width: calc(300px * var(--cocrates-novel-sidebar-scale));
+}
+
+html[lang='ko'].plugin-id-novel {
+  --cocrates-novel-sidebar-scale: 0.6;
 }
 
 /* 1. Docs sidebar episode list */

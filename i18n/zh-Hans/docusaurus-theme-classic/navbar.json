@@ -11,6 +11,10 @@
     "message": "文档",
     "description": "Navbar item with label 문서"
   },
+  "item.label.소설": {
+    "message": "小说",
+    "description": "Navbar item with label 소설"
+  },
   "item.label.GitHub": {
     "message": "GitHub",
     "description": "Navbar item with label GitHub"

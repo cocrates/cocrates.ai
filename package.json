@@ -4,6 +4,12 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
+    "sync:novel-i18n": "node scripts/sync-novel-i18n.mjs",
+    "prestart": "npm run sync:novel-i18n",
+    "prestart:en": "npm run sync:novel-i18n",
+    "prestart:cn": "npm run sync:novel-i18n",
+    "prestart:id": "npm run sync:novel-i18n",
+    "prebuild": "npm run sync:novel-i18n",
     "start": "docusaurus start",
     "start:en": "docusaurus start --locale en",
     "start:cn": "docusaurus start --locale zh-Hans",

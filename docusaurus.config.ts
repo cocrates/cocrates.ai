@@ -21,6 +21,7 @@ const config: Config = {
 
   markdown: {
     mermaid: true,
+    format: 'detect',
   },
   themes: ['@docusaurus/theme-mermaid'],
 
@@ -62,6 +63,19 @@ const config: Config = {
     ],
   ],
 
+  plugins: [
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'novel',
+        path: 'examples/rejected-future/manuscripts',
+        routeBasePath: 'novel',
+        sidebarPath: './sidebarsNovel.ts',
+        numberPrefixParser: false,
+      },
+    ],
+  ],
+
   themeConfig: {
     image: 'img/logo.svg',
     colorMode: {
@@ -79,6 +93,13 @@ const config: Config = {
           sidebarId: 'docsSidebar',
           position: 'left',
           label: '문서',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'novelSidebar',
+          docsPluginId: 'novel',
+          position: 'left',
+          label: '소설',
         },
         {
           type: 'localeDropdown',
