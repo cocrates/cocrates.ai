@@ -2,11 +2,11 @@
 name: spec-writing
 description: >-
   Creates and updates Spec documents — consolidating requests, decisions, and
-  constraints for one deliverable or requirement scope. Select when the user 
-  wants to define or capture requirements, scope, constraints, or intent; 
-  consolidate approved ADR decisions into a single self-contained spec; 
-  establish a high-level spec/PRD.md; or refine an existing spec based on 
-  post-generation verification feedback.
+  constraints for one deliverable or requirement scope. Select when the user
+  wants to define or capture requirements, scope, constraints, or intent;
+  consolidate approved ADR decisions into a single self-contained spec;
+  establish a high-level {project-slug}/spec/PRD.md; or refine an existing
+  spec based on post-generation verification feedback.
 compatibility: opencode
 metadata:
   agent: cocrates
@@ -30,29 +30,37 @@ A Spec here is a **short, living document for one deliverable or requirement sco
 1. **One File, One Scope Principle:** Every distinct component, feature, or independent deliverable must have its own dedicated Spec file to prevent document bloat and maintain modularity.
 2. **Strict Self-Containment Rule:** A reader (or `spec-driven-generation`) must understand **all decided requirements and constraints** from the Spec alone. ADRs explain *how* a decision was reached, but are **not** a dependency for building. 
    - When consolidating from approved ADRs, **copy the decided outcome's exact parameters, technical values, and behaviors into the Spec in full**.
-   - **Prohibited:** Never use ADR hyperlinks as a substitute for actual specification bullets (e.g., Do not write `- Auth: See adr/auth.md`).
+   - **Prohibited:** Never use ADR hyperlinks as a substitute for actual specification bullets (e.g., Do not write `- Auth: See {project-slug}/adr/auth.md`).
 
 Match the user's language (Korean, English, etc.) in user-facing messages. Spec file content may use the language of the requirement context; filenames and slugs stay English kebab-case.
 
 ---
 
-## Spec Input Scope
+## Project Folder Layout
 
-Specs are stored in the project **`spec/`** directory at the repository root.
+Specs are stored under the project's **`spec/`** directory:
 
 ```
-spec/
-├── PRD.md
-└── {requirement-slug}.md
+{project-slug}/
+├── spec/
+│   ├── ASR.md
+│   ├── PRD.md
+│   └── {requirement-slug}.md
+├── adr/
+├── verification/
+└── …
 ```
 
-- **`spec/PRD.md` (Product Requirement Definition):** The top-level master anchor that defines the high-level product boundaries, overarching goals, and global constraints.
-- **`spec/{requirement-slug}.md`:** Modular, independent specifications for individual features or deliverables mapped to the PRD.
+- **`{project-slug}`:** English **kebab-case** project folder (same as used by `spec-driven-generation` / `adr-writing`). Resolve from the user's request or an existing project folder; ask if ambiguous. If the folder does not exist yet, prefer routing through **`spec-driven-generation`** (which owns project-folder creation) or create `{project-slug}/spec/` when the user explicitly asks to write a Spec first.
+- **`{project-slug}/spec/ASR.md`:** When encoding approved decisions, advance related ASRs to `approved` and record the Spec path under each ASR's **Spec** field.
+- **`{project-slug}/spec/PRD.md` (Product Requirement Definition):** The top-level master anchor that defines the high-level product boundaries, overarching goals, and global constraints.
+- **`{project-slug}/spec/{requirement-slug}.md`:** Modular, independent specifications for individual features or deliverables mapped to the PRD. Do not confuse with `ASR.md` (status registry) or `PRD.md` (product anchor).
+- **Do not** place `spec/` at the repository root — always nest under `{project-slug}/`. Keep `ASR.md` only at `{project-slug}/spec/ASR.md`.
 
 ### Before Creating a New Spec
 
-Before saving, check the `spec/` directory.
-- Search for files with the **same or similar scope** (compare filename, `## Requirement`, `## Tags`).
+Before saving, check the `{project-slug}/spec/` directory.
+- Search for files with the **same or similar scope** (compare filename, `## Requirement`, `## Tags`). Ignore `ASR.md` and `PRD.md` when matching feature Specs.
 - If found, **do not create a new file** — **supplement and merge** into the existing Spec.
 - For large projects, map out whether the request should expand an existing independent spec or requires a brand-new scoped spec file.
 
@@ -63,8 +71,8 @@ Before saving, check the `spec/` directory.
 ### 1. Identify the Requirement Scope & Hierarchy
 
 Clarify **what deliverable or requirement scope** this Spec covers.
-- **Initial Setup:** If this is the start of a project, create **`spec/PRD.md`** first to capture the macro scope.
-- **Feature/Component Focus:** If the PRD is established, map the current requirement to a specific `{requirement-slug}.md` file. Ensure it isolates a single, independent concern.
+- **Initial Setup:** If this is the start of a project, create **`{project-slug}/spec/PRD.md`** first to capture the macro scope (ensure `{project-slug}/` exists).
+- **Feature/Component Focus:** If the PRD is established, map the current requirement to a specific `{requirement-slug}.md` file under `{project-slug}/spec/`. Ensure it isolates a single, independent concern.
 
 ### 2. Resolve Ambiguity (Socratic)
 
@@ -86,12 +94,13 @@ Write or revise using the template below.
 - **Formatting:** Use **bullets over prose**. Ensure every line under `## Requirements` is a **testable statement** that can be checked deterministically during verification.
 - **Exclusions:** Explicitly document `## Out of Scope` items to prevent feature creep.
 
-Save to `spec/{requirement-slug}.md` or `spec/PRD.md`.
+Save to `{project-slug}/spec/{requirement-slug}.md` or `{project-slug}/spec/PRD.md`.
+After saving, update `{project-slug}/spec/ASR.md` for each resolved ASR: set status to `approved` (when the user confirms), fill **Resolution** / **Spec** fields, and keep Summary in sync.
 
 ### 5. Notify and Route
 
 Report the **file path** and a brief summary of what was captured or modified.
-- *Example:* *"I have updated `spec/item-catalog-api.md` with the finalized cache requirements. The spec is now completely self-contained."*
+- *Example:* *"I have updated `{project-slug}/spec/item-catalog-api.md` with the finalized cache requirements. The spec is now completely self-contained. ASR-003 is marked approved in `ASR.md`."*
 - **Next Step Routing:** If the spec is ready and sufficient, guide the user to **`spec-driven-generation`** to build or refine the artifact.
 
 ---
@@ -106,7 +115,7 @@ Report the **file path** and a brief summary of what was captured or modified.
 
 ## Context
 - {Why this is needed now — one line each}
-- {Link to parent spec/PRD.md if applicable}
+- {Link to parent {project-slug}/spec/PRD.md if applicable}
 
 ## Decisions
 - {What was decided — stated fully with deep-copied concrete parameters}
@@ -126,8 +135,8 @@ Report the **file path** and a brief summary of what was captured or modified.
 - {Deferred item — and whether it blocks generation}
 
 ## Related
-- adr/{concern-slug}.md — optional audit trail only; NOT required reading for generation
-- spec/PRD.md
+- {project-slug}/adr/{concern-slug}.md — optional audit trail only; NOT required reading for generation
+- {project-slug}/spec/PRD.md
 
 ## Tags
 `tag-one`, `tag-two`
@@ -148,7 +157,8 @@ Omit empty sections except **Requirement** and **Requirements**. Do **not** incl
 ## Prohibitions
 
 - Long narrative explanations instead of concise, user-confirmed bullets.
-- Spec bullets that point to `adr/` or conversation history instead of stating the specification fully.
+- Spec bullets that point to `{project-slug}/adr/` or conversation history instead of stating the specification fully.
+- Writing Spec files at the repository root instead of under `{project-slug}/spec/`.
 - Handing off to generation with ADR files marked as required reading.
 - Duplicating full alternative option analyses inside the Spec.
 - Adding `Status`, `Approved`, or other lifecycle approval state fields in Spec files.
@@ -158,7 +168,8 @@ Omit empty sections except **Requirement** and **Requirements**. Do **not** incl
 
 ## Completion Criteria
 
-- Requirement scope isolated, and `spec/PRD.md` or functional `{requirement-slug}.md` target determined.
+- Requirement scope isolated, and `{project-slug}/spec/PRD.md` or functional `{project-slug}/spec/{requirement-slug}.md` target determined.
 - All approved ADR parameters deep-copied into the Spec, achieving **100% self-containment**.
+- Related ASRs in `{project-slug}/spec/ASR.md` advanced to `approved` with Spec path recorded.
 - Requirements stated as **testable, itemized bullets** suitable for audit.
 - Spec saved, user notified of the path, and seamlessly routed to `spec-driven-generation` for production.
