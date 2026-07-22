@@ -2,7 +2,7 @@
 
 **Prerequisites:** Approved `overview.md`
 
-**Gate artifact:** `novels/{title-slug}/series.md`
+**Gate artifact:** `{project-root}/series.md`
 
 **Next stage:** `03-architecture.md` (after user approves `series.md`)
 

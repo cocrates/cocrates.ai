@@ -2,7 +2,7 @@
 
 **Prerequisites:** Approved chapter design (stage ④) — chapter file + all episode files in `chapters/{nnn}-{chapter-slug}/`
 
-**Gate artifact:** `novels/{title-slug}/manuscripts/{nnn}-{chapter-slug}.md`
+**Gate artifact:** `{project-root}/manuscripts/{nnn}-{chapter-slug}.md`
 
 **Next stage:** `06-evaluation.md` (manuscript evaluation, after user approves manuscript)
 

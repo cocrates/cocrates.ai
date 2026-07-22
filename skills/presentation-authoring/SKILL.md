@@ -79,9 +79,32 @@ Presenter **scripts** are generated **by default**. At stage ④ entry, ask whet
 
 When Phase A is complete and the user asks to **generate, render, or export** a deck, enter **Phase B**: read [`renderer/README.md`](renderer/README.md) and follow the matching renderer. Do not fold PSM translation into Phase A stages.
 
+## Resolve Project Root
+
+Before writing artifacts, resolve **`{project-root}`** — the folder that holds this presentation.
+
+Workspace layouts fall into three types. **Inspect the workspace first**, then match:
+
+| Type | When | `{project-root}` |
+|------|------|------------------|
+| **1** | Workspace *is* the single presentation project | `.` (workspace root) |
+| **2** | Workspace holds multiple peer projects | `{title-slug}/` |
+| **3** | Workspace groups projects by kind | `presentations/{title-slug}/` |
+
+**Examples:**
+- Type 1 → `overview.md` at workspace root
+- Type 2 → `{title-slug}/overview.md`
+- Type 3 → `presentations/{title-slug}/overview.md`
+
+**Rules:**
+1. Infer the type from existing structure (e.g. `overview.md` at root, peer project folders, or a `presentations/` kind folder). Prefer an **existing** matching folder over creating a new one.
+2. **Before creating** a new project folder, confirm **location and name** with the user.
+3. If the project folder already exists, use it — do not recreate or relocate silently.
+4. **`{title-slug}`:** URL-friendly slug from the presentation title. Type 1 has no slug folder.
+
 ## Working Location
 
-Default root: `presentations/{title-slug}/` (or a path the user specifies).
+Default root: `{project-root}/` (resolved above; or a path the user specifies).
 
 | Path | Stage | Role |
 |------|-------|------|
@@ -101,7 +124,7 @@ Phase B adds renderer-specific paths — defined in `renderer/{name}.md`.
 - Sections live in `outline.md` / `slides.md`, not subfolders — flat numbering in `slides/` and `scripts/`
 - Slide numbers: `01`–`99` for the main deck; `B01`, `B02`, … for **backup** slides
 - Template numbers: `01`–`99` within `templates/`; `01` is primary/default
-- `{title-slug}`: URL-friendly slug from presentation title
+- Paths above are relative to `{project-root}`
 
 **Backup slides (`B01`, …):**
 - Optional; list under a Backup section in `outline.md` when useful for Q&A or overflow

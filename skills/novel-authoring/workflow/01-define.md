@@ -2,7 +2,7 @@
 
 **Prerequisites:** None — first stage of a new novel.
 
-**Gate artifact:** `novels/{title-slug}/overview.md`
+**Gate artifact:** `{project-root}/overview.md`
 
 **Next stage:** `02-plan.md` (after user approves `overview.md`)
 
@@ -43,7 +43,7 @@ Surface the novel's foundation through Socratic dialogue. Ask **one question at 
 
 If the user mentions episodes, clarify: *"This workflow publishes by chapter. Episodes are internal design blocks inside a chapter — we'll decide how many when we design each chapter. For now, roughly how many chapters do you plan?"*
 
-Record into `novels/{title-slug}/overview.md`:
+Record into `{project-root}/overview.md`:
 
 ```markdown
 # Novel Definition: {Title}

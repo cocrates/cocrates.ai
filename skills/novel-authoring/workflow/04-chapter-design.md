@@ -7,8 +7,8 @@
 - **Chapter 002+:** Prior chapter released (⑧); continuity files loaded
 
 **Gate artifacts:**
-- `novels/{title-slug}/chapters/{nnn}-{chapter-slug}.md` — chapter-level design
-- `novels/{title-slug}/chapters/{nnn}-{chapter-slug}/{nnn}-{episode-slug}.md` — one file per episode (scene-level design)
+- `{project-root}/chapters/{nnn}-{chapter-slug}.md` — chapter-level design
+- `{project-root}/chapters/{nnn}-{chapter-slug}/{nnn}-{episode-slug}.md` — one file per episode (scene-level design)
 
 **Next stage:** `06-evaluation.md` (design evaluation, recommended) → `05-generation.md` (after user approves design)
 

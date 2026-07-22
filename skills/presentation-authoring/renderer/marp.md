@@ -535,8 +535,8 @@ Never edit `{title-slug}.md` slide bodies or template CSS directly.
 ## Export
 
 ```bash
-npx @marp-team/marp-cli presentations/{title-slug}/{title-slug}.md --pdf
-npx @marp-team/marp-cli presentations/{title-slug}/{title-slug}.md --pptx
+npx @marp-team/marp-cli {project-root}/{title-slug}.md --pdf
+npx @marp-team/marp-cli {project-root}/{title-slug}.md --pptx
 ```
 
 Built-in themes require no `--theme-set` for `gaia` and `uncover`. Template CSS is embedded in the compiled markdown.

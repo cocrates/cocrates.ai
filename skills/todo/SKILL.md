@@ -28,15 +28,20 @@ Match the user's language (Korean, English, etc.) in `TODO.md` prose and status 
 
 ## Working Location
 
-`TODO.md` lives at the **deliverable workspace root**:
+`TODO.md` lives at the **deliverable `{project-root}`** resolved by the active artifact skill:
 
 ```text
-docs/{title-slug}/TODO.md
-presentations/{title-slug}/TODO.md
-{workspace}/{title-slug}/TODO.md   # other artifact-generation skills
+{project-root}/TODO.md
 ```
 
+**Examples** (after that skill resolves workspace type):
+- Type 1 → `TODO.md` at workspace root
+- Type 2 → `{title-slug}/TODO.md` or `{project-slug}/TODO.md`
+- Type 3 → `docs/{title-slug}/TODO.md`, `presentations/{title-slug}/TODO.md`, `novels/{title-slug}/TODO.md`, …
+
 One `TODO.md` per deliverable session. Do not use the agent's ephemeral todo tool as a substitute — the file survives across sessions.
+
+When initializing, use the same `{project-root}` the companion skill confirmed with the user (or an already existing project folder). Do not invent a different location.
 
 ## Task Model
 
@@ -87,7 +92,7 @@ Use this skeleton when creating or rebuilding the file:
 ```markdown
 # TODO: {Title}
 
-> **Workspace:** `{path}`
+> **Project root:** `{project-root}`
 > **Updated:** {YYYY-MM-DD}
 
 ## Snapshot
@@ -122,9 +127,9 @@ Keep **Snapshot** counts accurate — recompute whenever statuses change.
 
 ### 1. Initialize
 
-Trigger: user starts a new deliverable; workspace folder created or about to be created.
+Trigger: user starts a new deliverable; `{project-root}` resolved or about to be created.
 
-1. Identify workspace path and the deliverable's workflow (stages, artifacts, gates).
+1. Identify `{project-root}` (via the companion skill's Resolve Project Root rules) and the deliverable's workflow (stages, artifacts, gates).
 2. Use [templates.md](templates.md) as a starting point; adapt phases and tasks to the specific deliverable.
 3. Customize:
    - Mark optional phases `skipped` when the user has already decided to omit them
@@ -138,7 +143,7 @@ Do **not** wait for every unit to be known upfront — start with phase-level ta
 
 **Always run before working on a deliverable**, even mid-conversation:
 
-1. Read `{workspace}/TODO.md`. If missing, run **Initialize**.
+1. Read `{project-root}/TODO.md`. If missing, run **Initialize**.
 2. Verify **Snapshot** against filesystem (quick check: does the `in_progress` artifact exist? are `done` gate artifacts present?).
 3. If drift detected, run **Sync** before recommending next work.
 4. Report to user:

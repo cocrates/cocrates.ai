@@ -169,12 +169,35 @@ Every level must be **fully cataloged** before chapter detail design (stage ④)
 
 ---
 
+## Resolve Project Root
+
+Before writing artifacts, resolve **`{project-root}`** — the folder that holds this novel.
+
+Workspace layouts fall into three types. **Inspect the workspace first**, then match:
+
+| Type | When | `{project-root}` |
+|------|------|------------------|
+| **1** | Workspace *is* the single novel project | `.` (workspace root) |
+| **2** | Workspace holds multiple peer projects | `{title-slug}/` |
+| **3** | Workspace groups projects by kind | `novels/{title-slug}/` |
+
+**Examples:**
+- Type 1 → `overview.md` at workspace root
+- Type 2 → `{title-slug}/overview.md`
+- Type 3 → `novels/{title-slug}/overview.md`
+
+**Rules:**
+1. Infer the type from existing structure (e.g. `overview.md` at root, peer project folders, or a `novels/` kind folder). Prefer an **existing** matching folder over creating a new one.
+2. **Before creating** a new project folder, confirm **location and name** with the user.
+3. If the project folder already exists, use it — do not recreate or relocate silently.
+4. **`{title-slug}`:** URL-friendly slug from the novel title. Type 1 has no slug folder.
+
 ## Working Location
 
-All artifacts under `novels/{title-slug}/`:
+All artifacts under `{project-root}/`:
 
 ```
-novels/{title-slug}/
+{project-root}/
 ├── overview.md              # ①
 ├── series.md                # ②
 ├── parts/                   # ③

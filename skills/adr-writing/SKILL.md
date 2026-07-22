@@ -28,12 +28,24 @@ One ADR file = one concern. Options are the answer candidates for that concern �
 
 Match the user's language (Korean, English, etc.) in user-facing messages. ADR file content may use the language of the decision context; filenames and slugs stay English kebab-case.
 
+## Resolve Project Root
+
+Before writing ADRs, resolve **`{project-root}`** the same way as `spec-driven-generation` / `spec-writing`:
+
+| Type | When | `{project-root}` |
+|------|------|------------------|
+| **1** | Workspace *is* the single project | `.` (workspace root) |
+| **2** | Workspace holds multiple peer projects | `{project-slug}/` |
+| **3** | Workspace groups projects by kind | `{kind}/{project-slug}/` |
+
+**Rules:** Inspect workspace structure first; prefer an existing project folder; **confirm location and name with the user before creating** a new one; reuse if it already exists.
+
 ## Project Folder Layout
 
-ADRs live under the project's **`adr/`** directory:
+ADRs live under `{project-root}/adr/`:
 
 ```
-{project-slug}/
+{project-root}/
 ├── spec/
 │   ├── ASR.md
 │   ├── PRD.md
@@ -44,12 +56,12 @@ ADRs live under the project's **`adr/`** directory:
 └── …
 ```
 
-- **`{project-slug}`:** English **kebab-case** project folder (same as used by `spec-driven-generation` / `spec-writing`). Resolve from the user's request or an existing project folder; ask if ambiguous.
-- **ADR root:** `{project-slug}/adr/` (create if missing)
-- **ASR registry:** `{project-slug}/spec/ASR.md` — keep Related ASRs / Related ADRs in sync when creating or approving ADRs
+- **`{project-slug}`:** English **kebab-case** (same as `spec-driven-generation` / `spec-writing`). Used when Type 2/3 needs a folder name.
+- **ADR root:** `{project-root}/adr/` (create if missing)
+- **ASR registry:** `{project-root}/spec/ASR.md` — keep Related ASRs / Related ADRs in sync when creating or approving ADRs
 - **Filename:** English **kebab-case** for the concern (e.g. `item-storage-database.md`, `report-intro-structure.md`)
 - One file = one concern
-- **Do not** place `adr/` at the repository root — always nest under `{project-slug}/`.
+- Place `adr/` under `{project-root}` only.
 
 ### ASR ↔ ADR (Many-to-Many)
 
@@ -59,7 +71,7 @@ ADRs live under the project's **`adr/`** directory:
 
 ### Before Creating a New ADR
 
-Before saving, check the `{project-slug}/adr/` directory.
+Before saving, check the `{project-root}/adr/` directory.
 
 - Search for files with the **same or similar concern** (compare filename, `## Concern`, `## Tags`, Related ASRs)
 - If found, **do not create a new file** — **supplement and merge** into the existing ADR, or set `Status: superseded` and link to a replacing ADR when the concern is reframed
@@ -72,7 +84,7 @@ Before saving, check the `{project-slug}/adr/` directory.
 ### 1. Identify the Concern & Related ASRs
 
 Clarify the **concern** — the specific question the user must resolve — and why it matters now.
-Capture briefly: **Concern**, **Context**, **Stakes**, and **Related ASR ID(s)** from `{project-slug}/spec/ASR.md` (create or amend ASR entries if the concern reveals a new ASR).
+Capture briefly: **Concern**, **Context**, **Stakes**, and **Related ASR ID(s)** from `{project-root}/spec/ASR.md` (create or amend ASR entries if the concern reveals a new ASR).
 
 ### 2. Enumerate Viable Options
 
@@ -84,8 +96,8 @@ Add a short, scannable **Tradeoffs** section (comparison table or bullet pairs) 
 
 ### 4. Save ADR File & Sync ASR.md
 
-Write the ADR using the template below. Set `Status: proposed` and save to `{project-slug}/adr/{concern-slug}.md`.
-Then update `{project-slug}/spec/ASR.md`:
+Write the ADR using the template below. Set `Status: proposed` and save to `{project-root}/adr/{concern-slug}.md`.
+Then update `{project-root}/spec/ASR.md`:
 - Set each related ASR to `reviewing` (if not already).
 - Append this ADR path under **Related ADRs** for every linked ASR.
 - Ensure the ADR lists those ASR IDs under **Related ASRs**.
@@ -177,7 +189,7 @@ Omit **Related ASRs** only when the ADR is exploratory and no ASR ID exists yet 
 
 ## Example (Chained/Derived Concerns)
 
-File: `{project-slug}/adr/application-performance-cache.md`
+File: `{project-root}/adr/application-performance-cache.md`
 
 ```markdown
 # Application Performance Cache
@@ -216,7 +228,7 @@ User-approved: Offload read traffic from the primary DB using a dedicated cachin
 - [ ] **Cache Size & Memory Constraints:** What happens when memory is full?
 
 ## Related
-- Follow-up needed: `{project-slug}/adr/cache-eviction-policy.md`
+- Follow-up needed: `{project-root}/adr/cache-eviction-policy.md`
 
 ## Approved
 - 2026-06-29: Option A, user confirmed
@@ -228,7 +240,7 @@ User-approved: Offload read traffic from the primary DB using a dedicated cachin
 
 1. **State the current step** (identify concern → enumerate options → save → review → approve → identify downstream concerns → chain/spec handoff).
 2. **Proactive Chaining Guidance:** When a user approves an option, congratulate the choice and **immediately present the next 1–2 critical sub-questions** that logically follow, offering to draft the next ADR right away.
-   - *Example:* *"Great choice! You've decided to implement a Cache for performance optimization, and I have recorded this approval in `{project-slug}/adr/application-performance-cache.md`. By introducing a cache, we now have downstream concerns that need attention: **1) Cache Eviction & TTL Policy**, and **2) Cache Size & Memory Constraints**. Would you like to proceed with drafting the next ADR for the Cache Eviction Policy right away?"*
+   - *Example:* *"Great choice! You've decided to implement a Cache for performance optimization, and I have recorded this approval in `{project-root}/adr/application-performance-cache.md`. By introducing a cache, we now have downstream concerns that need attention: **1) Cache Eviction & TTL Policy**, and **2) Cache Size & Memory Constraints**. Would you like to proceed with drafting the next ADR for the Cache Eviction Policy right away?"*
 3. When the user says "just pick one," still present alternatives with tradeoffs, recommend, and explicitly highlight what downstream obligations that choice brings.
 
 ---
@@ -236,8 +248,8 @@ User-approved: Offload read traffic from the primary DB using a dedicated cachin
 ## Prohibitions
 
 - Fewer than **2 viable options** in an ADR.
-- Writing ADR files at the repository root instead of under `{project-slug}/adr/`.
-- Creating or approving an ADR **without** linking Related ASR ID(s) and syncing `{project-slug}/spec/ASR.md`.
+- Writing ADR files outside `{project-root}/adr/`.
+- Creating or approving an ADR **without** linking Related ASR ID(s) and syncing `{project-root}/spec/ASR.md`.
 - Closing an ADR loop **without identifying or asking about downstream consequences/derived concerns** inherent to the chosen solution.
 - Marking `approved` without explicit user confirmation.
 
@@ -246,8 +258,8 @@ User-approved: Offload read traffic from the primary DB using a dedicated cachin
 ## Completion Criteria
 
 - Concern identified and stated as a clear question, with Related ASR ID(s) recorded.
-- ADR saved at `{project-slug}/adr/{concern-slug}.md` with **≥ 2 viable options**.
-- `{project-slug}/spec/ASR.md` updated (status + Related ADRs) for every linked ASR — supporting one-to-many and many-to-one links.
+- ADR saved at `{project-root}/adr/{concern-slug}.md` with **≥ 2 viable options**.
+- `{project-root}/spec/ASR.md` updated (status + Related ADRs) for every linked ASR — supporting one-to-many and many-to-one links.
 - User has reviewed and **explicitly approved** the decision.
 - **Downstream Concerns** triggered by the approved option are explicitly enumerated in the file.
 - User guided on whether to chain into a follow-up ADR or hand off to spec-writing.    

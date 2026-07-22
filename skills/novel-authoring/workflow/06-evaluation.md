@@ -2,7 +2,7 @@
 
 **Prerequisites:** Depends on mode — see below
 
-**Gate artifact:** `novels/{title-slug}/evaluations/{nnn}-{chapter-slug}.md`
+**Gate artifact:** `{project-root}/evaluations/{nnn}-{chapter-slug}.md`
 
 **Next stage:** `07-revision.md` if issues found; `05-generation.md` (after design eval) or `08-release.md` (after manuscript eval)
 

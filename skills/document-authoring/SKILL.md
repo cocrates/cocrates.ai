@@ -48,28 +48,50 @@ Structure follows purpose. Do not impose a generic template. Analyze the documen
 
 Match the user's language (Korean, English, etc.) in all user-facing messages and artifact content.
 
+## Resolve Project Root
+
+Before writing artifacts, resolve **`{project-root}`** — the folder that holds this document.
+
+Workspace layouts fall into three types. **Inspect the workspace first**, then match:
+
+| Type | When | `{project-root}` |
+|------|------|------------------|
+| **1** | Workspace *is* the single document project | `.` (workspace root) |
+| **2** | Workspace holds multiple peer projects | `{title-slug}/` |
+| **3** | Workspace groups projects by kind | `documents/{title-slug}/` |
+
+**Examples:**
+- Type 1 → `overview.md` at workspace root
+- Type 2 → `{title-slug}/overview.md`
+- Type 3 → `documents/{title-slug}/overview.md`
+
+**Rules:**
+1. Infer the type from existing structure (e.g. `overview.md` at root, peer project folders, or a `docs/` kind folder). Prefer an **existing** matching folder over creating a new one.
+2. **Before creating** a new project folder, confirm **location and name** with the user.
+3. If the project folder already exists, use it — do not recreate or relocate silently.
+4. **`{title-slug}`:** URL-friendly slug from the document title (e.g. `ai-education-report`). Type 1 has no slug folder.
+
 ## Working Location
 
-Documents live under the project's `docs/` directory:
+Documents live under `{project-root}/`:
 
 ```
-docs/
-└── {title-slug}/
-    ├── overview.md                     # define — document definition
-    ├── outline.md                      # plan — document structure overview
-    ├── docs/                           # research — independent, any stage
-    │   ├── {topic-slug}.md            # per-topic research files
-    │   └── ...
-    ├── sections.md                     # architecture design — section/sub-section design
-    ├── sections/
-    │   ├── 01-{section-slug}.md       # detail design — section content
-    │   ├── 02-{section-slug}/
-    │   │   ├── 02-01-{sub-slug}.md   # sub-section files for large documents
-    │   │   └── ...
-    │   └── ...
-    ├── {title-slug}.md                 # generation — final integrated document
-    ├── q-and-a.md                      # validation — reader Q&A and supplementation notes
-    └── validation.md                   # validation — purpose-fit check against overview.md
+{project-root}/
+├── overview.md                     # define — document definition
+├── outline.md                      # plan — document structure overview
+├── docs/                           # research — independent, any stage
+│   ├── {topic-slug}.md            # per-topic research files
+│   └── ...
+├── sections.md                     # architecture design — section/sub-section design
+├── sections/
+│   ├── 01-{section-slug}.md       # detail design — section content
+│   ├── 02-{section-slug}/
+│   │   ├── 02-01-{sub-slug}.md   # sub-section files for large documents
+│   │   └── ...
+│   └── ...
+├── {title-slug}.md                 # generation — final integrated document
+├── q-and-a.md                      # validation — reader Q&A and supplementation notes
+└── validation.md                   # validation — purpose-fit check against overview.md
 ```
 
 **File structure rules by document scale:**
@@ -106,7 +128,7 @@ Research is **not a fixed stage**. It is an independent activity that can be ini
 
 1. **Request**: The user asks for research ("Look into this topic"), or Cocrates proposes it ("This section needs recent data — shall I research it?").
 2. **Perform**: Gather information via web search, user-provided materials, or internal sources.
-3. **Record**: Per topic, write a separate file `docs/{title-slug}/docs/{topic-slug}.md` containing:
+3. **Record**: Per topic, write a separate file `{project-root}/docs/{topic-slug}.md` containing:
    - Summarized findings with source attribution
    - Key facts, data points, and terminology
    - Open questions requiring user input
@@ -122,7 +144,7 @@ The user may request research independently of document generation:
 
 > *"Research AI education trends and save the results in docs/. I'll write the report later based on those materials."*
 
-In this case, only `docs/{title-slug}/docs/*.md` files are created. When document generation is requested later, the Snowflake stages proceed using those materials.
+In this case, only `{project-root}/docs/*.md` files are created. When document generation is requested later, the Snowflake stages proceed using those materials.
 
 ### Ad-Hoc Research During Authoring
 
@@ -133,7 +155,7 @@ During any stage of document authoring, the user may request research or summari
 
 When such a request is received:
 
-1. **Determine context**: If a document session is active (`docs/{title-slug}/` exists), save research under that document's `docs/` directory: `docs/{title-slug}/docs/{topic-slug}.md`. If no document session is active, save at the project level: `docs/{topic-slug}.md`.
+1. **Determine context**: If a document session is active (`{project-root}/` exists), save research under that document's `docs/` directory: `{project-root}/docs/{topic-slug}.md`. If no document session is active, save at the project level: `docs/{topic-slug}.md`.
 2. **Perform and record**: Same process as standard research — gather, synthesize, and save with source attribution.
 3. **Notify**: Inform the user that the result was saved and can be referenced in the current or later stages.
 4. **No gate required**: Unlike Snowflake stage artifacts, ad-hoc research files are informational and do not require explicit approval gates. The user can reference or ignore them as they see fit.
@@ -179,7 +201,7 @@ Surface the document's foundation through Socratic dialogue:
 | *"How will you confirm the document fulfills its purpose? What must be true for it to be complete?"* | Validation criteria |
 | *"Are there reference materials or templates to follow?"* | Context & references |
 
-Record answers into `docs/{title-slug}/overview.md`:
+Record answers into `{project-root}/overview.md`:
 
 ```
 # Document Definition: {Title}
@@ -305,7 +327,7 @@ Integrate all sections into one coherent, polished document.
    - Do all sections serve the purpose defined in `overview.md`?
    - Are there gaps or redundancies?
 
-4. Write to `docs/{title-slug}/{title-slug}.md`.
+4. Write to `{project-root}/{title-slug}.md`.
 
 ### Stage ⑥ — Validation / Revision
 
@@ -396,6 +418,6 @@ Validation checks whether the document **fulfills the purpose and validation cri
 ## Completion Criteria
 
 - All Snowflake stage gates passed (see Snowflake Stages table)
-- `docs/{title-slug}/{title}.md` exists as an integrated, coherent final document
+- `{project-root}/{title}.md` exists as an integrated, coherent final document
 - Validation findings and Q&A supplementation needs are addressed (unless the user explicitly accepts as-is)
 - User has given explicit final approval

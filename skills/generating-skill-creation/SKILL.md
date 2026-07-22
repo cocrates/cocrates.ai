@@ -28,11 +28,21 @@ The goal is to design and write a **workflow skill** that produces a given artif
 
 ## Working Location
 
+Skill files themselves are authored at:
+
 ```text
 .opencode/skills/{skill-slug}/SKILL.md
-
 ```
 
+When the skill under design **creates deliverable project folders**, its `SKILL.md` must include a **Resolve Project Root** section covering the three workspace types:
+
+| Type | When | `{project-root}` |
+|------|------|------------------|
+| **1** | Workspace *is* the single project | `.` (workspace root) — no nested project folder |
+| **2** | Workspace holds multiple peer projects | `{slug}/` |
+| **3** | Workspace groups projects by kind | `{kind}/{slug}/` |
+
+Require: inspect workspace structure first; **confirm location and name with the user before creating** a project folder; reuse an existing folder when present.
 ---
 
 ## Snowflake: Progressive Refinement Stages
@@ -142,6 +152,7 @@ Include in `description`:
 # {Skill Title}
 
 ## Core Principles
+## Resolve Project Root
 ## Working Location
 ## Component Definitions & Dependency Map
 ## Snowflake Stages
@@ -169,6 +180,7 @@ Include in `description`:
 * Filling a `SKILL.md` template without component, dependency structure, and per-stage refinement design
 * Authoring a skill that proceeds to generation without a fully locked detail design
 * Leaving intermediate artifacts in chat only, without file-save rules
+* Omitting **Resolve Project Root** (three workspace types + user confirmation before create) when the skill creates deliverable project folders
 * Proceeding to the next stage with ambiguous or passive user feedback without validating core criteria
 * Omitting `compatibility: opencode` and `metadata.agent: cocrates`
 
@@ -179,3 +191,4 @@ Include in `description`:
 * define → plan → architecture design → detail design → generation flow is clearly mapped
 * Per-component, per-stage refinement content and component dependency rules are explicitly specified
 * Per-stage targeted approval points, rollback triggers, and prohibitions are included
+* If the skill creates deliverable folders: **Resolve Project Root** covers types 1–3 and requires user confirmation before create
