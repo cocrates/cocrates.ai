@@ -1,6 +1,6 @@
 # Install Cocrates Harness
 
-This document describes how to install or upgrade **Cocrates Harness** on [OpenCode](https://opencode.ai). Use it when a user asks you to install Cocrates Harness: follow the steps below to configure the OpenCode plugin and copy the required skill files.
+This document describes how to install or upgrade **Cocrates Harness** on [OpenCode](https://opencode.ai). Use it when a user asks you to install Cocrates Harness: follow the steps below to configure the OpenCode plugin, register the Google GenAI MCP server, and copy the required skill files.
 
 If Cocrates Harness is **already installed**, treat the request as an **upgrade** — do not skip version checks or overwrite skills without the user's consent.
 
@@ -11,13 +11,15 @@ Cocrates Harness is an **OpenCode plugin**, not a standalone program. OpenCode m
 - Install OpenCode from **https://opencode.ai/download**
 - Supported clients: OpenCode terminal, OpenCode desktop, or the OpenCode extension for Cursor/VS Code
 - Cocrates Harness works the same regardless of which client is used
+- Media-generation skills (image, video, speech, music) require the `cocrates-google-genai` MCP server and a working `npx` (Node.js) on the machine
 
 ## What you will do
 
 1. Detect whether Cocrates Harness is already installed
 2. Add or upgrade the `@cocrates/cocrates-harness` plugin in the OpenCode config
-3. Copy or reconcile Cocrates skill files in the OpenCode skills directory
-4. Ask the user to restart OpenCode and confirm the **Cocrates** agent is available
+3. Ensure the `cocrates-google-genai` MCP server is configured in `opencode.jsonc`
+4. Copy or reconcile Cocrates skill files in the OpenCode skills directory
+5. Ask the user to restart OpenCode and confirm the **Cocrates** agent is available
 
 ---
 
@@ -36,9 +38,10 @@ Check for an existing installation:
 |--------|----------|
 | Plugin configured | `OPENCODE_CONFIG/opencode.jsonc` contains `@cocrates/cocrates-harness` in the `plugin` array |
 | Plugin cached | `~/.cache/opencode/packages/` contains a directory matching `*cocrates-harness*` |
+| MCP configured | `OPENCODE_CONFIG/opencode.jsonc` contains `cocrates-google-genai` under `mcp` |
 | Skills present | `OPENCODE_CONFIG/skills/` contains one or more Cocrates skill subdirectories (e.g. `education/`, `spec-writing/`) |
 
-If **skills** are already present in Step 0, use skill **reconciliation** in Step 2b. Otherwise, use Step 2a. **Step 1 is the same** for both fresh install and upgrade.
+If **skills** are already present in Step 0, use skill **reconciliation** in Step 3b. Otherwise, use Step 3a. **Steps 1–2 are the same** for both fresh install and upgrade.
 
 ---
 
@@ -46,16 +49,30 @@ If **skills** are already present in Step 0, use skill **reconciliation** in Ste
 
 Fresh install and upgrade use the **same command**. The only difference is whether a previous version exists in the cache for comparison.
 
-The CLI command adds `"@cocrates/cocrates-harness"` to `opencode.jsonc` automatically (`-g`). You can also edit the config manually if needed:
+The CLI command adds `"@cocrates/cocrates-harness"` to `opencode.jsonc` automatically (`-g`). You can also edit the config manually if needed. The **complete** target config (plugin + MCP) looks like this:
 
-```json
+```jsonc
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["@cocrates/cocrates-harness"]
+  "plugin": [
+    "@cocrates/cocrates-harness"
+  ],
+  "mcp": {
+    "cocrates-google-genai": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@cocrates/google-genai-mcp"
+      ]
+    }
+  }
 }
 ```
 
 Create the config directory and file if they do not exist. For config details, see **https://opencode.ai/docs/config/**
+
+After the plugin CLI runs, continue to **Step 2** to ensure the `mcp` block is present — the plugin install command may not add MCP settings by itself.
 
 1. Read the **current version** from the OpenCode cache — do **not** rely on `npm` being installed:
 
@@ -102,7 +119,43 @@ Always show explicit version numbers read from `~/.cache/opencode/packages/`. Do
 
 ---
 
-## Step 2: Copy or reconcile skill files
+## Step 2: Configure the Google GenAI MCP server
+
+Cocrates media skills call **`@cocrates/google-genai-mcp`** through OpenCode MCP. Plugin + skills alone are not enough — `opencode.jsonc` must include the `cocrates-google-genai` server.
+
+1. Open `OPENCODE_CONFIG/opencode.jsonc`.
+2. If `mcp.cocrates-google-genai` is missing or incomplete, **merge** the following into the existing config (do not remove other plugins, MCP servers, or settings):
+
+   ```jsonc
+   "mcp": {
+     "cocrates-google-genai": {
+       "type": "local",
+       "command": [
+         "npx",
+         "-y",
+         "@cocrates/google-genai-mcp"
+       ]
+     }
+   }
+   ```
+
+3. Confirm the file still has both:
+   - `"plugin"` entry for `@cocrates/cocrates-harness`
+   - `"mcp"."cocrates-google-genai"` with `type: "local"` and the `npx -y @cocrates/google-genai-mcp` command array above
+
+4. Report to the user:
+
+   | Before | After | Report |
+   |--------|-------|--------|
+   | Missing | Present | `MCP configured: cocrates-google-genai` |
+   | Present (same) | Present | `MCP already configured: cocrates-google-genai` |
+   | Present (different command) | Updated to match | `MCP updated: cocrates-google-genai` |
+
+Preserve any other entries under `mcp` when merging. OpenCode starts this server via `npx` on demand; no separate global install of `@cocrates/google-genai-mcp` is required.
+
+---
+
+## Step 3: Copy or reconcile skill files
 
 The plugin registers the **Cocrates** agent, but the agent needs skill files to run workflows.
 
@@ -150,7 +203,7 @@ Core skills include:
 
 Copy **all** directories under `skills/` from the repository, not only the table above.
 
-### 2a. Fresh install
+### 3a. Fresh install
 
 When no Cocrates skills were present in Step 0:
 
@@ -158,7 +211,7 @@ When no Cocrates skills were present in Step 0:
 2. Copy every skill subdirectory into `OPENCODE_CONFIG/skills/`.
 3. Report which skills were installed.
 
-### 2b. Upgrade (skills already present)
+### 3b. Upgrade (skills already present)
 
 Skills may contain user edits. **Never blindly overwrite** the entire skills directory.
 
@@ -270,15 +323,16 @@ You can clone the repository and copy folders, or download individual skill dire
 
 ---
 
-## Step 3: Verify installation
+## Step 4: Verify installation
 
-After configuration and skill reconciliation are complete:
+After plugin, MCP, and skill reconciliation are complete:
 
 1. Tell the user to **restart OpenCode** (quit and reopen the terminal app, desktop app, or editor extension).
 2. Ask them to open the agent picker and confirm **Cocrates** appears and can be selected.
 3. If Cocrates is not listed, check that `opencode.jsonc` includes the plugin entry and that OpenCode was fully restarted.
+4. Confirm `opencode.jsonc` still includes `mcp.cocrates-google-genai` after restart (needed for image / video / speech / music generation skills).
 
-Installation or upgrade is complete when the user can select the **Cocrates** agent in OpenCode.
+Installation or upgrade is complete when the user can select the **Cocrates** agent in OpenCode and `opencode.jsonc` has both the plugin and the `cocrates-google-genai` MCP entry.
 
 ---
 
@@ -286,8 +340,8 @@ Installation or upgrade is complete when the user can select the **Cocrates** ag
 
 > Install Cocrates Harness using this document.
 
-Perform Step 0, then Steps 1–3. On a machine that already has Cocrates Harness, upgrade the plugin and reconcile skills instead of overwriting blindly.
+Perform Step 0, then Steps 1–4. On a machine that already has Cocrates Harness, upgrade the plugin, ensure MCP is configured, and reconcile skills instead of overwriting blindly.
 
 > Upgrade Cocrates Harness.
 
-Same procedure — always run Step 0 first, then Step 1 (plugin) and skill reconciliation (Step 2b) when skills already exist.
+Same procedure — always run Step 0 first, then Step 1 (plugin), Step 2 (MCP), and skill reconciliation (Step 3b) when skills already exist.
