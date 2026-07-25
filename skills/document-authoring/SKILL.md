@@ -7,7 +7,6 @@ description: >-
   memo, email, blog post, article, or any other written deliverable. This is the
   most general document-authoring skill — use it for any artifact whose primary
   form is prose or structured text.
-compatibility: opencode
 metadata:
   agent: cocrates
 ---

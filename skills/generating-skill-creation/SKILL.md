@@ -6,7 +6,6 @@ description: >-
   final artifact itself. Designs Snowflake stages
   (define → plan → architecture design → detail design → generation),
   per-component refinement, review points, and approval gates.
-compatibility: opencode
 metadata:
   agent: cocrates
 ---

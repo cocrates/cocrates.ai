@@ -9,7 +9,6 @@ description: >-
   item-by-item comparison, surfaces spec deviations, and flags undocumented
   ASRs (Architecturally Significant Requirements) to drive the iterative
   specification and refinement loop.
-compatibility: opencode
 metadata:
   agent: cocrates
 ---

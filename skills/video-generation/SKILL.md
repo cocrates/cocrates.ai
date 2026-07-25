@@ -9,7 +9,6 @@ description: >-
   they need an Omni-compatible video YAML. Captures user intent first, writes a
   motion-ready prompt with camera, timing, and audio, and only calls MCP after
   explicit approval.
-compatibility: opencode
 metadata:
   agent: cocrates
 ---

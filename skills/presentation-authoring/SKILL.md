@@ -9,7 +9,6 @@ description: >-
   → scripts → templates → slides/slide-*.md, plus Q&A and validation).
   Phase B translates that model into a renderer-specific deck (e.g. Marp).
   When the user requests a rendered deck, read renderer/ in this skill directory.
-compatibility: opencode
 metadata:
   agent: cocrates
 ---

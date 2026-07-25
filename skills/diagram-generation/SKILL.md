@@ -6,25 +6,24 @@ description: >-
   design stage. Select when the user asks to draw, diagram, visualize, map,
   sketch, or explain a system, architecture, flow, process, hierarchy, ER/class
   model, concept map, or relationships as a diagram — especially Excalidraw.
-  Prioritizes locking an explanation script (what you say while pointing at the
-  diagram) plus meta description (goal, audience, scope), validates structure and
-  layout against that script with the user, then emits valid Excalidraw JSON
-  (shapes and text as separate elements). Each stage writes only its own YAML
-  keys and stops for approval — no look-ahead structure or layout during Stage 1.
-compatibility: opencode
+  Stage 1 locks title → summary → explanation (diagram name, one-sentence
+  stand-in, then the walkthrough script); later stages design a picture that
+  fits that script, then emit valid Excalidraw JSON (shapes and text as separate
+  elements). Each stage writes only its own YAML keys and stops for approval —
+  no look-ahead structure or layout during Stage 1.
 metadata:
   agent: cocrates
 ---
 
 # Diagram Generation
 
-Produce diagrams that **make an approved explanation script deliverable** — not decorative drawings. Stage 1 locks `description` (meta) and `explanation` (walkthrough script); later stages design a picture that fits that script. Deliver a staged YAML design spec and valid **Excalidraw** JSON (`.excalidraw` / `.json`).
+Produce diagrams that **make an approved explanation script deliverable** — not decorative drawings. Stage 1 locks meaning by progressive concretization: **`title` → `summary` → `explanation`**; later stages design a picture that fits that script. Deliver a staged YAML design spec and valid **Excalidraw** JSON (`.excalidraw` / `.json`).
 
 ## Core Principles
 
 > **The unexamined diagram is not worth generating.**
 
-- **Explanation-First**: The primary deliverable of Stage 1 is an **`explanation` script** — the words someone would use while pointing at the finished diagram. The picture must make that script true and easy to follow. Meta fields (`description`) set goal/audience; they are not a substitute for the script.
+- **Explanation-First**: Stage 1 concretizes meaning in order — **title** (diagram name), **summary** (one sentence that could stand in for the picture), **explanation** (what you would say while pointing at it). The picture must make that script true and easy to follow. Do not invent Goal/Audience/Scope checklists; let title → summary → explanation carry the meaning.
 - **Snowflake method**: Refine in order: requirements → structure design → detail design → generation. Do not skip ahead.
 - **Per-stage artifacts + approval gates**: Each stage **writes or updates the YAML file with only that stage’s results**, then **stops for user review and explicit approval** before the next stage. The user may edit the YAML directly; treat their file as source of truth.
 - **No look-ahead in the file**: Never pre-fill later-stage keys (`elements`, `relationships`, `diagram`, or Excalidraw) while still on an earlier stage. Grow the YAML **incrementally**.
@@ -52,7 +51,7 @@ Write **only** the keys unlocked by the current stage. Do not invent placeholder
 
 | After stage | YAML may contain | YAML must **not** yet contain |
 |-------------|------------------|-------------------------------|
-| **1 Requirements** | `title`, `description`, `explanation`, optional `output`, optional `mode` / `packaging` | `elements`, `relationships`, `diagram`, any Excalidraw file |
+| **1 Requirements** | `title`, `summary`, `explanation`, optional `output`, optional `mode` / packaging notes | `elements`, `relationships`, `diagram`, any Excalidraw file |
 | **2 Structure** | Stage 1 keys **plus** `elements`, `relationships` | `diagram`, any Excalidraw file |
 | **3 Detail design** | Stage 2 keys **plus** `diagram` | Excalidraw file (until Stage 4) |
 | **4 Generation** | Full YAML **plus** `.excalidraw` sibling | — |
@@ -107,80 +106,63 @@ diagrams/
 
 ## Stage 1 — Requirements
 
-Lock **why** the diagram exists and **what will be said** while looking at it. This is the **most important** review: if `explanation` is wrong, every later stage is wasted.
+Lock meaning by **progressive concretization**, then later stages draw a picture that makes it true. This is the **most important** review: if `explanation` is wrong, every later stage is wasted.
 
-Separate two fields:
+| Field | Role | Prompt |
+|-------|------|--------|
+| **`title`** | Diagram name | What is the title of this picture? |
+| **`summary`** | One-sentence stand-in for the picture | If you replaced the diagram with a single sentence, what would it say? |
+| **`explanation`** | Walkthrough script | If you explained the diagram (while pointing at it), what would you say? |
 
-| Field | Role |
-|-------|------|
-| **`description`** | Brief / meta: Goal, Audience, Scope, diagram kind, constraints, success criteria |
-| **`explanation`** | **Spoken (or written) script** that walks through the finished diagram — the actual teaching narrative the picture must support |
+Concretize in that order: title → summary → explanation. The diagram is drawn **to fit `explanation`**; `summary` checks that the whole picture has one clear claim.
 
-The diagram is drawn **to fit `explanation`**, not merely to satisfy abstract goals in `description`.
+### Capture guidance
 
-### Capture checklist
+**`title`:** Short, specific name for the diagram (not a paragraph).
 
-**Into `description`:**
+**`summary`:** Exactly **one sentence** that could stand in for the finished picture. Prefer a claim a viewer could verify by looking (“Client reaches Auth via Gateway for token validation”), not a meta goal checklist.
 
-| Capture | Questions |
-|---------|-----------|
-| **Goal** | What should the viewer understand after looking? |
-| **Audience** | Beginner overview vs expert detail? |
-| **Scope** | In / out of frame; depth |
-| **Diagram kind** | Flow, architecture, hierarchy, ER/class, swimlanes, concept map, … |
-| **Constraints** | Must-include terms, reading direction, color, max boxes |
-| **Success criteria** | One sentence: “After reading this diagram, the viewer can …” |
-| **Packaging** | One file vs split files; if one file, whether to use **frames/zones** (see Choosing the Optimal Diagram Form) |
+**`explanation`:** Spoken (or written) walkthrough as if narrating the board aloud. Prefer ordered beats the eye can follow (e.g. “First… Then… Finally…”). Name the same concepts that will appear as boxes/edges. This is the **script** the picture must support — not a restatement of title/summary alone.
 
-**Into `explanation`:**
+If the script naturally splits into independent stories (e.g. “deploy path” vs “data model”), decide in Stage 1: **separate YAML/Excalidraw files** or **one file with named frames** — do not cram unrelated narratives onto one undivided canvas. Note packaging in chat or a brief YAML comment if needed; do not invent Goal/Audience/Scope form fields.
 
-Write a clear walkthrough as if narrating the slide/board aloud (or a caption sequence). Prefer ordered beats the eye can follow (e.g. “First… Then… Finally…”). Name the same concepts that will appear as boxes/edges. Do **not** dump only meta goals here — this is the **script**.
-
-If the script naturally splits into independent stories (e.g. “deploy path” vs “data model”), decide in Stage 1: **separate YAML/Excalidraw files** or **one file with named frames** — do not cram unrelated narratives onto one undivided canvas.
-
-Do **not** start listing boxes until both `description` and a usable `explanation` are clear.
+Do **not** start listing boxes until `title`, `summary`, and a usable `explanation` are clear.
 
 ### 1.1 Write requirements YAML (Stage 1 only)
 
-Create `{diagram-slug}.yaml` with **exactly** these top-level keys (plus optional `output`, `mode`, packaging notes inside `description`). **Do not** add `elements`, `relationships`, or `diagram` yet.
+Create `{diagram-slug}.yaml` with **exactly** these top-level keys (plus optional `output`, `mode`). **Do not** add `elements`, `relationships`, or `diagram` yet.
 
 ```yaml
-title: "{short title}"
+title: "{short title of the diagram}"
 # mode: express   # only when Express Mode / fast-track was requested or auto-eligible
 
-description: |
-  Goal: {what the viewer should understand}
-  Audience: {who}
-  Scope: {in / out}
-  Diagram kind: {flow | architecture | …}
-  Packaging: {single file | split files | frames/zones}
-  Constraints: {optional}
-  Success: {After viewing, the viewer can …}
+summary: |
+  {One sentence that could stand in for the diagram.}
 
 explanation: |
-  {Script for explaining the diagram — what you would say while pointing at it.
+  {What you would say while pointing at the finished diagram.
    Walk through the story in viewing order. This is what the picture must make visible.}
 
 # optional:
 # output: "./{slug}.excalidraw"
 ```
 
-**Forbidden at Stage 1:** `elements`, `relationships`, `diagram`, generating `.excalidraw`, sketching box inventories in the YAML (Express Mode still drafts `explanation` first, then may continue only after that content is coherent).
+**Forbidden at Stage 1:** `elements`, `relationships`, `diagram`, generating `.excalidraw`, sketching box inventories in the YAML (Express Mode still drafts `explanation` first, then may continue only after that content is coherent). Do not add Goal/Audience/Scope/Success checklist blocks.
 
 ### 1.2 Approval gate (required unless Express Mode)
 
 1. Point the user to the YAML path.  
-2. Summarize in chat (user’s language): **`description` meta** briefly, then read or highlight the full **`explanation` script** — that is the main approval object.  
+2. Summarize in chat (user’s language): **title**, then **summary**, then read or highlight the full **`explanation` script** — that is the main approval object.  
 3. Ask them to **review and approve**, or **edit the YAML** (especially `explanation`) and say when ready.  
 4. **Stop here** (default). Do **not** begin Stage 2 (and do **not** write structure/detail into the file) until approval — unless Express Mode is active.
 
-**Fit test (for the agent):** Could a diagram exist such that speaking `explanation` while pointing at it feels natural and complete? If the script names concepts or steps the picture could not show, revise `explanation` (or scope in `description`) before the gate.
+**Fit test (for the agent):** Does `summary` state one claim the picture can show? Could someone speak `explanation` while pointing at a diagram and feel natural and complete? If the script names concepts or steps the picture could not show, revise `explanation` (and `summary`/`title` if needed) before the gate.
 
 ---
 
 ## Stage 2 — Structure Design
 
-Turn the approved **`explanation`** into a **graph**: elements + relationships. Prefer the smallest set that still makes the script tellable. Proceed only from an **approved** Stage 1 YAML. Use `description` for audience/constraints; use **`explanation` as the coverage source of truth**.
+Turn the approved **`explanation`** into a **graph**: elements + relationships. Prefer the smallest set that still makes the script tellable. Proceed only from an **approved** Stage 1 YAML. Use **`summary`** as the one-claim check; use **`explanation` as the coverage source of truth**.
 
 ### 2.1 Identify elements
 
@@ -244,16 +226,16 @@ Before asking for approval, run the checks below and **show the user a short val
 | 4 | **Containment integrity** | `parentId` targets exist; no cycles; containers that only group children are present as elements |
 | 5 | **Script fidelity** | Reading elements + relationships aloud can deliver `explanation` without inventing missing boxes/edges |
 | 6 | **Relation honesty** | Non-nest edges match real dependencies; pure containment is **not** modeled only as an arrow |
-| 7 | **Description alignment** | Structure respects Goal / Audience / Scope / Constraints / Packaging in `description` |
+| 7 | **Summary alignment** | Structure realizes the one claim in `summary` (nothing essential omitted; no extra story) |
 
 If any check fails, revise `elements` / `relationships` and re-run the report — **do not** jump to layout.
 
 ### 2.4 Update YAML + approval gate (required)
 
-**Append** `elements` and `relationships` to the existing Stage 1 YAML. Keep `title` / `description` / `explanation` unless the user asked to change them. **Do not** add `diagram` yet.
+**Append** `elements` and `relationships` to the existing Stage 1 YAML. Keep `title` / `summary` / `explanation` unless the user asked to change them. **Do not** add `diagram` yet.
 
 ```yaml
-# ... existing title, description, explanation ...
+# ... existing title, summary, explanation ...
 
 elements:
   - id: vpc
@@ -539,7 +521,7 @@ Classify each change request, then edit at the **owning stage** (bi-directional 
 
 | Kind | Examples | Action |
 |------|----------|--------|
-| **Requirements** | Wrong topic, bad script, missing audience | Update `description` and/or `explanation`; re-approve Stage 1; then structure → detail → JSON |
+| **Requirements** | Wrong topic, bad script, weak summary | Update `title` / `summary` / `explanation`; re-approve Stage 1; then structure → detail → JSON |
 | **Structure** | Add/remove box, change relation type | Update `elements` / `relationships`; re-run §2.3 report + approve; then detail → JSON |
 | **Detail / visual** | Move, resize, recolor, straighten arrow | Update `diagram`; re-run §3.3 report + approve; then JSON |
 | **Generation-only** | Invalid Excalidraw / binding bug | Fix JSON (and sync YAML coords if layout changed); no meaning change |
@@ -557,13 +539,8 @@ One file under `diagrams/` (unless the user chose another folder). Examples belo
 ```yaml
 title: Auth request path
 
-description: |
-  Goal: Show how a client call reaches Auth Service via the API Gateway for token validation.
-  Audience: Backend onboarding.
-  Scope: Happy-path request only; omit refresh tokens and admin APIs.
-  Diagram kind: architecture / request flow (left to right).
-  Constraints: Max ~5 boxes; HTTPS label on client→gateway.
-  Success: After viewing, the viewer can name Client → API Gateway → Auth Service and say why the gateway calls Auth.
+summary: |
+  A client HTTPS call reaches Auth Service through the API Gateway for token validation.
 
 explanation: |
   Start at the Client on the left: it sends an HTTPS request to the API Gateway.
@@ -699,7 +676,7 @@ Pick **one** primary form per frame/file. Mixing ER + timeline + deployment on o
 - Arrow starts/ends floating in empty space or buried deep inside shapes  
 - Latin-only text width math for CJK labels  
 - Orphan decorative shapes that do not serve `explanation`
-- Treating `description` alone as enough Stage 1 content (missing or empty `explanation` script)
+- Treating `summary` alone as enough Stage 1 content (missing or empty `explanation` script)
 - Drawing a picture that cannot support speaking the approved `explanation`  
 - Representing containment **only** as an arrow / peer boxes outside the parent  
 - Missing `parentId` / `parentElementId` when the script or `contains`/`has-a` implies nesting  

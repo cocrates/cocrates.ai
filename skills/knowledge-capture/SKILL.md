@@ -6,7 +6,6 @@ description: >-
   the user's intent is to record, organize, or retain their learning journey and 
   reflection for later recall. Writes recall-focused reflection essentials to 
   kebab-case markdown files under kb/; merges into existing files when context matches.
-compatibility: opencode
 metadata:
   agent: cocrates
 ---

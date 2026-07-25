@@ -10,7 +10,6 @@ description: >-
   Gemini-compatible audio YAML. Directs performance via style, accent, pace,
   tone, audio tags, and voice choice for exact text recitation; only calls MCP
   after explicit approval.
-compatibility: opencode
 metadata:
   agent: cocrates
 ---

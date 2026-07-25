@@ -14,7 +14,6 @@ description: >-
   each step. Chapter is the publication unit; episodes nest under chapters for design only.
   Pipeline loop and approval rules are in SKILL.md; per-stage procedures in workflow/.
   For general non-narrative documents, use document-authoring instead.
-compatibility: opencode
 metadata:
   agent: cocrates
 ---

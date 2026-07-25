@@ -7,7 +7,6 @@ description: >-
   to decide among valid approaches — architectural or otherwise. Explicitly
   identifies and guides the user through downstream/derived concerns that
   arise from a chosen solution.
-compatibility: opencode
 metadata:
   agent: cocrates
 ---

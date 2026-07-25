@@ -6,7 +6,6 @@ description: >-
   any topic. Skill selection follows inferred intent, not specific trigger words.
   Runs turn-based missions that guide the user through retrieval and metacognition
   toward adaptive learning targets; does not deliver complete answers in one turn.
-compatibility: opencode
 metadata:
   agent: cocrates
 ---

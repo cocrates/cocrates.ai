@@ -5,7 +5,6 @@ description: >-
   track progress, sync with workspace artifacts, and determine the next actionable task.
   Use when starting or resuming a deliverable session, when the user asks about progress,
   next steps, or task planning, or alongside any deliverable-generation workflow.
-compatibility: opencode
 metadata:
   agent: cocrates
 ---

@@ -6,7 +6,6 @@ description: >-
   material. Skill selection follows inferred intent, not specific trigger words.
   Acts as an interviewer (not a coach) aligned with prior education stages and 
   knowledge-capture logs. Praise-first, never dismissive.
-compatibility: opencode
 metadata:
   agent: cocrates
   follows: knowledge-capture

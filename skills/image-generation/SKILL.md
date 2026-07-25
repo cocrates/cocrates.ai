@@ -9,7 +9,6 @@ description: >-
   or when they need an image-generation prompt or Gemini-compatible image YAML.
   Captures user intent first, writes a picture-ready prompt, and only calls MCP
   after explicit approval.
-compatibility: opencode
 metadata:
   agent: cocrates
 ---

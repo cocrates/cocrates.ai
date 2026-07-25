@@ -7,7 +7,6 @@ description: >-
   consolidate approved ADR decisions into a single self-contained spec;
   establish a high-level {project-root}/spec/PRD.md; or refine an existing
   spec based on post-generation verification feedback.
-compatibility: opencode
 metadata:
   agent: cocrates
 ---

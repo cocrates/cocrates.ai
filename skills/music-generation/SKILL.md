@@ -9,7 +9,6 @@ description: >-
   need a Lyria-compatible music YAML. Crafts specific prompts (genre,
   instruments, BPM, key, mood, structure, lyrics, timelines) for optimal Lyria
   3 output; only calls MCP after explicit approval.
-compatibility: opencode
 metadata:
   agent: cocrates
 ---

@@ -9,7 +9,6 @@ description: >-
   (then enter Step 0 Spec Readiness Gate: resolve/create {project-root} if needed,
   approve PRD, identify/review ASRs via ASR.md, approve ADRs, write Specs
   through adr-writing and spec-writing, then generate).
-compatibility: opencode
 metadata:
   agent: cocrates
 ---
