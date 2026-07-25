@@ -1,0 +1,384 @@
+title: jsondb 동시 요청 병렬 처리
+
+summary: |
+  에이전트와 CLI 사용자가 동시에 jsondb에 요청할 때,
+  파일별 독립 Engine과 잠금 메커니즘으로 병렬 처리와 데이터 무결성이 보장된다.
+
+explanation: |
+  에이전트(Agent 1, 2)와 CLI 사용자가 동시에 요청을 보낸다.
+  CLI는 내부적으로 모든 명령을 HTTP 요청으로 변환하므로, 에이전트와 동일한 경로로 처리된다.
+  
+  Go HTTP 서버는 들어오는 각 요청마다 별도의 goroutine을 생성하여 병렬로 처리한다.
+  goroutine은 독립적으로 실행되므로, 한 요청이 대기 중이어도 다른 요청에 영향을 주지 않는다.
+  
+  각 파일마다 독립적인 Engine 인스턴스가 존재한다.
+  같은 파일에 대한 요청은 하나의 Engine을 공유하고, 다른 파일에 대한 요청은 완전히 독립된다.
+  
+  파일별 잠금이 적용되어, 읽기 요청은 서로 병렬로 처리되고,
+  쓰기 요청은 해당 파일의 모든 접근이 끝날 때까지 대기한다.
+  
+  이 구조로 에이전트와 CLI 사용자는 서로 다른 파일에 대해 완전히 병렬로 작업하고,
+  같은 파일에 대해서는 안전하게 협업한다.
+
+elements:
+  # 요청 소스 (Left)
+  - id: agent1
+    label: Agent 1
+    kind: actor
+    notes: 에이전트 1 - HTTP 요청 전송
+  - id: agent2
+    label: Agent 2
+    kind: actor
+    notes: 에이전트 2 - HTTP 요청 전송
+  - id: cli_user
+    label: CLI 사용자
+    kind: actor
+    notes: 사람 - CLI 명령어 입력
+  - id: cli
+    label: CLI
+    kind: system
+    notes: 명령어를 HTTP 요청으로 변환
+
+  # Server 영역 (Center)
+  - id: server
+    label: Server
+    kind: boundary
+    notes: HTTP 서버 - goroutine 생성 및 관리
+  - id: goroutine1
+    label: goroutine 1
+    kind: process
+    parentId: server
+    notes: Agent 1 요청 처리
+  - id: goroutine2
+    label: goroutine 2
+    kind: process
+    parentId: server
+    notes: Agent 2 요청 처리
+  - id: goroutine3
+    label: goroutine 3
+    kind: process
+    parentId: server
+    notes: CLI 요청 처리
+
+  # Engine 영역 (Right-Center)
+  - id: engine_map
+    label: Engine Map
+    kind: boundary
+    notes: 파일별 Engine 인스턴스 관리
+  - id: engine_tasks
+    label: Engine (tasks)
+    kind: system
+    parentId: engine_map
+    notes: tasks.json 전용 Engine - goroutine 1, 3이 공유
+  - id: engine_users
+    label: Engine (users)
+    kind: system
+    parentId: engine_map
+    notes: users.json 전용 Engine - goroutine 2가 사용
+
+  # Storage 영역 (Right)
+  - id: storage
+    label: Storage
+    kind: boundary
+    notes: 파일 기반 저장소
+  - id: file_tasks
+    label: tasks.json
+    kind: data
+    parentId: storage
+    notes: 파일별 잠금 적용
+  - id: file_users
+    label: users.json
+    kind: data
+    parentId: storage
+    notes: 파일별 잠금 적용
+
+relationships:
+  # 사용자 → UI (uses)
+  - id: rel_cliuser_cli
+    from: cli_user
+    to: cli
+    type: uses
+    label: 명령어 입력
+    layout: edge
+
+  # 클라이언트 → 서버 (requests)
+  - id: rel_agent1_goroutine1
+    from: agent1
+    to: goroutine1
+    type: requests
+    label: HTTP 요청
+    layout: edge
+  - id: rel_agent2_goroutine2
+    from: agent2
+    to: goroutine2
+    type: requests
+    label: HTTP 요청
+    layout: edge
+  - id: rel_cli_goroutine3
+    from: cli
+    to: goroutine3
+    type: requests
+    label: HTTP 요청
+    layout: edge
+
+  # 내부 호출 (calls)
+  - id: rel_g1_engine_tasks
+    from: goroutine1
+    to: engine_tasks
+    type: calls
+    label: 호출
+    layout: edge
+  - id: rel_g2_engine_users
+    from: goroutine2
+    to: engine_users
+    type: calls
+    label: 호출
+    layout: edge
+  - id: rel_g3_engine_tasks
+    from: goroutine3
+    to: engine_tasks
+    type: calls
+    label: 호출 (공유)
+    layout: edge
+  - id: rel_engine_tasks_file
+    from: engine_tasks
+    to: file_tasks
+    type: calls
+    label: 읽기/쓰기
+    layout: edge
+  - id: rel_engine_users_file
+    from: engine_users
+    to: file_users
+    type: calls
+    label: 읽기/쓰기
+    layout: edge
+
+diagram:
+  canvas:
+    viewBackgroundColor: "#ffffff"
+  nodes:
+    # 요청 소스 (Left)
+    - elementId: agent1
+      shape: ellipse
+      x: 40
+      y: 120
+      width: 120
+      height: 60
+      style:
+        strokeColor: "#1e1e1e"
+        backgroundColor: "#a5d8ff"
+        fillStyle: solid
+        roughness: 1
+    - elementId: agent2
+      shape: ellipse
+      x: 40
+      y: 240
+      width: 120
+      height: 60
+      style:
+        strokeColor: "#1e1e1e"
+        backgroundColor: "#a5d8ff"
+        fillStyle: solid
+        roughness: 1
+    - elementId: cli_user
+      shape: ellipse
+      x: 40
+      y: 360
+      width: 120
+      height: 60
+      style:
+        strokeColor: "#1e1e1e"
+        backgroundColor: "#a5d8ff"
+        fillStyle: solid
+        roughness: 1
+    - elementId: cli
+      shape: rectangle
+      x: 200
+      y: 360
+      width: 120
+      height: 60
+      style:
+        strokeColor: "#1e1e1e"
+        backgroundColor: "#d0bfff"
+        fillStyle: solid
+        roughness: 1
+
+    # Server (Center)
+    - elementId: server
+      shape: rectangle
+      x: 380
+      y: 80
+      width: 260
+      height: 400
+      children: [goroutine1, goroutine2, goroutine3]
+      style:
+        strokeColor: "#1e1e1e"
+        backgroundColor: "#ffffff"
+        fillStyle: solid
+        roughness: 1
+    - elementId: goroutine1
+      shape: rectangle
+      parentElementId: server
+      x: 420
+      y: 160
+      width: 180
+      height: 60
+      style:
+        strokeColor: "#1e1e1e"
+        backgroundColor: "#b2f2bb"
+        fillStyle: solid
+        roughness: 1
+    - elementId: goroutine2
+      shape: rectangle
+      parentElementId: server
+      x: 420
+      y: 260
+      width: 180
+      height: 60
+      style:
+        strokeColor: "#1e1e1e"
+        backgroundColor: "#b2f2bb"
+        fillStyle: solid
+        roughness: 1
+    - elementId: goroutine3
+      shape: rectangle
+      parentElementId: server
+      x: 420
+      y: 360
+      width: 180
+      height: 60
+      style:
+        strokeColor: "#1e1e1e"
+        backgroundColor: "#b2f2bb"
+        fillStyle: solid
+        roughness: 1
+
+    # Engine Map (Right-Center)
+    - elementId: engine_map
+      shape: rectangle
+      x: 700
+      y: 80
+      width: 220
+      height: 400
+      children: [engine_tasks, engine_users]
+      style:
+        strokeColor: "#1e1e1e"
+        backgroundColor: "#ffffff"
+        fillStyle: solid
+        roughness: 1
+    - elementId: engine_tasks
+      shape: rectangle
+      parentElementId: engine_map
+      x: 740
+      y: 160
+      width: 140
+      height: 80
+      style:
+        strokeColor: "#1e1e1e"
+        backgroundColor: "#ffec99"
+        fillStyle: solid
+        roughness: 1
+    - elementId: engine_users
+      shape: rectangle
+      parentElementId: engine_map
+      x: 740
+      y: 320
+      width: 140
+      height: 80
+      style:
+        strokeColor: "#1e1e1e"
+        backgroundColor: "#ffec99"
+        fillStyle: solid
+        roughness: 1
+
+    # Storage (Right)
+    - elementId: storage
+      shape: rectangle
+      x: 980
+      y: 80
+      width: 180
+      height: 400
+      children: [file_tasks, file_users]
+      style:
+        strokeColor: "#1e1e1e"
+        backgroundColor: "#ffffff"
+        fillStyle: solid
+        roughness: 1
+    - elementId: file_tasks
+      shape: rectangle
+      parentElementId: storage
+      x: 1020
+      y: 160
+      width: 100
+      height: 60
+      style:
+        strokeColor: "#1e1e1e"
+        backgroundColor: "#ffc9c9"
+        fillStyle: solid
+        roughness: 1
+    - elementId: file_users
+      shape: rectangle
+      parentElementId: storage
+      x: 1020
+      y: 320
+      width: 100
+      height: 60
+      style:
+        strokeColor: "#1e1e1e"
+        backgroundColor: "#ffc9c9"
+        fillStyle: solid
+        roughness: 1
+
+  edges:
+    # 사용자 → UI (uses)
+    - relationshipId: rel_cliuser_cli
+      fromNode: cli_user
+      toNode: cli
+      endArrowhead: arrow
+      label: 명령어 입력
+
+    # 클라이언트 → 서버 (requests)
+    - relationshipId: rel_agent1_goroutine1
+      fromNode: agent1
+      toNode: goroutine1
+      endArrowhead: arrow
+      label: HTTP 요청
+    - relationshipId: rel_agent2_goroutine2
+      fromNode: agent2
+      toNode: goroutine2
+      endArrowhead: arrow
+      label: HTTP 요청
+    - relationshipId: rel_cli_goroutine3
+      fromNode: cli
+      toNode: goroutine3
+      endArrowhead: arrow
+      label: HTTP 요청
+
+    # 내부 호출 (calls)
+    - relationshipId: rel_g1_engine_tasks
+      fromNode: goroutine1
+      toNode: engine_tasks
+      endArrowhead: arrow
+      label: 호출
+    - relationshipId: rel_g2_engine_users
+      fromNode: goroutine2
+      toNode: engine_users
+      endArrowhead: arrow
+      label: 호출
+    - relationshipId: rel_g3_engine_tasks
+      fromNode: goroutine3
+      toNode: engine_tasks
+      endArrowhead: arrow
+      label: 호출 (공유)
+    - relationshipId: rel_engine_tasks_file
+      fromNode: engine_tasks
+      toNode: file_tasks
+      endArrowhead: arrow
+      label: 읽기/쓰기
+    - relationshipId: rel_engine_users_file
+      fromNode: engine_users
+      toNode: file_users
+      endArrowhead: arrow
+      label: 읽기/쓰기
+
+output: "./jsondb-concurrency.excalidraw"
