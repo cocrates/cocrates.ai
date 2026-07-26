@@ -118,7 +118,7 @@ Kernel → Components → Frame → Outline → Spec → Skill → Verification
 | **Components** | plan | Identify component dimensions and preliminary dependencies |
 | **Frame** | architecture design | Five-stage workflow, file structure, component dependency map, approval points |
 | **Outline** | detail design | Per-stage file artifacts, inputs, completion criteria |
-| **Spec → Skill → Verification** | generation | Write and verify `.opencode/skills/{skill-slug}/SKILL.md` |
+| **Spec → Skill → Verification** | generation | Write and verify `.opencode/skills/{skill-slug}/SKILL.md` — **frontmatter first** (`name`, `description`, `metadata.agent: cocrates`), then body. Verification must confirm `description` alone selects the skill correctly |
 
 ### Outline: Per-File Artifacts
 
@@ -137,17 +137,50 @@ Define each intermediate and final artifact file as follows:
 
 ### Rules for Authoring Generation Skills
 
-**State in `description` which artifact-generation requests select the skill.** The Cocrates Agent finds and loads skills from the skill list using `description`. Do not add a `## When to Use` section in the body.
+**Every generated `SKILL.md` MUST start with YAML frontmatter.** The Cocrates Agent discovers and selects skills from the skill list using frontmatter — especially `description`. Without it, the skill will not be loaded or matched. Do not add a `## When to Use` section in the body; selection criteria belong only in `description`.
 
-Include in `description`:
+#### Required Frontmatter
 
-* **What** the skill does
-* **Which artifact-generation requests** select it — artifact type, trigger terms
-* Exclusion conditions when another skill is more appropriate (if needed)
+```yaml
+---
+name: {skill-slug}
+description: >-
+  {What the skill produces}. Select when the user asks to {trigger verbs}
+  {artifact type / deliverable}, or {related request phrasings}. {How the
+  skill structures the work — stages, gates, consistency rules}. {Exclusion:
+  when another skill is more appropriate, if needed}.
+metadata:
+  agent: cocrates
+---
+```
+
+| Field | Required | Rules |
+| --- | --- | --- |
+| `name` | Yes | Same as `{skill-slug}` (kebab-case directory name) |
+| `description` | Yes | Multi-line (`>-`). Must make skill selection unambiguous for the agent |
+| `metadata.agent` | Yes | Always `cocrates` |
+
+Include in `description` (order matters for scanning):
+
+1. **What** — the artifact / deliverable this skill produces
+2. **When to select** — concrete user-request patterns: artifact type, trigger verbs, synonyms (so the agent matches the right skill)
+3. **How it works** — that generation is structured (Snowflake stages, approval gates, consistency rules) — enough that the agent knows this skill owns the *structured* path to that deliverable
+4. **Exclusion** (if needed) — when another skill is more appropriate
+
+**Description quality bar:** After reading `description` alone, the agent must know: (a) which user requests map to this skill, and (b) that this skill is the structured workflow for producing that artifact — not a one-shot dump.
 
 ### Generation Skill Body Structure
 
 ```markdown
+---
+name: {skill-slug}
+description: >-
+  {What}. Select when the user asks to {triggers} {artifact type}.
+  {Structured workflow summary}. {Exclusion if needed}.
+metadata:
+  agent: cocrates
+---
+
 # {Skill Title}
 
 ## Core Principles
@@ -175,18 +208,20 @@ Include in `description`:
 
 ## Prohibitions
 
+* Writing a `SKILL.md` without YAML frontmatter (`name`, `description`, `metadata.agent: cocrates`)
+* Omitting or weakening `description` so the agent cannot tell when to select the skill
 * Adding a `## When to Use` section in the body — selection criteria belong only in `description`
 * Filling a `SKILL.md` template without component, dependency structure, and per-stage refinement design
 * Authoring a skill that proceeds to generation without a fully locked detail design
 * Leaving intermediate artifacts in chat only, without file-save rules
 * Omitting **Resolve Project Root** (three workspace types + user confirmation before create) when the skill creates deliverable project folders
 * Proceeding to the next stage with ambiguous or passive user feedback without validating core criteria
-* Omitting `compatibility: opencode` and `metadata.agent: cocrates`
 
 ## Completion Criteria
 
 * `.opencode/skills/{skill-slug}/SKILL.md` is successfully created
-* `description` states which artifact-generation requests select the skill (trigger terms)
+* File begins with required YAML frontmatter: `name`, `description` (`>-`), `metadata.agent: cocrates`
+* `description` states what the skill produces, which artifact-generation requests select it (trigger terms), and that work is structured via this skill's workflow
 * define → plan → architecture design → detail design → generation flow is clearly mapped
 * Per-component, per-stage refinement content and component dependency rules are explicitly specified
 * Per-stage targeted approval points, rollback triggers, and prohibitions are included
