@@ -29,8 +29,41 @@
   "homepage.section.docs": {
     "message": "Perjalanan 14 Bagian Melalui Cocrates"
   },
-  "homepage.section.media": {
-    "message": "Kursus & Video"
+  "homepage.section.course": {
+    "message": "Kursus Konsep yang Ramah"
+  },
+  "homepage.section.videos": {
+    "message": "Video Praktis dari Kasus Nyata"
+  },
+  "homepage.course.intro": {
+    "message": "Kursus Inflearn yang menjelaskan konsep inti Cocrates dengan cara yang ramah."
+  },
+  "homepage.videos.intro": {
+    "message": "Pelajari cara menggunakan Cocrates Agent Harness melalui contoh kasus nyata."
+  },
+  "homepage.videos.subscribe": {
+    "message": "Video terus ditambahkan — disarankan untuk berlangganan."
+  },
+  "homepage.videos.feedback": {
+    "message": "Ada pertanyaan atau permintaan? Tinggalkan komentar atau hubungi kami di saluran {discordLink}."
+  },
+  "homepage.youtube.channel": {
+    "message": "Cocrates Youtube Channel"
+  },
+  "homepage.youtube.install": {
+    "message": "Cara Menginstal Cocrates Agent Harness"
+  },
+  "homepage.youtube.learn": {
+    "message": "Cara Belajar yang Benar dengan AI"
+  },
+  "homepage.youtube.write": {
+    "message": "Cara yang Benar untuk Menulis Laporan dengan AI"
+  },
+  "homepage.youtube.spec": {
+    "message": "Cara Mengembangkan yang Benar dengan AI"
+  },
+  "homepage.youtube.draw": {
+    "message": "Cara yang Benar untuk Menghasilkan Gambar dan Video dengan AI"
   },
   "homepage.inflearn.banner.alt": {
     "message": "Kursus Inflearn: Cara Menggunakan AI dengan Benar — Cocrates"

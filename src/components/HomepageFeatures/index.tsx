@@ -236,6 +236,63 @@ function EpisodeCard({ep, title, summary, to}: EpisodeItem) {
   );
 }
 
+type YouTubeItem = {
+  title: string;
+  image: string;
+  href: string;
+};
+
+const YouTubeList: YouTubeItem[] = [
+  {
+    title: translate({
+      id: 'homepage.youtube.channel',
+      message: 'Cocrates Youtube Channel',
+    }),
+    image: '/img/youtube/00-cocrates-channel.png',
+    href: 'https://www.youtube.com/@cocrates-harness',
+  },
+  {
+    title: translate({
+      id: 'homepage.youtube.install',
+      message: 'Cocrates Agent Harness 설치 방법',
+    }),
+    image: '/img/youtube/01-cocrates-harness-installation.png',
+    href: 'https://youtu.be/1Eqczus33tU',
+  },
+  {
+    title: translate({
+      id: 'homepage.youtube.learn',
+      message: 'AI를 이용한 올바른 학습 방법',
+    }),
+    image: '/img/youtube/02-learn-with-ai.png',
+    href: 'https://youtu.be/UoX4d9EcHd8',
+  },
+  {
+    title: translate({
+      id: 'homepage.youtube.write',
+      message: 'AI로 보고서를 쓰는 올바른 방법',
+    }),
+    image: '/img/youtube/03-write-with-ai.png',
+    href: 'https://youtu.be/c_1aoWeQjOM',
+  },
+  {
+    title: translate({
+      id: 'homepage.youtube.spec',
+      message: 'AI를 이용한 올바른 개발 방법',
+    }),
+    image: '/img/youtube/04-spec-with-ai.png',
+    href: 'https://youtu.be/G2j2PKBiJlQ',
+  },
+  {
+    title: translate({
+      id: 'homepage.youtube.draw',
+      message: 'AI로 이미지/동영상을 생성하는 올바른 방법',
+    }),
+    image: '/img/youtube/05-draw-with-ai.png',
+    href: 'https://youtu.be/C0I8C4a48OU',
+  },
+];
+
 function InflearnBanner() {
   const {
     i18n: {currentLocale},
@@ -259,6 +316,20 @@ function InflearnBanner() {
       target="_blank"
       rel="noopener noreferrer">
       <img src={bannerSrc} alt={alt} width={1279} height={321} />
+    </a>
+  );
+}
+
+function YouTubeCard({title, image, href}: YouTubeItem) {
+  const src = useBaseUrl(image);
+  return (
+    <a
+      className={styles.youtubeCard}
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer">
+      <img src={src} alt={title} width={480} height={270} />
+      <span className={styles.youtubeCardTitle}>{title}</span>
     </a>
   );
 }
@@ -386,14 +457,63 @@ export default function HomepageFeatures(): ReactNode {
       </Section>
 
       <Section
-        id="media"
+        id="course"
         title={translate({
-          id: 'homepage.section.media',
-          message: '강의와 영상',
+          id: 'homepage.section.course',
+          message: '개념을 친절하게 풀어주는 강의',
         })}>
+        <p className={styles.paragraph}>
+          <Translate id="homepage.course.intro">
+            Cocrates의 핵심 개념을 친절하게 설명하는 인프런 강의입니다.
+          </Translate>
+        </p>
         <div className={styles.mediaStack}>
           <InflearnBanner />
         </div>
+      </Section>
+
+      <Section
+        id="videos"
+        title={translate({
+          id: 'homepage.section.videos',
+          message: '실제 사례로 배우는 실전 동영상',
+        })}>
+        <p className={styles.paragraph}>
+          <Translate id="homepage.videos.intro">
+            실제 사례를 통해 Cocrates Agent Harness를 사용하는 방법을
+            보여줍니다.
+          </Translate>
+        </p>
+        <div className={styles.youtubeGrid}>
+          {YouTubeList.map(item => (
+            <YouTubeCard key={item.href} {...item} />
+          ))}
+        </div>
+        <ul className={clsx(styles.list, styles.videoNotes)}>
+          <li>
+            <Translate id="homepage.videos.subscribe">
+              동영상이 계속 올라오니 구독을 권장합니다.
+            </Translate>
+          </li>
+          <li>
+            <Translate
+              id="homepage.videos.feedback"
+              values={{
+                discordLink: (
+                  <a
+                    href="https://bit.ly/cocrates"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    Discord
+                  </a>
+                ),
+              }}>
+              {
+                '질문이나 요청이 있으면 댓글 또는 {discordLink} 채널로 남겨 주세요.'
+              }
+            </Translate>
+          </li>
+        </ul>
       </Section>
     </>
   );

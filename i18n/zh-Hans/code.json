@@ -29,8 +29,41 @@
   "homepage.section.docs": {
     "message": "Cocrates 十四讲之旅"
   },
-  "homepage.section.media": {
-    "message": "课程与视频"
+  "homepage.section.course": {
+    "message": "把概念讲清楚的友好课程"
+  },
+  "homepage.section.videos": {
+    "message": "用真实案例学习的实战视频"
+  },
+  "homepage.course.intro": {
+    "message": "用友好方式讲解 Cocrates 核心概念的 Inflearn 课程。"
+  },
+  "homepage.videos.intro": {
+    "message": "通过真实案例展示如何使用 Cocrates Agent Harness。"
+  },
+  "homepage.videos.subscribe": {
+    "message": "视频会持续更新，建议订阅频道。"
+  },
+  "homepage.videos.feedback": {
+    "message": "有问题或请求，请在评论区留言，或通过 {discordLink} 频道联系我们。"
+  },
+  "homepage.youtube.channel": {
+    "message": "Cocrates Youtube Channel"
+  },
+  "homepage.youtube.install": {
+    "message": "Cocrates Agent Harness 安装方法"
+  },
+  "homepage.youtube.learn": {
+    "message": "用 AI 正确学习的方法"
+  },
+  "homepage.youtube.write": {
+    "message": "用 AI 正确写报告的方法"
+  },
+  "homepage.youtube.spec": {
+    "message": "用 AI 正确开发的方法"
+  },
+  "homepage.youtube.draw": {
+    "message": "用 AI 正确生成图像与视频的方法"
   },
   "homepage.inflearn.banner.alt": {
     "message": "Inflearn 课程：正确使用 AI 的方法 — Cocrates"

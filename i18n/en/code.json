@@ -29,8 +29,41 @@
   "homepage.section.docs": {
     "message": "A 14-Part Journey Through Cocrates"
   },
-  "homepage.section.media": {
-    "message": "Courses & Videos"
+  "homepage.section.course": {
+    "message": "A Friendly Course on the Concepts"
+  },
+  "homepage.section.videos": {
+    "message": "Practical Videos from Real Cases"
+  },
+  "homepage.course.intro": {
+    "message": "An Inflearn course that explains Cocrates concepts clearly and kindly."
+  },
+  "homepage.videos.intro": {
+    "message": "Learn how to use Cocrates Agent Harness through real working examples."
+  },
+  "homepage.videos.subscribe": {
+    "message": "New videos keep coming — subscribe to stay updated."
+  },
+  "homepage.videos.feedback": {
+    "message": "Questions or requests? Leave a comment or reach us on the {discordLink} channel."
+  },
+  "homepage.youtube.channel": {
+    "message": "Cocrates Youtube Channel"
+  },
+  "homepage.youtube.install": {
+    "message": "How to Install Cocrates Agent Harness"
+  },
+  "homepage.youtube.learn": {
+    "message": "The Right Way to Learn with AI"
+  },
+  "homepage.youtube.write": {
+    "message": "The Right Way to Write Reports with AI"
+  },
+  "homepage.youtube.spec": {
+    "message": "The Right Way to Develop with AI"
+  },
+  "homepage.youtube.draw": {
+    "message": "The Right Way to Generate Images and Videos with AI"
   },
   "homepage.inflearn.banner.alt": {
     "message": "Inflearn course: How to Use AI the Right Way — Cocrates"
