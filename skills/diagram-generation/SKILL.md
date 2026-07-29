@@ -33,7 +33,7 @@ Semantic design is **`diagram.elements` + `diagram.relationships`** (there is no
 - **Consistency** — keep present `title` / `summary` / `explanation` aligned; the graph must cover `explanation`.
 - **Containment is structural** — use `parentId`, never a containment-only arrow.
 
-Chat and human-facing YAML fields use the **user's language**. Machine ids are English kebab-case.
+Chat and human-facing YAML fields (`title`, `summary`, **`explanation`**, `label`, `notes`) use the **user's language** — never default them to English when the user writes in another language. Machine ids are English kebab-case.
 
 ## Workflow
 
@@ -72,7 +72,7 @@ Do not write YAML until Discover is sufficient (or already was). Work **requirem
 | `summary` | One-sentence claim the viewer could verify by looking | No |
 | `explanation` | Viewing-order walkthrough — what you would say while pointing at the picture | Yes |
 
-**`explanation`:** Ordered beats the eye can follow. Name concepts that will become elements and edges. Do not merely restate title/summary.
+**`explanation`:** Ordered beats the eye can follow, written in the **user's language**. Name concepts that will become elements and edges. Do not merely restate title/summary.
 
 **Consistency:** Present fields must stay one story. Without `summary`, align `title` ↔ `explanation`. On edits, realign all present fields before designing the graph.
 
@@ -99,33 +99,35 @@ Independent stories → prefer separate YAML files. When coherent → Phase 2.
 Write the **complete** design YAML. No layout coordinates.
 
 ```yaml
-title: Auth request path
+# Human fields (title / summary / explanation / label) = user's language
+# Machine ids = English kebab-case
+title: 인증 요청 경로
 backend: excalidraw
 
 # summary: |   # optional
-#   A client HTTPS call reaches Auth Service through the API Gateway.
+#   클라이언트의 HTTPS 호출이 API 게이트웨이를 거쳐 인증 서비스에 도달한다.
 
 explanation: |
-  Start at the Client: it sends an HTTPS request to the API Gateway.
-  The gateway uses the Auth Service to validate the token.
-  Point along the arrow labeled "validates token."
+  클라이언트에서 시작한다: HTTPS 요청을 API 게이트웨이로 보낸다.
+  게이트웨이는 인증 서비스로 토큰을 검증한다.
+  "토큰 검증" 화살표를 따라가며 설명한다.
 
 output: "./auth-overview.excalidraw"
 
 diagram:
   elements:
     - id: client
-      label: Client
+      label: 클라이언트
       kind: actor
     - id: vpc
       label: VPC
       kind: boundary
     - id: api-gateway
-      label: API Gateway
+      label: API 게이트웨이
       kind: system
       parentId: vpc
     - id: auth-service
-      label: Auth Service
+      label: 인증 서비스
       kind: system
       parentId: vpc
 
@@ -141,7 +143,7 @@ diagram:
       to: auth-service
       type: uses
       direction: directed
-      label: validates token
+      label: 토큰 검증
 ```
 
 ### Elements
@@ -232,5 +234,6 @@ Procedure: read file → infer graph → write explanation → deliver by mode. 
 - Generating without a complete approved YAML (unless Express)
 - Layout geometry in YAML; inventing elements in a generator
 - Containment as arrow only; non-English or non-kebab machine ids
+- Defaulting `explanation` / `title` / `summary` / `label` to English when the user writes in another language
 - Auto Express; hiding validation failures
 - On reverse: inventing graph nodes; copying layout into recovered YAML

@@ -35,7 +35,7 @@ Pipeline: **`message`** (story/beats to convey) → **`design`** (how to visuali
 - **Consistency** — requirement fields aligned; `design` ↔ `params.prompt` ↔ `params.images` aligned.
 - **Intent fidelity** — do not invent unrequested subjects, props, text, or styles.
 
-Human YAML fields use the **user's language**. `params.prompt` is **English only**.
+Human YAML fields (`title`, `summary`, **`message`**, `design`) use the **user's language** — never default them to English when the user writes in another language. `params.prompt` is **English only**.
 
 ## Workflow
 
@@ -88,7 +88,7 @@ Do not write partial YAML here. Work **requirement before visual design**.
 | `summary` | One-sentence claim | No |
 | `message` | Communicative story / beats — what the image should *mean* | Yes |
 
-**`message` (story / beats):** The takeaway narrative the viewer should receive — claims, emotion, relationship, plot beats, or on-image text *as meaning*. Write it so someone could retell the intended story without sketching the picture.
+**`message` (story / beats):** The takeaway narrative the viewer should receive — claims, emotion, relationship, plot beats, or on-image text *as meaning*. Write it in the **user's language** so someone could retell the intended story without sketching the picture.
 
 | `message` owns | Belongs in `design` / prompt instead |
 |----------------|--------------------------------------|
@@ -126,16 +126,17 @@ When coherent → Phase 2.
 ## Phase 2 — Write YAML
 
 ```yaml
-title: Cafe cat
+# Human fields (title / message / design) = user's language; params.prompt = English
+title: 카페 고양이
 message: |
-  A quiet pause in everyday life: warmth, stillness, and gentle companionship
-  in a cafe — the viewer should feel unhurried calm, not a busy shop.
+  일상의 고요한 쉼: 카페 안의 온기와 고요, 부드러운 동반감 —
+  분주한 가게가 아니라 서두르지 않는 평온을 느끼게 한다.
 
 design: |
-  Fluffy orange tabby with white chest and green eyes, upright on a worn oak
-  cafe table, paws together, looking toward a rain-streaked window on the left.
-  Steaming cup beside the cat. Soft cafe bokeh. Medium shot, cinematic photo,
-  late-afternoon side light. No text. Flash, 1K, 16:9, blog header.
+  흰 가슴·초록 눈의 복슬복슬한 주황 태비. 낡은 오크 카페 테이블 위에
+  앉고, 앞발을 모은 채 왼쪽 빗물 창을 바라봄. 옆에는 김이 나는 컵.
+  부드러운 카페 보케. 미디엄 샷, 시네마틱 사진, 늦은 오후 측면광.
+  텍스트 없음. Flash, 1K, 16:9, 블로그 헤더.
 
 # --- cocrates-google-genai ---
 type: image
@@ -233,17 +234,18 @@ When improving from user feedback or an AI analyze report: apply only **user-agr
 ## Multi-ref example
 
 ```yaml
-title: Page 04 — Sidekick asks for help
+# Human fields = user's language; params.prompt = English
+title: 4쪽 — 조수가 도움을 청하다
 message: |
-  Danger is coming: the sidekick seeks the hero’s help, and the hero must
-  respond. Short on-image text carries the page’s spoken beat for young readers.
+  위험이 다가온다: 조수가 영웅에게 도움을 구하고, 영웅은 응답해야 한다.
+  짧은 화면 속 글이 어린 독자를 위한 대사 비트를 나른다.
 
 design: |
-  Refs (params.images order):
-  1. characters/hero-adventure.yaml → ./characters/hero-adventure.png — keep hero look/outfit
-  2. characters/sidekick.yaml → ./characters/sidekick.png — keep sidekick look
-  3. locations/plaza-peaceful.yaml → ./locations/plaza-peaceful.png — keep plaza
-  Scene: sidekick runs to hero; hero surprised; dust/danger. Text overlays. 4:3, 1K.
+  참조 (params.images 순서):
+  1. characters/hero-adventure.yaml → ./characters/hero-adventure.png — 영웅 외형/복장 유지
+  2. characters/sidekick.yaml → ./characters/sidekick.png — 조수 외형 유지
+  3. locations/plaza-peaceful.yaml → ./locations/plaza-peaceful.png — 광장 유지
+  장면: 조수가 영웅에게 달려감; 영웅은 놀람; 먼지/위험. 텍스트 오버레이. 4:3, 1K.
 
 # --- cocrates-google-genai ---
 type: image
@@ -273,6 +275,7 @@ output: "./page04.png"
 - MCP before YAML approval (except Express); auto Express
 - Auto `analyze` without an explicit user request; applying analyze suggestions without user agreement
 - `message` that duplicates `design` (shot lists, wardrobe, camera, lighting)
+- Defaulting `message` / `design` / `title` to English when the user writes in another language
 - Inconsistent `design` / prompt / `images`; non-English prompt
 - Guessing ref paths; generate after failed preflight
 - Inventing unrequested content; ignoring refs; Flash-only options on Pro

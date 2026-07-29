@@ -38,7 +38,7 @@ Pipeline: **`message`** (story / mood / purpose to convey) → **`design`** (how
 - **Single-turn Lyria** — no in-model multi-turn edit; revise = new YAML + `generate`. Prefer Clip before Pro when exploring.
 - **Intent fidelity** — do not invent unrequested genre, vocals, lyrics, or structure.
 
-Human YAML fields use the **user's language**. `params.prompt` is **English** unless non-English lyrics require matching prompt language.
+Human YAML fields (`title`, `summary`, **`message`**, `design`) use the **user's language** — never default them to English when the user writes in another language. `params.prompt` is **English** unless non-English lyrics require matching prompt language.
 
 ## Workflow
 
@@ -92,7 +92,7 @@ Do not write partial YAML here. Work **requirement before music design**.
 | `summary` | One-sentence claim | No |
 | `message` | Communicative story / beats — what the music should *mean* or *do* for the listener | Yes |
 
-**`message` (story / beats):** Purpose and emotional/narrative takeaway — why this music exists (BGM calm, night-city longing, game-loop energy…). Write it so someone could retell the intent without naming instruments or BPM.
+**`message` (story / beats):** Purpose and emotional/narrative takeaway — why this music exists (BGM calm, night-city longing, game-loop energy…). Write it in the **user's language** so someone could retell the intent without naming instruments or BPM.
 
 | `message` owns | Belongs in `design` / prompt instead |
 |----------------|--------------------------------------|
@@ -136,14 +136,15 @@ When coherent → Phase 2.
 ## Phase 2 — Write YAML
 
 ```yaml
-title: Cafe BGM
+# Human fields (title / message / design) = user's language; params.prompt = English
+title: 카페 BGM
 message: |
-  Quiet cafe warmth that supports conversation — present but unobtrusive;
-  a gentle pause, not a performance demanding attention.
+  대화를 받쳐 주는 조용한 카페의 온기 — 존재하되 방해하지 않고,
+  시선을 빼앗는 공연이 아니라 부드러운 쉼.
 
 design: |
-  Clip, instrumental only. Lo-fi hip hop: dusty vinyl, mellow Rhodes, boom-bap
-  ~85 BPM, jazzy upright bass. No vocals. mp3.
+  Clip, 인스트루멘탈만. 로파이 힙합: 먼지 낀 바이닐, 부드러운 로즈,
+  붐뱁 ~85 BPM, 재즈 업라이트 베이스. 보컬 없음. mp3.
 
 # --- cocrates-google-genai ---
 type: music
@@ -236,14 +237,15 @@ When improving from user feedback or an AI analyze report: apply only **user-agr
 ## Full-song example (Pro + lyrics)
 
 ```yaml
-title: Echoes
+# Human fields = user's language; params.prompt / lyrics language = as agreed for performance
+title: 메아리
 message: |
-  Night-city longing that turns into shared brightness — walking through neon
-  together; a short anthem of connection, not loneliness.
+  밤도시의 그리움이 함께하는 밝음으로 바뀐다 — 네온 속을 나란히 걷고,
+  외로움이 아니라 연결의 짧은 앤섬.
 
 design: |
-  Pro, ~2 min, dreamy indie pop, mid-tempo, soft synths + acoustic guitar.
-  Custom English verse/chorus. mp3 + lyricsOutput.
+  Pro, 약 2분, 몽환 인디 팝, 미드템포, 부드러운 신스 + 어쿠스틱 기타.
+  영어 verse/chorus 가사. mp3 + lyricsOutput.
 
 # --- cocrates-google-genai ---
 type: music
@@ -271,14 +273,15 @@ output: "./echoes.mp3"
 ## Image-inspired example (Pro)
 
 ```yaml
-title: Desert dusk ambient
+# Human fields = user's language; params.prompt = English
+title: 사막 황혼 앰비언트
 message: |
-  Wide, quiet dusk — heat fading into color; stillness with a slow sense of
-  scale, not a dance track.
+  넓고 고요한 황혼 — 열이 색으로 식어 가고, 춤곡이 아니라
+  천천히 다가오는 스케일의 정적.
 
 design: |
-  Pro, instrumental ambient from refs. Timeline: pads → sparse percussion →
-  peak → piano fade. mp3.
+  Pro, 참조 기반 인스트루멘탈 앰비언트. 타임라인: 패드 → 드문 퍼커션 →
+  피크 → 피아노 페이드. mp3.
 
 # --- cocrates-google-genai ---
 type: music
@@ -316,6 +319,7 @@ output: "./desert-dusk.mp3"
 - MCP before YAML approval (except Express); auto Express; empty `files` as success
 - Auto `analyze` without an explicit user request; applying analyze suggestions without user agreement
 - `message` that duplicates `design` (instrument lists, BPM sheets, timeline dumps as the “story”)
+- Defaulting `message` / `design` / `title` to English when the user writes in another language
 - Vague prompts when a specific sound is wanted (“nice music” alone)
 - Unlabeled custom lyrics mixed into direction; famous-artist voice / copyrighted lyrics
 - Pro-only multi-minute expectations on Clip without warning it stays 30s
