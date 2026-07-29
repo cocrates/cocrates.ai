@@ -1,0 +1,64 @@
+title: jsondb 아키텍처 발표 장면
+message: |
+  jsondb 아키텍처를 동료에게 직접 설명하는 현장 — “이 시스템을 함께 이해하고
+  있다”는 공유·학습의 분위기. 화면의 다이어그램이 이야기의 중심이고, 발표자가
+  Go 서버(병렬 처리) 쪽을 가리키며 핵심을 짚는다.
+
+design: |
+  참조 이미지: media2/jsondb-architecture.png (media2/jsondb-architecture.yaml에서 생성)
+    - 유지: 다이어그램 전체 레이아웃, 클라이언트/Go 서버/Storage 영역 구분,
+      Goroutine/Engine/Lock 요소, 관계선과 레이블, 박스 스타일과 색상 구성
+    - 변경: 독립 다이어그램 → TV 화면 내에 디스플레이됨
+
+  장면 구성:
+    - 배경: 모던한 회의실, 전면 벽에 75인치 이상 대형 TV 스크린
+    - TV 화면: 참조 이미지의 jsondb-architecture 다이어그램이 가득 차게 표시
+    - 인물: 젊은 여성 엔지니어 (20대 후반~30대 초반, 한국인,
+      단정한 어깨 길이 머리, 스마트 캐주얼 - 블레이저 + 블라우스),
+      오른손에 레이저 포인터, 왼손은 설명 제스처, TV를 바라보며 청중을 향해 설명 중
+    - 청중: 앞줄 청중 뒷모습이 아웃포커스로 흐릿하게 보임
+    - 조명: 따뜻한 실내 조명 + 오른쪽 창문 자연광 혼합
+    - 분위기: 전문적인 세미나/워크숍, 발표 현장감, 에너제틱하고 집중됨
+    - 스타일: 포토리얼리스틱, 선명한 화질, 깊이감 있는 구성
+  모델: gemini-3-pro-image (TV 화면 내 다이어그램 텍스트 가독성과 정확한 레이아웃 재현을 위해)
+  비율/크기: 16:9, 1K
+  참조: 1장 (jsondb-architecture 다이어그램)
+  출력: ./jsondb-explanation.png
+
+# --- cocrates-google-genai ---
+type: image
+model: gemini-3-pro-image
+params:
+  prompt: |
+    The provided reference image is the jsondb-architecture diagram. Keep its
+    exact layout, elements, boxes, arrows, and labels.
+
+    SCENE: A spacious modern conference room. A large wall-mounted TV display
+    (approx 75+ inch) dominates the front wall. On the TV screen, the
+    jsondb-architecture diagram from the reference image is displayed in full
+    resolution — client area (Agent 1, Agent 2, CLI, User) on the left, Go
+    server area with Goroutine A/B/C, Engine A/B, Read/Write Lock A/B in the
+    center, Storage area with File A and File B on the right, with all
+    connecting arrows and labels clearly legible.
+
+    In front of the TV, a young female engineer in her late 20s to early 30s
+    with neat shoulder-length dark hair stands confidently. She wears a smart
+    casual outfit — a tailored blazer over a light blouse. She holds a laser
+    pointer in her right hand, pointing at the Go server section of the diagram,
+    while gesturing with her left hand as she explains to the audience. Her
+    expression is engaged and professional.
+
+    In the foreground, softly blurred silhouettes of audience colleagues seen
+    from behind, sitting in conference chairs, creating a sense of a live
+    presentation.
+
+    Warm indoor lighting mixed with soft natural daylight streaming from windows
+    on the right side. Professional seminar atmosphere, photorealistic style,
+    shallow depth of field with the engineer and TV screen in sharp focus.
+    High detail, cinematic quality.
+  images:
+    - path: "./jsondb-architecture.png"
+  size: 1K
+  aspectRatio: "16:9"
+  seed: null
+output: "./jsondb-explanation.png"

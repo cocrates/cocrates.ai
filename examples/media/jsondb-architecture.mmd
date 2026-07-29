@@ -1,0 +1,68 @@
+%% jsondb 동시 요청 병렬 처리
+%% yaml: media2/jsondb-architecture.yaml
+%% kind: actor=stadium/sky; system=rect/blue; process=rect/gray; data=cyl/amber; boundary=subgraph/dashed; client=rect/pink(C1)
+%% type: uses=teal; requests=purple; flows-to=blue
+%%{init: {"flowchart": {"nodeSpacing": 50, "rankSpacing": 50, "padding": 16, "htmlLabels": true}}}%%
+flowchart LR
+  user(["사용자"])
+
+  subgraph client["클라이언트"]
+    direction LR
+    agent_1["Agent 1"]
+    agent_2["Agent 2"]
+    cli["CLI"]
+  end
+
+  subgraph server["Go 서버"]
+    direction LR
+    goroutine_a["Goroutine A"]
+    goroutine_b["Goroutine B"]
+    goroutine_c["Goroutine C"]
+    engine_a["Engine A"]
+    engine_b["Engine B"]
+    lock_a["Read/Write Lock A"]
+    lock_b["Read/Write Lock B"]
+  end
+
+  subgraph storage["Storage"]
+    direction LR
+    file_a[("파일 A")]
+    file_b[("파일 B")]
+  end
+
+  user -->|uses| cli
+  agent_1 -->|HTTP| goroutine_a
+  agent_2 -->|HTTP| goroutine_b
+  cli -->|HTTP| goroutine_c
+  goroutine_a --> engine_a
+  goroutine_b --> engine_b
+  goroutine_c --> engine_b
+  engine_a --> lock_a
+  engine_b --> lock_b
+  lock_a -->|read/write| file_a
+  lock_b -->|read/write| file_b
+
+  classDef actor fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#1e1e1e;
+  classDef system fill:#dbeafe,stroke:#1d4ed8,stroke-width:2px,color:#1e1e1e;
+  classDef process fill:#f3f4f6,stroke:#374151,stroke-width:2px,color:#1e1e1e;
+  classDef data fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#1e1e1e;
+  classDef boundary fill:#fafafa,stroke:#9ca3af,stroke-width:2px,stroke-dasharray:5 5,color:#1e1e1e;
+  classDef client_kind fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#1e1e1e;
+
+  class user actor;
+  class agent_1,agent_2,cli client_kind;
+  class goroutine_a,goroutine_b,goroutine_c,lock_a,lock_b process;
+  class engine_a,engine_b system;
+  class file_a,file_b data;
+
+  linkStyle 0 stroke:#0f766e,stroke-width:2px;
+  linkStyle 1 stroke:#7c3aed,stroke-width:2px;
+  linkStyle 2 stroke:#7c3aed,stroke-width:2px;
+  linkStyle 3 stroke:#7c3aed,stroke-width:2px;
+  linkStyle 4 stroke:#0f766e,stroke-width:2px;
+  linkStyle 5 stroke:#0f766e,stroke-width:2px;
+  linkStyle 6 stroke:#0f766e,stroke-width:2px;
+  linkStyle 7 stroke:#0f766e,stroke-width:2px;
+  linkStyle 8 stroke:#0f766e,stroke-width:2px;
+  linkStyle 9 stroke:#2563eb,stroke-width:2px;
+  linkStyle 10 stroke:#2563eb,stroke-width:2px;

@@ -1,121 +1,148 @@
 ---
 name: speech-generation
 description: >-
-  Generates controllable Gemini TTS prompts and YAML specs
-  (gemini-3.1-flash-tts-preview default; 2.5 Flash/Pro TTS optional), then —
-  after user approval — creates the audio via google-genai-mcp `generate`
-  (sync). Select when the user asks to generate, synthesize, narrate,
-  voice-over, read aloud, or produce speech, audio narration, podcast dialogue,
-  audiobook lines, or single-/multi-speaker TTS — or when they need a
-  Gemini-compatible audio YAML. Directs performance via style, accent, pace,
-  tone, audio tags, and voice choice for exact text recitation; only calls MCP
-  after explicit approval.
+  Select when the user asks to generate, synthesize, narrate, voice-over, read
+  aloud, or produce speech, TTS audio, podcast dialogue, audiobook lines, or
+  other exact-text spoken audio — or needs a Gemini TTS YAML. Uses Gemini TTS
+  via cocrates-google-genai (controllable style, accent, pace, tone, voices).
+  Do not select for music (music-generation), video (video-generation), still
+  images, diagrams, or interactive Live API conversation.
 metadata:
   agent: cocrates
 ---
 
 # Speech Generation
 
-Generate controllable Gemini text-to-speech (TTS) performances and output a YAML specification file — [Speech generation docs](https://ai.google.dev/gemini-api/docs/speech-generation).
+Exact-text TTS performances ([Speech generation](https://ai.google.dev/gemini-api/docs/speech-generation)) — not Live API conversation.
 
-TTS here is for **exact text recitation** with fine control over style, accent, pace, and tone (podcasts, audiobooks, VO, dialogue). It is not the Live API (interactive multimodal conversation).
+| Layer | Owns | Must not |
+|-------|------|----------|
+| **YAML** | `title`, `design`, MCP request | Call MCP before YAML approval (except Express) |
+| **MCP** `cocrates-google-genai` | Audio from approved YAML | Paraphrase a locked script |
+
+Spoken words come from an agreed **script** (user-supplied or drafted in chat) and are placed under `#### TRANSCRIPT` in `params.text`. There is no separate `message` / `explanation` field. `design` holds performance decisions and must stay consistent with preamble, voices, and TRANSCRIPT.
 
 ## Core Principles
 
-- **Intent-First**: Understand *who is speaking, what is said, and how it should sound* before writing YAML.
-- **Director, not announcer**: Craft a performance brief (profile, scene, director’s notes) plus a clearly labeled **transcript** the model must speak — not a bare string unless the request is trivial.
-- **Alignment**: Voice choice, character, writing style, and delivery instructions must agree (*who* / *what* / *how*).
-- **YAML as Contract**: First deliverable is a `{speech-slug}.yaml` request file (google-genai-mcp schema).
-- **YAML review + approval gate**: After writing the YAML, **stop** for user review. Do **not** create the final media (speech audio) until the user has reviewed the YAML and given **explicit approval**. The user may edit the YAML directly; treat their file as source of truth. Call MCP `generate` only after that approval.
+- **Chat then YAML** — discover intent, script, and performance in chat; write YAML when enough is known. If already enough, write YAML immediately.
+- **Script-first** — prefer a user-supplied script; if missing, draft and confirm in chat before YAML.
+- **YAML gate before generate** — user reviews YAML (`design` primary; TRANSCRIPT matches agreed script), then MCP `generate`.
+- **Director, not announcer** — `params.text` = direction preamble + labeled transcript.
+- **Consistency** — `design` ↔ preamble ↔ voices/speakers ↔ TRANSCRIPT.
+- **Audio tags always English** — map localized requests (e.g. whisper) to `[whispers]`; never non-English or closing tags.
+
+`title` / `design` use the **user's language**. Transcript language is whatever was agreed; direction preamble is typically English.
 
 ## Workflow
 
 ```
-Understand Intent → Choose Model & Voice(s) → Confirm Brief → Craft Text Prompt → Output YAML
-  → Review YAML → Ask to Generate → (on approval) MCP generate → (Revise if needed)
+1 Discover (chat)   intent + script + performance
+2 Write YAML        title / design / MCP block  → review
+3 Approve → Generate   cocrates-google-genai   → audio
+4 Revise            update design + text/voices together
 ```
 
-No multi-stage document gates. Ask only what is unclear, confirm the performance brief, write YAML, then **ask before generating**.
+**Enough already:** Write complete YAML immediately; stop for approval (unless Express).
 
-## Working Location
+**Express** (e.g. *generate now*, *express*): YAML + generate; revise from audio.
 
-### Spec folder (YAML)
+Mark only the MCP block with `# --- cocrates-google-genai ---`.
 
-When the user does **not** name a location, write the YAML under the workspace kind folder:
+## Paths
 
-```text
-speeches/{speech-slug}.yaml
-```
-
-If the user specifies a folder or path, use that instead. Prefer an existing `speeches/` tree over inventing a parallel layout.
-
-### Generated artifacts (`output`)
-
-| Rule | Path |
-|------|------|
-| **Default** | Same directory as the YAML file (e.g. `speeches/{slug}.wav`) — **not** `./output/` |
-| **User override** | Exact folder or file path the user named |
-
-**Example layout (defaults):**
-
-```text
-speeches/
-├── spooky-whisper.yaml
-└── spooky-whisper.wav
-```
+Default: `speeches/{slug}.yaml`, `output: "./{slug}.wav"` beside it. Relative paths resolve against **that YAML's directory**.
 
 ---
 
-## Step 1: Understand Intent
+## Phase 1 — Discover (chat)
 
-### 1.1 Extract what is already known
+Work **script before performance direction**. Skip lengthy Discover when already clear.
 
-| Dimension | Capture |
-|-----------|---------|
-| **Purpose** | Podcast, audiobook, ad VO, IVR, tutorial, spooky reading, dialogue scene, etc. |
-| **Mode** | Single speaker vs multi-speaker (max **2**) |
-| **Speakers** | Names, roles, relationship; how each should sound |
-| **Transcript** | Exact words to recite (user-supplied or to be drafted) |
-| **Language** | Spoken language of the transcript (auto-detected; many languages supported) |
-| **Style / tone** | Emotion, energy, formality |
-| **Accent** | Prefer specific (e.g. Brixton London, Laguna Beach valley) over vague “British” |
-| **Pace** | Fast/slow, bouncing, liquid drift, etc. |
-| **Audio tags** | Inline English only: `[whispers]`, `[laughs]`, mid-line shifts (never Korean/other-language tags) |
-| **Voice(s)** | From the 30 prebuilt voices (match emotion/archetype) |
-| **Format** | `outputFormat` (typically `wav`) |
+### 1.1 Intent & script (requirement analogue)
 
-### 1.2 Infer carefully
+| Topic | Capture |
+|-------|---------|
+| Purpose | Podcast, VO, dialogue, audiobook line, ad, … |
+| Mode | Single narrator vs multi (max **2** speakers) |
+| Language | Spoken language of the transcript |
+| Script | Exact words to recite — user-supplied is authoritative; if missing, draft and **confirm** (invent dialogue only if asked to draft) |
+| Model | Flash TTS default; Pro optional for longer dramatic reads |
 
-- Infer delivery from purpose (morning radio → high energy + vocal smile; bedtime story → soft, slow).
-- Do **not** invent dialogue content the user did not ask for unless they requested script drafting.
-- If they want a script *and* speech, draft the transcript first (may use a text model conceptually), then wrap it in a TTS-ready `text` field — the YAML still targets the TTS model only.
+**Fit test:** Is the exact spoken text locked (or clearly delegated for drafting)?
 
-### 1.3 Choose model
+### 1.2 Performance design (maps to `design` + preamble)
 
-| Model ID | Role |
-|----------|------|
-| `gemini-3.1-flash-tts-preview` | **Default** — Flash TTS preview; single + multi-speaker; streaming supported |
-| `gemini-2.5-flash-preview-tts` | Alternate Flash preview TTS |
-| `gemini-2.5-pro-preview-tts` | Pro preview TTS — consider for longer / higher-stakes performances |
+| Topic | Capture |
+|-------|---------|
+| Speakers / roles | Names, relationship; how each should sound |
+| Voices | Catalog voice(s) matched to persona |
+| Style / tone | Emotion, energy, formality (prefer vivid notes over one vague adjective) |
+| Accent | Specific when it matters (e.g. regional), not only “British” |
+| Pace | Tempo and variation |
+| Scene | Place/vibe affecting delivery |
+| Audio tags | English open tags only (`[whispers]`, …); plan mid-line shifts if needed |
+| Complexity | Simple one-liner vs directed performance (profile + notes + labeled TRANSCRIPT) |
 
-**Default:** `gemini-3.1-flash-tts-preview`. Prefer Pro when the user wants maximum performance nuance on longer dramatic reads (still split long scripts — see Limitations).
+**Fit test:** Could a voice actor perform this without asking what to say or how?
 
-### 1.4 Choose voice(s)
+When coherent → Phase 2.
 
-Match voice character to emotion and role. Examples of pairing:
+---
 
-| Need | Prefer voices like |
-|------|---------------------|
-| Firm / authoritative | Kore, Orus, Alnilam |
-| Upbeat / lively | Puck, Zephyr, Laomedeia, Sadachbia |
-| Informative / host | Charon, Rasalgethi, Sadaltager |
-| Soft / gentle / whispery scenes | Achernar, Vindemiatrix, Enceladus (breathy) |
-| Youthful / breezy | Leda, Aoede |
-| Mature / warm | Gacrux, Sulafat |
-| Gravelly / casual | Algenib, Zubenelgenubi |
-| Excitable | Fenrir |
+## Phase 2 — Write YAML
 
-Full catalog (use exact names in YAML):
+```yaml
+title: Spooky Macbeth line
+
+design: |
+  Single narrator, firm low whisper, slow deliberate pace. Voice Kore.
+  Horror reading for a short promo. No second speaker. Flash TTS, wav.
+
+# --- cocrates-google-genai ---
+type: speech
+model: gemini-3.1-flash-tts-preview
+params:
+  text: |
+    # SPEECH SYNTHESIS
+    Synthesize speech for the character below. Do not read the directions aloud.
+    Speak only the text under TRANSCRIPT.
+
+    ### DIRECTOR'S NOTES
+    Style: Spooky, intimate whisper; controlled dread
+    Pace: Slow and deliberate
+    Accent: Neutral dramatic English
+
+    #### TRANSCRIPT
+    [whispers] By the pricking of my thumbs...
+    Something wicked this way comes
+  voice: Kore
+  outputFormat: wav
+output: "./spooky-macbeth.wav"
+```
+
+### `design`
+
+User-facing performance rationale (§1.2) — primary YAML review object. Do **not** paste the full script; state that TRANSCRIPT follows the agreed script. Must stay consistent with preamble, `voice` / `speakers`, and TRANSCRIPT.
+
+### MCP request
+
+| Field | Role |
+|-------|------|
+| `type` | `speech` (never `audio`) |
+| `model` | `gemini-3.1-flash-tts-preview` (default); optional `gemini-2.5-flash-preview-tts`, `gemini-2.5-pro-preview-tts` |
+| `params.text` | Preamble from `design` + `#### TRANSCRIPT` + agreed script |
+| `params.voice` | Single-speaker voice name |
+| `params.speakers` | Multi: `[{name, voice}]` (1–2); names match transcript labels |
+| `params.outputFormat` | Typically `wav` |
+| `output` | Default `./{slug}.wav` |
+
+Use either `voice` or `speakers`, not a conflicting mix.
+
+### `params.text`
+
+Directed (recommended): synthesis preamble + director notes + `#### TRANSCRIPT` + exact script (optional English `[tags]`). Label the transcript so notes are not spoken. Simple shorts may use `Say in a spooky whisper:\n"…"`.
+
+### Voices (exact catalog names)
 
 | Voice | Character | Voice | Character |
 |-------|-----------|-------|-----------|
@@ -135,291 +162,77 @@ Full catalog (use exact names in YAML):
 | Vindemiatrix | Gentle | Sadachbia | Lively |
 | Sadaltager | Knowledgeable | Sulafat | Warm |
 
-**Multi-speaker:** At most **2** speakers. Speaker `name` in YAML **must match** names used in the transcript (`Joe:`, `Jane:`).
+Firm → Kore/Orus; upbeat → Puck/Zephyr; soft → Achernar/Enceladus; host → Charon/Sadaltager.
 
-### 1.5 Ask only what is still unclear
+### Audio tags
 
-| Check | Question (user's language) |
-|-------|----------------------------|
-| Mode | One narrator or a 2-person dialogue? |
-| Script | Exact text to speak, or should we draft it? |
-| Style | Tone, accent, pace? |
-| Voices | Any preferred voice, or OK to pick for the mood? |
-| Language | Which language should be spoken? |
-| Output | `wav` OK? |
+English open tags only (`[whispers]`, `[laughs]`, `[excited]`, …). No localized tag names; no closing tags.
 
-### 1.6 Confirm the performance brief
+### YAML gate
 
-2–4 sentences: purpose, speaker(s), voice(s), style/accent/pace, language, model. Proceed on confirm or if already fully specific.
+Present **`design`**; confirm TRANSCRIPT matches the agreed script; note voice(s)/model/output. **Stop** (unless Express).
 
 ---
 
-## Step 2: Craft the `text` Prompt
+## Phase 3 — Generate
 
-The YAML `text` field is the full TTS **input prompt**: direction + spoken words. Gemini TTS follows natural-language direction for style, accent, pace, and tone.
+MCP **`cocrates-google-genai`**. `generate` with `filePath`; report `files`. Long TRANSCRIPT may be chunked server-side (~4000 UTF-8 bytes).
 
-### 2.1 Complexity ladder
-
-| Level | When | Shape |
-|-------|------|--------|
-| **Simple** | Short line, clear emotion | `Say in a spooky whisper:\n"…"` |
-| **Styled dialogue** | 2 speakers, per-speaker mood | Guidance line + `Name: …` turns |
-| **Directed performance** | Podcast, character VO, ads | Audio Profile + Scene + Director’s Notes + Sample Context + **labeled Transcript** (+ tags) |
-
-Use the deepest level the request deserves. Do not overspecify — too many rigid rules hurt naturalness.
-
-### 2.2 Directed performance structure (recommended for best results)
-
-Think like a director casting virtual voice talent:
-
-1. **Audio Profile** — Name, archetype, age/background if useful  
-2. **Scene** — Place, vibe, what is happening around them  
-3. **Director’s Notes** — Style, pacing, accent, breathing, articulation (skip other sections if needed; **prefer always including notes**)  
-4. **Sample context** — Why this performance exists (optional but helpful)  
-5. **Transcript** — Exact words to speak; writing style must fit the direction  
-6. **Audio tags** — Inline `[whispers]`, `[excited]`, etc.
-
-**Critical (Flash 3.1 classifier):** Vague prompts may be rejected or cause the model to **read the director’s notes aloud**. Always:
-
-- Include a clear preamble that this is **speech synthesis / TTS** of the transcript only.  
-- **Explicitly label** where the spoken transcript begins (e.g. `#### TRANSCRIPT` or `Speak only the following transcript:`).  
-- Keep instructions and spoken text visually separated.
-
-### 2.3 Audio tags
-
-Inline modifiers for delivery and light non-verbals.
-
-**MUST be English.** Audio tags are **always** English square-bracket tokens — even when the spoken transcript is Korean or another language. If the user asks in Korean (e.g. “강조”, “속삭이듯”, “신나게”), **map** to English tags; do **not** transliterate or invent Korean tag names.
-
-| User intent (example) | Write in transcript |
-|-----------------------|---------------------|
-| 강조 / 힘주어 | `[serious]` or `[excited]` before the phrase (pick by tone) |
-| 속삭임 | `[whispers]` |
-| 웃음 | `[laughs]` / `[giggles]` |
-| 한숨 | `[sighs]` |
-
-**Forbidden tag forms**
-
-- Non-English tags: `[강조]`, `[속삭임]`, `[신나게]`  
-- XML-style open/close pairs: `[강조]…[/강조]`, `<강조>…</강조>`  
-- Fake markup that is not a Gemini audio tag — tags are **open-only** cues; there is no closing tag
-
-Common tags: `[amazed]`, `[crying]`, `[curious]`, `[excited]`, `[sighs]`, `[gasp]`, `[giggles]`, `[laughs]`, `[mischievously]`, `[panicked]`, `[sarcastic]`, `[serious]`, `[shouting]`, `[tired]`, `[trembling]`, `[whispers]`, plus pace like `[very fast]`, `[very slow]`.
-
-Creative tags work (still English): `[like dracula]`, `[like a cartoon dog]`, `[sarcastically, one painfully slow word at a time]`.
-
-Mid-line shifts:
-> `[whispers] Hey there… [shouting] and I can say things in many different ways. [whispers] How can I help you today?`
-
-Korean transcript example (tags English, words Korean):
-> `서버 안에는 여러 [serious] 고루틴이 있어요.`
-
-### 2.4 Patterns
-
-**Single — simple style**
-```text
-Say in a spooky whisper:
-"By the pricking of my thumbs...
-Something wicked this way comes"
-```
-
-**Single — cheerful**
-```text
-Say cheerfully: Have a wonderful day!
-```
-
-**Multi — per-speaker guidance (max 2)**
-```text
-Make Speaker1 sound tired and bored, and Speaker2 sound excited and happy:
-
-Speaker1: So... what's on the agenda today?
-Speaker2: You're never going to guess!
-```
-
-**Multi — named turns (names must match `speakers`)**
-```text
-TTS the following conversation between Joe and Jane:
-Joe: How's it going today, Jane?
-Jane: Not too bad, how about you?
-```
-
-**Directed — skeleton**
-```text
-# SPEECH SYNTHESIS
-Synthesize speech for the character below. Do not read the directions aloud.
-Speak only the text under TRANSCRIPT.
-
-# AUDIO PROFILE: {Name}
-## "{Archetype}"
-
-## THE SCENE: {Place}
-{Environment + vibe + how it affects delivery.}
-
-### DIRECTOR'S NOTES
-Style: {specific, vivid — better than one vague adjective}
-Pace: {tempo and variation}
-Accent: {precise regional description}
-
-### SAMPLE CONTEXT
-{Optional: where this VO will be used.}
-
-#### TRANSCRIPT
-{Exact words. Optional [audio tags] inline.}
-```
-
-**Style notes tips**
-
-- Prefer *“Infectious enthusiasm; listener feels part of a massive event”* over *“energetic”*.  
-- Accent: *“British English as heard in Croydon”* / *“Brixton, London”* beats *“British”*.  
-- Pace: simple (`as fast as possible`) to complex (`The Drift: incredibly slow and liquid…`).  
-- Voiceover terms OK: “vocal smile”, proximity effect, punchy consonants.
-
-### 2.5 Performance-ready test
-
-Before YAML: *Could a voice actor perform this without asking what to say or how?* If direction and transcript are muddled, or transcript unlabeled, fix that.
-
-### 2.6 Prompt rules
-
-1. **`text` holds direction + transcript** — spoken words must be unambiguous.  
-2. **Label the transcript** on directed prompts so notes are not spoken.  
-3. **Align** script tone with director’s notes and selected voice(s).  
-4. **Multi-speaker:** ≤2; names consistent across `text` and `speakers`.  
-5. **Audio tags MUST be English** (map Korean requests like “강조” → `[serious]` / `[excited]`); never `[강조]`, `[/강조]`, or other non-English / closing tags. Transcript language as requested.  
-6. **Don’t overspecify** — leave room for natural acting.  
-7. **Long material:** split into multiple YAML jobs / chunks (quality drifts after a few minutes).  
-8. **Exact recitation** — do not casually paraphrase user-provided lines unless asked.
+Limitations: text→audio only; long takes may drift — chunk; vague prompts may speak notes or hit `PROHIBITED_CONTENT` — use preamble + labeled transcript.
 
 ---
 
-## Step 3: Output YAML
+## Phase 4 — Revise
 
-### Single speaker
+| Change | Action |
+|--------|--------|
+| Script | Update TRANSCRIPT (+ tags); adjust `design` if tone shifts; re-approve; regenerate |
+| Performance | Update `design` and preamble/voices together; re-approve; regenerate |
+| Small tweak | Light direction edit or `continue_interaction`; ask before another paid call |
 
-Write under `speeches/` unless the user chose another folder:
+---
 
-```yaml
-type: speech
-model: gemini-3.1-flash-tts-preview
-
-params:
-  text: |
-    Say in a spooky whisper:
-    "By the pricking of my thumbs...
-    Something wicked this way comes"
-  voice: Kore
-  outputFormat: wav
-
-output: "./{slug}.wav"   # same folder as this YAML by default
-```
-
-### Multi-speaker (max 2)
+## Multi-speaker example
 
 ```yaml
+title: Friends phone brag
+
+design: |
+  Two Korean women, early 20s, casual phone call. Sua excited (Laomedeia);
+  friend envious (Callirrhoe). Fast bouncy pace. Flash TTS, wav.
+  TRANSCRIPT follows the agreed Korean dialogue.
+
+# --- cocrates-google-genai ---
 type: speech
 model: gemini-3.1-flash-tts-preview
-
 params:
   text: |
-    Joe: How's it going today, Jane?
-    Jane: Not too bad, how about you?
+    # SPEECH SYNTHESIS
+    Synthesize a casual phone conversation between two Korean female friends.
+    Speak only the text under TRANSCRIPT.
+
+    ### DIRECTOR'S NOTES
+    Style: Natural Korean phone call; Sua excited, friend envious and playful
+    Pace: Fast and bouncy
+    Accent: Standard Korean, informal
+
+    #### TRANSCRIPT
+    수아: 야~ 나 여름 방학에 유럽 간다!
+    친구: 뭐?! 진짜?! 나도 가고 싶은데ㅠㅠ
   speakers:
-    - name: Joe
-      voice: Kore
-    - name: Jane
-      voice: Puck
+    - name: 수아
+      voice: Laomedeia
+    - name: 친구
+      voice: Callirrhoe
   outputFormat: wav
-
-output: "./{slug}.wav"   # same folder as this YAML by default
+output: "./friends-phone.wav"
 ```
-
-Use **either** top-level `voice` (single) **or** `speakers` (multi) — not both. Speaker names must appear in `text` the same way.
-
-### Parameter reference
-
-| Parameter | Values | Default | Notes |
-|-----------|--------|---------|-------|
-| `model` | `gemini-3.1-flash-tts-preview`, `gemini-2.5-flash-preview-tts`, `gemini-2.5-pro-preview-tts` | `gemini-3.1-flash-tts-preview` | |
-| `text` | Prompt string (direction + transcript) | required | Controllable TTS input |
-| `voice` | One of 30 voice names | required for single | e.g. `Kore` |
-| `speakers` | Array of `{name, voice}` length 1–2 | required for multi | `name` matches transcript labels |
-| `outputFormat` | `wav` (typical) | `wav` | PCM WAV at runtime (~24 kHz mono in API samples) |
-| `output` | Path to `.wav` | `./{slug}.wav` next to the YAML | User-specified folder overrides |
-
-Maps conceptually to API `speech_config`: single → `{voice}`; multi → `{speaker, voice}` entries.
-
----
-
-## Step 4: Review YAML & Ask to Generate
-
-YAML alone does **not** synthesize audio. Actual files come from **google-genai-mcp**.
-
-1. Confirm YAML: model, voice(s)/speakers, `text` (direction + labeled transcript), `outputFormat`, `output`.
-2. Ask explicitly (user's language), e.g.:  
-   > YAML 스펙 검토가 끝났습니다. google-genai-mcp로 실제 음성 파일을 생성할까요?
-3. **Stop** until the user approves or declines.
-4. If declined: leave the YAML as the deliverable.
-5. If approved: proceed to Step 5.
-
----
-
-## Step 5: Generate via google-genai-mcp
-
-| Resource | Path |
-|----------|------|
-| MCP server | `../google-genai-mcp/src/mcp/server.ts` |
-| Spec | `../google-genai-mcp/spec/google-genai-mcp.md` |
-| Examples | `../google-genai-mcp/examples/` (e.g. `conversation.yaml`) |
-
-### Tools
-
-| Tool | Role |
-|------|------|
-| `generate` | **Primary.** `filePath` → the speech YAML. Wait for response with `files` filled |
-| `continue_interaction` | Follow-up turn with new direction/text |
-| `list_interactions` / `sync_interactions` | Discover / clean mappings |
-| `cancel_interaction` / `delete_interaction` | Stop / remove jobs |
-
-### Speech generation call
-
-1. Save YAML on disk (`type: speech` — never `audio`).
-2. Call MCP `generate` with `filePath`. Wait for `{ interactionId, files, … }` with `files` filled.
-3. Report the saved path(s) from `files`.
-4. Relative `output` / refs resolve against the **YAML file's directory**.
-
-Use either `params.voice` (single) or `params.speakers` (≤2) — not conflicting setups; MCP prefers `speakers` if both are present.
-
----
-
-## Step 6: Revise if Needed
-
-1. Identify change: wording, style, accent, pace, tags, voice, speaker count.  
-2. Update `text` and/or `voice` / `speakers`.  
-3. Re-confirm YAML, then **ask again** before `generate` / `continue_interaction`. Prefer small direction tweaks over rewriting the whole profile unless the character changed.
-
----
-
-## Limitations (do not promise around them)
-
-- Text in → audio out only (no image/video inputs to TTS).  
-- Context window ~32k tokens.  
-- Streaming: supported on `gemini-3.1-flash-tts-preview` (not assumed for older TTS variants).  
-- Voice may not match prompts that fight the voice’s natural profile — align character with voice.  
-- Long outputs (> a few minutes) may drift — chunk scripts.  
-- Rare non-audio token / 500 responses — callers should retry.  
-- Vague prompts → `PROHIBITED_CONTENT` or spoken stage directions — use synthesis preamble + labeled transcript.
 
 ---
 
 ## Prohibitions
 
-- More than **2** speakers in one YAML  
-- Mismatched speaker names between `text` and `speakers`  
-- Leaving directed prompts without a clear **transcript boundary**  
-- Choosing a voice that contradicts the written persona without warning the user  
-- Keyword-only style (“happy sad fast”) without usable direction when the user wants a rich performance  
-- Writing YAML before the brief is confirmed (unless the request is fully specific)  
-- Calling `generate` / `continue_interaction` / `download` **without** user approval after YAML review  
-- Using `type: audio` (removed — use `speech`)  
-- Inventing script content the user did not request (unless they asked you to draft it)  
-- Using voice names outside the 30-name catalog  
-- Non-English audio tags or closing-tag markup (`[강조]`, `[/강조]`, etc.) — **always English open tags only**
+- MCP before YAML approval (except Express); `type: audio`
+- More than 2 speakers; mismatched speaker names; unlabeled TRANSCRIPT on directed prompts
+- Non-English or closing audio tags; inventing script unless asked to draft
+- Full script only in `design` instead of TRANSCRIPT; voices outside the catalog

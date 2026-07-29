@@ -1,0 +1,81 @@
+title: jsondb 고루틴 설명 영상
+message: |
+  각 클라이언트 요청마다 독립 goroutine이 생겨, 여러 요청을 동시에 효율적으로
+  처리할 수 있다는 점 — 발표자가 그 이야기를 짧게 전달한다.
+
+design: |
+  Ref 0: ./jsondb-explanation.png as starting frame (FIRST_FRAME).
+  Ref 1: ./jsondb-architecture.png — TV 화면에 표시될 다이어그램의 정확한 참조.
+  신원·복장·회의실은 참조 이미지(Ref 0)와 동일하게 유지.
+  TV 화면의 다이어그램은 Ref 1(jsondb-architecture.png)과 정확히 일치해야 함.
+
+  동작:
+  - 엔지니어가 TV 쪽으로 살짝 몸을 돌리며 오른손으로
+    다이어그램의 Go 서버 영역을 가리킴 (레이저 포인터 없음, 손 제스처만)
+  - 자연스러운 손짓, 고개 움직임, 설명할 때의 미소
+  - 화면에 붉은 점/마커/오버레이 없음
+  - 전경의 청중 뒷모습은 흐릿하게 유지
+
+  음성 (한국어 표준어, 자연스러운 대화 속도, 친근한 동료 설명 톤):
+    "jsondb에서는 클라이언트의 요청마다 독립적인 goroutine이 할당됩니다.
+     이 goroutine들이 병렬로 실행되면서 여러 요청을 동시에 효율적으로 처리할 수 있어요."
+
+  카메라: 단일 연속 매체 숏, 아이레벨, 약간의 핸드헬드 느낌.
+  조명: 따뜻한 실내 조명 + 오른쪽 창문 자연광 혼합.
+  배경음악 없음. 추가 대사 없음. 화면 마커/오버레이 없음.
+
+  task: reference_to_video, 10초, 16:9.
+
+# --- cocrates-google-genai ---
+type: video
+model: gemini-omni-flash-preview
+params:
+  prompt: |
+    <FIRST_FRAME> Use Image 0 as the starting frame for the video.
+
+    In a single continuous shot, a young female Korean engineer in her late 20s
+    to early 30s stands in a modern conference room in front of a large wall-
+    mounted TV screen. She wears a smart casual outfit — a tailored blazer over
+    a light blouse — and has neat shoulder-length dark hair.
+
+    <IMAGE_REF_0> The TV screen must display the EXACT diagram shown in Image 1
+    (jsondb-architecture) — client area on the left with Agent 1, Agent 2, CLI,
+    and User nodes; Go server area in the center with Goroutine A, Goroutine B,
+    Goroutine C, Engine A, Engine B, Read/Write Lock A, and Read/Write Lock B
+    nodes; Storage area on the right with File A and File B nodes. All connecting
+    arrows, labels ("HTTP", "read/write", "uses"), and relationship lines must
+    match Image 1 exactly. The visual style, box colors, layout, and text labels
+    of the diagram must be reproduced faithfully from Image 1.
+
+    She turns slightly toward the TV screen, raising her right hand to point at
+    the Go server section of the diagram with her index finger. Her left hand
+    gestures naturally as she explains. NO laser pointer, NO red dot, NO markers,
+    NO on-screen annotations or overlays of any kind. Just her hand pointing.
+
+    She speaks the following lines in Korean in a warm, conversational, friendly
+    tone, as if explaining to a colleague:
+
+    "jsondb에서는 클라이언트의 요청마다 독립적인 goroutine이 할당됩니다.
+     이 goroutine들이 병렬로 실행되면서 여러 요청을 동시에 효율적으로 처리할 수 있어요."
+
+    Her expression is engaged and professional, with a slight smile. She makes
+    natural head movements while speaking.
+
+    In the foreground, softly blurred silhouettes of audience colleagues are
+    visible from behind, maintaining the live presentation atmosphere.
+
+    Single continuous medium shot, eye-level camera, gentle natural handheld
+    feel. Warm indoor lighting mixed with soft natural daylight streaming from
+    windows on the right side. Photorealistic style, high detail, cinematic
+    quality.
+
+    Audio: clear Korean speech, standard Seoul dialect, conversational pace.
+    No background music. No additional dialogue or sounds.
+  images:
+    - path: "./jsondb-explanation.png"
+    - path: "./jsondb-architecture.png"
+  durationSeconds: 10
+  aspectRatio: "16:9"
+  task: reference_to_video
+  seed: null
+output: "./jsondb-goroutine-video.mp4"

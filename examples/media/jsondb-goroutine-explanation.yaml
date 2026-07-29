@@ -1,0 +1,29 @@
+title: jsondb 고루틴 병렬 처리 설명
+
+design: |
+  단일 화자, 젊은 여성 엔지니어가 동료에게 편안하게 설명하는 상황.
+  한국어 표준어, 자연스러운 대화 속도, 약 10초 분량.
+  Voice: Achird (Friendly) — 다정하고 친근한 동료 설명 톤.
+  Flash TTS, wav 출력.
+  TRANSCRIPT는 합의된 스크립트를 그대로 사용.
+
+# --- cocrates-google-genai ---
+type: speech
+model: gemini-3.1-flash-tts-preview
+params:
+  text: |
+    # SPEECH SYNTHESIS
+    Synthesize speech for a young female engineer comfortably explaining a concept to a colleague.
+    Speak only the text under TRANSCRIPT.
+
+    ### DIRECTOR'S NOTES
+    Style: Comfortable, friendly technical explanation between colleagues
+    Pace: Natural, conversational pace
+    Accent: Standard Korean (서울 표준어)
+
+    #### TRANSCRIPT
+    jsondb에서는 클라이언트의 요청마다 독립적인 goroutine이 할당됩니다.
+    이 goroutine들이 병렬로 실행되면서 여러 요청을 동시에 효율적으로 처리할 수 있어요.
+  voice: Achird
+  outputFormat: wav
+output: "./jsondb-goroutine-explanation.wav"
