@@ -1,0 +1,11 @@
+type: image
+model: gemini-3.1-flash-image
+
+params:
+  prompt: |
+    A beautiful tooth kingdom plaza for a children's picture book illustration. A bright, open square with white tooth-shaped buildings arranged in a circle. The buildings are round and friendly-looking with soft curves. The ground sparkles with a clean, white surface. Small cute tooth citizens (similar to the Hayani character) walk around happily. Bright blue sky above. The atmosphere is peaceful and magical. Drawn in soft digital painting style with round, gentle outlines. Bright pastel palette with white, light blue, and soft pink tones. Wide shot showing the plaza and buildings. Children's book illustration style, beautiful and wonderous.
+  size: 1K
+  aspectRatio: "4:3"
+  seed: null
+
+output: "./tooth-plaza-peaceful.png"

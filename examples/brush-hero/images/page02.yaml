@@ -1,0 +1,33 @@
+type: image
+model: gemini-3.1-flash-image
+
+params:
+  prompt: |
+    Using the reference images: Image 1 is the boy character (Hoon) in pink pajamas. Image 2 is the evening bedroom scene.
+
+    SCENE: Create a children's picture book page illustration. The boy from image 1 is tucked into bed under white blankets in the room from image 2. His eyes are closed, already asleep. On the nightstand beside the bed, a toothbrush sits unused. Moonlight streams through the window. Peaceful, quiet nighttime atmosphere. Soft digital painting style, pastel colors, round gentle outlines. A subtle magical glow or sparkle near the sleeping boy's mouth area, hinting something is about to happen.
+
+    TEXT OVERLAY — render these Korean texts directly into the image as part of the illustration:
+
+    1. Top-left corner: two small narration lines in a soft rounded serif Korean font, white color with subtle warm shadow, stacked vertically:
+       "훈이는 잠자리에 들었어요."
+       "칫솔은 그대로 두었어요."
+
+    2. Center area, floating near the sleeping boy, in a dreamy italic or soft rounded Korean font, medium size, slightly translucent white — like a fading half-asleep whisper:
+       "내일은 꼭 닦을게요."
+
+    3. Below the dreamy text, small narration connector in soft white rounded Korean font:
+       "라고 말했지만,"
+
+    4. Bottom-center, final narration line in soft white rounded Korean font, slightly larger than the connector but smaller than the dreamy text:
+       "훈이는 이미 잠들었어요."
+
+    All text must be in Korean (Hangul). The text should feel like part of the picture book page — integrated into the composition, not a plain overlay. Place text in areas that do not obscure the boy's face or the toothbrush on the nightstand. The overall layout should look like a finished picture book page where illustration and text work together. The mood is quiet and calm, with a hint of magical anticipation.
+  images:
+    - path: "./characters/hun.png"
+    - path: "./locations/hoon-room-evening.png"
+  size: 1K
+  aspectRatio: "4:3"
+  seed: null
+
+output: "./page02.png"

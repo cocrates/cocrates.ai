@@ -1,0 +1,11 @@
+type: image
+model: gemini-3.1-flash-image
+
+params:
+  prompt: |
+    A 5-year-old Korean boy named Hoon, shown as a character reference sheet for a children's picture book. He has short black hair, round curious eyes, rosy pink cheeks, and a slightly chubby build. He wears pink pajamas with small star patterns. His expression is friendly and brave. The character is drawn in a soft digital painting style with round, gentle outlines. Pastel color palette with warm skin tones. Simple white background, character centered, full body view from front. Children's book illustration style, cute and approachable.
+  size: 1K
+  aspectRatio: "1:1"
+  seed: null
+
+output: "./hun.png"

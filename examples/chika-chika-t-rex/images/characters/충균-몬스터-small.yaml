@@ -1,0 +1,34 @@
+title: 충균 몬스터 (small) 캐릭터 참조 이미지
+message: |
+  양치당한 후 조그마해진 충균 몬스터. 같은 보라색 둥근 몸과 외눈박이지만
+  무릎 높이로 쪼그라듦. 울먹이는 표정, 두 팔 들어 항복. 같은 캐릭터,
+  훨씬 작아진 모습.
+
+design: |
+  캐릭터 참조 이미지 — 충균 몬스터 작은 상태(small). 정면 전신샷.
+  - 충균-몬스터-big와 동일한 외형이나 크기가 1/3로 축소
+  - 보라색 둥근 몸체, 중앙 외눈박이
+  - 울먹이는 표정, 눈물방울
+  - 두 팔을 들고 항복하는 포즈
+  - 초록 점액은 없음 (깨끗해짐)
+  - 수채화 디지털 페인팅
+  - 배경 투명
+  - 1:1 정사각형, 1K
+
+# --- cocrates-google-genai ---
+type: image
+model: gemini-3.1-flash-image
+params:
+  prompt: |
+    A full-body character reference of a tiny comical purple cavity monster
+    for a children's picture book. Same design as the big version but shrunken
+    to one-third size: round chubby purple body with lighter purple belly,
+    one large yellow eye in the center of its face, small mouth with a
+    trembling lower lip, a tear drop on its cheek. Short stubby arms raised
+    in surrender. No green slime. Pathetic and cute expression. Clean white
+    background, watercolor digital painting style, soft outlines. Full body,
+    front view.
+  size: 1K
+  aspectRatio: "1:1"
+  seed: null
+output: "./충균-몬스터-small.png"

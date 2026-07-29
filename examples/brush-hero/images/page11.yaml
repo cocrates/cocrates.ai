@@ -1,0 +1,31 @@
+type: image
+model: gemini-3.1-flash-image
+
+params:
+  prompt: |
+    Using the reference images: Image 1 is the boy character (Hoon) in pink pajamas.
+
+    SCENE: Create a children's picture book page illustration. The boy from image 1 wakes up in his bed in the morning. Sunlight streams through the window. He has a gentle smile on his face, remembering his dream. He stands in front of a mirror, holding a toothbrush, confidently brushing his teeth. The scene shows a happy, proud child taking care of his teeth. Bright, warm morning light. The final scene is peaceful and empowering — a hero in everyday life. Soft digital painting style, pastel colors, round gentle outlines.
+
+    TEXT OVERLAY — render these Korean texts directly into the image as part of the illustration:
+
+    1. Top-left corner: three small narration lines in a soft rounded serif Korean font, white color with subtle warm shadow, stacked vertically:
+       "아침이 왔어요."
+       "훈이가 눈을 떴어요."
+       "미소를 지었어요."
+
+    2. Below the first three lines, continuing narration in the same style:
+       "칫솔을 손에 들었어요."
+       "거울 앞에서 이빨을 닦았어요."
+
+    3. Bottom-center, largest and boldest text — the final statement: bold rounded Korean font, bright white with a warm golden glow, noticeably bigger than other text:
+       "훈이는 영웅이었어요."
+
+    All text must be in Korean (Hangul). The text should feel like part of the picture book page — integrated into the composition, not a plain overlay. Place text in areas that do not obscure the boy's face or the mirror. The overall layout should look like a finished picture book page where illustration and text work together. This is the final page — the mood is warm, proud, and empowering.
+  images:
+    - path: "./characters/hun.png"
+  size: 1K
+  aspectRatio: "4:3"
+  seed: null
+
+output: "./page11.png"

@@ -1,8 +1,8 @@
 # Research — Independent Activity
 
-**Not a fixed stage.** No gate required.
+**Not a fixed stage.** No approval gate required for taking notes.
 
-Can be initiated at any point — planning, architecture, chapter design, or revision.
+Can run during planning, architecture, chapter design, or revision.
 
 | When | Example |
 |------|---------|
@@ -23,7 +23,7 @@ Save under `{project-root}/docs/{topic-slug}.md`:
 {Attribution}
 
 ## Application Notes
-{How this informs the novel}
+{Which artifact should absorb this — world / character / location / chapter design}
 ```
 
-Research is informational — feed findings into the appropriate stage artifact when relevant.
+**Applying research into the novel** is not automatic: update the correct architecture or chapter-design file first, then cascade per [`consistency.md`](consistency.md). Do not sneak new world rules or facts only into manuscript prose.

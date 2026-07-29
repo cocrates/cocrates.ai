@@ -1,0 +1,35 @@
+title: 치카치카 왕국 / 이빨성-앞마당 / 성문-뷰 (회복) 장소 참조 이미지
+message: |
+  충균 몬스터가 물러난 후 되살아난 이빨 성 앞마당. 대리석 바닥이 다시
+  반짝이고 얼룩이 사라짐. 하늘은 맑고 무지개가 떠 있음. 왕국이 원래의
+  아름다운 모습을 되찾음.
+
+design: |
+  장소 참조 이미지 — 이빨 성 앞마당, 정문 쪽 뷰. 회복 상태.
+  - 오염 상태와 동일한 위치/구도, 단 state만 변화
+  - 대리석 바닥이 다시 하얗고 반짝반짝
+  - 성벽 얼룩이 완전히 사라짐
+  - 하늘이 맑고 화창, 무지개가 떠 있음
+  - 반짝이는 효과 (작은 별빛 파티클)
+  - 전체적으로 밝고 환한 분위기
+  - 수채화 디지털 페인팅
+  - 사람/캐릭터 없음
+  - 4:3 가로, 1K
+
+# --- cocrates-google-genai ---
+type: image
+model: gemini-3.1-flash-image
+params:
+  prompt: |
+    The same fantasy castle courtyard as the polluted version but completely
+    restored. The marble plaza in front of the Tooth Castle's open-mouth gate
+    is now pure white and sparkling clean. All purple and black stains on the
+    castle walls are gone. The sky is bright blue and clear with a beautiful
+    rainbow arching overhead. Sparkling light particles float in the air.
+    Toothbrush-shaped lamp posts stand at the edges. The entire scene feels
+    bright, happy, and renewed. No characters. Watercolor digital painting
+    style, soft pastel tones. Wide shot, 4:3 landscape.
+  size: 1K
+  aspectRatio: "4:3"
+  seed: null
+output: "./치카치카-왕국-이빨성-앞마당-성문-뷰-회복.png"

@@ -1,0 +1,31 @@
+type: image
+model: gemini-3.1-flash-image
+
+params:
+  prompt: |
+    Using the reference images: Image 1 is the boy character (Hoon) in his adventure outfit — blue tunic with golden shield emblem on chest, brown boots, small belt. Image 2 is the tooth kingdom plaza.
+
+    SCENE: Create a children's picture book page illustration. The boy from image 1 suddenly appears in the magical tooth kingdom from image 2. He stands in the center of a beautiful plaza surrounded by round white tooth-shaped buildings. He looks around with a surprised, amazed expression — eyes wide, mouth slightly open. He wears his adventure outfit (blue tunic, golden emblem, brown boots). Bright blue sky, sparkling white ground, magical wondrous atmosphere. Soft digital painting style, pastel colors, round gentle outlines.
+
+    TEXT OVERLAY — render these Korean texts directly into the image as part of the illustration:
+
+    1. Top-left corner: small narration lines in a soft rounded serif Korean font, white color with subtle warm shadow, stacked vertically:
+       "눈을 떴어요."
+       "여기는 어디일까요?"
+
+    2. Below the first two lines, continuing the narration in the same style:
+       "하얀 성들이 모여 있어요."
+       "동글동글 예쁜 성들이에요."
+
+    3. Bottom-center, largest and boldest text — the key exclamation: bold rounded Korean font, bright white with a soft glow, noticeably bigger than the narration:
+       "와, 멋져요!"
+
+    All text must be in Korean (Hangul). The text should feel like part of the picture book page — integrated into the composition, not a plain overlay. Place text in areas that do not obscure the boy's face or the tooth-shaped buildings. The overall layout should look like a finished picture book page where illustration and text work together.
+  images:
+    - path: "./characters/hun-adventure.png"
+    - path: "./locations/tooth-plaza-peaceful.png"
+  size: 1K
+  aspectRatio: "4:3"
+  seed: null
+
+output: "./page03.png"

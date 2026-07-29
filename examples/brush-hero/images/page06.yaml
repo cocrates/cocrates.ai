@@ -1,0 +1,33 @@
+type: image
+model: gemini-3.1-flash-image
+
+params:
+  prompt: |
+    Using the reference images: Image 1 is the boy character (Hoon) in his adventure outfit — blue tunic with golden shield emblem on chest, brown boots. Image 2 is the tooth character (Hayani).
+
+    SCENE: Create a children's picture book page illustration. The boy from image 1 clenches his fists with a determined expression, deciding to fight. The tooth character from image 2 looks at him with trusting, hopeful eyes. Sugar monsters are visible in the distant background. The boy shows courage despite being scared. Determined, heroic atmosphere. Soft digital painting style, pastel colors, round gentle outlines.
+
+    TEXT OVERLAY — render these Korean texts directly into the image as part of the illustration:
+
+    1. Top-left corner: two small narration lines in a soft rounded serif Korean font, white color with subtle warm shadow, stacked vertically:
+       "훈이는 잠시 무서웠어요."
+       "하지만 하얀이의 눈을 봤어요."
+
+    2. Center-bottom, largest and boldest text — the key declaration: bold rounded Korean font, bright white with a soft glow, noticeably bigger than other text:
+       "나가 싸울게!"
+
+    3. Below the bold text, small narration line in soft white rounded Korean font:
+       "훈이가 말했어요."
+
+    4. Bottom-center: small narration line in soft white rounded Korean font:
+       "하얀이가 고개를 끄덕였어요."
+
+    All text must be in Korean (Hangul). The text should feel like part of the picture book page — integrated into the composition, not a plain overlay. Place text in areas that do not obscure the characters' faces. The overall layout should look like a finished picture book page where illustration and text work together.
+  images:
+    - path: "./characters/hun-adventure.png"
+    - path: "./characters/hayani.png"
+  size: 1K
+  aspectRatio: "4:3"
+  seed: null
+
+output: "./page06.png"

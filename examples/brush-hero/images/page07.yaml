@@ -1,0 +1,36 @@
+type: image
+model: gemini-3.1-flash-image
+
+params:
+  prompt: |
+    Using the reference images: Image 1 is the boy character (Hoon) in his adventure outfit — blue tunic with golden shield emblem on chest, brown boots. Image 2 is the tooth character (Hayani). Image 3 is the weapon storage room.
+
+    SCENE: Create a children's picture book page illustration. The tooth character from image 2 brings the boy from image 1 to the magical weapon storage room from image 3. The boy excitedly reaches for the giant toothbrush weapon on the pedestal. The toothpaste tube sparkles nearby. Glowing white and gold tones fill the room. Hopeful, exciting atmosphere. The boy looks excited and ready for adventure. Soft digital painting style, pastel colors, round gentle outlines.
+
+    TEXT OVERLAY — render these Korean texts directly into the image as part of the illustration:
+
+    1. Near the tooth character (Hayani), medium size, rounded friendly Korean font, bright white — Hayani showing the weapon:
+       "이거 봐! 치카치카 방패야!"
+
+    2. Top-left corner: small narration line in a soft rounded serif Korean font, white color with subtle warm shadow:
+       "하얀이가 큰 칫솔을 보여줬어요."
+
+    3. Near the sparkling toothpaste, medium size, rounded Korean font, bright white:
+       "그리고 거품 마법!"
+
+    4. Below the toothpaste text, small narration line in soft white rounded Korean font:
+       "반짝이는 치약도 있어요."
+
+    5. Bottom-center: small narration line in soft white rounded Korean font:
+       "훈이는 칫솔을 번쩍 들어올렸어요."
+
+    All text must be in Korean (Hangul). The text should feel like part of the picture book page — integrated into the composition, not a plain overlay. Place text in areas that do not obscure the characters' faces or the weapons. The overall layout should look like a finished picture book page where illustration and text work together.
+  images:
+    - path: "./characters/hun-adventure.png"
+    - path: "./characters/hayani.png"
+    - path: "./locations/weapon-storage.png"
+  size: 1K
+  aspectRatio: "4:3"
+  seed: null
+
+output: "./page07.png"

@@ -6,54 +6,95 @@
 - Detail profiles exist for all characters/locations in this chapter
 - **Chapter 002+:** Prior chapter released (⑧); continuity files loaded
 
-**Gate artifacts:**
-- `{project-root}/chapters/{nnn}-{chapter-slug}.md` — chapter-level design
-- `{project-root}/chapters/{nnn}-{chapter-slug}/{nnn}-{episode-slug}.md` — one file per episode (scene-level design)
+**Gate artifact:** `{project-root}/chapters/{nnn}-{chapter-slug}.md` — **one file** holding chapter-level design **and** all episode/scene design
 
 **Next stage:** `06-evaluation.md` (design evaluation, recommended) → `05-generation.md` (after user approves design)
 
 **Also used by:** stages ⑤ (generation), ⑥ (evaluation), ⑦ (revision)
 
+**Cross-stage sync:** [`consistency.md`](consistency.md) — load before drafting; cascade when higher artifacts change.
+
 ---
 
 ## Core Concept
 
-Chapter design is **composition, not invention**. It arranges approved characters, locations, world rules, and continuity state into a **chapter arc** (chapter file) and **scene sequences** (nested episode files).
+Chapter design is **composition, not invention**. It arranges approved characters, locations, world rules, and continuity state into a **chapter arc** and **episode → scene sequences** — all in **one chapter design file**.
 
-**Chapter is the publication unit.** Episodes subdivide the chapter for design granularity only — they are not separately published, evaluated as manuscripts, or released.
+**Faithfulness (hard rule):** Chapter design is bound to already-approved higher-level artifacts. Before writing or expanding episode/scene content, **load and use** series/part plans, world bible, character and location profiles, and continuity (ch 002+). Do not redesign the work from memory. If the emerging chapter design **conflicts** with those sources, stop — fix by updating the higher-level artifact (with user approval) or revise the chapter plan to fit; never silently override.
 
-**Design is not the manuscript.** Key Events describe **what happens and why** — not the exact words characters will say. Dialogue, prose rhythm, and literary craft belong to stage ⑤ (generation).
+**Manuscript-ready design (hard rule):** By the end of stage ④, `chapters/{nnn}-{chapter-slug}.md` must contain everything stage ⑤ needs to write prose **without inventing plot beats, scene order, POV, location, seeds, or dialogue intent**. If a writer (or agent) would have to guess what happens next, the design is incomplete — do not proceed to generation.
 
-**Episode count is decided here.** Based on this chapter's story needs, determine how many episodes subdivide the chapter — not predetermined in part or architecture files.
+**Chapter is the publication unit.** Episodes and scenes are design subdivisions only — not separately published, evaluated as manuscripts, or released. **Scenes appear only under episode Key Events.**
+
+**Single-file rule:** Do **not** create `chapters/{nnn}-{chapter-slug}/` nested episode files. Episode and scene design live as sections inside `chapters/{nnn}-{chapter-slug}.md`.
+
+**Anti-duplication:** Chapter-level sections own *chapter-wide* plans (arc, seeds table, motifs, hooks). Episode sections own *execution* (purpose, craft, Key Events/scenes). Do **not** add an "Episode Detail" / prose summary block that repeats what Key Events already specify. Episode Index is TOC only.
+
+**Design is not the manuscript.** Key Events specify **concrete dramatic flow** (who, where, when, what changes, sensory/emotional cue, dialogue *intent*) — not quoted speech or publishable prose. Stage ⑤ writes the actual lines.
+
+**Episode count is decided here.** Based on this chapter's story needs — not predetermined in `series.md`, part files, or architecture catalogs.
+
+Load Structure Mode from `overview.md` / `series.md`. Chapter List source for Architecture References:
+- **Short:** `series.md`
+- **Series:** `parts/{nnn}-{part-slug}.md`
 
 ### Design Procedure
 
-1. Expand `chapters/{nnn}-{chapter-slug}.md` from architecture catalog into full chapter design
-2. **Create the Episode List** in the chapter file — as many episodes as the story composition requires
-3. Create one episode file per row in the Episode List under `chapters/{nnn}-{chapter-slug}/`
-4. Ensure episode designs connect — hooks, threads, and motifs flow across episodes within the chapter
-5. Present chapter file + all episode files for user approval
-6. **Recommend design evaluation** (`06-evaluation.md`, design mode) before manuscript generation
+1. **Load prior design** — complete the Pre-Design Load Checklist (below). Do not skip; do not rely on chat memory alone
+2. Expand `chapters/{nnn}-{chapter-slug}.md` from architecture catalog into full chapter-level sections, including **Prior Design Alignment**
+3. Draft Purpose / Chapter Arc / Episode Index so they **match** Chapter List Role, Hook to Next, and (series mode) part arc — record any needed higher-level change as a stop/ask, not a silent drift
+4. Under `## Episodes`, write one **complete** `### Episode {nnn}: {Title}` section per Index row — including every scene under Key Events with the mandatory scene fields below
+5. Walk episode hooks and scene transitions top-to-bottom: no orphan scenes, no unexplained jumps
+6. Run **Prior-Design Consistency Gate**, then **Manuscript Readiness** (below)
+7. Present the **single** chapter design file for user approval only if both gates pass — include a one-line status: *"Load ✅ · Consistency ✅ · Readiness ✅"*
+8. **Recommend design evaluation** (`06-evaluation.md`, design mode) before manuscript generation — eval must re-check prior-design consistency
+
+**Legacy note:** Older projects may still have `chapters/{slug}/*.md` episode files. Prefer migrating into the parent chapter.md; until then, treat nested files as authoritative for Key Events and strip duplicated Episode Detail from chapter.md. New work must use the single-file form.
+
 
 ---
 
-## Chapter File — Chapter-Level Design
-
-The chapter file governs the **whole publication unit**:
+## Chapter File Template
 
 ```markdown
 # Chapter {nnn}: {Title}
 
 ## Part
-{parts/{nnn}-{part-slug}.md}
+{Short: part id/title from `series.md` Part Composition | Series: `parts/{nnn}-{part-slug}.md`}
 
 ## Architecture References
-| Type | Artifact | Usage |
-|------|----------|-------|
-| Part | `parts/{nnn}-{part-slug}.md` | Chapter List (Role + Hook to Next); part arc |
-| Character | `characters/{name}.md` | |
-| Location | `locations/{name}.md` | |
-| World | `world-bible.md` / `world/{aspect}.md` | |
+| Type | Artifact | Usage in this chapter |
+|------|----------|----------------------|
+| Overview | `overview.md` | Genre/tone/validation — do not contradict |
+| Series | `series.md` | Arc, Structure Mode, voice; **Short:** Chapter List Role + Hook to Next |
+| Part / Chapter List | **Short:** `series.md`. **Series:** `parts/{nnn}-{part-slug}.md` | Role, conflict, hooks, part/work arc |
+| Character | `characters.md` + `characters/{name}.md` | Appearing cast only — voice/drive/arc as approved |
+| Location | `locations.md` + `locations/{name}.md` | Used places only — atmosphere/layout as approved |
+| World | `world-bible.md` / `world/{aspect}.md` | Laws, history, systems touched this chapter |
+
+## Prior Design Alignment
+{Filled after Pre-Design Load. Required before episode drafting.}
+
+### Load confirmation
+- [ ] `overview.md`
+- [ ] `series.md` (+ Structure Mode)
+- [ ] Chapter List source (short: `series.md` / series: parent `parts/…`)
+- [ ] `characters.md` + profiles for cast in this chapter
+- [ ] `locations.md` + profiles for places in this chapter
+- [ ] `world-bible.md` (+ relevant `world/` aspects)
+- [ ] Continuity set (ch 002+: `story-so-far`, prior summary, `unresolved-threads`)
+
+### Bound to higher design
+| Source constraint | How this chapter honors it |
+|-------------------|----------------------------|
+| Chapter List Role / Hook to Next | |
+| Part / series arc (if applicable) | |
+| Character drives / arcs touched | |
+| Location / world rules used | |
+| Continuity (prior hook + states) | {Ch 001: what this establishes} |
+
+### Conflicts / open questions
+{None | list. Any real conflict → stop; escalate to user; update architecture/continuity source first if changing lore.}
 
 ## Continuity References
 {Ch 001: what this establishes}
@@ -88,10 +129,12 @@ The chapter file governs the **whole publication unit**:
 {How tension builds and resolves across all episodes in this chapter}
 
 ## Episode Index
-| Ep | File | Title | Function in Chapter Arc |
-|----|------|-------|------------------------|
-| 001 | `{nnn}-{episode-slug}.md` | {Title} | {one line} |
-| 002 | ... | ... | ... |
+{TOC only — do not paste scene summaries here.}
+
+| Ep | Title | Function in Chapter Arc |
+|----|-------|------------------------|
+| 001 | {Title} | {one line} |
+| 002 | ... | ... |
 
 ## Chapter Hooks
 - **Opening hook** (episode 001):
@@ -116,155 +159,208 @@ The chapter file governs the **whole publication unit**:
 ## Tone Notes
 ## Estimated Length
 {Total chapter word count target}
-```
 
 ---
 
-## Episode Files — Scene-Level Design
+## Episodes
 
-Each episode file lives at `chapters/{nnn}-{chapter-slug}/{nnn}-{episode-slug}.md`.
+### Episode 001: {Title}
 
-Episode numbers are **local to the chapter** (001, 002, …).
-
-```markdown
-# Episode {nnn}: {Title}
-
-## Chapter
-`chapters/{nnn}-{chapter-slug}.md`
-
-## Purpose
+#### Purpose
 {One sentence — this episode's role in the chapter arc}
 
-## Reader Engagement
-### Personal Stake
-### Opening Question (if episode opens chapter or new POV block)
-### Reader Questions
-### Stakes
+#### Reader Engagement
+##### Personal Stake
+##### Opening Question (if episode opens chapter or new POV block)
+##### Reader Questions
+##### Stakes
 
-## Literary Craft
-### Motifs
-| Motif | Meaning | Appearances (Key Event #) |
+#### Literary Craft
+##### Motifs
+| Motif | Meaning | Appearances (Scene #) |
 
-### POV Inserts (if any)
-| Insert | After Key Event # | Reader learns (POV doesn't) |
+##### POV Inserts (if any)
+| Insert | After Scene # | Reader learns (POV doesn't) |
 
-### Sensory-Emotional Beats
-| World/setting detail | POV reaction or feeling |
-
-### Dialogue Voices
+##### Dialogue Voices
 | Character | Speech pattern | Inner/outer gap (if POV) |
 
-### Reader-Discovered Meaning
+##### Reader-Discovered Meaning
 **What reader should conclude** (design only):
 **Hold — do NOT write in manuscript:**
 **Closing image:**
 
-## Exposition Budget & Seeds
-### Budget
-### Seeds
-| Element | Class | How it appears |
-### Hold (do NOT include)
+#### Exposition Budget & Seeds
+##### Budget
+##### Seeds
+| Element | Class | Scene # | How it appears |
+##### Hold (do NOT include)
 
-## Key Events
-{Scene flow summaries — NOT dialogue or prose. See below.}
+#### Key Events
+{Every scene for this episode — mandatory fields per scene. See Key Events rules.}
 
-### Scene 1 — {title}
-**POV:** | **Location:**
-
-- **Situation:**
-- **Beat:**
-- **Turn:**
-- **Function:**
-- **Dialogue intent:** (optional — one phrase, no quotes)
-
-## POV
-## Hooks
-## Estimated Length
-## Characters Appearing
-## Locations Used
-## Tone Notes
-```
-
----
-
-## Key Events — Flow Summary, Not Dialogue
-
-Scene design must make the **dramatic flow** clear — not pre-write the episode.
-
-### What belongs in Key Events
-
-| Include | Exclude |
-|---------|---------|
-| Scene purpose (dramatic function) | Full dialogue lines (`> Character: "..."`) |
-| Who is present, where, POV | Paragraph-length prose |
-| What **changes** in the scene | Exact wording of speeches |
-| Turning point / emotional shift | Inner monologue draft text |
-| Dialogue **intent** in one phrase | Multi-line quoted exchanges |
-
-**Format per scene:**
-
-```markdown
-### Scene {n} — {title}
-**POV:** {character} | **Location:** {where}
+##### Scene 1 — {title}
+**POV:** {character} | **Location:** {architecture location} | **When:** {story time or relative (“same evening”)}
+**On stage:** {characters present}
 
 - **Situation:** {starting state — one line}
-- **Beat:** {what happens — causal flow, not script}
-- **Turn:** {what changes — character, relationship, stakes}
+- **Beat:** {what happens — causal flow, concrete actions; not script}
+- **Turn:** {what changes — character, relationship, stakes, or knowledge}
 - **Function:** {why this scene exists in the episode arc}
+- **Sensory-emotional:** {one world/setting detail} → {POV reaction or feeling}
+- **Dialogue intent:** {required if anyone speaks — goal + tone; no quotes. Else: none}
+- **Transition out:** {how this scene hands off to the next — cut / time skip / follow character / hook line intent}
+- **Est. length:** {approx. words or characters for this scene}
+
+##### Scene 2 — {title}
+{…same fields…}
+
+#### POV
+{Primary POV for the episode}
+
+#### Hooks
+- **In:** {from prior episode / chapter opening}
+- **Out:** {into next episode / chapter close}
+
+#### Estimated Length
+{Episode total — sum of scene Est. length; must fit chapter Estimated Length}
+
+#### Characters Appearing
+#### Locations Used
+#### Tone Notes
+
+### Episode 002: {Title}
+{Same subsection pattern — every episode fully specified before approval}
 ```
-
-Optional — when dialogue direction matters, use **intent only**:
-
-```markdown
-- **Dialogue intent:** Dong-hyeok requests a situation report in a professional tone (not casual friend speech)
-```
-
-### Rule
-
-If a Key Event reads like it could be pasted into `manuscripts/`, it is **too detailed**. Cut dialogue and prose; keep causal flow and dramatic function.
-
-**Stage ⑤** writes the actual lines — informed by `Dialogue Voices` and scene intent from design, not by pre-written quotes in Key Events.
 
 ---
 
-## Mandatory Loading
+## Key Events — Manuscript-Ready Scene Specs
 
-### Architecture (always)
+Each scene under an episode is a **generation brief**. Stage ⑤ must be able to write the scene from these fields alone (plus Architecture References), without inventing missing beats.
 
-| Artifact | Verify |
-|----------|--------|
-| `chapters/{nnn}-{chapter-slug}.md` | Chapter catalog from ③; Episode List added in this stage |
-| `parts/{nnn}-{part-slug}.md` | Chapter fits part arc |
-| `characters.md` | Every appearing character listed |
-| `characters/{name}.md` | Voice, motivation, arc — no redefinition |
-| `locations.md` | Every used location listed |
-| `locations/{name}.md` | Atmosphere, layout — no redefinition |
-| `world-bible.md` | No contradiction with premise/laws |
-| `world/{aspect}.md` | Referenced systems already defined |
+### Required vs excluded
 
-### Continuity (chapter 002+)
+| Required | Exclude |
+|----------|---------|
+| POV, Location (from architecture), When, On stage | Full dialogue lines (`> Character: "..."`) |
+| Situation → Beat → Turn → Function | Paragraph-length draft prose |
+| Sensory-emotional pair (world detail → POV reaction) | Exact wording of speeches |
+| Dialogue intent when speech occurs (goal + tone, no quotes) | Inner-monologue draft text |
+| Transition out | Multi-line quoted exchanges |
+| Est. length | Vague “they talk / something happens” |
 
-| Artifact | Verify |
-|----------|--------|
-| `continuity/story-so-far.md` | Character/location states, timeline |
-| `continuity/{prior-chapter-slug}-summary.md` | Prior hook addressed |
-| `continuity/unresolved-threads.md` | Threads picked up, advanced, planted, or held |
+### Format per scene
 
-**Chapter 001:** No continuity files — record what this chapter **establishes** for future continuity.
+```markdown
+##### Scene {n} — {title}
+**POV:** {character} | **Location:** {where} | **When:** {time / relative}
+**On stage:** {who is present}
 
-**Do not re-read prior manuscripts** — continuity files are authoritative.
+- **Situation:** {starting state — one line}
+- **Beat:** {concrete causal flow — what physically/dramatically happens}
+- **Turn:** {what changes}
+- **Function:** {why this scene exists in the episode arc}
+- **Sensory-emotional:** {detail} → {POV reaction}
+- **Dialogue intent:** {goal + tone, or none}
+- **Transition out:** {handoff to next scene}
+- **Est. length:** {approx. size}
+```
+
+Optional only when needed:
+
+```markdown
+- **Seed touch:** {Plant/Hint element id from episode Seeds — how it surfaces in this scene}
+- **Motif touch:** {motif id — brief placement note}
+```
+
+### Completeness rules
+
+1. **No empty Key Events.** Every episode section has ≥ 1 scene with all required fields filled.
+2. **Causal chain.** Scene N's Transition out makes Scene N+1's Situation intelligible; episode Out hook matches the next episode's In (or chapter Closing hook).
+3. **Concrete Beat.** A Beat must name actions or observable events — not only mood (“tension rises”).
+4. **Still not prose.** If a Key Event could be pasted into `manuscripts/` as finished text, it is too dialogue-/prose-heavy — cut wording; keep intent and flow.
+5. **Length budget.** Sum of scene Est. length ≈ episode Estimated Length ≈ share of chapter Estimated Length.
+
+**Stage ⑤** writes the actual lines from Dialogue Voices, Sensory-emotional cues, and scene intent — not from pre-written quotes in Key Events.
+
+---
+
+## Pre-Design Load Checklist (mandatory — before composing)
+
+Read artifacts from disk at the start of stage ④ (and again if resuming after a long gap). **Do not rely on prior chat alone.**
+
+| # | Artifact | Always / When | Confirm |
+|---|----------|---------------|---------|
+| 1 | `overview.md` | Always | Genre, tone, validation, Structure Mode, scale |
+| 2 | `series.md` | Always | Series arc, voice; Part Composition or Part Catalog |
+| 3 | Chapter List source | Always | **Short:** `series.md` Chapter List row for this ch. **Series:** `parts/{nnn}-{part-slug}.md` — Role, Key POV, Hook to Next, part arc |
+| 4 | This chapter's catalog | Always | Existing `chapters/{nnn}-{chapter-slug}.md` from ③ — Role / Hooks / conflict |
+| 5 | `characters.md` | Always | Cast allowed; relationship map |
+| 6 | `characters/{name}.md` | Every character who will appear | Drive, voice, arc — no redefinition |
+| 7 | `locations.md` | Always | Places allowed |
+| 8 | `locations/{name}.md` | Every location used in scenes | Atmosphere, layout |
+| 9 | `world-bible.md` | Always | Premise, laws, history, society — no contradiction |
+| 10 | `world/{aspect}.md` | Any system/history slice this chapter uses | Already defined |
+| 11 | `continuity/story-so-far.md` | Ch 002+ | Character/location states, timeline |
+| 12 | `continuity/{prior}-summary.md` | Ch 002+ | Prior closing; events that must not be undone |
+| 13 | `continuity/unresolved-threads.md` | Ch 002+ | Threads to pick up / advance / plant / hold |
+
+**Chapter 001:** Skip continuity files; after design, document what this chapter **establishes** under Continuity References / Prior Design Alignment.
+
+**Do not re-read prior manuscripts** — continuity files are authoritative for past plot.
+
+Record Load confirmation under **Prior Design Alignment** in the chapter file before writing Key Events.
+
+---
+
+## Prior-Design Consistency Gate (mandatory — before approval)
+
+Run after episode/scene design is drafted. Any ❌ blocks approval and stage ⑤.
+
+| Check | Pass criteria |
+|-------|----------------|
+| Loaded all required artifacts | Pre-Design Load Checklist complete; Reflecting in Prior Design Alignment |
+| Chapter List Role | Purpose + Chapter Arc execute the approved Role — not a different story |
+| Hook to Next / Closing | Chapter Closing hook aligns with Chapter List Hook to Next (or next-part handoff); refine wording but do not drop the obligation |
+| Opening honors prior | Ch 002+: Prior Hook addressed in ep 001 scenes; no soft-reset of prior chapter |
+| Continuity states | Ch 002+: Character/location states in scenes match `story-so-far`; no resurrection/undo without design-approved continuity update |
+| Unresolved threads | Each active thread is Picks up / Advances / Plants / Holds — none silently dropped |
+| Characters | Every On-stage name exists in architecture; voice/drive matches profile; arc direction not reversed without architecture update |
+| Locations | Every scene Location is in architecture; use matches profile |
+| World | Beats do not break physics/laws/history in world-bible; exposition only for Plant/Hint (not Hold lore dumps that contradict Seed plan) |
+| Series / part arc | Chapter advances the approved series/part role; no stealing later-part payoffs marked Hold elsewhere |
+| Tone / voice | Matches `series.md` Narrative Voice & Style and overview Genre & Tone |
+| No silent lore invention | New factions/places/rules → stop and update stage ③ first |
+
+**On conflict:** Prefer correcting the chapter design to fit approved sources. If the chapter reveals a necessary lore/plot change, propose architecture or continuity update → user approves → then finish chapter design.
+
+---
+
+## Mandatory Loading (summary)
+
+| Layer | Artifacts |
+|-------|-----------|
+| Scope / series | `overview.md`, `series.md` |
+| Plot parent | Chapter List source + chapter catalog |
+| World / cast / space | `world-bible.md`, `world/`, `characters*`, `locations*` |
+| Continuity (002+) | `story-so-far`, prior summary, `unresolved-threads` |
 
 ### MAY / MUST NOT
 
-**MAY:** Select approved characters/locations; apply world rules; plan scenes, hooks, engagement across chapter and episodes.
+**MAY:** Select approved characters/locations; apply world rules; plan scenes, hooks, engagement across chapter and episodes in the same file — within Chapter List Role and continuity.
 
 **MUST NOT:**
+- Start episode/scene drafting before Pre-Design Load Checklist is done
 - Invent new named characters, locations, factions, or world rules
 - Expand profiles beyond architecture files
-- Contradict `story-so-far.md`
-- Ignore active threads without Hold reason
-- Override parent chapter catalog scope (role/conflict/Hook to Next in part Chapter List)
-- Create top-level `episodes/` files — episodes nest under chapter folder only
+- Contradict `story-so-far.md` or ignore active threads without Hold reason
+- Override parent Chapter List scope (role/conflict/Hook to Next)
+- Contradict series/part arc, world-bible, or character/location profiles without an explicit approved higher-level update
+- Create nested `chapters/{nnn}-{chapter-slug}/` episode files, or a top-level `episodes/` directory
+- Duplicate episode plot as chapter-level "Episode Detail" when Key Events already exist
+- Approve or hand off to stage ⑤ when Prior-Design Consistency Gate or Manuscript Readiness fails
+- Episode Index–only chapter designs (TOC without Key Events)
 
 ---
 
@@ -382,21 +478,23 @@ The chapter closing must **not** restate what the chapter already showed. **Desi
 - [ ] Prior hook addressed (ch 002+)
 - [ ] Exposition budget respected (chapter level)
 - [ ] Seed discipline (Plant/Hint/Hold)
-- [ ] Scene-first Key Events in every episode file
-- [ ] Architecture-bound
-- [ ] Continuity-bound (ch 002+)
-- [ ] No improvised entities
-- [ ] **Motifs planned** — 1–2 motifs with placements across episodes
-- [ ] **Sensory-emotional pairing** — world details filtered through POV reaction
-- [ ] **Dialogue voices distinct**
+- [ ] Scene-first Key Events under every episode section — **all mandatory scene fields filled**
+- [ ] Architecture-bound — Prior Design Alignment filled; Consistency Gate green
+- [ ] Continuity-bound (ch 002+) — states, prior hook, threads accounted for
+- [ ] No improvised entities; no silent override of series/part/world/cast/place
+- [ ] **Motifs planned** — 1–2 motifs with placements across episodes/scenes
+- [ ] **Sensory-emotional** on every scene
+- [ ] **Dialogue voices** distinct; Dialogue intent on scenes with speech
 - [ ] **POV inner/outer gap**
 - [ ] **POV insert budget** — ≤ 2 per episode, placement planned
 - [ ] **Reader-discovered meaning** — thematic conclusion in Hold
 - [ ] **Antagonist plausibility**
 - [ ] **Emotional indeterminacy**
 - [ ] **Closing is image/silence**
-- [ ] **Key Events are flow summaries** — no quoted dialogue
-- [ ] **All episode files present** — one per Episode List row
+- [ ] **Key Events are briefs, not prose** — no quoted dialogue
+- [ ] **Every Episode Index row has a full episode section** with Key Events
+- [ ] **Scene transitions / episode hooks** chain without gaps
+- [ ] **Est. length** filled per scene and summed at episode + chapter
 
 ### Over-Seeded Opener Anti-Pattern
 
@@ -421,8 +519,8 @@ After user approves chapter design, **propose design evaluation** before manuscr
 > *"Chapter {nnn} design is approved. Shall we evaluate the design before writing the manuscript? Design evaluation catches structural issues more efficiently than post-prose revision."*
 
 See `06-evaluation.md` — **Design Evaluation** mode. Evaluator reads:
-- `chapters/{nnn}-{chapter-slug}.md`
-- All files in `chapters/{nnn}-{chapter-slug}/`
+- `chapters/{nnn}-{chapter-slug}.md` (chapter-level + episode sections + Prior Design Alignment)
+- Prior-design set again (`overview`, `series`, Chapter List source, world, cast, places, continuity)
 
 Results go to `evaluations/{nnn}-{chapter-slug}.md`.
 
@@ -430,22 +528,38 @@ Results go to `evaluations/{nnn}-{chapter-slug}.md`.
 
 ## Completeness Check
 
+- [ ] **Pre-Design Load Checklist** completed; Prior Design Alignment filled
+- [ ] **Prior-Design Consistency Gate** all pass (no unresolved conflicts)
 - [ ] Chapter file expanded from architecture catalog
-- [ ] One episode file per Episode List row
-- [ ] Architecture References complete (chapter file)
+- [ ] Episode Index + one full episode section per Index row (in the same file)
+- [ ] No parallel episode summary / Episode Detail that duplicates Key Events
+- [ ] No nested `chapters/{nnn}-{chapter-slug}/` episode files
+- [ ] Architecture References complete (overview, series, Chapter List source, cast, places, world)
 - [ ] Continuity References complete (ch 002+)
 - [ ] Prior Hook documented (ch 002+)
 - [ ] Threads This Chapter covers continuity
 - [ ] States match `story-so-far.md`
 - [ ] All entities in architecture — no improvisation
 - [ ] Engagement Checklist passed
-- [ ] Key Events are scene flow summaries in all episode files
+- [ ] **Manuscript Readiness** passed (below)
 - [ ] Episode hooks chain; chapter arc is coherent
+
+### Manuscript Readiness (required before stage ⑤)
+
+Stage ⑤ must **not** invent plot. Confirm:
+
+- [ ] Every episode has ≥ 1 scene under Key Events
+- [ ] Every scene has: POV | Location | When | On stage | Situation | Beat | Turn | Function | Sensory-emotional | Dialogue intent (or none) | Transition out | Est. length
+- [ ] Beats are concrete (actions/events), not mood-only
+- [ ] Scene Transition out → next Situation is intelligible; last episode Out matches Chapter Closing hook
+- [ ] Seeds/Hold and motifs are placeable from scene fields (or optional Seed/Motif touch)
+- [ ] Dialogue Voices cover every speaking character in On stage lists
+- [ ] A cold reader could draft the chapter from this file + architecture refs alone
 
 ---
 
 ## Gate
 
-User approves chapter design (chapter file + all episode files). Do not proceed to `05-generation.md` without approval.
+User approves the single chapter design file **only if Prior-Design Consistency Gate and Manuscript Readiness both pass**. Do not proceed to `05-generation.md` without approval.
 
-Design evaluation (`06-evaluation.md`) is strongly recommended between design approval and manuscript generation.
+Design evaluation (`06-evaluation.md`) is strongly recommended between design approval and manuscript generation — include prior-design consistency again.

@@ -1,0 +1,35 @@
+title: 치카치카 왕국 / 이빨성-앞마당 / 성문-뷰 (오염) 장소 참조 이미지
+message: |
+  치카치카 왕국 이빨 성의 앞마당. 입 벌린 모양의 웅장한 정문. 반짝이던
+  대리석 바닥이 충균 몬스터의 보라색 끈적한 슬라임으로 뒤덮임.
+
+design: |
+  장소 참조 이미지 — 이빨 성 앞마당, 정문 쪽 뷰. 오염 상태.
+  - 이빨 성의 정문 — 입 벌린 모양의 커다란 아치형 문
+  - 넓은 대리석 광장 바닥이 보라색 끈적한 슬라임으로 덮임
+  - 성벽에도 보라색/검은색 얼룩이 퍼져 있음
+  - 하늘이 흐릿하고 어두워짐
+  - 광장 가장자리에 칫솔 모양의 가로등
+  - 반짝임이 사라지고 칙칙한 느낌
+  - 수채화 디지털 페인팅
+  - 사람/캐릭터 없음
+  - 4:3 가로, 1K
+
+# --- cocrates-google-genai ---
+type: image
+model: gemini-3.1-flash-image
+params:
+  prompt: |
+    A fantasy castle courtyard background reference for a children's picture
+    book. The front of the Tooth Castle — the main gate is shaped like an
+    open mouth with large archway. In front of the gate is a wide marble
+    plaza, now covered in sticky purple slime and dark stains spreading
+    across the white floor. The castle walls are also stained with purple
+    and black blotches. The sky is overcast and dim. Lamp posts shaped like
+    toothbrushes stand at the edges of the plaza. The once bright and
+    sparkling courtyard looks dirty and corrupted. No characters. Watercolor
+    digital painting style, soft pastel tones. Wide shot, 4:3 landscape.
+  size: 1K
+  aspectRatio: "4:3"
+  seed: null
+output: "./치카치카-왕국-이빨성-앞마당-성문-뷰-오염.png"

@@ -1,0 +1,13 @@
+type: image
+model: gemini-3.1-flash-image
+
+params:
+  prompt: |
+    Using the provided reference image of the boy character, keep his exact appearance the same - same face, same hair, same eyes, same cheeks, same body shape, same art style. Change only the outfit: replace the pink pajamas with a bright blue adventurer's tunic with a golden shield emblem on the chest, brown boots, and a small belt. Keep everything else identical to the reference. The character should look brave and determined, like a young hero ready for adventure. Simple white background, character centered, full body view from front. Children's book illustration style.
+  images:
+    - path: "./hun.png"
+  size: 1K
+  aspectRatio: "1:1"
+  seed: null
+
+output: "./hun-adventure.png"

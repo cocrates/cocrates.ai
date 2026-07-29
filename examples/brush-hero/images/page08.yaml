@@ -1,0 +1,35 @@
+type: image
+model: gemini-3.1-flash-image
+
+params:
+  prompt: |
+    Using the reference images: Image 1 is the boy character with weapons (toothbrush in right hand, shield on chest, toothpaste in left hand). Image 2 is the sugar monster.
+
+    SCENE: Create a children's picture book page illustration. The boy from image 1 charges toward sugar monsters from image 2, swinging his toothbrush weapon. White foam and bubbles fly from the toothpaste tube. The sugar monsters recoil and retreat in fear. Dynamic, exciting battle scene with motion lines. Bright, energetic atmosphere. Soft digital painting style, pastel colors, round gentle outlines.
+
+    TEXT OVERLAY — render these Korean texts directly into the image as part of the illustration:
+
+    1. Near the boy, medium size, bold rounded Korean font, bright white — the battle cry:
+       "치카치카! 방패로 쳐라!"
+
+    2. Below the battle cry, small narration line with onomatopoeia in soft white rounded Korean font:
+       "휘익! 설탕 괴물이 날아갔어요."
+
+    3. Near the sparkling toothpaste, medium size, bold rounded Korean font, bright white — the magic attack:
+       "거품 마법! 뿌리자!"
+
+    4. Below the magic text, small narration line with onomatopoeia in soft white rounded Korean font:
+       "쉐라쉐라! 거품이 가득했어요."
+
+    5. Bottom-center: small narration line in soft white rounded Korean font:
+       "설탕 괴물들이 비명을 질렀어요."
+
+    All text must be in Korean (Hangul). The text should feel like part of the picture book page — integrated into the composition, not a plain overlay. Place text in areas that do not obscure the characters' faces or the action. The overall layout should look like a finished picture book page where illustration and text work together.
+  images:
+    - path: "./characters/hun-weapons.png"
+    - path: "./characters/sugar-monster.png"
+  size: 1K
+  aspectRatio: "4:3"
+  seed: null
+
+output: "./page08.png"

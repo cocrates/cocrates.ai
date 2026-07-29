@@ -2,7 +2,9 @@
 
 **Prerequisites:** Approved `overview.md` and `series.md`
 
-**Gate artifacts:** `characters.md`, `locations.md`, `world-bible.md`, `parts/{nnn}-{part-slug}.md`, `chapters/{nnn}-{chapter-slug}.md`
+**Gate artifacts:**
+- Always: `characters.md`, `locations.md`, `world-bible.md`, `chapters/{nnn}-{chapter-slug}.md`
+- **Series mode only:** `parts/{nnn}-{part-slug}.md`
 
 **Next stage:** `04-chapter-design.md` — only after architecture **and** parent chapter catalog are approved
 
@@ -10,15 +12,20 @@
 
 ## Procedure
 
-Load `overview.md` and `series.md`. Design the structural backbone. All files here represent the **whole** of their domain — individual details come in profiles (`characters/{name}.md`, etc.).
+Load `overview.md` and `series.md`. Respect **Structure Mode**.
 
-**Chapter planning lives in part files** — `series.md` provides part catalog only; expand each part into a chapter list here.
+| Mode | Chapter List source | `parts/` |
+|------|---------------------|---------|
+| **Short** | Already complete in `series.md` (stage ②) | **Do not create** |
+| **Series** | Expand each Part Catalog row into `parts/{nnn}-{part-slug}.md` here | **Required** |
 
-**Flexible counts:** Part and chapter counts from `overview.md` / `series.md` are planning targets. Adding, merging, or removing chapters during architecture is normal when story structure demands it — update affected files and `overview.md` Scale with user approval.
+**Flexible counts:** Part and chapter counts from `overview.md` / `series.md` are planning targets. Adding, merging, or removing chapters is normal when story structure demands it — update the Chapter List source and `overview.md` Scale with user approval.
 
-**Episodes are not planned here.** Do not specify episode counts in part chapter lists. Episode count and Episode List are decided at **stage ④ chapter design** based on each chapter's story needs.
+**Episodes are not planned here.** Do not specify episode counts. Episode Index and scenes are decided at **stage ④**.
 
-Characters, locations, world-bible, parts, and chapter catalogs may be designed **in parallel** (after part files define chapter lists).
+Characters, locations, world-bible, and chapter catalogs may be designed **in parallel** once the Chapter List for the next chapters to design is known.
+
+**“Early chapters”:** At minimum chapter 001 must have catalog + profiles for its cast/places. Expand catalogs and profiles for further chapters before designing them (typically a small upcoming window, e.g. next 1–3 chapters, or as the user requests).
 
 ---
 
@@ -42,7 +49,27 @@ Characters, locations, world-bible, parts, and chapter catalogs may be designed 
 - **Arc Direction**: {positive / negative / flat — brief description}
 ```
 
-Create `characters/{name-slug}.md` for each character who will appear in early chapters.
+Create `characters/{name-slug}.md` for each character who will appear in early chapters, using this structure:
+
+```markdown
+# {Character Name}
+
+## 기본 정보
+- Role: {protagonist / antagonist / ...}
+- Core Drive: {what they want most}
+- Central Conflict: {what prevents them from getting it}
+- Arc Direction: {positive / negative / flat — brief description}
+
+## 외형 및 거동 특징
+- 외형(Appearance): {face/height/build/unique visual traits}
+- 습관/거동(Behavior): {signature gestures, posture habits, movement style}
+- 말투/표현(Voice): {speech patterns, recurring phrases, emotional tell}
+- 반복되는 단서(Signature cues): {what readers notice consistently}
+
+## 주요 인물과의 관계
+- {Other Character A} ↔ {Character Name}: {relationship type, power dynamic, key tension seed}
+- {Other Character B} ↔ {Character Name}: ...
+```
 
 ---
 
@@ -61,7 +88,30 @@ Create `characters/{name-slug}.md` for each character who will appear in early c
 {Tree or list showing containment relationships}
 ```
 
-Create `locations/{name-slug}.md` for each location used in early chapters.
+Create `locations/{name-slug}.md` for each location used in early chapters, using this structure:
+
+```markdown
+# {Location Name}
+
+## 기본 정보
+- 유형: {world / region / city / building / room / outdoor / ...}
+- 서사적 역할: {why this place matters to the story}
+- 핵심 이벤트: {notable events that happen here}
+
+## 공간 구성
+- 구조/레이아웃: {spatial layout — rooms, corridors, open areas, landmarks}
+- 규모감: {size impression — cramped / vast / intimate / etc.}
+
+## 감각 환경
+- 조명: {natural light / artificial / dim / harsh / flickering / ...}
+- 온도/습도: {cold / warm / humid / dry / seasonal shift}
+- 냄새: {dominant scent — dust, food, chemicals, nature, decay, ...}
+- 소리/소음: {ambient sound — silence, traffic, machinery, birdsong, echoes, ...}
+- 질감/촉감: {what surfaces feel like if touched — rough stone, polished wood, ...}
+
+## 분위기 노트
+{이 장소가 주는 심리적 인상 — 안전 / 위협 / 향수 / 고립 / ...}
+```
 
 ---
 
@@ -82,9 +132,11 @@ Create `world/{aspect-slug}.md` for domains referenced in early chapters.
 
 ---
 
-## `parts/{nnn}-{part-slug}.md` (Part Design + Chapter Catalog)
+## `parts/{nnn}-{part-slug}.md` (Series mode only)
 
-**Where chapter planning happens.** One file per row in `series.md` Part Catalog.
+**Where chapter planning happens in series mode.** One file per row in `series.md` Part Catalog.
+
+**Short mode: skip this entire section** — Chapter List already lives in `series.md`.
 
 Prerequisite: Part appears in `series.md` Part Catalog.
 
@@ -92,7 +144,7 @@ Lists every planned chapter in the part. Chapter count may differ from the appro
 
 **No episode column** — episode structure is decided per chapter at stage ④.
 
-**Chapter List is the flow map** — each row's Role (what the chapter does) and Hook to Next (what pulls into the next) let you review momentum across the part before chapter detail design. Read the Hook column top-to-bottom: consecutive chapters should connect; gaps or dead ends need fixing here.
+**Chapter List is the flow map** — each row's Role and Hook to Next let you review momentum across the part before chapter detail design. Read the Hook column top-to-bottom: consecutive chapters should connect; gaps or dead ends need fixing here.
 
 ```markdown
 # Part {nnn}: {Title}
@@ -116,7 +168,7 @@ Lists every planned chapter in the part. Chapter count may differ from the appro
 ```
 
 **Hook to Next vs Part Hooks / chapter catalog Closing hook:**
-- **Hook to Next** (Chapter List column) — handoff *between* chapters inside the part; required for every row so part-level flow can be reviewed in one table.
+- **Hook to Next** (Chapter List column) — handoff *between* chapters; required for every row.
 - **Part Hooks** — part entry/exit only (first chapter open, last chapter close).
 - **Chapter catalog / stage ④ Closing hook** — refine the row's Hook to Next when designing that chapter; keep them aligned.
 
@@ -124,23 +176,26 @@ Lists every planned chapter in the part. Chapter count may differ from the appro
 
 ## `chapters/{nnn}-{chapter-slug}.md` (Chapter Catalog)
 
-**Bridge between part structure and chapter detail design.** Catalog-level chapter info only — **no Episode List here**.
+**Bridge between Chapter List and chapter detail design.** Catalog-level chapter info only — **no** Episode Index or Key Events here.
 
-Prerequisite: Chapter appears in parent `parts/{nnn}-{part-slug}.md` Chapter List.
+Prerequisite: Chapter appears in the mode's Chapter List source:
+- **Short:** `series.md` → Chapter List
+- **Series:** parent `parts/{nnn}-{part-slug}.md` → Chapter List
 
-Stage ④ expands this into full chapter design, creates the Episode List, and adds nested episode files based on story composition.
+**Catalog vs design:** Stage ③ chapter catalog has Role / Hooks only — **no** Episode Index or Key Events. Stage ④ expands the same path into manuscript-ready chapter + episode + scene design. Do not leave stage ④ at Episode Index alone.
+
 
 ```markdown
 # Chapter {nnn}: {Title}
 
 ## Part
-{parts/{nnn}-{part-slug}.md}
+{Short: part id/title from series.md Part Composition | Series: parts/{nnn}-{part-slug}.md}
 
 ## Role in Arc
 ## Core Conflict
 
 ## Chapter Arc
-{Brief — how this chapter fits the part arc}
+{Brief — how this chapter fits the part / work arc}
 
 ## Chapter Hooks
 - **Opening hook:**
@@ -153,13 +208,16 @@ Stage ④ expands this into full chapter design, creates the Episode List, and a
 
 ## Adjusting Chapter Counts
 
-When architecture reveals a different part structure than planned:
+When architecture (or later revision) changes planned structure, follow [`consistency.md`](consistency.md):
 
 1. Propose change to user with reason
-2. Update `parts/{nnn}-{part-slug}.md` Chapter List
-3. Update `series.md` Part Catalog approximate counts
+2. Update Chapter List source first:
+   - **Short:** `series.md` Chapter List (+ Part Composition counts)
+   - **Series:** `parts/{nnn}-{part-slug}.md` Chapter List + `series.md` Part Catalog approximate counts
+3. Update matching `chapters/{nnn}-*.md` catalogs (and full designs if they exist)
 4. Update `overview.md` Scale if total shifts significantly
-5. Resume — no need to match original numbers exactly
+5. If short work grows past ~20 chapters or needs multiple major parts → migrate to **series** mode
+6. Resume — estimates need not match the original numbers
 
 ---
 
@@ -167,12 +225,11 @@ When architecture reveals a different part structure than planned:
 
 - [ ] Every character in early chapters has `characters.md` entry + profile
 - [ ] Every location in early chapters has `locations.md` entry + profile
-- [ ] Each part file has a complete Chapter List for that part's story arc
-- [ ] Every Chapter List row has Role + Hook to Next; consecutive hooks connect without gaps
+- [ ] Chapter List source is complete with Role + Hook to Next; consecutive hooks connect
 - [ ] Each early chapter has a catalog file under `chapters/`
-- [ ] No Episode List or episode count in part or chapter catalog files
-- [ ] No nested episode files exist yet (those are stage ④)
-- [ ] No chapter details duplicated in `series.md`
+- [ ] No Episode Index / episode sections or episode count in Chapter List or chapter catalog files (those are stage ④)
+- [ ] **Short:** no `parts/` directory
+- [ ] **Series:** each Part Catalog row has a `parts/` file; no chapter detail duplicated in `series.md`
 
 ---
 

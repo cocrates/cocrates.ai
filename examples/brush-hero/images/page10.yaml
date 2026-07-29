@@ -1,0 +1,34 @@
+type: image
+model: gemini-3.1-flash-image
+
+params:
+  prompt: |
+    Using the reference images: Image 1 is the boy character (Hoon) in his adventure outfit — blue tunic with golden shield emblem on chest, brown boots. Image 2 is the tooth character (Hayani). Image 3 is the tooth kingdom plaza.
+
+    SCENE: Create a children's picture book page illustration. The tooth kingdom plaza from image 3 is restored to its peaceful, bright state. White tooth buildings sparkle again. The tooth character from image 2 hugs the boy from image 1 with gratitude. Small tooth citizens cheer happily around them. Warm, joyful atmosphere with golden light. The boy smiles shyly. Soft digital painting style, pastel colors, round gentle outlines.
+
+    TEXT OVERLAY — render these Korean texts directly into the image as part of the illustration:
+
+    1. Top-left corner: two small narration lines in a soft rounded serif Korean font, white color with subtle warm shadow, stacked vertically:
+       "이빨나라에 다시 빛이 왔어요."
+       "하얀 성들이 반짝였어요."
+
+    2. Near the tooth character (Hayani), medium size, rounded friendly Korean font, bright white — Hayani's grateful words:
+       "고마워, 훈아!"
+
+    3. Below Hayani's words, small narration line in soft white rounded Korean font:
+       "하얀이가 말했어요."
+
+    4. Bottom-center: small narration line in soft white rounded Korean font:
+       "훈이는 수줍게 웃었어요."
+
+    All text must be in Korean (Hangul). The text should feel like part of the picture book page — integrated into the composition, not a plain overlay. Place text in areas that do not obscure the characters' faces. The overall layout should look like a finished picture book page where illustration and text work together.
+  images:
+    - path: "./characters/hun-adventure.png"
+    - path: "./characters/hayani.png"
+    - path: "./locations/tooth-plaza-peaceful.png"
+  size: 1K
+  aspectRatio: "4:3"
+  seed: null
+
+output: "./page10.png"

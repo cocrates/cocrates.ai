@@ -1,0 +1,11 @@
+type: image
+model: gemini-3.1-flash-image
+
+params:
+  prompt: |
+    A cute sugar monster character for a children's picture book, shown as a character reference sheet. The monster is round and blob-like with a sticky, gooey texture. Color is dark purple and brown tones with a slightly shiny surface. Two small beady eyes and a mischievous grin. Small stubby arms and legs. The monster looks more playful than scary - like a naughty troublemaker, not a terrifying villain. Drawn in soft digital painting style with round, gentle outlines. Dark purple/brown palette. Simple white background, character centered, full body view from front. Children's book illustration style, mischievous but not too scary.
+  size: 1K
+  aspectRatio: "1:1"
+  seed: null
+
+output: "./sugar-monster.png"

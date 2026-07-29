@@ -12,7 +12,7 @@
 
 **Chapter is the only publication and release unit.** One approved chapter design → one chapter manuscript → one release.
 
-**Episode** is an internal design subdivision within a chapter (scene grouping). It is **not** serialized, released, or planned at define stage.
+**Episode** is an internal design subdivision within a chapter (scene grouping). It is **not** serialized, released, or planned at define stage. **Scene** design lives inside episode sections of the chapter design file (stage ④).
 
 At stage ①, plan and ask about **chapters only** — never episodes.
 
@@ -26,16 +26,29 @@ Surface the novel's foundation through Socratic dialogue. Ask **one question at 
 |----------|---------|
 | *"What is the novel about? What is its one-sentence logline?"* | Core concept |
 | *"Who is the intended reader? What genre and tone?"* | Audience & genre |
-| *"What is the target length — roughly how many chapters, and how long is each chapter?"* | Scale (approximate) |
+| *"What is the target length — roughly how many chapters, and how long is each chapter?"* | Scale (approximate) + Structure Mode |
 | *"How will you publish — chapter-by-chapter serialization, batch, or complete volume?"* | Release model |
 | *"Are there content boundaries, taboos, or mandatory elements?"* | Scope / out of scope |
 | *"What will make this novel successful in your eyes?"* | Validation criteria |
+
+### Structure Mode (from chapter scale)
+
+After the scale answer, lock **Structure Mode** in `overview.md`:
+
+| Mode | Guideline | Planning consequence |
+|------|-----------|----------------------|
+| **Short** | ~1 volume, under ~20 chapters | Stage ② puts **part + chapter lists** in `series.md`; **no** `parts/` |
+| **Series** | Multi-part / long-form (typically ≥ ~20 chapters or multiple major parts) | Stage ② Part Catalog only; stage ③ expands each part under `parts/` |
+
+If the user is unsure, propose from chapter count and confirm. **Borderline (~18–22 chapters or “maybe multi-part”):** ask explicitly which mode they want; prefer **series** if they expect several major parts.
+
+When Mode later changes, update via [`consistency.md`](consistency.md) cascade (overview → series → parts/chapter lists).
 
 ### Do NOT ask at define stage
 
 | ❌ Do not ask | Why |
 |--------------|-----|
-| Total episode count | Episodes are design-internal; decided at ③/④ per chapter |
+| Total episode count | Episodes are design-internal; decided at stage ④ per chapter |
 | Episodes per chapter | Decided at **chapter design** (stage ④) per story needs |
 | Words per episode | Plan words per **chapter** |
 | Episode release schedule | Release is **chapter**-by-chapter |
@@ -60,6 +73,7 @@ Record into `{project-root}/overview.md`:
 ## Scale
 {Planning targets for length management — **not fixed requirements**. Adjust as the story develops.}
 
+- **Structure Mode:** {short | series}
 - **Total chapters (approx.):** {n}
 - **Words per chapter (approx.):** {target}
 - **Total word count (optional estimate):**
@@ -90,6 +104,7 @@ Record into `{project-root}/overview.md`:
 ## Completeness Check
 
 - [ ] Logline is one clear sentence
+- [ ] Structure Mode is set (`short` or `series`) consistent with approximate chapter count
 - [ ] Scale gives **approximate** chapter count and words per chapter — no episode count
 - [ ] Scale is framed as planning guidance, not a rigid contract
 - [ ] Publication section states chapter as release unit

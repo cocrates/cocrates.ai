@@ -1,0 +1,35 @@
+title: 충균 몬스터 (big) 캐릭터 참조 이미지
+message: |
+  치카치카 왕국의 악당 — 코믹한 보라색 충균 몬스터. 둥글고 통통한 몸,
+  하나의 큰 눈, 짧은 팔다리. 처음엔 커보이지만 진짜 무섭진 않고,
+  익살스럽고 만화스러운 캐릭터. 초록 점액을 흘리며 교활하게 웃음.
+
+design: |
+  캐릭터 참조 이미지 — 충균 몬스터 큰 상태(big). 정면 전신샷.
+  - 둥글고 통통한 보라색 몸체, 매끈한 피부
+  - 정중앙에 커다란 외눈박이 하나 (노란 눈동자, 빨간 핏줄 약간)
+  - 입을 활짝 벌리고 교활하게 웃는 표정, 초록색 점액(충균)이 입가에서 뚝뚝
+  - 짧고 통통한 팔과 다리, 손가락 3개
+  - 배 쪽이 연한 보라색
+  - 약간 뒤로 젖힌 자세, 팔을 벌린 건방진 포즈
+  - 수채화 디지털 페인팅
+  - 배경 투명
+  - 1:1 정사각형, 1K
+
+# --- cocrates-google-genai ---
+type: image
+model: gemini-3.1-flash-image
+params:
+  prompt: |
+    A full-body character reference of a comical cartoon cavity/bacteria monster
+    for a children's picture book. Round chubby body in bright purple with a
+    slightly lighter purple belly. A single large yellow eye with a small red
+    vein in the center of its face. Wide grinning mouth with green slime
+    dripping from the corner. Short stubby arms and legs with three-fingered
+    hands. Standing in a cocky pose with arms spread wide, leaning back
+    slightly. Not scary — cute and funny instead. Clean white background,
+    watercolor digital painting style, soft outlines. Full body, front view.
+  size: 1K
+  aspectRatio: "1:1"
+  seed: null
+output: "./충균-몬스터-big.png"

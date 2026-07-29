@@ -1,0 +1,33 @@
+type: image
+model: gemini-3.1-flash-image
+
+params:
+  prompt: |
+    Using the reference images: Image 1 is the boy character (Hoon) in pink pajamas. Image 2 is the evening bedroom scene.
+
+    SCENE: Create a children's picture book page illustration. The boy from image 1 sits on the bed in the room from image 2. A mother's hand reaches toward him holding a toothbrush. The boy turns his head away with a stubborn, annoyed expression, refusing to brush his teeth. Warm evening lighting from a bedside lamp. Soft digital painting style, pastel colors, round gentle outlines.
+
+    TEXT OVERLAY — render these Korean texts directly into the image as part of the illustration:
+
+    1. Top-left corner: two small narration lines in a soft rounded serif Korean font, white color with subtle warm shadow, stacked vertically:
+       "저녁이에요."
+       "엄마가 말했어요."
+
+    2. Upper-right area near the mother's hand: a speech bubble or floating text in medium size, warm white color, rounded friendly Korean font:
+       "훈아, 이빨 닦자."
+
+    3. Bottom-left area near the boy: a small narration line in soft white rounded Korean font:
+       "훈이가 말했어요."
+
+    4. Bottom-center, largest and boldest text — this is the key line: bold rounded Korean font, bright white with a soft glow, noticeably bigger than all other text:
+       "싫어요!"
+
+    All text must be in Korean (Hangul). The text should feel like part of the picture book page — integrated into the composition, not a plain overlay. Place text in areas that do not obscure the main characters' faces. The overall layout should look like a finished picture book page where illustration and text work together.
+  images:
+    - path: "./characters/hun.png"
+    - path: "./locations/hoon-room-evening.png"
+  size: 1K
+  aspectRatio: "4:3"
+  seed: null
+
+output: "./page01.png"

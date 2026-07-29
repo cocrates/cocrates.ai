@@ -1,0 +1,38 @@
+title: 티라노 (인간 base) 캐릭터 참조 이미지
+message: |
+  노란 잠옷을 입은 5살 꼬마 — 티라노로 변신하기 전 인간 모습. 동그란 얼굴,
+  검정 단발머리, 커다란 눈. 살짝 시무룩한 표정. 평범하고 귀여운 아이.
+
+design: |
+  캐릭터 참조 이미지 — 인간 상태 (base). 정면 전신샷.
+  - 5살 정도의 작은 꼬마, 동그란 얼굴
+  - 검정 단발머리, 앞머리가 이마를 덮음 — **이 앞머리가 티라노 변신 시 이마의 검정 깃이 됨**
+  - 커다란 동그란 **검은 눈**, 긴 속눈썹 — **티라노 상태와 동일한 눈**
+  - 노란색 잠옷 (긴팔, 긴바지), 맨발 — **노란색 = 티라노 배/꼬리 무늬로 이어짐**
+  - 양손을 자연스럽게 내리고 섬
+  - 시무룩한 표정 (살짝 삐진 입)
+  - 수채화 디지털 페인팅, 부드러운 파스텔 톤
+  - 배경 투명
+  - 1:1 정사각형, 1K
+
+# --- cocrates-google-genai ---
+type: image
+model: gemini-3.1-flash-image
+params:
+  prompt: |
+    A full-body character reference of a cute 5-year-old boy for a children's
+    picture book. The boy has a round face, short straight black hair with
+    bangs covering the forehead, big round dark eyes with thick eyelashes,
+    and light skin. He wears soft yellow long-sleeve pajamas with round
+    neckline, matching long pants, barefoot. He stands with arms at his sides,
+    pouting slightly with a reluctant expression. Clean white background,
+    watercolor digital painting, soft pastel lines, warm and cute style.
+    Full body, front view.
+    NOTE: This is the human form that transforms into a T-rex. The big dark
+    eyes with eyelashes carry over to the T-rex form. The black bangs become
+    the black crest on the T-rex's forehead. The yellow pajama color becomes
+    the yellow markings on the T-rex's belly and tail.
+  size: 1K
+  aspectRatio: "1:1"
+  seed: null
+output: "./티라노.png"

@@ -1,0 +1,52 @@
+title: 치카치카 대모험 / Page 05
+message: |
+  마지막 기술! 티라노가 칫솔 검으로 몬스터 구석구석을 섬세하게 닦아낸다.
+  몬스터가 간지러워하며 웃고 발버둥친다. 몬스터가 더 작아졌다!
+
+design: |
+  그림책 페이지. 세로형 3:4.
+  - 장소: 이빨 성 앞마당 — 이빨성-앞마당 / 성문-뷰 (오염 상태 → 회복 중)
+    (참조: 치카치카-왕국-이빨성-앞마당-성문-뷰-오염.png)
+  - 티라노 (state: t-rex) — 왼쪽, 집중하는 표정, 칫솔 검을 섬세하게 움직임
+    (참조: 티라노-t-rex.png)
+  - 충균 몬스터 (state: small) — 오른쪽, 더 작아짐 (무릎 높이), 간지러워하며 웃는
+    표정 (참조: 충균-몬스터-small.png)
+  - 성의 오염이 조금 덜해짐 (회복되기 시작)
+  - 수채화 디지털 페인팅
+  - 텍스트:
+    (액션 효과음, 중앙, 큰 글씨, 파랑 계열) "안쪽까지 — 샥샥!"
+    (대사, 오른쪽, 몬스터, 굵게) "하하하! 간지러워!!!"
+    (괄호 내레이션, 작게, 오른쪽 아래) "(점점 작아지고 있어!)"
+
+# --- cocrates-google-genai ---
+type: image
+model: gemini-3.1-flash-image
+params:
+  prompt: |
+    Children's picture book page. Portrait 3:4.
+    SETTING: Using Image 1 as reference — the front courtyard of Tooth Castle.
+    The pollution is starting to recede slightly — some of the purple stains
+    are fading, a hint of sparkle returning.
+    CHARACTERS: Using Image 2 as reference — the cute green T-rex hero at
+    left, focused expression, carefully moving the toothbrush-sword in small
+    precise motions with swirling lines around it.
+    Using Image 3 — the purple cavity monster now at knee-height (small state),
+    same round body and single eye but much smaller, laughing with arms
+    flopping, tears of laughter.
+    Watercolor digital painting, soft pastel tones.
+    TEXT OVERLAY:
+    1. Center, large bold blue-toned action sound effect:
+    "안쪽까지 — 샥샥!"
+    2. Right side, by the tiny monster, bold font in purple tone:
+    "하하하! 간지러워!!!"
+    3. Bottom-right corner, small narration in parentheses:
+    "(점점 작아지고 있어!)"
+    Do not obscure character faces.
+  images:
+    - path: "../../images/locations/치카치카-왕국-이빨성-앞마당-성문-뷰-오염.png"
+    - path: "../../images/characters/티라노-t-rex.png"
+    - path: "../../images/characters/충균-몬스터-small.png"
+  size: 1K
+  aspectRatio: "3:4"
+  seed: null
+output: "./05.png"

@@ -6,7 +6,7 @@
 
 **Next stage:** `07-revision.md` if issues found; `05-generation.md` (after design eval) or `08-release.md` (after manuscript eval)
 
-**Engagement checks:** See checklist in `04-chapter-design.md`
+**Engagement / fidelity detail:** `04-chapter-design.md`, `05-generation.md`. **Layer sync:** [`consistency.md`](consistency.md).
 
 ---
 
@@ -14,7 +14,7 @@
 
 | Mode | When | Inputs | Purpose |
 |------|------|--------|---------|
-| **Design Evaluation** | After stage ④ approval (recommended before ⑤) | `chapters/{nnn}-{chapter-slug}.md` + all files in `chapters/{nnn}-{chapter-slug}/` | Catch structural, pacing, seed, and engagement issues **before** writing prose |
+| **Design Evaluation** | After stage ④ approval (recommended before ⑤) | `chapters/{nnn}-{chapter-slug}.md` (chapter + episode + scene Key Events) | Catch structural, pacing, seed, engagement, and **manuscript-readiness** issues **before** writing prose |
 | **Manuscript Evaluation** | After stage ⑤ approval | Above + `manuscripts/{nnn}-{chapter-slug}.md` | Validate prose against design and criteria |
 
 **Design evaluation is strongly recommended.** Fixing structure at design stage is more efficient than revising finished prose.
@@ -32,20 +32,24 @@ Propose after chapter design approval:
 > *"Chapter {nnn} design is approved. Shall we evaluate the design before writing the manuscript? We'll validate structure, seeds, and engagement against criteria."*
 
 Load:
-- `chapters/{nnn}-{chapter-slug}.md`
-- Every file in `chapters/{nnn}-{chapter-slug}/`
-- `overview.md`, architecture references, continuity (ch 002+)
-- **Literary Awards Juror:** also `parts/{nnn}-{part-slug}.md` for work-level context; fill **Literary Awards Juror Checks (Design)** before persona critique
+- `chapters/{nnn}-{chapter-slug}.md` (full file — chapter + episode sections + Prior Design Alignment)
+- **Same prior-design set as stage ④ load:** `overview.md`, `series.md`, Chapter List source, `characters*`, `locations*`, `world-bible` (+ aspects), continuity (ch 002+)
+- Re-run Prior-Design Consistency Gate from `04-chapter-design.md` against the finished design
+- **Literary Awards Juror:** also Chapter List source for work-level context — **Short:** `series.md`; **Series:** `parts/{nnn}-{part-slug}.md`; fill **Literary Awards Juror Checks (Design)** before persona critique
 
 ### Manuscript Evaluation
 
 Propose after chapter manuscript approval:
 
-> *"Chapter {nnn} manuscript is ready. Shall we evaluate it? We'll start with validation against criteria. Would you also like a critique from a specific critic persona?"*
+> *"Chapter {nnn} manuscript is ready. Shall we evaluate it? We'll start with validation against the chapter design and prior architecture/continuity. Would you also like a critique from a specific critic persona?"*
 
-Load design files + `manuscripts/{nnn}-{chapter-slug}.md`.
+Load:
+- `manuscripts/{nnn}-{chapter-slug}.md`
+- `chapters/{nnn}-{chapter-slug}.md` (full design)
+- Architecture + continuity set listed in the chapter design (same as stage ⑤ Pre-Generation Load)
+- Re-run **Design-Fidelity Gate** from `05-generation.md`
 
-**Literary Awards Juror:** When this persona is requested, fill **Literary Awards Juror Checks** in the evaluation file (design and/or manuscript section) before the persona critique. Load parent `parts/{nnn}-{part-slug}.md` and `overview.md` for work-level context.
+**Literary Awards Juror:** When this persona is requested, fill **Literary Awards Juror Checks** in the evaluation file (design and/or manuscript section) before the persona critique. Load Chapter List source (**Short:** `series.md`; **Series:** parent `parts/{nnn}-{part-slug}.md`) and `overview.md` for work-level context.
 
 ---
 
@@ -66,20 +70,33 @@ Load design files + `manuscripts/{nnn}-{chapter-slug}.md`.
 |-------|--------|----------|
 | Chapter arc coherent | ✅ / ⚠️ / ❌ | |
 | Episode hooks chain | | |
-| Episode List fully designed | | {All episode files present?} |
+| Episode sections complete | | {Every Episode Index row has full Key Events?} |
+| Manuscript Readiness | | {Every scene has required fields — see `04-chapter-design.md`} |
+| Scene transitions coherent | | {Transition out → next Situation} |
+| Beat concreteness | | {No mood-only Beats} |
+| Est. length budget | | {Scenes → episode → chapter} |
 | Chapter/part scope aligned | | |
-| Prior hook addressed (ch 002+) | | |
+| Prior hook addressed (ch 002+) | | {Also under Continuity below — one evidence cell is enough} |
 
 ### Architecture & Continuity Compliance
 | Check | Result | Evidence |
 |-------|--------|----------|
-| Characters from architecture | ✅ / ❌ | |
-| Locations from architecture | | |
-| World rules consistent | | |
-| No improvised entities | | |
-| Continuity files loaded (ch 002+) | | |
-| Character/location state consistent | | |
-| Unresolved threads handled | | |
+| Pre-Design load reflected in Prior Design Alignment | ✅ / ❌ | |
+| Series / overview tone & arc honored | | |
+| Chapter List Role / Hook to Next honored | | |
+| Part arc honored (series mode) | | |
+| Characters from architecture; profiles not redefined | ✅ / ❌ | |
+| Locations from architecture; profiles not redefined | | |
+| World rules / history consistent with bible | | |
+| No improvised entities or silent lore | | |
+| Continuity files used (ch 002+) | | |
+| Character/location state vs `story-so-far` | | |
+| Unresolved threads: pick up / advance / plant / hold | | |
+| No contradiction of released continuity | | |
+| Conflicts section empty or escalated (not ignored) | | |
+
+### Prior-Design Consistency Gate
+{Copy pass/fail from `04-chapter-design.md` table — any ❌ → Design Verdict cannot be manuscript-ready}
 
 ### Engagement Checks (Design)
 | Check | Result | Evidence |
@@ -89,15 +106,16 @@ Load design files + `manuscripts/{nnn}-{chapter-slug}.md`.
 | Chapter closing hook | | |
 | Exposition budget respected | | |
 | Seed discipline | | |
-| Scene-first Key Events | | |
-| Motifs planned across episodes | | |
+| Scene-first Key Events (all required fields) | | |
+| Sensory-emotional on every scene | | |
+| Motifs planned across episodes/scenes | | |
 
 ### Literary Craft Checks (Design)
 | Check | Result | Evidence |
 |-------|--------|----------|
 | Info : tension balance | | {Ch 001: ~50:50?} |
 | Sensory-emotional pairing | | |
-| Dialogue voices distinct | | |
+| Dialogue voices + Dialogue intent | | |
 | Reader-discovered meaning | | {Theme in Hold, not closing monologue?} |
 | Antagonist plausibility | | |
 | Closing image specified | | |
@@ -124,6 +142,7 @@ Load design files + `manuscripts/{nnn}-{chapter-slug}.md`.
 ### Design Verdict
 | Dimension | Result |
 |-----------|--------|
+| Prior-design consistent | ✅ / ❌ |
 | Design quality | |
 | Manuscript-ready | ✅ / ⬜ |
 
@@ -132,9 +151,22 @@ Load design files + `manuscripts/{nnn}-{chapter-slug}.md`.
 ## 2. Manuscript Evaluation
 {Perform after stage ⑤ — skip if evaluating design only}
 
-### Consistency Checks
+### Consistency Checks (Design Fidelity)
 | Check | Result | Evidence |
 |-------|--------|----------|
+| Pre-generation sources loaded / used | ✅ / ⚠️ / ❌ | |
+| Every Key Event scene present in order | | |
+| No extra plot scenes without Key Event | | |
+| Situation → Beat → Turn realized | | |
+| POV / On stage / Location / When match | | |
+| Dialogue intent + voices honored | | |
+| Sensory-emotional realized (no catalog dump) | | |
+| Seeds Plant/Hint only; Hold absent | | |
+| Motifs / POV inserts at designed placements | | |
+| Prior hook / closing hook / closing image | | |
+| Continuity states & threads not contradicted | | |
+| World / series tone not broken | | |
+| Design-Fidelity Gate | | {All pass?} |
 
 ### Engagement Checks (Manuscript)
 | Check | Result | Evidence |
@@ -187,6 +219,7 @@ Load design files + `manuscripts/{nnn}-{chapter-slug}.md`.
 ### Manuscript Verdict
 | Dimension | Result |
 |-----------|--------|
+| Design fidelity | ✅ / ❌ |
 | Manuscript quality | |
 | Next-chapter readiness | |
 | Release ready | ✅ / ⬜ |

@@ -2,48 +2,58 @@
 
 **Prerequisites:** Evaluation completed (stage ⑥); user selected findings to apply
 
-**Gate:** User approves revised artifact(s)
+**Gate:** User approves revised artifact(s); Consistency Cascade complete if higher layers changed
 
-**Next stage:** `06-evaluation.md` (re-evaluate if needed), `05-generation.md` (after design revision), or `08-release.md`
+**Next stage:** Re-evaluate (`06`) if needed → `05` (after design revision) or `08` (manuscript clean)
 
-**Chapter design rules:** `04-chapter-design.md`
+**Also read:** [`consistency.md`](consistency.md) · chapter scene rules in [`04-chapter-design.md`](04-chapter-design.md)
 
 ---
 
 ## Core Rule
 
-**Critique-driven revision updates the design before the manuscript** — not just patches prose.
+1. **Design before prose** for anything that changes plot, pacing, seeds, cast, place, or world
+2. **Higher before lower** — if the finding requires a Series/Part/architecture change, update that file first (user approves), then cascade per `consistency.md`
+3. Tell the user which files will change **before** editing, then confirm cascade status when done
 
-For design evaluation findings: revise chapter file and episode files only.
-For manuscript evaluation findings: update design first if structure/pacing/seeds affected, then rewrite manuscript.
-
----
-
-## Revision Order
-
-When evaluation suggests cutting, relocating, or rebalancing content:
-
-1. **Update chapter design first:**
-   - `chapters/{nnn}-{chapter-slug}.md` — chapter arc, Seeds, Hold, Literary Craft, Episode Index
-   - `chapters/{nnn}-{chapter-slug}/{nnn}-{episode-slug}.md` — Key Events, episode-level craft
-   - Move over-explained items from Plant → Hold
-   - Adjust Exposition Budget and Seeds tables
-   - Revise Key Events to scene-level beats
-   - Add Personal Stake if missing
-   - Update **Literary Craft**: Opening Question, Motifs, Sensory-Emotional Beats, Dialogue Voices, POV Inserts
-2. **Then rewrite `manuscripts/{nnn}-{chapter-slug}.md`** following revised design (if manuscript exists)
-3. Record changes in `evaluations/{nnn}-{chapter-slug}.md` → appropriate Revision Decisions section
-4. Present revised design for approval (**design first**); manuscript second if both changed
+Prose-only polish is allowed **only** when Key Events, Seeds/Hold, Prior Design Alignment, and continuity remain true.
 
 ---
 
-## Standard Procedure
+## Classify the finding
 
-1. User selects findings from evaluation (design and/or manuscript section)
-2. If structure/pacing/seeds affected → **revise chapter + episode designs first**
-3. Update affected files
-4. Record in evaluation Revision Decisions
-5. Present for user approval
+| Kind | Examples | First file to touch |
+|------|----------|---------------------|
+| A — Prose craft only | Rhythm, wording, minor clarity | `manuscripts/` only |
+| B — Chapter design | Beats, hooks, seeds, motifs, scenes | `chapters/{nnn}-*.md` then manuscript if it exists |
+| C — Higher plot/list | Wrong Role, Hook to Next, part arc | Chapter List source (`series.md` or `parts/`) → catalog/design → manuscript |
+| D — Lore / cast / place | New rule, renamed place, personality change | `world*` / `characters*` / `locations*` → open designs → manuscripts as needed |
+| E — Continuity error | Contradicts released ch | Prefer fix unreleased design/manuscript; if released must change → user must approve republication path |
+
+---
+
+## Procedure
+
+1. User selects findings from evaluation
+2. Classify A–E; propose cascade file list; get approval if C/D/E
+3. Edit highest layer first → cascade downward (use checklist in `consistency.md`)
+4. Re-run gates:
+   - Design changed → Prior-Design Consistency + Manuscript Readiness (`04`)
+   - Manuscript changed → Design-Fidelity (`05`)
+5. Record in `evaluations/{nnn}-{chapter-slug}.md` → Revision Decisions (note cascade files)
+6. Present for approval: design first if design changed; then manuscript
+
+### When updating chapter design
+
+- Keep Episode Index in sync with `## Episodes` sections
+- Fill all required scene fields (see `04`)
+- Refresh **Prior Design Alignment** if higher files changed
+- Do not add Episode Detail summaries that duplicate Key Events
+
+### When regenerating manuscript
+
+- Reload design + Architecture/Continuity References (`05` Pre-Generation Load)
+- Pass Design-Fidelity Gate before asking approval
 
 ---
 
@@ -51,28 +61,28 @@ When evaluation suggests cutting, relocating, or rebalancing content:
 
 | Critique finding | Design fix | Manuscript fix |
 |------------------|------------|----------------|
-| Too much world-building in opening | Move lore to Hold; budget → Low | Scene opening; cut essay |
-| Info-dump dialogue | Key Events: character questions | Compress dialogue |
-| Too many mysteries explained | Reclassify as Hold; one Hint | Cut explanatory conversation |
-| No personal connection | Add Personal Stake to chapter file | Add character-specific detail |
-| Thematic summary ending | Chapter Hooks: closing image | Replace summary paragraph |
-| Covers entire series themes | Distribute seeds in part/chapter list | Cut held content |
-| Opening has action but no tension | Add **Opening Question** to chapter file | Rewrite opening with persistent question |
-| Em-dash monotony / flat rhythm | Note rhythm target in Literary Craft | Vary sentence length; cut chains |
-| World details are functional only | Add **Sensory-Emotional Beats** table | Pair each detail with POV reaction |
-| Dialogue sounds same for all characters | Add **Dialogue Voices** table | Differentiate speech; add inner/outer gap |
-| Motif appears once | Plan 2–3 placements across episodes | Thread motif across chapter |
-| Too many POV inserts (logs) | Reduce POV Inserts to 1–2 per episode | Cut excess inserts |
-| Info 70% / tension 30% | Lower exposition budget; add tension beats | Cut catalog blocks |
-| Thematic closing monologue | Add to **Hold**; specify Closing image | Cut monologue; end on silence/image |
-| Obvious villain dialogue | Dialogue Voices: self-justifying worldview | Rewrite antagonist as believer |
-| POV emotion over-explained | Emotional indeterminacy in design | "angry or wronged?" — don't label |
-| Violent scene over-described | One focal action in Key Events | Cut catalog; POV omission |
-| Episode transitions jarring | Revise episode hooks in chapter file | Smooth transitions in prose |
-| Chapter arc incoherent | Revise Chapter Arc and Episode Index | Restructure manuscript sections |
+| Too much world-building in opening | Move lore to Hold; lower budget | Scene opening; cut essay |
+| Info-dump dialogue | Key Events: intent only; cut lecture beats | Compress dialogue |
+| Too many mysteries explained | Reclassify as Hold; one Hint | Cut explanatory talk |
+| No personal connection | Add Personal Stake | Character-specific detail |
+| Thematic summary ending | Closing image in Hold/craft | End on image/silence |
+| Covers entire series themes | Redistribute via Chapter List / seeds | Cut held content |
+| Opening action without tension | Add Opening Question | Persist unanswered question |
+| Flat rhythm | Note in Literary Craft | Vary sentences |
+| World details functional only | Sensory-emotional per scene | Pair detail → POV reaction |
+| Same voice for all | Dialogue Voices table | Differentiate + inner/outer gap |
+| Motif once | Plan placements across scenes | Thread motif |
+| Too many POV inserts | ≤ 2 per episode in design | Cut extras |
+| Info-heavy opening | Lower exposition budget | Cut catalog blocks |
+| Cartoon villain | Self-justifying worldview in Voices | Rewrite as believer |
+| POV emotion over-labeled | Indeterminacy in design | Ambiguous feeling cues |
+| Jarring episode joins | Fix episode Hooks + Transition out | Smooth handoffs |
+| Chapter vs Chapter List Role | Cascade C: List → design | Restructure to match |
+| Prose invents beat/cast | Do not “keep” invention — design first or cut | Align to Key Events |
+| Conflicts with world/continuity | Cascade D/E | Regenerate after sync |
 
 ---
 
 ## Gate
 
-User approves revised artifact(s). If design changed, design approval precedes manuscript approval.
+User approves revised artifact(s). Design approval precedes manuscript approval when both changed. Cascade checklist must show no dangling higher/lower mismatch.

@@ -1,0 +1,35 @@
+type: image
+model: gemini-3.1-flash-image
+
+params:
+  prompt: |
+    Using the reference images: Image 1 is the boy character (Hoon) in his adventure outfit — blue tunic with golden shield emblem on chest, brown boots. Image 2 is the tooth character (Hayani). Image 3 is the sugar monster. Image 4 is the tooth kingdom plaza.
+
+    SCENE: Create a children's picture book page illustration. Sugar monsters from image 3 are invading the tooth kingdom plaza from image 4. The sky has turned dark. Tooth buildings are wilting. The tooth character from image 2 looks terrified. The boy from image 1 stands protectively in front of the tooth character, looking determined but scared. Tense, dramatic atmosphere. Dark purple tones mixing with pastel colors. Soft digital painting style, pastel colors, round gentle outlines.
+
+    TEXT OVERLAY — render these Korean texts directly into the image as part of the illustration:
+
+    1. Top-left corner: small narration lines in a soft rounded serif Korean font, white color with subtle warm shadow, stacked vertically:
+       "하늘이 어두워졌어요."
+       "설탕 괴물들이 왔어요!"
+
+    2. Below the first two lines, continuing narration in the same style:
+       "동글동글 끈적한 괴물들."
+
+    3. Near the tooth character (Hayani), medium size, rounded Korean font, bright white — Hayani's frightened cry:
+       "으악! 설탕 괴물이야!"
+
+    4. Bottom-center: small narration line in soft white rounded Korean font:
+       "하얀이가 소리쳤어요."
+
+    All text must be in Korean (Hangul). The text should feel like part of the picture book page — integrated into the composition, not a plain overlay. Place text in areas that do not obscure the characters' faces or the sugar monsters. The overall layout should look like a finished picture book page where illustration and text work together.
+  images:
+    - path: "./characters/hun-adventure.png"
+    - path: "./characters/hayani.png"
+    - path: "./characters/sugar-monster.png"
+    - path: "./locations/tooth-plaza-peaceful.png"
+  size: 1K
+  aspectRatio: "4:3"
+  seed: null
+
+output: "./page05.png"

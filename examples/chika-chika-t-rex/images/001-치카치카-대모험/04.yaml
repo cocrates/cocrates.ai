@@ -1,0 +1,51 @@
+title: 치카치카 대모험 / Page 04
+message: |
+  두 번째 공격! 티라노가 칫솔 검을 앞뒤로 휘두르며 몬스터를 공격한다.
+  몬스터가 움츠리며 벌써 조금 작아지기 시작했다.
+
+design: |
+  그림책 페이지. 세로형 3:4.
+  - 장소: 이빨 성 앞마당 — 이빨성-앞마당 / 성문-뷰 (오염 상태)
+    (참조: 치카치카-왕국-이빨성-앞마당-성문-뷰-오염.png)
+  - 티라노 (state: t-rex) — 왼쪽, 칫솔 검을 좌우로 흔드는 동작 (참조: 티라노-t-rex.png)
+  - 충균 몬스터 (state: big, shrinking) — 오른쪽, 이전보다 살짝 작아짐, 움츠린 표정
+    (참조: 충균-몬스터-big.png)
+  - 칫솔 검의 좌우 궤적이 흔적처럼 표현됨
+  - 수채화 디지털 페인팅
+  - 텍스트:
+    (액션 효과음, 중앙, 큰 글씨) "앞뒤로도 — 치카치카!"
+    (대사, 오른쪽, 몬스터, 굵게) "히이이! 멈춰!"
+    (괄호 내레이션, 작게, 오른쪽 아래) "(벌써 조금 작아졌네?)"
+
+# --- cocrates-google-genai ---
+type: image
+model: gemini-3.1-flash-image
+params:
+  prompt: |
+    Children's picture book page. Portrait 3:4. Action scene.
+    SETTING: Using Image 1 as reference — same polluted front courtyard of
+    Tooth Castle. Purple stains on white marble and castle walls.
+    CHARACTERS: Using Image 2 as reference — the cute green T-rex hero at
+    left, swinging the blue toothbrush-sword from left to right in a wide
+    horizontal motion, with motion trail lines showing the arc. Using Image 3
+    as reference — the purple cavity monster at right, now slightly smaller
+    than before, cowering with a scared expression, arms partly raised.
+    The monster should look slightly reduced in size compared to page 03,
+    but still recognizable as the same big monster.
+    Watercolor digital painting, soft pastel tones.
+    TEXT OVERLAY:
+    1. Center, large bold action text with glow:
+    "앞뒤로도 — 치카치카!"
+    2. Right side, by the monster, bold purple-toned font:
+    "히이이! 멈춰!"
+    3. Bottom-right corner, small narration in parentheses:
+    "(벌써 조금 작아졌네?)"
+    Do not obscure character faces.
+  images:
+    - path: "../../images/locations/치카치카-왕국-이빨성-앞마당-성문-뷰-오염.png"
+    - path: "../../images/characters/티라노-t-rex.png"
+    - path: "../../images/characters/충균-몬스터-big.png"
+  size: 1K
+  aspectRatio: "3:4"
+  seed: null
+output: "./04.png"

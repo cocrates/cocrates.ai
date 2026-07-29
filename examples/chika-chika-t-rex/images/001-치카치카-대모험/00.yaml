@@ -1,0 +1,44 @@
+title: 치카치카 대모험 / Page 00 (표지)
+message: |
+  책 표지. 치카치카 왕국을 배경으로 티라노사우루스가 칫솔 검을 높이 들고
+  당당하게 서 있다. 뒤로 반짝이는 이빨 성. 모험의 시작을 알리는 역동적인 장면.
+  제목 "치카치카 티라노"가 중앙에 크게 표시됨.
+
+design: |
+  그림책 표지. 세로형 3:4.
+  - 배경: 치카치카 왕국 — 칫솔 숲 너머로 반짝이는 하얀 이빨 성 (깨끗한 상태)
+  - 티라노 (t-rex 상태): 초록 몸, 하얀 배, 커다란 검은 눈+속눈썹+이마 검정 깃,
+    노란 배 무늬와 꼬리 노란 줄무늬. 오른손에 파란 칫솔 검을 하늘 높이 치켜듦.
+    머리에 치약 왕관. 포효하는 포즈. 자신감 가득한 표정.
+  - 로우 앵글, 역동적인 구도
+  - 수채화 디지털 페인팅, 따뜻하고 밝은 파스텔 톤
+  - 텍스트: 제목 "치카치카 티라노"를 중앙 상단에 크고 굵게, 둥근 고딕체,
+    하양+글로우 효과
+  - 참조: 티라노-t-rex.png (캐릭터 외형 유지)
+
+# --- cocrates-google-genai ---
+type: image
+model: gemini-3.1-flash-image
+params:
+  prompt: |
+    Children's picture book cover. Portrait orientation.
+    BACKGROUND: A fantasy kingdom called Chika-Chika Kingdom — a path through
+    a forest of giant colorful toothbrush trees leads to a majestic white
+    castle shaped like a giant molar tooth, sparkling clean under a bright
+    sky with a rainbow. Watercolor digital painting style, warm pastel tones.
+    CHARACTER: Using Image 1 as reference — a cute cartoon T-rex with bright
+    green skin, white belly, LARGE DARK eyes with long eyelashes (not yellow),
+    a small black crest on the forehead, yellow markings on belly and tail.
+    Short arms, one hand holding a blue toothbrush-sword high up. Small
+    toothpaste-shaped crown on head. Roaring heroic pose, looking confident.
+    Low angle, dynamic composition.
+    TEXT OVERLAY: The title "치카치카 티라노" in large bold rounded font,
+    centered at the top, white with soft glow outline. No other text.
+    Do not obscure the character's face with text.
+    Full cover illustration, 3:4 portrait.
+  images:
+    - path: "../../images/characters/티라노-t-rex.png"
+  size: 1K
+  aspectRatio: "3:4"
+  seed: null
+output: "./00.png"

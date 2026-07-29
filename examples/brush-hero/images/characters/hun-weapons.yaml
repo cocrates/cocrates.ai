@@ -1,0 +1,14 @@
+type: image
+model: gemini-3.1-flash-image
+
+params:
+  prompt: |
+    Using two reference images: Image 1 is the boy character in adventure outfit. Image 2 shows the weapons from the weapon storage with three items: toothbrush weapon, shield, and toothpaste tube. Keep the boy's exact appearance from image 1 - same face, same hair, same art style. Equip all three items from image 2: In his right hand, he holds the toothbrush weapon. On his chest, he wears the shield that protects his upper body, fastened with straps. In his left hand, he holds the toothpaste tube. The character should look brave and determined, ready for battle. Simple white background, character centered, full body view from front. Children's book illustration style.
+  images:
+    - path: "./hun-adventure.png"
+    - path: "./weapon-storage.png"
+  size: 1K
+  aspectRatio: "1:1"
+  seed: null
+
+output: "./hun-weapons.png"

@@ -1,0 +1,11 @@
+type: image
+model: gemini-3.1-flash-image
+
+params:
+  prompt: |
+    A magical weapon storage room inside the tooth kingdom for a children's picture book illustration. A mystical chamber with glowing white and gold tones. Three weapons are displayed: On the left pedestal, a giant toothbrush weapon gleams with silver bristles and a sturdy handle - this is held in hand as a weapon. In the center, a round shield that protects the upper body shines with a tooth emblem in the center - this is worn on the chest with straps. On the right pedestal, a shiny toothpaste tube sparkles with iridescent bubbles - this is held in hand and used as magic. The room has arched ceilings with soft glowing light emanating from the walls. The atmosphere is hopeful and magical. Drawn in soft digital painting style with round, gentle outlines. White, gold, and pastel color palette. Medium shot focusing on the three weapons on display. Children's book illustration style, magical and exciting.
+  size: 1K
+  aspectRatio: "4:3"
+  seed: null
+
+output: "./weapon-storage.png"

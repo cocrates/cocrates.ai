@@ -14,7 +14,9 @@ Mark chapter complete. **Released chapters should not be revised** unless user e
 
 1. Confirm user explicitly approves release
 2. Update `evaluations/{nnn}-{chapter-slug}.md` → Release section with date
-3. **Update continuity files** (critical for next chapter design/generation):
+3. **Update continuity files** (critical for next chapter). Prefer extracting from **approved design Key Events + manuscript outcomes**, not free paraphrase of long prose:
+
+Keep `unresolved-threads.md` and `story-so-far.md` **Current Unresolved Threads** in sync (same thread ids/status).
 
 ### `continuity/{nnn}-{chapter-slug}-summary.md`
 
@@ -45,7 +47,7 @@ Mark chapter complete. **Released chapters should not be revised** unless user e
 | Location | Current State | Last Changed In | Notes |
 
 ## Major Events (Timeline)
-| Chapter | Ep | Key Event |
+| Chapter | Ep | Story time (if known) | Key Event |
 
 ## Current Unresolved Threads
 | Thread | Set Up In | Notes |
@@ -59,11 +61,9 @@ Mark chapter complete. **Released chapters should not be revised** unless user e
 | Thread | Chapter Set Up | Current Status | Expected Resolution Window |
 ```
 
-4. Provide **continuity briefing** to user:
+4. Provide **continuity briefing** to user (states, open threads, next-chapter obligation from Closing hook)
 
-   > *"Chapter 003 released. Character X is now in Y. Two hooks remain: … Next chapter should …"*
-
-5. Proceed to stage ④ for next chapter — **read `04-chapter-design.md` and load continuity files**
+5. Proceed to stage ④ for next chapter — read `04-chapter-design.md` + `consistency.md`; load continuity files
 
 ---
 

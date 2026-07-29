@@ -1,0 +1,11 @@
+type: image
+model: gemini-3.1-flash-image
+
+params:
+  prompt: |
+    A cozy children's bedroom for a picture book illustration. The room has pink wallpaper with small patterns, a wooden bed with white bedding and a pink blanket, a small nightstand beside the bed with a toothbrush on it, and a window showing a night sky with moonlight streaming in. The atmosphere is warm and peaceful. Drawn in soft digital painting style with round, gentle outlines. Pastel pink and warm color palette. Wide shot showing the whole room interior. Children's book illustration style, cozy and inviting.
+  size: 1K
+  aspectRatio: "4:3"
+  seed: null
+
+output: "./hoon-room-evening.png"

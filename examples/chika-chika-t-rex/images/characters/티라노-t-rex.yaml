@@ -1,0 +1,45 @@
+title: 티라노 (t-rex 상태) 캐릭터 참조 이미지
+message: |
+  5살 꼬마가 티라노사우루스로 변신한 모습. 초록색 몸, 하얀 배, 커다란 눈,
+  짧은 팔에 파란 칫솔 검, 머리에 치약 모양 왕관. 유쾌하고 영웅적이며 활기찬
+  그림책 주인공.
+
+design: |
+  캐릭터 참조 이미지 — 티라노사우루스 상태. 정면 전신샷.
+  - 초록색 몸통, 하얀 배, 부드러운 카툰 스타일
+  - **인간 상태와 이어지는 시각적 연결고리:**
+    ① **눈:** 인간 꼬마와 동일한 커다란 **검은 눈 + 긴 속눈썹** (노란 눈 아님)
+    ② **머리:** 이마 위에 **작은 검정색 깃/볏** = 아이의 앞머리가 변신한 것
+    ③ **색상:** 배 가운데 **노란색 무늬**, 꼬리 끝 **노란 줄무늬** = 아이의 노란 잠옷 색상
+  - 짧은 오른팔에 파란색 칫솔 검을 쥐고 있음 (칫솔 머리 부분이 검날)
+  - 머리 위에 치약 모양의 작은 왕관 (하양/파랑 줄무늬)
+  - 입을 살짝 벌리고 자신감 있는 미소
+  - 수채화 느낌, 부드러운 파스텔 톤
+  - 배경은 투명/없음 (캐릭터 단독)
+  - 1:1 정사각형, 1K
+
+# --- cocrates-google-genai ---
+type: image
+model: gemini-3.1-flash-image
+params:
+  prompt: |
+    A full-body reference sheet of a cute cartoon Tyrannosaurus rex character
+    for a children's picture book. This T-rex is the transformed form of a
+    5-year-old boy, so it must have clear visual connections to the human form.
+    The T-rex has bright green skin with a soft white belly. IMPORTANT
+    CONNECTING FEATURES: (1) Large round DARK eyes with long eyelashes, NOT
+    yellow eyes — same distinctive eyes as the boy. (2) A small black crest/
+    ridge on the top of its forehead — this is the boy's black hair bangs
+    transformed. (3) Yellow markings on the belly and yellow stripes on the
+    tail tip — carrying over the boy's yellow pajama color. The body is that
+    of a cute T-rex with a large head, short arms, and sturdy tail. In its
+    right hand it holds a blue toothbrush that looks like a sword (bristle
+    end as the blade tip). On its head sits a tiny crown shaped like a tube
+    of toothpaste with white and blue stripes. The T-rex stands in a confident
+    heroic pose, chest out, smiling. Clean white background, watercolor
+    digital painting style, soft pastel outlines, warm and friendly mood.
+    Full body, front view.
+  size: 1K
+  aspectRatio: "1:1"
+  seed: null
+output: "./티라노-t-rex.png"

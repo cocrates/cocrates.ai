@@ -1,0 +1,11 @@
+type: image
+model: gemini-3.1-flash-image
+
+params:
+  prompt: |
+    A cute tooth character named Hayani for a children's picture book, shown as a character reference sheet. The character is a round, friendly tooth shape with small stubby arms and legs. Pure white body with soft pink cheeks. Big expressive eyes with a warm smile. The character radiates a gentle glow. Drawn in soft digital painting style with round, gentle outlines. Pastel color palette. Simple white background, character centered, full body view from front. Children's book illustration style, very cute and approachable, like a small guardian of teeth.
+  size: 1K
+  aspectRatio: "1:1"
+  seed: null
+
+output: "./hayani.png"

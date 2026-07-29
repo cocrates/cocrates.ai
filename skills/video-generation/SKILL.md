@@ -35,7 +35,7 @@ Pipeline: **`message`** (story/beats over time) → **`design`** (how to visuali
 - **Motion, not a still** — prompt describes action over time, camera, environment change, and audio.
 - **Intent fidelity** — do not invent unrequested cast, cuts, dialogue, or music.
 
-Human YAML fields use the **user's language**. `params.prompt` is **English only**.
+Human YAML fields (`title`, `summary`, **`message`**, `design`) use the **user's language** — never default them to English when the user writes in another language. `params.prompt` is **English only**.
 
 ## Workflow
 
@@ -88,7 +88,7 @@ Do not write partial YAML here. Work **requirement before motion design**.
 | `summary` | One-sentence claim | No |
 | `message` | Communicative story / beats — what the clip should *mean* over time | Yes |
 
-**`message` (story / beats):** The narrative takeaway across the duration — claims, emotion, relationship, plot beats, spoken intent as meaning. Write it so someone could retell the story without directing the shot.
+**`message` (story / beats):** The narrative takeaway across the duration — claims, emotion, relationship, plot beats, spoken intent as meaning. Write it in the **user's language** so someone could retell the story without directing the shot.
 
 | `message` owns | Belongs in `design` / prompt instead |
 |----------------|--------------------------------------|
@@ -128,15 +128,16 @@ When coherent → Phase 2.
 ## Phase 2 — Write YAML
 
 ```yaml
-title: Garden walk
+# Human fields (title / message / design) = user's language; params.prompt = English
+title: 정원 산책
 message: |
-  A brief, wordless breath of calm: moving through nature should feel gentle
-  and restorative — mood over plot; no spoken story.
+  말 없는 짧은 평온의 숨: 자연을 지나는 느낌이 부드럽고 회복적이어야 한다 —
+  플롯보다 분위기; 말로 된 이야기는 없다.
 
 design: |
-  Single continuous shot. Woman in blue floral dress on a gravel path; dress
-  drifts in breeze. Eye-level tracking, slight handheld. Warm morning light.
-  Audio: breeze + distant birds; no dialogue. 8s, 16:9.
+  단일 연속 샷. 파란 꽃무늬 드레스 여성, 자갈길; 바람에 옷자락.
+  아이레벨 트래킹, 약한 핸드헬드. 따뜻한 아침빛.
+  오디오: 바람 + 먼 새소리; 대사 없음. 8초, 16:9.
 
 # --- cocrates-google-genai ---
 type: video
@@ -227,15 +228,16 @@ When improving from user feedback or an AI analyze report: apply only **user-agr
 ## Image-to-video example
 
 ```yaml
-title: Cafe call comes alive
+# Human fields = user's language; params.prompt = English
+title: 카페 통화가 살아나다
 message: |
-  A warm phone call comes to life — connection and lightness without spoken
-  words; the still should feel inhabited, not narrated.
+  따뜻한 전화가 살아난다 — 말 없이도 연결과 가벼움;
+  나레이션이 아니라, 장면이 사람이 있는 것처럼 느껴져야 한다.
 
 design: |
-  Ref: ./cafe-portrait.png as starting frame. Keep identity and framing.
-  Motion: gestures, smile beats, latte drip. Single continuous medium shot.
-  Lo-fi cafe bed; no dialogue. 8s, 16:9.
+  참조: ./cafe-portrait.png를 시작 프레임. 신원·프레이밍 유지.
+  모션: 제스처, 미소 비트, 라떼 물방울. 단일 연속 미디엄 샷.
+  로파이 카페 BGM; 대사 없음. 8초, 16:9.
 
 # --- cocrates-google-genai ---
 type: video
@@ -263,6 +265,7 @@ output: "./cafe-call.mp4"
 - MCP before YAML approval (except Express); auto Express; empty `files` as success
 - Auto `analyze` without an explicit user request; applying analyze suggestions without user agreement
 - `message` that duplicates `design` (shot lists, camera, lighting, motion checklists)
+- Defaulting `message` / `design` / `title` to English when the user writes in another language
 - Still captions without motion/camera/audio; vague `make it move`
 - Guessing ref paths; failed preflight; aspect ratios other than `16:9` / `9:16`
 - Inventing unrequested cast/cuts/dialogue/music; mis-tagging first frame vs ref

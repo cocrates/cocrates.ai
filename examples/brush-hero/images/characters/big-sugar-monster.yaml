@@ -1,0 +1,11 @@
+type: image
+model: gemini-3.1-flash-image
+
+params:
+  prompt: |
+    A large sugar monster boss character for a children's picture book, shown as a character reference sheet. This monster is 2-3 times bigger than a regular sugar monster, with a round, blob-like body and sticky, gooey texture. Dark purple and brown tones with a slightly shiny surface. Two small beady eyes and a more menacing (but still playful) grin. Thick stubby arms and legs. The monster looks like a bigger, more powerful version of the small sugar monsters - intimidating but still in a children's book style. Drawn in soft digital painting style with round, gentle outlines. Dark purple/brown palette. Simple white background, character centered, full body view from front. Children's book illustration style, big and powerful but not too scary.
+  size: 1K
+  aspectRatio: "1:1"
+  seed: null
+
+output: "./big-sugar-monster.png"
