@@ -1,262 +1,258 @@
 ---
 name: music-generation
 description: >-
-  Generates Lyria 3 music prompts and YAML specs (lyria-3-clip-preview for
-  30s clips; lyria-3-pro-preview for full songs), then — after user approval —
-  creates the audio via google-genai-mcp `generate` (sync). Select when the
-  user asks to generate, compose, produce, or create music, a song, beat,
-  soundtrack, BGM, loop, instrumental, or image-inspired track — or when they
-  need a Lyria-compatible music YAML. Crafts specific prompts (genre,
-  instruments, BPM, key, mood, structure, lyrics, timelines) for optimal Lyria
-  3 output; only calls MCP after explicit approval.
+  Select when the user asks to generate, compose, produce, or create music, a
+  song, beat, soundtrack, BGM, loop, instrumental, or image-inspired track — or
+  needs a Lyria-compatible music YAML. Also select when they ask to interpret,
+  analyze, evaluate, or describe existing audio/music (or reuse speech/audio
+  analysis) in order to draft a music YAML and regenerate a revised track.
+  Uses Lyria 3 and MCP analyze via cocrates-google-genai. Do not select for
+  TTS/speech as the primary deliverable (speech-generation), video clips
+  (video-generation), still images, or diagrams.
 metadata:
   agent: cocrates
 ---
 
 # Music Generation
 
-Generate music with Google Lyria 3 and output a YAML specification file — [Music generation docs](https://ai.google.dev/gemini-api/docs/music-generation).
+Produce music that **delivers an approved message** — not decorative noise.
 
-Lyria 3 produces **44.1 kHz stereo** audio from text (and optionally images), with structural coherence: vocals, timed lyrics, and full arrangements. This skill targets **Lyria 3 Clip / Pro** (not Lyria RealTime streaming).
+Lyria 3 ([docs](https://ai.google.dev/gemini-api/docs/music-generation)): **44.1 kHz stereo** from text (and optionally images). Targets **Clip / Pro** — not Lyria RealTime streaming.
+
+| Layer | Owns | Must not |
+|-------|------|----------|
+| **YAML** | `title`, optional `summary`, `message`, `design`, MCP request | Call MCP before YAML approval (except Express) |
+| **MCP** `cocrates-google-genai` | `generate` → audio; optional `analyze` → text | Invent meaning absent from YAML; auto-analyze |
+
+Pipeline: **`message`** (story / mood / purpose to convey) → **`design`** (how to shape it musically) → **`params.prompt`** (+ optional `lyrics`) (English realization). Not a post-hoc track critique.
 
 ## Core Principles
 
-- **Intent-First**: Understand genre, length, vocals vs instrumental, and use case before writing YAML.
-- **Specificity Wins**: Vague prompts → generic music. Name instruments, BPM, key, mood, and structure.
-- **Separate Direction from Lyrics**: Put musical direction in `prompt`; put custom words in `lyrics` (section-tagged). Do not bury lyrics inside unclear prose.
-- **YAML as Contract**: First deliverable is a `{music-slug}.yaml` request file (google-genai-mcp schema).
-- **YAML review + approval gate**: After writing the YAML, **stop** for user review. Do **not** create the final media (music audio) until the user has reviewed the YAML and given **explicit approval**. The user may edit the YAML directly; treat their file as source of truth. Call MCP `generate` only after that approval.
+- **Message-first** — the track must make `message` (story/beats of feeling or purpose) graspable on listen.
+- **Design shapes the message** — `design` materializes the musical story; it is not a separate decorative brief.
+- **Chat then YAML** — gather what the YAML needs in chat; write when enough is known. If already enough, write YAML immediately.
+- **YAML gate before generate** — user reviews YAML (`design` primary), then MCP `generate`.
+- **User review by default** — after generate, the user evaluates the audio; AI `analyze` only on explicit request.
+- **Consistency** — requirement fields aligned; `design` ↔ `params.prompt` ↔ `lyrics` / `images` aligned.
+- **Separate direction from lyrics** — musical direction in `prompt`; custom words in `params.lyrics` (section-tagged).
+- **Single-turn Lyria** — no in-model multi-turn edit; revise = new YAML + `generate`. Prefer Clip before Pro when exploring.
+- **Intent fidelity** — do not invent unrequested genre, vocals, lyrics, or structure.
+
+Human YAML fields use the **user's language**. `params.prompt` is **English** unless non-English lyrics require matching prompt language.
 
 ## Workflow
 
 ```
-Understand Intent → Choose Model → Confirm Brief → Craft Prompt (+ Lyrics) → Output YAML
-  → Review YAML → Ask to Generate → (on approval) MCP generate → (Revise = new generation)
+A Forward
+  1 Discover (chat)   requirement + music design
+  2 Write YAML        title / [summary] / message / design / MCP block  → review
+  3 Approve → Generate   cocrates-google-genai                              → audio
+  4 Review            user evaluates (default); optional AI analyze on request
+  5 Revise            update YAML; keep fields consistent; regenerate if needed
+
+B From existing media (understand → YAML → regenerate)
+  analyze audio (and/or reuse prior speech/audio analysis)
+  → draft message/design (+ lyrics) → Write YAML → review/approve
+  → Generate → Review / Revise as in A
 ```
 
-No multi-turn in-model editing — Lyria 3 is **single-turn**. Revisions mean a new YAML / new generation. Prefer iterating on Clip before committing to Pro. Write YAML, then **ask before generating**.
+**Enough already:** Write complete YAML immediately; stop for approval (unless Express).
 
-## Working Location
+**Express** (e.g. *generate now*, *express*): YAML + generate; revise from the audio.
 
-### Spec folder (YAML)
+Mark only the MCP block with `# --- cocrates-google-genai ---`.
 
-When the user does **not** name a location, write the YAML under the workspace kind folder:
+## Paths
 
-```text
-music/{music-slug}.yaml
-```
-
-If the user specifies a folder or path, use that instead. Prefer an existing `music/` tree over inventing a parallel layout.
-
-### Generated artifacts (`output`, `lyricsOutput`)
-
-| Rule | Path |
-|------|------|
-| **Default** | Same directory as the YAML file (e.g. `music/{slug}.mp3`, `music/{slug}.lyrics.txt`) — **not** `./output/` |
-| **User override** | Exact folder or file path the user named |
-
-Reference images may live beside the YAML (e.g. `music/refs/…`) or wherever the user points.
-
-**Example layout (defaults):**
-
-```text
-music/
-├── echoes.yaml
-├── echoes.mp3
-├── echoes.lyrics.txt
-└── refs/
-    └── desert-sunset.jpg
-```
+Default: `music/{slug}.yaml`, `output: "./{slug}.mp3"` beside it. Optional `lyricsOutput: "./{slug}.lyrics.txt"`. Relative paths resolve against **that YAML's directory**. Refs: e.g. `music/refs/…`.
 
 ---
 
-## Step 1: Understand Intent
+## Understand & revise from media
 
-### 1.1 Extract what is already known
+When the user asks to interpret / analyze / evaluate existing **music or audio** to make or revise a track ([audio understanding](https://ai.google.dev/gemini-api/docs/audio) — mood, instruments, non-verbal texture, structure, lyrics):
 
-| Dimension | Capture |
-|-----------|---------|
-| **Purpose** | Song, loop, BGM, game cue, trailer, podcast bed, social clip, mood exploration |
-| **Length** | ~30s clip vs full song (~1–3 min, prompt-controllable on Pro) |
-| **Vocals** | Instrumental only vs sung vocals; lyric language |
-| **Genre / blend** | e.g. lo-fi hip hop, dreamy indie pop, cinematic orchestral |
-| **Instruments** | Specific when possible (Fender Rhodes, TR-808, fingerpicked acoustic) |
-| **BPM / tempo** | Exact BPM or relative (slow ~70, mid-tempo, 120 BPM) |
-| **Key / scale** | e.g. G major, D minor |
-| **Mood** | nostalgic, aggressive, ethereal, warm, intimate… |
-| **Structure** | Section tags and/or `[m:ss - m:ss]` timeline |
-| **Lyrics** | User-supplied vs model-written; theme if auto |
-| **Images** | Up to **10** mood/reference images |
-| **Format** | `mp3` (default) or `wav` (Pro) |
+1. **Analyze** — MCP `analyze` with `inputs: [audio path|URL]` (or reuse findings from a prior speech-generation analysis). Prompt for genre/mood/structure/lyrics as needed. Present `{ text, interactionId }`.
+2. **Material for YAML** — draft `message` + `design` (+ `lyrics` if sung). Confirm keep/change vs source before locking.
+3. **Write YAML** — full Lyria request; cite the source in `design` (Lyria has no audio-ref edit — encode the desired sound in prompt/lyrics; optional mood **images** only).
+4. **Review / approve** → **Generate** → **Review / Revise**.
 
-### 1.2 Infer carefully
+If the primary deliverable is revised **spoken TTS**, use **speech-generation** instead. Do not skip the YAML gate.
+---
 
-- Social/Reel bed → often Clip + instrumental + `9:16` video pairing elsewhere; music itself has no aspect ratio.
-- Game UI / loop → Clip, instrumental, clear loopable energy.
-- Full narrative song with verses → **Pro**.
-- Do not invent copyrighted lyrics or “sound exactly like [famous artist]” — safety filters block artist-voice / copyrighted-lyric requests.
+## Phase 1 — Discover (chat)
 
-### 1.3 Choose model
+Do not write partial YAML here. Work **requirement before music design**.
 
-| Model ID | Best for | Duration | Output |
-|----------|----------|----------|--------|
-| `lyria-3-clip-preview` | Short clips, loops, prompt previews | **Always 30 seconds** | MP3 |
-| `lyria-3-pro-preview` | Full songs (verse / chorus / bridge), timelines, richer arrangements | A couple of minutes (steer via prompt / timestamps) | MP3 (WAV supported) |
+### 1.1 Requirement
 
-**Defaults**
+| Field | Role | Required |
+|-------|------|----------|
+| `title` | Short track name | Yes |
+| `summary` | One-sentence claim | No |
+| `message` | Communicative story / beats — what the music should *mean* or *do* for the listener | Yes |
 
-- Unclear length or “quick idea / loop / preview” → **Clip**.
-- “Full song”, custom multi-section lyrics, detailed timeline, or image-inspired long ambient → **Pro**.
-- **Recommend Clip first** to lock genre/mood/instruments, then upgrade the same brief to Pro.
+**`message` (story / beats):** Purpose and emotional/narrative takeaway — why this music exists (BGM calm, night-city longing, game-loop energy…). Write it so someone could retell the intent without naming instruments or BPM.
 
-State the recommendation briefly; let the user override.
+| `message` owns | Belongs in `design` / prompt instead |
+|----------------|--------------------------------------|
+| What to convey (mood arc, story, use-case feeling) | Genre, instruments, BPM, key, arrangement |
+| Why the listener should care | Structure tags, timelines, Clip vs Pro, format |
+| Vocal intent as meaning (sung story vs instrumental space) | Exact lyric lines, section tags, image paths |
 
-### 1.4 Ask only what is still unclear
+**Anti-pattern:** A `message` that reads like a production sheet or duplicates `design`. Example: message = “quiet cafe warmth that doesn’t interrupt conversation” → design = lo-fi Rhodes, 85 BPM, instrumental Clip…
 
-| Check | Question (user's language) |
-|-------|----------------------------|
-| Length | 30s clip or full song (~2 min)? |
-| Vocals | Instrumental only, or with singing? |
-| Genre / mood | Style and feeling? |
-| Lyrics | Exact lyrics, or generate them? Language? |
-| Structure | Verse/chorus, or a timed arrangement? |
-| References | Mood images? (max 10) |
-| Model | Clip vs Pro? |
+**Consistency:** Present fields stay one story (`title` ↔ [`summary`] ↔ `message`). Realign all present fields on edits.
 
-### 1.5 Confirm the music brief
+**Fit test:** Could a listener name the intended story/purpose after hearing a track that matches — without the YAML? Could you write a different `design` that still serves the same `message`?
 
-2–4 sentences: purpose, Clip vs Pro, genre/BPM/key/mood, vocals, structure, images, format. Proceed on confirm or if already fully specific.
+### 1.2 Music design (maps to `design` + prompt / lyrics)
 
-**Good brief example:**
-> Dreamy indie pop, mid-tempo, soft synths + acoustic guitar; custom English verse/chorus/bridge; ~2 min — `lyria-3-pro-preview`, mp3.
+Agree in chat (then encode in YAML `design`) — **shape the approved message into a track** (realization layer; prompt executes this):
+
+| Topic | Capture |
+|-------|---------|
+| Model | `lyria-3-clip-preview` (always **30s**) vs `lyria-3-pro-preview` (full song; steer length in prompt) |
+| Genre / blend | e.g. lo-fi hip hop, dreamy indie pop, cinematic |
+| Instruments | Specific when possible (Rhodes, 808, fingerpicked acoustic…) |
+| BPM / tempo | Exact or relative |
+| Key / scale | When it matters |
+| Vocals | Instrumental only vs sung; lyric language |
+| Structure | `[Verse]` / `[Chorus]` / … and/or `[m:ss - m:ss]` (esp. Pro) |
+| Lyrics | User-supplied (→ `params.lyrics`) vs model-written theme |
+| Images | Up to **10** mood refs; how they inspire the sound |
+| Format | `mp3` (default) or `wav` (mainly Pro) |
+
+**Defaults:** unclear / loop / preview → **Clip**; full song, multi-section custom lyrics, detailed timeline → **Pro**. Recommend Clip first to lock the brief, then upgrade.
+
+**Fit test:** From the design brief alone, could a producer recreate the intended track? Does every design choice serve `message`? Thin briefs (genre + “nice” only) are not enough.
+
+Do not invent copyrighted lyrics or “sound exactly like [famous artist]”.
+
+When coherent → Phase 2.
 
 ---
 
-## Step 2: Craft the Prompt
-
-Write a **music-ready** English (or lyric-language) prompt. Specificity and structure beat poetic vagueness.
-
-### 2.1 Prompt ingredients (include what the brief needs)
-
-| Element | Why | Example |
-|---------|-----|---------|
-| **Genre** | Core style | `dreamy indie pop`, `lo-fi hip hop`, `jazz fusion` |
-| **Instruments** | Timbre / arrangement | `fingerpicked acoustic guitar`, `Fender Rhodes`, `808 bass` |
-| **BPM** | Groove | `85 BPM`, `120 BPM`, `slow tempo around 70 BPM` |
-| **Key / scale** | Tonality | `in G major`, `D minor` |
-| **Mood** | Emotional color | `warm, intimate`, `dark, atmospheric`, `ethereal` |
-| **Vocals** | Explicit | `gentle vocals…` or `Instrumental only, no vocals.` |
-| **Duration** | Pro only | `Create a 2-minute song…` (Clip is always 30s) |
-| **Structure** | Form | `[Verse]` / `[Chorus]` / `[Bridge]` or timestamps |
-| **Theme** | If model writes lyrics | `about a summer road trip` |
-
-### 2.2 Patterns
-
-**Clip — instrumental bed**
-> A short instrumental acoustic guitar piece. Warm, intimate, fingerpicked. No vocals.
-
-**Clip — detailed beat**
-> A 30-second lofi hip hop beat with dusty vinyl crackle, mellow Rhodes piano chords, a slow boom-bap drum pattern at 85 BPM, and a jazzy upright bass line. Instrumental only.
-
-**Pro — full song (direction; lyrics in `lyrics` field)**
-> Dreamy indie pop, mid-tempo, soft synths and acoustic guitar. Create a 2-minute song with verse / chorus / bridge.
-
-**Pro — timeline structure**
-```text
-[0:00 - 0:10] Intro: soft lo-fi beat and muffled vinyl crackle.
-[0:10 - 0:30] Verse 1: warm Fender Rhodes and gentle vocals about a rainy morning.
-[0:30 - 0:50] Chorus: full band, upbeat drums, soaring synth leads; hopeful lyrics.
-[0:50 - 1:00] Outro: fade with piano alone.
-```
-
-**Pro — image-inspired**
-> An atmospheric ambient track inspired by the mood and colors in the reference images. Instrumental only.
->
-> [0:00 - 0:20] Soft pads and distant piano
-> [0:20 - 1:00] Add sparse percussion and rising strings
-> [1:00 - 1:30] Peak, then fade to piano alone
-
-**Chiptune / game**
-> A bright chiptune melody in C Major, retro 8-bit video game style. Instrumental only, no vocals.
-
-**Pop with auto lyrics (language = prompt language)**
-> An upbeat, feel-good pop song in G major at 120 BPM with bright acoustic guitar strumming, claps, and warm vocal harmonies about a summer road trip.
-
-**Non-English lyrics**: Write the **prompt in that language** (e.g. French) so lyrics and pronunciation match.
-
-### 2.3 Custom lyrics
-
-- Put user lyrics in YAML `params.lyrics`, not mixed into free prose without labels.
-- Use section tags: `[Verse 1]`, `[Chorus]`, `[Bridge]`, `[Intro]`, `[Outro]`.
-- Keep `prompt` as musical direction only; say that the song should use the provided lyrics when helpful.
-- Never request copyrighted song lyrics or cloning a specific artist’s voice.
-
-**Example `lyrics`:**
-```text
-[Verse 1]
-Walking through the neon glow,
-city lights reflect below.
-
-[Chorus]
-We are the echoes in the night,
-burning brighter than the light.
-```
-
-### 2.4 Images
-
-- Up to **10** images in `params.images`.
-- Prompt should say how to use them (mood, color, atmosphere) — not “ignore the images.”
-- Prefer Pro for image-inspired full pieces; Clip is fine for short visual-mood stingers if the user wants 30s.
-
-### 2.5 Music-ready test
-
-Before YAML: *Could a session musician / producer recreate the intended track from this prompt alone?* If genre, groove, instrumentation, and vocal intent are missing, add them.
-
-**Too thin:** `A nice song.`  
-**Music-ready:** `Dreamy indie pop at mid-tempo (~100 BPM) in A major; soft synth pads, fingerpicked acoustic guitar, light brushed drums; intimate male vocal; 2-minute verse/chorus/bridge. No harsh EDM drops.`
-
-### 2.6 Prompt rules
-
-1. Be **specific** — instruments, BPM, key, mood, structure.  
-2. State **instrumental vs vocals** explicitly when it matters.  
-3. **Separate** musical direction (`prompt`) from custom words (`lyrics`).  
-4. Match **prompt language** to desired lyric language.  
-5. Use **section tags** and/or **timestamps** for Pro structure/duration.  
-6. Clip prompts may say “30-second” but Clip **always** outputs 30s.  
-7. Do not promise multi-turn “make the chorus louder” edits — ship a revised full prompt instead.  
-8. Prefer Clip iteration before expensive/long Pro runs when exploring.
-
----
-
-## Step 3: Output YAML
-
-### Text → clip (30s)
-
-Write under `music/` unless the user chose another folder:
+## Phase 2 — Write YAML
 
 ```yaml
+title: Cafe BGM
+message: |
+  Quiet cafe warmth that supports conversation — present but unobtrusive;
+  a gentle pause, not a performance demanding attention.
+
+design: |
+  Clip, instrumental only. Lo-fi hip hop: dusty vinyl, mellow Rhodes, boom-bap
+  ~85 BPM, jazzy upright bass. No vocals. mp3.
+
+# --- cocrates-google-genai ---
 type: music
 model: lyria-3-clip-preview
-
 params:
   prompt: |
-    A short instrumental acoustic guitar piece.
-    Warm, intimate, fingerpicked. No vocals.
+    A 30-second lofi hip hop beat with dusty vinyl crackle, mellow Rhodes piano
+    chords, a slow boom-bap drum pattern at 85 BPM, and a jazzy upright bass
+    line. Instrumental only, no vocals.
   outputFormat: mp3
-
-output: "./{slug}.mp3"   # same folder as this YAML by default
+output: "./cafe-bgm.mp3"
 ```
 
-### Full song + custom lyrics (Pro)
+### `design`
+
+User-facing music brief in the user's language — primary YAML review object. **Designs how to realize `message` musically**; `params.prompt` (and `lyrics`) realize that design. Cover the §1.2 topics; may be shorter than `params.prompt` but must not omit model, genre/instruments/groove, vocals intent, structure, refs, or format. Every musical claim in `params.prompt` must be grounded here. Do not restate the communicative story in place of production decisions — keep story in `message`.
+
+### MCP request
+
+| Field | Role |
+|-------|------|
+| `type` | `music` |
+| `model` | `lyria-3-clip-preview` or `lyria-3-pro-preview` |
+| `params.prompt` | English musical direction from `design` (+ timeline if Pro) |
+| `params.lyrics` | Optional section-tagged custom lyrics |
+| `params.images` | Ordered `{path}` mood refs (max 10) |
+| `params.outputFormat` | `mp3` (default) or `wav` |
+| `params.lyricsOutput` | Optional path for returned lyrics/structure text |
+| `output` | Default `./{slug}.mp3` (or `.wav`) |
+| `background` | Optional; prefer `true` for long Pro jobs |
+
+### Prompt & lyrics
+
+- Prompt: genre → instruments → BPM/key → mood → vocals intent → duration/structure (Pro) → image mood link → avoidances (`Instrumental only, no vocals.`).
+- Custom lyrics → `params.lyrics` with `[Verse 1]`, `[Chorus]`, … — not unlabeled prose dumped into `prompt`.
+- Non-English sung lyrics: write **prompt in that language** so pronunciation matches.
+- Clip may say “30-second” but output is **always** 30s.
+- Resolve image paths against this YAML’s directory; verify on disk; search + user approve if moved.
+- Music-ready test: could a producer recreate from the prompt alone?
+
+### YAML gate
+
+Present **`design`**; note Clip vs Pro, vocals/lyrics, images, format/output. Warn that Pro can take time. **Stop** (unless Express).
+
+---
+
+## Phase 3 — Generate
+
+MCP **`cocrates-google-genai`** (GetMcpTools; `mcp_auth` if needed).
+
+1. YAML on disk (`type: music`).
+2. Preflight every `params.images[].path` against **this YAML's directory**; on fail, stop and ask — do not `generate`.
+3. `generate` with `filePath` → report `files` (audio; plus lyrics file if `lyricsOutput` set). Do not treat empty `files` as success.
+
+Lyria is **single-turn** — do not rely on `continue_interaction` to “fix the chorus”; revise the YAML instead.
+
+Then Phase 4.
+
+---
+
+## Phase 4 — Review (user default; optional AI analyze)
+
+**Default:** Present the generated audio path(s). The **user** reviews and evaluates. Do not call `analyze` unless asked.
+
+**Optional AI analyze** — only on explicit request (e.g. *analyze*, *evaluate*, *AI review*, *평가해줘*). Never auto-run after generate.
+
+1. Resolve the artifact path from YAML `output` (relative to the YAML directory); verify on disk. Prefer an absolute path (or a path valid against the MCP process CWD).
+2. Call MCP **`analyze`**:
+   - `inputs`: `[artifact path]` (1–10; may include mood images if the user wants a comparison)
+   - `model`: omit unless the user overrides (default `gemini-3.5-flash`)
+   - `prompt`: evaluation brief in the **user's language**, grounded in approved `message` + `design` (and `summary` if present). Ask for a structured report covering **all** of:
+     1. **Intent fit** — does the track match the designed musical intent (`design` / genre / groove / vocals / structure)?
+     2. **Message delivery** — is `message` (story / purpose / mood arc) clearly conveyed?
+     3. **Functional** — wrong Clip/Pro length expectations, missing sections, lyric mishaps, ref misuse
+     4. **Quality / completeness** — mix clarity, arrangement gaps, abrupt endings, polish issues
+     5. **Improvements** — concrete, prioritized suggestions (what to change in `design` / prompt / lyrics)
+3. Present `{ text, interactionId }` to the user. Do **not** silently edit YAML or regenerate from the report.
+4. Follow-ups: `continue_interaction` with the same `interactionId` if the user asks more about the **analysis**. New audio → new `analyze` call. Musical fixes still go through Phase 5 + new `generate`.
+
+---
+
+## Phase 5 — Revise
+
+Keep `design` ↔ prompt ↔ lyrics/images consistent; re-approve; **new** `generate`. If `message` changes, reshape `design` to match.
+
+When improving from user feedback or an AI analyze report: apply only **user-agreed** changes; update owning YAML fields, then regenerate. Prefer Clip A/B before another Pro run when exploring.
+
+---
+
+## Full-song example (Pro + lyrics)
 
 ```yaml
+title: Echoes
+message: |
+  Night-city longing that turns into shared brightness — walking through neon
+  together; a short anthem of connection, not loneliness.
+
+design: |
+  Pro, ~2 min, dreamy indie pop, mid-tempo, soft synths + acoustic guitar.
+  Custom English verse/chorus. mp3 + lyricsOutput.
+
+# --- cocrates-google-genai ---
 type: music
 model: lyria-3-pro-preview
-
 params:
   prompt: |
     Dreamy indie pop, mid-tempo, soft synths and acoustic guitar.
     Create a 2-minute song with verse / chorus / bridge.
+    Use the provided lyrics.
   lyrics: |
     [Verse 1]
     Walking through the neon glow,
@@ -266,129 +262,62 @@ params:
     We are the echoes in the night,
     burning brighter than the light.
   outputFormat: mp3
-  lyricsOutput: "./{slug}.lyrics.txt"   # same folder as this YAML by default
-
-output: "./{slug}.mp3"
+  lyricsOutput: "./echoes.lyrics.txt"
+output: "./echoes.mp3"
 ```
 
-### Image inspiration + timeline (Pro)
+---
+
+## Image-inspired example (Pro)
 
 ```yaml
+title: Desert dusk ambient
+message: |
+  Wide, quiet dusk — heat fading into color; stillness with a slow sense of
+  scale, not a dance track.
+
+design: |
+  Pro, instrumental ambient from refs. Timeline: pads → sparse percussion →
+  peak → piano fade. mp3.
+
+# --- cocrates-google-genai ---
 type: music
 model: lyria-3-pro-preview
-
 params:
   prompt: |
-    An atmospheric ambient track inspired by the mood and colors
-    in the reference images. Instrumental only.
+    An atmospheric ambient track inspired by the mood and colors in the
+    reference images. Instrumental only, no vocals.
 
     [0:00 - 0:20] Soft pads and distant piano
     [0:20 - 1:00] Add sparse percussion and rising strings
     [1:00 - 1:30] Peak, then fade to piano alone
   images:
     - path: "./refs/desert-sunset.jpg"
-    - path: "./refs/city-night.png"
   outputFormat: mp3
-
-output: "./{slug}.mp3"
+output: "./desert-dusk.mp3"
 ```
-
-### Parameter reference
-
-| Parameter | Values | Default | Notes |
-|-----------|--------|---------|-------|
-| `model` | `lyria-3-clip-preview`, `lyria-3-pro-preview` | Infer from length/structure | Clip = 30s; Pro = full song |
-| `prompt` | Musical direction (+ timeline) | required | Specific genre/instruments/BPM/mood |
-| `lyrics` | Section-tagged lyric text | omit | Custom vocals; keep separate from direction |
-| `images` | Array of `{path}` (max 10) | `[]` | Mood / visual inspiration |
-| `outputFormat` | `mp3`, `wav` | `mp3` | WAV primarily documented for Pro |
-| `lyricsOutput` | Path for returned lyrics/structure text | `./{slug}.lyrics.txt` next to the YAML when used | User-specified folder overrides |
-| `output` | Path to audio file | `./{slug}.mp3` (or `.wav`) next to the YAML | User-specified folder overrides |
-
-### Model cheat sheet
-
-| User want | Model | Tips |
-|-----------|-------|------|
-| Loop, stinger, prompt test | Clip | Fast iterate; always 30s |
-| Full song, bridges, custom lyrics | Pro | Duration + sections in prompt/`lyrics` |
-| Timed arrangement | Pro | `[0:00 - 0:20] …` blocks |
-| Image mood track | Pro (or Clip if 30s OK) | ≤10 images; describe mood link in prompt |
-| Instrumental BGM | Either | End with `Instrumental only, no vocals.` |
-
----
-
-## Step 4: Review YAML & Ask to Generate
-
-YAML alone does **not** produce audio. Actual files come from **google-genai-mcp**.
-
-1. Confirm YAML: Clip vs Pro, prompt, lyrics, images, `outputFormat`, `lyricsOutput`, `output`.
-2. Ask explicitly (user's language), e.g.:  
-   > YAML 스펙 검토가 끝났습니다. google-genai-mcp로 실제 음악 파일을 생성할까요? (Pro는 시간이 걸릴 수 있습니다.)
-3. **Stop** until the user approves or declines.
-4. If declined: leave the YAML as the deliverable.
-5. If approved: proceed to Step 5.
-
----
-
-## Step 5: Generate via google-genai-mcp
-
-| Resource | Path |
-|----------|------|
-| MCP server | `../google-genai-mcp/src/mcp/server.ts` |
-| Spec | `../google-genai-mcp/spec/google-genai-mcp.md` |
-| Examples | `../google-genai-mcp/examples/` (e.g. `cafe-bgm.yaml`) |
-
-### Tools
-
-| Tool | Role |
-|------|------|
-| `generate` | **Primary.** `filePath` → the music YAML. Wait for response with `files` filled |
-| `continue_interaction` | Allowed by MCP but Lyria is single-turn — prefer a **new YAML + generate** |
-| `list_interactions` / `sync_interactions` | Discover / clean mappings |
-| `cancel_interaction` / `delete_interaction` | Stop / remove jobs |
-
-### Music generation call
-
-1. Save YAML on disk (`type: music`).
-2. Call MCP `generate` with `filePath`. Wait for `{ interactionId, files, … }` with `files` filled (audio; plus lyrics file if `lyricsOutput` set).
-3. Report the saved path(s) from `files`.
-4. Tell the user you are waiting if Pro is slow.
-5. Paths inside YAML are relative to the **YAML file's directory**.
-
-One MCP `generate` = one request file. Multiple tracks → multiple calls.
-
----
-
-## Step 6: Revise if Needed
-
-Lyria 3 does **not** support conversational multi-turn edit of an existing clip. To change the track:
-
-1. Adjust genre, instruments, BPM, structure, or lyrics in the brief.  
-2. Write a new YAML (optionally keep Clip for A/B tests).  
-3. Re-confirm, **ask again**, then `generate`.
 
 ---
 
 ## Limitations (do not promise around them)
 
-- Safety filters block artist-voice cloning and copyrighted lyrics.  
-- SynthID audio watermark on all outputs (inaudible).  
-- No multi-turn refine of a prior generation.  
-- Clip length fixed at 30s; Pro length approximate, steered by prompt/timestamps.  
-- Non-deterministic — same prompt can vary between runs.  
-- Not Lyria RealTime (streaming jam) — point users there only if they ask for real-time.  
-- Pro jobs can take a long time. If the MCP client times out, report the failure.
+- Safety filters block artist-voice cloning and copyrighted lyrics
+- SynthID audio watermark on all outputs (inaudible)
+- No multi-turn refine of a prior Lyria generation
+- Clip = fixed 30s; Pro length approximate (prompt/timestamps)
+- Non-deterministic — same prompt can vary
+- Not Lyria RealTime unless the user asks for streaming jam
+- Pro can take a long time; client timeouts → report failure
 
 ---
 
 ## Prohibitions
 
-- Vague prompts when the user wants a specific sound (“nice music”, “epic track” alone)  
-- Mixing unlabeled custom lyrics into direction without `[Verse]` / `[Chorus]` (or a dedicated `lyrics` field)  
-- Requesting famous-artist voice clones or copyrighted lyric reproduction  
-- Using Pro-only expectations (multi-minute structure) on Clip without warning it will still be 30s  
-- Claiming iterative in-place editing of a generated file via follow-up prompts  
-- Calling `generate` / `download` **without** user approval after YAML review  
-- Treating empty `files` as a finished local file  
-- More than 10 reference images  
-- Inventing musical requirements that contradict the user’s brief
+- MCP before YAML approval (except Express); auto Express; empty `files` as success
+- Auto `analyze` without an explicit user request; applying analyze suggestions without user agreement
+- `message` that duplicates `design` (instrument lists, BPM sheets, timeline dumps as the “story”)
+- Vague prompts when a specific sound is wanted (“nice music” alone)
+- Unlabeled custom lyrics mixed into direction; famous-artist voice / copyrighted lyrics
+- Pro-only multi-minute expectations on Clip without warning it stays 30s
+- Claiming in-place conversational edit of a generated file via Lyria follow-up
+- Guessing image paths; >10 reference images; inventing requirements that contradict the brief

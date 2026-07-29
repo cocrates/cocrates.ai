@@ -76,6 +76,5 @@ params:
     - path: "./jsondb-architecture.png"
   durationSeconds: 10
   aspectRatio: "16:9"
-  task: reference_to_video
   seed: null
 output: "./jsondb-goroutine-video.mp4"

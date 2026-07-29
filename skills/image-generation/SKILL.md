@@ -3,8 +3,11 @@ name: image-generation
 description: >-
   Select when the user asks to generate, create, draw, illustrate, or design an
   image, picture, illustration, icon, thumbnail, concept art, or other still
-  visual asset — or needs a Gemini-compatible image YAML. Uses Gemini image
-  models via cocrates-google-genai. Do not select for architecture/flow diagrams
+  visual asset — or needs a Gemini-compatible image YAML. Also select when they
+  ask to interpret, analyze, evaluate, critique, describe, or ask questions
+  about an existing still image (including using analysis to revise and
+  regenerate via YAML). Uses Gemini image models and MCP analyze via
+  cocrates-google-genai. Do not select for architecture/flow diagrams
   (diagram-generation), video clips (video-generation), or TTS/speech
   (speech-generation).
 metadata:
@@ -18,7 +21,7 @@ Produce images that **deliver an approved message** — not decorative guesses.
 | Layer | Owns | Must not |
 |-------|------|----------|
 | **YAML** | `title`, optional `summary`, `message`, `design`, MCP request | Call MCP before YAML approval (except Express) |
-| **MCP** `cocrates-google-genai` | Pixels from approved YAML | Invent meaning absent from YAML |
+| **MCP** `cocrates-google-genai` | `generate` → pixels; optional `analyze` → text | Invent meaning absent from YAML; auto-analyze |
 
 Pipeline: **`message`** (story/beats to convey) → **`design`** (how to visualize it) → **`params.prompt`** (English realization). Not an interpretation of the finished image. (Diagrams use `explanation` — a pointing/interpretation script — instead.)
 
@@ -28,6 +31,7 @@ Pipeline: **`message`** (story/beats to convey) → **`design`** (how to visuali
 - **Design shapes the message** — `design` materializes the story; it is not a separate decorative brief.
 - **Chat then YAML** — gather what the YAML needs in chat; write when enough is known. If already enough, write YAML immediately.
 - **YAML gate before generate** — user reviews YAML (`design` primary), then MCP `generate`.
+- **User review by default** — after generate, the user evaluates the artifact; AI `analyze` only on explicit request.
 - **Consistency** — requirement fields aligned; `design` ↔ `params.prompt` ↔ `params.images` aligned.
 - **Intent fidelity** — do not invent unrequested subjects, props, text, or styles.
 
@@ -36,10 +40,16 @@ Human YAML fields use the **user's language**. `params.prompt` is **English only
 ## Workflow
 
 ```
-1 Discover (chat)   requirement + visual design
-2 Write YAML        title / [summary] / message / design / MCP block  → review
-3 Approve → Generate   cocrates-google-genai                              → image
-4 Revise            update YAML; keep fields consistent
+A Forward
+  1 Discover (chat)   requirement + visual design
+  2 Write YAML        title / [summary] / message / design / MCP block  → review
+  3 Approve → Generate   cocrates-google-genai                              → image
+  4 Review            user evaluates (default); optional AI analyze on request
+  5 Revise            update YAML; keep fields consistent; regenerate if needed
+
+B From existing media (understand → YAML → regenerate)
+  analyze image → draft message/design from findings → Write YAML (refs source)
+  → review/approve → Generate → Review / Revise as in A
 ```
 
 **Enough already:** Write complete YAML immediately; stop for approval (unless Express).
@@ -52,6 +62,18 @@ Mark only the MCP block with `# --- cocrates-google-genai ---`.
 
 Default: `images/{slug}.yaml`, `output: "./{slug}.png"` beside it. Relative paths resolve against **that YAML's directory**. Optional series layout: `characters/`, `locations/`.
 
+---
+
+## Understand & revise from media
+
+When the user asks to interpret / analyze / evaluate / Q&A an **existing** image (not only a just-generated one):
+
+1. **Analyze** — MCP `analyze` with `inputs: [image path|URL]` and a prompt for the user’s question (description, critique, fidelity, Q&A). Present `{ text, interactionId }`. Follow up with `continue_interaction` as needed.
+2. **Material for YAML** — from the analysis (and user intent), draft `message` + `design` (keep/change vs source). Confirm with the user before locking.
+3. **Write YAML** — full request YAML; cite the source image in `design` and, when editing in place, in `params.images` as a ref. Prefer a new slug or explicit overwrite path.
+4. **Review / approve** → **Generate** → **Review / Revise** (Phases 2–5).
+
+Do not skip the YAML gate: analysis text alone is not a generation contract. Apply only user-agreed edits into YAML before regenerate.
 ---
 
 ## Phase 1 — Discover (chat)
@@ -175,11 +197,36 @@ MCP **`cocrates-google-genai`** (GetMcpTools; `mcp_auth` if needed).
 2. Preflight every `params.images[].path` against **this YAML's directory**; on fail, stop and ask — do not `generate`.
 3. `generate` with `filePath` → report `files` (or `download` if background).
 
+Then Phase 4.
+
 ---
 
-## Phase 4 — Revise
+## Phase 4 — Review (user default; optional AI analyze)
+
+**Default:** Present the generated image path(s). The **user** reviews and evaluates. Do not call `analyze` unless asked.
+
+**Optional AI analyze** — only on explicit request (e.g. *analyze*, *evaluate*, *AI review*, *평가해줘*). Never auto-run after generate.
+
+1. Resolve the artifact path from YAML `output` (relative to the YAML directory); verify on disk. Prefer an absolute path (or a path valid against the MCP process CWD).
+2. Call MCP **`analyze`**:
+   - `inputs`: `[artifact path]` (1–10; may include refs if the user wants a comparison)
+   - `model`: omit unless the user overrides (default `gemini-3.5-flash`)
+   - `prompt`: evaluation brief in the **user's language**, grounded in approved `message` + `design` (and `summary` if present). Ask for a structured report covering **all** of:
+     1. **Intent fit** — does the image match the designed intent (`design` / prompt realization)?
+     2. **Message delivery** — is `message` (story/beats) clearly conveyed?
+     3. **Functional** — missing/wrong subjects, text errors, ref fidelity, format issues
+     4. **Quality / completeness** — artifacts, composition, clarity, polish gaps
+     5. **Improvements** — concrete, prioritized suggestions (what to change in `design` / prompt)
+3. Present `{ text, interactionId }` to the user. Do **not** silently edit YAML or regenerate from the report.
+4. Follow-ups: `continue_interaction` with the same `interactionId` if the user asks more questions. New media → new `analyze` call.
+
+---
+
+## Phase 5 — Revise
 
 Keep `design` ↔ prompt ↔ `images` consistent; re-approve; regenerate. Prefer small edits. If `message` changes, reshape `design` to match.
+
+When improving from user feedback or an AI analyze report: apply only **user-agreed** changes; update owning YAML fields, then regenerate.
 
 ---
 
@@ -224,6 +271,7 @@ output: "./page04.png"
 ## Prohibitions
 
 - MCP before YAML approval (except Express); auto Express
+- Auto `analyze` without an explicit user request; applying analyze suggestions without user agreement
 - `message` that duplicates `design` (shot lists, wardrobe, camera, lighting)
 - Inconsistent `design` / prompt / `images`; non-English prompt
 - Guessing ref paths; generate after failed preflight

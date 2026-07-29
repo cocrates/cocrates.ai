@@ -3,10 +3,14 @@ name: speech-generation
 description: >-
   Select when the user asks to generate, synthesize, narrate, voice-over, read
   aloud, or produce speech, TTS audio, podcast dialogue, audiobook lines, or
-  other exact-text spoken audio — or needs a Gemini TTS YAML. Uses Gemini TTS
-  via cocrates-google-genai (controllable style, accent, pace, tone, voices).
-  Do not select for music (music-generation), video (video-generation), still
-  images, diagrams, or interactive Live API conversation.
+  other exact-text spoken audio — or needs a Gemini TTS YAML. Also select when
+  they ask to interpret, analyze, evaluate, transcribe, describe, or ask
+  questions about existing audio (speech and/or non-verbal sound), including
+  recovering a script/performance brief for revised TTS — or when analysis of
+  audio will feed a later music-generation YAML. Uses Gemini TTS and MCP
+  analyze via cocrates-google-genai ([audio understanding](https://ai.google.dev/gemini-api/docs/audio)).
+  Do not select for composing music as the primary deliverable (music-generation),
+  video (video-generation), still images, diagrams, or Live API conversation.
 metadata:
   agent: cocrates
 ---
@@ -18,7 +22,7 @@ Exact-text TTS performances ([Speech generation](https://ai.google.dev/gemini-ap
 | Layer | Owns | Must not |
 |-------|------|----------|
 | **YAML** | `title`, `design`, MCP request | Call MCP before YAML approval (except Express) |
-| **MCP** `cocrates-google-genai` | Audio from approved YAML | Paraphrase a locked script |
+| **MCP** `cocrates-google-genai` | `generate` → audio; optional `analyze` → text | Paraphrase a locked script; auto-analyze |
 
 Spoken words come from an agreed **script** (user-supplied or drafted in chat) and are placed under `#### TRANSCRIPT` in `params.text`. There is no separate `message` / `explanation` field. `design` holds performance decisions and must stay consistent with preamble, voices, and TRANSCRIPT.
 
@@ -27,6 +31,7 @@ Spoken words come from an agreed **script** (user-supplied or drafted in chat) a
 - **Chat then YAML** — discover intent, script, and performance in chat; write YAML when enough is known. If already enough, write YAML immediately.
 - **Script-first** — prefer a user-supplied script; if missing, draft and confirm in chat before YAML.
 - **YAML gate before generate** — user reviews YAML (`design` primary; TRANSCRIPT matches agreed script), then MCP `generate`.
+- **User review by default** — after generate, the user evaluates the audio; AI `analyze` only on explicit request.
 - **Director, not announcer** — `params.text` = direction preamble + labeled transcript.
 - **Consistency** — `design` ↔ preamble ↔ voices/speakers ↔ TRANSCRIPT.
 - **Audio tags always English** — map localized requests (e.g. whisper) to `[whispers]`; never non-English or closing tags.
@@ -36,10 +41,17 @@ Spoken words come from an agreed **script** (user-supplied or drafted in chat) a
 ## Workflow
 
 ```
-1 Discover (chat)   intent + script + performance
-2 Write YAML        title / design / MCP block  → review
-3 Approve → Generate   cocrates-google-genai   → audio
-4 Revise            update design + text/voices together
+A Forward
+  1 Discover (chat)   intent + script + performance
+  2 Write YAML        title / design / MCP block  → review
+  3 Approve → Generate   cocrates-google-genai   → audio
+  4 Review            user evaluates (default); optional AI analyze on request
+  5 Revise            update design + text/voices together; regenerate if needed
+
+B From existing audio (understand → YAML → regenerate)
+  analyze audio → transcript + non-verbal cues + performance notes
+  → draft script/design (or hand off music brief) → Write YAML → review/approve
+  → Generate → Review / Revise as in A
 ```
 
 **Enough already:** Write complete YAML immediately; stop for approval (unless Express).
@@ -52,6 +64,25 @@ Mark only the MCP block with `# --- cocrates-google-genai ---`.
 
 Default: `speeches/{slug}.yaml`, `output: "./{slug}.wav"` beside it. Relative paths resolve against **that YAML's directory**.
 
+---
+
+## Understand & revise from media
+
+When the user asks to interpret / analyze / evaluate / transcribe / Q&A **existing** audio ([audio understanding](https://ai.google.dev/gemini-api/docs/audio)):
+
+1. **Analyze** — MCP `analyze` with `inputs: [audio path|URL]` and a prompt that requests what the user needs. Typical recovery material:
+   - **Speech transcript** (exact words; speaker labels if multi-speaker)
+   - **Non-verbal sound** (laughter, sighs, ambience, SFX, music beds — Gemini can describe these)
+   - **Performance cues** (pace, emotion, accent hints) for `design` / director notes
+   - Timestamps (`MM:SS`) when segment-level detail matters
+2. Present `{ text, interactionId }` to the user. Follow up with `continue_interaction` as needed.
+3. **Material for YAML** — lock an agreed **script** (TRANSCRIPT) + `design` from the analysis and user edits. Confirm before locking.
+4. **Branch by deliverable:**
+   - **Revised TTS** — Write speech YAML (`type: speech`); put agreed words under `#### TRANSCRIPT`; encode performance in `design` / preamble. Review → generate.
+   - **Music from audio understanding** — if the goal is a track/BGM/song, hand off to **music-generation** with a brief built from the analysis (mood, non-verbal texture, any lyric content). Do not force Lyria through this skill’s `type: speech`.
+5. **Review / approve** → **Generate** → **Review / Revise**.
+
+Do not skip the YAML gate. Analysis text alone is not a generation contract. Apply only user-agreed edits before regenerate.
 ---
 
 ## Phase 1 — Discover (chat)
@@ -180,14 +211,38 @@ MCP **`cocrates-google-genai`**. `generate` with `filePath`; report `files`. Lon
 
 Limitations: text→audio only; long takes may drift — chunk; vague prompts may speak notes or hit `PROHIBITED_CONTENT` — use preamble + labeled transcript.
 
+Then Phase 4.
+
 ---
 
-## Phase 4 — Revise
+## Phase 4 — Review (user default; optional AI analyze)
+
+**Default:** Present the generated audio path(s). The **user** reviews and evaluates. Do not call `analyze` unless asked.
+
+**Optional AI analyze** — only on explicit request (e.g. *analyze*, *evaluate*, *AI review*, *평가해줘*). Never auto-run after generate.
+
+1. Resolve the artifact path from YAML `output` (relative to the YAML directory); verify on disk. Prefer an absolute path (or a path valid against the MCP process CWD).
+2. Call MCP **`analyze`**:
+   - `inputs`: `[artifact path]` (1–10)
+   - `model`: omit unless the user overrides (default `gemini-3.5-flash`)
+   - `prompt`: evaluation brief in the **user's language**, grounded in agreed **script** (TRANSCRIPT) + `design` / director notes. Ask for a structured report covering **all** of:
+     1. **Intent fit** — does the performance match the designed delivery (`design` / style / pace / accent / voices)?
+     2. **Message / script delivery** — is the intended spoken content clear and faithful (no paraphrasing drift; notes not spoken)?
+     3. **Functional** — wrong speaker, missing lines, tag mishaps, language/voice mismatches
+     4. **Quality / completeness** — clarity, pacing, artifacts, abrupt cuts (chunking), polish gaps
+     5. **Improvements** — concrete, prioritized suggestions (what to change in `design` / preamble / voices / tags)
+3. Present `{ text, interactionId }` to the user. Do **not** silently edit YAML or regenerate from the report.
+4. Follow-ups: `continue_interaction` with the same `interactionId` if the user asks more. New audio → new `analyze` call.
+
+---
+
+## Phase 5 — Revise
 
 | Change | Action |
 |--------|--------|
 | Script | Update TRANSCRIPT (+ tags); adjust `design` if tone shifts; re-approve; regenerate |
 | Performance | Update `design` and preamble/voices together; re-approve; regenerate |
+| From analyze / user review | Apply only **user-agreed** changes; then regenerate |
 | Small tweak | Light direction edit or `continue_interaction`; ask before another paid call |
 
 ---
@@ -233,6 +288,7 @@ output: "./friends-phone.wav"
 ## Prohibitions
 
 - MCP before YAML approval (except Express); `type: audio`
+- Auto `analyze` without an explicit user request; applying analyze suggestions without user agreement
 - More than 2 speakers; mismatched speaker names; unlabeled TRANSCRIPT on directed prompts
 - Non-English or closing audio tags; inventing script unless asked to draft
 - Full script only in `design` instead of TRANSCRIPT; voices outside the catalog
