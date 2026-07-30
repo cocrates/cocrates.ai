@@ -4,8 +4,8 @@ description: >-
   Creates complete vertical-scroll webtoons — episode-by-episode story
   with panel/cut layouts, speech balloons, narration, and matching color
   illustrations. Select when the user asks to write, draft, compose,
-  illustrate, design, or author a webtoon, 웹툰, vertical scroll comic, or
-  세로 스크롤 만화. Runs Define → Design → Evaluate → Generate with mandatory
+  illustrate, design, or author a webtoon, vertical scroll comic.
+  Runs Define → Design → Evaluate → Generate with mandatory
   approval gates; designs world, characters, locations, stagings, and
   episodes/pages/cuts before any images; locks approved cut design (art +
   balloons + dialogue + narration) before image generation; generates character,
