@@ -1,0 +1,204 @@
+# Stage ② — Design (References + Sequence / Segment / Clip Messages)
+
+**Prerequisites:** Approved `overview.md`
+
+**Gate artifacts:**
+- `{project-root}/references.md` (+ optional `references/**`, `context.md`)
+- `{project-root}/sequence.md`
+- Long only: `segments/{nnn}-{segment-slug}.md`
+
+**Next stage:** `03-evaluate.md` (after G2)
+
+---
+
+## Design constraints (global)
+
+- **Markdown owns story/message.** No media generation. No edit-spec YAML as design substitute.
+- **Short**: there is one implicit segment. Put **all segment-level content** (clip messages, direction, track needs) **inside `sequence.md`**. Do not create `segments/`.
+- **Long**: `sequence.md` = series-level arc + segment list; each `segments/*.md` = episode-level story + clips.
+- **Composition, not invention**: clips only reference entities declared in catalogs (when catalogs exist). Missing entity → stop, update Design, resume.
+- **Design-first fixes**: Evaluate findings update Markdown first, not Stage ④/⑤ YAML alone.
+- **User language**: Design Markdown prose may use the user's language (e.g. Korean clip messages); keep structure/keys consistent.
+
+### Reference models (conditional)
+
+A **reference model** defines visual identity that must hold across clips. Stage ④ materializes it as reference images.
+
+Concrete the intent analysis from Define:
+
+| Question | Result |
+|----------|--------|
+| What must look the same across clips? | Declare catalog kinds |
+| Are references unnecessary? | State **none** in `references.md` → skip Phase 0 |
+
+Example kinds: `characters`, `locations`, `slides`, `props`, `brand` — declare per project. Unlike picture books, characters/locations are not always required.
+
+---
+
+## Procedure
+
+### 2.1 Reference need + catalogs
+
+1. Write `references.md` (required).
+2. If kinds are needed, create catalogs under `references/{kind}/` (index + per-entity files as appropriate).
+3. Optional: `context.md` for domain/world/style rules when useful (education scripts, fictional worlds, brand voice).
+
+```markdown
+<!-- references.md -->
+# Reference model plan
+
+## Intent summary
+{from overview}
+
+## Reference needed?
+- Needed: {yes / no}
+- Why: {why consistency matters or why not}
+
+## Catalog kinds
+| Kind | Consistency goal | Entity count (approx) |
+|------|------------------|------------------------|
+| {characters / locations / slides / … / none} | {…} | {n} |
+
+## Stage ④ impact
+- Phase 0 reference images: {required / skip}
+```
+
+Character/location catalogs, when used, may follow picture-book patterns (state for physical identity; expression/pose/camera in clip direction — not in reference state). Slides/brand/props: define the stable visual identity fields appropriate to that kind.
+
+---
+
+### 2.2 Sequence design (`sequence.md`)
+
+**Always create `sequence.md`.**
+
+#### Long mode
+
+```markdown
+# Sequence: {Title}
+
+## Overall story / message arc
+{series-level narrative or argument arc}
+
+## Segment List
+
+| # | Slug | Summary | Clips (approx) | Length (approx) |
+|---|------|---------|----------------|-----------------|
+| 1 | {slug} | {summary} | {n} | {e.g. 40s} |
+
+## Tone / rhythm notes
+{pacing, peaks, callbacks}
+```
+
+Clip detail lives in `segments/*.md`.
+
+#### Short mode (single segment)
+
+`sequence.md` **must include everything a `segments/*.md` would contain**: segment story + all clips.
+
+```markdown
+# Sequence: {Title}
+
+## Overall story / message
+{arc — also serves as the single segment story}
+
+## Craft Notes
+- Genre rhythm: {…}
+- Core message: {…}
+- Climax clip: {id}
+
+## Clips
+
+### Clip {N} — {slug}
+
+#### Clip message
+{Story/info/emotion this clip must deliver — reading this alone should make the beat imaginable}
+{Basis for Stage ④ image/video `message`}
+
+#### Direction guide
+- Visual: {still image / motion from keyframe / hold frame / …}
+- References: {kind/slug/state or none}
+- Clip-specific direction (camera/action/expression/…): {…}
+- On-screen text (if any): {exact copy in the target language, or none}
+
+#### Required tracks
+- image: {yes/no — clip key image}
+- video: {yes/no — motion <~10s}
+- voice (speech): {yes/no — script summary}
+- bgm/sfx (music): {yes/no — role}
+
+#### Hook to next clip
+{curiosity/transition — final clip: resolution/aftertaste}
+```
+
+---
+
+### 2.3 Segment design (Long only)
+
+For each `segments/{nnn}-{segment-slug}.md`:
+
+```markdown
+# Segment {nnn}: {Title}
+
+## Summary
+{episode-level story / teaching beat / ad act}
+
+## Craft Notes
+- Role in the sequence arc: {…}
+- Core message: {…}
+- Climax clip: {id}
+
+## Clips
+
+### Clip {N} — {slug}
+
+#### Clip message
+{…}
+
+#### Direction guide
+- Visual: {…}
+- References: {…}
+- Clip-specific direction: {…}
+- On-screen text: {…}
+
+#### Required tracks
+- image / video / voice / bgm-sfx: {as above}
+
+#### Hook to next clip
+{…}
+```
+
+---
+
+### 2.4 Internal feedback loop
+
+If a clip needs an undeclared reference entity or track type:
+
+1. Update `references.md` / catalogs / `context.md` first.
+2. Re-check affected sequence/segment files.
+3. Do not invent mid-clip.
+
+---
+
+## Completeness Check (Stage ②)
+
+- [ ] `references.md` exists (explicit none allowed)
+- [ ] Declared catalogs exist when kinds ≠ none
+- [ ] `sequence.md` exists
+- [ ] Short: `sequence.md` contains full clip designs (segment-level content)
+- [ ] Long: every segment file has all clip messages + track needs
+- [ ] Every clip message is imaginable standalone
+- [ ] Track choices fit duration budgets (motion &lt;~10s; TTS-led ~30s ok)
+
+---
+
+## Gate G2
+
+User approves the design set:
+
+- Reference plan appropriate to intent? (not over-forcing characters/locations)
+- Sequence arc clear?
+- Short: clip section in `sequence.md` sufficient?
+- Long: each segment’s clips sufficient?
+- Messages strong enough to lock in Evaluate?
+
+**Do not proceed to Stage ③ without approval.**

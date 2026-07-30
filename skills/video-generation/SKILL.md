@@ -1,13 +1,13 @@
 ---
 name: video-generation
 description: >-
-  Select when the user asks to generate, create, animate, film, edit, or produce
-  a video, clip, motion sequence, image-to-video, reference-to-video, or
-  cinematic short — or needs a Gemini Omni-compatible video YAML. Also select
-  when they ask to interpret, analyze, evaluate, critique, describe, or ask
-  questions about an existing video (including using analysis to revise and
-  regenerate via YAML). Uses Gemini Omni Flash and MCP analyze via
-  cocrates-google-genai. Do not select for still images (image-generation),
+  Produces a single motion video clip (typically under ~10s) — or a Gemini
+  Omni-compatible video YAML for one generate — including image-to-video and
+  reference-to-video. Also covers interpreting, analyzing, evaluating,
+  critiquing, or Q&A on an existing video to revise that one clip. Select when
+  the deliverable is one clip/file, not a multi-clip project or final assembled
+  mp4 (use video-authoring for that; video-authoring may call this skill for
+  each motion component). Do not select for still images (image-generation),
   architecture diagrams (diagram-generation), or TTS/speech (speech-generation).
 metadata:
   agent: cocrates

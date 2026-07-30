@@ -1,6 +1,6 @@
 # Install Cocrates Harness
 
-This document describes how to install or upgrade **Cocrates Harness** on [OpenCode](https://opencode.ai). Use it when a user asks you to install Cocrates Harness: follow the steps below to configure the OpenCode plugin, register the required MCP servers (`cocrates-google-genai`, `cocrates-elk`), and copy the required skill files.
+This document describes how to install or upgrade **Cocrates Harness** on [OpenCode](https://opencode.ai). Use it when a user asks you to install Cocrates Harness: follow the steps below to configure the OpenCode plugin, register the required MCP servers (`cocrates-google-genai`, `cocrates-elk`, `cocrates-video-edit`), and copy the required skill files.
 
 If Cocrates Harness is **already installed**, treat the request as an **upgrade** — do not skip version checks or overwrite skills without the user's consent.
 
@@ -13,13 +13,14 @@ Cocrates Harness is an **OpenCode plugin**, not a standalone program. OpenCode m
 - Cocrates Harness works the same regardless of which client is used
 - Media-generation skills (image, video, speech, music) require the `cocrates-google-genai` MCP server
 - Diagram-generation skills (Excalidraw, draw.io) require the `cocrates-elk` MCP server
-- Both MCP servers run via `npx` (Node.js) on the machine
+- Video-authoring (multi-clip assemble / final mp4) requires the `cocrates-video-edit` MCP server
+- All MCP servers run via `npx` (Node.js) on the machine
 
 ## What you will do
 
 1. Detect whether Cocrates Harness is already installed
 2. Add or upgrade the `@cocrates/cocrates-harness` plugin in the OpenCode config
-3. Ensure the `cocrates-google-genai` and `cocrates-elk` MCP servers are configured in `opencode.jsonc`
+3. Ensure the `cocrates-google-genai`, `cocrates-elk`, and `cocrates-video-edit` MCP servers are configured in `opencode.jsonc`
 4. Copy or reconcile Cocrates skill files in the OpenCode skills directory
 5. Ask the user to restart OpenCode and confirm the **Cocrates** agent is available
 
@@ -40,7 +41,7 @@ Check for an existing installation:
 |--------|----------|
 | Plugin configured | `OPENCODE_CONFIG/opencode.jsonc` contains `@cocrates/cocrates-harness` in the `plugin` array |
 | Plugin cached | `~/.cache/opencode/packages/` contains a directory matching `*cocrates-harness*` |
-| MCP configured | `OPENCODE_CONFIG/opencode.jsonc` contains `cocrates-google-genai` and `cocrates-elk` under `mcp` |
+| MCP configured | `OPENCODE_CONFIG/opencode.jsonc` contains `cocrates-google-genai`, `cocrates-elk`, and `cocrates-video-edit` under `mcp` |
 | Skills present | `OPENCODE_CONFIG/skills/` contains one or more Cocrates skill subdirectories (e.g. `education/`, `spec-writing/`) |
 
 If **skills** are already present in Step 0, use skill **reconciliation** in Step 3b. Otherwise, use Step 3a. **Steps 1–2 are the same** for both fresh install and upgrade.
@@ -74,6 +75,14 @@ The CLI command adds `"@cocrates/cocrates-harness"` to `opencode.jsonc` automati
         "npx",
         "-y",
         "@cocrates/elk-mcp"
+      ]
+    },
+    "cocrates-video-edit": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@cocrates/video-edit-mcp"
       ]
     }
   }
@@ -131,15 +140,16 @@ Always show explicit version numbers read from `~/.cache/opencode/packages/`. Do
 
 ## Step 2: Configure MCP servers
 
-Cocrates skills call MCP servers through OpenCode. Plugin + skills alone are not enough — `opencode.jsonc` must include both:
+Cocrates skills call MCP servers through OpenCode. Plugin + skills alone are not enough — `opencode.jsonc` must include all three:
 
 | MCP server key | Package | Used by |
 |----------------|---------|---------|
 | `cocrates-google-genai` | `@cocrates/google-genai-mcp` | image, video, speech, music generation skills |
 | `cocrates-elk` | `@cocrates/elk-mcp` | diagram-generation (Excalidraw, draw.io layout) |
+| `cocrates-video-edit` | `@cocrates/video-edit-mcp` | video-authoring (edit-spec validate / render assemble) |
 
 1. Open `OPENCODE_CONFIG/opencode.jsonc`.
-2. If either server is missing or incomplete, **merge** the following into the existing config (do not remove other plugins, MCP servers, or settings):
+2. If any server is missing or incomplete, **merge** the following into the existing config (do not remove other plugins, MCP servers, or settings):
 
    ```jsonc
    "mcp": {
@@ -158,6 +168,14 @@ Cocrates skills call MCP servers through OpenCode. Plugin + skills alone are not
          "-y",
          "@cocrates/elk-mcp"
        ]
+     },
+     "cocrates-video-edit": {
+       "type": "local",
+       "command": [
+         "npx",
+         "-y",
+         "@cocrates/video-edit-mcp"
+       ]
      }
    }
    ```
@@ -166,6 +184,7 @@ Cocrates skills call MCP servers through OpenCode. Plugin + skills alone are not
    - `"plugin"` entry for `@cocrates/cocrates-harness`
    - `"mcp"."cocrates-google-genai"` with `type: "local"` and the `npx -y @cocrates/google-genai-mcp` command array above
    - `"mcp"."cocrates-elk"` with `type: "local"` and the `npx -y @cocrates/elk-mcp` command array above
+   - `"mcp"."cocrates-video-edit"` with `type: "local"` and the `npx -y @cocrates/video-edit-mcp` command array above
 
 4. Report to the user **for each server**:
 
@@ -175,9 +194,9 @@ Cocrates skills call MCP servers through OpenCode. Plugin + skills alone are not
    | Present (same) | Present | `MCP already configured: {server-key}` |
    | Present (different command) | Updated to match | `MCP updated: {server-key}` |
 
-   Use `{server-key}` = `cocrates-google-genai` or `cocrates-elk`.
+   Use `{server-key}` = `cocrates-google-genai`, `cocrates-elk`, or `cocrates-video-edit`.
 
-Preserve any other entries under `mcp` when merging. OpenCode starts these servers via `npx` on demand; no separate global install of `@cocrates/google-genai-mcp` or `@cocrates/elk-mcp` is required.
+Preserve any other entries under `mcp` when merging. OpenCode starts these servers via `npx` on demand; no separate global install of `@cocrates/google-genai-mcp`, `@cocrates/elk-mcp`, or `@cocrates/video-edit-mcp` is required.
 
 ---
 
@@ -356,9 +375,9 @@ After plugin, MCP, and skill reconciliation are complete:
 1. Tell the user to **restart OpenCode** (quit and reopen the terminal app, desktop app, or editor extension).
 2. Ask them to open the agent picker and confirm **Cocrates** appears and can be selected.
 3. If Cocrates is not listed, check that `opencode.jsonc` includes the plugin entry and that OpenCode was fully restarted.
-4. Confirm `opencode.jsonc` still includes `mcp.cocrates-google-genai` and `mcp.cocrates-elk` after restart (needed for media generation and diagram layout skills).
+4. Confirm `opencode.jsonc` still includes `mcp.cocrates-google-genai`, `mcp.cocrates-elk`, and `mcp.cocrates-video-edit` after restart (needed for media generation, diagram layout, and video-authoring assemble skills).
 
-Installation or upgrade is complete when the user can select the **Cocrates** agent in OpenCode and `opencode.jsonc` has the plugin and both MCP entries (`cocrates-google-genai`, `cocrates-elk`).
+Installation or upgrade is complete when the user can select the **Cocrates** agent in OpenCode and `opencode.jsonc` has the plugin and all three MCP entries (`cocrates-google-genai`, `cocrates-elk`, `cocrates-video-edit`).
 
 ---
 
