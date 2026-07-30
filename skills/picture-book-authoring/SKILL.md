@@ -6,11 +6,10 @@ description: >-
   compose, illustrate, design, or author a picture book, children's book,
   illustrated kids' story, 그림책, or 동화책 with images. Runs Define → Design
   → Evaluate → Generate with mandatory approval gates; designs world,
-  characters, locations, and episodes/pages (with per-page design) before any images;
-  locks approved story text before image generation; generates character and
-  location reference images first, then page images via the image-generation
+  characters, locations, stagings, and episodes/pages (with per-page design) before any images;
+  locks approved story text before image generation; generates character, location, and staging reference images first, then page images via the image-generation
   skill for visual consistency. Picture book structure is **series → episode → page**
-  and location consistency is managed with **location → position → view → state**.
+  location consistency uses **location → position → view → state**; continuing-situation placement uses **stagings** (same three-layer reference model as webtoon/video/novel).
   For long-form prose fiction without page illustrations, use
   novel-authoring; for general non-fiction prose, use document-authoring; for
   a standalone image (not a full book), use image-generation.
@@ -27,10 +26,10 @@ Generate complete children's picture books (0-8세) — from story concept throu
 
 - **Design Before Generation**: No image is generated without complete world, character, location, and episode/page design — and explicit user approval through Evaluate (G3).
 - **Architecture-First**: Characters, locations, and episode/page design are designed as structured documents before any visual assets are created.
-- **Composition, Not Invention**: Episode and page design arrange approved world, characters, and locations. Missing entities → stop, ask user, update Design catalogs, then resume. Do not invent mid-page.
+- **Composition, Not Invention**: Episode and page design arrange approved world, characters, locations, and stagings. While designing story, **co-design** staging + character states + location states — **reuse** catalog entries when present, **add** new reference models when missing (`workflow/reference-models.md` §7). Missing entities → stop, ask user, update Design catalogs, then resume. Do not invent mid-page.
 - **Story Lock Before Images**: Page stories, rendering text, and illustration guides are locked at G3. Image generation implements that lock; it does not rewrite the story.
 - **Design-First Revision**: Structure, story, text, character, or location problems are fixed in Design (and re-evaluated) before regenerating images. Never patch story by only changing image prompts.
-- **Reference-Based Consistency**: Character and location reference images are generated first; page images reference them for visual consistency.
+- **Reference-Based Consistency**: Character, location, and **staging** reference images are generated first; page images reference them. Canonical rules: `workflow/reference-models.md` (same three layers as webtoon/video/novel).
 - **Criteria-Driven Evaluation**: Evaluate checks the book against Validation Criteria from `overview.md`, plus picture-book craft rules — before any MCP generate.
 - **YAML Approval Per image-generation**: All image generation follows the image-generation skill's YAML review → approval → MCP generate workflow.
 
@@ -60,6 +59,9 @@ All picture book artifacts are authored under `{project-root}/`:
 ├── locations.md
 ├── locations/
 │   └── {location-slug}.md
+├── stagings.md
+├── stagings/
+│   └── {staging-slug}.md
 ├── series.md
 ├── episodes/
 │   └── {nnn}-{episode-slug}.md
@@ -78,6 +80,13 @@ All picture book artifacts are authored under `{project-root}/`:
 │   │   ├── {location-slug}-{position-slug}-{view-slug}.png
 │   │   ├── {location-slug}-{position-slug}-{view-slug}-{state-slug}.yaml
 │   │   └── {location-slug}-{position-slug}-{view-slug}-{state-slug}.png
+│   ├── stagings/
+│   │   ├── {staging-slug}-establishing.yaml
+│   │   ├── {staging-slug}-establishing.png
+│   │   ├── {staging-slug}-reverse.yaml
+│   │   ├── {staging-slug}-reverse.png
+│   │   ├── {staging-slug}-detail.yaml
+│   │   └── {staging-slug}-detail.png
 │   └── {nnn}-{episode-slug}/
 │       ├── {00}.yaml
 │       └── {00}.png
@@ -108,9 +117,10 @@ This file (`SKILL.md`) defines global pipeline rules, gates, and prohibitions.
 For step-by-step procedures, read the stage workflow file at the start of each stage:
 
 - Stage ① Define: `workflow/01-define.md` (gate artifact: `overview.md`)
-- Stage ② Design: `workflow/02-design.md` (gate artifact set: `series.md`, `episodes/*.md`, `world-bible.md`, `characters/*.md`, `locations/*.md`)
+- Stage ② Design: `workflow/02-design.md` (gate artifact set: `series.md`, `episodes/*.md`, `world-bible.md`, `characters/*.md`, `locations/*.md`, `stagings/*.md`)
 - Stage ③ Evaluate: `workflow/03-evaluate.md` (gate artifact set: `evaluations/*.md` = story lock)
 - Stage ④ Generate: `workflow/04-generate.md` (gate artifact: final output under `output/`)
+- Reference models (cross-stage): `workflow/reference-models.md` — character / location / staging
 
 ## Stage 1: Define
 세부 절차는 `workflow/01-define.md`를 참고하세요.

@@ -260,3 +260,11 @@ Critique may be requested at any stage (part, character web, series level) — p
 ## Gate
 
 User reviews evaluation, selects revision items, decides revise or proceed (to manuscript generation after design eval, or to release after manuscript eval).
+
+
+## Reference-model integrity (architecture / design eval)
+
+When evaluating design (⑥ after ④), also check `workflow/reference-models.md`:
+- Character appearance/equipment states consistent; no silent gear swap
+- Location used as set; lasting changes tracked
+- Continuing situations cite stagings; L/R and stations do not flip without Design update

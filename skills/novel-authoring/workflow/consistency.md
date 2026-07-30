@@ -19,6 +19,8 @@ This file is the **single source of truth** for how plot/world/cast layers stay 
 | **Manuscript Readiness** | Stage ④ — scene fields complete for generation (`04`) |
 | **Design-Fidelity Gate** | Stage ⑤ — prose vs chapter design + architecture + continuity (`05`) |
 | **Continuity** | Released-plot truth (`continuity/`) — not prior manuscript text |
+| **Reference models** | Character / location / staging locks — [`reference-models.md`](reference-models.md) (prose; shared with webtoon/picture-book/video) |
+| **Staging** | Who-is-where for a continuing situation across scenes |
 
 ---
 
@@ -33,7 +35,7 @@ overview.md (mode, tone, validation, scale estimates)
       → chapters/{nnn}-*.md catalog (③) → full design (④)
         → manuscripts/{nnn}-*.md (⑤)
 continuity/*                        [after ⑧; binds ④/⑤ for ch 002+]
-characters* / locations* / world*   [architecture; bind all ④/⑤]
+characters* / locations* / stagings* / world*   [architecture; bind all ④/⑤]
 ```
 
 | If you need to change… | Update first (user approve) | Then sync |

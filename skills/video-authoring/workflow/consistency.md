@@ -8,7 +8,8 @@
 
 | Term | Meaning |
 |------|---------|
-| **Design Layer** | `overview.md`, `references.md`, catalogs, `context.md`, `sequence.md`, `segments/*.md` |
+| **Design Layer** | `overview.md`, `references.md`, catalogs (incl. stagings), `context.md`, `sequence.md`, `segments/*.md` |
+| **Reference model rules** | `workflow/reference-models.md` when visual catalogs are used |
 | **Evaluation Layer** | `evaluations/*.md` — **design lock** per segment |
 | **Component Layer** | `images/`, `videos/`, `speech/`, `music/` — Stage ④ assets |
 | **Assembly Layer** | `assembly/**/*.yaml` (edit-specs) + `output/**/*.mp4` via MCP `cocrates-video-edit` |

@@ -33,6 +33,7 @@ Order (typical):
 
 1. Entity base references under `images/references/{kind}/`
 2. State / variant references as declared in catalogs
+3. If `stagings` kind exists: generate **2–3** ensemble views per staging under `images/references/stagings/` after character/location refs (`workflow/reference-models.md`)
 
 For each asset:
 

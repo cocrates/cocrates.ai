@@ -37,7 +37,10 @@ For each segment:
 3. **Message–composition fit**
    - Track choices match the message (e.g. long narration → still/hold + speech, not forced 10s motion)
    - Motion clips planned &lt;~10s; TTS-led clips may be ~30s
-4. **Reference integrity** (if catalogs exist)
+4. **Reference integrity** (if catalogs exist) — see `workflow/reference-models.md`
+   - Character identity gear does not silently swap; expression is clip direction
+   - Location states are lasting set changes only (not time/weather)
+   - Continuing multi-clip situations cite **stagings**; no L/R or station drift
    - Clips only use declared entities/states
    - Expression/pose/camera are clip direction, not reference-state abuse
    - If references.md says none: confirm no hidden identity-drift risk (or escalate to add a catalog)
@@ -75,6 +78,8 @@ For each segment:
 | Check | Result | Evidence |
 |-------|--------|----------|
 | Matches references.md plan | ✅ / ⚠️ / ❌ | |
+| Character/location/staging rules (`reference-models.md`) | ✅ / ⚠️ / ❌ / n/a | |
+| Staging for continuing multi-clip situations | ✅ / ⚠️ / ❌ / n/a | |
 | No undeclared entities | ✅ / ⚠️ / ❌ | |
 | state vs clip direction separation | ✅ / ⚠️ / ❌ / N/A | |
 

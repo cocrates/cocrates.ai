@@ -16,13 +16,16 @@
 - **Markdown owns story/message.** No media generation. No edit-spec YAML as design substitute.
 - **Short**: there is one implicit segment. Put **all segment-level content** (clip messages, direction, track needs) **inside `sequence.md`**. Do not create `segments/`.
 - **Long**: `sequence.md` = series-level arc + segment list; each `segments/*.md` = episode-level story + clips.
-- **Composition, not invention**: clips only reference entities declared in catalogs (when catalogs exist). Missing entity → stop, update Design, resume.
+- **Composition, not invention**: clips only reference entities declared in catalogs (when catalogs exist). While designing story/clips, **co-design** staging + character states + location states — **reuse** when present, **add** when missing (`workflow/reference-models.md` §7). Missing entity → stop, update Design, resume.
 - **Design-first fixes**: Evaluate findings update Markdown first, not Stage ④/⑤ YAML alone.
 - **User language**: Design Markdown prose may use the user's language (e.g. Korean clip messages); keep structure/keys consistent.
+
 
 ### Reference models (conditional)
 
 A **reference model** defines visual identity that must hold across clips. Stage ④ materializes it as reference images.
+
+**Shared three-layer model** (when characters/locations apply): `workflow/reference-models.md` — **character** (body + equipment identity), **location** (set/stage), **staging** (who is where in a continuing multi-clip situation: café L/R, OR stations, meeting seats, …). One staging per continuing situation; typically 2–3 ensemble reference views.
 
 Concrete the intent analysis from Define:
 
@@ -30,8 +33,10 @@ Concrete the intent analysis from Define:
 |----------|--------|
 | What must look the same across clips? | Declare catalog kinds |
 | Are references unnecessary? | State **none** in `references.md` → skip Phase 0 |
+| Do multi-clip situations need fixed placement? | Declare kind **stagings** (+ character/location kinds) |
 
-Example kinds: `characters`, `locations`, `slides`, `props`, `brand` — declare per project. Unlike picture books, characters/locations are not always required.
+Example kinds: `characters`, `locations`, `stagings`, `slides`, `props`, `brand` — declare per project. Unlike picture books, characters/locations are not always required — but if they are used across clips with continuing situations, **stagings are required** for placement continuity.
+
 
 ---
 
@@ -57,13 +62,13 @@ Example kinds: `characters`, `locations`, `slides`, `props`, `brand` — declare
 ## Catalog kinds
 | Kind | Consistency goal | Entity count (approx) |
 |------|------------------|------------------------|
-| {characters / locations / slides / … / none} | {…} | {n} |
+| {characters / locations / stagings / slides / … / none} | {…} | {n} |
 
 ## Stage ④ impact
 - Phase 0 reference images: {required / skip}
 ```
 
-Character/location catalogs, when used, may follow picture-book patterns (state for physical identity; expression/pose/camera in clip direction — not in reference state). Slides/brand/props: define the stable visual identity fields appropriate to that kind.
+Character/location/staging catalogs, when used, follow `workflow/reference-models.md` (state = lasting body + equipment identity; location = set; staging = continuing-situation blocking; expression/pose/camera/time/weather in clip direction). Slides/brand/props: define the stable visual identity fields appropriate to that kind.
 
 ---
 
@@ -116,7 +121,7 @@ Clip detail lives in `segments/*.md`.
 
 #### Direction guide
 - Visual: {still image / motion from keyframe / hold frame / …}
-- References: {kind/slug/state or none}
+- References: {kind/slug/state or none; include staging/{slug}+view when placement must hold}
 - Clip-specific direction (camera/action/expression/…): {…}
 - On-screen text (if any): {exact copy in the target language, or none}
 
@@ -169,13 +174,23 @@ For each `segments/{nnn}-{segment-slug}.md`:
 
 ---
 
-### 2.4 Internal feedback loop
+### 2.4 Internal feedback loop (story ↔ catalogs)
 
-If a clip needs an undeclared reference entity or track type:
+**Story design co-locks catalogs** — see `workflow/reference-models.md` §7 (when visual catalogs are used).
 
-1. Update `references.md` / catalogs / `context.md` first.
+While designing sequence / segments / clips, **together** design (when kinds are declared):
+
+1. **Staging** for each continuing multi-clip situation (cite existing or **add** under `references/stagings/`)
+2. **Character appearance states** (cite existing or **add** to character catalog)
+3. **Location set states** (cite existing or **add** to location catalog)
+
+**Reuse if present; add if missing.** Do not invent outfit, gear, set damage, seats, or L/R only inside clip direction.
+
+If a clip needs an undeclared reference entity, state, staging, or track type:
+
+1. Update `references.md` / catalogs / `context.md` first (user-visible Design update).
 2. Re-check affected sequence/segment files.
-3. Do not invent mid-clip.
+3. Cite the new/existing refs in clip direction — do not invent mid-clip.
 
 ---
 
@@ -183,6 +198,7 @@ If a clip needs an undeclared reference entity or track type:
 
 - [ ] `references.md` exists (explicit none allowed)
 - [ ] Declared catalogs exist when kinds ≠ none
+- [ ] Story units cite staging + character states + location states; new refs were **added to catalogs** before citing (or existing reused) — `workflow/reference-models.md` §7
 - [ ] `sequence.md` exists
 - [ ] Short: `sequence.md` contains full clip designs (segment-level content)
 - [ ] Long: every segment file has all clip messages + track needs

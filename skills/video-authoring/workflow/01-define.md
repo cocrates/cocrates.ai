@@ -34,6 +34,7 @@ Ask in the **user's language**. Example prompts (English shown; localize when th
 | “Who is the audience, and what tone?” | Audience + tone |
 | “Rough length, and Short (one segment) vs Long (multiple segments)?” | Scale + mode |
 | “Any visuals that must stay consistent across clips? (characters, backgrounds, slides, product, logo — or none)” | Reference-need sketch |
+| “Any multi-clip situations where who-stands-where must not flip? (café L/R, OR stations, meeting seats — or none)” | Staging need sketch |
 | “Taboos / out of scope?” | Safety |
 | “What would make this feel successful (Validation Criteria)?” | Evaluate criteria |
 

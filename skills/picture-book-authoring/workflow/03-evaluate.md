@@ -99,13 +99,22 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 |  - 물리 구조(새 건물/벽 파괴 등) 변화는 새 state로 갱신 | ✅ / ⚠️ / ❌ | {page + 예시} |
 | 연속 장면 구간에서 위치(position)·보이는 뷰(view)·state 유지가 일관됨 | ✅ / ⚠️ / ❌ | {page range} |
 
-### 3.3 Illustration Guide Completeness
+
+### 3.3 Staging reference model (= continuing-situation blocking)
+| Check | Result | Evidence |
+|-------|--------|----------|
+| 연속 상황에 staging이 있는가 | ✅ / ⚠️ / ❌ | {span + staging-slug} |
+| staging 참조 뷰 2–3 계획 | ✅ / ⚠️ / ❌ | {staging file} |
+| 페이지가 staging을 인용하는가 | ✅ / ⚠️ / ❌ | {page} |
+| 무단 L/R·좌석·스테이션 변경 없음 | ✅ / ⚠️ / ❌ | {page range} |
+
+### 3.4 Illustration Guide Completeness
 | Check | Result | Evidence |
 |-------|--------|----------|
 | illustration guide가 “캐릭터 참조 모델 + 장소 scene”을 모두 포함 | ✅ / ⚠️ / ❌ | {page} |
 | page story가 illustration guide의 표시 요소와 모순되지 않음 | ✅ / ⚠️ / ❌ | {page} |
 
-### 3.4 일러스트 텍스트(시각 효과) 가이드 적합성
+### 3.5 일러스트 텍스트(시각 효과) 가이드 적합성
 | Check | Result | Evidence |
 |-------|--------|----------|
 | `렌더링 텍스트`의 읽기 순서(좌→우, 위→아래)가 자연스러운가 | ✅ / ⚠️ / ❌ | {page} |

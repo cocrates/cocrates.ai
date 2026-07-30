@@ -4,6 +4,7 @@
 
 **Gate artifacts:**
 - Always: `characters.md`, `locations.md`, `world-bible.md`, `chapters/{nnn}-{chapter-slug}.md`
+- When needed: `stagings.md` + `stagings/{slug}.md` (continuing-situation blocking)
 - **Series mode only:** `parts/{nnn}-{part-slug}.md`
 
 **Next stage:** `04-chapter-design.md` — only after architecture **and** parent chapter catalog are approved
@@ -61,10 +62,16 @@ Create `characters/{name-slug}.md` for each character who will appear in early c
 - Arc Direction: {positive / negative / flat — brief description}
 
 ## 외형 및 거동 특징
-- 외형(Appearance): {face/height/build/unique visual traits}
+- 외형(Appearance): {face/height/build/unique visual traits — fixed identity}
 - 습관/거동(Behavior): {signature gestures, posture habits, movement style}
 - 말투/표현(Voice): {speech patterns, recurring phrases, emotional tell}
 - 반복되는 단서(Signature cues): {what readers notice consistently}
+
+## Reference models (appearance + equipment states)
+{Canonical: `workflow/reference-models.md` — same three layers as webtoon/picture-book/video}
+- base: {default outfit + identity gear (named weapons, accessories, …)}
+- {state-slug}: {lasting body change and/or outfit/gear change}
+Rules: state = lasting physical/equipment identity only; expression/mood/transient pose are scene direction; do not silently swap identity gear across scenes.
 
 ## 주요 인물과의 관계
 - {Other Character A} ↔ {Character Name}: {relationship type, power dynamic, key tension seed}
@@ -96,6 +103,7 @@ Create `locations/{name-slug}.md` for each location used in early chapters, usin
 ## 기본 정보
 - 유형: {world / region / city / building / room / outdoor / ...}
 - 서사적 역할: {why this place matters to the story}
+- Role as set/stage: {physical structure that must stay recognizable; lasting damage → new state — see `workflow/reference-models.md`}
 - 핵심 이벤트: {notable events that happen here}
 
 ## 공간 구성
@@ -112,6 +120,24 @@ Create `locations/{name-slug}.md` for each location used in early chapters, usin
 ## 분위기 노트
 {이 장소가 주는 심리적 인상 — 안전 / 위협 / 향수 / 고립 / ...}
 ```
+
+---
+
+## `stagings.md` + `stagings/{slug}.md` (Continuing-situation blocking)
+
+**When:** a situation continues across multiple scenes and relative placement must not flip (café L/R, OR stations, meeting seats, standoffs, …). **One staging per situation.** Full rules: `workflow/reference-models.md`.
+
+```markdown
+# Stagings
+
+| Slug | Situation | Location | Cast | Span |
+|------|-----------|----------|------|------|
+| {staging-slug} | {café / OR / meeting / …} | {location} | {A, B} | ch/ep/scene range |
+```
+
+Per staging file: location anchor, cast + appearance states, seat/spot/station + facing, continuity rules (forbidden L/R swap / reseat).
+
+Gate artifacts for this stage include `stagings.md` when any continuing situation needs blocking.
 
 ---
 

@@ -26,24 +26,29 @@
 
 #### 참조 모델(Reference Model)이란?
 
-**참조 모델 = 이야기 전체에서 지속·유지되는 물리적 외형/구조의 정의.**
+**Canonical rules:** `workflow/reference-models.md` (same three layers as webtoon / video / novel).
+
+**참조 모델 = 이야기 전체에서 지속·유지되는 물리적 외형/구조 + 연속 상황의 상대 배치 잠금.**
 Stage ④에서 image-generation 스킬을 통해 "참조 이미지"로 생성되며, 이후 모든 페이지 이미지가 이 참조 이미지를 기반으로 일관성을 유지한다.
 
 | 구분 | 참조 모델에 **포함** (= 참조 이미지 생성 대상) | 참조 모델에 **불포함** (= 페이지 일러스트레이션 가이드에서 지정) |
 |------|------|------|
-| **캐릭터** | 얼굴/체형/실루엣, 복장/장비 state별 차이 | 표정, 포즈, 동작, 감정 표현 |
-| **장소** | 공간의 물리적 구조·배치·고정 요소 (가구, 건물, 지형 등) | 조명, 시간대, 날씨, 분위기, 촬영 방향/구도/카메라 앵글, 동적 요소 (지나가는 사람 등) |
+| **캐릭터** | 얼굴/체형/실루엣, **지속 신체 변화**, **장비 정체성**(옷·액세서리·무기·방패 등 — 장면마다 다른 칼을 들면 안 됨) | 표정, 포즈, 동작, 감정 표현 |
+| **장소** | **세트/무대**의 물리적 구조·배치·고정 요소 | 조명, 시간대, 계절, 날씨, 분위기, 촬영 방향/구도/카메라 앵글, 동적 요소 |
+| **Staging** | 연속 상황에서 **누가 어디에**(카페 좌/우, 회의 좌석, 수술실 스테이션 등). 상황당 하나; 참조 이미지 **2–3**장 | 표정/분위기; 좌석이 유지되는 한에서의 카메라 타이트함 |
 
 **참조 모델 변경이 필요한 경우 (= 새 참조 이미지 필요):**
-- 캐릭터: 복장/장비가 바뀜 → 새 state 슬러그 추가
+- 캐릭터: 복장/장비가 바뀜, 또는 지속 신체 변화 → 새 state 슬러그 추가
 - 장소: 물리적 구조가 영구히 변함 (예: 창밖에 새 건물 완공, 벽이 파괴됨) → 새 state 슬러그 추가
-  - 예: 창밖에 보이던 “외부 건물(물리 구조)”이 새로 들어와 화면에 새 요소가 고정적으로 보임 → state 갱신
-  - 반대로: 창밖에서 멀리 인물이 지나가거나, 커튼/사람/물체가 잠깐 가렸다가 다시 사라지는 정도(일시·가역) → state 아님(페이지 프롬프트로 처리)
+- Staging: 자리/포메이션이 바뀌거나 새 상황이 시작됨 → 새 staging
 
 **참조 모델 변경이 불필요한 경우 (= 페이지 프롬프트로 처리):**
+- 표정·감정·일시 포즈
 - 커튼 개폐, 문 열림/닫힘 등 일시적·가역적 변화
 - 조명/시간대/날씨/분위기 변화
 - 동적 요소 (지나가는 캐릭터, 날아가는 새 등)
+
+**Staging이 필요한 경우:** 같은 상황이 여러 페이지에 이어지고 상대 위치가 바뀌면 안 될 때 (카페 마주 앉기, 수술실, 회의 등). `stagings.md` + `stagings/{slug}.md` 작성 후 Phase 0에서 앙상블 참조 2–3장 생성. 캐릭터+빈 장소만으로는 좌석/좌우가 잠기지 않는다.
 
 ---
 
@@ -100,7 +105,7 @@ Stage ④에서 image-generation 스킬을 통해 "참조 이미지"로 생성�
 - {state-slug}: ...
 
 참조 모델 규칙:
-- state = 물리적 외형 변화만 (복장/장비/무장/휴대물)
+- state = 지속 신체 변화 + 장비 정체성 (복장/액세서리/무기/방패/휴대물) — 장면마다 다른 무기를 쓰면 안 됨
 - 얼굴/체형/고정 포인트는 모든 state에서 동일하게 유지
 - 표정/포즈/동작/감정은 state가 아님 → 페이지 일러스트레이션 가이드에서 지정
 - 이야기 진행 중 복장/장비가 바뀌면 새 state 슬러그를 추가
@@ -179,6 +184,19 @@ Stage ④에서 image-generation 스킬을 통해 "참조 이미지"로 생성�
 
 ---
 
+### 2.3b Staging Catalog Design (continuing-situation blocking)
+
+**When:** 같은 상황이 여러 페이지에 이어지고 상대 위치가 바뀌면 안 될 때 — 카페 대화, 수술실, 회의, 식탁, 대치 등. **상황당 staging 하나.** Canonical: `workflow/reference-models.md`.
+
+1. `stagings.md` 인덱스 작성
+2. `stagings/{staging-slug}.md` 작성 (좌석/스테이션/좌우 + facing)
+3. 참조 뷰 2–3장 계획 (establishing / reverse / detail)
+4. 출연 캐릭터 state·장소 position/view/state가 catalogs에 있는지 확인
+
+연속 상황인데 staging이 없으면 → 중단 후 staging 추가, 재개.
+
+---
+
 ### 2.4 Series (Episode List) Design
 
 1. Create `series.md`:
@@ -245,9 +263,11 @@ For each `episodes/{nnn}-{episode-slug}.md`, design **all pages**:
 {등장 캐릭터·장소는 catalogs에 등록된 이름만}
 
 #### 일러스트레이션 가이드
-- 캐릭터: {character-slug} (state: {state-slug 또는 base})
+- Staging(해당 시): {staging-slug} — ref view: {establishing|reverse|detail}
+- 캐릭터: {character-slug} (state: {state-slug 또는 base})  # 장비 정체성 유지
 - 장소: {location-slug} / {position-slug} / {view-slug} (state: {state-slug 또는 base})
 - 페이지 연출: {조명/시간대/날씨/분위기, 촬영 방향/구도/카메라 앵글, 캐릭터 표정/포즈 등 — 참조 모델이 아닌 이 페이지 고유 연출}
+{연속 상황의 좌석/좌우는 staging에서 — 페이지에서 임의로 바꾸지 않음}
 {상세한 이미지 프롬프트는 Stage ④ image-generation YAML 작성 시}
 
 #### 렌더링 텍스트
@@ -264,28 +284,41 @@ For each `episodes/{nnn}-{episode-slug}.md`, design **all pages**:
 
 ---
 
-### 2.x Episode Design Internal Feedback Loop
+### 2.x Episode Design Internal Feedback Loop (story ↔ catalogs)
 
-Episode/page 설계 중 필요한 캐릭터/장소/세계 규칙이 누락되면:
-1. 해당 Design 파일을 먼저 수정:
-   - 캐릭터 필요 → `characters/{character-slug}.md` 수정
-   - 장소 필요 → `locations/{location-slug}.md` 수정
-   - 세계 규칙 필요 → `world-bible.md` 수정
-2. 수정 후, 영향을 받는 episode 파일을 다시 검토
+**Story design co-locks catalogs** — see `workflow/reference-models.md` §7.
+
+에피소드/페이지를 설계할 때 **함께** 설계한다:
+
+1. **Staging** — 연속 상황마다 (기존 staging 인용 **또는** `stagings/{slug}.md` **추가**)
+2. **캐릭터 appearance state** — 복장/장비/지속 신체 (기존 state 인용 **또는** `characters/{slug}.md`에 state **추가**)
+3. **장소 set state** — position/view/state (기존 인용 **또는** `locations/{slug}.md`에 **추가**)
+
+**있으면 재사용, 없으면 카탈로그에 추가한 뒤 인용.** 에피소드 파일 안에서만 복장·장비·세트 파손·좌석·좌우를 발명하지 않는다.
+
+누락이 보이면:
+1. 스토리 유닛 중단
+2. Design 카탈로그 먼저 수정 (`characters/*`, `locations/*`, `stagings/*`, `world-bible.md`)
+3. 에피소드 설계 재개 및 인용
+4. 영향받는 페이지 재검토
 
 추가 기준:
-- page가 참조하는 **캐릭터 state**(복장/무장 상태)가 catalogs에 정의돼 있는지
+- page가 참조하는 **캐릭터 state**(복장/장비)가 catalogs에 정의돼 있는지
 - page가 참조하는 **장소 position/view/state**가 catalogs에 정의돼 있는지
+- 연속 상황은 **staging**을 인용하는지; staging의 cast state·location anchor가 catalogs와 일치하는지
+- 표정/시간/날씨는 페이지 연출이지 새 reference state가 아님
 
 ---
 
 ## Completeness Check (Stage ②)
 
 - [ ] `world-bible.md`, `characters.md`, `locations.md`, `series.md` 존재
+- [ ] 연속 상황용 `stagings.md` + `stagings/{slug}.md` (필요 시) + `workflow/reference-models.md` 준수
 - [ ] 모든 `characters/{character-slug}.md`, `locations/{location-slug}.md` 작성됨
 - [ ] 모든 `episodes/{nnn}-{episode-slug}.md`에 페이지별 렌더링 텍스트 + 일러스트 가이드가 존재
 - [ ] 텍스트–이미지 분업(필수 정보 충분성)과 페이지 넘김 훅 규칙이 적용됨
-- [ ] 각 page에서 사용한 캐릭터 state / 장소 position-view-state가 catalogs에 모두 정의돼 있어 Stage ④ Phase 0 참조 이미지 생성이 가능함
+- [ ] 각 page에서 사용한 캐릭터 state / 장소 position-view-state / staging(해당 시)이 catalogs에 모두 정의돼 있어 Stage ④ Phase 0 참조 이미지 생성이 가능함
+- [ ] 스토리 설계 중 새 참조가 필요하면 catalogs에 **먼저 추가**했고, 있으면 **재사용**함 (`workflow/reference-models.md` §7)
 
 ---
 

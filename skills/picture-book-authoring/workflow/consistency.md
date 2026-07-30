@@ -4,7 +4,7 @@
 
 This file is the **single source of truth** for keeping:
 - story/연출 일관성
-- character/location/world 룰 일관성
+- character/location/staging/world 룰 일관성
 - image identity 일관성 (reference-based)
 
 ---
@@ -13,9 +13,10 @@ This file is the **single source of truth** for keeping:
 
 | Term | Meaning |
 |---|---|
-| **Design Layer** | `world-bible.md`, `characters/*.md`, `locations/*.md`, `series.md`, `episodes/*.md` (story + craft + illustration guides) |
+| **Design Layer** | `world-bible.md`, `characters/*.md`, `locations/*.md`, `stagings/*.md`, `series.md`, `episodes/*.md` |
 | **Evaluation Layer** | `evaluations/*.md` where **story lock** is approved per episode |
-| **Reference Images** | `images/characters/*` and `images/locations/*` — stable identity assets generated from catalogs |
+| **Reference Images** | `images/characters/*`, `images/locations/*`, `images/stagings/*` — identity + set + ensemble blocking |
+| **Staging** | Continuing-situation who-is-where — `workflow/reference-models.md` |
 | **Page Images** | `images/{nnn}-{episode-slug}/*` — rendered pages including locked `렌더링 텍스트` overlay |
 | **Story Lock** | G3 approval: page stories/rendering text/text–image split/page-turn hooks/illustration guides are frozen for image generation |
 
@@ -26,7 +27,7 @@ This file is the **single source of truth** for keeping:
 ```
 overview.md
   → series.md
-    → world-bible.md + characters/* + locations/*
+    → world-bible.md + characters/* + locations/* + stagings/*
       → episodes/*.md (page story + rendering text + illustration guide)
         → evaluations/*.md (story lock decision)
           → images/* (reference + page PNGs)
@@ -36,7 +37,7 @@ overview.md
 
 ## Cascade protocol (what to do when something changes)
 
-### When design catalogs change (characters/locations/world-bible)
+### When design catalogs change (characters/locations/stagings/world-bible)
 
 1. User approves the higher-layer change first (Design layer).
 2. Identify affected episodes (any page referencing changed cast/state/place/view).
@@ -74,7 +75,7 @@ overview.md
 - Highest updated file(s): {paths} — user approved: ✅/⬜
 - [ ] overview.md (only if scale/age/validation changed)
 - [ ] series.md
-- [ ] world-bible.md / characters/* / locations/*
+- [ ] world-bible.md / characters/* / locations/* / stagings/*
 - [ ] episodes/{nnn}-{episode-slug}.md
 - [ ] evaluations/{nnn}-{episode-slug}.md (story lock rerun)
 - [ ] reference images to regenerate (if identity/state/view changed)

@@ -70,6 +70,7 @@ Load Structure Mode from `overview.md` / `series.md`. Chapter List source for Ar
 | Part / Chapter List | **Short:** `series.md`. **Series:** `parts/{nnn}-{part-slug}.md` | Role, conflict, hooks, part/work arc |
 | Character | `characters.md` + `characters/{name}.md` | Appearing cast only — voice/drive/arc as approved |
 | Location | `locations.md` + `locations/{name}.md` | Used places only — atmosphere/layout as approved |
+| Staging | `stagings.md` + `stagings/{slug}.md` | Continuing situations with fixed who-is-where |
 | World | `world-bible.md` / `world/{aspect}.md` | Laws, history, systems touched this chapter |
 
 ## Prior Design Alignment
@@ -202,6 +203,7 @@ Load Structure Mode from `overview.md` / `series.md`. Chapter List source for Ar
 ##### Scene 1 — {title}
 **POV:** {character} | **Location:** {architecture location} | **When:** {story time or relative (“same evening”)}
 **On stage:** {characters present}
+**Staging:** {staging-slug or none — required when relative placement must hold across scenes; see `workflow/reference-models.md`}
 
 - **Situation:** {starting state — one line}
 - **Beat:** {what happens — causal flow, concrete actions; not script}
@@ -256,6 +258,7 @@ Each scene under an episode is a **generation brief**. Stage ⑤ must be able to
 ##### Scene {n} — {title}
 **POV:** {character} | **Location:** {where} | **When:** {time / relative}
 **On stage:** {who is present}
+**Staging:** {staging-slug or none}
 
 - **Situation:** {starting state — one line}
 - **Beat:** {concrete causal flow — what physically/dramatically happens}
@@ -328,6 +331,7 @@ Run after episode/scene design is drafted. Any ❌ blocks approval and stage ⑤
 | Unresolved threads | Each active thread is Picks up / Advances / Plants / Holds — none silently dropped |
 | Characters | Every On-stage name exists in architecture; voice/drive matches profile; arc direction not reversed without architecture update |
 | Locations | Every scene Location is in architecture; use matches profile |
+| Staging | Continuing multi-scene situations cite staging; blocking matches catalog |
 | World | Beats do not break physics/laws/history in world-bible; exposition only for Plant/Hint (not Hold lore dumps that contradict Seed plan) |
 | Series / part arc | Chapter advances the approved series/part role; no stealing later-part payoffs marked Hold elsewhere |
 | Tone / voice | Matches `series.md` Narrative Voice & Style and overview Genre & Tone |
@@ -364,14 +368,28 @@ Run after episode/scene design is drafted. Any ❌ blocks approval and stage ⑤
 
 ---
 
-## New Character or Location Needed?
+## New Character, Location, State, or Staging Needed?
 
-1. **Stop** chapter design
-2. **Propose to user** with reason and role (recurring / one-scene)
+**Story design co-locks catalogs** — see `workflow/reference-models.md` §7.
+
+While designing chapter scenes, **together** decide staging, character appearance states, and location set states:
+
+| Need | Already in architecture? | Action |
+|------|--------------------------|--------|
+| Character / appearance state (outfit, gear, lasting body) | Yes | Cite in **On stage** / scene fields |
+| Character / appearance state | No | **Stop** → propose → add `characters.md` + profile/state → approve → resume |
+| Location / lasting set change | Yes | Cite **Location** |
+| Location / lasting set change | No | **Stop** → propose → add `locations.md` + profile/state → approve → resume |
+| Continuing-situation who-is-where | Yes | Cite **Staging** |
+| Continuing-situation who-is-where | No | **Stop** → propose → add `stagings.md` + file (cast states + location must already exist or be added first) → approve → resume |
+| World rule | No | Update `world-bible.md` / `world/{aspect}.md` first |
+
+1. **Stop** chapter design when a gap appears
+2. **Propose to user** with reason and role (recurring / one-scene / one-situation)
 3. **Wait** for decision
-4. If approved → update `characters.md` / `locations.md` + profile → user approves → resume design
+4. If approved → update catalogs → user approves → resume design and **cite** the new or existing refs
 
-Same for new world rules → `world-bible.md` or `world/{aspect}.md` first.
+Do **not** invent outfit, gear, seats, or L/R only inside Key Events. Expression/mood/weather stay in scene direction.
 
 ---
 
@@ -549,7 +567,8 @@ Results go to `evaluations/{nnn}-{chapter-slug}.md`.
 Stage ⑤ must **not** invent plot. Confirm:
 
 - [ ] Every episode has ≥ 1 scene under Key Events
-- [ ] Every scene has: POV | Location | When | On stage | Situation | Beat | Turn | Function | Sensory-emotional | Dialogue intent (or none) | Transition out | Est. length
+- [ ] Every scene has: POV | Location | When | On stage | Staging (or none) | Situation | Beat | Turn | Function | Sensory-emotional | Dialogue intent (or none) | Transition out | Est. length
+- [ ] Continuing situations cite staging; no silent L/R or seat drift (`workflow/reference-models.md`)
 - [ ] Beats are concrete (actions/events), not mood-only
 - [ ] Scene Transition out → next Situation is intelligible; last episode Out matches Chapter Closing hook
 - [ ] Seeds/Hold and motifs are placeable from scene fields (or optional Seed/Motif touch)

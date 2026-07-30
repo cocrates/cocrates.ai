@@ -27,7 +27,7 @@ Generate complete videos (film, animation, ads, music videos, short-form, educat
 - **Markdown vs YAML**: Markdown owns story/message review (`sequence` → `segment` → `clip`). YAML owns implementation (image/video/speech/music) and assembly **edit-specs** (`assembly/*.yaml`). Do not use edit-spec YAML as a substitute for story design.
 - **Hierarchy**: Long = `sequence → segment → clip`. Short (single segment) = `sequence → clip`, with **segment-level clip design content living inside `sequence.md`** (no separate `segments/*.md`).
 - **Message-First Clips**: Each clip has a designed message; composition (image/video/audio tracks) follows that message.
-- **Conditional Reference Models**: Analyze intent/purpose and declare which visual identities need reference images. Not every project needs characters/locations (e.g. slides + narration).
+- **Conditional Reference Models**: Analyze intent/purpose and declare which visual identities need reference images. Not every project needs characters/locations (e.g. slides + narration). When characters/locations are used, apply the shared three-layer model in `workflow/reference-models.md` (character / location / **staging**). While designing story/clips, **co-design** staging + character states + location states — **reuse** catalog entries when present, **add** when missing (§7).
 - **Components then Assemble**: Stage ④ generates clip components; Stage ⑤ writes an **edit-spec** YAML and renders segment/final mp4 via MCP **`cocrates-video-edit`** (`validate_spec` → `render_video`).
 - **Segment as Approval Unit**: Evaluate, Generate Components, and Assemble are approved **per segment** (Short = the one implicit segment in `sequence.md`).
 - **Duration Budgets**: AI motion video clips stay under ~10s. TTS-led clips (still image or held video + speech) may run ~30s.
@@ -51,7 +51,7 @@ Generate complete videos (film, animation, ads, music videos, short-form, educat
 ├── overview.md
 ├── context.md                         # optional
 ├── references.md                      # reference-need analysis + catalog kinds
-├── references/                        # conditional catalogs
+├── references/                        # conditional catalogs (characters, locations, stagings, slides, …)
 │   ├── characters/
 │   ├── locations/
 │   ├── slides/

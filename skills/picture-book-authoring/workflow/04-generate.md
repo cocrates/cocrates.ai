@@ -30,10 +30,10 @@ If a problem is a **Design gap** (wrong cast/place/state/unclear guide):
 
 ## Phase 0: Reference Image Generation (Characters + Locations)
 
-Goal: 참조 모델(= 이야기 전체에서 지속·유지되는 물리적 외형/구조)을 참조 이미지로 생성하여, 이후 모든 페이지 이미지의 일관성 기반을 확보한다.
+Goal: 참조 모델(캐릭터·장소·staging — `workflow/reference-models.md`)을 참조 이미지로 생성하여, 이후 모든 페이지 이미지의 일관성 기반을 확보한다.
 
-**참조 이미지에 포함하는 것:** 캐릭터의 얼굴/체형/복장(state별), 장소의 물리적 고정 구조(state별). `position`·`view`는 “같은 장면 프레이밍”을 맞추기 위한 앵커로 사용됨.
-**참조 이미지에 포함하지 않는 것:** 표정/포즈/동작, 조명/시간대/날씨/분위기, 촬영 방향/구도/카메라 앵글, 동적 요소 — 이들은 페이지별 프롬프트에서 지정.
+**포함:** 캐릭터 얼굴/체형/복장·장비(state별), 장소 세트 구조(state별), staging 앙상블 배치(2–3뷰).
+**불포함:** 표정/포즈, 조명/시간/날씨/분위기, 일회성 카메라, 동적 요소 — 페이지 연출.
 
 ### 0.1 Generation order (per catalogs)
 
@@ -42,6 +42,7 @@ Goal: 참조 모델(= 이야기 전체에서 지속·유지되는 물리적 외�
 3. Location base references: `images/locations/{location-slug}.yaml/.png`
 4. Location position/view references: `images/locations/{location-slug}-{position-slug}-{view-slug}.yaml/.png`
 5. Location state variants: `images/locations/{location-slug}-{position-slug}-{view-slug}-{state-slug}.yaml/.png`
+6. Staging ensemble refs (2–3 views): `images/stagings/{staging-slug}-{establishing|reverse|detail}.yaml/.png` — see `workflow/reference-models.md`
 
 ### 0.2.1 샘플: reference image YAML 구조
 
@@ -120,7 +121,7 @@ For each episode:
 
 For each page image:
 1. Create `{page}.yaml` that:
-   - uses character/location reference PNGs
+   - uses character/location/staging reference PNGs; keep seating/L-R from staging when cited
    - implements only the locked illustration guide action
    - renders the locked `렌더링 텍스트` inside the image as part of illustration
    - uses the locked `렌더링 텍스트` verbatim (언어 포함 그대로 / 번역·재서술·요약·어순 변경 금지)

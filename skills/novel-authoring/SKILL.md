@@ -39,7 +39,8 @@ Produces **complete narrative fiction** — from a single short story to a multi
 |-------|---------|----------|---------------|
 | ① define | Lock scope, genre, criteria; **chapter-scale planning only** | [`01-define.md`](workflow/01-define.md) | `overview.md` |
 | ② plan | Series blueprint — **short:** parts + chapter lists in `series.md`; **series:** Part Catalog only | [`02-plan.md`](workflow/02-plan.md) | `series.md` |
-| ③ architecture | Characters, locations, world, chapter catalogs; **series mode:** `parts/` chapter lists | [`03-architecture.md`](workflow/03-architecture.md) | `characters.md`, `locations.md`, `world-bible.md`, `chapters/` (+ `parts/` if series) |
+| ③ architecture | Characters, locations, **stagings**, world, chapter catalogs; **series mode:** `parts/` chapter lists | [`03-architecture.md`](workflow/03-architecture.md) | `characters.md`, `locations.md`, `stagings.md`, `world-bible.md`, `chapters/` (+ `parts/` if series) |
+| (any) | Shared reference-model rules (character / location / staging) | [`reference-models.md`](workflow/reference-models.md) | Design locks (prose; no PNG) |
 | ④ chapter design | Chapter design — episode/scene sections in one file | [`04-chapter-design.md`](workflow/04-chapter-design.md) | `chapters/{nnn}-{chapter-slug}.md` |
 | ⑤ generation | Chapter prose locked to design + architecture + continuity | [`05-generation.md`](workflow/05-generation.md) | `manuscripts/{nnn}-{chapter-slug}.md` |
 | ⑥ evaluation | Design and/or manuscript validation + critique | [`06-evaluation.md`](workflow/06-evaluation.md) | `evaluations/{nnn}-{chapter-slug}.md` |
@@ -127,6 +128,7 @@ Only when the user requests designing multiple chapters before writing manuscrip
 - **Chapter** = publication / manuscript unit
 - **Episode / Scene** = design-only sections inside `chapters/{nnn}-{slug}.md` (④) — no nested episode folders for new work
 - **Consistency across layers:** see [`consistency.md`](workflow/consistency.md) (source-of-truth stack + cascade on change)
+- **Reference models (prose):** character / location / staging locks in [`reference-models.md`](workflow/reference-models.md) — same three layers as webtoon/picture-book/video; no PNG materialization. While designing chapter scenes, **co-design** staging + character states + location states — **reuse** when present, **add** when missing (§7).
 
 ### Structure Mode
 
@@ -194,6 +196,8 @@ All artifacts under `{project-root}/`:
 ├── characters/              # ③/④
 ├── locations.md             # ③
 ├── locations/               # ③/④
+├── stagings.md              # ③ continuing-situation blocking
+├── stagings/                # ③/④
 ├── world-bible.md           # ③
 ├── world/                   # ③/④
 ├── docs/                    # optional
