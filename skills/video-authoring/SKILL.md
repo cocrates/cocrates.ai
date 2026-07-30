@@ -101,7 +101,7 @@ Short:  sequence → clip   (segment content embedded in sequence.md)
 |-------|---------|----------|
 | **① Define** | Intent, genre, length, Short/Long, Validation Criteria, reference-need sketch | G1: `overview.md` |
 | **② Design** | Markdown story/message: sequence → [segment →] clip; optional catalogs | G2: design set |
-| **③ Evaluate** | Criteria + craft + reference integrity + message fit | G3: **design lock** (per segment) |
+| **③ Evaluate** | Criteria + craft + reference integrity + **required critic personas** (Target Viewer first) | G3: **design lock** (per segment) |
 | **④ Generate Components** | Reference/clip images, video, speech, music | G4: component set (per segment) |
 | **⑤ Assemble** | Composition YAML → segment mp4 → (Long) final mp4 | G5: segment (+ final) |
 
@@ -143,6 +143,7 @@ See `workflow/02-design.md` for the detailed procedure.
 See `workflow/03-evaluate.md` for the detailed procedure.
 
 - Write and approve `evaluations/*.md` **per segment** (Short = one embedded segment)
+- Run the **core persona set** (Target Viewer, Format, Message, Pacing/Editing, Craft Director) plus **format add-ons** from overview (education/explainer → Learning + Stakeholder + usually Audio; ad/brand → Stakeholder; speech-led → Audio); fill **Adjudication** (Target Viewer tie-break; Learning/Stakeholder High may win on education/brand)
 - Do not proceed to Stage ④ before G3 design lock
 
 ## Stage 4: Generate Components
@@ -201,6 +202,6 @@ See `workflow/05-assemble.md` for the detailed procedure.
 - `overview.md` with Validation Criteria and Short/Long mode
 - `references.md` declaring reference needs (or explicitly none)
 - `sequence.md` complete; Long has `segments/*.md`; Short has segment-level clip design inside `sequence.md`
-- `evaluations/*` with G3 design lock per segment
+- `evaluations/*` with G3 design lock per segment (required personas + Adjudication)
 - G4: all required component assets for each assembled segment approved
 - G5: segment mp4(s) approved via `cocrates-video-edit` render; Long also has approved `assembly/final.yaml` and `output/{slug}.mp4`

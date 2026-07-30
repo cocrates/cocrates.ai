@@ -22,10 +22,11 @@ Do not proceed to Stage ④ for a segment until that segment’s G3 is approved.
 
 For each segment:
 
-1. Load `overview.md` **Validation Criteria**.
+1. Load `overview.md` **Validation Criteria** and lock **Target Viewer** (who watches, where, what success means in viewer terms).
 2. Load `sequence.md` (+ segment file if Long) and `references.md`.
 3. Run checks below; write `evaluations/{nnn}-{segment-slug}.md`.
-4. If failures: Design-first revision → re-evaluate → new G3.
+4. Run the [Default persona set](#persona-reference) — do not skip for speed; fill Adjudication.
+5. If failures: Design-first revision → re-evaluate → new G3.
 
 ### Checks
 
@@ -46,10 +47,7 @@ For each segment:
    - If references.md says none: confirm no hidden identity-drift risk (or escalate to add a catalog)
 5. **Sequence continuity**
    - Hooks connect; arc role of segment is clear
-6. **Persona / audience lens** (genre-appropriate)
-   - Viewer: clarity, engagement
-   - Stakeholder (client/parent/teacher): safety, accuracy, brand
-   - Craft: pacing, audio/visual split
+6. **Persona / audience lens** — see Persona Reference (required set)
 
 ---
 
@@ -83,27 +81,127 @@ For each segment:
 | No undeclared entities | ✅ / ⚠️ / ❌ | |
 | state vs clip direction separation | ✅ / ⚠️ / ❌ / N/A | |
 
-## 4. Audience / Craft Notes
-- Viewer: {…}
-- Stakeholder: {…}
-- Rhythm / audio: {…}
+## 4. Target Viewer Checks
+| Check | Result | Evidence |
+|-------|--------|----------|
+| Opening earns locked viewer attention | ✅ / ⚠️ / ❌ | |
+| Message clarity for that viewer | | |
+| Desire to watch next clip / finish segment | | |
+| Drop-risk (boredom, confusion, overload) named | | |
 
-## 5. Revisions (Design-First)
+## 5. Persona Checks
+{Active set = Core + format add-ons from overview Genre/form. Per persona: Stance / Strengths / Defects (severity + High/Med/Low + fix) / Viewer impact.}
+
+### Target Viewer
+- Who: {from overview — platform, length tolerance, why they press play: entertainment / learn / decide / …}
+- Clarity: {rating}
+- Engagement / finish (or learn-and-apply) intent: {rating}
+- Feedback: {feedback}
+
+### Format Critic
+- Form promise vs delivery (film / animation / ad / education / explainer / …): {rating}
+- Convention misuse for *this* form: {rating}
+- Feedback: {feedback}
+
+### Message Critic
+- Segment message / learning beat completeness: {rating}
+- Cold-viewer comprehension (without prior context): {rating}
+- Show vs tell calibrated to form (drama ≠ lecture-dump; education may teach explicitly if clear): {rating}
+- Feedback: {feedback}
+
+### Pacing / Editing Critic
+- Clip rhythm & hook (or checkpoint) chain: {rating}
+- Duration budget realism: {rating}
+- Cognitive load / denseness for the locked viewer: {rating}
+- Feedback: {feedback}
+
+### Craft Director (picture / motion / assembly fit)
+- Track split matches message: {rating}
+- Reference plan survivable into Stage ④–⑤: {rating}
+- Feedback: {feedback}
+
+### Learning Critic
+{Required for education / explainer / tutorial / training — else omit or N/A}
+- Objectives covered in order: {rating}
+- Accuracy / no harmful misconception: {rating}
+- Practice or check-for-understanding if overview requires: {rating}
+- Feedback: {feedback}
+
+### Stakeholder (client / teacher / parent / brand)
+{Required for education/explainer/training, ad/brand, or when overview names a commissioner — else omit or N/A}
+- Safety, accuracy, brand / curriculum fit: {rating}
+- Feedback: {feedback}
+
+### Audio / Voice Critic
+{Required when speech/TTS/BGM/SFX-led — common for education; else omit or N/A}
+- Speech/BGM/SFX necessity vs clutter: {rating}
+- Narration density for ear: {rating}
+- Feedback: {feedback}
+
+## 6. Adjudication
+{Record Apply decisions. Default tie-break: Target Viewer (education/brand exceptions in Persona Reference). Never silently drop a High finding.}
+
+| # | Finding (persona) | Severity | Conflict? | Apply? | Rationale (Target Viewer first; education/brand exceptions per Persona Reference) | Design file | Status |
+|---|-------------------|----------|-----------|--------|----------------------------------------------------------------------------------|-------------|--------|
+
+## 7. Revisions (Design-First)
 | # | Finding | Severity | Design file | Fix | Status |
 |---|---------|----------|-------------|-----|--------|
 | 1 | | High/Med/Low | | | todo/done |
 
-## 6. Design Lock Readiness (G3)
+## 8. Design Lock Readiness (G3)
 - [ ] Criteria / Craft / Reference checks acceptable
+- [ ] Required personas + Adjudication filled
+- [ ] Target-viewer readiness acceptable
 - [ ] Clip messages and direction frozen for Stage ④–⑤
 ```
+
+---
+
+## Persona Reference
+
+Critics **advise**. Fill the Adjudication table and apply chosen fixes before G3.
+
+**Tie-break:** **Target Viewer** first. Exceptions from overview:
+- **Education / explainer / training:** High **Learning Critic** (accuracy / misconception) and High **Stakeholder** (curriculum/safety) outrank “more entertaining but wrong/unsafe.”
+- **Ad / brand:** High **Stakeholder** brand/safety may outrank pure entertainment taste.
+
+Video forms in `overview.md` Genre/form include film, animation, ad, music-video, short-form, **education**, **explainer**, tutorial, training, and similar — persona sets must follow the locked form, not assume narrative entertainment.
+
+### Core required (every segment, every form)
+
+**Target Viewer** · **Format Critic** · **Message Critic** · **Pacing / Editing Critic** · **Craft Director**
+
+### Format add-ons (also required when overview Genre/form matches)
+
+| Form band (from overview) | Also required |
+|---------------------------|---------------|
+| **Education / explainer / tutorial / training** | **Learning Critic** · **Stakeholder** · **Audio / Voice Critic** (if any speech/TTS/narration — usual) |
+| **Ad / brand / promo** | **Stakeholder** |
+| **Film / animation / dramatic short / music-video (story-led)** | (core only; add Character notes under Message Critic if cast-driven) |
+| **Any form with speech, TTS, heavy BGM/SFX** | **Audio / Voice Critic** |
+
+If form is ambiguous, ask once to lock Genre/form before evaluation — do not default to film/animation personas only.
+
+### Persona catalog
+
+| Persona | Focus | Typical questions |
+|---------|-------|-------------------|
+| **Target Viewer** | Locked audience’s watch experience (fun *or* learn/apply) | Clear? Worth finishing? Where do they quit or get lost? |
+| **Format Critic** | Form contracts (not only cinematic genre) | Does this feel like the promised *kind* of video (lesson, ad, film, …)? |
+| **Message Critic** | Beat purpose — story turn *or* instructional point | Would a cold viewer get the point? Density right for the form? |
+| **Pacing / Editing Critic** | Rhythm, hooks/checkpoints, duration, cognitive load | Too slow/fast/dense? Budgets realistic? |
+| **Craft Director** | Track choice, refs, assemble-ability | Will Stage ④–⑤ survive this design? |
+| **Learning Critic** | Objectives, accuracy, misconception risk, checks | Are learning goals covered without false claims? |
+| **Stakeholder** | Teacher/client/parent/brand constraints | Shipable for the locked commissioner/curriculum? |
+| **Audio / Voice Critic** | Speech, BGM, SFX load | Ear-friendly? Tracks fighting the picture? |
 
 ---
 
 ## Design-First Revision Loop
 
 1. Edit Design Markdown (`sequence.md`, `segments/*`, `references/*`, `context.md`).
-2. Update evaluation record.
+2. Update evaluation record (personas + Adjudication).
 3. Seek new G3 for affected segment(s).
 4. Only then enter Stage ④ for that segment.
 
@@ -116,7 +214,8 @@ User confirms:
 1. Criteria addressed for this segment?
 2. Clip messages strong and lockable?
 3. Reference plan intact?
-4. **Design lock:** clip messages, direction, and track *needs* are frozen for component generation and assembly.
+4. Persona feedback + Adjudication — residual risk acceptable for the **Target Viewer**?
+5. **Design lock:** clip messages, direction, and track *needs* are frozen for component generation and assembly.
 
 **Do not proceed to Stage ④ for this segment without G3.**
 

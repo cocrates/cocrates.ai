@@ -223,7 +223,7 @@ Episode numbers are **local headings** inside the parent chapter file (`### Epis
 2. Stage ①: one question at a time; chapters only (never episode planning); lock Structure Mode
 3. Present artifacts; wait for explicit approval; match user language
 4. After release, prompt next chapter and wait
-5. Propose design evaluation after ④; Reader-Editor (default) + Literary Critic for ch 001; Literary Awards Juror when user targets prestige
+5. Propose design evaluation after ④; run **required persona sets** in `06-evaluation.md` (Target Reader + Genre Critic + Plot Expert + Reader-Editor on design; Target Reader + Genre Critic + Reader-Editor + Literary Critic on manuscript; ch 001 adds Setting/Lore; prestige adds Literary Awards Juror)
 6. Critique → **design** → prose (never patch plot/structure in prose alone)
 7. Honor Structure Mode; run load + Consistency/Fidelity gates at ④/⑤; on edits use Consistency Cascade and tell the user which files synced
 

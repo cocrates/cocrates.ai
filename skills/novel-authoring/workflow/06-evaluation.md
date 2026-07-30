@@ -29,27 +29,33 @@ Use a **single evaluation file** per chapter — append or update sections as ev
 
 Propose after chapter design approval:
 
-> *"Chapter {nnn} design is approved. Shall we evaluate the design before writing the manuscript? We'll validate structure, seeds, and engagement against criteria."*
+> *"Chapter {nnn} design is approved. Shall we evaluate the design before writing the manuscript? We'll validate structure, seeds, and engagement against criteria, then run the required critic personas."*
 
 Load:
 - `chapters/{nnn}-{chapter-slug}.md` (full file — chapter + episode sections + Prior Design Alignment)
 - **Same prior-design set as stage ④ load:** `overview.md`, `series.md`, Chapter List source, `characters*`, `locations*`, `world-bible` (+ aspects), continuity (ch 002+)
 - Re-run Prior-Design Consistency Gate from `04-chapter-design.md` against the finished design
+- Lock **Target Reader** from `overview.md` (audience / platform / success-in-reader-terms) before persona critique
 - **Literary Awards Juror:** also Chapter List source for work-level context — **Short:** `series.md`; **Series:** `parts/{nnn}-{part-slug}.md`; fill **Literary Awards Juror Checks (Design)** before persona critique
+
+**Required personas (design):** run every persona in the [Default persona sets](#default-persona-sets) for this chapter — do not skip for speed. Optional personas only when overview criteria or the user request them.
 
 ### Manuscript Evaluation
 
 Propose after chapter manuscript approval:
 
-> *"Chapter {nnn} manuscript is ready. Shall we evaluate it? We'll start with validation against the chapter design and prior architecture/continuity. Would you also like a critique from a specific critic persona?"*
+> *"Chapter {nnn} manuscript is ready. Shall we evaluate it? We'll validate against the chapter design and prior architecture/continuity, then run the required critic personas."*
 
 Load:
 - `manuscripts/{nnn}-{chapter-slug}.md`
 - `chapters/{nnn}-{chapter-slug}.md` (full design)
 - Architecture + continuity set listed in the chapter design (same as stage ⑤ Pre-Generation Load)
 - Re-run **Design-Fidelity Gate** from `05-generation.md`
+- Same **Target Reader** lock as design eval
 
-**Literary Awards Juror:** When this persona is requested, fill **Literary Awards Juror Checks** in the evaluation file (design and/or manuscript section) before the persona critique. Load Chapter List source (**Short:** `series.md`; **Series:** parent `parts/{nnn}-{part-slug}.md`) and `overview.md` for work-level context.
+**Required personas (manuscript):** same [Default persona sets](#default-persona-sets). Additional named personas on request.
+
+**Literary Awards Juror:** When this persona is in the set (or requested), fill **Literary Awards Juror Checks** in the evaluation file (design and/or manuscript section) before the persona critique. Load Chapter List source (**Short:** `series.md`; **Series:** parent `parts/{nnn}-{part-slug}.md`) and `overview.md` for work-level context.
 
 ---
 
@@ -121,7 +127,7 @@ Load:
 | Closing image specified | | |
 
 ### Literary Awards Juror Checks (Design)
-{Include when Literary Awards Juror persona is requested — see Persona Reference}
+{Include when Literary Awards Juror is in the active set — see Persona Reference}
 
 | Check | Result | Evidence |
 |-------|--------|----------|
@@ -132,17 +138,37 @@ Load:
 | Chapter advances part/series literary arc | | |
 | Competition readiness at design scope | | {What jurors would praise / hesitate over / reject} |
 
-### Design Critique
-{Persona critique if requested}
+### Target Reader Checks (Design)
+{Always — use audience locked in overview.md}
 
-### Design Revision Decisions
-| # | Finding | Apply? | Action Taken | Status |
-|---|---------|--------|-------------|--------|
+| Check | Result | Evidence |
+|-------|--------|----------|
+| Opening earns the locked reader's attention | ✅ / ⚠️ / ❌ | |
+| Personal stake matches what this reader came for | | |
+| Pacing / density fits platform expectations | | |
+| Closing hook makes *this* reader want the next unit | | |
+| No alienation of core audience without overview intent | | |
+
+### Design Critique (required personas)
+For **each** persona in the active set, write a block:
+
+- `#### {Persona name}`
+- Stance: {1–2 lines — what this persona values here}
+- Strengths: {…}
+- Defects: {finding → severity High/Med/Low → proposed fix}
+- Reader impact: {how this affects the locked Target Reader}
+
+### Design Adjudication
+{Record Apply decisions. Default tie-break: Target Reader. Never silently drop a High finding.}
+
+| # | Finding (persona) | Severity | Conflict? | Apply? | Rationale (Target Reader first) | Action Taken | Status |
+|---|-------------------|----------|-----------|--------|---------------------------------|--------------|--------|
 
 ### Design Verdict
 | Dimension | Result |
 |-----------|--------|
 | Prior-design consistent | ✅ / ❌ |
+| Target-reader readiness | |
 | Design quality | |
 | Manuscript-ready | ✅ / ⬜ |
 
@@ -198,7 +224,7 @@ Load:
 | Closing scene over statement | | |
 
 ### Literary Awards Juror Checks (Manuscript)
-{Include when Literary Awards Juror persona is requested — see Persona Reference}
+{Include when Literary Awards Juror is in the active set — see Persona Reference}
 
 | Check | Result | Evidence |
 |-------|--------|----------|
@@ -209,17 +235,28 @@ Load:
 | Chapter contributes to work-level coherence in sequence | | |
 | Competition readiness | | {Praise / hesitate / reject — with revision priorities} |
 
-### Manuscript Critique
-{Persona critique if requested}
+### Target Reader Checks (Manuscript)
+{Always}
 
-### Manuscript Revision Decisions
-| # | Finding | Apply? | Action Taken | Status |
-|---|---------|--------|-------------|--------|
+| Check | Result | Evidence |
+|-------|--------|----------|
+| Would the locked reader keep reading past the first page? | ✅ / ⚠️ / ❌ | |
+| Emotional / curiosity payoff lands for that reader | | |
+| Voice and density feel native to the platform/audience | | |
+| Closing hook / next-chapter pull is concrete | | |
+| Drop-risk moments (confusion, lecture, stall) identified | | |
+
+### Manuscript Critique (required personas)
+Same per-persona block as Design Critique for every persona in the active set.
+
+### Manuscript Adjudication
+Same table shape as Design Adjudication — Target Reader tie-break; never silently drop a High finding.
 
 ### Manuscript Verdict
 | Dimension | Result |
 |-----------|--------|
 | Design fidelity | ✅ / ❌ |
+| Target-reader readiness | |
 | Manuscript quality | |
 | Next-chapter readiness | |
 | Release ready | ✅ / ⬜ |
@@ -231,36 +268,46 @@ Load:
 - **Date**:
 ```
 
-### Persona Reference
+---
 
-| Persona | Focus | When to suggest |
-|---------|-------|-----------------|
-| **Genre Critic** | Genre conventions, tropes | Always |
-| **Literary Critic** | Prose rhythm, motif, sensory-emotional craft, dialogue voice | **Recommended for ch 001** and after major rewrites |
-| **Literary Awards Juror** | Thematic depth, originality, artistic integrity, moral complexity, language as literary art, work-level coherence, lasting literary merit — criteria typical of major prizes and competition judging | **Recommended** when targeting awards, contests, or literary prestige; major part/manuscript milestones |
-| **Plot Expert** | Pacing, causality, structure | **Recommended for design evaluation** |
-| **Character Critic** | Arc, motivation, voice | Character-driven works |
-| **Reader-Editor** | Engagement, exposition restraint | **Default for serialization** |
-| **Setting/Lore Expert** | World consistency, info-dumping | **Required for ch 001** |
+## Persona Reference
 
-**Literary Critic vs Literary Awards Juror:** Critic = craft execution on the page. Juror = whether the work *as literature* earns lasting merit — theme, vision, insight, and form at work/part level, not only line-level polish.
+Critics **advise**. They do not auto-apply changes — fill the Adjudication table and apply chosen fixes before proceeding. When personas conflict, **Target Reader** (from `overview.md`) is the default tie-break unless overview explicitly prioritizes prestige, niche, or another locked criterion.
 
-**Literary Awards Juror critique should cover:**
-- **Theme & vision** — Is the central concern substantial, coherent, and earned (not asserted)?
-- **Originality** — What is genuinely new in perspective, form, or moral imagination?
-- **Human insight** — Does the work illuminate condition, society, or consciousness beyond plot?
-- **Artistic integrity** — Are ambition, structure, and language aligned — no sentimentality, didacticism, or ornamental prose?
-- **Work-level coherence** — Do part/chapter arcs accumulate into a whole greater than serial entertainment?
-- **Competition readiness** — What would jurors praise, hesitate over, or reject — with concrete revision priorities?
+### Default persona sets
 
-Critique may be requested at any stage (part, character web, series level) — produce appropriate `evaluations/{scope}.md`.
+| Context | **Required** (always run) | **Also required when** |
+|---------|---------------------------|-------------------------|
+| Design eval (any chapter) | **Target Reader**, **Genre Critic**, **Plot Expert**, **Reader-Editor** | Character-driven brief → **Character Critic**; ch 001 or major lore debut → **Setting/Lore Expert**; prestige/awards in overview → **Literary Awards Juror** |
+| Manuscript eval (any chapter) | **Target Reader**, **Genre Critic**, **Reader-Editor**, **Literary Critic** | Same conditionals as design; after major rewrite → **Literary Critic** even mid-series |
+| Ch 001 (design + manuscript) | Above + **Setting/Lore Expert** + **Literary Critic** (manuscript) | — |
+
+Optional on request: any persona below; series/part-level critique → `evaluations/{scope}.md`.
+
+### Persona catalog
+
+| Persona | Focus | Typical questions |
+|---------|-------|-------------------|
+| **Target Reader** | The locked audience's lived read — fun, clarity, desire to continue, platform fit | Would *I* (this reader) keep going? Where do I skim, confuse, or quit? |
+| **Reader-Editor** | Engagement craft, exposition restraint, serialization hooks | Is info dumped? Is the hook earned? Is the chapter sellable as a unit? |
+| **Genre Critic** | Genre contracts, tropes, promise/payoff | Does it deliver what this genre's readers paid for — without empty cliché? |
+| **Plot Expert** | Pacing, causality, structure, seed timing | Does every turn follow? Any stalled middle? Design ready to write? |
+| **Character Critic** | Arc, motivation, distinct voice, relationship pressure | Why does this person act *now*? Voices interchangeable? |
+| **Literary Critic** | Prose rhythm, motif, sensory-emotional craft, dialogue music | Does the page *feel*? Motifs earned? Emotion shown not labeled? |
+| **Setting/Lore Expert** | World consistency, info-dumping, rule clarity | Is the world learned through character need — not catalog? |
+| **Literary Awards Juror** | Theme, originality, insight, artistic integrity, work-level merit | Would this earn lasting literary respect — or only serial entertainment? |
+
+**Literary Critic vs Literary Awards Juror:** Critic = craft on the page. Juror = whether the work *as literature* earns lasting merit at work/part level.
+
+**Literary Awards Juror critique should cover:** theme & vision earned; originality; human insight; artistic integrity (no sentimentality/didacticism/ornament); work-level coherence; competition readiness with concrete revision priorities.
+
+**Target Reader critique should cover:** who they are (from overview); what they came for; first-page / first-chapter retention; confusion or lecture risks; whether the closing hook pulls *them* specifically.
 
 ---
 
 ## Gate
 
-User reviews evaluation, selects revision items, decides revise or proceed (to manuscript generation after design eval, or to release after manuscript eval).
-
+After evaluation + adjudication (and any applied revisions): user reviews the evaluation, selects or confirms revision items as needed, and decides revise or proceed (to manuscript generation after design eval, or to release after manuscript eval).
 
 ## Reference-model integrity (architecture / design eval)
 

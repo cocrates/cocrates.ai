@@ -104,7 +104,7 @@ All picture book artifacts are authored under `{project-root}/`:
 |-------|---------|----------|
 | **① Define** | Define what picture book to create; lock Validation Criteria | G1: Overview approval |
 | **② Design** | Design world, characters, locations, episodes/pages (story + craft) | G2: Full design approval |
-| **③ Evaluate** | Criteria + craft + multi-perspective check; revise design if needed | G3: Evaluation approval = **story lock** |
+| **③ Evaluate** | Criteria + craft + **required critic personas** (Target Child first); revise design if needed | G3: Evaluation approval = **story lock** |
 | **④ Generate** | Generate reference images and page images from locked design | G4: Final result approval |
 
 **Boundary:** Stages ①–③ own story and design. Stage ④ owns image YAML and pixels only. Crossing that boundary for story/structure changes requires explicit rollback.
@@ -142,6 +142,7 @@ For step-by-step procedures, read the stage workflow file at the start of each s
 세부 절차는 `workflow/03-evaluate.md`를 참고하세요.
 
 - 에피소드 단위로 `evaluations/*.md` 생성
+- **필수 페르소나** 실행 (Target Child, Caregiver, Genre/Age, Story Critic, Illustration specialist; Educator/Librarian when overview locks education use) + **Adjudication** (Target Child 우선)
 - G3: 사용자 승인(Story lock) 전에는 Stage ④로 진행하지 않음
 
 ---
@@ -188,7 +189,7 @@ For step-by-step procedures, read the stage workflow file at the start of each s
 - `characters.md` + `characters/{character-slug}.md` exist with complete character designs
 - `locations.md` + `locations/{location-slug}.md` exist with complete location designs
 - `series.md` + `episodes/{nnn}-{episode-slug}.md` exist with complete episode designs (including craft fields)
-- All evaluation records exist in `evaluations/{nnn}-{episode-slug}.md` with Criteria Check + Craft Checks
+- All evaluation records exist in `evaluations/{nnn}-{episode-slug}.md` with Criteria Check + Craft Checks + required personas + Adjudication
 - G3 story lock approved
 - All reference images generated and approved with explicit user confirmation (Phase 0)
 - All page images generated with text overlay and approved with explicit user confirmation (Phase 1)

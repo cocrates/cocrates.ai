@@ -159,7 +159,7 @@ Upload portals often split tall files (e.g. max ~1280px height per file). Design
 |-------|---------|----------|
 | **① Define** | Define what webtoon to create; lock Validation Criteria + canvas specs | G1: Overview approval |
 | **② Design** | World, characters, locations, episodes/pages/cuts (story + craft) | G2: Full design approval |
-| **③ Evaluate** | Criteria + craft + multi-perspective check; revise design if needed | G3: Evaluation approval = **story lock** |
+| **③ Evaluate** | Criteria + craft + **required critic personas** (Target Reader first); revise design if needed | G3: Evaluation approval = **story lock** |
 | **④ Generate** | Reference images → page images → stitch episode scroll | G4: Final result approval |
 
 **Boundary:** Stages ①–③ own story and design. Stage ④ owns image YAML, pixels, and stitch only. Crossing that boundary for story/structure changes requires explicit rollback.
@@ -201,6 +201,7 @@ See `workflow/02-design.md`.
 See `workflow/03-evaluate.md`.
 
 - Create `evaluations/*.md` per episode
+- Run the **default persona set** (Target Reader, Genre, Plot/Pacing, Story, Platform/editorial, Webtoon art; Character when needed); fill **Adjudication** (Target Reader tie-break)
 - G3: Do not proceed to Stage ④ without story-lock approval
 
 ---
@@ -253,7 +254,7 @@ See `workflow/04-generate.md`.
 - `locations.md` + `locations/{location-slug}.md` exist with complete location designs
 - `stagings.md` + `stagings/{staging-slug}.md` exist for every multi-cut ensemble that needs fixed blocking
 - `series.md` + `episodes/{nnn}-{episode-slug}.md` exist with complete episode designs (pages → cuts, balloons, narration, gutters)
-- All evaluation records exist in `evaluations/{nnn}-{episode-slug}.md` with Criteria Check + Craft Checks
+- All evaluation records exist in `evaluations/{nnn}-{episode-slug}.md` with Criteria Check + Craft Checks + required personas + Adjudication
 - G3 story lock approved
 - All reference images generated and approved with explicit user confirmation (Phase 0: characters, locations, stagings)
 - All page images generated with balloons/narration and approved with explicit user confirmation (Phase 1)

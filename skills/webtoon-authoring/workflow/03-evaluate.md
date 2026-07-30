@@ -52,13 +52,8 @@ For each `episodes/{nnn}-{episode-slug}.md`:
    - Reading order is top→bottom (left→right within a cut if needed)
    - Scroll hooks set up the next cut/page
 
-6. Persona checks:
-   - Reader (scroll immersion / comprehension / desire to keep scrolling)
-   - Platform/editorial (readability, width, color, upload-split feasibility)
-   - Critic (quality, rhythm, cut division / size-class variety)
-   - Webtoon art specialist (character/location/staging refs, balloons, gutters, cut heights, vertical direction)
-
-7. Record results into `evaluations/{nnn}-{episode-slug}.md`.
+6. **Persona checks** — run the [Default persona set](#persona-reference); do not skip for speed. Lock **Target Reader** from `overview.md` first.
+7. Record results into `evaluations/{nnn}-{episode-slug}.md`, including per-persona critique and **Adjudication**.
 
 ---
 
@@ -145,10 +140,30 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 | Scroll hook creates natural tension/curiosity | ✅ / ⚠️ / ❌ | {page} |
 
 ## 6. Persona Checks
-### Reader
+{Run every persona in the Default set. Per persona: Stance / Strengths / Defects (severity + High/Med/Low + fix) / Reader impact.}
+
+### Target Reader (locked audience)
+- Who: {from overview — platform, genre appetite, why they open this episode}
 - Fun: {rating}
-- Clarity: {rating}
+- Clarity / followability: {rating}
 - Want to keep scrolling: {rating}
+- First-viewport / early-cut retention risk: {…}
+- Feedback: {feedback}
+
+### Genre Critic
+- Genre promise vs delivery: {rating}
+- Trope use (earned vs empty): {rating}
+- Feedback: {feedback}
+
+### Plot / Pacing Critic
+- Episode arc completeness: {rating}
+- Cut/page rhythm & information timing: {rating}
+- Scroll-hook chain: {rating}
+- Feedback: {feedback}
+
+### Character Critic
+- Motivation readable in art+balloon: {rating}
+- Voice distinctness in dialogue: {rating}
 - Feedback: {feedback}
 
 ### Platform / editorial
@@ -156,9 +171,10 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 - One-screen readability: {rating}
 - Feedback: {feedback}
 
-### Critic
-- Story completeness: {rating}
-- Cut division / rhythm: {rating}
+### Story Critic (webtoon craft)
+- Story completeness without didacticism: {rating}
+- Cut division / size-class variety vs drama: {rating}
+- Balloon–art collaboration: {rating}
 - Feedback: {feedback}
 
 ### Webtoon art specialist
@@ -173,28 +189,59 @@ For each `episodes/{nnn}-{episode-slug}.md`:
   - Staging cites: {cut → staging-slug + ref view}
   - Outside-cut fill / side margins: {full bleed or 30–50px}
 
-## 7. Revisions (Design-First)
+## 7. Adjudication
+{Record Apply decisions. Default tie-break: Target Reader. Never silently drop a High finding.}
+
+| # | Finding (persona) | Severity | Conflict? | Apply? | Rationale (Target Reader first) | Where to apply | Status |
+|---|-------------------|----------|-----------|--------|---------------------------------|----------------|--------|
+
+## 8. Revisions (Design-First)
 | # | Finding | Severity | Where to apply | Proposed fix | Action Status |
 |---|---------|-----------|----------------|--------------|----------------|
 | 1 | {finding} | High/Med/Low | characters/... / locations/... / episodes/... | {edit} | {todo/done} |
 
-## 8. Story Lock Readiness (G3)
+## 9. Story Lock Readiness (G3)
 - [ ] Reference Model Integrity (character / location / staging): ✅/⚠️/❌
 - [ ] Scene Continuity & Visual Consistency: ✅/⚠️/❌
 - [ ] Cut Guide Completeness: ✅/⚠️/❌
 - [ ] Balloon/Caption Guide: ✅/⚠️/❌
 - [ ] Craft Checks: ✅/⚠️/❌
+- [ ] Required personas run + Adjudication filled: ✅/⚠️/❌
+- [ ] Target-reader readiness acceptable: ✅/⚠️/❌
 ```
 
 ---
 
-### 3.3 Evaluation perspectives (rubric)
+## Persona Reference
+
+Critics **advise**. Fill the Adjudication table and apply chosen fixes before G3. Default tie-break: **Target Reader** from `overview.md`, unless overview locks another priority (e.g. platform compliance over spectacle).
+
+### Default persona set (every episode evaluation)
+
+**Required:** Target Reader · Genre Critic · Plot / Pacing Critic · Story Critic · Platform / editorial · Webtoon art specialist
+
+**Also required when:** character-driven or dialogue-heavy episode → **Character Critic**; episode 001 / series premiere → emphasize Target Reader **first-viewport retention** and Genre promise.
+
+### Persona catalog
+
+| Persona | Focus | Typical questions |
+|---------|-------|-------------------|
+| **Target Reader** | Phone-scroll lived experience for the locked audience | Fun? Followable? Keep scrolling? Where do they bounce? |
+| **Genre Critic** | Genre contracts and trope payoff | Does this episode pay the genre bill? |
+| **Plot / Pacing Critic** | Arc, causality, hook chain, info timing | Dead mid-scroll? Hooks earned? |
+| **Character Critic** | Motive, face-acting, dialogue voice | Do I care who speaks? |
+| **Story Critic** | Completeness, cut rhetoric, no preachy caption ending | Is the story told in cuts, not lectures? |
+| **Platform / editorial** | Width, color, split upload, one-screen beats | Shipable on the locked canvas? |
+| **Webtoon art specialist** | Refs, gutters, heights, balloons, staging | Will Stage ④ stay consistent and readable? |
+
+### Evaluation perspectives (rubric summary)
+
 | Perspective | Focus | Typical questions |
 |---|---|---|
-| Reader | Understanding / fun / scroll | Is it fun? Followable? Want to keep scrolling? |
-| Platform / editorial | Specs / readability | Readable at locked width? Color + split upload feasible? |
-| Critic | Completeness / rhythm | Story complete? Cut division and size/gutter variety working? |
-| Webtoon art | Visual consistency | Character/location/staging refs, balloons, cut heights, vertical space intact? |
+| Target Reader | Understanding / fun / scroll | Is it fun? Followable? Want to keep scrolling? |
+| Genre / Plot / Character / Story | Narrative craft | Promise, pace, people, completeness |
+| Platform / editorial | Specs / readability | Readable at locked width? Split upload feasible? |
+| Webtoon art | Visual consistency | Refs, balloons, cut heights, vertical space intact? |
 
 ---
 
@@ -216,7 +263,7 @@ User confirms:
 2. Craft Checks — satisfactory?
 3. Reference Model Integrity — character states / location set states / stagings consistent with catalogs (`workflow/reference-models.md`)?
 4. Scene Continuity & Visual Consistency — continuity held (including seating); gutters/changes intentional?
-5. Persona feedback — residual risk acceptable?
+5. Persona feedback + Adjudication — residual risk acceptable for the **Target Reader**?
 6. **Story lock:** episode page/cut stories, balloon texts, captions, gutters, scroll hooks, staging cites, and illustration guides are now frozen for image generation.
 
 **Do not proceed to Stage ④ until G3 is approved.**

@@ -46,13 +46,8 @@ For each `episodes/{nnn}-{episode-slug}.md`:
    - “겹침 없음”은 강제하지 않되, 중복으로 인해 중요한 정보가 사라지지 않는가
    - 페이지 넘김 훅이 실제로 다음 페이지 내용을 자연스럽게 기대하게 만드는가
 
-6. Persona checks (전문가 시각):
-   - 아이 관점(독자 몰입/이해/넘김 욕구)
-   - 부모 관점(안전/가치/설교 과잉 없음)
-   - 평론가 관점(품질/협응/리듬)
-   - 일러스트 전문가 관점(시각 일관성/참조 모델 연결/장면 명확성)
-
-7. Record results into `evaluations/{nnn}-{episode-slug}.md`.
+6. Persona checks — run the [Default persona set](#persona-reference); lock **Target Child Reader** (age band from overview) first.
+7. Record results into `evaluations/{nnn}-{episode-slug}.md`, including per-persona critique and **Adjudication**.
 
 ---
 
@@ -139,25 +134,36 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 | 페이지 넘김 훅이 자연스러운 긴장/호기심으로 연결 | ✅ / ⚠️ / ❌ | {page} |
 
 ## 6. Persona Checks
-### 아이 관점
+{필수 세트 전원 실행. 페르소나마다: Stance / Strengths / Defects(severity+High/Med/Low+fix) / Reader impact.}
+
+### Target Child Reader (아이·잠긴 연령대)
+- Who: {overview 연령대·읽기 맥락 — 혼자 / 읽어주기}
 - 재미도: {rating}
 - 이해도: {rating}
 - 페이지 넘기고 싶은가: {rating}
+- 혼란·공포·지루 구간: {…}
 - 피드백: {feedback}
 
-### 부모 관점
+### Caregiver / Parent (보호자·구매·읽어주기)
 - 가치/공유 의향: {rating}
-- 안전성: {rating}
+- 안전성(연령 적합성): {rating}
 - 설교 과잉 없음: {rating}
+- 읽어주기 리듬(소리 내어 읽기): {rating}
 - 피드백: {feedback}
 
-### 평론가 관점
+### Genre / Age Critic (그림책 장르·발달)
+- 연령대 약속 대비 밀도·어휘: {rating}
+- 장르/형식 기대(반복·누적·유머 등): {rating}
+- 피드백: {feedback}
+
+### Story Critic (평론·스토리)
 - 스토리 완결성: {rating}
-- 캐릭터 매력: {rating}
-- 텍스트–이미지 협응: {rating}
+- 캐릭터 매력·동기: {rating}
+- 텍스트–이미지 협응·리듬: {rating}
+- 교훈 강요 없이 의미가 남는가: {rating}
 - 피드백: {feedback}
 
-### 일러스트 전문가 관점
+### Illustration specialist (일러스트 전문가)
 - 참조 모델 일관성: {rating}
 - 장면 명확성(무엇이 보이는가): {rating}
 - 페이지 프레이밍 고정 준수: {rating}
@@ -170,28 +176,63 @@ For each `episodes/{nnn}-{episode-slug}.md`:
   - Key word emphasis: {어떤 단어/표현을 어떻게 강조하는지}
   - 8세+ 텍스트 많은 경우: {본문 패널/박스 분리 yes/no + 위치/크기}
 
-## 7. 수정 사항 (Design-First)
+### Educator / Librarian (선택 — overview가 교육·도서관 유통을 잠근 경우 필수)
+- 학습/정서 목표와의 정합: {rating}
+- 교실·도서관 읽어주기 적합성: {rating}
+- 피드백: {feedback}
+
+## 7. Adjudication
+{Apply 결정을 기록. 기본 동점 처리: **Target Child Reader**. High finding을 조용히 버리지 말 것.}
+
+| # | Finding (persona) | Severity | Conflict? | Apply? | Rationale (Target Child first) | 적용 위치 | Status |
+|---|-------------------|----------|-----------|--------|--------------------------------|-----------|--------|
+
+## 8. 수정 사항 (Design-First)
 | # | Finding | Severity | 적용 위치(Design 파일 / Stage④ YAML overlay 반영) | 개선안(무엇을 바꿀지) | Action Status |
 |---|---------|-----------|---------------------------|---------------------------|----------------|
 | 1 | {finding} | High/Med/Low | characters/... / locations/... / episodes/... | {proposed edit} | {todo/done} |
 | 2 | {finding} | ... | ... | ... | ... |
 
-## 8. Story Lock Readiness (G3 체크)
+## 9. Story Lock Readiness (G3 체크)
 - [ ] Reference Model Integrity: ✅/⚠️/❌ 모든 항목
 - [ ] Scene Continuity & Visual Consistency: ✅/⚠️/❌ 모든 항목
 - [ ] Illustration Guide Completeness: ✅/⚠️/❌ 모든 항목
 - [ ] Illustration Text Styling/Effects Guide: ✅/⚠️/❌ 모든 항목
 - [ ] Craft Checks: ✅/⚠️/❌ 모든 항목
+- [ ] Required personas + Adjudication: ✅/⚠️/❌
+- [ ] Target-child readiness: ✅/⚠️/❌
 ```
 
 ---
 
-### 3.3 Evaluation perspectives (use as check rubric)
+## Persona Reference
+
+Critics **advise**. Fill the Adjudication table and apply chosen fixes before G3. Default tie-break: **Target Child Reader** (age band in `overview.md`). Caregiver safety findings that are High generally outrank “funnier but unsafe” unless overview explicitly allows.
+
+### Default persona set (every episode evaluation)
+
+**Required:** Target Child Reader · Caregiver / Parent · Genre / Age Critic · Story Critic · Illustration specialist
+
+**Also required when:** overview locks school/library/education use → **Educator / Librarian**
+
+### Persona catalog
+
+| Persona | Focus | Typical questions |
+|---------|-------|-------------------|
+| **Target Child Reader** | 잠긴 연령 아이의 이해·재미·넘김 욕구 | 재밌나? 따라가나? 다음 장이 궁금한가? |
+| **Caregiver / Parent** | 안전·가치·설교·읽어주기 | 같이 읽고 싶은가? 과한 공포/설교인가? |
+| **Genre / Age Critic** | 연령·형식 계약 | 이 나이 그림책으로 밀도/어휘가 맞는가? |
+| **Story Critic** | 완결·캐릭터·텍스트–이미지 협응 | 이야기와 그림이 한 호흡인가? |
+| **Illustration specialist** | 참조 일관성·장면 가시성·텍스트 오버레이 | Stage ④에서 깨지지 않는가? |
+| **Educator / Librarian** | 교육·공공 읽어주기 적합성 | 교실/도서관에서 쓸 수 있는가? |
+
+### Evaluation perspectives (rubric summary)
+
 | Perspective | Focus | Typical questions |
 |---|---|---|
-| 아이(독자) | 이해/즐거움 | 재밌는가? 따라갈 수 있는가? 넘기고 싶어지는가? |
-| 부모(구매자) | 안전/가치 | 안전한가? 공유하고 싶은가? 설교 과잉은 없는가? |
-| 평론가(품질) | 완성/협응 | 스토리 완결성, 텍스트-이미지 협응, 리듬 적합성 |
+| 아이(Target Child) | 이해/즐거움 | 재밌는가? 따라갈 수 있는가? 넘기고 싶어지는가? |
+| 부모(Caregiver) | 안전/가치 | 안전한가? 공유하고 싶은가? 설교 과잉은 없는가? |
+| Genre/Age + Story | 완성/연령 적합성 | 밀도·협응·리듬이 연령에 맞는가? |
 | 일러스트 전문가 | 시각 일관성 | 참조 모델 연결이 끊기지 않는가? 장면이 명확히 “보이는가”? |
 
 ---
@@ -217,7 +258,7 @@ User confirms:
 2. Craft Checks — satisfactory?
 3. Reference Model Integrity — 캐릭터 state / 장소 position-view-state가 catalogs와 모순 없이 정의되어 있는가?
 4. Scene Continuity & Visual Consistency — 연속 장면의 동일성이 유지되고, 변경은 필요한 곳에서만 발생하는가?
-5. Persona feedback items — 잔여 리스크가 허용 가능한 수준인가?
+5. Persona feedback + Adjudication — **Target Child** 기준으로 잔여 리스크가 허용 가능한가?
 6. **Story lock:** episode page stories, rendering text, text–image split, page-turn hooks, and illustration guides are now frozen for image generation.
 
 **Do not proceed to Stage ④ until G3 is approved.**
