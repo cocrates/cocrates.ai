@@ -65,6 +65,12 @@
   "homepage.youtube.draw": {
     "message": "Cara yang Benar untuk Menghasilkan Gambar dan Video dengan AI"
   },
+  "homepage.youtube.skill": {
+    "message": "Cara yang Benar Membuat Skill AI"
+  },
+  "homepage.youtube.chikaChikaTrex": {
+    "message": "Video Chika Chika T-Rex"
+  },
   "homepage.inflearn.banner.alt": {
     "message": "Kursus Inflearn: Cara Menggunakan AI dengan Benar — Cocrates"
   },
@@ -501,6 +507,102 @@
   "theme.contentVisibility.draftBanner.message": {
     "message": "Halaman ini adalah draf. Hanya akan terlihat di dev dan dikecualikan dari build produksi.",
     "description": "The draft content banner message"
+  },
+  "media.page.title": {
+    "message": "Media"
+  },
+  "media.page.description": {
+    "message": "Galeri video, buku gambar, dan media penjelasan struktur yang dibuat dengan Cocrates"
+  },
+  "media.page.lead": {
+    "message": "Video, buku gambar, dan penjelasan struktur yang dibuat dengan skill Cocrates."
+  },
+  "media.github": {
+    "message": "GitHub"
+  },
+  "media.section.chikaVideo.title": {
+    "message": "Video 'Chika Chika T-Rex'"
+  },
+  "media.section.chikaVideo.p1": {
+    "message": "Dengan AI yang digunakan dengan baik, membuat video tidak terlalu sulit."
+  },
+  "media.section.chikaVideo.p2": {
+    "message": "Video ini dibuat dengan skill {skill}: alur cerita dirancang per potongan, lalu beberapa klip dengan dialog, efek suara, dan BGM divalidasi, disetujui, dan dirakit."
+  },
+  "media.section.chikaVideo.p3": {
+    "message": "Tantangan sebenarnya adalah merancang apa yang ditampilkan dan dalam urutan apa. Dokumen desain dan berkas sumber tersedia di {githubLink}."
+  },
+  "media.video.chika.title": {
+    "message": "Chika Chika T-Rex"
+  },
+  "media.section.chikaBook.title": {
+    "message": "Buku Gambar 'Chika Chika T-Rex'"
+  },
+  "media.section.chikaBook.p1": {
+    "message": "Dengan AI yang digunakan dengan baik, menyusun buku gambar juga tidak terlalu sulit."
+  },
+  "media.section.chikaBook.p2": {
+    "message": "Buku gambar ini dibuat dengan skill {skill}. Cerita, dunia, karakter, dan tema dirancang per halaman, lalu divalidasi dan disetujui sambil menjaga konsistensi alur keseluruhan."
+  },
+  "media.section.chikaBook.p3": {
+    "message": "Dokumen desain dan berkas sumber tersedia di {githubLink}."
+  },
+  "media.picturebook.chika.altPrefix": {
+    "message": "Halaman Chika Chika T-Rex"
+  },
+  "media.section.brushHero.title": {
+    "message": "Buku Gambar 'Pahlawan Kecil Negeri Gigi'"
+  },
+  "media.section.brushHero.p1": {
+    "message": "Buku gambar sikat gigi yang dibuat dengan skill {skill}, dibentuk melalui desain, validasi, dan persetujuan per halaman agar koheren dan mengalir. Dokumen desain dan berkas sumber tersedia di {githubLink}."
+  },
+  "media.picturebook.brushHero.altPrefix": {
+    "message": "Halaman Pahlawan Kecil Negeri Gigi"
+  },
+  "media.section.jsondb.title": {
+    "message": "Penjelasan Struktur jsondb"
+  },
+  "media.section.jsondb.p1": {
+    "message": "Media yang menjelaskan struktur pemrosesan paralel permintaan bersamaan jsondb. Diagram dibuat dengan skill {diagramSkill} (generasi Excalidraw), gambar penjelasan dengan skill {imageSkill} (model Google Nano Banana), dan video penjelasan dengan skill {videoSkill} (model Google Omni). Berkas sumber tersedia di {githubLink}."
+  },
+  "media.jsondb.diagram": {
+    "message": "Diagram"
+  },
+  "media.jsondb.image": {
+    "message": "Gambar"
+  },
+  "media.jsondb.video": {
+    "message": "Video"
+  },
+  "media.jsondb.diagram.alt": {
+    "message": "struktur jsondb"
+  },
+  "media.jsondb.diagram.caption": {
+    "message": "struktur jsondb"
+  },
+  "media.jsondb.image.alt": {
+    "message": "Gambar yang menjelaskan struktur jsondb"
+  },
+  "media.jsondb.image.caption": {
+    "message": "Gambar yang menjelaskan struktur jsondb"
+  },
+  "media.jsondb.video.caption": {
+    "message": "Video yang menjelaskan struktur jsondb"
+  },
+  "media.video.unsupported": {
+    "message": "Browser Anda tidak mendukung tag video."
+  },
+  "picturebook.prev": {
+    "message": "← Sebelumnya"
+  },
+  "picturebook.next": {
+    "message": "Berikutnya →"
+  },
+  "picturebook.prev.aria": {
+    "message": "Halaman sebelumnya"
+  },
+  "picturebook.next.aria": {
+    "message": "Halaman berikutnya"
   },
   "theme.docs.DocCard.categoryDescription.plurals": {
     "message": "1 item|{count} item",

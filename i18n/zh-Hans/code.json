@@ -65,6 +65,12 @@
   "homepage.youtube.draw": {
     "message": "用 AI 正确生成图像与视频的方法"
   },
+  "homepage.youtube.skill": {
+    "message": "创建 AI 技能的正确方法"
+  },
+  "homepage.youtube.chikaChikaTrex": {
+    "message": "刷刷刷霸王龙视频"
+  },
   "homepage.inflearn.banner.alt": {
     "message": "Inflearn 课程：正确使用 AI 的方法 — Cocrates"
   },
@@ -501,6 +507,102 @@
   "theme.contentVisibility.draftBanner.message": {
     "message": "此页面为草稿，仅在开发环境可见，不会包含在生产构建中。",
     "description": "The draft content banner message"
+  },
+  "media.page.title": {
+    "message": "媒体"
+  },
+  "media.page.description": {
+    "message": "使用 Cocrates 制作的视频、绘本与结构说明媒体画廊"
+  },
+  "media.page.lead": {
+    "message": "使用 Cocrates 技能制作的视频、绘本与结构说明媒体。"
+  },
+  "media.github": {
+    "message": "GitHub"
+  },
+  "media.section.chikaVideo.title": {
+    "message": "《刷刷刷霸王龙》视频"
+  },
+  "media.section.chikaVideo.p1": {
+    "message": "善用 AI，制作视频并不难。"
+  },
+  "media.section.chikaVideo.p2": {
+    "message": "本视频使用 {skill} 技能制作：按故事节拍逐镜头设计，再生成包含对白、音效和 BGM 的多个片段，经校验与批准后组装完成。"
+  },
+  "media.section.chikaVideo.p3": {
+    "message": "真正的难点在于设计“展示什么、以什么顺序展示”。设计文档与原始文件可在 {githubLink} 查看。"
+  },
+  "media.video.chika.title": {
+    "message": "刷刷刷霸王龙"
+  },
+  "media.section.chikaBook.title": {
+    "message": "《刷刷刷霸王龙》绘本"
+  },
+  "media.section.chikaBook.p1": {
+    "message": "善用 AI，绘本结构也并不难。"
+  },
+  "media.section.chikaBook.p2": {
+    "message": "本绘本使用 {skill} 技能创作。按页设计故事、世界观、角色与主题，经校验与批准后，在保持整体一致性的同时完成各页。"
+  },
+  "media.section.chikaBook.p3": {
+    "message": "设计文档与原始文件可在 {githubLink} 查看。"
+  },
+  "media.picturebook.chika.altPrefix": {
+    "message": "刷刷刷霸王龙页面"
+  },
+  "media.section.brushHero.title": {
+    "message": "《牙齿王国的小英雄》绘本"
+  },
+  "media.section.brushHero.p1": {
+    "message": "使用 {skill} 技能制作的刷牙主题绘本，通过按页设计、校验与批准，兼顾完整性与叙事连贯。设计文档与原始文件可在 {githubLink} 查看。"
+  },
+  "media.picturebook.brushHero.altPrefix": {
+    "message": "牙齿王国的小英雄页面"
+  },
+  "media.section.jsondb.title": {
+    "message": "jsondb 结构说明"
+  },
+  "media.section.jsondb.p1": {
+    "message": "说明 jsondb 并发请求并行处理结构的媒体。结构图使用 {diagramSkill} 技能（Excalidraw 生成），说明图片使用 {imageSkill} 技能（Google Nano Banana 模型），说明视频使用 {videoSkill} 技能（Google Omni 模型）制作。原始文件可在 {githubLink} 查看。"
+  },
+  "media.jsondb.diagram": {
+    "message": "图表"
+  },
+  "media.jsondb.image": {
+    "message": "图片"
+  },
+  "media.jsondb.video": {
+    "message": "视频"
+  },
+  "media.jsondb.diagram.alt": {
+    "message": "jsondb 结构"
+  },
+  "media.jsondb.diagram.caption": {
+    "message": "jsondb 结构"
+  },
+  "media.jsondb.image.alt": {
+    "message": "说明 jsondb 结构的图片"
+  },
+  "media.jsondb.image.caption": {
+    "message": "说明 jsondb 结构的图片"
+  },
+  "media.jsondb.video.caption": {
+    "message": "说明 jsondb 结构的视频"
+  },
+  "media.video.unsupported": {
+    "message": "您的浏览器不支持 video 标签。"
+  },
+  "picturebook.prev": {
+    "message": "← 上一页"
+  },
+  "picturebook.next": {
+    "message": "下一页 →"
+  },
+  "picturebook.prev.aria": {
+    "message": "上一页"
+  },
+  "picturebook.next.aria": {
+    "message": "下一页"
   },
   "theme.docs.DocCard.categoryDescription.plurals": {
     "message": "1 项|{count} 项",

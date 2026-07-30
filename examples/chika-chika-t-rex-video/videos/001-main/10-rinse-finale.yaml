@@ -1,0 +1,52 @@
+title: Clip 10 — 물로 입안을 헹궈라!
+message: |
+  승리의 여운을 받아 마무리 동작. 칫솔 검을 크게 휘둘러 물/거품 소용돌이로
+  몬스터를 휩쓸어버림. 성이 완전히 정화. 클립 끝에서 깨끗해진 성이
+  반짝이며 다음 클립(왕국 회복/축제)으로 연결.
+
+design: |
+  단일 연속 샷. 참조 이미지를 첫 프레임으로 사용.
+  시작: 이전 클립에서 칫솔 검을 든 자세가 이어져 휘두르는 동작으로 전환.
+  모션: 티라노가 칫솔 검을 크게 휘두름. 물/거품 소용돌이가 몬스터를 감쌈.
+  몬스터가 허둥대며 휩쓸려감. 성이 반짝이며 완전히 정화됨.
+  클립 끝: 소용돌이가 가라앉고 깨끗해진 성이 반짝임 — 다음 클립(축제/왕국 회복)의
+  밝은 분위기를 준비.
+  오디오: 주인공(티라노) "자, 마무리! 물로 입안을 헹궈라~!" 당당하고 경쾌한 톤.
+  충균 몬스터 "아아아악! 휩쓸려간다!" 놀라고 당황한 코믹 톤.
+  물/거품 소용돌이 효과음.
+  BGM: 승리 테마에서 클라이맥스 해소로 전환. 물결치는 듯한 사운드.
+  클립 끝에서 밝고 따뜻한 축제 분위기로 전환 준비. 8초, 16:9.
+
+# --- cocrates-google-genai ---
+type: video
+model: gemini-omni-flash-preview
+params:
+  prompt: |
+    In a single continuous shot, using the provided image as the first frame.
+    The T-rex's sword-raising pose from the previous clip flows directly into
+    this sweeping motion.
+    <FIRST_FRAME> A cute green T-rex makes a big sweeping motion with a blue
+    toothbrush-sword, creating a swirling vortex of water bubbles and foam.
+    A tiny purple one-eyed monster gets caught in the foam whirlwind, flailing
+    its little arms with a comical panicked expression. The castle behind is
+    completely clean and gleaming brightly.
+    At the end: the whirlwind settles and the sparkling clean castle shines
+    brightly — preparing the bright celebration mood for the next clip.
+    Sound sequence:
+    1) A young Korean boy's voice (around 5-6 years old), bright and playful
+    natural child tone, speaks in Korean saying "자, 마무리! 물로 입안을
+    행궈라~!" with commanding cheerful tone.
+    2) A comical cartoon villain voice in Korean, slightly deep and raspy,
+    over-the-top theatrical tone, says "아아아악! 휩쓸려간다!" with panicked
+    comical tone.
+    Swirling water and bubble sound effects.
+    Background music: transitions from victory theme to climactic resolution.
+    Flowing water-like musical sounds. At the end, the music prepares to shift
+    to a bright warm celebration mood.
+  references:
+    - path: "../../images/clips/001-main/10-rinse-finale.png"
+      type: image
+  durationSeconds: 8
+  aspectRatio: "16:9"
+  seed: null
+output: "./10-rinse-finale.mp4"

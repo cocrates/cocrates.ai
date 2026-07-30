@@ -1,0 +1,36 @@
+title: 치카치카 왕국 / 칫솔숲-입구 / 성-전망 (오염) 장소 참조 이미지
+message: |
+  치카치카 왕국의 입구. 칫솔 나무 숲을 지나 이빨 모양 성으로 이어지는 길.
+  하지만 성과 주변이 충균 몬스터에게 더럽혀져 보라색과 검은색으로 얼룩짐.
+
+design: |
+  장소 참조 이미지 — 치카치카 왕국 입구, 칫솔 숲에서 이빨 성이 보이는 뷰. 오염 상태.
+  - 칫솔 모양의 나무들이 늘어선 길 (나무 줄기는 칫솔 손잡이, 잎은 칫솔모)
+  - 바닥은 부드러운 치약 거품으로 덮여 있음
+  - 멀리 거대한 이빨 모양의 하얀 성 (여러 개의 이빨 탑)
+  - 성과 주변이 보라색/검은색 끈적한 오염 물질로 더럽혀짐
+  - 하늘이 부분적으로 흐림
+  - 반짝이는 효과가 사라지고 어두운 느낌
+  - 수채화 디지털 페인팅, 밝은 파스텔 톤 (오염 제외)
+  - 사람/캐릭터 없음
+  - 4:3 가로, 1K
+
+# --- cocrates-google-genai ---
+type: image
+model: gemini-3.1-flash-image
+params:
+  prompt: |
+    A fantasy kingdom background reference for a children's picture book.
+    A path through a whimsical forest where trees look like giant colorful
+    toothbrushes with bristle-like leaves. The ground is covered in soft
+    foamy toothpaste. In the distance stands a majestic white castle shaped
+    like a giant molar tooth with multiple tooth-shaped towers. However, the
+    castle and surrounding area are heavily polluted with sticky purple and
+    black stains creeping over the white surfaces. The sky is partly cloudy
+    and dim. The once-bright kingdom looks tarnished and corrupted. No
+    characters. Watercolor digital painting style, soft pastel tones.
+    Wide shot, 4:3 landscape.
+  size: 1K
+  aspectRatio: "4:3"
+  seed: null
+output: "./치카치카-왕국-칫솔숲-입구-성-전망-오염.png"

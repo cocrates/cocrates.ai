@@ -1,0 +1,50 @@
+title: 치카치카 대모험 / Page 01
+message: |
+  아이 전용 화장실. 꼬마가 칫솔을 들고 양치를 하기 싫어한다. 그런데 갑자기
+  반짝! 티라노사우루스로 변신한다. 놀라면서도 신나는 순간.
+
+design: |
+  그림책 페이지. 세로형 3:4.
+  - 장소: 아이 전용 화장실 세면대 앞 (참조: 현실-화장실-세면대-앞-거울-뷰.png)
+  - 분할 장면 (좌우):
+    왼쪽: 인간 꼬마 (state: base) — 노란 잠옷, 시무룩, 칫솔을 손에 듦 (참조: 티라노.png)
+    오른쪽: 티라노 (state: t-rex) — 변신 직후, 놀란 + 신난 표정 (참조: 티라노-t-rex.png)
+    중간에 반짝이는 변신 효과 (별빛/치약 거품)
+  - 포근한 화장실 조명, 따뜻한 분위기
+  - 수채화 디지털 페인팅, 부드러운 파스텔 톤
+  - 텍스트:
+    (내레이션, 작게, 왼쪽 상단) "앙! 양치하기 싫어!"
+    (내레이션, 작게, 중간) "그런데 갑자기 — 반짝!"
+    (대사, 가장 크게+굵게+글로우, 오른쪽) "크아아아! 치카치카 티라노다!"
+
+# --- cocrates-google-genai ---
+type: image
+model: gemini-3.1-flash-image
+params:
+  prompt: |
+    Children's picture book page. Portrait 3:4. Split scene.
+    SETTING: Using Image 1 as reference — a child-friendly bathroom with a
+    low sink, wall mirror, step stool, cute towel. Warm yellow light.
+    LEFT SIDE: Using Image 2 as reference — a cute 5-year-old boy in yellow
+    pajamas, black hair with bangs, big dark eyes with long lashes, looking
+    reluctant, holding a blue toothbrush. Right side: Using Image 3 as
+    reference — a cute green T-rex with big dark eyes, black forehead crest,
+    yellow belly/tail markings, short arms, holding a blue toothbrush-sword,
+    toothpaste crown on head, looking surprised and excited.
+    In the middle between them: sparkling magical transformation effect with
+    shiny particles and toothpaste bubbles. Continuous bathroom background
+    spanning both sides (sink and mirror in the center background).
+    Watercolor digital painting, soft pastel tones.
+    TEXT OVERLAY (render all lines exactly):
+    1. Top-left, small narration: "앙! 양치하기 싫어!"
+    2. Center, small narration (between the two figures): "그런데 갑자기 — 반짝!"
+    3. Bottom-right, largest+bold+glow, dialogue: "크아아아! 치카치카 티라노다!"
+    Do not obscure faces. Place text in areas with clear background.
+  images:
+    - path: "./locations/현실-화장실-세면대-앞-거울-뷰.png"
+    - path: "./characters/티라노.png"
+    - path: "./characters/티라노-t-rex.png"
+  size: 1K
+  aspectRatio: "3:4"
+  seed: null
+output: "./01.png"

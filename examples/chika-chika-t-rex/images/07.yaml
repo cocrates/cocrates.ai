@@ -1,0 +1,52 @@
+title: 치카치카 대모험 / Page 07
+message: |
+  마무리 동작! 티라노가 칫솔 검을 휘둘러 치약 거품을 쓸어내듯 광선을 보낸다.
+  몬스터가 거품 소용돌이에 휩쓸려 사라진다. 성이 완전히 깨끗해진다.
+
+design: |
+  그림책 페이지. 세로형 3:4.
+  - 장소: 이빨 성 앞마당 — 이빨성-앞마당 / 성문-뷰 (회복 상태)
+    (참조: 치카치카-왕국-이빨성-앞마당-성문-뷰-회복.png)
+  - 티라노 (state: t-rex) — 왼쪽, 칫솔 검을 크게 휘두르는 마무리 동작
+    (참조: 티라노-t-rex.png)
+  - 충균 몬스터 (state: small) — 거품 소용돌이에 휩쓸려 허둥대는 모습
+    (참조: 충균-몬스터-small.png)
+  - 물/거품이 휘몰아치는 역동적인 마무리 장면
+  - 성이 완전히 깨끗해짐
+  - 수채화 디지털 페인팅
+  - 텍스트:
+    (대사, 왼쪽, 티라노, 굵게) "자, 마무리! 물로 입안을 헹궈라~!"
+    (대사, 오른쪽, 몬스터, 굵게+글로우, 점점 작아지게) "아아아악! 휩쓸려간다!"
+    (괄호, 몬스터 옆, 아주 작게) "(사라짐)"
+
+# --- cocrates-google-genai ---
+type: image
+model: gemini-3.1-flash-image
+params:
+  prompt: |
+    Children's picture book page. Portrait 3:4. Dynamic finish scene.
+    SETTING: Using Image 1 as reference — the front courtyard of Tooth Castle
+    almost completely clean and sparkling. Bright sunlight, clear sky.
+    CHARACTERS: Using Image 2 as reference — the cute green T-rex hero at
+    left, swinging the toothbrush-sword in a wide finishing arc, from which
+    a swirling vortex of white and blue toothpaste foam and water spirals
+    across the scene. Using Image 3 as reference — the tiny purple cavity
+    monster caught in the foamy vortex, flailing its short arms, being swept
+    away toward the right edge.
+    Swirling motion, bubbles, water splash effects.
+    Watercolor digital painting, soft pastel tones.
+    TEXT OVERLAY:
+    1. Left side, dialogue by T-rex, bold rounded font:
+    "자, 마무리! 물로 입안을 헹궈라~!"
+    2. Right side, near the swirling monster, bold+glow font that appears to
+    shrink at the end: "아아아악! 휩쓸려간다!"
+    3. Next to monster, very tiny font in parentheses: "(사라짐)"
+    Do not obscure character faces.
+  images:
+    - path: "./locations/치카치카-왕국-이빨성-앞마당-성문-뷰-회복.png"
+    - path: "./characters/티라노-t-rex.png"
+    - path: "./characters/충균-몬스터-small.png"
+  size: 1K
+  aspectRatio: "3:4"
+  seed: null
+output: "./07.png"

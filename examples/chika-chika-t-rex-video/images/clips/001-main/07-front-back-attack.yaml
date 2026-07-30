@@ -1,0 +1,38 @@
+title: Clip 07 — 앞뒤로도 치카치카!
+message: |
+  두 번째 공격! 칫솔 검을 앞뒤로 휘두르며 몬스터를 감싸 문지른다.
+  몬스터가 점점 작아지기 시작한다. 액션이 먹히고 있다!
+
+design: |
+  영상 클립 키 이미지. 16:9 와이드.
+  - 장소: 이빨 성 앞마당 (오염이 조금 덜해짐).
+  - 티라노 (t-rex 상태): 칫솔 검을 좌우/앞뒤로 흔드는 동작. 칫솔 검의 움직임 궤적이
+    흔들림선으로 표현됨.
+  - 충균 몬스터 (big에서 small로 축소 중): 이전보다 약간 작아짐. 움츠린 표정.
+    "히이이!" 하는 당황한 표정.
+  - 수채화 디지털 페인팅, 파스텔 톤
+  - 참조: 티라노-t-rex.png, 충균-몬스터-big.png, 충균-몬스터-small.png
+
+# --- cocrates-google-genai ---
+type: image
+model: gemini-3.1-flash-image
+params:
+  prompt: |
+    Widescreen 16:9 action scene for a children's picture book video.
+    SETTING: Courtyard in front of the castle — the purple stains are slightly
+    reduced.
+    ACTION: Using Images 1 and 2 as reference.
+    Image 1 (T-rex): The cute green T-rex swings the blue toothbrush-sword
+    side to side in a scrubbing motion. Motion lines show the sweeping action.
+    Image 2 (Monster): The purple one-eyed monster is now visibly smaller than
+    before (between big and small state), cowering with a panicked expression
+    as if saying "Stop!"
+    The monster's size reduction is visually clear.
+    Watercolor digital painting, warm pastel tones. No text.
+  images:
+    - path: "../../../images/references/characters/티라노-t-rex.png"
+    - path: "../../../images/references/characters/충균-몬스터-big.png"
+  size: 1K
+  aspectRatio: "16:9"
+  seed: null
+output: "./07-front-back-attack.png"

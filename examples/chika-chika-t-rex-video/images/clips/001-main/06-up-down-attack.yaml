@@ -1,0 +1,38 @@
+title: Clip 06 — 위아래로 치카치카!
+message: |
+  티라노의 첫 공격! 칫솔 검을 위아래로 휘두르며 충균 몬스터를 향해 돌진한다.
+  칫솔 검에서 하얀 치약 거품 광선이 나와 몬스터를 때린다. 몬스터가 아파하며 움찔.
+
+design: |
+  영상 클립 키 이미지. 16:9 와이드.
+  - 장소: 이빨 성 앞마당 (오염 상태).
+  - 티라노 (t-rex 상태): 칫솔 검을 위에서 아래로 휘두르는 역동적인 액션 포즈.
+    칫솔 검에서 하얀 치약 거품 광선/에너지가 발사됨.
+  - 충균 몬스터 (big 상태): 광선을 맞고 움찔하는 표정. 놀라고 아파하는 코믹한 표정.
+  - 속도감 있는 구도, 액션 궤적 표현
+  - 수채화 디지털 페인팅, 파스텔 톤
+  - 참조: 티라노-t-rex.png, 충균-몬스터-big.png
+
+# --- cocrates-google-genai ---
+type: image
+model: gemini-3.1-flash-image
+params:
+  prompt: |
+    Widescreen 16:9 dynamic action scene for a children's picture book video.
+    SETTING: Courtyard in front of the castle in Chika-Chika Kingdom (slightly
+    polluted state).
+    ACTION: Using Images 1 and 2 as reference.
+    Image 1 (T-rex): The cute green T-rex in a dynamic action pose, swinging
+    the blue toothbrush-sword in a downward motion. A white toothpaste-foam
+    energy beam shoots from the sword.
+    Image 2 (Cavity Monster): The big purple round one-eyed monster gets hit by
+    the foam beam and flinches, making a comical surprised/ouch expression.
+    Speed lines and motion trails show the action.
+    Watercolor digital painting, warm pastel tones. No text.
+  images:
+    - path: "../../../images/references/characters/티라노-t-rex.png"
+    - path: "../../../images/references/characters/충균-몬스터-big.png"
+  size: 1K
+  aspectRatio: "16:9"
+  seed: null
+output: "./06-up-down-attack.png"

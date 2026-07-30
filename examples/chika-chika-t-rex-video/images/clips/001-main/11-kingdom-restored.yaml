@@ -1,0 +1,33 @@
+title: Clip 11 — 반짝이는 왕국
+message: |
+  치카치카 왕국이 다시 반짝반짝 빛난다. 이빨 성이 새하얗게 정화되었고,
+  하늘에는 무지개가 떴다. 티라노가 성 앞에서 미소 짓는다.
+  모두가 기뻐하는 축제 분위기.
+
+design: |
+  영상 클립 키 이미지. 16:9 와이드.
+  - 장소: 이빨 성 앞마당 (완전 회복, 반짝임). 하늘에 무지개. 곳곳에 작은 반짝임.
+  - 티라노 (t-rex 상태): 행복한 미소, 칫솔 검을 하늘로 들어 올림. 기쁜 표정.
+  - 전체적으로 밝고 따뜻한 축제 분위기
+  - 수채화 디지털 페인팅, 따뜻한 파스텔 톤
+  - 참조: 티라노-t-rex.png
+
+# --- cocrates-google-genai ---
+type: image
+model: gemini-3.1-flash-image
+params:
+  prompt: |
+    Widescreen 16:9 celebration scene for a children's picture book video.
+    SETTING: Chika-Chika Kingdom — the molar-tooth castle is now brilliantly
+    white, clean, and sparkling. A beautiful rainbow arcs across the clear
+    blue sky. Small sparkles and glowing particles float everywhere.
+    CHARACTER: Using Image 1 as reference — the cute green T-rex stands in
+    front of the castle, raising the blue toothbrush-sword high with a joyful,
+    happy smile. Pure celebration and triumph atmosphere.
+    Watercolor digital painting, warm bright pastel tones. No text.
+  images:
+    - path: "../../../images/references/characters/티라노-t-rex.png"
+  size: 1K
+  aspectRatio: "16:9"
+  seed: null
+output: "./11-kingdom-restored.png"

@@ -1,0 +1,34 @@
+title: Clip 12 — 내일도 치카치카 티라노!
+message: |
+  현실 화장실로 돌아온 꼬마. 거울 속 자신의 이빨이 반짝반짝 빛난다.
+  아이가 환하게 웃으며 다음 양치질을 기약한다. 양치질이 더 이상 하기 싫은 일이
+  아니라 즐거운 모험이 되었음을 암시. 따뜻하고 포근한 마무리.
+
+design: |
+  영상 클립 키 이미지. 16:9 와이드.
+  - 장소: 현실-화장실. 세면대 앞, 벽걸이 거울. 따뜻한 노란 실내등. 포근한 분위기.
+  - 꼬마 (base 상태): 거울을 보며 환하게 웃고 있음. 칫솔을 손에 들고 있음.
+  - 거울 속 아이의 이빨이 살짝 반짝이는 효과
+  - 수채화 디지털 페인팅, 따뜻하고 부드러운 파스텔 톤
+  - 참조: 티라노-base.png (인간 상태)
+
+# --- cocrates-google-genai ---
+type: image
+model: gemini-3.1-flash-image
+params:
+  prompt: |
+    Widescreen 16:9 warm ending scene for a children's picture book video.
+    SETTING: A cozy child's bathroom. Low sink at child height, wall mirror
+    above. Warm yellow light, soft and cozy atmosphere.
+    CHARACTER: Using Image 1 as reference — a cute 5-year-old boy with short
+    black hair and bangs, big round dark eyes with long eyelashes, wearing soft
+    yellow pajamas. He stands at the sink looking at his reflection in the
+    mirror with a big happy smile, holding a blue toothbrush in one hand.
+    In the mirror, his teeth have a subtle sparkle effect.
+    Watercolor digital painting, warm soft pastel tones. No text.
+  images:
+    - path: "../../../images/references/characters/티라노.png"
+  size: 1K
+  aspectRatio: "16:9"
+  seed: null
+output: "./12-back-to-reality.png"

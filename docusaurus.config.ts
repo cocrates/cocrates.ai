@@ -102,6 +102,11 @@ const config: Config = {
           label: '소설',
         },
         {
+          to: '/media',
+          label: '미디어',
+          position: 'left',
+        },
+        {
           type: 'localeDropdown',
           position: 'right',
         },

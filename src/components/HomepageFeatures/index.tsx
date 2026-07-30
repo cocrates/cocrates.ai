@@ -291,6 +291,22 @@ const YouTubeList: YouTubeItem[] = [
     image: '/img/youtube/05-draw-with-ai.png',
     href: 'https://youtu.be/C0I8C4a48OU',
   },
+  {
+    title: translate({
+      id: 'homepage.youtube.skill',
+      message: 'AI 스킬을 만드는 올바른 방법',
+    }),
+    image: '/img/youtube/06-skill-with-ai.png',
+    href: 'https://youtu.be/kYI9KO4eF9w',
+  },
+  {
+    title: translate({
+      id: 'homepage.youtube.chikaChikaTrex',
+      message: '치카치카 티라노 동영상',
+    }),
+    image: '/img/youtube/chika-chika-t-rex.png',
+    href: 'https://youtu.be/eIULw7jPa1E',
+  },
 ];
 
 function InflearnBanner() {

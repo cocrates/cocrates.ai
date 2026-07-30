@@ -1,0 +1,32 @@
+title: Clip 05 — 칫솔 검, 준비 완료!
+message: |
+  티라노가 칫솔 검을 꺼내 든다. 빛나는 칫솔 검이 등장하며 결의에 찬 표정.
+  승리를 확신하는 자신감. 액션의 시작을 알린다.
+
+design: |
+  영상 클립 키 이미지. 16:9 와이드.
+  - 장소: 이빨 성 앞마당 (오염 상태). 성이 보라색으로 더럽혀짐.
+  - 티라노 (t-rex 상태): 칫솔 검을 오른손(짧은 팔)에 높이 치켜들고 있는 당당한 포즈.
+    칫솔 검이 반짝이는 하이라이트 효과. 자신만만한 표정. 결의에 찬 눈빛.
+  - 수채화 디지털 페인팅, 파스텔 톤
+  - 참조: 티라노-t-rex.png
+
+# --- cocrates-google-genai ---
+type: image
+model: gemini-3.1-flash-image
+params:
+  prompt: |
+    Widescreen 16:9 action scene for a children's picture book video.
+    SETTING: Courtyard in front of the molar-tooth castle in Chika-Chika
+    Kingdom. The castle is slightly stained with purple.
+    CHARACTER: Using Image 1 as reference — the cute green T-rex stands in a
+    heroic pose, raising a blue toothbrush-sword high with one short arm.
+    The toothbrush-sword sparkles with a shiny highlight effect. Confident,
+    determined expression, looking ready for battle.
+    Watercolor digital painting, warm pastel tones. No text.
+  images:
+    - path: "../../../images/references/characters/티라노-t-rex.png"
+  size: 1K
+  aspectRatio: "16:9"
+  seed: null
+output: "./05-toothbrush-sword.png"

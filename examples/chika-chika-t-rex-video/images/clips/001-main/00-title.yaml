@@ -1,0 +1,39 @@
+title: Clip 00 — Title
+message: |
+  영상의 시작. 치카치카 왕국을 배경으로 타이틀을 보여준다. 반짝이는 이빨 성과
+  칫솔 숲, 그리고 티라노가 당당히 칫솔 검을 들고 서 있다. 모험의 시작을 예고하는
+  기대감과 호기심 유발.
+
+design: |
+  영상 타이틀 카드. 16:9 와이드.
+  - 배경: 치카치카 왕국 — 칫솔 숲 너머로 반짝이는 하얀 이빨 성 (깨끗한 상태).
+    맑은 하늘, 따뜻한 햇살.
+  - 티라노 (t-rex 상태): 초록 몸, 하얀 배, 커다란 검은 눈+속눈썹, 이마 검정 깃,
+    노란 배 무늬. 오른손에 파란 칫솔 검을 하늘 높이 치켜듦. 당당하고英雄的인 포즈.
+  - 로우 앵글, 역동적인 구도
+  - 수채화 디지털 페인팅, 따뜻하고 밝은 파스텔 톤
+  - 텍스트: "치카치카 티라노"를 중앙에 크고 굵게, 하얀색 글로우 효과
+  - 참조: 티라노-t-rex.png (캐릭터 외형), 치카치카-왕국 (배경)
+
+# --- cocrates-google-genai ---
+type: image
+model: gemini-3.1-flash-image
+params:
+  prompt: |
+    Widescreen 16:9 title card for a children's picture book video.
+    BACKGROUND: A fantasy kingdom called Chika-Chika Kingdom seen from a path
+    through a forest of giant colorful toothbrush trees, leading to a majestic
+    white castle shaped like a giant molar tooth sparkling under a bright sky.
+    Watercolor digital painting style, warm pastel tones, bright and cheerful.
+    CHARACTER: Using Image 1 as reference — the cute cartoon T-rex with bright
+    green skin, white belly, large dark eyes with long eyelashes, small black
+    crest on forehead, yellow markings on belly and tail. Short arms holding a
+    blue toothbrush-sword high up. Low angle heroic pose, confident expression.
+    TEXT OVERLAY: The title "치카치카 티라노" centered in large bold rounded
+    white font with a soft glow outline. Widescreen 16:9 format.
+  images:
+    - path: "../../../images/references/characters/티라노-t-rex.png"
+  size: 1K
+  aspectRatio: "16:9"
+  seed: null
+output: "./00-title.png"

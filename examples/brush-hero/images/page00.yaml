@@ -1,0 +1,60 @@
+title: page00 — 표지 (이빨나라의 작은 영웅)
+message: |
+  표지가 전하는 이야기: 이 책은 5살 소년 훈이 이빨나라에서 설탕 괴물들과 싸워
+  이기는 모험 이야기다. 훈이는 당당하고 용감한 작은 영웅이고, 귀여운 하얀이가
+  함께하며, 아름다운 이빨 광장이 모험의 배경임을 보여준다.
+  표지를 보는 아이가 "와, 재미있겠다!" 하고 책을 집게 만든다.
+
+design: |
+  참조 이미지 (params.images 순서):
+  1. hun-adventure.png — 훈이 모험가 복장 유지 (파란 튜닉, 황금 방패 문양, 갈색 부츠)
+  2. hayani.png — 하얀이 외형 유지 (동글동글 치아 캐릭터, 분홍 볼)
+  3. tooth-plaza-peaceful.png — 이빨 광장 배경 유지 (하얀 치아 성들, 파스텔 하늘)
+  4. hun-weapons.png — 훈이의 무기 장착 참조 (치카치카 방패)
+
+  장면: 훈이가 모험가 복장으로 당당히 서 있다. 오른쪽 어깨 위에 하얀이가
+  올라타 있다. 훈이는 오른손에 큰 칫솔(치카치카 방패)을 번쩍 들어올리고
+  왼손은 허리에 얹은 영웅적인 포즈. 배경은 밝고 신비로운 이빨 광장 —
+  하얀 치아 성들이 반짝이고 하늘은 파스텔 블루와 부드러운 오렌지 빛이 섞인
+  따뜻한 색감. 약간 로우 앵글 구도로 훈이가 더 영웅적으로 보이게 연출.
+  부드러운 디지털 페인팅 스타일, 파스텔 톤 팔레트, 둥글고 부드러운 윤곽선.
+
+  온페이지 텍스트 (한글):
+  - 상단 중앙, 가장 크고 굵게: "이빨나라의 작은 영웅" — 밝은 금색/흰색,
+    rounded friendly Korean font, 부드러운 글로우 효과
+  - 상단 제목 아래, 작게: "훈이의 모험" — 연한 파란색, 조금 작은 글씨
+  - 하단 중앙, 가장 작게: "글·그림 Cocrates" — 크레딧 영역
+
+  포맷: Flash, 1K, 4:3
+
+# --- cocrates-google-genai ---
+type: image
+model: gemini-3.1-flash-image
+params:
+  prompt: |
+    Using the provided reference images: Image 1 is the boy character (Hoon) in his adventure outfit — blue tunic with golden shield emblem on chest, brown boots. Image 2 is the cute tooth character (Hayani) — round white body, pink cheeks. Image 3 is the Tooth Kingdom plaza with white tooth-shaped buildings and bright pastel sky. Image 4 shows the boy holding a toothbrush weapon and toothpaste tube.
+
+    SCENE: Picture book COVER illustration. The boy from image 1 stands heroically in the center. On his right shoulder sits the tooth character from image 2. In his right hand, the boy triumphantly holds up a large toothbrush (as seen in image 4) like a hero's sword. His left hand rests on his hip. The background shows the beautiful Tooth Kingdom plaza from image 3 — white tooth-shaped buildings sparkle under a warm pastel sky blending soft blue and gentle orange hues. Slightly low-angle composition, making the boy look heroic and tall. Soft digital painting style, pastel color palette, round gentle outlines. Warm, inviting, and adventurous atmosphere.
+
+    TEXT OVERLAY — render these Korean texts directly into the image as part of the illustration:
+
+    1. Top-center, largest and boldest text: bold rounded Korean font, bright gold-white color with a soft warm glow, clearly the title:
+       "이빨나라의 작은 영웅"
+
+    2. Directly below the main title, smaller text in soft light blue rounded Korean font:
+       "훈이의 모험"
+
+    3. Bottom-center, small text in soft warm gray or light gold rounded Korean and English font:
+       "글·그림 Cocrates"
+
+    All text must be in Korean (Hangul). The text should feel like a real picture book cover — beautifully integrated into the composition. Title should be the most prominent visual element after the main character. Place text so it does not obscure the characters' faces. The overall layout should look like a finished children's picture book cover that makes a child want to open the book.
+  images:
+    - path: "./hun-adventure.png"
+    - path: "./hayani.png"
+    - path: "./tooth-plaza-peaceful.png"
+    - path: "./hun-weapons.png"
+  size: 1K
+  aspectRatio: "4:3"
+  seed: null
+
+output: "./page00.png"

@@ -1,0 +1,40 @@
+title: Clip 00 — Title
+message: |
+  영상의 시작. 치카치카 왕국 배경 위로 "치카치카 티라노" 타이틀이 페이드인.
+  따뜻하고 신나는 분위기. 모험의 시작을 예고. 클립 끝에서 화면이 부드럽게
+  페이드 아웃되며 다음 장면(현실 화장실)으로 넘어갈 준비.
+
+design: |
+  단일 연속 샷. 참조 이미지를 첫 프레임으로 사용.
+  모션: 타이틀 텍스트 "치카치카 티라노"가 중앙에 부드럽게 페이드인.
+  은은한 반짝임 효과. 약간의 카메라 슬로우 줌인.
+  클립 끝: 화면이 서서히 페이드 아웃(어두워짐) — 다음 장면으로 전환 준비.
+  오디오: 엄마 목소리 "치카치카 티라노". 경쾌하고 신나는 BGM 메인 테마(인트로).
+  BGM은 클립 끝에서 잔잔해지며 다음 클립의 분위기로 연결.
+  8초, 16:9.
+
+# --- cocrates-google-genai ---
+type: video
+model: gemini-omni-flash-preview
+params:
+  prompt: |
+    In a single continuous shot, using the provided image as the first frame.
+    <FIRST_FRAME> A fantasy kingdom with toothbrush forest and a white castle
+    shaped like a molar tooth. A cute green T-rex stands heroically holding a
+    blue toothbrush-sword. The title "치카치카 티라노" fades in softly at the
+    center with a gentle glow effect. Subtle sparkle particles float around.
+    Slow camera zoom in.
+    At the end, the scene slowly fades to dark (fade out) to transition to the
+    next scene.
+    Sound: A warm Korean female narrator voice, gentle motherly tone, speaks
+    clearly in Korean saying "치카치카 티라노" cheerfully.
+    Background music: cheerful upbeat main theme intro.
+    At the end, the music softens and becomes calmer to bridge to the next clip.
+    No other sounds.
+  references:
+    - path: "../../images/clips/001-main/00-title.png"
+      type: image
+  durationSeconds: 8
+  aspectRatio: "16:9"
+  seed: null
+output: "./00-title.mp4"

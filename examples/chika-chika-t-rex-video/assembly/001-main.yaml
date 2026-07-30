@@ -1,0 +1,57 @@
+# Assembly: 치카치카 티라노 — 13 clips → final mp4
+# Edit-spec per video-authoring/workflow/edit-spec.md
+# All transitions are baked into the video clip content.
+# Hard cuts (no transition) between all clips.
+
+output: ./치카치카-티라노.mp4
+width: 1280
+height: 720
+fps: 24
+
+clips:
+  # --- Part 1: 도입 (Clip 00~03) ---
+  - tracks:
+      - type: video
+        src: ../videos/001-main/00-title.mp4
+  - tracks:
+      - type: video
+        src: ../videos/001-main/01-dont-wanna-brush.mp4
+  - tracks:
+      - type: video
+        src: ../videos/001-main/02-transformation.mp4
+  - tracks:
+      - type: video
+        src: ../videos/001-main/03-dirty-kingdom.mp4
+
+  # --- Part 2: 갈등 (Clip 04~05) ---
+  - tracks:
+      - type: video
+        src: ../videos/001-main/04-monster-appears.mp4
+  - tracks:
+      - type: video
+        src: ../videos/001-main/05-toothbrush-sword.mp4
+
+  # --- Part 3: 액션 (Clip 06~08) ---
+  - tracks:
+      - type: video
+        src: ../videos/001-main/06-up-down-attack.mp4
+  - tracks:
+      - type: video
+        src: ../videos/001-main/07-front-back-attack.mp4
+  - tracks:
+      - type: video
+        src: ../videos/001-main/08-inside-scrub.mp4
+
+  # --- Part 4: 클라이맥스~해소 (Clip 09~12) ---
+  - tracks:
+      - type: video
+        src: ../videos/001-main/09-victory.mp4
+  - tracks:
+      - type: video
+        src: ../videos/001-main/10-rinse-finale.mp4
+  - tracks:
+      - type: video
+        src: ../videos/001-main/11-kingdom-restored.mp4
+  - tracks:
+      - type: video
+        src: ../videos/001-main/12-back-to-reality.mp4

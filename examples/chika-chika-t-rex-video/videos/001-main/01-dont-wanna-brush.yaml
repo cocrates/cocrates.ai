@@ -1,0 +1,48 @@
+title: Clip 01 — 양치하기 싫어!
+message: |
+  이전 클립에서 페이드 인되어 현실 화장실 장면으로 전환. 꼬마가 칫솔을 들고
+  심드렁한 표정. 양치질 싫다고 투정. 클립 끝에서 반짝임이 점점 커지며
+  다음 장면(변신)으로 자연스럽게 연결.
+
+design: |
+  단일 연속 샷. 참조 이미지를 첫 프레임으로 사용.
+  시작: 페이드 인으로 화장실 장면이 나타남 (이전 클립의 페이드 아웃과 연결).
+  모션: 꼬마가 칫솔을 들고 서 있음. 표정이 심드렁→약간 놀람으로 변화.
+  주변에 반짝이는 빛 파티클이 점점 퍼짐.
+  클립 끝: 반짝임이 화면 전체를 감싸며 폭발 직전의 긴장감 — 다음 클립(변신)으로
+  자연스럽게 전환.
+  오디오: 주인공(꼬마) "앙! 양치하기 싫어!" 투정 섞인 톤.
+  클립 끝에서 큰 반짝임 효과음으로 다음 장면(변신)을 예고.
+  BGM: 메인 테마의 잔잔한 피아노 변주로 시작, 점점 긴장감 상승.
+  클립 끝에서 BGM이 불안정한 사운드로 변하며 변신을 암시. 10초, 16:9.
+
+# --- cocrates-google-genai ---
+type: video
+model: gemini-omni-flash-preview
+params:
+  prompt: |
+    In a single continuous shot, using the provided image as the first frame.
+    The scene begins as a fade-in from darkness, transitioning from the previous
+    title card.
+    <FIRST_FRAME> A cozy child's bathroom with a cute 5-year-old boy in yellow
+    pajamas standing at a low sink, holding a blue toothbrush. He has black
+    hair with bangs, big dark eyes with long eyelashes. He makes a reluctant
+    pouty face, then his expression gradually shifts to slight surprise.
+    Sparkling light particles begin appearing around him, increasing in number
+    and intensity.
+    At the end: the sparkles fill the entire frame, building to a burst — this
+    leads directly into the transformation in the next clip.
+    Sound: A young Korean boy's voice (around 5-6 years old), bright and playful
+    natural child tone, speaks in Korean saying "앙! 양치하기 싫어!" with a
+    whiny reluctant tone. A big sparkling burst sound effect at the end
+    anticipates the transformation in the next clip.
+    Background music: starts as a soft calm piano variation of the main theme,
+    gradually building tension. At the end, the music becomes unstable and
+    shimmering to hint at the upcoming transformation.
+  references:
+    - path: "../../images/clips/001-main/01-dont-wanna-brush.png"
+      type: image
+  durationSeconds: 10
+  aspectRatio: "16:9"
+  seed: null
+output: "./01-dont-wanna-brush.mp4"

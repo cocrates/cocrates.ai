@@ -1,0 +1,40 @@
+title: Clip 10 — 물로 입안을 헹궈라!
+message: |
+  마무리 동작. 티라노가 칫솔 검을 크게 휘둘러 치약 거품을 쓸어낸다.
+  물과 거품의 소용돌이가 몬스터를 휩쓸어 사라지게 한다. 성이 완전히 깨끗해진다.
+
+design: |
+  영상 클립 키 이미지. 16:9 와이드.
+  - 장소: 이빨 성 앞마당 (완전 회복).
+  - 티라노 (t-rex 상태): 칫솔 검을 크게 휘두르는 마무리 동작. 칫솔 검에서
+    물결/거품 소용돌이가 휘몰아침.
+  - 충균 몬스터 (small 상태): 거품 소용돌이에 휩쓸려 허둥대는 모습.
+    놀라고 당황한 표정.
+  - 배경: 성이 완전히 깨끗해짐. 하늘이 다시 맑아짐.
+  - 수채화 디지털 페인팅, 파스텔 톤
+  - 참조: 티라노-t-rex.png, 충균-몬스터-small.png
+
+# --- cocrates-google-genai ---
+type: image
+model: gemini-3.1-flash-image
+params:
+  prompt: |
+    Widescreen 16:9 climactic finale scene for a children's picture book video.
+    SETTING: Courtyard in front of the molar-tooth castle — now completely
+    clean and sparkling, sky clear and bright.
+    ACTION: Using Images 1 and 2 as reference.
+    Image 1 (T-rex): The cute green T-rex makes a big sweeping motion with the
+    blue toothbrush-sword, sending a swirl of water bubbles and foam.
+    Image 2 (Monster): The tiny purple one-eyed monster gets caught in the
+    foam whirlwind, flailing its little arms with a comical panicked expression
+    as if being swept away.
+    Dynamic swirling foam and bubbles fill the scene. The castle gleams
+    brilliantly behind them.
+    Watercolor digital painting, warm pastel tones. No text.
+  images:
+    - path: "../../../images/references/characters/티라노-t-rex.png"
+    - path: "../../../images/references/characters/충균-몬스터-small.png"
+  size: 1K
+  aspectRatio: "16:9"
+  seed: null
+output: "./10-rinse-finale.png"

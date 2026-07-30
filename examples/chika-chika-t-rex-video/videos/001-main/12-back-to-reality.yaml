@@ -1,0 +1,49 @@
+title: Clip 12 — 내일도 치카치카 티라노!
+message: |
+  이전 클립의 왕국이 흐려지며 현실 화장실로 페이드 인. 거울 속 반짝이는
+  이빨을 보며 환하게 웃음. 양치질이 즐거운 모험이 되었음을 암시.
+  영상의 마지막 클립 — 따뜻하고 포근한 엔딩으로 마무리.
+
+design: |
+  단일 연속 샷. 참조 이미지를 첫 프레임으로 사용.
+  시작: 페이드 인으로 현실 화장실 장면이 나타남 (이전 클립의 환상적인
+  왕국에서 현실로 부드럽게 전환).
+  모션: 꼬마가 거울을 보며 환하게 웃음. 거울 속 이빨이 살짝 반짝임.
+  포근한 분위기. 카메라 약간의 슬로우 줌인 — 아이의 웃는 얼굴을 강조.
+  끝: 아이의 웃는 얼굴이 화면에 남은 채로 서서히 페이드 아웃 (영상 종료).
+  마지막 프레임에서 아이의 미소가 시청자의 기억에 오래 남도록.
+  오디오: 주인공(꼬마) "내일도 치카치카 티라노 할 거야!" 환하고 즐거운 톤.
+  미세한 반짝임 효과음.
+  BGM: 메인 테마의 포근한 피아노 변주 (reprise) — 엔딩 크레딧처럼 따뜻하게
+  마무리. BGM이 서서히 페이드 아웃되며 영상 종료. 10초, 16:9.
+
+# --- cocrates-google-genai ---
+type: video
+model: gemini-omni-flash-preview
+params:
+  prompt: |
+    In a single continuous shot, using the provided image as the first frame.
+    The scene fades in from the fantasy kingdom of the previous clip, gently
+    transitioning back to reality.
+    <FIRST_FRAME> A cozy child's bathroom with warm yellow light. A cute
+    5-year-old boy in yellow pajamas stands at a low sink, looking at his
+    reflection in the wall mirror with a big happy smile, holding a blue
+    toothbrush in one hand. In the mirror, his teeth have a subtle sparkle
+    effect. Soft warm atmosphere. Slow camera zoom in toward the boy's
+    smiling face.
+    At the end: the boy's happy smiling face remains on screen as the scene
+    slowly fades to black (fade out) — the final moment of the video. The
+    smile should linger in the viewer's memory.
+    Sound: A young Korean boy's voice (around 5-6 years old), bright and
+    playful natural child tone, speaks in Korean saying "내일도 치카치카
+    티라노 할 거야!" with happy cheerful joyful tone.
+    Gentle subtle sparkle sound effect.
+    Background music: a warm cozy piano reprise of the main theme — like
+    end credits music. The music slowly fades out with the scene.
+  references:
+    - path: "../../images/clips/001-main/12-back-to-reality.png"
+      type: image
+  durationSeconds: 10
+  aspectRatio: "16:9"
+  seed: null
+output: "./12-back-to-reality.mp4"

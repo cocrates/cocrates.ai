@@ -1,0 +1,36 @@
+title: Clip 08 — 안쪽까지 샥샥!
+message: |
+  세 번째 공격! 칫솔 검을 섬세하게 움직이며 몬스터 구석구석을 닦아낸다.
+  몬스터가 간지러워하며 웃고 발버둥친다. 몬스터가 더 작아졌다!
+
+design: |
+  영상 클립 키 이미지. 16:9 와이드.
+  - 장소: 이빨 성 앞마당 (거의 깨끗해짐).
+  - 티라노 (t-rex 상태): 집중하는 표정, 칫솔 검을 섬세하게 조종. 작은 광선들이
+    몬스터 주변을 감쌈.
+  - 충균 몬스터 (small 상태): 티라노 무릎 높이까지 작아짐. 간지러워하며 웃고
+    발버둥치는 코믹한 표정.
+  - 수채화 디지털 페인팅, 파스텔 톤
+  - 참조: 티라노-t-rex.png, 충균-몬스터-small.png
+
+# --- cocrates-google-genai ---
+type: image
+model: gemini-3.1-flash-image
+params:
+  prompt: |
+    Widescreen 16:9 action scene for a children's picture book video.
+    SETTING: Courtyard in front of the castle — now mostly clean and restored.
+    ACTION: Using Images 1 and 2 as reference.
+    Image 1 (T-rex): The cute green T-rex with a focused expression, delicately
+    maneuvering the blue toothbrush-sword. Small foam beams surround the monster.
+    Image 2 (Monster): The purple one-eyed monster is now tiny — only knee-high
+    to the T-rex. The monster is laughing and flailing, looking ticklish and
+    comical rather than hurt.
+    Watercolor digital painting, warm pastel tones. No text.
+  images:
+    - path: "../../../images/references/characters/티라노-t-rex.png"
+    - path: "../../../images/references/characters/충균-몬스터-small.png"
+  size: 1K
+  aspectRatio: "16:9"
+  seed: null
+output: "./08-inside-scrub.png"

@@ -1,0 +1,42 @@
+title: 현실 화장실 / 세면대-앞 / 거울-뷰 (base) 장소 참조 이미지
+message: |
+  아이 전용 화장실 세면대 앞에서 거울을 바라본 뷰. 낮은 세면대, 벽걸이
+  거울. 칫솔꽂이와 치약이 세면대 위에 있음. 포근하고 따뜻한 분위기.
+  아이가 양치질을 하는 실제 공간.
+
+design: |
+  장소 참조 이미지 — 아이 전용 화장실. 세면대 앞에서 거울 쪽을 바라본 뷰.
+  - 아이 키에 맞춘 낮은 세면대 (또는 높은 세면대 앞에 귀여운 발판)
+  - 세면대 위 벽에 붙은 네모난/타원형 거울
+  - **거울 속 반사: 반대편 벽면이 비침. 그 벽에 화장실 문(나무 문)과 벽걸이 그림 액자가 선명하게 보임** — 거울 반사 물리 법칙 준수
+  - 세면대 위: 파란 칫솔 하나, 치약 하나, 칫솔꽂이 (심플, 최소한)
+  - 벽에 귀여운 타월걸이 (동물 캐릭터 타월)
+  - 바닥에 작은 발판 (아이 키 맞춤)
+  - 따뜻한 노란 실내등, 포근한 분위기
+  - 배경 요소 단순하고 깔끔 — 캐릭터가 들어갈 공간 확보
+  - 사람 없음 (빈 화장실)
+  - 수채화 디지털 페인팅, 부드러운 파스텔 톤
+  - 4:3 가로, 1K
+
+# --- cocrates-google-genai ---
+type: image
+model: gemini-3.1-flash-image
+params:
+  prompt: |
+    A child-friendly bathroom background reference for a children's picture
+    book. View from in front of a low sink with a small wooden step stool,
+    facing a rectangular wall-mounted mirror above the sink. The mirror
+    reflects the opposite wall behind the viewer. In the mirror reflection,
+    a WOODEN BATHROOM DOOR is clearly visible on one side and a SMALL
+    PICTURE FRAME on the wall. CRITICAL: The reflection must obey mirror
+    physics — nothing behind the mirror plane is visible in the reflection.
+    On the sink: one blue toothbrush in a cute toothbrush holder, one tube
+    of toothpaste, no clutter. A small animal-shaped towel on a towel rack
+    on the wall. A wooden step stool on the floor. Warm yellow bathroom
+    light, cozy and inviting atmosphere. Simple background with empty space
+    for a character. No people. Watercolor digital painting style, soft
+    pastel tones, cute and warm mood. Wide shot, 4:3 landscape.
+  size: 1K
+  aspectRatio: "4:3"
+  seed: null
+output: "./현실-화장실-세면대-앞-거울-뷰.png"

@@ -15,6 +15,10 @@
     "message": "Novel",
     "description": "Navbar item with label 소설"
   },
+  "item.label.미디어": {
+    "message": "Media",
+    "description": "Navbar item with label 미디어"
+  },
   "item.label.GitHub": {
     "message": "GitHub",
     "description": "Navbar item with label GitHub"

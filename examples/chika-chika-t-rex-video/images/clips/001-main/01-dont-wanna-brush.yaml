@@ -1,0 +1,37 @@
+title: Clip 01 — 양치하기 싫어!
+message: |
+  현실 화장실. 꼬마가 칫솔을 들고 심드렁한 표정. 양치질을 싫어하는 투정.
+  하지만 갑자기 주변이 반짝이기 시작하며 변신을 암시하는 긴장감.
+
+design: |
+  영상 클립 키 이미지. 16:9 와이드.
+  - 장소: 현실-화장실. 아이 전용 낮은 세면대, 벽걸이 거울, 칫솔꽂이. 따뜻한 노란
+    실내등. 포근한 분위기.
+  - 꼬마 (base 상태): 5살 정도, 검정 단발머리 앞머리, 커다란 검은 눈+속눈썹,
+    노란 잠옷. 칫솔을 손에 들고 심드렁/울상 표정. 살짝 삐진 입.
+  - 거울에 꼬마의 모습이 비침
+  - 화면 가장자리에서 은은한 반짝임 효과가 퍼지기 시작
+  - 수채화 디지털 페인팅, 따뜻하고 부드러운 파스텔 톤
+  - 참조: 티라노-base.png (캐릭터), 현실-화장실 (배경)
+
+# --- cocrates-google-genai ---
+type: image
+model: gemini-3.1-flash-image
+params:
+  prompt: |
+    Widescreen 16:9 scene for a children's picture book video.
+    SETTING: A cozy child's bathroom. Low sink at child height, wall mirror above,
+    toothbrush holder on the counter. Warm yellow light, soft and cozy atmosphere.
+    CHARACTER: Using Image 1 as reference — a cute 5-year-old boy with short
+    black hair and bangs, big round dark eyes with long eyelashes, wearing soft
+    yellow pajamas. He stands at the sink holding a blue toothbrush in one hand,
+    making a reluctant pouty face. His reflection is visible in the mirror.
+    Subtle sparkling light particles begin to appear around the edges of the
+    frame, suggesting something magical is about to happen.
+    Watercolor digital painting, warm soft pastel tones. No text.
+  images:
+    - path: "../../../images/references/characters/티라노.png"
+  size: 1K
+  aspectRatio: "16:9"
+  seed: null
+output: "./01-dont-wanna-brush.png"

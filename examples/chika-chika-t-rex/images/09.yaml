@@ -1,0 +1,70 @@
+title: 치카치카 대모험 / Page 09 (마지막)
+message: |
+  현실의 화장실로 돌아온 꼬마. 세면대 앞 거울 속 자신의 이빨이 반짝인다.
+  아이가 환하게 웃으며 칫솔을 든다. "내일도 치카치카 티라노 할 거야!"
+  따뜻하고 포근한 마무리. 교훈을 직접 말하지 않고 아이의 즐거운 다짐으로 끝.
+
+design: |
+  그림책 페이지. 세로형 3:4. 마지막 장면.
+  - 장소: 아이 전용 화장실 세면대 앞 — 세면대-앞 / 거울-뷰
+    (참조: 현실-화장실-세면대-앞-거울-뷰.png)
+  - **구도: 아이의 뒷모습(3/4 측면)이 왼쪽에 있고, 오른쪽에 벽걸이 거울이 있음.
+    거울 속에 아이의 얼굴이 비침.**
+  - 티라노 (state: base) — 인간 꼬마. 노란 잠옷, 검정 앞머리, 큰 검은 눈+속눈썹.
+    칫솔을 들고 거울을 보며 환하게 웃음. (참조: 티라노.png)
+  - **거울 속 반사 규칙 (필수):**
+    - 아이가 칫솔을 든 손이 실제로는 오른손이면, 거울 속에서는 왼손에 칫솔이 보여야 함
+    - 아이의 앞머리 방향(가르마)도 거울 속에서 반전됨
+    - 거울 속 얼굴은 실물과 동일한 표정/생김새 (동일 인물)
+  - **거울 속 배경: 거울에 비치는 반대편 벽에 문과 액자가 보임**
+    (화장실 문, 벽에 걸린 그림 액자)
+  - 거울 속 아이의 이빨이 살짝 반짝이는 효과
+  - 세면대 위: 칫솔꽂이, 치약, 발판
+  - 따뜻한 노란 실내등, 포근한 밤 분위기
+  - 수채화 디지털 페인팅, 부드러운 파스텔 톤
+  - 텍스트:
+    (대사, 아이, 크고 자신감 있게, 둥근 고딕체, 화면 아래쪽)
+    "내일도 치카치카 티라노 할 거야!"
+    다른 텍스트 없음 — 교훈 독백 금지.
+
+# --- cocrates-google-genai ---
+type: image
+model: gemini-3.1-flash-image
+params:
+  prompt: |
+    Children's picture book page. Portrait 3:4. Final scene.
+    SETTING: A warm child-friendly bathroom with a sink. On the right side of
+    the composition is a wall-mounted rectangular mirror above the sink.
+    On the sink: a toothbrush holder, a tube of toothpaste. A small wooden
+    step stool on the floor in front of the sink.
+    CHARACTER: A cute 5-year-old boy in soft yellow pajamas standing in front
+    of the sink. We see him from a 3/4 back view on the left side — his back
+    and side profile visible. He holds a blue toothbrush in his RIGHT hand.
+    His face is visible through the MIRROR on the right side.
+    CRITICAL — MIRROR REFLECTION WITH LEFT-RIGHT REVERSAL:
+    The reflection must obey mirror physics:
+    - The boy's RIGHT hand holding the toothbrush appears as the LEFT hand
+      in the mirror reflection
+    - The reflection shows the boy's face looking back with the same big
+      happy smile, same round face, same black hair with bangs (hair part
+      reversed), same big dark eyes with long eyelashes, same yellow pajamas
+    - The reflection's teeth have a subtle sparkle/glow effect
+    - The reflection is recognizably the SAME child, not a different person
+    MIRROR BACKGROUND: The mirror reflects the wall behind the viewer —
+    on that wall, a bathroom DOOR is visible and a small PICTURE FRAME
+    on the wall. These details must be inside the mirror area.
+    Total composition: warm yellow light, cozy evening atmosphere.
+    Watercolor digital painting, soft pastel tones, warm and quiet mood.
+    TEXT OVERLAY:
+    Bottom-center area, dialogue by the boy, bold rounded font in warm
+    golden color with soft glow:
+    "내일도 치카치카 티라노 할 거야!"
+    Only this one line of text. No narration, no moral lesson.
+    Place text in the lower area so it does not cover the face in the mirror.
+  images:
+    - path: "./locations/현실-화장실-세면대-앞-거울-뷰.png"
+    - path: "./characters/티라노.png"
+  size: 1K
+  aspectRatio: "3:4"
+  seed: null
+output: "./09.png"

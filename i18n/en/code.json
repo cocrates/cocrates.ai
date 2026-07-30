@@ -65,6 +65,12 @@
   "homepage.youtube.draw": {
     "message": "The Right Way to Generate Images and Videos with AI"
   },
+  "homepage.youtube.skill": {
+    "message": "The Right Way to Create AI Skills"
+  },
+  "homepage.youtube.chikaChikaTrex": {
+    "message": "Chika Chika T-Rex Video"
+  },
   "homepage.inflearn.banner.alt": {
     "message": "Inflearn course: How to Use AI the Right Way — Cocrates"
   },
@@ -501,6 +507,102 @@
   "theme.contentVisibility.draftBanner.message": {
     "message": "This page is a draft. It will only be visible in dev and be excluded from the production build.",
     "description": "The draft content banner message"
+  },
+  "media.page.title": {
+    "message": "Media"
+  },
+  "media.page.description": {
+    "message": "Gallery of videos, picture books, and diagram media made with Cocrates"
+  },
+  "media.page.lead": {
+    "message": "Videos, picture books, and structural explainers created with Cocrates skills."
+  },
+  "media.github": {
+    "message": "GitHub"
+  },
+  "media.section.chikaVideo.title": {
+    "message": "'Chika Chika T-Rex' Video"
+  },
+  "media.section.chikaVideo.p1": {
+    "message": "With AI used well, making videos is not that hard."
+  },
+  "media.section.chikaVideo.p2": {
+    "message": "This video was made with the {skill} skill: story beats are designed cut by cut, then multiple clips with dialogue, sound effects, and BGM are validated, approved, and assembled."
+  },
+  "media.section.chikaVideo.p3": {
+    "message": "The real challenge is designing what to show and in what order. Design documents and source files are available on {githubLink}."
+  },
+  "media.video.chika.title": {
+    "message": "Chika Chika T-Rex"
+  },
+  "media.section.chikaBook.title": {
+    "message": "'Chika Chika T-Rex' Picture Book"
+  },
+  "media.section.chikaBook.p1": {
+    "message": "With AI used well, structuring a picture book is not that hard either."
+  },
+  "media.section.chikaBook.p2": {
+    "message": "This picture book was created with the {skill} skill. Story, world, characters, and themes are designed page by page, then validated and approved while keeping the overall flow consistent."
+  },
+  "media.section.chikaBook.p3": {
+    "message": "Design documents and source files are available on {githubLink}."
+  },
+  "media.picturebook.chika.altPrefix": {
+    "message": "Chika Chika T-Rex page"
+  },
+  "media.section.brushHero.title": {
+    "message": "'The Little Hero of Toothland' Picture Book"
+  },
+  "media.section.brushHero.p1": {
+    "message": "A tooth-brushing picture book made with the {skill} skill, shaped through page-level design, validation, and approval for coherence and flow. Design documents and source files are available on {githubLink}."
+  },
+  "media.picturebook.brushHero.altPrefix": {
+    "message": "The Little Hero of Toothland page"
+  },
+  "media.section.jsondb.title": {
+    "message": "jsondb Architecture Explainer"
+  },
+  "media.section.jsondb.p1": {
+    "message": "Media explaining jsondb's concurrent request parallel-processing architecture. The diagram was made with the {diagramSkill} skill (Excalidraw generation), the explainer image with the {imageSkill} skill (Google Nano Banana model), and the explainer video with the {videoSkill} skill (Google Omni model). Source files are available on {githubLink}."
+  },
+  "media.jsondb.diagram": {
+    "message": "Diagram"
+  },
+  "media.jsondb.image": {
+    "message": "Image"
+  },
+  "media.jsondb.video": {
+    "message": "Video"
+  },
+  "media.jsondb.diagram.alt": {
+    "message": "jsondb architecture"
+  },
+  "media.jsondb.diagram.caption": {
+    "message": "jsondb architecture"
+  },
+  "media.jsondb.image.alt": {
+    "message": "Image explaining jsondb architecture"
+  },
+  "media.jsondb.image.caption": {
+    "message": "Image explaining jsondb architecture"
+  },
+  "media.jsondb.video.caption": {
+    "message": "Video explaining jsondb architecture"
+  },
+  "media.video.unsupported": {
+    "message": "Your browser does not support the video tag."
+  },
+  "picturebook.prev": {
+    "message": "← Previous"
+  },
+  "picturebook.next": {
+    "message": "Next →"
+  },
+  "picturebook.prev.aria": {
+    "message": "Previous page"
+  },
+  "picturebook.next.aria": {
+    "message": "Next page"
   },
   "theme.docs.DocCard.categoryDescription.plurals": {
     "message": "1 item|{count} items",

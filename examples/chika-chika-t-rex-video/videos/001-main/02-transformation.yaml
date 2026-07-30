@@ -1,0 +1,51 @@
+title: Clip 02 — 치카치카 티라노!
+message: |
+  이전 클립의 반짝임 폭발에서 이어짐. 꼬마가 초록색 티라노사우루스로 변신!
+  치카치카 왕국 배경. 포효하며 모험의 시작을 알림.
+  클립 끝: 티라노가 당당히 서 있는 모습에서 다음 장면(더러워진 왕국)으로
+  이어지기 위해 분위기가 살짝 흔들림.
+
+design: |
+  단일 연속 샷. 참조 이미지를 첫 프레임으로 사용.
+  시작: 반짝임 폭발과 함께 티라노의 모습이 등장 (이전 클립의 반짝임과 연결).
+  모션: 티라노가 두 팔을 벌려 포효. 주변에 폭죽 같은 반짝임 효과.
+  약간의 카메라 흔들림.
+  클립 끝: 반짝임이 가라앉고 티라노의 표정이 약간 호기심/의문으로 변화하며
+  다음 장면(더러워진 왕국 발견)으로 이어짐.
+  오디오: 주인공(티라노) "크아아아! 치카치카 티라노다!" 당차고 신나는 톤.
+  변신 굉음 + 반짝임 폭발 효과음.
+  BGM: 메인 테마가 모험/액션 버전으로 웅장하게 전환. 포효와 함께 절정에 달했다가
+  클립 끝에서 갑자기 불안한 음색으로 변하며 다음 장면의 위기를 암시.
+  8초, 16:9.
+
+# --- cocrates-google-genai ---
+type: video
+model: gemini-omni-flash-preview
+params:
+  prompt: |
+    In a single continuous shot, using the provided image as the first frame.
+    The scene begins with a burst of sparkles transitioning from the previous
+    clip's sparkling buildup.
+    <FIRST_FRAME> A cute green cartoon T-rex with big dark eyes and long
+    eyelashes, a small black crest on forehead, yellow belly markings, standing
+    in a bright fantasy kingdom with toothbrush trees and a sparkling castle.
+    The T-rex roars with arms spread wide, looking excited and confident.
+    Bursting sparkle effects like fireworks surround the T-rex. Slight camera
+    shake for dynamic feel.
+    At the end: the sparkles settle, and the T-rex's expression shifts slightly
+    to curiosity, as if noticing something wrong — leading to the next scene
+    where he discovers the dirty castle.
+    Sound: A young Korean boy's voice (around 5-6 years old), bright and playful
+    natural child tone, speaks in Korean saying "크아아아! 치카치카 티라노다!"
+    with excited confident heroic energy. Transformation rumble sound effect
+    followed by sparkle burst chimes.
+    Background music: the main theme swells into a grand adventurous version.
+    At the peak of the roar, the music suddenly shifts to an uneasy tone,
+    hinting at the danger in the next clip.
+  references:
+    - path: "../../images/clips/001-main/02-transformation.png"
+      type: image
+  durationSeconds: 8
+  aspectRatio: "16:9"
+  seed: null
+output: "./02-transformation.mp4"

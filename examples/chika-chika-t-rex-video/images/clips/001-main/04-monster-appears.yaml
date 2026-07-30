@@ -1,0 +1,39 @@
+title: Clip 04 — 충균 몬스터 등장
+message: |
+  충균 몬스터가 성 위에서 나타난다. 자신만만하게 깔깔대며 왕국을 더럽힌 것이
+  자신이라고 자랑한다. 악당의 정체가 드러나는 순간.
+
+design: |
+  영상 클립 키 이미지. 16:9 와이드.
+  - 장소: 이빨 성 앞마당. 성이 보라색/검은색으로 오염됨.
+  - 충균 몬스터 (big 상태): 둥글고 통통한 보라색 몸체, 큰 외눈박이 하나.
+    티라노보다 1.5배 큰 크기. 성 위에 올라서서 활짝 웃으며 양팔을 벌린
+    건방지고 자신만만한 포즈.
+  - 티라노 (t-rex): 아래에서 몬스터를 올려다보며 경계하는 표정.
+  - 수채화 디지털 페인팅, 파스텔 톤
+  - 참조: 티라노-t-rex.png, 충균-몬스터-big.png
+
+# --- cocrates-google-genai ---
+type: image
+model: gemini-3.1-flash-image
+params:
+  prompt: |
+    Widescreen 16:9 scene for a children's picture book video.
+    SETTING: The courtyard in front of the molar-tooth castle in Chika-Chika
+    Kingdom. The castle is stained with purple and black gunk.
+    CHARACTERS: Using Images 1 and 2 as reference.
+    Image 1 (T-rex): The cute green T-rex stands on the ground looking up
+    warily.
+    Image 2 (Cavity Monster): A big purple round blob monster with one large
+    eye, standing on top of the castle. The monster is 1.5 times the size of
+    the T-rex, arms spread wide in a smug, confident pose, grinning widely.
+    The monster looks comical rather than scary — like a playful but naughty
+    cartoon villain.
+    Watercolor digital painting, pastel tones. No text.
+  images:
+    - path: "../../../images/references/characters/티라노-t-rex.png"
+    - path: "../../../images/references/characters/충균-몬스터-big.png"
+  size: 1K
+  aspectRatio: "16:9"
+  seed: null
+output: "./04-monster-appears.png"

@@ -1,0 +1,45 @@
+title: Clip 04 — 충균 몬스터 등장
+message: |
+  이전 클립의 카메라 팬을 따라 성 위로 시선이 이동. 충균 몬스터가 성 위에서
+  나타나 건방지게 웃는다. 악당의 정체 공개. 클립 끝에서 몬스터의 웃음이
+  다음 클립(티라노의 대응)으로 이어짐.
+
+design: |
+  단일 연속 샷. 참조 이미지를 첫 프레임으로 사용.
+  시작: 이전 클립 끝의 카메라 팬이 성 위까지 도달 — 몬스터가 프레임에 들어옴.
+  모션: 충균 몬스터가 성 위에서 활짝 웃으며 양팔 벌림. 보라색 연기 효과.
+  티라노는 아래에서 경계. 몬스터가 건방지게 웃는 표정을 지음.
+  클립 끝: 몬스터가 여전히 웃고 있는 모습 — 다음 클립(티라노의 결의)으로 연결.
+  오디오: 충균 몬스터 "히히히! 내가 다 더럽혀 주겠어!" 건방지고 우쭐한 톤.
+  코믹 악당 효과음 + 낄낄 웃음.
+  BGM: 악당 테마 — 코믹하면서도 약간 위협적인 분위기. 클립 끝에서 액션을
+  예고하는 드럼 비트가 살짝 시작됨. 6초, 16:9.
+
+# --- cocrates-google-genai ---
+type: video
+model: gemini-omni-flash-preview
+params:
+  prompt: |
+    In a single continuous shot, using the provided image as the first frame.
+    The camera continues its upward pan from the previous clip, reaching the
+    top of the castle where the monster comes into frame.
+    <FIRST_FRAME> A big purple round one-eyed monster with short stubby limbs
+    stands on top of a molar-shaped castle stained purple and black. The
+    monster grins widely with arms spread in a smug pose. Below, a cute green
+    T-rex looks up warily. Purple smoky haze surrounds the monster.
+    The monster maintains its smug laughing expression.
+    At the end: the monster is still laughing, setting up the T-rex's
+    determined response in the next clip.
+    Sound: A comical cartoon villain voice in Korean, slightly deep and raspy,
+    over-the-top theatrical tone, speaks in Korean saying "히히히! 내가 다
+    더럽혀 주겠어!" with a smug arrogant tone followed by comical chuckle.
+    Comical villain sound effects.
+    Background music: villain theme — comical yet slightly menacing.
+    At the end, a drum beat subtly starts, anticipating action in the next clip.
+  references:
+    - path: "../../images/clips/001-main/04-monster-appears.png"
+      type: image
+  durationSeconds: 6
+  aspectRatio: "16:9"
+  seed: null
+output: "./04-monster-appears.mp4"

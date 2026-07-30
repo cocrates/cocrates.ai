@@ -1,0 +1,33 @@
+title: 현실 방 / 방-중앙 / 침대-뷰 (base) 장소 참조 이미지
+message: |
+  아이 방 중앙에서 침대 쪽을 바라본 아늑한 풍경. 작은 침대, 옷장, 흩어진
+  장난감이 있는 따뜻하고 익숙한 공간. 모험의 출발점.
+
+design: |
+  장소 참조 이미지 — 아이 방. 방 중앙에서 침대 쪽을 바라본 뷰.
+  - 작고 아늑한 침실, 따뜻한 노란 실내등
+  - 왼쪽에 작은 침대 (파란 이불, 베개)
+  - 오른쪽에 옷장, 벽에 그림 액자
+  - 바닥에 장난감 몇 개 (블록, 공룡 인형)
+  - 침대 옆 작은 탁자에 칫솔이 놓여 있음
+  - 부드러운 수채화 스타일, 파스텔 톤
+  - 사람은 없음 (빈 방)
+  - 4:3 가로, 1K
+
+# --- cocrates-google-genai ---
+type: image
+model: gemini-3.1-flash-image
+params:
+  prompt: |
+    A cozy child's bedroom background reference for a children's picture book.
+    View from the center of the room facing the bed area. A small bed with a
+    blue blanket and a pillow on the left side. A wooden closet on the right
+    wall. A small framed drawing on the wall. Scattered toys on the floor —
+    colorful blocks and a small toy dinosaur. A blue toothbrush on a small
+    bedside table. Warm yellow indoor lighting, soft shadows. No people.
+    Watercolor digital painting style, soft pastel tones, warm and welcoming
+    atmosphere. Wide shot, 4:3 landscape.
+  size: 1K
+  aspectRatio: "4:3"
+  seed: null
+output: "./현실-방-방-중앙-침대-뷰.png"

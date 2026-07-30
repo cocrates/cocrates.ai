@@ -1,0 +1,51 @@
+title: Clip 06 — 위아래로 치카치카!
+message: |
+  이전 클립의 준비 자세에서 곧바로 이어지는 첫 공격. 칫솔 검을 위아래로
+  휘두르며 몬스터를 공격. 액션의 시작. 클립 끝에서도 액션이 멈추지 않고
+  다음 클립(앞뒤 공격)으로 연속 이어짐.
+
+design: |
+  단일 연속 샷. 참조 이미지를 첫 프레임으로 사용.
+  시작: 이전 클립의 칫솔 검 든 자세에서 곧바로 휘두르는 동작으로 돌입.
+  모션: 티라노가 칫솔 검을 위에서 아래로 휘두르는 역동적인 액션.
+  치약 거품 광선 발사. 몬스터가 맞고 움찔.
+  클립 끝: 티라노가 검을 다시 들어 올리며 다음 동작(앞뒤 휘두름)을 준비.
+  액션의 흐름이 끊기지 않음.
+  오디오: 엄마(내레이터) "위아래로 — 치카치카!" 신나는 액션 묘사 톤.
+  이어서 충균 몬스터 "아야야! 뭐야 그거!" 아파하는 코믹 톤.
+  칫솔 검 휘두름 + 광선 효과음.
+  BGM: 액션 테마 — 이전 클립에서 이어져 연속감 유지. 박진감 넘치는 리듬.
+  다음 클립으로 이어질 때도 BGM이 끊기지 않고 계속됨. 10초, 16:9.
+
+# --- cocrates-google-genai ---
+type: video
+model: gemini-omni-flash-preview
+params:
+  prompt: |
+    In a single continuous shot, using the provided image as the first frame.
+    The action flows directly from the previous clip's ready pose into this
+    swing.
+    <FIRST_FRAME> Dynamic action. A cute green T-rex swings a blue
+    toothbrush-sword in a downward motion, releasing a white toothpaste-foam
+    energy beam toward a big purple one-eyed monster. The monster flinches as
+    the beam hits, making a comical surprised expression. Speed lines and
+    motion trails show the action.
+    At the end: the T-rex raises the sword again, preparing the next swing.
+    The action does not stop — it flows continuously into the next clip.
+    Sound sequence:
+    1) A warm Korean female narrator voice, gentle motherly tone, speaks
+    clearly in Korean saying "위아래로 — 치카치카!" with exciting action tone.
+    2) Then a comical cartoon villain voice in Korean, slightly deep and raspy,
+    over-the-top theatrical tone, says "아야야! 뭐야 그거!" with comical
+    pain tone.
+    Sword swish sound effect and energy beam whoosh.
+    Background music: the action theme continues seamlessly from the previous
+    clip. Energetic driving rhythm. The music does not stop — it continues
+    into the next clip maintaining the action momentum.
+  references:
+    - path: "../../images/clips/001-main/06-up-down-attack.png"
+      type: image
+  durationSeconds: 10
+  aspectRatio: "16:9"
+  seed: null
+output: "./06-up-down-attack.mp4"

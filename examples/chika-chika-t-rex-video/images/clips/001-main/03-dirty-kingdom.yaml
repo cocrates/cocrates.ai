@@ -1,0 +1,36 @@
+title: Clip 03 — 더러워진 왕국
+message: |
+  치카치카 왕국에 도착한 티라노. 그런데 평소 반짝이는 하얀 성이 보라색과 검은색으로
+  더럽혀져 있다. 티라노가 당황하고 놀란다. 위기가 감지된다.
+
+design: |
+  영상 클립 키 이미지. 16:9 와이드.
+  - 장소: 치카치카 왕국, 칫솔숲 입구에서 바라본 이빨 성 전망.
+  - 성이 보라색/검은색으로 더럽혀짐 (오염 상태). 하늘이 부분적으로 흐려짐.
+  - 티라노 (t-rex 상태): 왼쪽 아래에서 성을 올려다보며 깜짝 놀란 표정.
+    입을 벌린 당황한 표정.
+  - 수채화 디지털 페인팅, 밝았던 분위기에서 어두워지는 전환
+  - 참조: 티라노-t-rex.png (캐릭터)
+
+# --- cocrates-google-genai ---
+type: image
+model: gemini-3.1-flash-image
+params:
+  prompt: |
+    Widescreen 16:9 scene for a children's picture book video.
+    SETTING: Chika-Chika Kingdom, viewed from the entrance of the toothbrush
+    forest looking toward the castle. The beautiful white castle shaped like a
+    giant molar tooth is now stained with purple and black slime (polluted
+    state). The sky is partially cloudy and dimmer than usual.
+    CHARACTER: Using Image 1 as reference — the cute cartoon T-rex stands at
+    the lower left, looking up at the castle with a shocked and worried
+    expression, mouth open in surprise.
+    Contrast between the polluted dark castle and the green T-rex.
+    Watercolor digital painting, transitioning from bright to slightly ominous
+    tones. No text.
+  images:
+    - path: "../../../images/references/characters/티라노-t-rex.png"
+  size: 1K
+  aspectRatio: "16:9"
+  seed: null
+output: "./03-dirty-kingdom.png"
