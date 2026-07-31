@@ -17,38 +17,38 @@
 
 ### 2.0 Design constraints (global)
 
-- **아키텍처-퍼스트**: 이미지 생성은 Stage ④에서만.
-- **일관성 소스**:
-  - 캐릭터 일관성: `characters/{character-slug}.md` (기본 외형/얼굴/실루엣 + 참조 모델 목록)
-  - 장소 일관성: `locations/{location-slug}.md` (참조 모델은 `state` 변화 중심, `position`·`view`는 프레이밍 앵커)
-  - 이야기/연출 일관성: `episodes/{nnn}-{episode-slug}.md` (페이지별 렌더링 텍스트 + 일러스트 가이드)
-- **Design-first fixes**: Evaluate가 문제를 지적하면 “그림 프롬프트만”으로 고치지 말고, 먼저 Design 파일을 수정한 뒤 재평가.
+- **Architecture-first**: Image generation only in Stage ④.
+- **Consistency sources**:
+  - Character consistency: `characters/{character-slug}.md` (base appearance / face / silhouette + reference model list)
+  - Location consistency: `locations/{location-slug}.md` (reference models center on `state` change; `position` · `view` are framing anchors)
+  - Story / direction consistency: `episodes/{nnn}-{episode-slug}.md` (per-page rendering text + illustration guide)
+- **Design-first fixes**: If Evaluate flags a problem, do not fix by “image prompt only” — update Design files first, then re-evaluate.
 
-#### 참조 모델(Reference Model)이란?
+#### What is a Reference Model?
 
 **Canonical rules:** `workflow/reference-models.md` (same three layers as webtoon / video / novel).
 
-**참조 모델 = 이야기 전체에서 지속·유지되는 물리적 외형/구조 + 연속 상황의 상대 배치 잠금.**
-Stage ④에서 image-generation 스킬을 통해 "참조 이미지"로 생성되며, 이후 모든 페이지 이미지가 이 참조 이미지를 기반으로 일관성을 유지한다.
+**Reference model = durable physical appearance/structure across the story + locked relative placement for continuing situations.**
+In Stage ④ these become “reference images” via the image-generation skill; every later page image builds consistency from them.
 
-| 구분 | 참조 모델에 **포함** (= 참조 이미지 생성 대상) | 참조 모델에 **불포함** (= 페이지 일러스트레이션 가이드에서 지정) |
+| Kind | **Included** in reference model (= generate as reference images) | **Excluded** (= direct in page illustration guide) |
 |------|------|------|
-| **캐릭터** | 얼굴/체형/실루엣, **지속 신체 변화**, **장비 정체성**(옷·액세서리·무기·방패 등 — 장면마다 다른 칼을 들면 안 됨) | 표정, 포즈, 동작, 감정 표현 |
-| **장소** | **세트/무대**의 물리적 구조·배치·고정 요소 | 조명, 시간대, 계절, 날씨, 분위기, 촬영 방향/구도/카메라 앵글, 동적 요소 |
-| **Staging** | 연속 상황에서 **누가 어디에**(카페 좌/우, 회의 좌석, 수술실 스테이션 등). 상황당 하나; 참조 이미지 **2–3**장 | 표정/분위기; 좌석이 유지되는 한에서의 카메라 타이트함 |
+| **Character** | Face / body / silhouette, **lasting body change**, **equipment identity** (clothes, accessories, weapons, shields — do not swap to a different sword page-to-page) | Expression, pose, action, emotion |
+| **Location** | Physical structure / layout / fixed set dressing of the **set / stage** | Lighting, time of day, season, weather, mood, camera direction / framing / angle, transient elements |
+| **Staging** | **Who is where** in a continuing situation (café L/R, meeting seats, OR stations, …). One per situation; **2–3** reference images | Expression / mood; camera tightness while seats stay locked |
 
-**참조 모델 변경이 필요한 경우 (= 새 참조 이미지 필요):**
-- 캐릭터: 복장/장비가 바뀜, 또는 지속 신체 변화 → 새 state 슬러그 추가
-- 장소: 물리적 구조가 영구히 변함 (예: 창밖에 새 건물 완공, 벽이 파괴됨) → 새 state 슬러그 추가
-- Staging: 자리/포메이션이 바뀌거나 새 상황이 시작됨 → 새 staging
+**When a reference model change is required (= new reference image):**
+- Character: outfit/gear changes, or lasting body change → add a new state slug
+- Location: physical structure changes permanently (e.g. new building outside the window, wall destroyed) → add a new state slug
+- Staging: seats/formation change or a new situation starts → new staging
 
-**참조 모델 변경이 불필요한 경우 (= 페이지 프롬프트로 처리):**
-- 표정·감정·일시 포즈
-- 커튼 개폐, 문 열림/닫힘 등 일시적·가역적 변화
-- 조명/시간대/날씨/분위기 변화
-- 동적 요소 (지나가는 캐릭터, 날아가는 새 등)
+**When a reference model change is not required (= handle in page prompt):**
+- Expression, emotion, transient pose
+- Temporary / reversible changes (curtains open/closed, door open/shut)
+- Lighting / time / weather / mood shifts
+- Transient elements (passerby, bird flying by)
 
-**Staging이 필요한 경우:** 같은 상황이 여러 페이지에 이어지고 상대 위치가 바뀌면 안 될 때 (카페 마주 앉기, 수술실, 회의 등). `stagings.md` + `stagings/{slug}.md` 작성 후 Phase 0에서 앙상블 참조 2–3장 생성. 캐릭터+빈 장소만으로는 좌석/좌우가 잠기지 않는다.
+**When staging is required:** The same situation spans multiple pages and relative positions must not flip (café facing seats, OR, meeting, …). Write `stagings.md` + `stagings/{slug}.md`, then generate 2–3 ensemble refs in Phase 0. Character + empty location alone do not lock seats / L-R.
 
 ---
 
@@ -57,19 +57,19 @@ Stage ④에서 image-generation 스킬을 통해 "참조 이미지"로 생성�
 1. Write `world-bible.md` using the following structure:
 
 ```markdown
-# 세계관
+# World Bible
 
-## 세계 이름
+## World Name
 {name}
 
-## 세계 설명
+## World Description
 {description of the world — rules, atmosphere, key features}
 
-## 핵심 규칙
+## Core Rules
 - {rule 1}
 - {rule 2}
 
-## 역사/배경
+## History / Background
 {background story of the world}
 ```
 
@@ -83,43 +83,43 @@ Stage ④에서 image-generation 스킬을 통해 "참조 이미지"로 생성�
 ```markdown
 # {Character Name}
 
-## 기본 정보
-- 역할(주요/조연/악역 등): {role}
-- 핵심 욕구/Core Drive: {what they want most}
-- 중앙 갈등/Central Conflict: {what prevents them from getting it}
+## Basic Info
+- Role (lead / supporting / antagonist / …): {role}
+- Core Drive: {what they want most}
+- Central Conflict: {what prevents them from getting it}
 
-## 외형 및 거동 특징
-- 얼굴/체형/실루엣의 “변하면 안 되는 고정 포인트”: {describe in detail}
-- 시그니처 제스처/버릇/행동 패턴(거동): {tics, posture habits, typical movement}
-- 표정/말투에서 반복되는 느낌(캐릭터성): {expression + speaking style notes}
+## Appearance & Behavior
+- Face / body / silhouette “must-not-change” anchors: {describe in detail}
+- Signature gestures / tics / movement patterns: {tics, posture habits, typical movement}
+- Recurring expression / speech feel (character voice): {expression + speaking style notes}
 
-## 주요 인물과의 관계
+## Relationships
 - {other-character-slug}: {relationship type, power dynamic, conflict seed}
 - {other-character-slug}: ...
 
-## 참조 모델 (외형 변화 + state 목록)
-{각 state가 하나의 참조 이미지에 대응됨 — Stage ④ Phase 0에서 image-generation으로 생성}
+## Reference Models (appearance change + state list)
+{Each state maps to one reference image — generated via image-generation in Stage ④ Phase 0}
 
-- base: {기본 복장/무장 상태의 정의}
-- {state-slug}: {state가 바뀌는 요소(의상/장비/무장/휴대물) + 얼굴/체형 규칙 유지}
+- base: {definition of default outfit / gear}
+- {state-slug}: {what changes (outfit / gear / carried items) + face/body rules stay}
 - {state-slug}: ...
 
-참조 모델 규칙:
-- state = 지속 신체 변화 + 장비 정체성 (복장/액세서리/무기/방패/휴대물) — 장면마다 다른 무기를 쓰면 안 됨
-- 얼굴/체형/고정 포인트는 모든 state에서 동일하게 유지
-- 표정/포즈/동작/감정은 state가 아님 → 페이지 일러스트레이션 가이드에서 지정
-- 이야기 진행 중 복장/장비가 바뀌면 새 state 슬러그를 추가
+Reference model rules:
+- state = lasting body change + equipment identity (outfit / accessories / weapons / shields / carried items) — do not swap identity gear page-to-page
+- Face / body / fixed anchors stay the same across all states
+- Expression / pose / action / emotion are not states → direct in the page illustration guide
+- If outfit/gear changes mid-story, add a new state slug
 ```
 
 ```markdown
 <!-- `characters.md` index template -->
-# 캐릭터 목록
+# Character List
 
-| 이름 | 역할 | 핵심 특징 |
+| Name | Role | Key trait |
 |------|------|----------|
 | {name} | {role} | {key trait} |
 
-## 관계도
+## Relationship Map
 {character relationships}
 ```
 
@@ -133,52 +133,52 @@ Stage ④에서 image-generation 스킬을 통해 "참조 이미지"로 생성�
 ```markdown
 # {Location Name}
 
-## 기본 정보
-- 유형: {world / region / city / building / room / outdoor / ...}
-- 서사적 역할: {why this place matters to the story}
+## Basic Info
+- Type: {world / region / city / building / room / outdoor / ...}
+- Narrative role: {why this place matters to the story}
 
-## 공간 구성
-- 구조/레이아웃: {spatial layout — rooms, corridors, open areas, landmarks}
-- 규모감: {size impression — cramped / vast / intimate / etc.}
+## Spatial Layout
+- Structure / layout: {spatial layout — rooms, corridors, open areas, landmarks}
+- Scale feel: {size impression — cramped / vast / intimate / etc.}
 
-## 감각 환경
-- 조명: {natural light / artificial / dim / harsh / flickering / ...}
-- 온도/습도: {cold / warm / humid / dry / seasonal shift}
-- 냄새: {dominant scent — dust, food, chemicals, nature, decay, ...}
-- 소리/소음: {ambient sound — silence, traffic, machinery, birdsong, echoes, ...}
-- 질감/촉감: {what surfaces feel like if touched — rough stone, polished wood, ...}
+## Sensory Environment
+- Lighting: {natural light / artificial / dim / harsh / flickering / ...}
+- Temperature / humidity: {cold / warm / humid / dry / seasonal shift}
+- Smell: {dominant scent — dust, food, chemicals, nature, decay, ...}
+- Sound / noise: {ambient sound — silence, traffic, machinery, birdsong, echoes, ...}
+- Texture / touch: {what surfaces feel like if touched — rough stone, polished wood, ...}
 
-## 분위기 노트
-{이 장소가 주는 심리적 인상 — 안전 / 위협 / 향수 / 고립 / ...}
+## Mood Notes
+{psychological impression of the place — safety / threat / nostalgia / isolation / ...}
 
-## 장면 목록 (location → position → view → state)
-{이 목록은 Stage ④ "참조 이미지" 생성에 그대로 사용되는 장면 슬러그 목록입니다.}
-{각 행이 하나의 참조 이미지에 대응됩니다.}
+## Scene List (location → position → view → state)
+{This list is the scene-slug inventory used as-is for Stage ④ reference image generation.}
+{Each row maps to one reference image.}
 
-| position | view | state | 설명 |
+| position | view | state | Description |
 |------|------|-------|------|
-| {position-slug} | {view-slug} | base | {기본 상태 설명} |
-| {position-slug} | {view-slug} | {state-slug} | {변화된 상태 — 화재/파괴/신축/계절 등} |
+| {position-slug} | {view-slug} | base | {base-state description} |
+| {position-slug} | {view-slug} | {state-slug} | {changed state — fire / destruction / new build / …} |
 | ... | ... | ... | ... |
 
-참조 모델 규칙:
-- position: `location` 내부의 특정 위치 (예: 거실-창쪽, 거실-문쪽, 침대-머리맡 쪽)
-- view: 해당 position에서 **보이는 장면** (예: 창이 보이는 뷰, 침대가 보이는 뷰, 책장이 보이는 뷰). 3D 공간을 직접 관리할 수 없으므로, "무엇이 보이는가"를 기준으로 뷰를 정의한다. 촬영 방향/구도/카메라 앵글은 view가 아니며, 페이지 이미지 생성에서 결정됨.
-- state: 공간의 물리적 구조가 영구히 바뀐 상태 (base = 기본). 참조 모델은 state 변화로만 갱신됨.
-  - 포함 예: 새 건물 완공으로 창밖 풍경(물리 구조)이 바뀜, 벽 파괴, 가구 재배치
-  - 불포함 예: 커튼 개폐, 문 열림/닫힘, 조명 변화, 날씨/시간대, 일시적 등장인물/동적 요소 → 페이지 프롬프트로 처리
-- 각 행(position × view × state)이 하나의 참조 이미지에 대응. 참조 모델(물리적 동일성) 갱신은 `state` 변화로만 판단한다.
+Reference model rules:
+- position: a specific spot inside `location` (e.g. living-room-window-side, living-room-door-side, bed-headboard-side)
+- view: the **visible scene** from that position (e.g. window-facing view, bed-facing view, bookshelf-facing view). Because a full 3D space is not managed, define views by “what is visible.” Camera direction / framing / angle are not view — those are decided at page image generation.
+- state: lasting change to the set’s physical structure (base = default). Reference models update only via state change.
+  - Included examples: new building permanently changes the outside view, wall destroyed, furniture rearranged for good
+  - Excluded examples: curtains open/closed, door open/shut, lighting, weather/time, transient cast/dynamic props → page prompt
+- Each row (position × view × state) → one reference image. Physical-identity updates are judged by `state` change only.
 ```
 
 ```markdown
 <!-- `locations.md` index template -->
-# 위치 목록
+# Location List
 
-| 이름 | 유형 | 핵심 특징 |
+| Name | Type | Key trait |
 |------|------|----------|
 | {name} | {world/region/location/position} | {key trait} |
 
-## 계층 관계
+## Hierarchy
 {location hierarchy}
 ```
 
@@ -186,31 +186,31 @@ Stage ④에서 image-generation 스킬을 통해 "참조 이미지"로 생성�
 
 ### 2.3b Staging Catalog Design (continuing-situation blocking)
 
-**When:** 같은 상황이 여러 페이지에 이어지고 상대 위치가 바뀌면 안 될 때 — 카페 대화, 수술실, 회의, 식탁, 대치 등. **상황당 staging 하나.** Canonical: `workflow/reference-models.md`.
+**When:** The same situation spans multiple pages and relative positions must not flip — café dialogue, OR, meeting, dinner table, standoff, etc. **One staging per situation.** Canonical: `workflow/reference-models.md`.
 
-1. `stagings.md` 인덱스 작성
-2. `stagings/{staging-slug}.md` 작성 (좌석/스테이션/좌우 + facing)
-3. 참조 뷰 2–3장 계획 (establishing / reverse / detail)
-4. 출연 캐릭터 state·장소 position/view/state가 catalogs에 있는지 확인
+1. Write `stagings.md` index
+2. Write `stagings/{staging-slug}.md` (seats / stations / L-R + facing)
+3. Plan 2–3 reference views (establishing / reverse / detail)
+4. Confirm cast character states and location position/view/state exist in catalogs
 
-연속 상황인데 staging이 없으면 → 중단 후 staging 추가, 재개.
+If a continuing situation has no staging → stop, add staging, then resume.
 
 ---
 
 ### 2.4 Series (Episode List) Design
 
 1. Create `series.md`:
-   - `Episode List` (번호/제목/요약/페이지 수(예상))
-   - 전체 구조 서술 (감정 피크 + 페이지 넘김 긴장 흐름)
+   - `Episode List` (number / title / summary / expected page count)
+   - Overall structure (emotional peaks + page-turn tension flow)
 
 ```markdown
 # Episode List
 
-| 번호 | 제목 | 요약 | 페이지 수(예상) |
+| # | Title | Summary | Pages (expected) |
 |------|------|------|------------------|
 | 1 | {title} | {summary} | {pages} |
 
-## 전체 구조
+## Overall Structure
 {story arc overview — emotional peaks, where page-turn tension builds}
 ```
 
@@ -220,66 +220,75 @@ Stage ④에서 image-generation 스킬을 통해 "참조 이미지"로 생성�
 
 For each `episodes/{nnn}-{episode-slug}.md`, design **all pages**:
 
-#### 필수 페이지 필드
-각 `Page {idx}`마다:
-- `Page 0`은 표지(cover)로 고정
-- `페이지 스토리`: 장면이 전달하는 이야기(배경/상황/감정/전개)
-- `일러스트레이션 가이드`: 이미지에 반드시 들어갈 “구성요소”를 간결히 기록
-  - 등장 캐릭터/장소의 **슬러그**
-  - 캐릭터의 **state(복장/장비/무장 상태)** 또는 “기본(base)”
-  - 장소의 **position + view** (참조 모델 기준) 및 **state** (물리적 구조 변화가 있는 경우)
-  - 촬영 방향/구도/카메라 앵글 (참조 모델이 아닌 페이지별 연출)
-- `렌더링 텍스트`: 실제 페이지에 표시될 텍스트(언어 포함) (동화체/읽기 리듬)
-- `텍스트–이미지 분업`: 텍스트가 맡는 정보 vs 그림이 맡는 정보
-- `페이지 넘김 훅`: 마지막 페이지를 제외하고 다음 장을 당기는 궁금증/긴장
+#### Required page fields
+For each `Page {idx}`:
+- `Page 0` is fixed as the cover
+- `Page story`: the story the scene delivers (setting / situation / emotion / beat)
+- `Illustration guide`: concise “must-include” visual components
+  - Character / location **slugs**
+  - Character **state** (outfit / gear) or `base`
+  - Location **position + view** (reference-model axes) and **state** (when physical structure changed)
+  - Camera direction / framing / angle (page direction — not reference model)
+- `Rendering text`: text that will appear on the page (in the locked rendering language) — storybook voice / read-aloud rhythm
+- `Text–image split`: what text carries vs what the picture carries
+- `Page-turn hook`: curiosity / tension that pulls the next page (omit on the final page)
 
-#### Craft rules (적용)
-- Page-turn hook: 마지막 페이지 제외
-- Text–image split: “겹침 없음”은 필수 아님
-  - 대신 **페이지 스토리의 필수 정보가 텍스트+이미지 합으로 충분히 전달되는지**를 검증
-- Read-aloud rhythm: 타겟 연령에 맞는 문장/어휘 밀도
-- No didactic close: 마지막 페이지는 “설교/교훈 독백”이 아니라 장면으로 마무리
-- Age density: `overview.md`의 연령 범위를 기준으로 단어 선택 조정
+#### Craft rules (apply)
+- Page-turn hook: required except on the final page
+- Text–image split: “no overlap” is **not** mandatory
+  - Instead verify that **essential page-story information is sufficiently delivered by text + image together**
+- Read-aloud rhythm: sentence / vocabulary density fit for target age
+- No didactic close: final page ends as a scene, not a sermon / moral monologue
+- Age density: tune word choice to the age range in `overview.md`
+
+**Multilingual example (Korean edition rendering text only):**
+
+```text
+Rendering text (Korean):
+“미나는 창밖을 보았다. 구름이 천천히 지나가고 있었다.”
+```
+
+YAML image prompts stay English; overlay strings keep the target-language wording verbatim.
 
 ```markdown
 <!-- `episodes/{nnn}-{episode-slug}.md` template -->
 # Episode {nnn}: {Title}
 
-## 요약
+## Summary
 {episode summary — what happens, emotional arc}
 
 ## Craft Notes
-- 연령 밀도: {words/vocabulary fit for target age}
-- 주제 전달: {how theme is shown in scenes — not stated as sermon}
-- 클라이맥스 페이지: {page number}
+- Age density: {words/vocabulary fit for target age}
+- Theme delivery: {how theme is shown in scenes — not stated as sermon}
+- Climax page: {page number}
 
-## 페이지 구성
+## Pages
 
 ### Page {N}
 
-#### 페이지 스토리
-{이 페이지가 전달하는 이야기 — 배경, 상황, 감정, 전개}
-{중요: 페이지 스토리만 읽어도 이 페이지(및 해당 에피소드의 전개)가 명확히 상상되어야 함. 이것이 Stage ④ image-generation의 “message”가 됨.}
-{등장 캐릭터·장소는 catalogs에 등록된 이름만}
+#### Page story
+{Story this page delivers — setting, situation, emotion, beat}
+{Important: reading page story alone must make this page (and the episode beat) clearly imaginable. This becomes the Stage ④ image-generation “message”.}
+{Characters and places: catalog-registered names only}
 
-#### 일러스트레이션 가이드
-- Staging(해당 시): {staging-slug} — ref view: {establishing|reverse|detail}
-- 캐릭터: {character-slug} (state: {state-slug 또는 base})  # 장비 정체성 유지
-- 장소: {location-slug} / {position-slug} / {view-slug} (state: {state-slug 또는 base})
-- 페이지 연출: {조명/시간대/날씨/분위기, 촬영 방향/구도/카메라 앵글, 캐릭터 표정/포즈 등 — 참조 모델이 아닌 이 페이지 고유 연출}
-{연속 상황의 좌석/좌우는 staging에서 — 페이지에서 임의로 바꾸지 않음}
-{상세한 이미지 프롬프트는 Stage ④ image-generation YAML 작성 시}
+#### Illustration guide
+- Staging (when applicable): {staging-slug} — ref view: {establishing|reverse|detail}
+- Characters: {character-slug} (state: {state-slug or base})  # keep equipment identity
+- Location: {location-slug} / {position-slug} / {view-slug} (state: {state-slug or base})
+- Page direction: {lighting / time / weather / mood, camera direction / framing / angle, expression / pose — page-specific, not reference model}
+{Seats / L-R for continuing situations come from staging — do not invent on the page}
+{Detailed image prompts are written in Stage ④ image-generation YAML}
 
-#### 렌더링 텍스트
-{실제 페이지에 표시될 텍스트 — 동화체, 소리 내어 읽기 리듬}
+#### Rendering text
+{Exact page overlay text — storybook voice, read-aloud rhythm; in the locked rendering language}
 
-#### 텍스트–이미지 분업
-- 텍스트가 맡는 것: {…}
-- 그림이 맡는 것: {…}
-{검증: 페이지 스토리의 필수 정보가 텍스트+이미지 합으로 충분히 전달되는가? (yes / fix)}
+#### Text–image split
+- Text carries: {…}
+- Picture carries: {…}
+{Check: are essential page-story facts delivered by text+image together? (yes / fix)}
 
-#### 페이지 넘김 훅
-{다음 장을 넘기게 하는 궁금증·긴장 — 마지막 페이지는 "해소/잔상"으로 표기}
+#### Page-turn hook
+{Curiosity / tension that makes the reader turn — on the final page write “resolution / afterimage”}
 ```
 
 ---
@@ -288,54 +297,53 @@ For each `episodes/{nnn}-{episode-slug}.md`, design **all pages**:
 
 **Story design co-locks catalogs** — see `workflow/reference-models.md` §7.
 
-에피소드/페이지를 설계할 때 **함께** 설계한다:
+While designing episodes/pages, design **together**:
 
-1. **Staging** — 연속 상황마다 (기존 staging 인용 **또는** `stagings/{slug}.md` **추가**)
-2. **캐릭터 appearance state** — 복장/장비/지속 신체 (기존 state 인용 **또는** `characters/{slug}.md`에 state **추가**)
-3. **장소 set state** — position/view/state (기존 인용 **또는** `locations/{slug}.md`에 **추가**)
+1. **Staging** — for each continuing situation (cite existing staging **or** **add** `stagings/{slug}.md`)
+2. **Character appearance state** — outfit / gear / lasting body (cite existing state **or** **add** state to `characters/{slug}.md`)
+3. **Location set state** — position / view / state (cite existing **or** **add** to `locations/{slug}.md`)
 
-**있으면 재사용, 없으면 카탈로그에 추가한 뒤 인용.** 에피소드 파일 안에서만 복장·장비·세트 파손·좌석·좌우를 발명하지 않는다.
+**Reuse if present; if missing, add to the catalog then cite.** Do not invent outfit, gear, set damage, seats, or L-R only inside the episode file.
 
-누락이 보이면:
-1. 스토리 유닛 중단
-2. Design 카탈로그 먼저 수정 (`characters/*`, `locations/*`, `stagings/*`, `world-bible.md`)
-3. 에피소드 설계 재개 및 인용
-4. 영향받는 페이지 재검토
+When something is missing:
+1. Pause the story unit
+2. Update Design catalogs first (`characters/*`, `locations/*`, `stagings/*`, `world-bible.md`)
+3. Resume episode design and cite
+4. Re-check affected pages
 
-추가 기준:
-- page가 참조하는 **캐릭터 state**(복장/장비)가 catalogs에 정의돼 있는지
-- page가 참조하는 **장소 position/view/state**가 catalogs에 정의돼 있는지
-- 연속 상황은 **staging**을 인용하는지; staging의 cast state·location anchor가 catalogs와 일치하는지
-- 표정/시간/날씨는 페이지 연출이지 새 reference state가 아님
+Additional checks:
+- Character **states** (outfit/gear) cited by pages exist in catalogs
+- Location **position/view/state** cited by pages exist in catalogs
+- Continuing situations cite a **staging**; staging cast states and location anchor match catalogs
+- Expression / time / weather are page direction, not new reference states
 
 ---
 
 ## Completeness Check (Stage ②)
 
-- [ ] `world-bible.md`, `characters.md`, `locations.md`, `series.md` 존재
-- [ ] 연속 상황용 `stagings.md` + `stagings/{slug}.md` (필요 시) + `workflow/reference-models.md` 준수
-- [ ] 모든 `characters/{character-slug}.md`, `locations/{location-slug}.md` 작성됨
-- [ ] 모든 `episodes/{nnn}-{episode-slug}.md`에 페이지별 렌더링 텍스트 + 일러스트 가이드가 존재
-- [ ] 텍스트–이미지 분업(필수 정보 충분성)과 페이지 넘김 훅 규칙이 적용됨
-- [ ] 각 page에서 사용한 캐릭터 state / 장소 position-view-state / staging(해당 시)이 catalogs에 모두 정의돼 있어 Stage ④ Phase 0 참조 이미지 생성이 가능함
-- [ ] 스토리 설계 중 새 참조가 필요하면 catalogs에 **먼저 추가**했고, 있으면 **재사용**함 (`workflow/reference-models.md` §7)
+- [ ] `world-bible.md`, `characters.md`, `locations.md`, `series.md` exist
+- [ ] Continuing-situation `stagings.md` + `stagings/{slug}.md` (when needed) + compliance with `workflow/reference-models.md`
+- [ ] All `characters/{character-slug}.md`, `locations/{location-slug}.md` authored
+- [ ] All `episodes/{nnn}-{episode-slug}.md` have per-page rendering text + illustration guides
+- [ ] Text–image split (essential-info sufficiency) and page-turn hook rules applied
+- [ ] Every page’s character state / location position-view-state / staging (when used) is catalogued so Stage ④ Phase 0 reference generation is possible
+- [ ] During story design, new refs were **added to catalogs first** and existing ones **reused** (`workflow/reference-models.md` §7)
 
 ---
 
 ## Gate G2 (User Approval)
 
-다음에 대해 사용자 승인 전까지 Stage ③으로 넘어가지 않습니다.
-- 세계관/룰/배경: 일관적이고 충분히 구체적인가?
-- 캐릭터 카탈로그: state별 의상/장비가 맞고, 얼굴/체형 일관성이 유지되는가?
-- 장소 카탈로그: location → position → view → state 계층이 명확한가?
-- 에피소드/페이지 설계:
-  - 페이지 스토리가 감정을 잘 전달하는가?
-  - 페이지 스토리만 읽어도 페이지 전개가 명확히 상상되는가?
-  - 렌더링 텍스트가 연령·리듬에 맞는가?
-  - 텍스트–이미지 분업(필수 정보 충분성)과 페이지 넘김 훅이 있는가?
-  - 마지막 페이지가 설교가 아닌 장면으로 끝나는가?
-  - 일러스트레이션 가이드가 필요한 장면 요소를 담는가?
-  - 참조 이미지 준비성(캐릭터 state/장소 position-view-state가 catalogs에 정의돼 있는가?)
+Do not proceed to Stage ③ until the user approves:
+- World / rules / background: consistent and specific enough?
+- Character catalog: outfit/gear per state correct; face/body consistency held?
+- Location catalog: location → position → view → state hierarchy clear?
+- Episode / page design:
+  - Does page story deliver emotion well?
+  - Can page story alone make the page beat clearly imaginable?
+  - Does rendering text fit age and rhythm?
+  - Are text–image split (essential-info sufficiency) and page-turn hooks present?
+  - Does the final page end as a scene, not a sermon?
+  - Does the illustration guide carry the needed scene elements?
+  - Reference-image readiness (character states / location position-view-states defined in catalogs)?
 
 **Do not proceed until G2 is approved.**
-

@@ -2,11 +2,9 @@
 
 **Not a numbered stage.** Canonical rules for what stays locked as reference images vs what is directed per page. Read in Stage ② (catalog design), Stage ③ (integrity checks), and Stage ④ Phase 0 (reference generation).
 
-**Shared model:** Same three layers as `webtoon-authoring`, `video-authoring`, and `novel-authoring` (character, location, staging). Continuity unit here = **page**.
-
 Reference models raise **visual consistency**. They are not the whole illustration — they are the durable identity and spatial anchors that page generation must obey.
 
-**Shared model:** Same three layers as webtoon-authoring / video-authoring / novel-authoring (character, location, staging). Continuity unit here = **page**.
+**Shared model:** Same three layers as `webtoon-authoring`, `video-authoring`, and `novel-authoring` (character, location, staging). Continuity unit here = **page**.
 
 ---
 

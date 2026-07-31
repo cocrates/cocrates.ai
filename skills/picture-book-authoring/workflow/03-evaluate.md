@@ -18,33 +18,33 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 1. Load `overview.md` and extract **Validation Criteria**.
 
 2. Check **episode/page craft completeness** (design correctness):
-   - Page 0/표지 규칙 준수
-   - 모든 `Page {N}`에 `페이지 스토리`, `일러스트레이션 가이드`, `렌더링 텍스트`, `텍스트–이미지 분업`, `페이지 넘김 훅`(마지막 페이지 제외)이 존재
+   - Page 0 / cover rule followed
+   - Every `Page {N}` has `Page story`, `Illustration guide`, `Rendering text`, `Text–image split`, and `Page-turn hook` (except final page)
    - Page-turn hooks exist on non-final pages
    - Text–image split is not redundant captioning
    - Rendering text fits target age (read-aloud rhythm + word density)
    - No didactic closing monologue (theme emerges via final scene/image)
 
-3. Check **Reference Model Integrity** (그림책 장면 일관성의 핵심):
-   - 캐릭터 참조 모델(= state) 무결성
-     - 각 page에서 사용하는 캐릭터는 `characters/{character-slug}.md`에 정의된 **state**(또는 base) 중 하나를 명시하는가
-     - 표정/자세/동작/감정 표현은 “참조 모델 state”가 아니라 페이지 가이드(페이지 이미지 생성 결정)로 남아 있는가
-     - 캐릭터 state는 이야기에서 “물리적 외형/복장 변화”가 있을 때만 갱신되는가
-   - 장소 참조 모델(= state) 무결성
-     - 각 page에서 사용하는 장소는 `locations/{location-slug}.md`에 정의된 **scene 축(position + view)** 및 해당 scene의 **state(base 또는 state-slug)**를 명시하는가
-     - 조명/시간대/날씨/분위기/촬영 방향/구도/카메라 앵글/동적 요소는 참조 모델 state가 아닌 페이지별 연출로 취급되는가
-     - “창밖 풍경”처럼 보이는 내용이 **동적 요소 수준**이면 state 변경 없이 페이지 프롬프트로 처리되는가
-     - “새 건물 완공/벽 파괴”처럼 물리 구조가 고정적으로 바뀌면 새 state로 갱신되는가
+3. Check **Reference Model Integrity** (core of picture-book scene consistency):
+   - Character reference model (= state) integrity
+     - Each page names a **state** (or base) defined in `characters/{character-slug}.md`
+     - Expression / posture / action / emotion stay in the page guide (page image direction), not as reference-model states
+     - Character state updates only when the story has a lasting physical / outfit change
+   - Location reference model (= state) integrity
+     - Each page names a location with **scene axes (position + view)** and that scene’s **state (base or state-slug)** from `locations/{location-slug}.md`
+     - Lighting / time / weather / mood / camera direction / framing / angle / transient elements are page direction, not reference-model state
+     - “Outside-the-window view” treated as **transient** → page prompt, no state change
+     - Permanent physical change (new building / wall destroyed) → new state
 
 4. Check **Scene Continuity & Visual Consistency**:
-   - 연속된 페이지에서 “같은 장면”으로 묶이는 구간은 동일한 캐릭터 state / 동일한 장소 scene(position+view) / 동일한 state를 유지하는가
-   - 변경이 필요한 순간에는 어떤 변경인지(캐릭터: 복장/장비 state, 장소: 물리 구조 state)를 명확히 표시했는가
-   - `position`/`view` 의미가 “무엇이 보이는가(보이는 장면)” 관점으로 정의되어 있는가
+   - Spans treated as “the same scene” keep the same character state / location scene (position+view) / state
+   - When change is needed, the change type is explicit (character: outfit/gear state; location: physical-structure state)
+   - `position` / `view` are defined by “what is visible”
 
 5. Check **Text–Image Collaboration**:
-   - 페이지 스토리의 핵심 정보가 `렌더링 텍스트 + 이미지가 담아야 할 정보` 합으로 충분히 전달되는가
-   - “겹침 없음”은 강제하지 않되, 중복으로 인해 중요한 정보가 사라지지 않는가
-   - 페이지 넘김 훅이 실제로 다음 페이지 내용을 자연스럽게 기대하게 만드는가
+   - Core page-story information is sufficiently delivered by `rendering text + what the image must show`
+   - “No overlap” is not forced, but redundancy must not erase important information
+   - Page-turn hooks naturally set up the next page
 
 6. Persona checks — run the [Default persona set](#persona-reference); lock **Target Child Reader** (age band from overview) first.
 7. Record results into `evaluations/{nnn}-{episode-slug}.md`, including per-persona critique and **Adjudication**.
@@ -56,7 +56,7 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 `evaluations/{nnn}-{episode-slug}.md`:
 
 ```markdown
-# Episode {nnn} 평가
+# Episode {nnn} Evaluation
 
 ## 1. Criteria Check (from overview.md Validation Criteria)
 | Criterion | Result | Evidence |
@@ -66,139 +66,139 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 ## 2. Craft Checks (Design correctness)
 | Check | Result | Evidence |
 |-------|--------|----------|
-| 모든 Page 필수 필드 존재 | ✅ / ⚠️ / ❌ | {page} |
-| Page 0은 cover | ✅ / ⚠️ / ❌ | {page} |
-| Page-turn hook (비-마지막 페이지) | ✅ / ⚠️ / ❌ | {page} |
-| Text–image split (중복 캡션/군더더기 없음) | ✅ / ⚠️ / ❌ | {page} |
+| All required Page fields present | ✅ / ⚠️ / ❌ | {page} |
+| Page 0 is cover | ✅ / ⚠️ / ❌ | {page} |
+| Page-turn hook (non-final pages) | ✅ / ⚠️ / ❌ | {page} |
+| Text–image split (no redundant caption fluff) | ✅ / ⚠️ / ❌ | {page} |
 | Read-aloud rhythm / age density | ✅ / ⚠️ / ❌ | {page} |
 | No didactic closing monologue | ✅ / ⚠️ / ❌ | {last page} |
-| 캐릭터/장소는 catalogs 등록 엔터티만 사용 | ✅ / ⚠️ / ❌ | {entities} |
+| Characters/locations are catalog entities only | ✅ / ⚠️ / ❌ | {entities} |
 
 ## 3. Reference Model Integrity Checks (Visual lock)
 
-### 3.1 캐릭터 참조 모델(= state) 검사
+### 3.1 Character reference model (= state)
 | Check | Result | Evidence |
 |-------|--------|----------|
-| 모든 page에 캐릭터 state(또는 base)가 명시됨 | ✅ / ⚠️ / ❌ | {page + character-slug} |
-| state는 “복장/장비/무장/휴대물” 같은 물리 변화만 반영 | ✅ / ⚠️ / ❌ | {page} |
-| 표정/자세/동작은 page 가이드에 있고 state로 고정되지 않음 | ✅ / ⚠️ / ❌ | {page} |
-| 물리 변화가 있을 때만 state가 갱신됨 | ✅ / ⚠️ / ❌ | {page} |
+| Every page names character state (or base) | ✅ / ⚠️ / ❌ | {page + character-slug} |
+| State reflects physical change only (outfit / gear / carried items) | ✅ / ⚠️ / ❌ | {page} |
+| Expression / posture / action stay in page guide, not as state | ✅ / ⚠️ / ❌ | {page} |
+| State updates only when physical change occurs | ✅ / ⚠️ / ❌ | {page} |
 
-### 3.2 장소 참조 모델(= state) + scene 정의 검사
+### 3.2 Location reference model (= state) + scene definition
 | Check | Result | Evidence |
 |-------|--------|----------|
-| 모든 page에 location + position + view가 명시됨 | ✅ / ⚠️ / ❌ | {page} |
-| 조명/시간/날씨/분위기/촬영 방향/구도/카메라 앵글은 참조 모델 state가 아님 (view는 “무엇이 보이는가” 기준) | ✅ / ⚠️ / ❌ | {page} |
-| “창밖 풍경”의 변화 기준이 올바름
-|  - 동적(일시/가역) 변화는 state 아님 | ✅ / ⚠️ / ❌ | {page + 예시} |
-|  - 물리 구조(새 건물/벽 파괴 등) 변화는 새 state로 갱신 | ✅ / ⚠️ / ❌ | {page + 예시} |
-| 연속 장면 구간에서 위치(position)·보이는 뷰(view)·state 유지가 일관됨 | ✅ / ⚠️ / ❌ | {page range} |
+| Every page names location + position + view | ✅ / ⚠️ / ❌ | {page} |
+| Lighting / time / weather / mood / camera / framing are not reference-model state (view = “what is visible”) | ✅ / ⚠️ / ❌ | {page} |
+| Outside-window change rule is correct
+|  - Transient (temporary / reversible) change is not a state | ✅ / ⚠️ / ❌ | {page + example} |
+|  - Physical-structure change (new building / wall destroyed, …) → new state | ✅ / ⚠️ / ❌ | {page + example} |
+| Continuous scene spans keep position / view / state consistent | ✅ / ⚠️ / ❌ | {page range} |
 
 
 ### 3.3 Staging reference model (= continuing-situation blocking)
 | Check | Result | Evidence |
 |-------|--------|----------|
-| 연속 상황에 staging이 있는가 | ✅ / ⚠️ / ❌ | {span + staging-slug} |
-| staging 참조 뷰 2–3 계획 | ✅ / ⚠️ / ❌ | {staging file} |
-| 페이지가 staging을 인용하는가 | ✅ / ⚠️ / ❌ | {page} |
-| 무단 L/R·좌석·스테이션 변경 없음 | ✅ / ⚠️ / ❌ | {page range} |
+| Continuing situations have a staging | ✅ / ⚠️ / ❌ | {span + staging-slug} |
+| Staging plans 2–3 reference views | ✅ / ⚠️ / ❌ | {staging file} |
+| Pages cite the staging | ✅ / ⚠️ / ❌ | {page} |
+| No unauthorized L/R · seat · station swaps | ✅ / ⚠️ / ❌ | {page range} |
 
 ### 3.4 Illustration Guide Completeness
 | Check | Result | Evidence |
 |-------|--------|----------|
-| illustration guide가 “캐릭터 참조 모델 + 장소 scene”을 모두 포함 | ✅ / ⚠️ / ❌ | {page} |
-| page story가 illustration guide의 표시 요소와 모순되지 않음 | ✅ / ⚠️ / ❌ | {page} |
+| Illustration guide includes character reference model + location scene | ✅ / ⚠️ / ❌ | {page} |
+| Page story does not contradict illustration-guide display elements | ✅ / ⚠️ / ❌ | {page} |
 
-### 3.5 일러스트 텍스트(시각 효과) 가이드 적합성
+### 3.5 Illustration text (visual effects) guide fitness
 | Check | Result | Evidence |
 |-------|--------|----------|
-| `렌더링 텍스트`의 읽기 순서(좌→우, 위→아래)가 자연스러운가 | ✅ / ⚠️ / ❌ | {page} |
-| 대사/감탄사 강조(가장 크게+굵게, 가능하면 글로우/아웃라인)가 명확한가 | ✅ / ⚠️ / ❌ | {page} |
-| 내레이션 스타일(더 작게+둥근 세리프+따뜻한 그림자)이 일관적인가 | ✅ / ⚠️ / ❌ | {page} |
-| 중요 단어/표현이 크기 또는 색상으로 구분되어 강조되는가 | ✅ / ⚠️ / ❌ | {page} |
-| 텍스트가 얼굴/핵심 비주얼을 가리지 않도록 `anchor area`가 제안되는가 | ✅ / ⚠️ / ❌ | {page} |
-| 8세 이상 & 텍스트가 많은 페이지는 본문을 “그림 속 이야기 섹션(패널/박스)”으로 분리하는가(권장) | ✅ / ⚠️ / ❌ | {page} |
+| Reading order for `rendering text` (left→right, top→bottom) is natural | ✅ / ⚠️ / ❌ | {page} |
+| Dialogue / exclamation emphasis (largest + bold; glow/outline when useful) is clear | ✅ / ⚠️ / ❌ | {page} |
+| Narration style (smaller + soft rounded serif + warm shadow) is consistent | ✅ / ⚠️ / ❌ | {page} |
+| Key words/phrases are emphasized by size or color | ✅ / ⚠️ / ❌ | {page} |
+| Anchor area suggested so text does not cover faces / key visuals | ✅ / ⚠️ / ❌ | {page} |
+| Ages 8+ & text-heavy pages separate body copy into an in-image story section (panel/box) — recommended | ✅ / ⚠️ / ❌ | {page} |
 
 ## 4. Scene Continuity & Visual Consistency Checks
 | Check | Result | Evidence |
 |-------|--------|----------|
-| 연속 페이지에서 동일성(캐릭터/장소/구조) 유지 | ✅ / ⚠️ / ❌ | {page range} |
-| 변경 시점에 변경 종류(캐릭터 state vs 장소 state vs 동적 요소)가 구분됨 | ✅ / ⚠️ / ❌ | {page} |
-| position/view가 “무엇이 보이는가” 기준으로 정의되어 장면이 명확함 | ✅ / ⚠️ / ❌ | {page} |
+| Continuous pages keep identity (character / place / structure) | ✅ / ⚠️ / ❌ | {page range} |
+| Change moments distinguish change type (character state vs location state vs transient) | ✅ / ⚠️ / ❌ | {page} |
+| position/view defined by “what is visible” so the scene is clear | ✅ / ⚠️ / ❌ | {page} |
 
 ## 5. Text–Image Collaboration Checks
 | Check | Result | Evidence |
 |-------|--------|----------|
-| 페이지 스토리의 핵심 정보가 text+image로 충분히 전달 | ✅ / ⚠️ / ❌ | {page} |
-| 중복/누락으로 인해 다음 페이지 기대가 무너지는지 | ✅ / ⚠️ / ❌ | {page} |
-| 페이지 넘김 훅이 자연스러운 긴장/호기심으로 연결 | ✅ / ⚠️ / ❌ | {page} |
+| Core page-story info is sufficiently delivered by text+image | ✅ / ⚠️ / ❌ | {page} |
+| Redundancy / omission does not collapse next-page expectation | ✅ / ⚠️ / ❌ | {page} |
+| Page-turn hook connects as natural tension / curiosity | ✅ / ⚠️ / ❌ | {page} |
 
 ## 6. Persona Checks
-{필수 세트 전원 실행. 페르소나마다: Stance / Strengths / Defects(severity+High/Med/Low+fix) / Reader impact.}
+{Run the full required set. Per persona: Stance / Strengths / Defects(finding+High/Med/Low+fix) / Reader impact.}
 
-### Target Child Reader (아이·잠긴 연령대)
-- Who: {overview 연령대·읽기 맥락 — 혼자 / 읽어주기}
-- 재미도: {rating}
-- 이해도: {rating}
-- 페이지 넘기고 싶은가: {rating}
-- 혼란·공포·지루 구간: {…}
-- 피드백: {feedback}
+### Target Child Reader (locked age band)
+- Who: {overview age band · reading context — alone / read-aloud}
+- Fun: {rating}
+- Understanding: {rating}
+- Want to turn the page: {rating}
+- Confused / scary / boring stretches: {…}
+- Feedback: {feedback}
 
-### Caregiver / Parent (보호자·구매·읽어주기)
-- 가치/공유 의향: {rating}
-- 안전성(연령 적합성): {rating}
-- 설교 과잉 없음: {rating}
-- 읽어주기 리듬(소리 내어 읽기): {rating}
-- 피드백: {feedback}
+### Caregiver / Parent (buyer · read-aloud)
+- Value / share willingness: {rating}
+- Safety (age fit): {rating}
+- No sermon overload: {rating}
+- Read-aloud rhythm: {rating}
+- Feedback: {feedback}
 
-### Genre / Age Critic (그림책 장르·발달)
-- 연령대 약속 대비 밀도·어휘: {rating}
-- 장르/형식 기대(반복·누적·유머 등): {rating}
-- 피드백: {feedback}
+### Genre / Age Critic (picture-book genre · development)
+- Density / vocabulary vs age-band contract: {rating}
+- Genre / form expectations (repetition / accumulation / humor, …): {rating}
+- Feedback: {feedback}
 
-### Story Critic (평론·스토리)
-- 스토리 완결성: {rating}
-- 캐릭터 매력·동기: {rating}
-- 텍스트–이미지 협응·리듬: {rating}
-- 교훈 강요 없이 의미가 남는가: {rating}
-- 피드백: {feedback}
+### Story Critic (critique · story)
+- Story completeness: {rating}
+- Character appeal · motivation: {rating}
+- Text–image collaboration · rhythm: {rating}
+- Meaning without forced moral: {rating}
+- Feedback: {feedback}
 
-### Illustration specialist (일러스트 전문가)
-- 참조 모델 일관성: {rating}
-- 장면 명확성(무엇이 보이는가): {rating}
-- 페이지 프레이밍 고정 준수: {rating}
-- 텍스트 시각 효과 가이드 제공(폰트/강조/읽기 순서/anchor area/패널 분리): {rating}
-- 텍스트 오버레이 가이드 (Stage④ YAML 반영용): {feedback}
-  - Reading order anchor plan: {좌→우/위→아래 배치 규칙 + 텍스트 영역 맵}
+### Illustration specialist
+- Reference-model consistency: {rating}
+- Scene clarity (what is visible): {rating}
+- Page framing lock compliance: {rating}
+- Text visual-effects guide provided (font / emphasis / reading order / anchor area / panel split): {rating}
+- Text overlay guide (for Stage ④ YAML): {feedback}
+  - Reading order anchor plan: {left→right / top→bottom placement rules + text-area map}
   - TextBox list: {line-index → anchor area / size / font style / color / emphasis}
-  - Dialogue/exclamation style: {largest+bold + (글로우/아웃라인 등) 적용 방식}
-  - Narration style: {smaller font + (serif/sans) + 그림자 적용 방식}
-  - Key word emphasis: {어떤 단어/표현을 어떻게 강조하는지}
-  - 8세+ 텍스트 많은 경우: {본문 패널/박스 분리 yes/no + 위치/크기}
+  - Dialogue/exclamation style: {largest+bold + (glow/outline, …) application}
+  - Narration style: {smaller font + (serif/sans) + shadow application}
+  - Key word emphasis: {which words/phrases and how}
+  - Ages 8+ text-heavy case: {body panel/box split yes/no + position/size}
 
-### Educator / Librarian (선택 — overview가 교육·도서관 유통을 잠근 경우 필수)
-- 학습/정서 목표와의 정합: {rating}
-- 교실·도서관 읽어주기 적합성: {rating}
-- 피드백: {feedback}
+### Educator / Librarian (optional — required when overview locks school/library distribution)
+- Fit to learning / socio-emotional goals: {rating}
+- Classroom / library read-aloud fitness: {rating}
+- Feedback: {feedback}
 
 ## 7. Adjudication
-{Apply 결정을 기록. 기본 동점 처리: **Target Child Reader**. High finding을 조용히 버리지 말 것.}
+{Record Apply decisions. Default tie-break: **Target Child Reader**. Do not quietly drop High findings.}
 
-| # | Finding (persona) | Severity | Conflict? | Apply? | Rationale (Target Child first) | 적용 위치 | Status |
+| # | Finding (persona) | Severity | Conflict? | Apply? | Rationale (Target Child first) | Apply at | Status |
 |---|-------------------|----------|-----------|--------|--------------------------------|-----------|--------|
 
-## 8. 수정 사항 (Design-First)
-| # | Finding | Severity | 적용 위치(Design 파일 / Stage④ YAML overlay 반영) | 개선안(무엇을 바꿀지) | Action Status |
+## 8. Revisions (Design-First)
+| # | Finding | Severity | Apply at (Design file / Stage ④ YAML overlay) | Improvement (what to change) | Action Status |
 |---|---------|-----------|---------------------------|---------------------------|----------------|
 | 1 | {finding} | High/Med/Low | characters/... / locations/... / episodes/... | {proposed edit} | {todo/done} |
 | 2 | {finding} | ... | ... | ... | ... |
 
-## 9. Story Lock Readiness (G3 체크)
-- [ ] Reference Model Integrity: ✅/⚠️/❌ 모든 항목
-- [ ] Scene Continuity & Visual Consistency: ✅/⚠️/❌ 모든 항목
-- [ ] Illustration Guide Completeness: ✅/⚠️/❌ 모든 항목
-- [ ] Illustration Text Styling/Effects Guide: ✅/⚠️/❌ 모든 항목
-- [ ] Craft Checks: ✅/⚠️/❌ 모든 항목
+## 9. Story Lock Readiness (G3 check)
+- [ ] Reference Model Integrity: ✅/⚠️/❌ all items
+- [ ] Scene Continuity & Visual Consistency: ✅/⚠️/❌ all items
+- [ ] Illustration Guide Completeness: ✅/⚠️/❌ all items
+- [ ] Illustration Text Styling/Effects Guide: ✅/⚠️/❌ all items
+- [ ] Craft Checks: ✅/⚠️/❌ all items
 - [ ] Required personas + Adjudication: ✅/⚠️/❌
 - [ ] Target-child readiness: ✅/⚠️/❌
 ```
@@ -219,21 +219,21 @@ Critics **advise**. Fill the Adjudication table and apply chosen fixes before G3
 
 | Persona | Focus | Typical questions |
 |---------|-------|-------------------|
-| **Target Child Reader** | 잠긴 연령 아이의 이해·재미·넘김 욕구 | 재밌나? 따라가나? 다음 장이 궁금한가? |
-| **Caregiver / Parent** | 안전·가치·설교·읽어주기 | 같이 읽고 싶은가? 과한 공포/설교인가? |
-| **Genre / Age Critic** | 연령·형식 계약 | 이 나이 그림책으로 밀도/어휘가 맞는가? |
-| **Story Critic** | 완결·캐릭터·텍스트–이미지 협응 | 이야기와 그림이 한 호흡인가? |
-| **Illustration specialist** | 참조 일관성·장면 가시성·텍스트 오버레이 | Stage ④에서 깨지지 않는가? |
-| **Educator / Librarian** | 교육·공공 읽어주기 적합성 | 교실/도서관에서 쓸 수 있는가? |
+| **Target Child Reader** | Understanding · fun · page-turn desire for the locked age | Is it fun? Can I follow? Do I want the next page? |
+| **Caregiver / Parent** | Safety · value · sermon · read-aloud | Want to share it? Too scary / preachy? |
+| **Genre / Age Critic** | Age · form contract | Density / vocabulary right for this age of picture book? |
+| **Story Critic** | Completeness · character · text–image collaboration | Do story and pictures share one breath? |
+| **Illustration specialist** | Reference consistency · scene visibility · text overlay | Will Stage ④ hold together? |
+| **Educator / Librarian** | Education · public read-aloud fitness | Usable in classroom / library? |
 
 ### Evaluation perspectives (rubric summary)
 
 | Perspective | Focus | Typical questions |
 |---|---|---|
-| 아이(Target Child) | 이해/즐거움 | 재밌는가? 따라갈 수 있는가? 넘기고 싶어지는가? |
-| 부모(Caregiver) | 안전/가치 | 안전한가? 공유하고 싶은가? 설교 과잉은 없는가? |
-| Genre/Age + Story | 완성/연령 적합성 | 밀도·협응·리듬이 연령에 맞는가? |
-| 일러스트 전문가 | 시각 일관성 | 참조 모델 연결이 끊기지 않는가? 장면이 명확히 “보이는가”? |
+| Target Child | Understanding / enjoyment | Fun? Followable? Want to turn? |
+| Caregiver | Safety / value | Safe? Want to share? No sermon overload? |
+| Genre/Age + Story | Finish quality / age fit | Density · collaboration · rhythm fit the age? |
+| Illustration specialist | Visual consistency | Do reference links hold? Is the scene clearly “visible”? |
 
 ---
 
@@ -242,9 +242,9 @@ Critics **advise**. Fill the Adjudication table and apply chosen fixes before G3
 If Evaluation finds issues:
 
 1. Return to **Stage ② (Design)** and update the relevant Design files:
-   - `characters/{character-slug}.md` (캐릭터 state)
+   - `characters/{character-slug}.md` (character state)
    - `locations/{location-slug}.md` (location scene: position/view/state)
-   - `episodes/{nnn}-{episode-slug}.md` (페이지별 illustration guide/렌더링 텍스트)
+   - `episodes/{nnn}-{episode-slug}.md` (per-page illustration guide / rendering text)
 2. Re-run affected checks and update `evaluations/{nnn}-{episode-slug}.md`.
 3. Only after user approves the story lock (G3), proceed to Stage ④.
 
@@ -256,9 +256,9 @@ User confirms:
 
 1. Criteria Check — all items addressed?
 2. Craft Checks — satisfactory?
-3. Reference Model Integrity — 캐릭터 state / 장소 position-view-state가 catalogs와 모순 없이 정의되어 있는가?
-4. Scene Continuity & Visual Consistency — 연속 장면의 동일성이 유지되고, 변경은 필요한 곳에서만 발생하는가?
-5. Persona feedback + Adjudication — **Target Child** 기준으로 잔여 리스크가 허용 가능한가?
+3. Reference Model Integrity — character states / location position-view-states defined without contradicting catalogs?
+4. Scene Continuity & Visual Consistency — continuous scenes keep identity; changes only where needed?
+5. Persona feedback + Adjudication — residual risk acceptable under **Target Child** priority?
 6. **Story lock:** episode page stories, rendering text, text–image split, page-turn hooks, and illustration guides are now frozen for image generation.
 
 **Do not proceed to Stage ④ until G3 is approved.**

@@ -19,7 +19,7 @@ metadata:
 
 # Picture Book Authoring
 
-Generate complete children's picture books (0-8세) — from story concept through design, evaluation, and image generation — producing a cohesive narrative with AI-generated illustrations for each page using the **image-generation** skill.
+Generate complete children's picture books (ages 0–8) — from story concept through design, evaluation, and image generation — producing a cohesive narrative with AI-generated illustrations for each page using the **image-generation** skill.
 
 ## Core Principles
 > **The unexamined picture book is not worth generating.**
@@ -123,36 +123,36 @@ For step-by-step procedures, read the stage workflow file at the start of each s
 - Reference models (cross-stage): `workflow/reference-models.md` — character / location / staging
 
 ## Stage 1: Define
-세부 절차는 `workflow/01-define.md`를 참고하세요.
+For detailed procedure, see `workflow/01-define.md`.
 
-- `overview.md` 생성(에피소드/페이지 기준 메타 + `Validation Criteria`)
-- G1: 사용자 승인 전에는 Stage ②로 진행하지 않음
+- Create `overview.md` (episode/page-scale metadata + `Validation Criteria`)
+- G1: Do not proceed to Stage ② until the user approves
 
 ---
 
 ## Stage 2: Design
-세부 절차는 `workflow/02-design.md`를 참고하세요.
+For detailed procedure, see `workflow/02-design.md`.
 
-- `world-bible.md`, `characters/*.md`, `locations/*.md`, `series.md`, `episodes/*.md` 작성/승인
-- G2: 사용자 승인 전에는 Stage ③으로 진행하지 않음
+- Author/approve `world-bible.md`, `characters/*.md`, `locations/*.md`, `series.md`, `episodes/*.md`
+- G2: Do not proceed to Stage ③ until the user approves
 
 ---
 
 ## Stage 3: Evaluate
-세부 절차는 `workflow/03-evaluate.md`를 참고하세요.
+For detailed procedure, see `workflow/03-evaluate.md`.
 
-- 에피소드 단위로 `evaluations/*.md` 생성
-- **필수 페르소나** 실행 (Target Child, Caregiver, Genre/Age, Story Critic, Illustration specialist; Educator/Librarian when overview locks education use) + **Adjudication** (Target Child 우선)
-- G3: 사용자 승인(Story lock) 전에는 Stage ④로 진행하지 않음
+- Create `evaluations/*.md` per episode
+- Run **required personas** (Target Child, Caregiver, Genre/Age, Story Critic, Illustration specialist; Educator/Librarian when overview locks education use) + **Adjudication** (Target Child first)
+- G3: Do not proceed to Stage ④ until the user approves (story lock)
 
 ---
 
 ## Stage 4: Generate
-세부 절차는 `workflow/04-generate.md`를 참고하세요.
+For detailed procedure, see `workflow/04-generate.md`.
 
-- 참조 이미지(캐릭터/장소) → 페이지 이미지 생성
-- 각 이미지 YAML은 사용자 명시 승인 후 생성
-- G4: 최종 결과(출력물) 사용자 승인 전 전달하지 않음
+- Reference images (characters/locations/stagings) → page images
+- Generate each image only after explicit user approval of its YAML
+- G4: Do not deliver the final result until the user approves
 
 ---
 

@@ -3,9 +3,9 @@
 **Not a numbered stage.** Read when starting Stage ②/③/④, when revising (within the stage’s loops), or when any approved artifact changes.
 
 This file is the **single source of truth** for keeping:
-- story/연출 일관성
-- character/location/staging/world 룰 일관성
-- image identity 일관성 (reference-based)
+- story / direction consistency
+- character / location / staging / world-rule consistency
+- image identity consistency (reference-based)
 
 ---
 
@@ -17,8 +17,8 @@ This file is the **single source of truth** for keeping:
 | **Evaluation Layer** | `evaluations/*.md` where **story lock** is approved per episode |
 | **Reference Images** | `images/characters/*`, `images/locations/*`, `images/stagings/*` — identity + set + ensemble blocking |
 | **Staging** | Continuing-situation who-is-where — `workflow/reference-models.md` |
-| **Page Images** | `images/{nnn}-{episode-slug}/*` — rendered pages including locked `렌더링 텍스트` overlay |
-| **Story Lock** | G3 approval: page stories/rendering text/text–image split/page-turn hooks/illustration guides are frozen for image generation |
+| **Page Images** | `images/{nnn}-{episode-slug}/*` — rendered pages including locked `rendering text` overlay |
+| **Story Lock** | G3 approval: page stories / rendering text / text–image split / page-turn hooks / illustration guides are frozen for image generation |
 
 ---
 
@@ -92,4 +92,3 @@ When resuming mid-work:
 2. Re-load disk artifacts for the active stage (do not rely only on chat summaries).
 3. Confirm whether G3 story lock already exists for those episodes.
 4. Follow that stage workflow file again (`workflow/0X-*.md`).
-

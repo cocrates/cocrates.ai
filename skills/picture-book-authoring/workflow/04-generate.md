@@ -16,7 +16,7 @@ To preserve story lock:
 - Allowed in ④:
   - image YAML prompts that implement locked illustration guides
   - re-rendering reference/page PNGs for quality/consistency (max 2 retries per image)
-  - rendering the locked `렌더링 텍스트` inside each page image
+  - rendering the locked `rendering text` inside each page image
 - Not allowed in ④:
   - rewriting episode/page story or rendering text
   - changing illustration guide meaning (only prompt phrasing/tightening)
@@ -28,12 +28,12 @@ If a problem is a **Design gap** (wrong cast/place/state/unclear guide):
 
 ---
 
-## Phase 0: Reference Image Generation (Characters + Locations)
+## Phase 0: Reference Image Generation (Characters + Locations + Stagings)
 
-Goal: 참조 모델(캐릭터·장소·staging — `workflow/reference-models.md`)을 참조 이미지로 생성하여, 이후 모든 페이지 이미지의 일관성 기반을 확보한다.
+Goal: Generate reference models (character · location · staging — `workflow/reference-models.md`) as reference images so every later page image has a consistency base.
 
-**포함:** 캐릭터 얼굴/체형/복장·장비(state별), 장소 세트 구조(state별), staging 앙상블 배치(2–3뷰).
-**불포함:** 표정/포즈, 조명/시간/날씨/분위기, 일회성 카메라, 동적 요소 — 페이지 연출.
+**Included:** Character face/body/outfit·gear (per state), location set structure (per state), staging ensemble blocking (2–3 views).
+**Excluded:** Expression/pose, lighting/time/weather/mood, one-off camera, transient elements — page direction.
 
 ### 0.1 Generation order (per catalogs)
 
@@ -44,7 +44,7 @@ Goal: 참조 모델(캐릭터·장소·staging — `workflow/reference-models.md
 5. Location state variants: `images/locations/{location-slug}-{position-slug}-{view-slug}-{state-slug}.yaml/.png`
 6. Staging ensemble refs (2–3 views): `images/stagings/{staging-slug}-{establishing|reverse|detail}.yaml/.png` — see `workflow/reference-models.md`
 
-### 0.2.1 샘플: reference image YAML 구조
+### 0.2.1 Sample: reference image YAML structure
 
 **Character base YAML structure** (`images/characters/{character-slug}.yaml`):
 
@@ -102,8 +102,8 @@ output: "./images/locations/{location-slug}-{position-slug}-{view-slug}.png"
 For each reference image:
 1. Create image-generation YAML that reflects the approved Design notes.
    - YAML `title/message/design` role boundary:
-     - `message`: 참조 이미지의 “의미(정체성/구조 일관성)”만 간단히(스토리/배치/폰트 디테일 중복 금지)
-     - `design`: 참조 이미지의 “시각 구현”만(캐릭터 얼굴/체형/복장 state, 장소 물리 구조 state, 프레이밍 앵커; on-image text 없음)
+     - `message`: only the reference image’s “meaning (identity / structure consistency)” briefly (no story / layout / font-detail duplication)
+     - `design`: only the reference image’s “visual implementation” (character face/body/outfit state, location physical-structure state, framing anchors; no on-image text)
 2. Show the full YAML to the user and request explicit approval.
 3. Only after explicit approval, call the MCP image generation.
 4. Verify visual quality (do not treat it as story redesign).
@@ -123,13 +123,13 @@ For each page image:
 1. Create `{page}.yaml` that:
    - uses character/location/staging reference PNGs; keep seating/L-R from staging when cited
    - implements only the locked illustration guide action
-   - renders the locked `렌더링 텍스트` inside the image as part of illustration
-   - uses the locked `렌더링 텍스트` verbatim (언어 포함 그대로 / 번역·재서술·요약·어순 변경 금지)
-   - (참고) if `evaluations/{nnn}-{episode-slug}.md`에 일러스트 전문가의 텍스트 시각 효과 가이드가 있다면, 해당 가이드를 그대로 텍스트 박스 anchor area / 폰트/강조 규칙에 반영
-   - YAML `title/message/design`은 아래 역할 경계를 지켜 중복을 피함:
-     - `title`: `{episode-slug} / Page {idx}` 같은 짧은 이미지 이름(서사/샷리스트 금지)
-     - `message`: `페이지 스토리`에서 “무엇이 전달돼야 하는가(의미/정서/관계/전개 비트)”만 1~2문장으로 요약(shot list/배치/폰트 중복 금지)
-     - `design`: `일러스트레이션 가이드` + (TextBox/anchor area/폰트/색/강조/패널 분리)처럼 “그림으로 어떻게 구현할지”만 작성(episode 설계를 근거로만 사용)
+   - renders the locked `rendering text` inside the image as part of the illustration
+   - uses the locked `rendering text` **verbatim** (keep language as locked — no translation, paraphrase, summary, or word-order change)
+   - (note) if `evaluations/{nnn}-{episode-slug}.md` includes an Illustration specialist text visual-effects guide, apply that guide to TextBox anchor areas / font / emphasis rules
+   - YAML `title/message/design` respect role boundaries and avoid duplication:
+     - `title`: short image name such as `{episode-slug} / Page {idx}` (no narrative / shot list)
+     - `message`: 1–2 sentences from `Page story` on “what must be communicated (meaning / emotion / relationship / beat)” only (no shot list / layout / font duplication)
+     - `design`: only “how to realize it in the picture” from `Illustration guide` + (TextBox / anchor area / font / color / emphasis / panel split) — grounded in episode design
 2. Show YAML to user for explicit review and approval
 3. On explicit approval only → call MCP generate
 4. Verify:
@@ -144,16 +144,16 @@ Using the provided reference images:
 - Add extra elements only if the locked guide lists them
 
 TEXT OVERLAY (Episode rendering text):
-- Render every line from locked `렌더링 텍스트` directly into the image
-- 배치/읽기 순서(중요):
-  - 텍스트 박스는 원칙적으로 `왼쪽 → 오른쪽 → 위 → 아래`의 읽기 흐름이 되도록 배치
-  - 여러 줄일 경우, 같은 영역에서는 줄이 자연스럽게 다음 줄로 이어지게 배치
-- 대사/감탄사(exclamation)는 가장 크게 + 굵게(가능하면 얇은 글로우/아웃라인) 강조
-- 내레이션(narration)은 더 작게 + 소프트 둥근 세리프(또는 유사) + 따뜻한 그림자
-- 중요 단어/표현은 (a) 크기 확대 또는 (b) 색상 변경(또는 볼드) 중 하나로 강조
+- Render every line from locked `rendering text` directly into the image
+- Placement / reading order (important):
+  - Text boxes should follow a left → right → top → bottom reading flow by default
+  - For multiple lines in the same area, place lines so they continue naturally downward
+- Dialogue / exclamations: largest + bold (thin glow/outline when useful)
+- Narration: smaller + soft rounded serif (or similar) + warm shadow
+- Key words/phrases: emphasize by (a) larger size or (b) color change (or bold)
 - Do not obscure faces/key visuals with text
 
-**(참고) SKILL 템플릿 프롬프트 패턴**
+**(Reference) SKILL template prompt pattern**
 
 ```
 Using the provided reference images:
@@ -161,26 +161,34 @@ Using the provided reference images:
 - Change only the character's action: {action from locked illustration guide}
 - [Add any new elements only if listed in the locked illustration guide]
 
-TEXT OVERLAY — render these episode `렌더링 텍스트` lines directly into the image as part of the illustration:
-{For each line in 렌더링 텍스트, specify:}
-1. {TextBox (ReadingOrder)}: {text} — {Anchor area (예: top-left / top-right / bottom-left / bottom-right or 좌상단/우상단 등), size, font style, color, emphasis level}
+TEXT OVERLAY — render these episode `rendering text` lines directly into the image as part of the illustration:
+{For each line in rendering text, specify:}
+1. {TextBox (ReadingOrder)}: {text} — {Anchor area (e.g. top-left / top-right / bottom-left / bottom-right), size, font style, color, emphasis level}
 2. ...
 {Place text in areas that do not obscure characters' faces}
 {Key dialogue or exclamations should be largest and boldest}
 {Narration lines should be smaller, in soft rounded serif/sans appropriate to the rendering language}
 ```
 
+**Multilingual example (Korean overlay strings only; prompt English):**
+
+```
+TEXT OVERLAY — render these locked rendering-text lines verbatim:
+1. TextBox: “미나는 창밖을 보았다.” — top-left, narration, smaller soft rounded serif, warm shadow
+2. TextBox: “구름이 천천히 지나가고 있었다.” — below previous, narration, same style
+```
+
 **Text overlay design rules (must follow):**
 - All rendering text from the locked episode design must appear in the image
-- No text mutation: `렌더링 텍스트`의 문구/철자/구두점은 그대로 사용
+- No text mutation: keep wording / spelling / punctuation of `rendering text` exactly
 - Text must feel integrated into the illustration, not a plain overlay
 - Text placement must respect reading order and avoid blocking key visuals
 - Key dialogue / exclamations → largest, boldest, with glow
 - Narration lines → smaller, soft rounded serif/sans appropriate to the rendering language, white with warm shadow
 - Place text in areas that do not obscure characters' faces or key visual elements
-- For 8세 이상 & 텍스트가 많은 페이지:
-  - 본문(그림 속 이야기)을 별도 텍스트 영역(예: 연한 박스/패널)으로 분리해 가독성을 높이는 레이아웃을 권장
-  - 대사/핵심 표현은 패널 안에서 강조 규칙을 우선 적용
+- For ages 8+ & text-heavy pages:
+  - Prefer separating body copy (in-image story) into its own text area (e.g. soft box/panel) for readability
+  - Apply emphasis rules first to dialogue / key phrases inside that panel
 - The final image should look like a finished picture book page where illustration and text work together
 
 ---
@@ -206,4 +214,3 @@ Confirm with user:
 3. Final result in `output/{book-slug}-final/` — ready to deliver?
 
 **Do not deliver until G4 is approved.**
-
