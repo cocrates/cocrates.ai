@@ -22,7 +22,7 @@ params:
        "훈이는 영웅이었어요."
 
     All text must be in Korean (Hangul). The text should feel like part of the picture book page — integrated into the composition, not a plain overlay. Place text in areas that do not obscure the boy's face or the mirror. The overall layout should look like a finished picture book page where illustration and text work together. This is the final page — the mood is warm, proud, and empowering.
-  images:
+  references:
     - path: "./characters/hun.png"
   size: 1K
   aspectRatio: "4:3"

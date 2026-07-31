@@ -25,7 +25,7 @@ params:
     front of the castle, raising the blue toothbrush-sword high with a joyful,
     happy smile. Pure celebration and triumph atmosphere.
     Watercolor digital painting, warm bright pastel tones. No text.
-  images:
+  references:
     - path: "../../../images/references/characters/티라노-t-rex.png"
   size: 1K
   aspectRatio: "16:9"

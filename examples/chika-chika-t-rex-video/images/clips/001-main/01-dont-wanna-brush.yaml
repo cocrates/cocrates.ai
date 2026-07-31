@@ -29,7 +29,7 @@ params:
     Subtle sparkling light particles begin to appear around the edges of the
     frame, suggesting something magical is about to happen.
     Watercolor digital painting, warm soft pastel tones. No text.
-  images:
+  references:
     - path: "../../../images/references/characters/티라노.png"
   size: 1K
   aspectRatio: "16:9"

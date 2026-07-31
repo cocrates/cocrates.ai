@@ -32,7 +32,7 @@ Pipeline: **`message`** (story/beats to convey) → **`design`** (how to visuali
 - **Chat then YAML** — gather what the YAML needs in chat; write when enough is known. If already enough, write YAML immediately.
 - **YAML gate before generate** — user reviews YAML (`design` primary), then MCP `generate`.
 - **User review by default** — after generate, the user evaluates the artifact; AI `analyze` only on explicit request.
-- **Consistency** — requirement fields aligned; `design` ↔ `params.prompt` ↔ `params.images` aligned.
+- **Consistency** — requirement fields aligned; `design` ↔ `params.prompt` ↔ `params.references` aligned.
 - **Intent fidelity** — do not invent unrequested subjects, props, text, or styles.
 
 Human YAML fields (`title`, `summary`, **`message`**, `design`) use the **user's language** — never default them to English when the user writes in another language. `params.prompt` is **English only**.
@@ -70,7 +70,7 @@ When the user asks to interpret / analyze / evaluate / Q&A an **existing** image
 
 1. **Analyze** — MCP `analyze` with `inputs: [image path|URL]` and a prompt for the user’s question (description, critique, fidelity, Q&A). Present `{ text, interactionId }`. Follow up with `continue_interaction` as needed.
 2. **Material for YAML** — from the analysis (and user intent), draft `message` + `design` (keep/change vs source). Confirm with the user before locking.
-3. **Write YAML** — full request YAML; cite the source image in `design` and, when editing in place, in `params.images` as a ref. Prefer a new slug or explicit overwrite path.
+3. **Write YAML** — full request YAML; cite the source image in `design` and, when editing in place, in `params.references` as a ref. Prefer a new slug or explicit overwrite path.
 4. **Review / approve** → **Generate** → **Review / Revise** (Phases 2–5).
 
 Do not skip the YAML gate: analysis text alone is not a generation contract. Apply only user-agreed edits into YAML before regenerate.
@@ -165,24 +165,26 @@ User-facing picture brief in the user's language — primary YAML review object.
 | `type` | `image` |
 | `model` | `gemini-3.1-flash-image` (default) or `gemini-3-pro-image` |
 | `params.prompt` | English prompt derived from `design` |
-| `params.images` | Ordered `{path}` refs |
+| `params.references` | Ordered `{path, type?}` refs (**image only**; omit `type` or set `image`) |
 | `params.size` / `aspectRatio` / `seed` | Format |
 | `output` | Default `./{slug}.png` |
+
+**Do not use `params.images`** — removed; MCP returns `INVALID_INPUT` (`use params.references`).
 
 Recommend Pro for brand/text/layout fidelity or complex multi-character work. Do not use Flash-only `0.5K` or strip ratios with Pro.
 
 ### Prompt & references
 
 - Prompt: subject → action → setting → composition → style → lighting → details → on-image text; concrete English; ~100–250 words.
-- Bind refs with `the provided image` or `Image 1` / `Image 2` … matching `params.images` order; names only after binding.
+- Bind refs with `the provided image` or `Image 1` / `Image 2` … matching `params.references` order; names only after binding.
 - Resolve YAML-sourced refs via source `output` → verify on disk → path relative to **this** YAML; if missing, search and get user approval before locking.
-- Multi-ref: ref map → SCENE → optional TEXT OVERLAY. Max ~14 refs.
+- Multi-ref: ref map → SCENE → optional TEXT OVERLAY. Max ~14 refs (Nano Banana 2: up to 19).
 
 | Param | Notes |
 |-------|-------|
 | `size` | `0.5K` (Flash only), `1K` (default), `2K`, `4K` |
 | `aspectRatio` | Default `1:1` unless purpose implies otherwise |
-| `images` | Ordered `{path}`; order = `Image N` |
+| `references` | Ordered `{path}`; order = `Image N`. **Not** `images` |
 
 ### YAML gate
 
@@ -195,7 +197,7 @@ Present **`design`** (and refs); note model/size/aspect/output. Ask approval; **
 MCP **`cocrates-google-genai`** (GetMcpTools; `mcp_auth` if needed).
 
 1. YAML on disk.
-2. Preflight every `params.images[].path` against **this YAML's directory**; on fail, stop and ask — do not `generate`.
+2. Preflight every `params.references[].path` against **this YAML's directory**; on fail, stop and ask — do not `generate`.
 3. `generate` with `filePath` → report `files` (or `download` if background).
 
 Then Phase 4.
@@ -206,26 +208,33 @@ Then Phase 4.
 
 **Default:** Present the generated image path(s). The **user** reviews and evaluates. Do not call `analyze` unless asked.
 
-**Optional AI analyze** — only on explicit request (e.g. *analyze*, *evaluate*, *AI review*, *평가해줘*). Never auto-run after generate.
+**Optional AI analyze** — only on explicit request (e.g. *analyze*, *evaluate*, *AI review*, *평가해줘*). Never auto-run after generate. *(Architect / automation agents that remapped this gate: always run analyze with the checklist below.)*
 
 1. Resolve the artifact path from YAML `output` (relative to the YAML directory); verify on disk. Prefer an absolute path (or a path valid against the MCP process CWD).
 2. Call MCP **`analyze`**:
-   - `inputs`: `[artifact path]` (1–10; may include refs if the user wants a comparison)
+   - `inputs`: `[artifact path]` plus **reference images used in the YAML** when present (location/character/staging) so geometry can be compared (1–10 total).
    - `model`: omit unless the user overrides (default `gemini-3.5-flash`)
-   - `prompt`: evaluation brief in the **user's language**, grounded in approved `message` + `design` (and `summary` if present). Ask for a structured report covering **all** of:
+   - `prompt`: evaluation brief in the **user's language**, grounded in approved `message` + `design` (and `summary` if present). **Quote** camera/POV, must-show, and must-hide/occlusion constraints from `design` — do not rely on a vague “evaluate this image.” Ask for a structured report covering **all** of:
      1. **Intent fit** — does the image match the designed intent (`design` / prompt realization)?
      2. **Message delivery** — is `message` (story/beats) clearly conveyed?
-     3. **Functional** — missing/wrong subjects, text errors, ref fidelity, format issues
-     4. **Quality / completeness** — artifacts, composition, clarity, polish gaps
-     5. **Improvements** — concrete, prioritized suggestions (what to change in `design` / prompt)
-3. Present `{ text, interactionId }` to the user. Do **not** silently edit YAML or regenerate from the report.
+     3. **Spatial geometry (mandatory when the design implies place/camera)** — each item **PASS/FAIL + visual evidence**:
+        - **Solid architecture** — walls/doors/floors that should exist are present (no vanished wall / open void)
+        - **Occlusion / line-of-sight** — people or objects behind an opaque barrier from this POV are **not** visible (no X-ray / see-through wall; outdoor shot must not reveal indoor-only cast through missing architecture)
+        - **Camera consistency** — visible cast matches what that camera can see
+        - **Layout** — left/right, near/far, beside/behind, indoor vs outdoor match `design`
+     4. **Functional** — missing/wrong subjects, text errors, ref fidelity, format issues
+     5. **Quality / completeness** — artifacts, composition, clarity, polish gaps
+     6. **Improvements** — concrete, prioritized suggestions (what to change in `design` / prompt), including **explicit negative constraints** for geometry Fails (e.g. “opaque wall must fully block caregiver; do not show interior figure”)
+     7. **OVERALL** — `PASS` only if every High spatial/functional checkpoint is PASS; else `FAIL`
+   - **Anti-vagueness:** Reject mood-only summaries. If a hide/show constraint was quoted and the report does not answer whether the hidden subject is visible → treat as incomplete and re-ask that checkpoint.
+3. Present `{ text, interactionId }` to the user. Do **not** silently edit YAML or regenerate from the report *(unless an automation agent owns revise).*
 4. Follow-ups: `continue_interaction` with the same `interactionId` if the user asks more questions. New media → new `analyze` call.
 
 ---
 
 ## Phase 5 — Revise
 
-Keep `design` ↔ prompt ↔ `images` consistent; re-approve; regenerate. Prefer small edits. If `message` changes, reshape `design` to match.
+Keep `design` ↔ prompt ↔ `references` consistent; re-approve; regenerate. Prefer small edits. If `message` changes, reshape `design` to match.
 
 When improving from user feedback or an AI analyze report: apply only **user-agreed** changes; update owning YAML fields, then regenerate.
 
@@ -241,7 +250,7 @@ message: |
   짧은 화면 속 글이 어린 독자를 위한 대사 비트를 나른다.
 
 design: |
-  참조 (params.images 순서):
+  참조 (params.references 순서):
   1. characters/hero-adventure.yaml → ./characters/hero-adventure.png — 영웅 외형/복장 유지
   2. characters/sidekick.yaml → ./characters/sidekick.png — 조수 외형 유지
   3. locations/plaza-peaceful.yaml → ./locations/plaza-peaceful.png — 광장 유지
@@ -258,7 +267,7 @@ params:
     SCENE: Children's picture book page. The boy from image 1 meets the sidekick
     from image 2 in the plaza from image 3. Soft digital painting, pastel outlines.
     TEXT OVERLAY: short narration/dialogue without covering faces.
-  images:
+  references:
     - path: "./characters/hero-adventure.png"
     - path: "./characters/sidekick.png"
     - path: "./locations/plaza-peaceful.png"
@@ -276,6 +285,7 @@ output: "./page04.png"
 - Auto `analyze` without an explicit user request; applying analyze suggestions without user agreement
 - `message` that duplicates `design` (shot lists, wardrobe, camera, lighting)
 - Defaulting `message` / `design` / `title` to English when the user writes in another language
-- Inconsistent `design` / prompt / `images`; non-English prompt
+- Inconsistent `design` / prompt / `references`; non-English prompt
+- Using `params.images` (removed — use `params.references`)
 - Guessing ref paths; generate after failed preflight
 - Inventing unrequested content; ignoring refs; Flash-only options on Pro

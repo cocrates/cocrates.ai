@@ -13,13 +13,14 @@ This file is the **single source of truth** for keeping:
 
 | Term | Meaning |
 |---|---|
-| **Design Layer** | `world-bible.md`, `characters/*.md`, `locations/*.md`, `stagings/*.md`, `series.md`, `episodes/*.md` |
-| **Canonical episode page schema** | Flat `- **Field:**` lists under `### Page {N}` only — no nested `####` page subsections; see `workflow/02-design.md` |
+| **Design Layer** | `illustration-guide.md`, `world-bible.md`, `characters/*.md`, `locations/*.md`, `stagings/*.md`, `series.md`, `episodes/*.md` |
+| **Canonical episode page schema** | Flat `- **Field:**` lists under `### Page {N}` only — no nested `####` page subsections; see `workflow/02-design.md`. **`### Page 0` = mandatory cover** (title overlay; invite to open). |
+| **Series illustration guide** | `{project-root}/illustration-guide.md` — art style, layout, fonts, text boxes; see `workflow/illustration-guide.md`. Stage ④ YAML must apply it. |
 | **Evaluation Layer** | `evaluations/*.md` where **story lock** is approved per episode |
 | **Reference Images** | `images/characters/*`, `images/locations/*`, `images/stagings/*` — identity + set + ensemble blocking |
-| **Staging** | Continuing-situation who-is-where — `workflow/reference-models.md` |
-| **Page Images** | `images/{nnn}-{episode-slug}/*` — rendered pages including locked `rendering text` overlay |
-| **Story Lock** | G3 approval: page stories / rendering text / text–image split / page-turn hooks / illustration guides are frozen for image generation |
+| **Staging** | Continuing-situation who-is-where **+ situation props/table dressing** — `workflow/reference-models.md` §4 |
+| **Page Images** | `images/{nnn}-{episode-slug}/*` — rendered pages including locked `rendering text` overlay (`00` = cover) |
+| **Story Lock** | G3 approval: page stories / rendering text / text–image split / page-turn hooks / Direction fields are frozen for image generation; series visual+typography lock stays in `illustration-guide.md` |
 
 ---
 
@@ -27,16 +28,24 @@ This file is the **single source of truth** for keeping:
 
 ```
 overview.md
+  → illustration-guide.md (art / layout / typography)
   → series.md
     → world-bible.md + characters/* + locations/* + stagings/*
-      → episodes/*.md (page story + rendering text + illustration guide)
+      → episodes/*.md (page story + rendering text + Direction)
         → evaluations/*.md (story lock decision)
-          → images/* (reference + page PNGs)
+          → images/* (reference + page PNGs — YAML must apply illustration-guide.md)
 ```
 
 ---
 
 ## Cascade protocol (what to do when something changes)
+
+### When `illustration-guide.md` changes
+
+1. User approves the updated series guide (Design / G2).
+2. Re-run Stage ③ if Evaluate must re-check typography/layout fitness.
+3. Regenerate **all** page images that must match the new recipes (typically the whole episode or book) — do not leave old pages on the previous font/box style.
+4. Reference images: regenerate only if §1 art style (medium/line/palette/proportions) changed.
 
 ### When design catalogs change (characters/locations/stagings/world-bible)
 
@@ -59,7 +68,8 @@ overview.md
 - Treat it as a visual quality issue:
   - tighten prompts / re-render affected page image(s)
   - max 2 retries per image
-- Do NOT alter locked rendering text or locked illustration guide meaning.
+- Do NOT alter locked rendering text or locked page Direction meaning.
+- Do NOT invent fonts/boxes outside `illustration-guide.md`; if typography is wrong, update the guide (or re-apply it in YAML), not one-off styles.
 
 ### When inconsistencies reveal a design gap
 
@@ -76,12 +86,13 @@ overview.md
 - Change: {what changed}
 - Highest updated file(s): {paths} — user approved: ✅/⬜
 - [ ] overview.md (only if scale/age/validation changed)
+- [ ] illustration-guide.md (art / layout / typography)
 - [ ] series.md
 - [ ] world-bible.md / characters/* / locations/* / stagings/*
 - [ ] episodes/{nnn}-{episode-slug}.md
 - [ ] evaluations/{nnn}-{episode-slug}.md (story lock rerun)
-- [ ] reference images to regenerate (if identity/state/view changed)
-- [ ] page images to regenerate for affected episode pages
+- [ ] reference images to regenerate (if identity/state/view **or art-style §1** changed)
+- [ ] page images to regenerate for affected episode pages (all pages if typography recipes changed)
 - Gates re-run: Story Lock (G3) for affected episodes
 ```
 

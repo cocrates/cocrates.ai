@@ -12,9 +12,9 @@ Cuts are not mere “picture boxes.” **Cut height and gutter distance control 
 |------|-----------|--------|
 | Canvas width | **690px–800px** | Common portal range; lock exact width in `overview.md`. Some portals also accept ~1080px — only if the user/portal requires it |
 | Cut horizontal fit | **Full bleed** or **30–50px side margins** | Fill the strip width, or keep left/right margins even |
-| Cuts per episode (weekly-serial average) | **~60–80 cuts** | Scale for short pilots; lock a target range in `overview.md` / `series.md` |
+| Cuts per episode (weekly-serial average) | **Emergent from ~10–15 page design** | Do not budget cuts in `series.md`; pack by dwell (`§4b`) |
 
-Generation default aspect for a phone-width strip remains **9:21** (~672×1584) when producing page segments; individual cuts inside a page still follow the height classes below.
+Generation default for phone-width page strips: **`gemini-3.1-flash-image` + 1K + 9:16**, typically **2 tiles per design page**, then stitch (`04-generate.md`). Optional single tall frame: **Pro + 2K + 1:8** only. Individual cuts inside a page still follow the height classes below.
 
 ---
 
@@ -99,6 +99,32 @@ Do not stack so many standard cuts that a single screen becomes a crowded strip 
 
 ---
 
+## 4b. Page packing by dwell time (reader breath)
+
+A **page** is not “as many cuts as fit.” It is a **breath unit**: how long the reader should stay in this vertical segment before the next page/scroll chunk.
+
+### Decide cuts-per-page from dwell need
+
+| Dwell need | Typical packing | Why |
+|------------|-----------------|-----|
+| **High** — dense dialogue/balloons; first look at a new place/cast; reader must think or feel; spectacle scroll-through | **1 cut per page** (sometimes 1 tall cut alone) | Gives eye time; avoids competing beats in one viewport chain |
+| **Medium** — clear beat + short reaction, or two linked dialogue beats | **2–3 cuts** stacked top→bottom | One breath, still readable |
+| **Low** — quick reactions, punchline chain, action stutter | **n cuts** (tight gutters) | Speed; still keep faces/balloons readable per viewport |
+
+**Default stack direction:** top → bottom only (no side-by-side panels unless the series explicitly locks a rare exception).
+
+### Heuristics (apply in Stage ② when grouping cuts into pages)
+
+1. **Estimate dwell** per cut: skim / read balloons / absorb new info / feel / scroll-through tall.
+2. **High-dwell cut → own page** (or own page + only a tiny reaction cut if the hook needs it).
+3. **Do not pack** a first-time establishing + heavy dialogue + emotional turn into the same page.
+4. **Page estimated height** ≈ sum of cut heights + gutters; if that exceeds one comfortable generation frame, prefer **fewer cuts per page** over cramming (see Stage ④ aspect guidance in `04-generate.md`).
+5. **Viewport plan** must name the intended breath: e.g. `1 cut — linger`, `2 cuts — quick exchange`, `tall alone — scroll-through`.
+
+Breath > filling the frame. Empty vertical space (`pause` gutter) or a single-cut page is valid directing.
+
+---
+
 ## 5. Rhythm checklist (per scene / episode stretch)
 
 - [ ] Size class matches dramatic intent (not all cuts the same height)
@@ -106,5 +132,7 @@ Do not stack so many standard cuts that a single screen becomes a crowded strip 
 - [ ] Silence/time uses `pause` gutters, not empty “forgotten” gaps
 - [ ] Action uses open/diagonal + tight gutters
 - [ ] Everyday dialogue stays in standard height + normal gutters
-- [ ] Episode cut count is in the agreed range (or short-form exception is noted)
+- [ ] **Cuts-per-page matches dwell/breath** (high-dwell → 1 cut/page allowed; not max-packing by default)
+- [ ] Episode cut count is recorded in Craft Notes (measured) — not managed in `series.md`
+- [ ] Episode page volume is ~10–15 (or short-form exception noted)
 - [ ] Side margins are full-bleed or consistently 30–50px

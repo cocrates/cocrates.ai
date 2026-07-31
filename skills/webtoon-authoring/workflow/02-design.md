@@ -3,6 +3,7 @@
 **Prerequisites:** Approved `overview.md`
 
 **Gate artifacts (design layer):**
+- `{project-root}/illustration-guide.md` (**series-wide** art / layout / balloon·caption typography lock — see `workflow/illustration-guide.md`)
 - `{project-root}/world-bible.md`
 - `{project-root}/characters.md` + `characters/{character-slug}.md`
 - `{project-root}/locations.md` + `locations/{location-slug}.md`
@@ -20,11 +21,13 @@
 
 - **Architecture-first**: Image generation only in Stage ④.
 - **Consistency sources**:
+  - **Visual / typography:** `illustration-guide.md` (art style, vertical chrome, balloon/caption recipes — series-wide; `workflow/illustration-guide.md`)
   - Characters: `characters/{character-slug}.md` (body identity + lasting change + equipment states)
   - Locations: `locations/{location-slug}.md` (set/stage; `state` for lasting set change; `position`/`view` framing anchors)
   - Stagings: `stagings/{staging-slug}.md` (who sits/stands where across a multi-cut span)
-  - Story / direction: `episodes/{nnn}-{episode-slug}.md` (per page/cut: art / balloons / dialogue / narration / gutters)
+  - Story / direction: `episodes/{nnn}-{episode-slug}.md` (per page/cut: art / balloons / dialogue / narration / gutters — **not** lettering invention)
 - **Design-first fixes**: If Evaluate finds issues, fix Design files first — do not patch via image prompts alone.
+- **Do not invent per-page balloon fonts or caption boxes.** Tile YAML places locked strings; style tokens come from `illustration-guide.md`.
 - **Canonical reference rules:** `workflow/reference-models.md` (required reading for catalogs + cut guides).
 - **Unlike picture books**:
   - Page height is **not fixed** — varies with cut count, gutters, balloon load
@@ -57,6 +60,15 @@ Full rules: `workflow/reference-models.md`. Summary:
 - Transient elements (passersby, VFX)
 
 **Staging is required when** a situation continues across cuts and relative placement must not flip (café L/R, OR doctor/nurse stations, meeting seats, etc.). Character + empty location refs alone do not lock positions. **One staging per continuing situation.**
+
+---
+
+### 2.0b Illustration Guide (series-wide)
+
+1. Expand `overview.md` → Art style + Canvas into `{project-root}/illustration-guide.md`.
+2. Follow the full template and rules in `workflow/illustration-guide.md` (art style, vertical chrome, balloon/caption recipes, Stage ④ checklist).
+3. Do not proceed to heavy episode cut design without a draft guide strong enough that two pages would share lettering and balloon chrome.
+4. G2 includes explicit approval of `illustration-guide.md`.
 
 ---
 
@@ -216,26 +228,42 @@ If episode design discovers a continuing situation without a staging → stop, a
 
 ### 2.4 Series (Episode List) Design
 
-1. Create `series.md` with Episode List + overall arc (emotional peaks + **scroll tension**):
+1. Create `series.md` with Episode List + overall arc. Plan **what each episode is about**, not how many pages/cuts it will use.
 
 ```markdown
 # Episode List
 
-| # | Title | Summary | Pages (est.) | Cuts (est.) |
-|---|------|---------|--------------|-------------|
-| 1 | {title} | {summary} | {pages} | {cuts} |
+| # | Title | Summary |
+|---|------|---------|
+| 1 | {title} | {what this episode delivers — situation, turn, hook to next} |
 
 ## Overall structure
-{story arc — emotional peaks, where scroll tension builds; note where tall cuts / pause gutters / action stacks land}
+{story arc — emotional peaks, where scroll tension builds across episodes}
 ```
 
-**Pages (est.) / Cuts (est.)** are planning targets only. After an episode file is designed, update that row to **measured** page/cut counts from the episode file (or mark `exception noted` in Craft Notes if deliberately different).
+**Series.md owns only:** episode count, titles, and summaries (plus optional part/arc grouping).
+
+**Do not** put Pages (est.) / Cuts (est.) / page·cut budgets in `series.md`. Volume is decided in each episode file during §2.5 (and recorded in that episode’s Craft Notes after design).
+
+Review focus at series stage: Is the episode count right? Does each title+summary earn a release slot? Does the arc chain (hooks between episodes) work?
 
 ---
 
 ### 2.5 Episode Page & Cut Design
 
 For each `episodes/{nnn}-{episode-slug}.md`, design **all pages**, and inside each page design **all cuts** top→bottom.
+
+**Episode = distribution unit.** Design enough vertical volume to carry that episode’s story — do **not** compress a full episode into 2–3 pages.
+
+| Spec | Guideline |
+|------|-----------|
+| **Pages per episode** | **~10–15** (incl. Page 0 / cover-thumbnail if used) |
+| **Cuts** | Enough to stage, breathe, and payoff the episode summary — count is **derived** from page packing + dwell (`cut-composition.md` §4b), not from `series.md` |
+| Short-form exception | Fewer than ~10 pages only with **user-approved** note in Craft Notes (pilot / promo / special) |
+
+If the episode summary cannot be told without cramming beats onto every page, **add pages** (or split into two episodes in `series.md`) — do not max-pack cuts to fake length.
+
+**Comprehension gate (design-time):** Before G2, re-read only Cut stories + Balloons + Captions (+ what Direction says will be *visible*). Ask: would a first-time reader follow the episode? Any beat that requires unshown prior knowledge or off-panel designer notes is incomplete — expand art, dialogue, or caption (or add pages).
 
 **Required reading:** `workflow/cut-composition.md` — cut height, gutter distance, size class, and viewport rhythm are first-class design decisions (not afterthoughts).
 
@@ -257,8 +285,11 @@ For each `episodes/{nnn}-{episode-slug}.md`, design **all pages**, and inside ea
 4. **Mobile viewport** — plan what one phone screen shows; one clear beat (or intentional partial reveal of a tall cut).
 5. **Direct with color** — e.g. flashback via sepia/desaturation; color is a primary tool.
 6. **Variable page height** — page height = sum of cut heights + gutters; do not force equal page ratios.
-7. **Vary size classes across the episode** — do not make every cut the same height unless that flatness is intentional.
-8. **Size class ↔ Height must agree** — e.g. do not label `tall` with Height under 1,200px; see `workflow/cut-composition.md`.
+7. **Pack pages by dwell/breath** — high-dwell cuts may sit alone on a page; otherwise stack n cuts top→bottom (`cut-composition.md` §4b).
+8. **Vary size classes across the episode** — do not make every cut the same height unless that flatness is intentional.
+9. **Size class ↔ Height must agree** — e.g. do not label `tall` with Height under 1,200px; see `workflow/cut-composition.md`.
+10. **Episode volume** — target **~10–15 pages** so the distribution unit can carry its story; avoid 2–3 page compression.
+11. **Reader comprehension (art + dialogue + caption)** — a cold reader scrolling the finished episode must understand **who / where / what happens / why it matters** from **illustration + balloons + captions alone**. Do not leave essential facts only in Cut story / Direction notes that never appear on-panel. If something must be known, show it, speak it, or caption it (captions sparingly — not sermon). Gaps → add cuts/pages or on-panel text, do not assume the reader “will get it.”
 
 #### Episode header: Cast roster
 
@@ -282,10 +313,13 @@ Each `Page {idx}`:
 
 - `Page 0` = cover/thumbnail vertical segment (or agreed series thumbnail rule)
 - `Page story`: what this vertical segment conveys
-- `Estimated height`: sum of cut heights + gutters (px guide); note if taller than one 9:21 segment
-- `Viewport plan`: what one phone screen should show in this segment (1 beat / partial tall reveal / …)
+- `Estimated height`: sum of cut heights + gutters (px guide); note generation frame / strip-split if needed
+- `Viewport plan`: what one phone screen should show **and the intended breath** (e.g. `1 cut — linger` / `2 cuts — quick exchange` / `tall alone — scroll-through`)
+- `Cuts on this page`: count + dwell rationale (high / medium / low) — see `workflow/cut-composition.md` §4b
 - `Outside-cut area` / side margins: follow overview unless page exception
 - `Scroll hook`: pull to next page (non-final); final = resolution / aftertaste
+
+**Page packing (mandatory):** Group cuts into pages by **reader dwell / breath**, not by filling a generation frame. High dwell (dense text, first exposure, think/feel beats, spectacle) → often **1 cut per page**. Otherwise stack **n cuts top→bottom**. Prefer fewer cuts per page over crowding.
 
 #### Required cut fields (flat list, this order)
 
@@ -322,10 +356,12 @@ Do **not** invent seating in Direction — seating comes from staging. Detailed 
 ## Craft Notes
 - Scroll rhythm: {fast / normal / lingering sections — map to size/gutter classes}
 - Theme delivery: {shown in scenes — not sermon captions}
+- Reader comprehension: {cold reader can follow from art+balloons+captions — yes / gaps to fix: …}
 - Climax page.cut: {page.cut} — expect tall/long size class when climax is spectacle
+- Page count (this episode): {n}  <!-- MUST equal count of ### Page headings; target ~10–15 unless short-form exception noted -->
 - Cut count (this episode): {n}  <!-- MUST equal count of ##### Cut headings in this file -->
+- Volume note: {meets ~10–15 pages | short-form exception: …}
 - Canvas: width {690–800px locked}, height variable, color, side margins {full bleed / 30–50px}, outside-cut {white/black/theme}
-- series.md sync: {updated to measured pages/cuts | exception noted: …}
 
 ## Pages
 
@@ -337,10 +373,13 @@ Do **not** invent seating in Direction — seating comes from staging. Detailed 
 {Only catalog-registered characters/locations}
 
 #### Estimated height
-{sum of cut heights + gutters in px; note strip-split if needed}
+{sum of cut heights + gutters in px; note generation frame / strip-split if needed}
 
 #### Viewport plan
-{what one phone screen shows here — one beat / partial tall reveal / …}
+{one phone screen + breath: e.g. 1 cut — linger / 2 cuts — quick exchange / tall alone — scroll-through}
+
+#### Cuts on this page
+{n} — dwell: {high|medium|low} — {one-line rationale}
 
 #### Scroll hook
 {curiosity/tension to scroll down — final page: resolution/aftertaste}
@@ -393,22 +432,27 @@ Also verify:
 - Every cut’s location **position/view/state** exists in catalogs
 - Multi-cut ensembles with fixed seating/formation cite a **staging**; staging cast/location anchors match catalogs
 - Cast roster ↔ cut Characters (no ghosts; mention-only tagged)
-- Craft Notes **Cut count** == number of `##### Cut` headings; series.md row updated or exception noted
+- Craft Notes **Page count** / **Cut count** == measured `### Page` / `##### Cut` headings
+- Page count in ~10–15 range (or Craft Notes short-form exception)
 - Size class ↔ Height agree per `cut-composition.md`
 - Expression/mood/time/season/weather are cut direction, not new reference states
 - Every cut has Balloons + Captions fields (value may be `없음`)
-- Viewport plan is stated per page (or per dense stretch)
+- Viewport plan is stated per page (breath named; or per dense stretch)
+- Cuts-per-page matches dwell (1-cut pages OK for high dwell)
+- Cold-reader comprehension: art + balloons + captions carry the episode (no note-only essentials)
 
 ---
 
 ## Completeness Check (Stage ②)
 
+- [ ] `illustration-guide.md` exists (art style + vertical chrome + balloon/caption typography) — `workflow/illustration-guide.md`
 - [ ] `world-bible.md`, `characters.md`, `locations.md`, `series.md` exist
 - [ ] All `characters/{character-slug}.md`, `locations/{location-slug}.md` written
 - [ ] `stagings.md` + needed `stagings/{staging-slug}.md` exist for ensemble continuity spans
+- [ ] `series.md` lists episodes by **# / Title / Summary only** (no page/cut columns)
 - [ ] All `episodes/{nnn}-{episode-slug}.md` use **flat cut fields** (no nested `######` subsections)
 - [ ] Cast roster present; no ghost cast; mention-only tagged
-- [ ] Craft Notes cut count matches measured cuts; series.md synced or exception noted
+- [ ] Craft Notes page/cut counts match measured headings; page volume ~10–15 (or short-form exception noted)
 - [ ] Reference rules followed (`workflow/reference-models.md`)
 - [ ] Cut size/gutter classes vary with dramatic intent (`workflow/cut-composition.md`); size class ↔ height consistent
 - [ ] Variable page height + scroll hooks + viewport plans applied
@@ -420,13 +464,16 @@ Also verify:
 ## Gate G2 (User Approval)
 
 Do not proceed to Stage ③ until the user approves:
+- **`illustration-guide.md`:** art style, chrome, and balloon/caption lettering specific enough that pages won’t drift?
 - World rules/background: coherent and specific enough?
 - Character catalog: lasting body + outfit/identity-gear states; expressions not treated as states?
 - Location catalog: set/stage clear; time/weather not mistaken for location states?
 - Staging catalog: each continuing situation (café / OR / meeting / …) has who-is-where + planned ref views?
 - Episode/page/cut design:
   - Flat cut schema only throughout the episode file?
-  - Cut stories carry emotion?
+  - Episode volume ~10–15 pages (or approved short-form exception)?
+  - Cold reader can follow from art + balloons + captions alone (no essential facts trapped in notes only)?
+  - Cut stories carry emotion without compressing the episode summary?
   - Staging cited wherever relative placement must not drift?
   - Cast roster clean (no ghosts)?
   - Cut **size classes** match intent and Height?
@@ -434,7 +481,8 @@ Do not proceed to Stage ③ until the user approves:
   - Balloons/captions fields present; reading order and face clearance OK?
   - Viewport plans readable on a phone?
   - Scroll hooks present?
-  - Cut count / series.md consistent?
+  - Craft Notes page/cut counts match measured headings?
+  - `series.md` has titles/summaries only (no page/cut columns)?
   - Reference-image readiness (characters / locations / stagings)?
 
 **Do not proceed until G2 is approved.**

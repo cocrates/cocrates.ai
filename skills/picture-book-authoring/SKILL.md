@@ -9,6 +9,7 @@ description: >-
   characters, locations, stagings, and episodes/pages (with per-page design) before any images;
   locks approved story text before image generation; generates character, location, and staging reference images first, then page images via the image-generation
   skill for visual consistency. Picture book structure is **series → episode → page**
+  (every episode starts with mandatory **Page 0 cover**);
   location consistency uses **location → position → view → state**; continuing-situation placement uses **stagings** (same three-layer reference model as webtoon/video/novel).
   For long-form prose fiction without page illustrations, use
   novel-authoring; for general non-fiction prose, use document-authoring; for
@@ -29,7 +30,8 @@ Generate complete children's picture books (ages 0–8) — from story concept t
 - **Composition, Not Invention**: Episode and page design arrange approved world, characters, locations, and stagings. While designing story, **co-design** staging + character states + location states — **reuse** catalog entries when present, **add** new reference models when missing (`workflow/reference-models.md` §7). Missing entities → stop, ask user, update Design catalogs, then resume. Do not invent mid-page.
 - **Story Lock Before Images**: Page stories, rendering text, and illustration guides are locked at G3. Image generation implements that lock; it does not rewrite the story.
 - **Design-First Revision**: Structure, story, text, character, or location problems are fixed in Design (and re-evaluated) before regenerating images. Never patch story by only changing image prompts.
-- **Reference-Based Consistency**: Character, location, and **staging** reference images are generated first; page images reference them. Canonical rules: `workflow/reference-models.md` (same three layers as webtoon/video/novel).
+- **Reference-Based Consistency**: Character, location, and **staging** reference images are generated first; page images reference them. Stagings lock **who-is-where and situation props** (e.g. meal layout) for continuing scenes. Canonical rules: `workflow/reference-models.md`.
+- **Series Illustration Guide**: Art style, layout, fonts, and text boxes are locked in `illustration-guide.md`; every page YAML must apply it — no per-page typography invention (`workflow/illustration-guide.md`).
 - **Criteria-Driven Evaluation**: Evaluate checks the book against Validation Criteria from `overview.md`, plus picture-book craft rules — before any MCP generate.
 - **YAML Approval Per image-generation**: All image generation follows the image-generation skill's YAML review → approval → MCP generate workflow.
 
@@ -50,6 +52,7 @@ All picture book artifacts are authored under `{project-root}/`:
 ```text
 {project-root}/
 ├── overview.md
+├── illustration-guide.md          # series art / layout / typography lock
 ├── world-bible.md
 ├── worlds/
 │   └── {world-slug}.md
@@ -88,11 +91,27 @@ All picture book artifacts are authored under `{project-root}/`:
 │   │   ├── {staging-slug}-detail.yaml
 │   │   └── {staging-slug}-detail.png
 │   └── {nnn}-{episode-slug}/
-│       ├── {00}.yaml
-│       └── {00}.png
+│       ├── {00}.yaml              # Page 0 cover (mandatory)
+│       ├── {00}.png
+│       ├── {01}.yaml
+│       └── {01}.png
 └── output/
     └── {book-slug}-final/
 ```
+
+## Publication Model
+
+```text
+series → episode → page
+```
+
+| Unit | Role |
+|------|------|
+| **Series** | Episode list / overall arc (`series.md`) |
+| **Episode** | Generation & evaluation unit |
+| **Page** | Fixed-size illustrated page; **Page 0 = cover** (mandatory), then body pages 1…N |
+
+**Page 0 (Cover):** Every episode file must open with `### Page 0`. Rendering text is the title (subtitle/credit optional); the picture invites opening the book. Generated as `images/{nnn}-{episode-slug}/00.*`.
 
 ## Workflow Overview
 
@@ -117,10 +136,11 @@ This file (`SKILL.md`) defines global pipeline rules, gates, and prohibitions.
 For step-by-step procedures, read the stage workflow file at the start of each stage:
 
 - Stage ① Define: `workflow/01-define.md` (gate artifact: `overview.md`)
-- Stage ② Design: `workflow/02-design.md` (gate artifact set: `series.md`, `episodes/*.md`, `world-bible.md`, `characters/*.md`, `locations/*.md`, `stagings/*.md`)
+- Stage ② Design: `workflow/02-design.md` (gate artifact set: `illustration-guide.md`, `series.md`, `episodes/*.md`, `world-bible.md`, `characters/*.md`, `locations/*.md`, `stagings/*.md`)
 - Stage ③ Evaluate: `workflow/03-evaluate.md` (gate artifact set: `evaluations/*.md` = story lock)
 - Stage ④ Generate: `workflow/04-generate.md` (gate artifact: final output under `output/`)
 - Reference models (cross-stage): `workflow/reference-models.md` — character / location / staging
+- Illustration guide (cross-stage): `workflow/illustration-guide.md` — series art / layout / typography lock
 
 ## Stage 1: Define
 For detailed procedure, see `workflow/01-define.md`.
@@ -133,7 +153,8 @@ For detailed procedure, see `workflow/01-define.md`.
 ## Stage 2: Design
 For detailed procedure, see `workflow/02-design.md`.
 
-- Author/approve `world-bible.md`, `characters/*.md`, `locations/*.md`, `series.md`, `episodes/*.md`
+- Author/approve `illustration-guide.md`, `world-bible.md`, `characters/*.md`, `locations/*.md`, `series.md`, `episodes/*.md`
+- Every episode includes **Page 0 cover** + body pages (flat page schema)
 - G2: Do not proceed to Stage ③ until the user approves
 
 ---
@@ -150,7 +171,7 @@ For detailed procedure, see `workflow/03-evaluate.md`.
 ## Stage 4: Generate
 For detailed procedure, see `workflow/04-generate.md`.
 
-- Reference images (characters/locations/stagings) → page images
+- Reference images (characters/locations/stagings) → page images (**Page 0 cover `00` first**, then body pages) — **every YAML applies `illustration-guide.md`**
 - Generate each image only after explicit user approval of its YAML
 - G4: Do not deliver the final result until the user approves
 
@@ -181,25 +202,34 @@ For detailed procedure, see `workflow/04-generate.md`.
 - Calling MCP generate without image-generation skill's approval workflow
 - Writing page rendering text that only captions the illustration, or a final-page moral monologue that states the theme instead of showing it
 - Generating page images without including the locked rendering text as overlay in the image
+- **Writing page YAML without applying locked `illustration-guide.md`** (art style, layout, typography roles)
+- **Inventing per-page fonts, text boxes, or outline recipes** not defined in `illustration-guide.md`
+- **Skipping staging** for a continuing multi-page situation (meal, café, picnic, play, …) or omitting the **situation props / table dressing** map when shared objects matter
+- **Generating staging-cited pages without staging reference PNGs**, or reinventing seats/L-R / meal/props from Location alone
+- **Inventing architecture/fixtures in page YAML** that are not visible in the cited location position×view reference (e.g. forcing a bathroom door when only an interior-without-door ref exists) — add a Scene List row + Phase 0 image instead (`workflow/reference-models.md` §3.1)
+- **Ignoring beat chronology** (e.g. dressed before towel-dry) and patching only in Generate instead of reordering Design pages
+- **Omitting Page 0 cover** from any episode (design or generate) — every episode must have `### Page 0` and `images/.../00.*`
+- Treating Page 0 as a story-body page (plot prose overlay instead of title; climax spoilers on the cover)
 - **Nested page subsections** (`#### Page story`, `#### Illustration guide`, …) — canonical episode page schema is flat `- **Field:**` lists under `### Page {N}` only (see `workflow/02-design.md`)
 - **Omitting required page fields** when empty (use `없음`; Staging/Characters always present)
 - **Ghost cast** — roster without on-page appearance or mention-only tag
-- Writing Craft Notes / `series.md` page counts that disagree with measured `### Page` headings without a documented exception
+- Writing Craft Notes / `series.md` page counts that disagree with measured `### Page` headings (incl. Page 0) without a documented exception
 - Using field notation other than `- **Field:**` (colon must be inside bold)
 
 ## Completion Criteria
 
-- `overview.md` exists with complete book definition, episode structure (episode count + pages per episode), **and Validation Criteria**
+- `overview.md` exists with complete book definition, episode structure (episode count + pages per episode **incl. Page 0 cover**), **and Validation Criteria**
+- `illustration-guide.md` exists with series art style, layout, and typography/text-box roles locked
 - `world-bible.md` exists with world design
 - `characters.md` + `characters/{character-slug}.md` exist with complete character designs
 - `locations.md` + `locations/{location-slug}.md` exist with complete location designs
 - `series.md` + `episodes/{nnn}-{episode-slug}.md` exist with complete episode designs (including craft fields)
-- Every episode file matches the **canonical flat page schema** (cast roster; no nested `####` page subsections) per `workflow/02-design.md`
-- All evaluation records exist in `evaluations/{nnn}-{episode-slug}.md` with Criteria Check + **Schema / Structural Integrity** + Craft Checks + required personas + Adjudication
+- Every episode file has **`### Page 0` cover** and matches the **canonical flat page schema** (cast roster; no nested `####` page subsections) per `workflow/02-design.md`
+- All evaluation records exist in `evaluations/{nnn}-{episode-slug}.md` with Criteria Check + **Schema / Structural Integrity** (incl. Page 0 present) + Craft Checks + required personas + Adjudication
 - Evaluate schema checks pass before G3
 - G3 story lock approved
 - All reference images generated and approved with explicit user confirmation (Phase 0)
-- All page images generated with text overlay and approved with explicit user confirmation (Phase 1)
+- All page images generated with text overlay and approved with explicit user confirmation (Phase 1) — **including cover `00`**, each YAML applying `illustration-guide.md`
 - Consistency review completed (Phase 2)
 - Final assembly approved by user (G4)
 

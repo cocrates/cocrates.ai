@@ -33,7 +33,7 @@ params:
     Strong size contrast between the tall victorious T-rex and the tiny defeated
     monster. Sparkling effects around the castle.
     Watercolor digital painting, warm pastel tones. No text.
-  images:
+  references:
     - path: "../../../images/references/characters/티라노-t-rex.png"
     - path: "../../../images/references/characters/충균-몬스터-small.png"
   size: 1K

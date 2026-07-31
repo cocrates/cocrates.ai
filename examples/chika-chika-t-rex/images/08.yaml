@@ -42,7 +42,7 @@ params:
     ""만세! 치카치카 티라노 만세!""
     Text should feel like part of the festive atmosphere.
     Do not obscure the character's face.
-  images:
+  references:
     - path: "./locations/치카치카-왕국-이빨성-앞마당-성문-뷰-회복.png"
     - path: "./characters/티라노-t-rex.png"
   size: 1K

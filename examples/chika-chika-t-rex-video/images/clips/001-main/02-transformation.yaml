@@ -28,7 +28,7 @@ params:
     SURROUNDINGS: Sparkling magical light effects burst around the T-rex as if
     he just transformed — bright sparkles and gentle glowing particles.
     Warm pastel tones, digital watercolor painting style. No text.
-  images:
+  references:
     - path: "../../../images/references/characters/티라노-t-rex.png"
   size: 1K
   aspectRatio: "16:9"

@@ -40,6 +40,8 @@ Generate complete vertical-scroll webtoons — from concept through design, eval
 
 - Place characters and dialogue to use vertical space (e.g. dialogue block, then figure, then breathing room) — do not cram like a print-page panel grid.
 - **Cut height + gutter** set eye speed, tension, and breath — not decoration. Canonical sizes/intents: `workflow/cut-composition.md`.
+- **Cuts-per-page follows dwell/breath** — high-dwell beats may be **1 cut per page**; otherwise stack n cuts top→bottom (`cut-composition.md` §4b). Do not max-pack a generation frame.
+- **Episode volume ~10–15 pages** (distribution unit) — do not compress a full episode into 2–3 pages; page/cut counts live in episode Craft Notes, not in `series.md`.
 - Keep phone-viewport readability: key face/action + balloons should read without pinch-zoom; prefer simpler art and shorter text than print comics when needed.
 - Default to **full color**; recall/flashback via color grade (e.g. sepia), not only ink tones.
 - Outside-cut area may be white, black, or a series theme color; cuts are **full bleed** or **30–50px** even side margins.
@@ -54,7 +56,9 @@ Generate complete vertical-scroll webtoons — from concept through design, eval
 - **Story Lock Before Images**: Page/cut stories, balloon text, narration, gutters, and illustration guides are locked at G3. Image generation implements that lock; it does not rewrite the story.
 - **Design-First Revision**: Structure, story, dialogue, character, or location problems are fixed in Design (and re-evaluated) before regenerating images. Never patch story by only changing image prompts.
 - **Reference-Based Consistency**: Character, location, and **staging** (ensemble blocking) reference images are generated first; page images reference them for visual and spatial consistency. Rules: `workflow/reference-models.md`.
+- **Series Illustration Guide**: Art style, vertical chrome, balloon/caption fonts and boxes are locked in `illustration-guide.md`; every tile/page YAML must apply it — no per-page lettering invention (`workflow/illustration-guide.md`).
 - **Scroll-Native Craft**: Design for vertical reading — cut order top→bottom; **cut height + gutter** as directing tools (`workflow/cut-composition.md`); balloon placement that uses vertical space.
+- **On-Panel Comprehension**: Readers must understand the episode from **art + balloons + captions** alone; essential facts must not live only in designer notes.
 - **Criteria-Driven Evaluation**: Evaluate checks against Validation Criteria from `overview.md`, plus webtoon craft rules — before any MCP generate.
 - **YAML Approval Per image-generation**: All image generation follows the image-generation skill's YAML review → approval → MCP generate workflow.
 
@@ -75,6 +79,7 @@ All webtoon artifacts are authored under `{project-root}/`:
 ```text
 {project-root}/
 ├── overview.md
+├── illustration-guide.md          # series art / chrome / balloon·caption typography lock
 ├── world-bible.md
 ├── worlds/
 │   └── {world-slug}.md
@@ -142,8 +147,9 @@ series → episode → page → cut
 | Height | **Variable** | Sum of cut heights + gutters; not a fixed page size |
 | Cut height classes | See `workflow/cut-composition.md` | standard ~400–600px; tall/long ~1,200–2,000px+; action = open/diagonal + tight gutters |
 | Gutter classes | See `workflow/cut-composition.md` | normal ~150–300px; pause ~500–1,000px+ for silence/time |
-| Cuts / episode | **~60–80** typical | Weekly-serial average; short pilots may be lower — lock a range |
-| Generation aspect (1K) | **9:21** (~672×1584) | Default page-segment frame; taller pages = stacked strips or approved extension |
+| Pages / episode | **~10–15** | Distribution unit volume; short-form exception only with user note |
+| Cuts / episode | **Derived in episode design** | From dwell packing — do **not** plan in `series.md` |
+| Generation | **Default: Flash + 1K + 9:16**, typically **2 tiles per page** then stitch; optional Pro + 2K + 1:8 | See `04-generate.md` — never Flash at 2K/1:8 for balloon text |
 | Color | **Full color** | Smartphone display default |
 | Outside-cut / side margins | Theme fill; full bleed or 30–50px sides | Keep side margins even |
 
@@ -172,11 +178,12 @@ This file (`SKILL.md`) defines global pipeline rules, gates, and prohibitions.
 For step-by-step procedures, read the stage workflow file at the start of each stage:
 
 - Stage ① Define: `workflow/01-define.md` (gate artifact: `overview.md`)
-- Stage ② Design: `workflow/02-design.md` (gate artifact set: `series.md`, `episodes/*.md`, `world-bible.md`, `characters/*.md`, `locations/*.md`, `stagings/*.md`)
+- Stage ② Design: `workflow/02-design.md` (gate artifact set: `illustration-guide.md`, `series.md`, `episodes/*.md`, `world-bible.md`, `characters/*.md`, `locations/*.md`, `stagings/*.md`)
 - Stage ③ Evaluate: `workflow/03-evaluate.md` (gate artifact set: `evaluations/*.md` = story lock)
 - Stage ④ Generate: `workflow/04-generate.md` (gate artifact: final output under `output/`)
 - Cut composition (cross-stage): `workflow/cut-composition.md` — cut height, gutter, size class, viewport rhythm
 - Reference models (cross-stage): `workflow/reference-models.md` — character / location / staging identity locks
+- Illustration guide (cross-stage): `workflow/illustration-guide.md` — series art / chrome / balloon·caption typography lock
 - Consistency: `workflow/consistency.md`
 
 ## Stage 1: Define
@@ -190,7 +197,7 @@ See `workflow/01-define.md`.
 ## Stage 2: Design
 See `workflow/02-design.md`.
 
-- Author/approve `world-bible.md`, `characters/*.md`, `locations/*.md`, `stagings/*.md`, `series.md`, `episodes/*.md`
+- Author/approve `illustration-guide.md`, `world-bible.md`, `characters/*.md`, `locations/*.md`, `stagings/*.md`, `series.md`, `episodes/*.md`
 - Episode files include **page → cut** design (art / balloons / dialogue / narration / gutters)
 - Multi-cut ensembles with fixed seating/formation get a **staging** — **one per continuing situation** (café, OR, meeting, …); see `workflow/reference-models.md`
 - G2: Do not proceed to Stage ③ without user approval
@@ -209,7 +216,7 @@ See `workflow/03-evaluate.md`.
 ## Stage 4: Generate
 See `workflow/04-generate.md`.
 
-- Reference images (characters/locations/**stagings**) → page images (cuts + balloons + narration) → episode vertical stitch
+- Reference images (characters/locations/**stagings**) → page images (cuts + balloons + narration) → episode vertical stitch — **every YAML applies `illustration-guide.md`**
 - Each image YAML requires explicit user approval before generate
 - G4: Do not deliver final output without user approval
 
@@ -244,27 +251,35 @@ See `workflow/04-generate.md`.
 - Designing fixed equal-height pages as if this were a picture book (height must follow cut layout)
 - Omitting cut/balloon/gutter design and treating a page as a single undivided illustration by default
 - Generating page images without rendering locked balloon dialogue and narration into the image
+- **Writing page/tile YAML without applying locked `illustration-guide.md`** (art style, chrome, balloon/caption typography)
+- **Inventing per-page balloon fonts, caption boxes, or panel chrome** not defined in `illustration-guide.md`
+- Omitting the mandatory **IMPORTANT** block from page-image YAML `design` (exact balloon text; cut order; clear gutters; no CUT/panel labels; smartphone vertical reading)
+- Using **`gemini-3.1-flash-image` with `2K` + `1:8`** for pages with balloons/captions (use default Flash + `1K` + `9:16` tiles, or Pro + `2K` + `1:8` when a single tall frame is required)
 - Delivering an episode without stitching approved pages into the episode scroll (unless user explicitly wants pages only)
 - **Nested cut subsections (`###### Cut story`, `###### Composition`, `###### Illustration guide`, `###### Balloons`, …)** — canonical episode cut schema is flat `- **Field:**` lists under `##### Cut {n}` only (see `workflow/02-design.md`)
 - **Omitting required cut fields** when empty (establishing shots still need `- **Characters:** 없음 …`; Captions/Balloons/Staging always present, value may be `없음`)
 - **Ghost cast** — listing a character in the episode roster without on-cut appearance or an explicit mention-only tag
-- Writing Craft Notes / `series.md` cut or page counts that disagree with measured `##### Cut` / page headers without a documented exception
+- Writing Craft Notes page/cut counts that disagree with measured `### Page` / `##### Cut` headings without a documented exception
+- Compressing a distribution-unit episode into ~2–3 pages when the summary needs ~10–15 pages of breath
+- Leaving essential story facts only in Cut story / Direction notes so a cold reader cannot follow from art + balloons + captions
+- Putting page/cut estimates or budgets in `series.md` (series plans **# / Title / Summary** only)
 - Using field notation other than `- **Field:**` (colon must be inside bold; reject `**Field**:` and bare `- Location:`)
 
 ## Completion Criteria
 
 - `overview.md` exists with complete webtoon definition, episode structure, **canvas specs (width/aspect)**, **and Validation Criteria**
+- `illustration-guide.md` exists with series art style, vertical chrome, and balloon/caption typography locked
 - `world-bible.md` exists with world design
 - `characters.md` + `characters/{character-slug}.md` exist with complete character designs
 - `locations.md` + `locations/{location-slug}.md` exist with complete location designs
 - `stagings.md` + `stagings/{staging-slug}.md` exist for every multi-cut ensemble that needs fixed blocking
-- `series.md` + `episodes/{nnn}-{episode-slug}.md` exist with complete episode designs (pages → cuts, balloons, narration, gutters)
+- `series.md` lists episodes by **# / Title / Summary** only (no page/cut columns) + `episodes/{nnn}-{episode-slug}.md` with complete designs (~10–15 pages unless short-form exception)
 - Every episode file matches the **canonical flat cut schema** (flat cut fields; cast roster; no `######` cut subsections) per `workflow/02-design.md`
 - All evaluation records exist in `evaluations/{nnn}-{episode-slug}.md` with Criteria Check + **Schema / Structural Integrity** + Craft Checks + required personas + Adjudication
 - Evaluate schema checks pass (flat cut schema, field notation, required fields, cast roster, cut counts, size class ↔ height) before G3
 - G3 story lock approved
 - All reference images generated and approved with explicit user confirmation (Phase 0: characters, locations, stagings)
-- All page images generated with balloons/narration and approved with explicit user confirmation (Phase 1)
+- All page images generated with balloons/narration and approved with explicit user confirmation (Phase 1) — each YAML applying `illustration-guide.md`
 - Episode scroll stitched and reviewed (Phase 2)
 - Consistency review completed (Phase 3)
 - Final assembly approved by user (G4)

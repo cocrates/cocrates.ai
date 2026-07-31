@@ -24,7 +24,7 @@ params:
     The toothbrush-sword sparkles with a shiny highlight effect. Confident,
     determined expression, looking ready for battle.
     Watercolor digital painting, warm pastel tones. No text.
-  images:
+  references:
     - path: "../../../images/references/characters/티라노-t-rex.png"
   size: 1K
   aspectRatio: "16:9"

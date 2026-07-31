@@ -47,7 +47,7 @@ params:
     4. Center-right/hero area, largest+bold+golden glow:
     "치카치카 티라노의 승리!"
     Do not obscure character faces.
-  images:
+  references:
     - path: "./locations/치카치카-왕국-이빨성-앞마당-성문-뷰-회복.png"
     - path: "./characters/티라노-t-rex.png"
     - path: "./characters/충균-몬스터-small.png"

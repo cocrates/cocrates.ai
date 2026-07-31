@@ -71,7 +71,7 @@ params:
 
     Audio: clear Korean speech, standard Seoul dialect, conversational pace.
     No background music. No additional dialogue or sounds.
-  images:
+  references:
     - path: "./jsondb-explanation.png"
     - path: "./jsondb-architecture.png"
   durationSeconds: 10

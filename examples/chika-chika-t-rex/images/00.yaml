@@ -36,7 +36,7 @@ params:
     centered at the top, white with soft glow outline. No other text.
     Do not obscure the character's face with text.
     Full cover illustration, 3:4 portrait.
-  images:
+  references:
     - path: "./characters/티라노-t-rex.png"
   size: 1K
   aspectRatio: "3:4"

@@ -33,8 +33,8 @@ Picture-book assumptions (uniform page size, page-turn hooks, read-aloud caption
 | What is the one-line logline? | Core concept |
 | Who is the target audience (age band / platform feel)? | Audience + tone constraints |
 | How many episodes? | Episode List scale |
-| Rough pages (vertical segments) per episode? | Episode length (approx) — actual design may change |
-| Target cut count per episode? (weekly average ~60–80; short pilot may be lower) | Cut budget / pacing scale |
+| What does each episode deliver? (title + one-paragraph role) | Series planning — no page/cut budgets in `series.md` |
+| Target pages per episode? (~10–15 as distribution unit) | Episode volume scale — designed in episode files, not `series.md` |
 | Genre / tone (romance, action, comedy, thriller, …)? | Craft direction |
 | Art style (digital color comic, line-heavy, painterly, …) and reference works? | Visual style |
 | Target portal / canvas width? (690–800px common; ~1080 only if required) | Canvas width |
@@ -54,8 +54,8 @@ Picture-book assumptions (uniform page size, page-turn hooks, read-aloud caption
 - Title: {title}
 - Target audience: {audience / age band}
 - Episode count: {episode count}
-- Approx. pages per episode: {pages per episode} — adjustable in episode design
-- Target cuts per episode: {e.g. 60–80 weekly / lower for short pilot}
+- Target pages per episode: **~10–15** (distribution unit; design in episode files — not tracked per-row in `series.md`)
+- Cuts per episode: derived in episode design from page packing + dwell (do not budget in `series.md`)
 - Genre: {genre}
 - Tone / mood: {tone}
 
@@ -64,7 +64,7 @@ Picture-book assumptions (uniform page size, page-turn hooks, read-aloud caption
 - Width: {690–800px; lock exact px} — ~1080 only if portal/user requires
 - Height: variable (sum of cut heights + gutters; may differ per page)
 - Cut horizontal fit: {full bleed / 30–50px even side margins}
-- Generation aspect (1K): 9:21 (~672×1584) default — if a page is taller, plan strip splits or stitch extension
+- Generation: **default Flash + 1K + 9:16 strip tiles** (typically 2 per page, then stitch); optional **Pro + 2K + 1:8** single frame only — never Flash at 2K/1:8 for balloon pages
 - Color: full color (default)
 - Outside-cut area: {white / black / theme color}
 - Cut composition: follow `workflow/cut-composition.md` (size classes + gutter classes)
@@ -84,12 +84,14 @@ Picture-book assumptions (uniform page size, page-turn hooks, read-aloud caption
 - Main locations: {location} — {one-line description}
 
 ## Art style
+{Seed only — expand into `illustration-guide.md` in Stage ②.}
 - Medium: {digital color comic / ink+flat / painterly / ...}
 - Palette: {color palette description}
 - Line: {outline style}
 - Balloon tone: {round / jagged / thought / shout conventions}
 - Mood: {mood}
 - References: {reference works or styles if any}
+- Lettering intent (seed): {e.g. clean rounded Hangul in balloons; smaller captions}
 
 ## Constraints
 - Taboos: {taboos}
@@ -103,6 +105,8 @@ Picture-book assumptions (uniform page size, page-turn hooks, read-aloud caption
 | {e.g. One phone-screen beat is readable without pinch-zoom} | {e.g. Each cut’s key face/action + balloon fit in ~9:21 viewport planning} |
 | {e.g. Scroll curiosity through climax} | {e.g. Non-final pages/cuts end with a scroll hook or intentional gutter beat} |
 | {e.g. Dialogue lives in balloons; narration is optional captions} | {e.g. Every spoken line has a balloon owner + placement} |
+| {e.g. Balloon/caption lettering stays consistent across pages} | {e.g. Pages follow `illustration-guide.md` recipes; no one-off fonts/boxes} |
+| {e.g. Cold reader follows from art + dialogue + captions} | {e.g. Who/where/what/why recoverable without designer notes; no note-only exposition} |
 | {e.g. Theme earned by scenes, not sermon caption} | {e.g. Final beats show outcome; no moral monologue box} |
 | {e.g. Safe / taboo-compliant} | {e.g. No content from Taboos} |
 ```
@@ -111,9 +115,9 @@ Picture-book assumptions (uniform page size, page-turn hooks, read-aloud caption
 
 ## Completeness Check
 
-- [ ] Title / audience / scale fields are filled in episode/page/cut terms
+- [ ] Title / audience / episode count are filled
+- [ ] Target pages-per-episode (~10–15) is locked (or short-form exception noted)
 - [ ] Canvas width, cut horizontal fit, variable height, color, outside-cut fill are locked
-- [ ] Target cuts-per-episode range is set (or short-form exception noted)
 - [ ] Validation Criteria are concrete enough to be checked in Stage ③
 - [ ] Story summary matches the user’s intent
 - [ ] Art style and taboos are specific

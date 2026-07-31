@@ -1,6 +1,6 @@
 # Stage ③ — Evaluate (Criteria + Craft + Visual Reference Integrity + Story Lock)
 
-**Prerequisites:** Approved Stage ② design artifacts (`world-bible.md`, `characters*`, `locations*`, `stagings*` when needed, `series.md`, `episodes*`).
+**Prerequisites:** Approved Stage ② design artifacts (`illustration-guide.md`, `world-bible.md`, `characters*`, `locations*`, `stagings*` when needed, `series.md`, `episodes*`).
 
 **Gate artifacts:**
 - `evaluations/{nnn}-{episode-slug}.md` (story lock decision per episode)
@@ -18,13 +18,15 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 1. Load `overview.md` and extract **Validation Criteria** + canvas specs.
 
 2. Check **Schema / structural integrity first** (mechanical — any ❌ blocks G3 story lock):
+   - **`illustration-guide.md` exists** with art style + vertical chrome + balloon/caption typography sections (missing or empty → ❌)
    - **Flat cut schema only:** zero matches for `###### Cut story`, `###### Composition`, `###### Illustration guide`, `###### Balloons`, `###### Captions`, `###### Gutter` (and hybrids that nest Balloons/Gutter under Illustration guide)
    - Every cut field uses `- **Field:**` with colon **inside** bold (reject `**Field**:` and bare `- Location:`)
    - Every `##### Cut` has required fields present: Cut story, Purpose/Size class/Height/Shape, Staging, Characters, Location, Direction, Balloons, Captions, Gutter (values may be `없음`)
    - Balloon/caption tables (when not `없음`) use 2-space indent under the field
    - **Size class ↔ Height:** standard ≈400–600px; tall/long ≥1,200px; compact &lt;400px sparingly — contradiction is ❌ (`workflow/cut-composition.md`)
    - **Cast roster:** episode `**Characters:**` list ↔ union of cut `- **Characters:**` (ghost = roster without on-cut and without mention tag → ❌; on-cut missing from roster → ❌). Mention-only must be tagged `(언급)` (or equivalent)
-   - **Cut count:** Craft Notes cut count == number of `##### Cut` headings; `series.md` row matches measured pages/cuts or Craft Notes documents `exception noted`
+   - **Page / cut counts:** Craft Notes page count == measured `### Page` headings; cut count == measured `##### Cut` headings
+   - **Episode volume:** page count ~10–15 (or Craft Notes short-form exception) — do **not** require page/cut columns in `series.md`
 
 3. Check **episode/page/cut craft completeness** (design correctness):
    - Page 0 / cover-thumbnail rule followed (if agreed)
@@ -35,6 +37,8 @@ For each `episodes/{nnn}-{episode-slug}.md`:
    - No didactic closing monologue caption (theme via final scene)
    - Vertical readability: key face/action + balloons plausible within a phone viewport beat
    - Page heights treated as **variable** (sum of cuts + gutters)
+   - **Cuts-per-page matches dwell/breath** (`cut-composition.md` §4b): high-dwell → often 1 cut/page; not max-packing
+   - Episode is not compressed into ~2–3 pages when the summary needs full distribution-unit volume (~10–15)
    - Cut composition follows `workflow/cut-composition.md`:
      - dialogue/everyday → roughly standard height + normal gutter
      - climax/spectacle → tall/long where overwhelm is intended
@@ -53,11 +57,13 @@ For each `episodes/{nnn}-{episode-slug}.md`:
    - Change points name the kind of change (character state vs location state vs staging reseat vs transient)
    - Gutters match scene transitions / silence / speed
 
-6. Check **Balloon–Art Collaboration**:
+6. Check **Balloon–Art Collaboration & Reader Comprehension**:
    - Cut story core is carried by art + balloons (+ captions)
    - Balloon placement does not cover face/key action
    - Reading order is top→bottom (left→right within a cut if needed)
    - Scroll hooks set up the next cut/page
+   - **Cold-reader comprehension:** Ignoring designer-only Cut story prose that is not shown on-panel, can a first-time reader understand the episode’s who/where/what/why from **visible art + balloon text + caption text** alone? Any essential fact only in notes / assumed knowledge → ❌ (fix in Design: add cut, dialogue, caption, or page)
+   - Captions explain when needed but do not preach the theme as a closing monologue
 
 7. **Persona checks** — run the [Default persona set](#persona-reference); do not skip for speed. Lock **Target Reader** from `overview.md` first.
 8. Record results into `evaluations/{nnn}-{episode-slug}.md`, including per-persona critique and **Adjudication**.
@@ -79,14 +85,17 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 ## 1b. Schema / Structural Integrity (any ❌ blocks G3)
 | Check | Result | Evidence |
 |-------|--------|----------|
+| `illustration-guide.md` present (art + chrome + balloon/caption typography) | ✅ / ⚠️ / ❌ | {file} |
 | Flat cut schema only (no `######` cut subsections / hybrid nesting) | ✅ / ⚠️ / ❌ | {file / line} |
 | Field notation `- **Field:**` (colon inside bold) | ✅ / ⚠️ / ❌ | {page.cut} |
 | Required cut fields present (incl. Characters/Captions/Shape; `없음` OK) | ✅ / ⚠️ / ❌ | {page.cut} |
 | Balloon/caption tables 2-space indented when present | ✅ / ⚠️ / ❌ | {page.cut} |
 | Size class ↔ Height ranges agree | ✅ / ⚠️ / ❌ | {page.cut} |
 | Cast roster ↔ cut Characters (no ghosts; mention-only tagged) | ✅ / ⚠️ / ❌ | {roster vs cuts} |
+| Craft Notes page count == measured `### Page` count | ✅ / ⚠️ / ❌ | {n vs n} |
 | Craft Notes cut count == measured `##### Cut` count | ✅ / ⚠️ / ❌ | {n vs n} |
-| series.md pages/cuts match measured (or exception noted) | ✅ / ⚠️ / ❌ | {series row} |
+| Episode page volume ~10–15 (or short-form exception noted) | ✅ / ⚠️ / ❌ | {page count} |
+| `series.md` has no page/cut budget columns (title/summary only) | ✅ / ⚠️ / ❌ / N/A | {series} |
 
 ## 2. Craft Checks (Design correctness)
 | Check | Result | Evidence |
@@ -98,7 +107,9 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 | Size class matches purpose (standard/tall/open/…) | ✅ / ⚠️ / ❌ | {page.cut} |
 | Gutter class/distance/intent specified | ✅ / ⚠️ / ❌ | {page.cut} |
 | Pause gutters used for silence/time (not accidental) | ✅ / ⚠️ / ❌ | {page.cut} |
-| Viewport plan present / one-screen beat readable | ✅ / ⚠️ / ❌ | {page} |
+| Viewport plan present / breath named / one-screen beat readable | ✅ / ⚠️ / ❌ | {page} |
+| Cuts-per-page matches dwell (high-dwell may be 1 cut/page; no max-packing) | ✅ / ⚠️ / ❌ | {page} |
+| Episode volume sufficient (~10–15 pages; not 2–3 page compression) | ✅ / ⚠️ / ❌ | {episode} |
 | Variable page height (sum of cuts + gutters) | ✅ / ⚠️ / ❌ | {page} |
 | No didactic closing monologue | ✅ / ⚠️ / ❌ | {last beat} |
 | Characters/locations only from catalogs | ✅ / ⚠️ / ❌ | {entities} |
@@ -121,13 +132,15 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 | Time/season/weather/camera mood are cut direction | ✅ / ⚠️ / ❌ | {page.cut} |
 | Continuous scenes keep position/view/state consistent | ✅ / ⚠️ / ❌ | {page range} |
 
-### 3.3 Staging reference model (= continuing-situation blocking)
+### 3.3 Staging reference model (= continuing-situation continuity)
 | Check | Result | Evidence |
 |-------|--------|----------|
-| Each continuing situation with fixed placement has a staging | ✅ / ⚠️ / ❌ | {café/OR/meeting span + staging-slug} |
-| Staging has 2–3 planned ref views | ✅ / ⚠️ / ❌ | {staging file} |
+| Each continuing situation with fixed placement has a staging | ✅ / ⚠️ / ❌ | {café/OR/meeting/dinner span + staging-slug} |
+| Staging has Situation props / table dressing map when shared objects exist | ✅ / ⚠️ / ❌ | {staging file} |
+| Staging has 2–3 planned ref views (blocking + props visible) | ✅ / ⚠️ / ❌ | {staging file} |
 | Cuts cite staging + matching cast/location | ✅ / ⚠️ / ❌ | {page.cut} |
 | No L/R flip, seat shuffle, or OR station drift without Design reseat | ✅ / ⚠️ / ❌ | {page.cut range} |
+| No wholesale food/menu/prop teleport across cuts in the same staging | ✅ / ⚠️ / ❌ | {page.cut range} |
 
 ### 3.4 Direction Completeness
 | Check | Result | Evidence |
@@ -150,11 +163,14 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 | Change kind distinguished (character state vs location state vs staging reseat vs transient) | ✅ / ⚠️ / ❌ | {page.cut} |
 | Gutters match transition/psychology | ✅ / ⚠️ / ❌ | {page.cut} |
 
-## 5. Balloon–Art Collaboration Checks
+## 5. Balloon–Art Collaboration & Reader Comprehension Checks
 | Check | Result | Evidence |
 |-------|--------|----------|
 | Cut story core carried by art+balloon(+caption) | ✅ / ⚠️ / ❌ | {page.cut} |
 | Scroll hook creates natural tension/curiosity | ✅ / ⚠️ / ❌ | {page} |
+| Cold-reader comprehension (art + dialogue + caption alone) | ✅ / ⚠️ / ❌ | {episode — name any opaque beat} |
+| Essential facts not trapped in Cut story/Direction notes only | ✅ / ⚠️ / ❌ | {page.cut} |
+| Captions clarify when needed; no sermon ending | ✅ / ⚠️ / ❌ | {last beats} |
 
 ## 6. Persona Checks
 {Run every persona in the Default set. Per persona: Stance / Strengths / Defects (severity + High/Med/Low + fix) / Reader impact.}
@@ -163,6 +179,7 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 - Who: {from overview — platform, genre appetite, why they open this episode}
 - Fun: {rating}
 - Clarity / followability: {rating}
+- **Understood the episode from art + dialogue + captions alone?** {yes / where lost}
 - Want to keep scrolling: {rating}
 - First-viewport / early-cut retention risk: {…}
 - Feedback: {feedback}
@@ -190,21 +207,25 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 
 ### Story Critic (webtoon craft)
 - Story completeness without didacticism: {rating}
+- Cold-reader can reconstruct who/where/what/why from on-panel channels only: {rating}
 - Cut division / size-class variety vs drama: {rating}
-- Balloon–art collaboration: {rating}
+- Balloon–art–caption collaboration (no note-only exposition): {rating}
 - Feedback: {feedback}
 
 ### Webtoon art specialist
 - Reference-model consistency (character / location / staging): {rating}
 - Vertical direction, cut heights & gutters: {rating}
 - Size-class variety vs drama: {rating}
-- Balloon guide (for Stage ④ YAML): {feedback}
+- **`illustration-guide.md` completeness** (art / chrome / balloon·caption lettering — prevents page drift): {rating}
+- **Compliance plan for Stage ④:** YAML must apply guide tokens — do **not** invent per-episode lettering
+- Balloon/caption placement notes only (styles stay in the series guide):
   - Reading order: {top→bottom + balloon map}
-  - Balloon list: {cut → speaker / type / text / placement / emphasis}
-  - Caption style: {caption-box rules}
+  - Balloon list: {cut → speaker / type / text / placement — type maps to guide §3 recipe}
+  - Caption list: {cut → text / placement — guide §4 recipe}
   - Composition map: {cut → size class / height / gutter class}
   - Staging cites: {cut → staging-slug + ref view}
-  - Outside-cut fill / side margins: {full bleed or 30–50px}
+  - Outside-cut fill / side margins: {from guide + overview}
+  - Guide gaps to fix in Design (if any): {missing recipes → update illustration-guide.md, not YAML}
 
 ## 7. Adjudication
 {Record Apply decisions. Default tie-break: Target Reader. Never silently drop a High finding.}
@@ -222,7 +243,9 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 - [ ] Reference Model Integrity (character / location / staging): ✅/⚠️/❌
 - [ ] Scene Continuity & Visual Consistency: ✅/⚠️/❌
 - [ ] Direction Completeness: ✅/⚠️/❌
-- [ ] Balloon/Caption Guide: ✅/⚠️/❌
+- [ ] **Series `illustration-guide.md` lock + balloon/caption typography consistency: ✅/⚠️/❌**
+- [ ] Balloon/Caption placement map (roles from guide): ✅/⚠️/❌
+- [ ] **Cold-reader comprehension (art + dialogue + caption): ✅/⚠️/❌**
 - [ ] Craft Checks: ✅/⚠️/❌
 - [ ] Required personas run + Adjudication filled: ✅/⚠️/❌
 - [ ] Target-reader readiness acceptable: ✅/⚠️/❌
@@ -248,7 +271,7 @@ Critics **advise**. Fill the Adjudication table and apply chosen fixes before G3
 | **Genre Critic** | Genre contracts and trope payoff | Does this episode pay the genre bill? |
 | **Plot / Pacing Critic** | Arc, causality, hook chain, info timing | Dead mid-scroll? Hooks earned? |
 | **Character Critic** | Motive, face-acting, dialogue voice | Do I care who speaks? |
-| **Story Critic** | Completeness, cut rhetoric, no preachy caption ending | Is the story told in cuts, not lectures? |
+| **Story Critic** | Completeness, cold-reader comprehension via art+dialogue+caption, no preachy ending | Would a first-time reader follow without designer notes? |
 | **Platform / editorial** | Width, color, split upload, one-screen beats | Shipable on the locked canvas? |
 | **Webtoon art specialist** | Refs, gutters, heights, balloons, staging | Will Stage ④ stay consistent and readable? |
 
@@ -281,11 +304,12 @@ User confirms:
 
 1. Schema / Structural Integrity — flat cut schema, field notation, required fields, cast roster, cut counts all ✅?
 2. Criteria Check — all items addressed?
-3. Craft Checks — satisfactory?
-4. Reference Model Integrity — character states / location set states / stagings consistent with catalogs (`workflow/reference-models.md`)?
-5. Scene Continuity & Visual Consistency — continuity held (including seating); gutters/changes intentional?
-6. Persona feedback + Adjudication — residual risk acceptable for the **Target Reader**?
-7. **Story lock:** episode page/cut stories, balloon texts, captions, gutters, scroll hooks, staging cites, and Direction fields are now frozen for image generation.
+3. Craft Checks — satisfactory (incl. episode volume)?
+4. **Cold-reader comprehension** — art + dialogue + captions alone carry who/where/what/why?
+5. Reference Model Integrity — character states / location set states / stagings consistent with catalogs (`workflow/reference-models.md`)?
+6. Scene Continuity & Visual Consistency — continuity held (including seating); gutters/changes intentional?
+7. Persona feedback + Adjudication — residual risk acceptable for the **Target Reader**?
+8. **Story lock:** episode page/cut stories, balloon texts, captions, gutters, scroll hooks, staging cites, and Direction fields are now frozen for image generation.
 
 **Do not proceed to Stage ④ until G3 is approved.**
 

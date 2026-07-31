@@ -31,7 +31,7 @@ params:
     Dynamic swirling foam and bubbles fill the scene. The castle gleams
     brilliantly behind them.
     Watercolor digital painting, warm pastel tones. No text.
-  images:
+  references:
     - path: "../../../images/references/characters/티라노-t-rex.png"
     - path: "../../../images/references/characters/충균-몬스터-small.png"
   size: 1K

@@ -61,7 +61,7 @@ params:
     "내일도 치카치카 티라노 할 거야!"
     Only this one line of text. No narration, no moral lesson.
     Place text in the lower area so it does not cover the face in the mirror.
-  images:
+  references:
     - path: "./locations/현실-화장실-세면대-앞-거울-뷰.png"
     - path: "./characters/티라노.png"
   size: 1K

@@ -23,7 +23,7 @@ params:
        "훈이는 이미 잠들었어요."
 
     All text must be in Korean (Hangul). The text should feel like part of the picture book page — integrated into the composition, not a plain overlay. Place text in areas that do not obscure the boy's face or the toothbrush on the nightstand. The overall layout should look like a finished picture book page where illustration and text work together. The mood is quiet and calm, with a hint of magical anticipation.
-  images:
+  references:
     - path: "./characters/hun.png"
     - path: "./locations/hoon-room-evening.png"
   size: 1K

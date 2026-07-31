@@ -40,7 +40,7 @@ params:
     2. Center, small narration (between the two figures): "그런데 갑자기 — 반짝!"
     3. Bottom-right, largest+bold+glow, dialogue: "크아아아! 치카치카 티라노다!"
     Do not obscure faces. Place text in areas with clear background.
-  images:
+  references:
     - path: "./locations/현실-화장실-세면대-앞-거울-뷰.png"
     - path: "./characters/티라노.png"
     - path: "./characters/티라노-t-rex.png"

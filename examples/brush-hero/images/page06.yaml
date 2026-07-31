@@ -23,7 +23,7 @@ params:
        "하얀이가 고개를 끄덕였어요."
 
     All text must be in Korean (Hangul). The text should feel like part of the picture book page — integrated into the composition, not a plain overlay. Place text in areas that do not obscure the characters' faces. The overall layout should look like a finished picture book page where illustration and text work together.
-  images:
+  references:
     - path: "./characters/hun-adventure.png"
     - path: "./characters/hayani.png"
   size: 1K

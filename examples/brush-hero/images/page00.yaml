@@ -6,7 +6,7 @@ message: |
   표지를 보는 아이가 "와, 재미있겠다!" 하고 책을 집게 만든다.
 
 design: |
-  참조 이미지 (params.images 순서):
+  참조 이미지 (params.references 순서):
   1. hun-adventure.png — 훈이 모험가 복장 유지 (파란 튜닉, 황금 방패 문양, 갈색 부츠)
   2. hayani.png — 하얀이 외형 유지 (동글동글 치아 캐릭터, 분홍 볼)
   3. tooth-plaza-peaceful.png — 이빨 광장 배경 유지 (하얀 치아 성들, 파스텔 하늘)
@@ -48,7 +48,7 @@ params:
        "글·그림 Cocrates"
 
     All text must be in Korean (Hangul). The text should feel like a real picture book cover — beautifully integrated into the composition. Title should be the most prominent visual element after the main character. Place text so it does not obscure the characters' faces. The overall layout should look like a finished children's picture book cover that makes a child want to open the book.
-  images:
+  references:
     - path: "./hun-adventure.png"
     - path: "./hayani.png"
     - path: "./tooth-plaza-peaceful.png"

@@ -30,7 +30,7 @@ params:
     The monster looks comical rather than scary — like a playful but naughty
     cartoon villain.
     Watercolor digital painting, pastel tones. No text.
-  images:
+  references:
     - path: "../../../images/references/characters/티라노-t-rex.png"
     - path: "../../../images/references/characters/충균-몬스터-big.png"
   size: 1K

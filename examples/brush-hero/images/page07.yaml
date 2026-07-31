@@ -25,7 +25,7 @@ params:
        "훈이는 칫솔을 번쩍 들어올렸어요."
 
     All text must be in Korean (Hangul). The text should feel like part of the picture book page — integrated into the composition, not a plain overlay. Place text in areas that do not obscure the characters' faces or the weapons. The overall layout should look like a finished picture book page where illustration and text work together.
-  images:
+  references:
     - path: "./characters/hun-adventure.png"
     - path: "./characters/hayani.png"
     - path: "./locations/weapon-storage.png"

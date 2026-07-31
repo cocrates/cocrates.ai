@@ -15,15 +15,16 @@
 
 To preserve story lock:
 - Allowed in ④:
-  - image YAML prompts that implement locked cut/illustration guides
+  - image YAML prompts that implement locked cut/illustration guides **and** locked `illustration-guide.md` (art / chrome / balloon·caption typography)
   - re-rendering reference/page PNGs for quality/consistency (max 2 retries per image)
   - rendering locked balloon dialogue and narration/captions inside each page image
   - stitching approved page PNGs into the episode scroll (and optional portal split-export)
 - Not allowed in ④:
   - rewriting episode/page/cut story, balloon text, or captions
   - changing illustration guide meaning (only prompt phrasing/tightening)
+  - inventing new balloon fonts, caption boxes, panel chrome, or art-medium treatments not in `illustration-guide.md`
 
-If a problem is a **Design gap** (wrong cast/place/state/unclear guide/missing balloon):
+If a problem is a **Design gap** (wrong cast/place/state/unclear guide/missing balloon / missing or weak `illustration-guide.md`):
 - Stop generation
 - Roll back to Stage ②
 - Re-run Stage ③ for affected episode(s)
@@ -37,22 +38,50 @@ Read from locked `overview.md` (defaults if unspecified). Cut heights/gutters co
 | Spec | Default |
 |------|---------|
 | Target width | **690–800px** locked in overview (do not invent mid-generate) |
-| Page height | **Variable** — sum of locked cut heights + gutters |
-| Generation size | 1K unless user asks otherwise |
-| Aspect ratio | **9:21** as the default vertical-strip frame (~672×1584). If a page needs more height, either (a) design/generate as multiple stacked strips within the page folder and stitch, or (b) generate taller then crop/extend per user approval — never silently change locked cut order or size classes |
+| Page height | **Variable** — sum of locked cut heights + gutters (page packing follows dwell/breath — `cut-composition.md` §4b) |
+| **Default page generation** | **`gemini-3.1-flash-image` + `1K` + `9:16`**, split into **strip tiles** (typically **2** per design page), then stitch to `{page}.png` |
+| Optional tall single frame | **`gemini-3-pro-image` + `2K` + `1:8`** only — do **not** use Flash at 2K/1:8 for balloon text (frequent text errors) |
 | Color | Full color |
 | Side margins | Full bleed or 30–50px even sides (per lock) |
 | Outside-cut fill | Per overview / page note |
 
+### Default: 9:16 / 1K strip tiles (Flash)
+
+`gemini-3.1-flash-image` renders balloon text more reliably at **1K**. Prefer this path for all normal page work.
+
+1. Partition the locked page’s cuts top→bottom into **tile A / tile B** (default **2** tiles). Prefer splits **on gutters between cuts**, not through the middle of a cut. A single tall cut may occupy one full tile (or more tiles if needed).
+2. Generate each tile:
+   - `images/{nnn}-{episode-slug}/{page}-a.yaml` → `{page}-a.png`
+   - `images/{nnn}-{episode-slug}/{page}-b.yaml` → `{page}-b.png`
+   - (If a page needs >2 tiles: `-c`, `-d`, … — still `1K` + `9:16` + Flash unless Pro path is locked.)
+3. Stitch tiles top→bottom into `images/{nnn}-{episode-slug}/{page}.png` before episode-scroll stitch.
+4. Each tile YAML gets its own approval + generate call (image-generation skill rules).
+
+**Tile continuity:** Tile B’s `design` must state it continues the same page immediately below tile A (same width, style, cast/location refs, outside-cut fill). Do not re-introduce page chrome or restart cut numbering as on-image labels.
+
+### Optional: 1:8 / 2K single frame (Pro only)
+
+Use **only** when overview/user explicitly wants one tall generation:
+
+| Field | Value |
+|-------|--------|
+| `model` | **`gemini-3-pro-image`** (required) |
+| `size` | **`2K`** |
+| `aspectRatio` | **`1:8`** |
+
+**Forbidden:** `gemini-3.1-flash-image` with `2K` + `1:8` for pages with balloons/captions.
+
 **Portal note:** Uploads may require splitting tall images (e.g. ~1280px height). Keep creative continuity as one scroll; split only at export if requested.
 
-**Composition fidelity:** When writing page YAML, preserve locked **size class**, approximate **cut height**, **shape** (open/diagonal vs box), and **gutter class/distance** between stacked cuts. A climax `tall` cut must feel scroll-through tall; a `pause` gutter must read as intentional empty vertical space, not a forgotten gap.
+**Composition fidelity:** When writing tile/page YAML, preserve locked **size class**, approximate **cut height**, **shape** (open/diagonal vs box), and **gutter class/distance** between stacked cuts. A climax `tall` cut must feel scroll-through tall; a `pause` gutter must read as intentional empty vertical space, not a forgotten gap.
 
 ---
 
 ## Phase 0: Reference Image Generation (Characters + Locations + Stagings)
 
 Goal: Generate durable identity and spatial anchors so later page images stay consistent. Full rules: `workflow/reference-models.md`.
+
+**Required reading before any YAML:** `{project-root}/illustration-guide.md` (§1 Art style). Apply the same medium / palette / line / proportion tokens to every reference image. Full rules: `workflow/illustration-guide.md`.
 
 | Layer | Include in reference images | Exclude (cut direction) |
 |-------|----------------------------|-------------------------|
@@ -120,7 +149,7 @@ params:
     (continuing-situation blocking lock) for a webtoon scene (café / OR / meeting / formation / etc.).
     Lock who sits/stands where exactly as designed; preserve left/right and stations; neutral expressions; no balloons.
     Wide establishing view of the full group placement.
-  images:
+  references:
     - path: "./images/locations/...."
     - path: "./images/characters/...."
   size: 1K
@@ -144,54 +173,77 @@ For each reference image:
 
 ## Phase 1: Page Image Generation (Cuts + Balloons + Captions)
 
+**Required before every tile/page YAML:** open `{project-root}/illustration-guide.md` and apply art style (§1), vertical chrome (§2), and balloon/caption recipes (§3–4). Do not invent lettering. Procedure: `workflow/illustration-guide.md`.
+
 For each episode:
-- For each page index (`{00}`, `{01}`, ...), generate:
-  - `images/{nnn}-{episode-slug}/{page-idx}.yaml`
-  - `images/{nnn}-{episode-slug}/{page-idx}.png`
+- For each page index (`{00}`, `{01}`, ...):
+  - **Default:** generate strip tiles `{page}-a`, `{page}-b` (…), stitch → `{page}.png`
+  - **Pro optional path:** one `{page}.yaml` / `{page}.png` at `2K` + `1:8` with `gemini-3-pro-image` only
 
-Each page image must depict **all locked cuts on that page** stacked top→bottom, with gutters, speech balloons, and captions as designed — not a single undivided picture-book illustration unless the locked design intentionally uses one full-bleed cut.
+Each page (after tile stitch) must depict **all locked cuts on that page** stacked top→bottom, with gutters, speech balloons, and captions as designed — not a single undivided picture-book illustration unless the locked design intentionally uses one full-bleed cut.
 
-### 1.1 Per-page YAML approval (MANDATORY)
+### 1.1 Per-tile / per-page YAML approval (MANDATORY)
 
-For each page image:
-1. Create `{page}.yaml` that:
-   - uses character/location/**staging** reference PNGs as locked
-   - implements only the locked cut illustration guides (order preserved top→bottom)
+For each **strip tile** (default path) or single page frame (Pro path):
+1. Create YAML that:
+   - **cites and applies `{project-root}/illustration-guide.md`** (mandatory — include §6 checklist in `design`)
+   - uses character/location/**staging** reference PNGs via `params.references` (image-generation skill; do not use `params.images`) as locked
+   - implements only the locked cuts assigned to **this tile** (order preserved top→bottom within the page; tile B continues after tile A)
    - when a cut cites a staging: keep **seating/formation** from that staging; vary expression/gesture/camera tightness only
    - does not silently swap identity gear or reseat characters
    - renders locked balloon `text` and caption `text` **verbatim** (target language; no rewrite)
    - places balloons/captions per locked placement (do not cover faces/key action)
-   - uses outside-cut fill from overview/page notes
-   - prefers `aspectRatio: "9:21"` unless the locked page height plan requires a different approved approach
+   - uses **balloon/caption chrome and lettering only from the series guide** (type from cut table → recipe from guide)
+   - **when Staging is cited:** attach staging ref PNG(s) under `params.references`; keep **same seats/L-R and same situation props/table dressing** as the staging (Location alone ≠ tonight’s meal / this scene’s props)
+   - uses outside-cut fill from overview/guide/page notes
+   - **Default:** `model: gemini-3.1-flash-image`, `size: 1K`, `aspectRatio: "9:16"`
+   - **Pro tall frame only:** `model: gemini-3-pro-image`, `size: 2K`, `aspectRatio: "1:8"`
+   - embeds the mandatory **IMPORTANT** block below verbatim in `design` (or the generation prompt body) so the model cannot drop it
    - YAML role boundary:
-     - `title`: `{episode-slug} / Page {idx}`
-     - `message`: page story meaning/emotion/beat only (1–2 sentences)
-     - `design`: cut stack + balloon/caption map + gutters + color/mood + staging cites (from locked episode design)
+     - `title`: `{episode-slug} / Page {idx} / tile {a|b|…}` (or `/ Page {idx}` for Pro single frame)
+     - `message`: page/tile story meaning/emotion/beat only (1–2 sentences)
+     - `design`: **IMPORTANT** block (required) + **illustration-guide tokens** + cuts in this tile + balloon/caption map + gutters + color/mood + staging cites + tile continuity note
 2. Show YAML to user for explicit review and approval
 3. On explicit approval only → call MCP generate
 4. Verify:
-   - cut order and gutters match lock
-   - balloon/caption accuracy and readability
-   - width/vertical-strip feel suitable for locked target width (note resize at export if generated at 1K)
+   - cut order and gutters match lock (across tiles after stitch)
+   - balloon/caption accuracy and readability (exact strings; no particle changes)
+   - **typography/chrome matches `illustration-guide.md`** (not a one-off lettering style)
+   - **no** cut labels / “CUT 1” / panel index text on the image
+   - width/vertical-strip feel suitable for locked target width (resize/crop at export to 690–800px width as needed)
+5. After all tiles for a page are approved: stitch `{page}-a.png` + `{page}-b.png` (+ …) → `{page}.png`
 
-### 1.2 Prompt pattern (guideline)
+### 1.2 Prompt pattern (mandatory for every tile/page YAML)
+
+Every tile/page `design` (prompt body) **must** include this **IMPORTANT** block **verbatim** (English), then the cuts **for this tile only**:
 
 ```
 Using the provided reference images:
 - Keep character appearance (including identity gear), set structure, and series art style consistent
-- When staging refs are provided, keep WHO SITS/STANDS WHERE locked; do not reseat
-- Compose a VERTICAL SCROLL WEBTOON PAGE (not a picture-book single illustration):
+- Series art style (from illustration-guide.md): {medium}, {palette}, {line}, {proportions}
+- Balloon/caption recipes (from illustration-guide.md): speech={…}; thought={…}; shout={…}; caption={…}
+- Outside-cut / panel chrome (from illustration-guide.md): {fill}, {border rules}
+- When staging refs are provided, keep WHO SITS/STANDS WHERE locked and keep SITUATION PROPS / TABLE DRESSING the same (same meal/toys/cups — no wholesale swap); do not reseat
+- Compose a VERTICAL SCROLL WEBTOON STRIP TILE (not a picture-book single illustration):
   stacked comic panels (cuts) from top to bottom with clear gutters between cuts
-- Cut order and content must follow the locked design exactly
+- This image is tile {a|b|…} of page {idx}; it continues the same page strip {above|below} the sibling tile — same width, style, and outside-cut fill
 - Outside panel area: {white / black / theme color}
 
-CUTS (top → bottom):
+IMPORTANT:
+- All balloon text must be rendered EXACTLY as written below, character by character. Do not add, omit, or alter any particle.
+- Cut order from top to bottom must be preserved
+- Clear gutters between cuts
+- DO NOT render any labels, cut numbers, or words like "CUT 1", "CUT 2", "CUT 3" anywhere on the image. No panel numbering, no index text, no captions other than the specified balloon text.
+- Suitable for smartphone vertical reading
+- Do NOT invent new balloon fonts, caption boxes, or panel chrome not listed in the series illustration guide
+
+CUTS (top → bottom) — this tile only:
 1. Cut {n}: size class {standard|tall|open|…}, height ~{px}, shape {box|open|diagonal}
-   Art: {action / framing from locked illustration guide}
+   Art: {action / framing from locked cut Direction}
    Balloons:
-   - {type} from {speaker}: "{verbatim text}" at {placement}
+   - {type} from {speaker}: "{verbatim text}" at {placement} — apply locked recipe for {type}
    Captions:
-   - "{verbatim text}" at {placement}
+   - "{verbatim text}" at {placement} — apply locked caption recipe   <!-- omit section if Captions: 없음; never invent caption text -->
    Gutter after: class {tight|normal|wide|pause}, ~{px} empty vertical space
 2. ...
 
@@ -200,23 +252,30 @@ TEXT RULES:
 - Reading order: top → bottom (then left → right within a cut if needed)
 - Do not obscure faces or key action with balloons
 - Full-color webtoon style suitable for smartphone vertical reading
+- Lettering and balloon chrome must match the series illustration guide on every tile
 ```
 
 **Must follow:**
-- All locked balloon/caption lines appear in the image
-- No text mutation of locked strings
-- Cuts remain visually separated by gutters (unless design says full-bleed merge)
-- Final look = finished webtoon strip segment, not a captioned picture-book page
+- The **IMPORTANT** block is present in every tile/page YAML before generation
+- **`illustration-guide.md` tokens** are present (art + balloon/caption recipes); no per-tile lettering invention
+- Default path uses Flash + `1K` + `9:16` tiles (typically 2); Pro + `2K` + `1:8` only when explicitly chosen
+- Never Flash + `2K` + `1:8` for balloon/caption pages
+- All locked balloon/caption lines appear in the image **exactly** (character by character)
+- No text mutation of locked strings (including particles)
+- Cut order top→bottom preserved across tiles; cuts visually separated by clear gutters (unless design says full-bleed merge)
+- **No** on-image labels: no “CUT 1/2/3”, panel numbers, index text, or extra captions beyond locked balloon/caption text
+- Final look = finished webtoon strip segment for smartphone vertical reading, not a captioned picture-book page or a labeled storyboard
 
 ---
 
 ## Phase 2: Stitch Episode Scroll
 
-1. After all pages for the episode are approved, concatenate page PNGs **top → bottom** into:
+1. Ensure each page has a stitched `{page}.png` (from `{page}-a` + `{page}-b` + … on the default path, or the Pro single frame).
+2. After all pages for the episode are approved, concatenate page PNGs **top → bottom** into:
    - `images/{nnn}-{episode-slug}/episode-scroll.png`
-2. Optionally resize the scroll (or each page) to **target width** (690px or overview width) while preserving aspect.
-3. If the user/portal needs split upload files, export additional slices (e.g. max height ~1280px) **without changing art** — document slice boundaries next to the files if useful.
-4. Show the stitched scroll (or a clear multi-page preview path) to the user for review before G4.
+3. Optionally resize the scroll (or each page) to **target width** (690px or overview width) while preserving aspect.
+4. If the user/portal needs split upload files, export additional slices (e.g. max height ~1280px) **without changing art** — document slice boundaries next to the files if useful.
+5. Show the stitched scroll (or a clear multi-page preview path) to the user for review before G4.
 
 If stitch reveals a **design** problem (wrong cut order, missing beat): rollback to Stage ② — do not “fix” in stitch.
 
@@ -224,13 +283,14 @@ If stitch reveals a **design** problem (wrong cut order, missing beat): rollback
 
 ## Phase 3: Visual Consistency Review
 
-1. Compare generated page images and the episode scroll within each episode.
-2. If **visual inconsistencies** (palette/style/identity) appear:
-   - regenerate only the affected image(s)
+1. Compare generated page images and the episode scroll within each episode **and against `illustration-guide.md`**.
+2. Check specifically: same art medium/line feel; same balloon/caption lettering and chrome; same outside-cut fill.
+3. If **visual inconsistencies** (palette/style/identity/**typography drift**) appear:
+   - regenerate only the affected image(s) with stronger guide tokens in YAML
    - do not change locked story/text
    - max 2 retries per image
    - re-stitch if pages changed
-3. If inconsistencies indicate a **Design gap**:
+4. If inconsistencies indicate a **Design gap** (including incomplete `illustration-guide.md`):
    - rollback to Stage ②
    - re-evaluate and regenerate affected assets
 
@@ -239,8 +299,8 @@ If stitch reveals a **design** problem (wrong cut order, missing beat): rollback
 ## Approval Gate G4 — Final Result
 
 Confirm with user:
-1. All reference images — quality acceptable?
-2. All page images — cuts, balloons, captions faithful to lock?
+1. All reference images — quality acceptable? Style matches `illustration-guide.md`?
+2. All page images — tiles stitched; cuts, balloons, captions faithful to lock (exact text; no CUT/panel labels); **lettering/chrome consistent across pages**?
 3. Episode scroll — continuous vertical read feels right?
 4. Final result in `output/{webtoon-slug}-final/` — ready to deliver?
 

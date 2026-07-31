@@ -41,7 +41,7 @@ params:
     3. Bottom-right corner, small narration in parentheses:
     "(벌써 조금 작아졌네?)"
     Do not obscure character faces.
-  images:
+  references:
     - path: "./locations/치카치카-왕국-이빨성-앞마당-성문-뷰-오염.png"
     - path: "./characters/티라노-t-rex.png"
     - path: "./characters/충균-몬스터-big.png"

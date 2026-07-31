@@ -174,6 +174,8 @@ User-facing motion brief in the user's language — primary YAML review object. 
 
 **Do not set `params.task`.** Runtime infers Omni task from references: 0 → `text_to_video`; one image only → `image_to_video`; 2+ images or any video/audio → `reference_to_video`. Multi-turn edits use `continue_interaction`.
 
+**Do not use `params.images`** — removed; MCP returns `INVALID_INPUT` (`use params.references`).
+
 ### Prompt & references
 
 - Prompt: subject → action over time → setting motion → camera → light/mood → **shot plan** → audio → timing/text → in-prompt avoidances (`No dialogue`). Say `single continuous shot` when needed (Omni often prefers multi-shot). Edits: short + `Keep everything else the same`.
@@ -270,3 +272,4 @@ output: "./cafe-call.mp4"
 - Guessing ref paths; failed preflight; aspect ratios other than `16:9` / `9:16`
 - Inventing unrequested cast/cuts/dialogue/music; mis-tagging first frame vs ref
 - Putting `params.task` in YAML (ignored; task is inferred from references only)
+- Using `params.images` (removed — use `params.references`)

@@ -21,7 +21,7 @@ params:
        "와, 멋져요!"
 
     All text must be in Korean (Hangul). The text should feel like part of the picture book page — integrated into the composition, not a plain overlay. Place text in areas that do not obscure the boy's face or the tooth-shaped buildings. The overall layout should look like a finished picture book page where illustration and text work together.
-  images:
+  references:
     - path: "./characters/hun-adventure.png"
     - path: "./locations/tooth-plaza-peaceful.png"
   size: 1K

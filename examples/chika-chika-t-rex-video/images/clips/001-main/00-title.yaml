@@ -31,7 +31,7 @@ params:
     blue toothbrush-sword high up. Low angle heroic pose, confident expression.
     TEXT OVERLAY: The title "치카치카 티라노" centered in large bold rounded
     white font with a soft glow outline. Widescreen 16:9 format.
-  images:
+  references:
     - path: "../../../images/references/characters/티라노-t-rex.png"
   size: 1K
   aspectRatio: "16:9"

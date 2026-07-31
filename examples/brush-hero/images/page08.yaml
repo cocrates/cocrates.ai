@@ -25,7 +25,7 @@ params:
        "설탕 괴물들이 비명을 질렀어요."
 
     All text must be in Korean (Hangul). The text should feel like part of the picture book page — integrated into the composition, not a plain overlay. Place text in areas that do not obscure the characters' faces or the action. The overall layout should look like a finished picture book page where illustration and text work together.
-  images:
+  references:
     - path: "./characters/hun-weapons.png"
     - path: "./characters/sugar-monster.png"
   size: 1K

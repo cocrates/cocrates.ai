@@ -43,7 +43,7 @@ params:
     3. Right side, by the monster, bold+purple glow:
     "아야야! 뭐야 그거!"
     Do not obscure faces. Text in sky/background areas.
-  images:
+  references:
     - path: "./locations/치카치카-왕국-이빨성-앞마당-성문-뷰-오염.png"
     - path: "./characters/티라노-t-rex.png"
     - path: "./characters/충균-몬스터-big.png"

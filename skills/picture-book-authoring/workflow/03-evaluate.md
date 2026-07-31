@@ -1,6 +1,6 @@
 # Stage ③ — Evaluate (Criteria + Craft + Visual Reference Integrity + Story Lock)
 
-**Prerequisites:** Approved Stage ② design artifacts (`world-bible.md`, `characters*`, `locations*`, `series.md`, `episodes*`).
+**Prerequisites:** Approved Stage ② design artifacts (`illustration-guide.md`, `world-bible.md`, `characters*`, `locations*`, `series.md`, `episodes*`).
 
 **Gate artifacts:**
 - `evaluations/{nnn}-{episode-slug}.md` (story lock decision per episode)
@@ -18,34 +18,47 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 1. Load `overview.md` and extract **Validation Criteria**.
 
 2. Check **Schema / structural integrity first** (mechanical — any ❌ blocks G3 story lock):
+   - **`illustration-guide.md` exists** with art style + layout + typography/text-role sections (missing or empty → ❌)
    - **Flat page schema only:** zero matches for `#### Page story`, `#### Illustration guide`, `#### Rendering text`, `#### Text–image split`, `#### Page-turn hook`
    - Every page field uses `- **Field:**` with colon **inside** bold
    - Every `### Page` has required fields: Page story, Staging, Characters, Location, Direction, Rendering text, Text carries, Picture carries, Page-turn hook (values may be `없음`)
+   - **`### Page 0` exists** as the first page heading (cover) — missing Page 0 → ❌
    - **Cast roster** ↔ page Characters (ghost / missing on-page → ❌; mention-only tagged)
-   - Craft Notes page count == measured `### Page` headings; `series.md` matches or exception noted
+   - Craft Notes page count == measured `### Page` headings (incl. Page 0); `series.md` matches or exception noted
 
 3. Check **episode/page craft completeness** (design correctness):
-   - Page 0 / cover rule followed
-   - Page-turn hooks exist (final = resolution/afterimage)
+   - Page 0 / cover rule followed (see cover criteria below)
+   - Page-turn hooks exist (Page 0 = opening curiosity; final = resolution/afterimage)
    - Text–image split is not redundant captioning
-   - Rendering text fits target age (read-aloud rhythm + word density)
+   - Rendering text fits target age (read-aloud rhythm + word density; Page 0 = title display OK)
    - No didactic closing monologue (theme emerges via final scene/image)
+   - **Beat chronology / causality:** page order must not contradict physical sequence (e.g. already dressed → then towel-dry; food eaten → then first bite). If order is wrong → ❌ Design fix (swap/reorder pages), not Generate patch
+
+   **Page 0 cover criteria (all should pass):**
+   - Heading is `### Page 0` (optional `(Cover)` label)
+   - Page story identifies cover role (invite to open; no climax spoiler)
+   - Rendering text is **title** (subtitle/credit optional) — not story-body prose
+   - Text carries = title; Picture carries = world / protagonist / mood
+   - Direction notes title safe zone (or equivalent space for title)
+   - Page-turn hook invites into Page 1
 
 4. Check **Reference Model Integrity** (core of picture-book scene consistency):
    - Character reference model (= state) integrity
      - Each page names a **state** (or base) defined in `characters/{character-slug}.md`
      - Expression / posture / action / emotion stay in Direction (page image direction), not as reference-model states
      - Character state updates only when the story has a lasting physical / outfit change
+     - **Outfit chronology:** if state goes bath→dressed, drying/towel pages must come **before** dressed pages
    - Location reference model (= state) integrity
      - Each page names a location with **scene axes (position + view)** and that scene’s **state (base or state-slug)** from `locations/{location-slug}.md`
-     - Lighting / time / weather / mood / camera direction / framing / angle / transient elements are page direction, not reference-model state
-     - “Outside-the-window view” treated as **transient** → page prompt, no state change
+     - Lighting / time / weather / mood / camera tightness / transient elements are page direction, not reference-model state
+     - **Visibility coverage (`workflow/reference-models.md` §3.1):** every must-see architectural/fixture element on the page is already visible in the cited position×view ref Description/PNG — missing door/wall/fixture → ❌ add Scene List row + ref; do **not** invent in Generate
      - Permanent physical change (new building / wall destroyed) → new state
 
 5. Check **Scene Continuity & Visual Consistency**:
    - Spans treated as “the same scene” keep the same character state / location scene (position+view) / state
-   - When change is needed, the change type is explicit (character: outfit/gear state; location: physical-structure state)
+   - When change is needed, the change type is explicit (character: outfit/gear state; location: physical-structure state; staging: reseat / new situation / documented progressive props)
    - `position` / `view` are defined by “what is visible”
+   - **Same staging span:** seats/L-R **and** situation props (e.g. meal layout) stay recognizable page-to-page — not reinvented
 
 6. Check **Text–Image Collaboration**:
    - Core page-story information is sufficiently delivered by `rendering text + what the image must show`
@@ -72,22 +85,27 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 ## 1b. Schema / Structural Integrity (any ❌ blocks G3)
 | Check | Result | Evidence |
 |-------|--------|----------|
+| `illustration-guide.md` present (art + layout + typography roles) | ✅ / ⚠️ / ❌ | {file} |
 | Flat page schema only (no nested `####` page subsections) | ✅ / ⚠️ / ❌ | {file / line} |
 | Field notation `- **Field:**` (colon inside bold) | ✅ / ⚠️ / ❌ | {page} |
 | Required page fields present (value `없음` OK) | ✅ / ⚠️ / ❌ | {page} |
+| `### Page 0` cover heading present (first page) | ✅ / ⚠️ / ❌ | {heading} |
 | Cast roster ↔ page Characters (no ghosts; mention-only tagged) | ✅ / ⚠️ / ❌ | {roster vs pages} |
-| Craft Notes page count == measured `### Page` count | ✅ / ⚠️ / ❌ | {n vs n} |
+| Craft Notes page count == measured `### Page` count (incl. Page 0) | ✅ / ⚠️ / ❌ | {n vs n} |
 | series.md pages match measured (or exception noted) | ✅ / ⚠️ / ❌ | {series row} |
 
 ## 2. Craft Checks (Design correctness)
 | Check | Result | Evidence |
 |-------|--------|----------|
-| Page 0 is cover | ✅ / ⚠️ / ❌ | {page} |
-| Page-turn hook (incl. final resolution/afterimage) | ✅ / ⚠️ / ❌ | {page} |
+| Page 0 is cover (title overlay; invite, no climax spoiler) | ✅ / ⚠️ / ❌ | {page} |
+| Page 0 Rendering text = title (not story-body prose) | ✅ / ⚠️ / ❌ | {rendering text} |
+| Page 0 Picture carries world / hero / mood; title safe zone | ✅ / ⚠️ / ❌ | {Direction / Picture carries} |
+| Page-turn hook (Page 0 opening curiosity; final resolution/afterimage) | ✅ / ⚠️ / ❌ | {page} |
 | Text–image split (no redundant caption fluff) | ✅ / ⚠️ / ❌ | {page} |
 | Read-aloud rhythm / age density | ✅ / ⚠️ / ❌ | {page} |
 | No didactic closing monologue | ✅ / ⚠️ / ❌ | {last page} |
 | Characters/locations are catalog entities only | ✅ / ⚠️ / ❌ | {entities} |
+| Beat chronology / causality (no dressed-before-dry, etc.) | ✅ / ⚠️ / ❌ | {page range} |
 
 ## 3. Reference Model Integrity Checks (Visual lock)
 
@@ -103,6 +121,9 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 | Check | Result | Evidence |
 |-------|--------|----------|
 | Every page names location + position + view | ✅ / ⚠️ / ❌ | {page} |
+| Scene List Description names what is visible in that PNG | ✅ / ⚠️ / ❌ | {location file} |
+| **Visibility coverage:** page must-see architecture/fixtures ⊆ cited position×view ref | ✅ / ⚠️ / ❌ | {page + ref} |
+| No “invent missing door/wall in Generate” workaround | ✅ / ⚠️ / ❌ | {page} |
 | Lighting / time / weather / mood / camera / framing are not reference-model state (view = “what is visible”) | ✅ / ⚠️ / ❌ | {page} |
 | Outside-window change rule is correct
 |  - Transient (temporary / reversible) change is not a state | ✅ / ⚠️ / ❌ | {page + example} |
@@ -110,13 +131,17 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 | Continuous scene spans keep position / view / state consistent | ✅ / ⚠️ / ❌ | {page range} |
 
 
-### 3.3 Staging reference model (= continuing-situation blocking)
+### 3.3 Staging reference model (= continuing-situation continuity)
 | Check | Result | Evidence |
 |-------|--------|----------|
 | Continuing situations have a staging | ✅ / ⚠️ / ❌ | {span + staging-slug} |
-| Staging plans 2–3 reference views | ✅ / ⚠️ / ❌ | {staging file} |
-| Pages cite the staging | ✅ / ⚠️ / ❌ | {page} |
+| Staging has Situation props / table dressing map when shared objects exist (meal, picnic, toys, cups, …) | ✅ / ⚠️ / ❌ | {staging file} |
+| Staging Continuity rules distinguish progressive change vs wholesale prop swap | ✅ / ⚠️ / ❌ | {staging file} |
+| Staging plans 2–3 reference views that show blocking + props | ✅ / ⚠️ / ❌ | {staging file} |
+| Pages cite the staging (ref view named) | ✅ / ⚠️ / ❌ | {page} |
 | No unauthorized L/R · seat · station swaps | ✅ / ⚠️ / ❌ | {page range} |
+| No wholesale food/menu/prop teleport across pages in the same staging | ✅ / ⚠️ / ❌ | {page range} |
+| Progressive prop notes in Direction only if Continuity rules allow | ✅ / ⚠️ / ❌ | {page} |
 
 ### 3.4 Direction Completeness
 | Check | Result | Evidence |
@@ -124,15 +149,16 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 | Direction / Characters / Location include needed refs | ✅ / ⚠️ / ❌ | {page} |
 | Page story does not contradict Direction display elements | ✅ / ⚠️ / ❌ | {page} |
 
-### 3.5 Illustration text (visual effects) guide fitness
+### 3.5 Series illustration guide + text consistency
 | Check | Result | Evidence |
 |-------|--------|----------|
-| Reading order for `rendering text` (left→right, top→bottom) is natural | ✅ / ⚠️ / ❌ | {page} |
-| Dialogue / exclamation emphasis (largest + bold; glow/outline when useful) is clear | ✅ / ⚠️ / ❌ | {page} |
-| Narration style (smaller + soft rounded serif + warm shadow) is consistent | ✅ / ⚠️ / ❌ | {page} |
-| Key words/phrases are emphasized by size or color | ✅ / ⚠️ / ❌ | {page} |
-| Anchor area suggested so text does not cover faces / key visuals | ✅ / ⚠️ / ❌ | {page} |
-| Ages 8+ & text-heavy pages separate body copy into an in-image story section (panel/box) — recommended | ✅ / ⚠️ / ❌ | {page} |
+| `illustration-guide.md` locks art style + layout + typography roles | ✅ / ⚠️ / ❌ | {file sections} |
+| Guide recipes are specific enough to prevent page-to-page font/box drift | ✅ / ⚠️ / ❌ | {guide quotes} |
+| Episode pages do not invent alternate fonts/boxes (placement only) | ✅ / ⚠️ / ❌ | {page} |
+| Reading order / text zones align with guide §2 | ✅ / ⚠️ / ❌ | {page} |
+| Each overlay line maps to a locked text role (title/narration/dialogue/emphasis) | ✅ / ⚠️ / ❌ | {page} |
+| Anchor areas respect face / key-visual rule from guide | ✅ / ⚠️ / ❌ | {page} |
+| Ages 8+ dense pages use guide §3.5 box rules (if applicable) | ✅ / ⚠️ / ❌ | {page} |
 
 ## 4. Scene Continuity & Visual Consistency Checks
 | Check | Result | Evidence |
@@ -182,14 +208,12 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 - Reference-model consistency: {rating}
 - Scene clarity (what is visible): {rating}
 - Page framing lock compliance: {rating}
-- Text visual-effects guide provided (font / emphasis / reading order / anchor area / panel split): {rating}
-- Text overlay guide (for Stage ④ YAML): {feedback}
-  - Reading order anchor plan: {left→right / top→bottom placement rules + text-area map}
-  - TextBox list: {line-index → anchor area / size / font style / color / emphasis}
-  - Dialogue/exclamation style: {largest+bold + (glow/outline, …) application}
-  - Narration style: {smaller font + (serif/sans) + shadow application}
-  - Key word emphasis: {which words/phrases and how}
-  - Ages 8+ text-heavy case: {body panel/box split yes/no + position/size}
+- **`illustration-guide.md` completeness** (art / layout / typography roles specific enough to prevent page drift): {rating}
+- **Compliance plan for Stage ④:** YAML must apply guide tokens — do **not** invent per-episode fonts
+- Page-specific placement notes only (anchors / reading order) — styles stay in the series guide:
+  - Reading order / text-zone plan: {per guide §2 + any page exceptions}
+  - Role map for this episode’s lines: {which lines = title / narration / dialogue / emphasis}
+  - Guide gaps to fix in Design (if any): {missing recipes → update illustration-guide.md, not YAML}
 
 ### Educator / Librarian (optional — required when overview locks school/library distribution)
 - Fit to learning / socio-emotional goals: {rating}
@@ -213,7 +237,7 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 - [ ] Reference Model Integrity: ✅/⚠️/❌ all items
 - [ ] Scene Continuity & Visual Consistency: ✅/⚠️/❌ all items
 - [ ] Direction Completeness: ✅/⚠️/❌ all items
-- [ ] Illustration Text Styling/Effects Guide: ✅/⚠️/❌ all items
+- [ ] **Series `illustration-guide.md` lock + text consistency: ✅/⚠️/❌** (fonts/boxes from guide, not invented per page)
 - [ ] Craft Checks: ✅/⚠️/❌ all items
 - [ ] Required personas + Adjudication: ✅/⚠️/❌
 - [ ] Target-child readiness: ✅/⚠️/❌

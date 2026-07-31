@@ -56,7 +56,7 @@ params:
     on the right side. Professional seminar atmosphere, photorealistic style,
     shallow depth of field with the engineer and TV screen in sharp focus.
     High detail, cinematic quality.
-  images:
+  references:
     - path: "./jsondb-architecture.png"
   size: 1K
   aspectRatio: "16:9"

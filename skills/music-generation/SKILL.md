@@ -33,7 +33,7 @@ Pipeline: **`message`** (story / mood / purpose to convey) → **`design`** (how
 - **Chat then YAML** — gather what the YAML needs in chat; write when enough is known. If already enough, write YAML immediately.
 - **YAML gate before generate** — user reviews YAML (`design` primary), then MCP `generate`.
 - **User review by default** — after generate, the user evaluates the audio; AI `analyze` only on explicit request.
-- **Consistency** — requirement fields aligned; `design` ↔ `params.prompt` ↔ `lyrics` / `images` aligned.
+- **Consistency** — requirement fields aligned; `design` ↔ `params.prompt` ↔ `lyrics` / `references` aligned.
 - **Separate direction from lyrics** — musical direction in `prompt`; custom words in `params.lyrics` (section-tagged).
 - **Single-turn Lyria** — no in-model multi-turn edit; revise = new YAML + `generate`. Prefer Clip before Pro when exploring.
 - **Intent fidelity** — do not invent unrequested genre, vocals, lyrics, or structure.
@@ -74,7 +74,7 @@ When the user asks to interpret / analyze / evaluate existing **music or audio**
 
 1. **Analyze** — MCP `analyze` with `inputs: [audio path|URL]` (or reuse findings from a prior speech-generation analysis). Prompt for genre/mood/structure/lyrics as needed. Present `{ text, interactionId }`.
 2. **Material for YAML** — draft `message` + `design` (+ `lyrics` if sung). Confirm keep/change vs source before locking.
-3. **Write YAML** — full Lyria request; cite the source in `design` (Lyria has no audio-ref edit — encode the desired sound in prompt/lyrics; optional mood **images** only).
+3. **Write YAML** — full Lyria request; cite the source in `design` (Lyria has no audio-ref edit — encode the desired sound in prompt/lyrics; optional mood **references** images only).
 4. **Review / approve** → **Generate** → **Review / Revise**.
 
 If the primary deliverable is revised **spoken TTS**, use **speech-generation** instead. Do not skip the YAML gate.
@@ -120,7 +120,7 @@ Agree in chat (then encode in YAML `design`) — **shape the approved message in
 | Vocals | Instrumental only vs sung; lyric language |
 | Structure | `[Verse]` / `[Chorus]` / … and/or `[m:ss - m:ss]` (esp. Pro) |
 | Lyrics | User-supplied (→ `params.lyrics`) vs model-written theme |
-| Images | Up to **10** mood refs; how they inspire the sound |
+| Images | Up to **10** mood refs via `params.references`; how they inspire the sound |
 | Format | `mp3` (default) or `wav` (mainly Pro) |
 
 **Defaults:** unclear / loop / preview → **Clip**; full song, multi-section custom lyrics, detailed timeline → **Pro**. Recommend Clip first to lock the brief, then upgrade.
@@ -170,11 +170,13 @@ User-facing music brief in the user's language — primary YAML review object. *
 | `model` | `lyria-3-clip-preview` or `lyria-3-pro-preview` |
 | `params.prompt` | English musical direction from `design` (+ timeline if Pro) |
 | `params.lyrics` | Optional section-tagged custom lyrics |
-| `params.images` | Ordered `{path}` mood refs (max 10) |
+| `params.references` | Ordered `{path}` mood image refs (max 10; **image only**) |
 | `params.outputFormat` | `mp3` (default) or `wav` |
 | `params.lyricsOutput` | Optional path for returned lyrics/structure text |
 | `output` | Default `./{slug}.mp3` (or `.wav`) |
 | `background` | Optional; prefer `true` for long Pro jobs |
+
+**Do not use `params.images`** — removed; MCP returns `INVALID_INPUT` (`use params.references`).
 
 ### Prompt & lyrics
 
@@ -187,7 +189,7 @@ User-facing music brief in the user's language — primary YAML review object. *
 
 ### YAML gate
 
-Present **`design`**; note Clip vs Pro, vocals/lyrics, images, format/output. Warn that Pro can take time. **Stop** (unless Express).
+Present **`design`**; note Clip vs Pro, vocals/lyrics, references, format/output. Warn that Pro can take time. **Stop** (unless Express).
 
 ---
 
@@ -196,7 +198,7 @@ Present **`design`**; note Clip vs Pro, vocals/lyrics, images, format/output. Wa
 MCP **`cocrates-google-genai`** (GetMcpTools; `mcp_auth` if needed).
 
 1. YAML on disk (`type: music`).
-2. Preflight every `params.images[].path` against **this YAML's directory**; on fail, stop and ask — do not `generate`.
+2. Preflight every `params.references[].path` against **this YAML's directory**; on fail, stop and ask — do not `generate`.
 3. `generate` with `filePath` → report `files` (audio; plus lyrics file if `lyricsOutput` set). Do not treat empty `files` as success.
 
 Lyria is **single-turn** — do not rely on `continue_interaction` to “fix the chorus”; revise the YAML instead.
@@ -228,7 +230,7 @@ Then Phase 4.
 
 ## Phase 5 — Revise
 
-Keep `design` ↔ prompt ↔ lyrics/images consistent; re-approve; **new** `generate`. If `message` changes, reshape `design` to match.
+Keep `design` ↔ prompt ↔ lyrics/references consistent; re-approve; **new** `generate`. If `message` changes, reshape `design` to match.
 
 When improving from user feedback or an AI analyze report: apply only **user-agreed** changes; update owning YAML fields, then regenerate. Prefer Clip A/B before another Pro run when exploring.
 
@@ -294,7 +296,7 @@ params:
     [0:00 - 0:20] Soft pads and distant piano
     [0:20 - 1:00] Add sparse percussion and rising strings
     [1:00 - 1:30] Peak, then fade to piano alone
-  images:
+  references:
     - path: "./refs/desert-sunset.jpg"
   outputFormat: mp3
 output: "./desert-dusk.mp3"
@@ -325,3 +327,4 @@ output: "./desert-dusk.mp3"
 - Pro-only multi-minute expectations on Clip without warning it stays 30s
 - Claiming in-place conversational edit of a generated file via Lyria follow-up
 - Guessing image paths; >10 reference images; inventing requirements that contradict the brief
+- Using `params.images` (removed — use `params.references`)

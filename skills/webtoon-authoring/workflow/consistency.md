@@ -5,10 +5,12 @@
 This file is the **single source of truth** for keeping:
 - story / direction consistency (page → cut → balloon)
 - character / location / staging / world-rule consistency
+- **series art / typography consistency** (`illustration-guide.md`)
 - image identity consistency (reference-based)
 - episode scroll continuity (stitched pages)
 
 Canonical reference rules: `workflow/reference-models.md`.
+Series visual/typography rules: `workflow/illustration-guide.md`.
 
 ---
 
@@ -16,19 +18,20 @@ Canonical reference rules: `workflow/reference-models.md`.
 
 | Term | Meaning |
 |---|---|
-| **Design Layer** | `world-bible.md`, `characters/*.md`, `locations/*.md`, `stagings/*.md`, `series.md`, `episodes/*.md` |
+| **Design Layer** | `illustration-guide.md`, `world-bible.md`, `characters/*.md`, `locations/*.md`, `stagings/*.md`, `series.md`, `episodes/*.md` |
 | **Canonical episode cut schema** | Flat `- **Field:**` lists under `##### Cut {n}` only — no nested `######` cut subsections; see `workflow/02-design.md` |
+| **Series illustration guide** | `{project-root}/illustration-guide.md` — art style, chrome, balloon/caption typography; see `workflow/illustration-guide.md`. Stage ④ YAML must apply it. |
 | **Evaluation Layer** | `evaluations/*.md` where **story lock** is approved per episode |
 | **Reference Images** | `images/characters/*`, `images/locations/*`, `images/stagings/*` — identity + set + ensemble blocking assets |
 | **Character ref** | Lasting body + outfit + **identity gear** (weapons/shields/accessories); not expression/mood |
 | **Location ref** | **Set/stage** physical structure; not time/season/weather |
 | **Staging ref** | **Who is where** for one continuing situation (café L/R, OR stations, meeting, …); typically 2–3 ensemble views |
-| **Page Images** | `images/{nnn}-{episode-slug}/{page}.png` — variable-height strip segments with cuts + balloons + captions |
+| **Page Images** | `images/{nnn}-{episode-slug}/{page}.png` — stitched page strip; tiles `{page}-a.png`, `{page}-b.png`, … on the default Flash path |
 | **Episode Scroll** | `images/{nnn}-{episode-slug}/episode-scroll.png` — pages concatenated top→bottom |
 | **Cut** | Panel within a page; art + optional speech balloons + optional narration; has size class + height guide |
 | **Gutter** | Vertical spacing between cuts (`tight` / `normal` / `wide` / `pause`) |
 | **Size class** | `standard` / `tall`/`long` / `compact` / `open`/`diagonal` — see `workflow/cut-composition.md` |
-| **Story Lock** | G3 approval: page/cut stories, balloon texts, captions, composition, staging cites, illustration guides frozen |
+| **Story Lock** | G3 approval: page/cut stories, balloon texts, captions, composition, staging cites, Direction fields frozen; series visual+typography lock stays in `illustration-guide.md` |
 
 ---
 
@@ -36,17 +39,25 @@ Canonical reference rules: `workflow/reference-models.md`.
 
 ```
 overview.md (incl. canvas width / color / outside-cut fill)
+  → illustration-guide.md (art / chrome / balloon·caption typography)
   → series.md
     → world-bible.md + characters/* + locations/* + stagings/*
       → episodes/*.md (page → cut + balloons + captions + gutters + staging cites)
         → evaluations/*.md (story lock decision)
-          → images/* (character + location + staging refs, then page PNGs)
+          → images/* (refs + page PNGs — YAML must apply illustration-guide.md)
             → episode-scroll.png (+ optional portal slices)
 ```
 
 ---
 
 ## Cascade protocol (what to do when something changes)
+
+### When `illustration-guide.md` changes
+
+1. User approves the updated series guide (Design / G2).
+2. Re-run Stage ③ if Evaluate must re-check lettering/chrome fitness.
+3. Regenerate **all** page tiles that must match the new recipes (typically the whole episode) — do not leave old pages on the previous balloon font/box style; then re-stitch.
+4. Reference images: regenerate only if §1 art style (medium/line/palette/proportions) changed.
 
 ### When design catalogs change (characters/locations/stagings/world-bible)
 
@@ -63,7 +74,7 @@ overview.md (incl. canvas width / color / outside-cut fill)
 1. Design change requires rollback to Stage ② for that episode.
 2. Re-run Stage ③ for the episode and approve a new G3 story lock.
 3. Regenerate only the affected episode’s page images (and reference images only if new cast/place/state/staging variants are required), then re-stitch.
-4. After design is final, sync `series.md` page/cut estimates to **measured** counts in the episode file (or document an exception in Craft Notes).
+4. After design is final, record measured page/cut counts in the episode Craft Notes only — do **not** push page/cut budgets into `series.md`.
 
 ### When only visual inconsistency is found during generation
 
@@ -71,7 +82,8 @@ overview.md (incl. canvas width / color / outside-cut fill)
   - tighten prompts / re-render affected page image(s)
   - max 2 retries per image
   - re-stitch if needed
-- Do NOT alter locked balloon/caption text, locked cut guide meaning, identity gear, or staging seats.
+- Do NOT alter locked balloon/caption text, locked cut Direction meaning, identity gear, or staging seats.
+- Do NOT invent lettering/chrome outside `illustration-guide.md`; if typography is wrong, update the guide (or re-apply it in YAML), not one-off styles.
 
 ### When inconsistencies reveal a design gap
 
@@ -94,12 +106,13 @@ overview.md (incl. canvas width / color / outside-cut fill)
 - Change: {what changed}
 - Highest updated file(s): {paths} — user approved: ✅/⬜
 - [ ] overview.md (scale / audience / validation / canvas)
+- [ ] illustration-guide.md (art / chrome / balloon·caption typography)
 - [ ] series.md
 - [ ] world-bible.md / characters/* / locations/* / stagings/*
 - [ ] episodes/{nnn}-{episode-slug}.md
 - [ ] evaluations/{nnn}-{episode-slug}.md (story lock rerun)
-- [ ] reference images to regenerate (identity / set / staging)
-- [ ] page images to regenerate for affected episode pages
+- [ ] reference images to regenerate (if identity/state/view/staging **or art-style §1** changed)
+- [ ] page images to regenerate for affected episode pages (all pages if typography recipes changed)
 - [ ] episode-scroll.png re-stitch (+ portal slices if any)
 - Gates re-run: Story Lock (G3) for affected episodes
 ```
