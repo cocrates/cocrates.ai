@@ -220,26 +220,49 @@ If a continuing situation has no staging → stop, add staging, then resume.
 
 For each `episodes/{nnn}-{episode-slug}.md`, design **all pages**:
 
-#### Required page fields
-For each `Page {idx}`:
-- `Page 0` is fixed as the cover
-- `Page story`: the story the scene delivers (setting / situation / emotion / beat)
-- `Illustration guide`: concise “must-include” visual components
-  - Character / location **slugs**
-  - Character **state** (outfit / gear) or `base`
-  - Location **position + view** (reference-model axes) and **state** (when physical structure changed)
-  - Camera direction / framing / angle (page direction — not reference model)
-- `Rendering text`: text that will appear on the page (in the locked rendering language) — storybook voice / read-aloud rhythm
-- `Text–image split`: what text carries vs what the picture carries
-- `Page-turn hook`: curiosity / tension that pulls the next page (omit on the final page)
+#### Canonical page schema (mandatory)
+
+**Only the flat page schema is allowed.** Every page is a `### Page {N}` heading followed by a **flat** `- **Field:**` list. Do **not** use nested `#### Page story`, `#### Illustration guide`, `#### Rendering text`, `#### Text–image split`, or `#### Page-turn hook` subsections (nested or hybrid layouts).
+
+**Field notation (fixed):**
+
+- Always `- **Field:** value` — colon **inside** the bold markers (correct: `**Location:**`; wrong: `**Location**:` or `- Location:`).
+- Empty values still require the field: use `없음` (optionally with a reason), e.g. `- **Staging:** 없음`.
+
+#### Episode header: Cast roster
+
+```markdown
+**Characters:** {slug-a}, {slug-b}, {slug-c} (언급)
+**Locations:** {location-a}, {location-b}
+```
+
+Rules: on-page ⊆ roster; ghost cast forbidden; mention-only tagged `(언급)` (or equivalent).
+
+#### Required page fields (flat list, this order)
+
+`Page 0` is fixed as the cover. Each `### Page {N}` **must** include every field below (value may be `없음`):
+
+| Field | Rule |
+|-------|------|
+| `- **Page story:**` | Beat this page alone carries (Stage ④ message basis) |
+| `- **Staging:**` | `{slug} — ref view: …` or `없음` |
+| `- **Characters:**` | slugs + `(state: …)` or `없음 (establishing / …)` |
+| `- **Location:**` | `{location} / {position} / {view} (state: …)` |
+| `- **Direction:**` | lighting / time / weather / mood / camera / expression / pose — page-specific, not reference model |
+| `- **Rendering text:**` | Exact overlay text (locked rendering language) or `없음` |
+| `- **Text carries:**` | What text delivers |
+| `- **Picture carries:**` | What the image delivers |
+| `- **Page-turn hook:**` | Curiosity/tension; final page: `resolution / afterimage` |
+
+Do **not** invent seating in Direction — seating comes from staging. Detailed image prompts belong in Stage ④ YAML only.
 
 #### Craft rules (apply)
-- Page-turn hook: required except on the final page
-- Text–image split: “no overlap” is **not** mandatory
-  - Instead verify that **essential page-story information is sufficiently delivered by text + image together**
+- Page-turn hook: required (final page uses resolution/afterimage wording)
+- Text–image split: “no overlap” is **not** mandatory — essential page-story info must be delivered by text + image together
 - Read-aloud rhythm: sentence / vocabulary density fit for target age
 - No didactic close: final page ends as a scene, not a sermon / moral monologue
 - Age density: tune word choice to the age range in `overview.md`
+- Craft Notes **Page count** = measured `### Page` headings; sync `series.md` or note exception
 
 **Multilingual example (Korean edition rendering text only):**
 
@@ -251,46 +274,35 @@ Rendering text (Korean):
 YAML image prompts stay English; overlay strings keep the target-language wording verbatim.
 
 ```markdown
-<!-- `episodes/{nnn}-{episode-slug}.md` template -->
+<!-- `episodes/{nnn}-{episode-slug}.md` template — flat page schema only -->
 # Episode {nnn}: {Title}
 
 ## Summary
 {episode summary — what happens, emotional arc}
 
+**Characters:** {slug-a}, {slug-b}, {slug-c} (언급)
+**Locations:** {location-a}, {location-b}
+
 ## Craft Notes
 - Age density: {words/vocabulary fit for target age}
 - Theme delivery: {how theme is shown in scenes — not stated as sermon}
 - Climax page: {page number}
+- Page count (this episode): {n}  <!-- MUST equal count of ### Page headings -->
+- series.md sync: {updated to measured pages | exception noted: …}
 
 ## Pages
 
 ### Page {N}
-
-#### Page story
-{Story this page delivers — setting, situation, emotion, beat}
-{Important: reading page story alone must make this page (and the episode beat) clearly imaginable. This becomes the Stage ④ image-generation “message”.}
-{Characters and places: catalog-registered names only}
-
-#### Illustration guide
-- Staging (when applicable): {staging-slug} — ref view: {establishing|reverse|detail}
-- Characters: {character-slug} (state: {state-slug or base})  # keep equipment identity
-- Location: {location-slug} / {position-slug} / {view-slug} (state: {state-slug or base})
-- Page direction: {lighting / time / weather / mood, camera direction / framing / angle, expression / pose — page-specific, not reference model}
-{Seats / L-R for continuing situations come from staging — do not invent on the page}
-{Detailed image prompts are written in Stage ④ image-generation YAML}
-
-#### Rendering text
-{Exact page overlay text — storybook voice, read-aloud rhythm; in the locked rendering language}
-
-#### Text–image split
-- Text carries: {…}
-- Picture carries: {…}
-{Check: are essential page-story facts delivered by text+image together? (yes / fix)}
-
-#### Page-turn hook
-{Curiosity / tension that makes the reader turn — on the final page write “resolution / afterimage”}
+- **Page story:** {setting, situation, emotion, beat — imaginable standalone}
+- **Staging:** {staging-slug — ref view: establishing|reverse|detail | 없음}
+- **Characters:** {character-slug} (state: {state-slug or base})  <!-- or: 없음 (establishing) -->
+- **Location:** {location-slug} / {position-slug} / {view-slug} (state: {state-slug or base})
+- **Direction:** {lighting / time / weather / mood, camera, expression / pose}
+- **Rendering text:** {exact overlay — storybook voice; locked language | 없음}
+- **Text carries:** {…}
+- **Picture carries:** {…}
+- **Page-turn hook:** {curiosity / tension | final: resolution / afterimage}
 ```
-
 ---
 
 ### 2.x Episode Design Internal Feedback Loop (story ↔ catalogs)
@@ -312,10 +324,14 @@ When something is missing:
 4. Re-check affected pages
 
 Additional checks:
+- Episode file uses the **flat page schema only** (no nested `####` page subsections)
+- Cast roster ↔ page Characters (no ghosts; mention-only tagged)
+- Craft Notes page count == measured `### Page` headings; series.md synced or exception noted
 - Character **states** (outfit/gear) cited by pages exist in catalogs
 - Location **position/view/state** cited by pages exist in catalogs
 - Continuing situations cite a **staging**; staging cast states and location anchor match catalogs
 - Expression / time / weather are page direction, not new reference states
+- Every page has all required fields (value may be `없음`)
 
 ---
 
@@ -324,7 +340,9 @@ Additional checks:
 - [ ] `world-bible.md`, `characters.md`, `locations.md`, `series.md` exist
 - [ ] Continuing-situation `stagings.md` + `stagings/{slug}.md` (when needed) + compliance with `workflow/reference-models.md`
 - [ ] All `characters/{character-slug}.md`, `locations/{location-slug}.md` authored
-- [ ] All `episodes/{nnn}-{episode-slug}.md` have per-page rendering text + illustration guides
+- [ ] All `episodes/{nnn}-{episode-slug}.md` use **flat page fields** (no nested `####` page subsections)
+- [ ] Cast roster present; no ghost cast; mention-only tagged
+- [ ] Craft Notes page count matches measured pages; series.md synced or exception noted
 - [ ] Text–image split (essential-info sufficiency) and page-turn hook rules applied
 - [ ] Every page’s character state / location position-view-state / staging (when used) is catalogued so Stage ④ Phase 0 reference generation is possible
 - [ ] During story design, new refs were **added to catalogs first** and existing ones **reused** (`workflow/reference-models.md` §7)
@@ -338,12 +356,14 @@ Do not proceed to Stage ③ until the user approves:
 - Character catalog: outfit/gear per state correct; face/body consistency held?
 - Location catalog: location → position → view → state hierarchy clear?
 - Episode / page design:
+  - Flat page schema only throughout?
+  - Cast roster clean (no ghosts)?
   - Does page story deliver emotion well?
   - Can page story alone make the page beat clearly imaginable?
   - Does rendering text fit age and rhythm?
   - Are text–image split (essential-info sufficiency) and page-turn hooks present?
   - Does the final page end as a scene, not a sermon?
-  - Does the illustration guide carry the needed scene elements?
+  - Do Direction / Characters / Location fields carry the needed scene elements?
   - Reference-image readiness (character states / location position-view-states defined in catalogs)?
 
 **Do not proceed until G2 is approved.**

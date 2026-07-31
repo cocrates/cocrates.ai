@@ -38,6 +38,8 @@ Load:
 - Lock **Target Reader** from `overview.md` (audience / platform / success-in-reader-terms) before persona critique
 - **Literary Awards Juror:** also Chapter List source for work-level context — **Short:** `series.md`; **Series:** `parts/{nnn}-{part-slug}.md`; fill **Literary Awards Juror Checks (Design)** before persona critique
 
+**Schema gate (before craft/persona):** run Schema / Structural Integrity on every scene. Any ❌ blocks design-eval pass and stage ⑤ — fix `04-chapter-design.md` canonical schema first.
+
 **Required personas (design):** run every persona in the [Default persona sets](#default-persona-sets) for this chapter — do not skip for speed. Optional personas only when overview criteria or the user request them.
 
 ### Manuscript Evaluation
@@ -70,6 +72,16 @@ Load:
 ### Criteria Check (from overview.md)
 | Criterion | Result | Evidence |
 |-----------|--------|----------|
+
+### Schema / Structural Integrity (any ❌ blocks design-eval pass / stage ⑤)
+| Check | Result | Evidence |
+|-------|--------|----------|
+| Canonical scene schema only (no nested scene subsections / alternate layouts) | ✅ / ⚠️ / ❌ | |
+| Field notation `**Field:**` / `- **Field:**` (colon inside bold) | ✅ / ⚠️ / ❌ | |
+| Every scene has required meta + bullet fields (`none` OK) | ✅ / ⚠️ / ❌ | |
+| Characters Appearing ↔ On stage union (no ghosts; mention-only tagged) | ✅ / ⚠️ / ❌ | |
+| Nested `chapters/{slug}/` episode files absent (single chapter.md) | ✅ / ⚠️ / ❌ | |
+| Est. length sum ≈ episode / chapter budget | ✅ / ⚠️ / ❌ | |
 
 ### Structure & Arc Checks
 | Check | Result | Evidence |
@@ -308,6 +320,8 @@ Optional on request: any persona below; series/part-level critique → `evaluati
 ## Gate
 
 After evaluation + adjudication (and any applied revisions): user reviews the evaluation, selects or confirms revision items as needed, and decides revise or proceed (to manuscript generation after design eval, or to release after manuscript eval).
+
+**Design eval:** Schema / Structural Integrity must be all ✅ before proceeding to stage ⑤. Schema ❌ → return to stage ④ and fix canonical scene schema first.
 
 ## Reference-model integrity (architecture / design eval)
 

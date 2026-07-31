@@ -229,6 +229,8 @@ If episode design discovers a continuing situation without a staging → stop, a
 {story arc — emotional peaks, where scroll tension builds; note where tall cuts / pause gutters / action stacks land}
 ```
 
+**Pages (est.) / Cuts (est.)** are planning targets only. After an episode file is designed, update that row to **measured** page/cut counts from the episode file (or mark `exception noted` in Craft Notes if deliberately different).
+
 ---
 
 ### 2.5 Episode Page & Cut Design
@@ -236,6 +238,16 @@ If episode design discovers a continuing situation without a staging → stop, a
 For each `episodes/{nnn}-{episode-slug}.md`, design **all pages**, and inside each page design **all cuts** top→bottom.
 
 **Required reading:** `workflow/cut-composition.md` — cut height, gutter distance, size class, and viewport rhythm are first-class design decisions (not afterthoughts).
+
+#### Canonical cut schema (mandatory)
+
+**Only the flat cut schema is allowed.** Every cut is a `##### Cut {n}` heading followed by a **flat** `- **Field:**` list. Do **not** use nested `###### Cut story`, `###### Composition`, `###### Illustration guide`, `###### Balloons`, `###### Captions`, or `###### Gutter` subsections (nested or hybrid layouts).
+
+**Field notation (fixed):**
+
+- Always `- **Field:** value` — colon **inside** the bold markers (correct: `**Location:**`; wrong: `**Location**:` or `- Location:`).
+- Balloon / caption markdown tables sit under the field line with **2-space indent** on every table row.
+- Empty values still require the field: use `없음` (optionally with a reason), e.g. `- **Characters:** 없음 (establishing shot)`.
 
 #### Webtoon craft rules
 
@@ -246,10 +258,28 @@ For each `episodes/{nnn}-{episode-slug}.md`, design **all pages**, and inside ea
 5. **Direct with color** — e.g. flashback via sepia/desaturation; color is a primary tool.
 6. **Variable page height** — page height = sum of cut heights + gutters; do not force equal page ratios.
 7. **Vary size classes across the episode** — do not make every cut the same height unless that flatness is intentional.
+8. **Size class ↔ Height must agree** — e.g. do not label `tall` with Height under 1,200px; see `workflow/cut-composition.md`.
+
+#### Episode header: Cast roster
+
+After Summary (or inside Summary block), include an explicit cast list:
+
+```markdown
+**Characters:** {slug-a}, {slug-b}, {slug-c} (언급)
+**Locations:** {location-a}, {location-b}
+```
+
+Rules:
+
+- **on-cut** names appear in at least one cut’s `- **Characters:**` field.
+- **mention-only** names use a tag such as `(언급)` and must **not** be treated as on-panel cast for Phase 0 staging unless they appear in a cut.
+- **Ghost cast forbidden:** a name in the episode Characters list without `(언급)` (or similar) must appear in ≥1 cut; a name only in cuts must be added to the episode list.
+- Background extras (unnamed crowd) belong in Direction, not the Characters roster, unless catalogued.
 
 #### Required page fields
 
 Each `Page {idx}`:
+
 - `Page 0` = cover/thumbnail vertical segment (or agreed series thumbnail rule)
 - `Page story`: what this vertical segment conveys
 - `Estimated height`: sum of cut heights + gutters (px guide); note if taller than one 9:21 segment
@@ -257,45 +287,45 @@ Each `Page {idx}`:
 - `Outside-cut area` / side margins: follow overview unless page exception
 - `Scroll hook`: pull to next page (non-final); final = resolution / aftertaste
 
-#### Required cut fields
+#### Required cut fields (flat list, this order)
 
-Each `Cut {n}` (top→bottom):
-- `Cut story`: the beat this cut alone carries
-- `Purpose` / directing intent: dialogue | everyday | climax | silence/time | action | …
-- `Size class`: `standard` | `tall`/`long` | `compact` | `open`/`diagonal` (see cut-composition.md)
-- `Height (guide)`: target px range (e.g. 500 / 1500 / …)
-- `Cut shape`: rectangle | borderless open | diagonal | bleed / break-frame
-- `Illustration guide`:
-  - **Staging** (if this cut is in a continuity span): `{staging-slug}` + which ref view (`establishing` / `reverse` / `detail`)
-  - Character/location **slugs** (must match staging cast/location when staging is cited)
-  - Character **state** or base (identity gear locked — no silent sword/outfit swap)
-  - Location **position + view** (+ **state** if needed) — set/stage only
-  - Cut direction: lighting / time / season / weather / color grade / camera tightness / **expression** / gesture within seat
-  - Do **not** invent seating here — seating comes from staging
-- `Balloons` (0+):
-  - speaker (character slug or narrator)
-  - type: speech / thought / shout / whisper / …
-  - text: display string **verbatim in the target language**
-  - placement: approx. in-cut position (top/mid/bottom × left/center/right) — must not cover face/key action
-- `Captions` (optional): exposition / time / place / inner thought + placement
-- `Gutter to next cut`:
-  - class: `tight` | `normal` | `wide` | `pause`
-  - distance (guide): px range
-  - intent: pace / transition / silence / time / aftertaste
+Each `##### Cut {n}` (top→bottom) **must** include every field below (value may be `없음`):
+
+| Field | Rule |
+|-------|------|
+| `- **Cut story:**` | Beat this cut alone carries |
+| `- **Purpose:**` | May share a line with Size class / Height / Shape using `\|` |
+| `- **Size class:**` | `standard` \| `tall`/`long` \| `compact` \| `open`/`diagonal` |
+| `- **Height:**` | Target px; must match size class ranges |
+| `- **Shape:**` | `rectangle` \| `open` \| `diagonal` \| `bleed` (required) |
+| `- **Staging:**` | `{slug} — ref view: …` or `없음` |
+| `- **Characters:**` | slugs + `(state: …)` or `없음 (establishing / …)` |
+| `- **Location:**` | `{location} / {position} / {view} (state: …)` |
+| `- **Direction:**` | expression / gesture / camera / time-weather; seating from staging only |
+| `- **Color grade:**` | optional separate line, or fold into Direction |
+| `- **Balloons:**` | `없음` or indented table (`# \| speaker \| type \| text \| placement`) |
+| `- **Captions:**` | `없음` or indented table — **field always present** (content optional) |
+| `- **Gutter:**` | `{class} {distance} — {intent}` (prefer stating even at episode end / page break) |
+
+Do **not** invent seating in Direction — seating comes from staging. Detailed image prompts belong in Stage ④ YAML only.
 
 ```markdown
-<!-- `episodes/{nnn}-{episode-slug}.md` template -->
+<!-- `episodes/{nnn}-{episode-slug}.md` template — flat cut schema only -->
 # Episode {nnn}: {Title}
 
 ## Summary
 {what happens, emotional arc}
 
+**Characters:** {slug-a}, {slug-b}, {slug-c} (언급)
+**Locations:** {location-a}, {location-b}
+
 ## Craft Notes
 - Scroll rhythm: {fast / normal / lingering sections — map to size/gutter classes}
 - Theme delivery: {shown in scenes — not sermon captions}
-- Climax page.cut: {page.cut} — expect tall/long size class
-- Cut count (this episode): {n} (target range from overview)
+- Climax page.cut: {page.cut} — expect tall/long size class when climax is spectacle
+- Cut count (this episode): {n}  <!-- MUST equal count of ##### Cut headings in this file -->
 - Canvas: width {690–800px locked}, height variable, color, side margins {full bleed / 30–50px}, outside-cut {white/black/theme}
+- series.md sync: {updated to measured pages/cuts | exception noted: …}
 
 ## Pages
 
@@ -318,38 +348,23 @@ Each `Cut {n}` (top→bottom):
 #### Cuts (top → bottom)
 
 ##### Cut {n}
-
-###### Cut story
-{beat}
-
-###### Composition
-- Purpose: {dialogue / everyday / climax / silence-time / action / …}
-- Size class: {standard | tall/long | compact | open/diagonal}
-- Height (guide): {e.g. 500px / 1500px}
-- Shape: {rectangle | open | diagonal | bleed}
-
-###### Illustration guide
-- Staging (if any): {staging-slug} — ref view: {establishing|reverse|detail}
-- Character: {character-slug} (state: {state-slug or base})  # must match staging cast when staging is set
-- Location: {location-slug} / {position-slug} / {view-slug} (state: {state-slug or base})
-- Direction: {expression / gesture / camera tightness / time-season-weather grade}
-{Seating/formation comes from staging — do not reseat in this cut unless Design updates staging}
-{Detailed image prompt only in Stage ④ YAML}
-
-###### Balloons
-| # | speaker | type | text | placement |
-|---|---------|------|------|-----------|
-| 1 | {slug} | speech | {dialogue in target language} | {e.g. top-left} |
-
-###### Captions
-| # | text | placement |
-|---|------|-----------|
-| 1 | {optional, target language} | {e.g. top-center} |
-
-###### Gutter to next cut
-- Class: {tight | normal | wide | pause}
-- Distance (guide): {e.g. 200px / 800px}
-- Intent: {pace / transition / silence / time / aftertaste}
+- **Cut story:** {beat}
+- **Purpose:** {dialogue / everyday / climax / silence-time / action / establishing / …} | **Size class:** {standard | tall/long | compact | open/diagonal} | **Height:** {e.g. 500px} | **Shape:** {rectangle | open | diagonal | bleed}
+- **Staging:** {staging-slug — ref view: establishing|reverse|detail | 없음}
+- **Characters:** {character-slug} (state: {state-slug or base})  <!-- or: 없음 (establishing shot) -->
+- **Location:** {location-slug} / {position-slug} / {view-slug} (state: {state-slug or base})
+- **Direction:** {expression / gesture / camera tightness / time-season-weather grade}
+- **Balloons:**
+  | # | speaker | type | text | placement |
+  |---|---------|------|------|-----------|
+  | 1 | {slug} | speech | {dialogue in target language} | {e.g. top-left}
+  <!-- or single line: 없음 -->
+- **Captions:**
+  | # | text | placement |
+  |---|------|-----------|
+  | 1 | {optional, target language} | {e.g. top-center}
+  <!-- or single line: 없음 -->
+- **Gutter:** {tight|normal|wide|pause} {e.g. 200px} — {intent}
 ```
 
 ---
@@ -373,14 +388,15 @@ If a gap appears mid-design:
 4. Re-check every affected cut
 
 Also verify:
+- Episode file uses the **flat cut schema only** (no `######` cut subsections)
 - Every cut’s character **state** exists in catalogs; identity gear does not silently swap
 - Every cut’s location **position/view/state** exists in catalogs
-- Multi-cut ensembles with fixed seating/formation cite a **staging**; staging has 2–3 planned ref views; staging cast/location anchors match catalogs
+- Multi-cut ensembles with fixed seating/formation cite a **staging**; staging cast/location anchors match catalogs
+- Cast roster ↔ cut Characters (no ghosts; mention-only tagged)
+- Craft Notes **Cut count** == number of `##### Cut` headings; series.md row updated or exception noted
+- Size class ↔ Height agree per `cut-composition.md`
 - Expression/mood/time/season/weather are cut direction, not new reference states
-- Every spoken line has speaker + balloon type + placement
-- Every cut has **size class + height guide + purpose** aligned with `cut-composition.md`
-- Gutter class/distance matches scene change / silence / speed
-- Episode cut count is near the overview target (or short-form exception is noted)
+- Every cut has Balloons + Captions fields (value may be `없음`)
 - Viewport plan is stated per page (or per dense stretch)
 
 ---
@@ -390,9 +406,11 @@ Also verify:
 - [ ] `world-bible.md`, `characters.md`, `locations.md`, `series.md` exist
 - [ ] All `characters/{character-slug}.md`, `locations/{location-slug}.md` written
 - [ ] `stagings.md` + needed `stagings/{staging-slug}.md` exist for ensemble continuity spans
-- [ ] All `episodes/{nnn}-{episode-slug}.md` have page → cut design (art/balloons/dialogue/captions/composition/gutters/staging cites)
+- [ ] All `episodes/{nnn}-{episode-slug}.md` use **flat cut fields** (no nested `######` subsections)
+- [ ] Cast roster present; no ghost cast; mention-only tagged
+- [ ] Craft Notes cut count matches measured cuts; series.md synced or exception noted
 - [ ] Reference rules followed (`workflow/reference-models.md`)
-- [ ] Cut size/gutter classes vary with dramatic intent (`workflow/cut-composition.md`)
+- [ ] Cut size/gutter classes vary with dramatic intent (`workflow/cut-composition.md`); size class ↔ height consistent
 - [ ] Variable page height + scroll hooks + viewport plans applied
 - [ ] Character / location / staging catalogs ready for Stage ④ Phase 0
 - [ ] Story co-lock: every cut’s staging/character-state/location-state is catalogued (reuse or added) — `workflow/reference-models.md` §7
@@ -405,15 +423,18 @@ Do not proceed to Stage ③ until the user approves:
 - World rules/background: coherent and specific enough?
 - Character catalog: lasting body + outfit/identity-gear states; expressions not treated as states?
 - Location catalog: set/stage clear; time/weather not mistaken for location states?
-- Staging catalog: each continuing situation (café / OR / meeting / …) has who-is-where + 2–3 ref views?
+- Staging catalog: each continuing situation (café / OR / meeting / …) has who-is-where + planned ref views?
 - Episode/page/cut design:
+  - Flat cut schema only throughout the episode file?
   - Cut stories carry emotion?
-  - Staging cited wherever relative placement must not drift (incl. L/R pairs and OR stations)?
-  - Cut **size classes** match intent (standard vs tall vs open/action)?
-  - **Gutters** used intentionally (normal vs pause vs tight)?
-  - Balloons/captions respect top→bottom reading and face clearance?
+  - Staging cited wherever relative placement must not drift?
+  - Cast roster clean (no ghosts)?
+  - Cut **size classes** match intent and Height?
+  - **Gutters** used intentionally?
+  - Balloons/captions fields present; reading order and face clearance OK?
   - Viewport plans readable on a phone?
   - Scroll hooks present?
+  - Cut count / series.md consistent?
   - Reference-image readiness (characters / locations / stagings)?
 
 **Do not proceed until G2 is approved.**

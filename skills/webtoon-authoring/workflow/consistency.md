@@ -17,6 +17,7 @@ Canonical reference rules: `workflow/reference-models.md`.
 | Term | Meaning |
 |---|---|
 | **Design Layer** | `world-bible.md`, `characters/*.md`, `locations/*.md`, `stagings/*.md`, `series.md`, `episodes/*.md` |
+| **Canonical episode cut schema** | Flat `- **Field:**` lists under `##### Cut {n}` only — no nested `######` cut subsections; see `workflow/02-design.md` |
 | **Evaluation Layer** | `evaluations/*.md` where **story lock** is approved per episode |
 | **Reference Images** | `images/characters/*`, `images/locations/*`, `images/stagings/*` — identity + set + ensemble blocking assets |
 | **Character ref** | Lasting body + outfit + **identity gear** (weapons/shields/accessories); not expression/mood |
@@ -62,6 +63,7 @@ overview.md (incl. canvas width / color / outside-cut fill)
 1. Design change requires rollback to Stage ② for that episode.
 2. Re-run Stage ③ for the episode and approve a new G3 story lock.
 3. Regenerate only the affected episode’s page images (and reference images only if new cast/place/state/staging variants are required), then re-stitch.
+4. After design is final, sync `series.md` page/cut estimates to **measured** counts in the episode file (or document an exception in Craft Notes).
 
 ### When only visual inconsistency is found during generation
 

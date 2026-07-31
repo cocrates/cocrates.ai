@@ -17,6 +17,7 @@ This file is the **single source of truth** for how plot/world/cast layers stay 
 | **Episode Index** | TOC only inside chapter design (not "Episode List" elsewhere) |
 | **Prior-Design Consistency Gate** | Stage ④ — chapter design vs higher artifacts (`04`) |
 | **Manuscript Readiness** | Stage ④ — scene fields complete for generation (`04`) |
+| **Canonical scene schema** | Meta `**Field:**` lines + flat `- **Field:**` bullets under `##### Scene` only — see `04-chapter-design.md` |
 | **Design-Fidelity Gate** | Stage ⑤ — prose vs chapter design + architecture + continuity (`05`) |
 | **Continuity** | Released-plot truth (`continuity/`) — not prior manuscript text |
 | **Reference models** | Character / location / staging locks — [`reference-models.md`](reference-models.md) (prose; shared with webtoon/picture-book/video) |

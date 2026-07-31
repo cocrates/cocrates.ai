@@ -14,6 +14,7 @@ This file is the **single source of truth** for keeping:
 | Term | Meaning |
 |---|---|
 | **Design Layer** | `world-bible.md`, `characters/*.md`, `locations/*.md`, `stagings/*.md`, `series.md`, `episodes/*.md` |
+| **Canonical episode page schema** | Flat `- **Field:**` lists under `### Page {N}` only — no nested `####` page subsections; see `workflow/02-design.md` |
 | **Evaluation Layer** | `evaluations/*.md` where **story lock** is approved per episode |
 | **Reference Images** | `images/characters/*`, `images/locations/*`, `images/stagings/*` — identity + set + ensemble blocking |
 | **Staging** | Continuing-situation who-is-where — `workflow/reference-models.md` |
@@ -51,6 +52,7 @@ overview.md
 1. Design change requires rollback to Stage ② for that episode.
 2. Re-run Stage ③ for the episode and approve a new G3 story lock.
 3. Regenerate only the affected episode’s page images (and reference images only if the episode requires new cast/place/state variants).
+4. After design is final, sync `series.md` page estimates to **measured** `### Page` counts (or document an exception in Craft Notes).
 
 ### When only visual inconsistency is found during generation
 

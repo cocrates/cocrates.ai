@@ -240,6 +240,10 @@ Episode numbers are **local headings** inside the parent chapter file (`### Epis
 - Manuscript or Index-only design that skipped Manuscript Readiness
 - Chapter N+1 before N released (unless user batches); skipping user approval; chat-only artifacts
 - Publishing/evaluating at episode level; unlocking released chapters without explicit republication
+- **Alternate scene layouts** — inventing nested scene subsections or non-canonical Key Events field sets (see `workflow/04-chapter-design.md` canonical scene schema)
+- **Omitting required scene fields** (use `none` where empty is valid)
+- **Ghost cast** — Characters Appearing without On stage presence or mention-only tag
+- Field notation other than `**Field:**` / `- **Field:**` (colon must be inside bold)
 
 **Consistency (see `consistency.md`):**
 - Inventing cast/places/world rules in ④/⑤
@@ -253,6 +257,6 @@ Episode numbers are **local headings** inside the parent chapter file (`### Epis
 
 ## Completion Criteria
 
-**Per chapter:** ③ architecture (chapter catalog) → ④ design (single chapter.md: chapter + episodes + scenes) → ⑥ design evaluation → ⑤ manuscript → ⑥ manuscript evaluation → ⑦ revisions → ⑧ release + continuity updated
+**Per chapter:** ③ architecture (chapter catalog) → ④ design (single chapter.md: chapter + episodes + scenes; **canonical scene schema**) → ⑥ design evaluation (**Schema Integrity** pass) → ⑤ manuscript → ⑥ manuscript evaluation → ⑦ revisions → ⑧ release + continuity updated
 
 **Work complete:** Chapter List source complete (`series.md` in short mode; all `parts/` in series mode) → all chapters designed and released → user final approval

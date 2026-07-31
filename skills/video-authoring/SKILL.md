@@ -196,12 +196,18 @@ See `workflow/05-assemble.md` for the detailed procedure.
 - Treating BGM/SFX as speech-generation (or voice as music-generation)
 - Assembling with `src` paths that were not G4-approved (or G5a segment outputs for final)
 - Delivering final mp4 before G5
+- **Nested clip subsections** (`#### Clip message`, `#### Direction guide`, …) — canonical clip schema is flat `- **Field:**` lists under `### Clip {N}` only (see `workflow/02-design.md`)
+- **Omitting required clip fields** when empty (use `없음` / `no`)
+- **Ghost cast** when catalogs exist — roster without on-clip refs or mention-only tag
+- Writing Craft Notes / Segment List clip counts that disagree with measured `### Clip` headings without a documented exception
+- Using field notation other than `- **Field:**` (colon must be inside bold)
 
 ## Completion Criteria
 
 - `overview.md` with Validation Criteria and Short/Long mode
 - `references.md` declaring reference needs (or explicitly none)
 - `sequence.md` complete; Long has `segments/*.md`; Short has segment-level clip design inside `sequence.md`
-- `evaluations/*` with G3 design lock per segment (required personas + Adjudication)
+- Clip designs match the **canonical flat clip schema**; Evaluate schema checks pass before G3
+- `evaluations/*` with Schema Integrity + G3 design lock per segment (required personas + Adjudication)
 - G4: all required component assets for each assembled segment approved
 - G5: segment mp4(s) approved via `cocrates-video-edit` render; Long also has approved `assembly/final.yaml` and `output/{slug}.mp4`

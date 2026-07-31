@@ -9,6 +9,7 @@
 | Term | Meaning |
 |------|---------|
 | **Design Layer** | `overview.md`, `references.md`, catalogs (incl. stagings), `context.md`, `sequence.md`, `segments/*.md` |
+| **Canonical clip schema** | Flat `- **Field:**` lists under `### Clip {N}` only — no nested `####` clip subsections; see `workflow/02-design.md` |
 | **Reference model rules** | `workflow/reference-models.md` when visual catalogs are used |
 | **Evaluation Layer** | `evaluations/*.md` — **design lock** per segment |
 | **Component Layer** | `images/`, `videos/`, `speech/`, `music/` — Stage ④ assets |
@@ -50,8 +51,9 @@ Markdown story/message wins over YAML. Composition YAML must not redefine story.
 ### Clip message / direction change
 
 1. Stage ② edit → new G3.
-2. Regenerate affected components (④).
-3. Update edit-spec YAML and re-render via `cocrates-video-edit` (⑤).
+2. After design is final, sync Segment List approx clip counts to **measured** `### Clip` headings (or document an exception in Craft Notes).
+3. Regenerate affected components (④).
+4. Update edit-spec YAML and re-render via `cocrates-video-edit` (⑤).
 
 ### Component quality only
 

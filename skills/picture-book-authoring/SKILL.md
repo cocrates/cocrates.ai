@@ -181,6 +181,11 @@ For detailed procedure, see `workflow/04-generate.md`.
 - Calling MCP generate without image-generation skill's approval workflow
 - Writing page rendering text that only captions the illustration, or a final-page moral monologue that states the theme instead of showing it
 - Generating page images without including the locked rendering text as overlay in the image
+- **Nested page subsections** (`#### Page story`, `#### Illustration guide`, …) — canonical episode page schema is flat `- **Field:**` lists under `### Page {N}` only (see `workflow/02-design.md`)
+- **Omitting required page fields** when empty (use `없음`; Staging/Characters always present)
+- **Ghost cast** — roster without on-page appearance or mention-only tag
+- Writing Craft Notes / `series.md` page counts that disagree with measured `### Page` headings without a documented exception
+- Using field notation other than `- **Field:**` (colon must be inside bold)
 
 ## Completion Criteria
 
@@ -189,7 +194,9 @@ For detailed procedure, see `workflow/04-generate.md`.
 - `characters.md` + `characters/{character-slug}.md` exist with complete character designs
 - `locations.md` + `locations/{location-slug}.md` exist with complete location designs
 - `series.md` + `episodes/{nnn}-{episode-slug}.md` exist with complete episode designs (including craft fields)
-- All evaluation records exist in `evaluations/{nnn}-{episode-slug}.md` with Criteria Check + Craft Checks + required personas + Adjudication
+- Every episode file matches the **canonical flat page schema** (cast roster; no nested `####` page subsections) per `workflow/02-design.md`
+- All evaluation records exist in `evaluations/{nnn}-{episode-slug}.md` with Criteria Check + **Schema / Structural Integrity** + Craft Checks + required personas + Adjudication
+- Evaluate schema checks pass before G3
 - G3 story lock approved
 - All reference images generated and approved with explicit user confirmation (Phase 0)
 - All page images generated with text overlay and approved with explicit user confirmation (Phase 1)

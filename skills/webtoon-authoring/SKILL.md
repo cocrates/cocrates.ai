@@ -229,7 +229,7 @@ See `workflow/04-generate.md`.
 - Generating images before G3 story lock
 - Generating images without user-approved YAML
 - **Calling MCP generate without explicit user approval for each YAML** — every image requires separate user confirmation
-- **Auto-generating images in batch without stopping for approval per image**
+- **Auto-generating images in batch without stopping for approval for each YAML**
 - Proceeding past any Approval Gate without explicit user confirmation
 - Skipping the Evaluate stage
 - Creating page images before reference images (Phase 0 before Phase 1)
@@ -245,6 +245,11 @@ See `workflow/04-generate.md`.
 - Omitting cut/balloon/gutter design and treating a page as a single undivided illustration by default
 - Generating page images without rendering locked balloon dialogue and narration into the image
 - Delivering an episode without stitching approved pages into the episode scroll (unless user explicitly wants pages only)
+- **Nested cut subsections (`###### Cut story`, `###### Composition`, `###### Illustration guide`, `###### Balloons`, …)** — canonical episode cut schema is flat `- **Field:**` lists under `##### Cut {n}` only (see `workflow/02-design.md`)
+- **Omitting required cut fields** when empty (establishing shots still need `- **Characters:** 없음 …`; Captions/Balloons/Staging always present, value may be `없음`)
+- **Ghost cast** — listing a character in the episode roster without on-cut appearance or an explicit mention-only tag
+- Writing Craft Notes / `series.md` cut or page counts that disagree with measured `##### Cut` / page headers without a documented exception
+- Using field notation other than `- **Field:**` (colon must be inside bold; reject `**Field**:` and bare `- Location:`)
 
 ## Completion Criteria
 
@@ -254,7 +259,9 @@ See `workflow/04-generate.md`.
 - `locations.md` + `locations/{location-slug}.md` exist with complete location designs
 - `stagings.md` + `stagings/{staging-slug}.md` exist for every multi-cut ensemble that needs fixed blocking
 - `series.md` + `episodes/{nnn}-{episode-slug}.md` exist with complete episode designs (pages → cuts, balloons, narration, gutters)
-- All evaluation records exist in `evaluations/{nnn}-{episode-slug}.md` with Criteria Check + Craft Checks + required personas + Adjudication
+- Every episode file matches the **canonical flat cut schema** (flat cut fields; cast roster; no `######` cut subsections) per `workflow/02-design.md`
+- All evaluation records exist in `evaluations/{nnn}-{episode-slug}.md` with Criteria Check + **Schema / Structural Integrity** + Craft Checks + required personas + Adjudication
+- Evaluate schema checks pass (flat cut schema, field notation, required fields, cast roster, cut counts, size class ↔ height) before G3
 - G3 story lock approved
 - All reference images generated and approved with explicit user confirmation (Phase 0: characters, locations, stagings)
 - All page images generated with balloons/narration and approved with explicit user confirmation (Phase 1)

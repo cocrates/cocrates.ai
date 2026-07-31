@@ -17,18 +17,24 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 
 1. Load `overview.md` and extract **Validation Criteria**.
 
-2. Check **episode/page craft completeness** (design correctness):
+2. Check **Schema / structural integrity first** (mechanical — any ❌ blocks G3 story lock):
+   - **Flat page schema only:** zero matches for `#### Page story`, `#### Illustration guide`, `#### Rendering text`, `#### Text–image split`, `#### Page-turn hook`
+   - Every page field uses `- **Field:**` with colon **inside** bold
+   - Every `### Page` has required fields: Page story, Staging, Characters, Location, Direction, Rendering text, Text carries, Picture carries, Page-turn hook (values may be `없음`)
+   - **Cast roster** ↔ page Characters (ghost / missing on-page → ❌; mention-only tagged)
+   - Craft Notes page count == measured `### Page` headings; `series.md` matches or exception noted
+
+3. Check **episode/page craft completeness** (design correctness):
    - Page 0 / cover rule followed
-   - Every `Page {N}` has `Page story`, `Illustration guide`, `Rendering text`, `Text–image split`, and `Page-turn hook` (except final page)
-   - Page-turn hooks exist on non-final pages
+   - Page-turn hooks exist (final = resolution/afterimage)
    - Text–image split is not redundant captioning
    - Rendering text fits target age (read-aloud rhythm + word density)
    - No didactic closing monologue (theme emerges via final scene/image)
 
-3. Check **Reference Model Integrity** (core of picture-book scene consistency):
+4. Check **Reference Model Integrity** (core of picture-book scene consistency):
    - Character reference model (= state) integrity
      - Each page names a **state** (or base) defined in `characters/{character-slug}.md`
-     - Expression / posture / action / emotion stay in the page guide (page image direction), not as reference-model states
+     - Expression / posture / action / emotion stay in Direction (page image direction), not as reference-model states
      - Character state updates only when the story has a lasting physical / outfit change
    - Location reference model (= state) integrity
      - Each page names a location with **scene axes (position + view)** and that scene’s **state (base or state-slug)** from `locations/{location-slug}.md`
@@ -36,18 +42,18 @@ For each `episodes/{nnn}-{episode-slug}.md`:
      - “Outside-the-window view” treated as **transient** → page prompt, no state change
      - Permanent physical change (new building / wall destroyed) → new state
 
-4. Check **Scene Continuity & Visual Consistency**:
+5. Check **Scene Continuity & Visual Consistency**:
    - Spans treated as “the same scene” keep the same character state / location scene (position+view) / state
    - When change is needed, the change type is explicit (character: outfit/gear state; location: physical-structure state)
    - `position` / `view` are defined by “what is visible”
 
-5. Check **Text–Image Collaboration**:
+6. Check **Text–Image Collaboration**:
    - Core page-story information is sufficiently delivered by `rendering text + what the image must show`
    - “No overlap” is not forced, but redundancy must not erase important information
    - Page-turn hooks naturally set up the next page
 
-6. Persona checks — run the [Default persona set](#persona-reference); lock **Target Child Reader** (age band from overview) first.
-7. Record results into `evaluations/{nnn}-{episode-slug}.md`, including per-persona critique and **Adjudication**.
+7. Persona checks — run the [Default persona set](#persona-reference); lock **Target Child Reader** (age band from overview) first.
+8. Record results into `evaluations/{nnn}-{episode-slug}.md`, including per-persona critique and **Adjudication**.
 
 ---
 
@@ -63,12 +69,21 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 |-----------|--------|----------|
 | {criterion from overview} | ✅ / ⚠️ / ❌ | {page / quote / note} |
 
+## 1b. Schema / Structural Integrity (any ❌ blocks G3)
+| Check | Result | Evidence |
+|-------|--------|----------|
+| Flat page schema only (no nested `####` page subsections) | ✅ / ⚠️ / ❌ | {file / line} |
+| Field notation `- **Field:**` (colon inside bold) | ✅ / ⚠️ / ❌ | {page} |
+| Required page fields present (value `없음` OK) | ✅ / ⚠️ / ❌ | {page} |
+| Cast roster ↔ page Characters (no ghosts; mention-only tagged) | ✅ / ⚠️ / ❌ | {roster vs pages} |
+| Craft Notes page count == measured `### Page` count | ✅ / ⚠️ / ❌ | {n vs n} |
+| series.md pages match measured (or exception noted) | ✅ / ⚠️ / ❌ | {series row} |
+
 ## 2. Craft Checks (Design correctness)
 | Check | Result | Evidence |
 |-------|--------|----------|
-| All required Page fields present | ✅ / ⚠️ / ❌ | {page} |
 | Page 0 is cover | ✅ / ⚠️ / ❌ | {page} |
-| Page-turn hook (non-final pages) | ✅ / ⚠️ / ❌ | {page} |
+| Page-turn hook (incl. final resolution/afterimage) | ✅ / ⚠️ / ❌ | {page} |
 | Text–image split (no redundant caption fluff) | ✅ / ⚠️ / ❌ | {page} |
 | Read-aloud rhythm / age density | ✅ / ⚠️ / ❌ | {page} |
 | No didactic closing monologue | ✅ / ⚠️ / ❌ | {last page} |
@@ -103,11 +118,11 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 | Pages cite the staging | ✅ / ⚠️ / ❌ | {page} |
 | No unauthorized L/R · seat · station swaps | ✅ / ⚠️ / ❌ | {page range} |
 
-### 3.4 Illustration Guide Completeness
+### 3.4 Direction Completeness
 | Check | Result | Evidence |
 |-------|--------|----------|
-| Illustration guide includes character reference model + location scene | ✅ / ⚠️ / ❌ | {page} |
-| Page story does not contradict illustration-guide display elements | ✅ / ⚠️ / ❌ | {page} |
+| Direction / Characters / Location include needed refs | ✅ / ⚠️ / ❌ | {page} |
+| Page story does not contradict Direction display elements | ✅ / ⚠️ / ❌ | {page} |
 
 ### 3.5 Illustration text (visual effects) guide fitness
 | Check | Result | Evidence |
@@ -194,9 +209,10 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 | 2 | {finding} | ... | ... | ... | ... |
 
 ## 9. Story Lock Readiness (G3 check)
+- [ ] **Schema / Structural Integrity: ✅** (any ❌ → G3 blocked; fix Design first)
 - [ ] Reference Model Integrity: ✅/⚠️/❌ all items
 - [ ] Scene Continuity & Visual Consistency: ✅/⚠️/❌ all items
-- [ ] Illustration Guide Completeness: ✅/⚠️/❌ all items
+- [ ] Direction Completeness: ✅/⚠️/❌ all items
 - [ ] Illustration Text Styling/Effects Guide: ✅/⚠️/❌ all items
 - [ ] Craft Checks: ✅/⚠️/❌ all items
 - [ ] Required personas + Adjudication: ✅/⚠️/❌
@@ -252,14 +268,17 @@ If Evaluation finds issues:
 
 ## Approval Gate G3 — Story Lock (per episode)
 
+**Prerequisite:** Section **1b Schema / Structural Integrity** must be all ✅. Schema ❌ blocks story lock — return to Stage ② and fix flat page schema / roster / counts before personas or lock.
+
 User confirms:
 
-1. Criteria Check — all items addressed?
-2. Craft Checks — satisfactory?
-3. Reference Model Integrity — character states / location position-view-states defined without contradicting catalogs?
-4. Scene Continuity & Visual Consistency — continuous scenes keep identity; changes only where needed?
-5. Persona feedback + Adjudication — residual risk acceptable under **Target Child** priority?
-6. **Story lock:** episode page stories, rendering text, text–image split, page-turn hooks, and illustration guides are now frozen for image generation.
+1. Schema / Structural Integrity — flat page schema, field notation, required fields, cast roster, page counts all ✅?
+2. Criteria Check — all items addressed?
+3. Craft Checks — satisfactory?
+4. Reference Model Integrity — character states / location position-view-states defined without contradicting catalogs?
+5. Scene Continuity & Visual Consistency — continuous scenes keep identity; changes only where needed?
+6. Persona feedback + Adjudication — residual risk acceptable under **Target Child** priority?
+7. **Story lock:** episode page stories, rendering text, text–image split, page-turn hooks, and Direction fields are now frozen for image generation.
 
 **Do not proceed to Stage ④ until G3 is approved.**
 

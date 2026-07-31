@@ -241,6 +241,23 @@ Load Structure Mode from `overview.md` / `series.md`. Chapter List source for Ar
 
 Each scene under an episode is a **generation brief**. Stage ⑤ must be able to write the scene from these fields alone (plus Architecture References), without inventing missing beats.
 
+### Canonical scene schema (mandatory)
+
+**Only this scene schema is allowed** under each `##### Scene {n} — {title}`:
+
+1. Two meta lines using `**Field:**` with colon **inside** bold (may join with `|` on one line):
+   - `**POV:**` · `**Location:**` · `**When:**`
+   - `**On stage:**` · `**Staging:**` (`none` when not needed)
+2. Then a **flat** bullet list `- **Field:** value` for Situation → Est. length (order fixed below).
+
+Do **not**: nest scene fields under `######` / extra `####` subsections; omit required fields; use bare `- Location:` or `**Field**:` (colon outside bold); invent a parallel Key Events layout.
+
+Empty optional meaning still needs the field: e.g. `- **Dialogue intent:** none`, `**Staging:** none`.
+
+### Episode cast roster
+
+Each episode section’s **Characters Appearing** must match the union of scene `**On stage:**` lists (plus explicit mention-only tags such as `(언급)`). Ghost cast (listed but never on stage without mention tag) is forbidden. Characters on stage must appear in Characters Appearing.
+
 ### Required vs excluded
 
 | Required | Exclude |
@@ -251,6 +268,7 @@ Each scene under an episode is a **generation brief**. Stage ⑤ must be able to
 | Dialogue intent when speech occurs (goal + tone, no quotes) | Inner-monologue draft text |
 | Transition out | Multi-line quoted exchanges |
 | Est. length | Vague “they talk / something happens” |
+| Staging (`none` or slug) | Alternate scene field layouts |
 
 ### Format per scene
 
@@ -270,7 +288,7 @@ Each scene under an episode is a **generation brief**. Stage ⑤ must be able to
 - **Est. length:** {approx. size}
 ```
 
-Optional only when needed:
+Optional only when needed (same `- **Field:**` notation):
 
 ```markdown
 - **Seed touch:** {Plant/Hint element id from episode Seeds — how it surfaces in this scene}
@@ -279,11 +297,12 @@ Optional only when needed:
 
 ### Completeness rules
 
-1. **No empty Key Events.** Every episode section has ≥ 1 scene with all required fields filled.
+1. **No empty Key Events.** Every episode section has ≥ 1 scene with all required fields filled (canonical schema only).
 2. **Causal chain.** Scene N's Transition out makes Scene N+1's Situation intelligible; episode Out hook matches the next episode's In (or chapter Closing hook).
 3. **Concrete Beat.** A Beat must name actions or observable events — not only mood (“tension rises”).
 4. **Still not prose.** If a Key Event could be pasted into `manuscripts/` as finished text, it is too dialogue-/prose-heavy — cut wording; keep intent and flow.
 5. **Length budget.** Sum of scene Est. length ≈ episode Estimated Length ≈ share of chapter Estimated Length.
+6. **Cast roster.** Characters Appearing ↔ On stage union (ghosts / missing roster entries → fail).
 
 **Stage ⑤** writes the actual lines from Dialogue Voices, Sensory-emotional cues, and scene intent — not from pre-written quotes in Key Events.
 
@@ -566,8 +585,11 @@ Results go to `evaluations/{nnn}-{chapter-slug}.md`.
 
 Stage ⑤ must **not** invent plot. Confirm:
 
+- [ ] **Canonical scene schema only** (no nested scene subsections / alternate Key Events layouts)
+- [ ] Field notation `**Field:**` / `- **Field:**` (colon inside bold)
 - [ ] Every episode has ≥ 1 scene under Key Events
 - [ ] Every scene has: POV | Location | When | On stage | Staging (or none) | Situation | Beat | Turn | Function | Sensory-emotional | Dialogue intent (or none) | Transition out | Est. length
+- [ ] Characters Appearing ↔ On stage union (no ghosts; mention-only tagged)
 - [ ] Continuing situations cite staging; no silent L/R or seat drift (`workflow/reference-models.md`)
 - [ ] Beats are concrete (actions/events), not mood-only
 - [ ] Scene Transition out → next Situation is intelligible; last episode Out matches Chapter Closing hook
@@ -579,6 +601,6 @@ Stage ⑤ must **not** invent plot. Confirm:
 
 ## Gate
 
-User approves the single chapter design file **only if Prior-Design Consistency Gate and Manuscript Readiness both pass**. Do not proceed to `05-generation.md` without approval.
+User approves the single chapter design file **only if Prior-Design Consistency Gate and Manuscript Readiness both pass** (including schema). Do not proceed to `05-generation.md` without approval.
 
-Design evaluation (`06-evaluation.md`) is strongly recommended between design approval and manuscript generation — include prior-design consistency again.
+Design evaluation (`06-evaluation.md`) is strongly recommended between design approval and manuscript generation — include Schema / Structural Integrity and prior-design consistency again.

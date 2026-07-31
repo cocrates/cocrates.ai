@@ -17,10 +17,18 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 
 1. Load `overview.md` and extract **Validation Criteria** + canvas specs.
 
-2. Check **episode/page/cut craft completeness** (design correctness):
+2. Check **Schema / structural integrity first** (mechanical — any ❌ blocks G3 story lock):
+   - **Flat cut schema only:** zero matches for `###### Cut story`, `###### Composition`, `###### Illustration guide`, `###### Balloons`, `###### Captions`, `###### Gutter` (and hybrids that nest Balloons/Gutter under Illustration guide)
+   - Every cut field uses `- **Field:**` with colon **inside** bold (reject `**Field**:` and bare `- Location:`)
+   - Every `##### Cut` has required fields present: Cut story, Purpose/Size class/Height/Shape, Staging, Characters, Location, Direction, Balloons, Captions, Gutter (values may be `없음`)
+   - Balloon/caption tables (when not `없음`) use 2-space indent under the field
+   - **Size class ↔ Height:** standard ≈400–600px; tall/long ≥1,200px; compact &lt;400px sparingly — contradiction is ❌ (`workflow/cut-composition.md`)
+   - **Cast roster:** episode `**Characters:**` list ↔ union of cut `- **Characters:**` (ghost = roster without on-cut and without mention tag → ❌; on-cut missing from roster → ❌). Mention-only must be tagged `(언급)` (or equivalent)
+   - **Cut count:** Craft Notes cut count == number of `##### Cut` headings; `series.md` row matches measured pages/cuts or Craft Notes documents `exception noted`
+
+3. Check **episode/page/cut craft completeness** (design correctness):
    - Page 0 / cover-thumbnail rule followed (if agreed)
    - Every `Page {N}` has `page story`, `estimated height`, `viewport plan`, `scroll hook` (non-final), `cut list`
-   - Every `Cut {n}` has `cut story`, `purpose`, `size class`, `height guide`, `shape`, `illustration guide`, `balloons` (when needed), `captions` (when needed), `gutter class/distance/intent`
    - Spoken lines have speaker + balloon type + placement
    - Scroll hooks on non-final pages (or intentional end-of-beat gutters)
    - Balloon/caption text is not mere caption-of-the-drawing
@@ -33,27 +41,26 @@ For each `episodes/{nnn}-{episode-slug}.md`:
      - silence/time → pause gutters, not accidental empty gaps
      - action → open/diagonal + tight gutters
      - size classes vary with drama (not flat unless intentional)
-     - episode cut count near overview target (or short-form exception noted)
 
-3. Check **Reference Model Integrity** (see `workflow/reference-models.md`):
-   - Characters: each cut’s state (or base) is in catalogs; **identity gear** (weapon/outfit/accessories) does not silently swap; expression/mood/pose only in cut guide
+4. Check **Reference Model Integrity** (see `workflow/reference-models.md`):
+   - Characters: each cut’s state (or base) is in catalogs; **identity gear** (weapon/outfit/accessories) does not silently swap; expression/mood/pose only in Direction
    - Locations: each cut’s location + position + view (+ state) is in catalogs; state only for lasting **set** change; time/season/weather are cut direction
-   - Stagings: every multi-cut ensemble with fixed seating/formation cites a staging; cast states + location anchor match the staging file; 2–3 ref views planned
+   - Stagings: every multi-cut ensemble with fixed seating/formation cites a staging; cast states + location anchor match the staging file; planned ref views listed
    - Cuts in a staging span do not reseat characters without a Design update
 
-4. Check **Scene Continuity & Visual Consistency**:
+5. Check **Scene Continuity & Visual Consistency**:
    - Continuous cut/page runs keep the same character state / location scene / state / staging blocking
    - Change points name the kind of change (character state vs location state vs staging reseat vs transient)
    - Gutters match scene transitions / silence / speed
 
-5. Check **Balloon–Art Collaboration**:
+6. Check **Balloon–Art Collaboration**:
    - Cut story core is carried by art + balloons (+ captions)
    - Balloon placement does not cover face/key action
    - Reading order is top→bottom (left→right within a cut if needed)
    - Scroll hooks set up the next cut/page
 
-6. **Persona checks** — run the [Default persona set](#persona-reference); do not skip for speed. Lock **Target Reader** from `overview.md` first.
-7. Record results into `evaluations/{nnn}-{episode-slug}.md`, including per-persona critique and **Adjudication**.
+7. **Persona checks** — run the [Default persona set](#persona-reference); do not skip for speed. Lock **Target Reader** from `overview.md` first.
+8. Record results into `evaluations/{nnn}-{episode-slug}.md`, including per-persona critique and **Adjudication**.
 
 ---
 
@@ -69,20 +76,30 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 |-----------|--------|----------|
 | {criterion from overview} | ✅ / ⚠️ / ❌ | {page.cut / quote / note} |
 
+## 1b. Schema / Structural Integrity (any ❌ blocks G3)
+| Check | Result | Evidence |
+|-------|--------|----------|
+| Flat cut schema only (no `######` cut subsections / hybrid nesting) | ✅ / ⚠️ / ❌ | {file / line} |
+| Field notation `- **Field:**` (colon inside bold) | ✅ / ⚠️ / ❌ | {page.cut} |
+| Required cut fields present (incl. Characters/Captions/Shape; `없음` OK) | ✅ / ⚠️ / ❌ | {page.cut} |
+| Balloon/caption tables 2-space indented when present | ✅ / ⚠️ / ❌ | {page.cut} |
+| Size class ↔ Height ranges agree | ✅ / ⚠️ / ❌ | {page.cut} |
+| Cast roster ↔ cut Characters (no ghosts; mention-only tagged) | ✅ / ⚠️ / ❌ | {roster vs cuts} |
+| Craft Notes cut count == measured `##### Cut` count | ✅ / ⚠️ / ❌ | {n vs n} |
+| series.md pages/cuts match measured (or exception noted) | ✅ / ⚠️ / ❌ | {series row} |
+
 ## 2. Craft Checks (Design correctness)
 | Check | Result | Evidence |
 |-------|--------|----------|
-| All Page/Cut required fields present | ✅ / ⚠️ / ❌ | {page.cut} |
+| All Page required fields present | ✅ / ⚠️ / ❌ | {page} |
 | Page 0 cover/thumbnail rule | ✅ / ⚠️ / ❌ | {page} |
 | Scroll hook (non-final pages) | ✅ / ⚠️ / ❌ | {page} |
 | Balloon speaker/type/text/placement | ✅ / ⚠️ / ❌ | {page.cut} |
-| Size class + height guide present | ✅ / ⚠️ / ❌ | {page.cut} |
 | Size class matches purpose (standard/tall/open/…) | ✅ / ⚠️ / ❌ | {page.cut} |
 | Gutter class/distance/intent specified | ✅ / ⚠️ / ❌ | {page.cut} |
 | Pause gutters used for silence/time (not accidental) | ✅ / ⚠️ / ❌ | {page.cut} |
 | Viewport plan present / one-screen beat readable | ✅ / ⚠️ / ❌ | {page} |
 | Variable page height (sum of cuts + gutters) | ✅ / ⚠️ / ❌ | {page} |
-| Cut-count near overview target (or exception noted) | ✅ / ⚠️ / ❌ | {episode} |
 | No didactic closing monologue | ✅ / ⚠️ / ❌ | {last beat} |
 | Characters/locations only from catalogs | ✅ / ⚠️ / ❌ | {entities} |
 
@@ -112,11 +129,11 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 | Cuts cite staging + matching cast/location | ✅ / ⚠️ / ❌ | {page.cut} |
 | No L/R flip, seat shuffle, or OR station drift without Design reseat | ✅ / ⚠️ / ❌ | {page.cut range} |
 
-### 3.4 Cut Guide Completeness
+### 3.4 Direction Completeness
 | Check | Result | Evidence |
 |-------|--------|----------|
-| Illustration guide includes needed character / location / staging refs | ✅ / ⚠️ / ❌ | {page.cut} |
-| Cut story does not contradict the guide | ✅ / ⚠️ / ❌ | {page.cut} |
+| Direction includes needed character / location / staging refs | ✅ / ⚠️ / ❌ | {page.cut} |
+| Cut story does not contradict Direction | ✅ / ⚠️ / ❌ | {page.cut} |
 
 ### 3.5 Balloon / Caption Guide
 | Check | Result | Evidence |
@@ -201,9 +218,10 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 | 1 | {finding} | High/Med/Low | characters/... / locations/... / episodes/... | {edit} | {todo/done} |
 
 ## 9. Story Lock Readiness (G3)
+- [ ] **Schema / Structural Integrity: ✅** (any ❌ → G3 blocked; fix Design first)
 - [ ] Reference Model Integrity (character / location / staging): ✅/⚠️/❌
 - [ ] Scene Continuity & Visual Consistency: ✅/⚠️/❌
-- [ ] Cut Guide Completeness: ✅/⚠️/❌
+- [ ] Direction Completeness: ✅/⚠️/❌
 - [ ] Balloon/Caption Guide: ✅/⚠️/❌
 - [ ] Craft Checks: ✅/⚠️/❌
 - [ ] Required personas run + Adjudication filled: ✅/⚠️/❌
@@ -257,14 +275,17 @@ If Evaluation finds issues:
 
 ## Approval Gate G3 — Story Lock (per episode)
 
+**Prerequisite:** Section **1b Schema / Structural Integrity** must be all ✅. Schema ❌ blocks story lock — return to Stage ② and fix flat cut schema / roster / counts / size↔height before personas or lock.
+
 User confirms:
 
-1. Criteria Check — all items addressed?
-2. Craft Checks — satisfactory?
-3. Reference Model Integrity — character states / location set states / stagings consistent with catalogs (`workflow/reference-models.md`)?
-4. Scene Continuity & Visual Consistency — continuity held (including seating); gutters/changes intentional?
-5. Persona feedback + Adjudication — residual risk acceptable for the **Target Reader**?
-6. **Story lock:** episode page/cut stories, balloon texts, captions, gutters, scroll hooks, staging cites, and illustration guides are now frozen for image generation.
+1. Schema / Structural Integrity — flat cut schema, field notation, required fields, cast roster, cut counts all ✅?
+2. Criteria Check — all items addressed?
+3. Craft Checks — satisfactory?
+4. Reference Model Integrity — character states / location set states / stagings consistent with catalogs (`workflow/reference-models.md`)?
+5. Scene Continuity & Visual Consistency — continuity held (including seating); gutters/changes intentional?
+6. Persona feedback + Adjudication — residual risk acceptable for the **Target Reader**?
+7. **Story lock:** episode page/cut stories, balloon texts, captions, gutters, scroll hooks, staging cites, and Direction fields are now frozen for image generation.
 
 **Do not proceed to Stage ④ until G3 is approved.**
 

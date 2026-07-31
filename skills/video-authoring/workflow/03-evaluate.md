@@ -31,23 +31,28 @@ For each segment:
 ### Checks
 
 1. **Criteria Check** — each Validation Criterion against this segment’s clips.
-2. **Craft / completeness**
-   - Every clip has: message, direction guide, required tracks, hook (or resolution on the last clip)
+2. **Schema / structural integrity first** (mechanical — any ❌ blocks G3):
+   - **Flat clip schema only:** zero `#### Clip message`, `#### Direction guide`, `#### Required tracks`, `#### Hook to next clip`
+   - Every field uses `- **Field:**` (colon inside bold)
+   - Every `### Clip` has required fields (Clip message, Visual, References, Direction, On-screen text, four Tracks lines, Hook to next) — values may be `없음`/`no`
+   - Cast roster ↔ References/on-clip cast when catalogs exist (no ghosts)
+   - Craft Notes clip count == measured `### Clip` headings; Segment List synced or exception noted
+3. **Craft / completeness**
    - Short: clip section lives in `sequence.md`
    - Messages alone make the beat imaginable
-3. **Message–composition fit**
+4. **Message–composition fit**
    - Track choices match the message (e.g. long narration → still/hold + speech, not forced 10s motion)
    - Motion clips planned &lt;~10s; TTS-led clips may be ~30s
-4. **Reference integrity** (if catalogs exist) — see `workflow/reference-models.md`
+5. **Reference integrity** (if catalogs exist) — see `workflow/reference-models.md`
    - Character identity gear does not silently swap; expression is clip direction
    - Location states are lasting set changes only (not time/weather)
    - Continuing multi-clip situations cite **stagings**; no L/R or station drift
    - Clips only use declared entities/states
    - Expression/pose/camera are clip direction, not reference-state abuse
    - If references.md says none: confirm no hidden identity-drift risk (or escalate to add a catalog)
-5. **Sequence continuity**
+6. **Sequence continuity**
    - Hooks connect; arc role of segment is clear
-6. **Persona / audience lens** — see Persona Reference (required set)
+7. **Persona / audience lens** — see Persona Reference (required set)
 
 ---
 
@@ -63,10 +68,19 @@ For each segment:
 |-----------|--------|----------|
 | {from overview} | ✅ / ⚠️ / ❌ | {clip / note} |
 
+## 1b. Schema / Structural Integrity (any ❌ blocks G3)
+| Check | Result | Evidence |
+|-------|--------|----------|
+| Flat clip schema only (no nested `####` clip subsections) | ✅ / ⚠️ / ❌ | |
+| Field notation `- **Field:**` (colon inside bold) | ✅ / ⚠️ / ❌ | |
+| Required clip fields present (`없음`/`no` OK) | ✅ / ⚠️ / ❌ | |
+| Cast roster ↔ on-clip refs (when catalogs exist) | ✅ / ⚠️ / ❌ / N/A | |
+| Craft Notes clip count == measured `### Clip` count | ✅ / ⚠️ / ❌ | |
+| Segment List clips match measured (or exception) | ✅ / ⚠️ / ❌ / N/A | |
+
 ## 2. Craft Checks
 | Check | Result | Evidence |
 |-------|--------|----------|
-| All required clip fields present | ✅ / ⚠️ / ❌ | |
 | Clip message alone makes the beat imaginable | ✅ / ⚠️ / ❌ | |
 | Track choice ↔ message / duration budget | ✅ / ⚠️ / ❌ | |
 | Hooks / arc role | ✅ / ⚠️ / ❌ | |
@@ -150,6 +164,7 @@ For each segment:
 | 1 | | High/Med/Low | | | todo/done |
 
 ## 8. Design Lock Readiness (G3)
+- [ ] **Schema / Structural Integrity: ✅** (any ❌ → G3 blocked)
 - [ ] Criteria / Craft / Reference checks acceptable
 - [ ] Required personas + Adjudication filled
 - [ ] Target-viewer readiness acceptable
@@ -209,13 +224,16 @@ If form is ambiguous, ask once to lock Genre/form before evaluation — do not d
 
 ## Gate G3 — Design Lock (per segment)
 
+**Prerequisite:** Schema / Structural Integrity all ✅. Schema ❌ blocks lock — fix flat clip schema / roster / counts in Design first.
+
 User confirms:
 
-1. Criteria addressed for this segment?
-2. Clip messages strong and lockable?
-3. Reference plan intact?
-4. Persona feedback + Adjudication — residual risk acceptable for the **Target Viewer**?
-5. **Design lock:** clip messages, direction, and track *needs* are frozen for component generation and assembly.
+1. Schema / Structural Integrity — flat clip schema, fields, roster, clip counts ✅?
+2. Criteria addressed for this segment?
+3. Clip messages strong and lockable?
+4. Reference plan intact?
+5. Persona feedback + Adjudication — residual risk acceptable for the **Target Viewer**?
+6. **Design lock:** clip messages, direction, and track *needs* are frozen for component generation and assembly.
 
 **Do not proceed to Stage ④ for this segment without G3.**
 

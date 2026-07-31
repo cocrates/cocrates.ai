@@ -100,46 +100,76 @@ Clip detail lives in `segments/*.md`.
 
 `sequence.md` **must include everything a `segments/*.md` would contain**: segment story + all clips.
 
+#### Canonical clip schema (mandatory)
+
+**Only the flat clip schema is allowed.** Every clip is a `### Clip {N} — {slug}` heading followed by a **flat** `- **Field:**` list. Do **not** use nested `#### Clip message`, `#### Direction guide`, `#### Required tracks`, or `#### Hook to next clip` subsections (nested or hybrid layouts).
+
+**Field notation (fixed):** Always `- **Field:** value` — colon **inside** bold (correct: `**Visual:**`; wrong: `**Visual**:` or `- Visual:`). Empty values still require the field (`없음` / `no` as appropriate).
+
+#### Segment / sequence cast roster (when catalogs exist)
+
+```markdown
+**Characters:** {slug-a}, {slug-b} (언급)
+**Locations:** {location-a}
+```
+
+Rules: on-clip ⊆ roster; ghost cast forbidden; mention-only tagged. If `references.md` says none, omit roster.
+
+#### Required clip fields (flat list, this order)
+
+Each `### Clip {N}` **must** include every field below:
+
+| Field | Rule |
+|-------|------|
+| `- **Clip message:**` | Beat this clip alone carries (Stage ④ message basis) |
+| `- **Visual:**` | still / motion from keyframe / hold / … |
+| `- **References:**` | kind/slug/state; staging/{slug}+view when placement must hold; or `없음` |
+| `- **Direction:**` | camera / action / expression — clip-specific |
+| `- **On-screen text:**` | exact copy in target language, or `없음` |
+| `- **Tracks — image:**` | yes/no |
+| `- **Tracks — video:**` | yes/no |
+| `- **Tracks — voice:**` | yes/no (+ script summary when yes) |
+| `- **Tracks — bgm/sfx:**` | yes/no (+ role when yes) |
+| `- **Hook to next:**` | curiosity/transition; final: resolution/aftertaste |
+
+Craft Notes **Clip count** = measured `### Clip` headings; Long Segment List approx clips sync to measured after design, or exception noted.
+
 ```markdown
 # Sequence: {Title}
 
 ## Overall story / message
 {arc — also serves as the single segment story}
 
+**Characters:** {slug-a}, {slug-b} (언급)  <!-- omit if references: none -->
+**Locations:** {location-a}
+
 ## Craft Notes
 - Genre rhythm: {…}
 - Core message: {…}
 - Climax clip: {id}
+- Clip count (this segment): {n}  <!-- MUST equal ### Clip headings -->
+- Segment List sync: {updated to measured clips | exception noted | N/A short}
 
 ## Clips
 
 ### Clip {N} — {slug}
-
-#### Clip message
-{Story/info/emotion this clip must deliver — reading this alone should make the beat imaginable}
-{Basis for Stage ④ image/video `message`}
-
-#### Direction guide
-- Visual: {still image / motion from keyframe / hold frame / …}
-- References: {kind/slug/state or none; include staging/{slug}+view when placement must hold}
-- Clip-specific direction (camera/action/expression/…): {…}
-- On-screen text (if any): {exact copy in the target language, or none}
-
-#### Required tracks
-- image: {yes/no — clip key image}
-- video: {yes/no — motion <~10s}
-- voice (speech): {yes/no — script summary}
-- bgm/sfx (music): {yes/no — role}
-
-#### Hook to next clip
-{curiosity/transition — final clip: resolution/aftertaste}
+- **Clip message:** {story/info/emotion — imaginable standalone}
+- **Visual:** {still image / motion from keyframe / hold frame / …}
+- **References:** {kind/slug/state or staging/{slug}+view | 없음}
+- **Direction:** {camera / action / expression / …}
+- **On-screen text:** {exact copy in target language | 없음}
+- **Tracks — image:** {yes/no}
+- **Tracks — video:** {yes/no}
+- **Tracks — voice:** {yes/no — script summary}
+- **Tracks — bgm/sfx:** {yes/no — role}
+- **Hook to next:** {curiosity/transition | final: resolution/aftertaste}
 ```
 
 ---
 
 ### 2.3 Segment design (Long only)
 
-For each `segments/{nnn}-{segment-slug}.md`:
+For each `segments/{nnn}-{segment-slug}.md` — same **flat clip schema** as Short:
 
 ```markdown
 # Segment {nnn}: {Title}
@@ -147,29 +177,29 @@ For each `segments/{nnn}-{segment-slug}.md`:
 ## Summary
 {episode-level story / teaching beat / ad act}
 
+**Characters:** {…}  <!-- when catalogs exist -->
+**Locations:** {…}
+
 ## Craft Notes
 - Role in the sequence arc: {…}
 - Core message: {…}
 - Climax clip: {id}
+- Clip count (this segment): {n}
+- sequence.md Segment List sync: {updated | exception noted}
 
 ## Clips
 
 ### Clip {N} — {slug}
-
-#### Clip message
-{…}
-
-#### Direction guide
-- Visual: {…}
-- References: {…}
-- Clip-specific direction: {…}
-- On-screen text: {…}
-
-#### Required tracks
-- image / video / voice / bgm-sfx: {as above}
-
-#### Hook to next clip
-{…}
+- **Clip message:** {…}
+- **Visual:** {…}
+- **References:** {…}
+- **Direction:** {…}
+- **On-screen text:** {…}
+- **Tracks — image:** {yes/no}
+- **Tracks — video:** {yes/no}
+- **Tracks — voice:** {yes/no}
+- **Tracks — bgm/sfx:** {yes/no}
+- **Hook to next:** {…}
 ```
 
 ---
@@ -200,8 +230,10 @@ If a clip needs an undeclared reference entity, state, staging, or track type:
 - [ ] Declared catalogs exist when kinds ≠ none
 - [ ] Story units cite staging + character states + location states; new refs were **added to catalogs** before citing (or existing reused) — `workflow/reference-models.md` §7
 - [ ] `sequence.md` exists
-- [ ] Short: `sequence.md` contains full clip designs (segment-level content)
-- [ ] Long: every segment file has all clip messages + track needs
+- [ ] Short: `sequence.md` contains full clip designs (segment-level content) using **flat clip schema**
+- [ ] Long: every segment file has all clip messages + track needs using **flat clip schema** (no nested `####` clip subsections)
+- [ ] Cast roster present when catalogs exist; no ghost cast
+- [ ] Craft Notes clip count matches measured `### Clip` headings; Segment List synced or exception noted
 - [ ] Every clip message is imaginable standalone
 - [ ] Track choices fit duration budgets (motion &lt;~10s; TTS-led ~30s ok)
 
@@ -213,6 +245,7 @@ User approves the design set:
 
 - Reference plan appropriate to intent? (not over-forcing characters/locations)
 - Sequence arc clear?
+- Flat clip schema only throughout?
 - Short: clip section in `sequence.md` sufficient?
 - Long: each segment’s clips sufficient?
 - Messages strong enough to lock in Evaluate?
