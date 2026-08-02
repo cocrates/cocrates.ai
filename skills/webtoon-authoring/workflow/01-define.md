@@ -10,8 +10,8 @@
 
 ## Publication Model (unit of generation)
 
-- **Episode** is the generation unit: each `episodes/{nnn}-{episode-slug}.md` is evaluated, then generates page images into `images/{nnn}-{episode-slug}/`, then stitches them into `episode-scroll.png`.
-- **Page** = variable-height vertical strip segment (fixed width, usually 690px). Pages concatenate top→bottom into one episode scroll.
+- **Episode** is the generation unit: each `episodes/{nnn}-{episode-slug}.md` is evaluated, then generates page images into `images/{nnn}-{episode-slug}/`; episode-scroll stitch runs only on explicit user request after page images are complete.
+- **Page** = variable-height vertical strip segment (fixed width, default **768px**). Pages concatenate top→bottom into one episode scroll.
 - **Cut** = panel inside a page; design lives inside the episode file (cut art + balloons + dialogue + narration + gutters).
 
 Picture-book assumptions (uniform page size, page-turn hooks, read-aloud caption overlay) do **not** apply. Use scroll craft instead.
@@ -37,7 +37,7 @@ Picture-book assumptions (uniform page size, page-turn hooks, read-aloud caption
 | Target pages per episode? (~10–15 as distribution unit) | Episode volume scale — designed in episode files, not `series.md` |
 | Genre / tone (romance, action, comedy, thriller, …)? | Craft direction |
 | Art style (digital color comic, line-heavy, painterly, …) and reference works? | Visual style |
-| Target portal / canvas width? (690–800px common; ~1080 only if required) | Canvas width |
+| Target portal / canvas width? (**768px** default; 690–800 common; ~1080 only if required) | Canvas width |
 | Cut side margins: full bleed or ~30–50px even margins? | Horizontal fit |
 | Outside-cut fill color (white / black / theme)? | Outside-cut fill |
 | Taboos / out of scope? | Safety |
@@ -61,7 +61,7 @@ Picture-book assumptions (uniform page size, page-turn hooks, read-aloud caption
 
 ## Canvas / format
 - Reading mode: vertical scroll
-- Width: {690–800px; lock exact px} — ~1080 only if portal/user requires
+- Width: {**768px** default; lock exact px — 690–800 common; ~1080 only if portal/user requires}
 - Height: variable (sum of cut heights + gutters; may differ per page)
 - Cut horizontal fit: {full bleed / 30–50px even side margins}
 - Generation: **default Flash + 1K + 9:16 strip tiles** (typically 2 per page, then stitch); optional **Pro + 2K + 1:8** single frame only — never Flash at 2K/1:8 for balloon pages

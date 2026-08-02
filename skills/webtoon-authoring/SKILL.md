@@ -258,7 +258,7 @@ See `workflow/04-generate.md`.
 - Delivering an episode without stitching approved pages into the episode scroll when the user has requested it (pages-only delivery is fine until then)
 - **Auto-stitching or re-stitching `episode-scroll.png` whenever page images change** — run Phase 2 only on explicit user request after page images are complete
 - **Nested cut subsections (`###### Cut story`, `###### Composition`, `###### Illustration guide`, `###### Balloons`, …)** — canonical episode cut schema is flat `- **Field:**` lists under `##### Cut {n}` only (see `workflow/02-design.md`)
-- **Omitting required cut fields** when empty (establishing shots still need `- **Characters:** 없음 …`; Captions/Balloons/Staging always present, value may be `없음`)
+- **Omitting required cut fields** when empty (establishing shots still need `- **Characters:** none …`; Captions/Balloons/Staging always present, value may be `none`)
 - **Ghost cast** — listing a character in the episode roster without on-cut appearance or an explicit mention-only tag
 - Writing Craft Notes page/cut counts that disagree with measured `### Page` / `##### Cut` headings without a documented exception
 - Compressing a distribution-unit episode into ~2–3 pages when the summary needs ~10–15 pages of breath

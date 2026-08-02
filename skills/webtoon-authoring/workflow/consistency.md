@@ -25,7 +25,7 @@ Series visual/typography rules: `workflow/illustration-guide.md`.
 | **Reference Images** | `images/characters/*`, `images/locations/*`, `images/stagings/*` — identity + set + ensemble blocking assets |
 | **Character ref** | Lasting body + outfit + **identity gear** (weapons/shields/accessories); not expression/mood |
 | **Location ref** | **Set/stage** physical structure; not time/season/weather |
-| **Staging ref** | **Who is where** for one continuing situation (café L/R, OR stations, meeting, …); typically 2–3 ensemble views |
+| **Staging ref** | WHO–WHERE for one continuing situation; **default 1× establishing** (optional reverse/detail only) |
 | **Page Images** | `images/{nnn}-{episode-slug}/{page}.png` — stitched page strip; tiles `{page}-a.png`, `{page}-b.png`, … on the default Flash path |
 | **Episode Scroll** | `images/{nnn}-{episode-slug}/episode-scroll.png` — pages concatenated top→bottom |
 | **Cut** | Panel within a page; art + optional speech balloons + optional narration; has size class + height guide |
@@ -56,7 +56,7 @@ overview.md (incl. canvas width / color / outside-cut fill)
 
 1. User approves the updated series guide (Design / G2).
 2. Re-run Stage ③ if Evaluate must re-check lettering/chrome fitness.
-3. Regenerate **all** page tiles that must match the new recipes (typically the whole episode) — do not leave old pages on the previous balloon font/box style; then re-stitch.
+3. Regenerate **all** page tiles that must match the new recipes (typically the whole episode) — do not leave old pages on the previous balloon font/box style. Mark `episode-scroll.png` stale if present; re-stitch **only on explicit user request** after page images are complete.
 4. Reference images: regenerate only if §1 art style (medium/line/palette/proportions) changed.
 
 ### When design catalogs change (characters/locations/stagings/world-bible)
@@ -67,13 +67,13 @@ overview.md (incl. canvas width / color / outside-cut fill)
 4. Regenerate:
    - reference images (if identity/appearance/state/blocking changed)
    - page images for pages whose locked guides reference updated references
-   - re-stitch episode scroll
+   - do **not** auto re-stitch; re-run episode-scroll stitch only on explicit user request after pages are done
 
 ### When episode page/cut design changes
 
 1. Design change requires rollback to Stage ② for that episode.
 2. Re-run Stage ③ for the episode and approve a new G3 story lock.
-3. Regenerate only the affected episode’s page images (and reference images only if new cast/place/state/staging variants are required), then re-stitch.
+3. Regenerate only the affected episode’s page images (and reference images only if new cast/place/state/staging variants are required). Mark episode scroll stale; re-stitch only on explicit user request.
 4. After design is final, record measured page/cut counts in the episode Craft Notes only — do **not** push page/cut budgets into `series.md`.
 
 ### When only visual inconsistency is found during generation
@@ -81,7 +81,7 @@ overview.md (incl. canvas width / color / outside-cut fill)
 - Treat it as a visual quality issue:
   - tighten prompts / re-render affected page image(s)
   - max 2 retries per image
-  - re-stitch if needed
+  - do **not** auto re-stitch; mark episode scroll stale if present; re-stitch only on explicit user request after pages are complete
 - Do NOT alter locked balloon/caption text, locked cut Direction meaning, identity gear, or staging seats.
 - Do NOT invent lettering/chrome outside `illustration-guide.md`; if typography is wrong, update the guide (or re-apply it in YAML), not one-off styles.
 
@@ -113,7 +113,7 @@ overview.md (incl. canvas width / color / outside-cut fill)
 - [ ] evaluations/{nnn}-{episode-slug}.md (story lock rerun)
 - [ ] reference images to regenerate (if identity/state/view/staging **or art-style §1** changed)
 - [ ] page images to regenerate for affected episode pages (all pages if typography recipes changed)
-- [ ] episode-scroll.png re-stitch (+ portal slices if any)
+- [ ] episode-scroll.png re-stitch (+ portal slices if any) — **only on explicit user request** after page images are complete
 - Gates re-run: Story Lock (G3) for affected episodes
 ```
 

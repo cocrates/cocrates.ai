@@ -46,7 +46,7 @@ Do not invent new balloon fonts, caption boxes, or art treatments per page.
 - References: {works — feel only}
 
 ## 2. Vertical layout & chrome
-- Target width: {from overview, e.g. 690px}
+- Target width: {from overview, e.g. 768px}
 - Cut horizontal fit: {full bleed / 30–50px even sides}
 - Outside-cut fill: {white / black / theme — exact look}
 - Panel / cut border: {hard box / soft / open/bleed rules}
@@ -93,7 +93,7 @@ Do not invent new balloon fonts, caption boxes, or art treatments per page.
 - [ ] Art style tokens from §1 applied
 - [ ] Layout / outside-cut / border rules from §2 respected
 - [ ] Each balloon uses a locked type recipe from §3
-- [ ] Each caption uses §4 recipe (or omitted if 없음)
+- [ ] Each caption uses §4 recipe (or omitted if none)
 - [ ] No new font, balloon chrome, or caption box invented for this tile
 - [ ] Locked balloon/caption text verbatim; faces not covered
 - [ ] IMPORTANT block present (webtoon generate rules)

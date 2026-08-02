@@ -10,7 +10,7 @@ Cuts are not mere “picture boxes.” **Cut height and gutter distance control 
 
 | Spec | Guideline | Notes |
 |------|-----------|--------|
-| Canvas width | **690px–800px** | Common portal range; lock exact width in `overview.md`. Some portals also accept ~1080px — only if the user/portal requires it |
+| Canvas width | **768px** default (690–800 common) | Lock exact width in `overview.md`. Some portals also accept ~1080px — only if the user/portal requires it |
 | Cut horizontal fit | **Full bleed** or **30–50px side margins** | Fill the strip width, or keep left/right margins even |
 | Cuts per episode (weekly-serial average) | **Emergent from ~10–15 page design** | Do not budget cuts in `series.md`; pack by dwell (`§4b`) |
 

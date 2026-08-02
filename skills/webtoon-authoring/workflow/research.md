@@ -1,7 +1,7 @@
 # Optional Research (`docs/{topic}.md`)
 
 Use this workflow when the user asks for factual or stylistic research that will feed Design (Stage ②), such as:
-- portal manuscript rules (width, file size, split height) — e.g. 690px width, ~760×7000 split norms
+- portal manuscript rules (width, file size, split height) — e.g. 768px default width, ~760×7000 split norms
 - vertical-scroll craft (gutter pacing, balloon placement, color storytelling)
 - historical period / cultural wardrobe / symbol safety
 - architecture/landscape reference points

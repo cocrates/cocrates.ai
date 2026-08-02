@@ -46,7 +46,7 @@ Full rules: `workflow/reference-models.md`. Summary:
 |------|------|------|
 | **Character** | Face/body/silhouette; lasting body change (growth, accident aftermath); **equipment identity** (clothes, accessories, weapons, shields — e.g. the same sword across fight cuts) | Expression, mood, transient pose/action |
 | **Location** | The **set/stage**: physical structure, fixed set dressing; lasting damage/rebuild | Time of day, season, weather, lighting mood, one-off camera, passersby |
-| **Staging** | **Who is where** relative to whom for a **continuing situation** (café L/R, OR stations, meeting seats, standoffs, …) — one staging per situation; **2–3** ensemble reference views | Expression/mood; camera tightness as long as blocking stays recognizable |
+| **Staging** | WHO–WHERE for a **continuing situation** — one staging per situation; **default 1× establishing** (optional reverse/detail only) | Expression/mood; CU/OTS in Direction; reseat without Design |
 
 **New reference image needed when:**
 - Character: outfit/identity gear changes, or lasting body change → new state
@@ -118,17 +118,21 @@ Full rules: `workflow/reference-models.md`. Summary:
 - {other-character-slug}: ...
 
 ## Reference models (appearance + equipment states)
-{Each state → one reference image in Stage ④ Phase 0}
-{Locks identity gear: clothes, accessories, weapons, shields — do not silently swap across cuts}
+{Static look for a story span. Each state → one turnaround reference image in Stage ④ Phase 0}
+{Locks identity gear: clothes, armor, weapons, shields, glasses, accessories — do not silently swap across cuts}
+{Document each state concretely in this md; YAML concretizes the md — no invention}
 
-- base: {default outfit + identity gear (e.g. named sword, shield, accessories)}
-- {state-slug}: {what changes: outfit / gear / lasting body change; face/body identity rules unchanged}
+- base: {concrete default outfit + identity gear — face/body anchors + clothes + key accessories}
+- {state-slug}: {concrete lasting change: growth/accident aftermath OR outfit/gear change; what stays vs what differs}
 - {state-slug}: ...
 
 Rules:
-- state = lasting physical/equipment identity only
+- state = lasting physical/equipment identity only (static look)
 - Same fight gear across cuts unless a designed state change
 - Expression / mood / transient pose are NOT states → cut illustration guide
+- Each image = **one turnaround sheet** (front + side + back + key accessories) for that state
+- Co-appearing majors need **≥2-axis visual contrast** (hair/face/outfit) + ID keywords in prompts (`workflow/reference-models.md` §2.3)
+- World taxonomy classes from world-bible must match appearance Direction (§2.4)
 ```
 
 ```markdown
@@ -158,8 +162,9 @@ Rules:
 - Narrative role: {why this place matters}
 - Role as set/stage: {what physical structure must stay recognizable}
 
-## Spatial layout
+## Spatial layout (static / physical — empty set)
 - Structure: {rooms, corridors, landmarks, fixed furniture of the set}
+- Physical detail examples: {street → buildings, signage, lights, crosswalk, façades; café → seats, counter, fixed décor, fixtures}
 - Scale feel: {cramped / vast / intimate / ...}
 
 ## Sensory environment (defaults — may be overridden per cut)
@@ -174,11 +179,13 @@ Rules:
 
 ## Scene list (location → position → view → state)
 {Each row → one Stage ④ location reference image}
+{One PNG cannot hold full 3D — plan multi-view: front/left/right or window-side/bed-side/door-side}
 {state = lasting set change only — not time/season/weather}
+{YAML for each row concretizes this Description — no invention}
 
-| position | view | state | Notes |
+| position | view | state | Notes (what is visible in this PNG) |
 |------|------|-------|------|
-| {position-slug} | {view-slug} | base | {default set} |
+| {position-slug} | {view-slug} | base | {default set — name visible architecture} |
 | {position-slug} | {view-slug} | {state-slug} | {e.g. after fire / new wing built} |
 | ... | ... | ... | ... |
 
@@ -187,7 +194,7 @@ Rules:
 - view: **what of the set is visible** (not a one-cut camera choice)
 - state: permanent physical-structure change (base = default)
 - Time/season/weather → cut direction, not a new location state
-- Who is where across many cuts of the **same situation** → **staging**, not location alone (café L/R, OR stations, meeting seats, …)
+- Who is where / ambient extras across many cuts of the **same situation** → **staging**, not location alone
 ```
 
 ```markdown
@@ -206,20 +213,26 @@ Rules:
 
 ### 2.3b Staging Catalog Design (continuing-situation blocking)
 
-**When:** any multi-cut (or multi-page) **continuing situation** needs stable relative placement — café dialogues, OR procedures, meetings, meals, courtrooms, formations, vehicles, etc. Default: **one staging per situation**.
+**When:** any multi-cut **continuing situation** needs stable relative placement, situation props, and/or ambient occupancy — café dialogues, street walk-and-talk, OR, meetings, meals, etc. Default: **one staging per situation**.
+
+**Episode-first (preferred):** Define staging **with the episode** that needs it. Same location ≠ reuse prior staging. Prefer a new episode-appropriate staging for this beat/time/occupancy; reuse only when the same continuity span truly continues. May require **extra location Scene List rows** for this episode’s framings. Canonical: `workflow/reference-models.md` §4 / §4.1 / §4.2.
+
+**Mandatory:** ≥2 cuts in the same situation **and** (≥2 named cast **or** fixture-relative placement matters) → staging required. `Staging: none` only for single-cut establishing / no fixed placement.
 
 1. Create `stagings.md` as an index.
-2. For each staging, create `stagings/{staging-slug}.md` using the template in `workflow/reference-models.md` §4 (name by situation, e.g. `cafe-a-b-first-date`, `or-appendectomy-team`).
-3. Plan **2–3** reference views (e.g. establishing / reverse / detail) that preserve L/R and stations.
-4. Ensure every cast member’s appearance state and the location position/view/state already exist in catalogs.
+2. For each staging, create `stagings/{staging-slug}.md` using the template in `workflow/reference-models.md` §4 (name by episode situation, e.g. `ep003-street-walk-talk`).
+3. Header **must** bind catalog paths: `Location: slug / position / view (state)` + each `character-slug (state: …)`.
+4. Include blocking + situation props + ambient + situation environment (when span-locked) as needed.
+5. Plan **canonical establishing** ref (default **one** PNG). Optional reverse/detail only with stated lock purpose — **never** register OTS/CU as staging views.
+6. Ensure every cast state and location path already exist (add missing location views first).
 
 ```markdown
 <!-- `stagings.md` index template -->
 # Stagings
 
-| Slug | Situation | Location | Cast (short) | Continuity span | Ref views |
-|------|-----------|----------|--------------|-----------------|-----------|
-| {staging-slug} | {café / OR / meeting / …} | {location} | {A, B, C} | ep{nnn} p{a}.{c}–p{b}.{c} | 3 |
+| Slug | Situation | Owning episode | Location path | Cast (short) | Continuity span | Ref |
+|------|-----------|----------------|---------------|--------------|-----------------|-----|
+| {staging-slug} | {street walk / café call / …} | {nnn-…} | {loc/pos/view} | {A, B} | ep{nnn} p{a}.{c}–p{b}.{c} | establishing |
 ```
 
 If episode design discovers a continuing situation without a staging → stop, add staging (+ catalog gaps), then resume. Do not invent seats, L/R, or OR stations only inside cut prompts.
@@ -275,7 +288,7 @@ If the episode summary cannot be told without cramming beats onto every page, **
 
 - Always `- **Field:** value` — colon **inside** the bold markers (correct: `**Location:**`; wrong: `**Location**:` or `- Location:`).
 - Balloon / caption markdown tables sit under the field line with **2-space indent** on every table row.
-- Empty values still require the field: use `없음` (optionally with a reason), e.g. `- **Characters:** 없음 (establishing shot)`.
+- Empty values still require the field: use `none` (optionally with a reason), e.g. `- **Characters:** none (establishing shot)`.
 
 #### Webtoon craft rules
 
@@ -323,7 +336,7 @@ Each `Page {idx}`:
 
 #### Required cut fields (flat list, this order)
 
-Each `##### Cut {n}` (top→bottom) **must** include every field below (value may be `없음`):
+Each `##### Cut {n}` (top→bottom) **must** include every field below (value may be `none`):
 
 | Field | Rule |
 |-------|------|
@@ -332,13 +345,13 @@ Each `##### Cut {n}` (top→bottom) **must** include every field below (value ma
 | `- **Size class:**` | `standard` \| `tall`/`long` \| `compact` \| `open`/`diagonal` |
 | `- **Height:**` | Target px; must match size class ranges |
 | `- **Shape:**` | `rectangle` \| `open` \| `diagonal` \| `bleed` (required) |
-| `- **Staging:**` | `{slug} — ref view: …` or `없음` |
-| `- **Characters:**` | slugs + `(state: …)` or `없음 (establishing / …)` |
+| `- **Staging:**` | `{slug} — ref view: …` or `none` |
+| `- **Characters:**` | slugs + `(state: …)` or `none (establishing / …)` |
 | `- **Location:**` | `{location} / {position} / {view} (state: …)` |
 | `- **Direction:**` | expression / gesture / camera / time-weather; seating from staging only |
 | `- **Color grade:**` | optional separate line, or fold into Direction |
-| `- **Balloons:**` | `없음` or indented table (`# \| speaker \| type \| text \| placement`) |
-| `- **Captions:**` | `없음` or indented table — **field always present** (content optional) |
+| `- **Balloons:**` | `none` or indented table (`# \| speaker \| type \| text \| placement`) |
+| `- **Captions:**` | `none` or indented table — **field always present** (content optional) |
 | `- **Gutter:**` | `{class} {distance} — {intent}` (prefer stating even at episode end / page break) |
 
 Do **not** invent seating in Direction — seating comes from staging. Detailed image prompts belong in Stage ④ YAML only.
@@ -361,7 +374,7 @@ Do **not** invent seating in Direction — seating comes from staging. Detailed 
 - Page count (this episode): {n}  <!-- MUST equal count of ### Page headings; target ~10–15 unless short-form exception noted -->
 - Cut count (this episode): {n}  <!-- MUST equal count of ##### Cut headings in this file -->
 - Volume note: {meets ~10–15 pages | short-form exception: …}
-- Canvas: width {690–800px locked}, height variable, color, side margins {full bleed / 30–50px}, outside-cut {white/black/theme}
+- Canvas: width {768px default; lock exact px}, height variable, color, side margins {full bleed / 30–50px}, outside-cut {white/black/theme}
 
 ## Pages
 
@@ -389,20 +402,20 @@ Do **not** invent seating in Direction — seating comes from staging. Detailed 
 ##### Cut {n}
 - **Cut story:** {beat}
 - **Purpose:** {dialogue / everyday / climax / silence-time / action / establishing / …} | **Size class:** {standard | tall/long | compact | open/diagonal} | **Height:** {e.g. 500px} | **Shape:** {rectangle | open | diagonal | bleed}
-- **Staging:** {staging-slug — ref view: establishing|reverse|detail | 없음}
-- **Characters:** {character-slug} (state: {state-slug or base})  <!-- or: 없음 (establishing shot) -->
+- **Staging:** {staging-slug — ref view: establishing|reverse|detail | none}
+- **Characters:** {character-slug} (state: {state-slug or base})  <!-- or: none (establishing shot) -->
 - **Location:** {location-slug} / {position-slug} / {view-slug} (state: {state-slug or base})
 - **Direction:** {expression / gesture / camera tightness / time-season-weather grade}
 - **Balloons:**
   | # | speaker | type | text | placement |
   |---|---------|------|------|-----------|
   | 1 | {slug} | speech | {dialogue in target language} | {e.g. top-left}
-  <!-- or single line: 없음 -->
+  <!-- or single line: none -->
 - **Captions:**
   | # | text | placement |
   |---|------|-----------|
   | 1 | {optional, target language} | {e.g. top-center}
-  <!-- or single line: 없음 -->
+  <!-- or single line: none -->
 - **Gutter:** {tight|normal|wide|pause} {e.g. 200px} — {intent}
 ```
 
@@ -436,7 +449,7 @@ Also verify:
 - Page count in ~10–15 range (or Craft Notes short-form exception)
 - Size class ↔ Height agree per `cut-composition.md`
 - Expression/mood/time/season/weather are cut direction, not new reference states
-- Every cut has Balloons + Captions fields (value may be `없음`)
+- Every cut has Balloons + Captions fields (value may be `none`)
 - Viewport plan is stated per page (breath named; or per dense stretch)
 - Cuts-per-page matches dwell (1-cut pages OK for high dwell)
 - Cold-reader comprehension: art + balloons + captions carry the episode (no note-only essentials)

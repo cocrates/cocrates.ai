@@ -4,7 +4,7 @@
 
 **Gate artifacts:**
 - reference images and page images under `images/characters`, `images/locations`, `images/stagings`, `images/{nnn}-{episode-slug}/`
-- `images/{nnn}-{episode-slug}/episode-scroll.png` (pages stitched top→bottom)
+- `images/{nnn}-{episode-slug}/{nnn}-{episode-slug}.png` (pages stitched top→bottom)
 - final assembly confirmation in `output/{webtoon-slug}-final/` (user approval)
 
 **Next stage:** none (this is the terminal stage for the skill)
@@ -18,7 +18,7 @@ To preserve story lock:
   - image YAML prompts that implement locked cut/illustration guides **and** locked `illustration-guide.md` (art / chrome / balloon·caption typography)
   - re-rendering reference/page PNGs for quality/consistency (max 2 retries per image)
   - rendering locked balloon dialogue and narration/captions inside each page image
-  - stitching approved page PNGs into the episode scroll (and optional portal split-export)
+  - stitching approved page PNGs into the episode scroll **only on explicit user request** after page images are complete (and optional portal split-export)
 - Not allowed in ④:
   - rewriting episode/page/cut story, balloon text, or captions
   - changing illustration guide meaning (only prompt phrasing/tightening)
@@ -37,7 +37,7 @@ Read from locked `overview.md` (defaults if unspecified). Cut heights/gutters co
 
 | Spec | Default |
 |------|---------|
-| Target width | **690–800px** locked in overview (do not invent mid-generate) |
+| Target width | **768px** default (lock exact px in overview; do not invent mid-generate) |
 | Page height | **Variable** — sum of locked cut heights + gutters (page packing follows dwell/breath — `cut-composition.md` §4b) |
 | **Default page generation** | **`gemini-3.1-flash-image` + `1K` + `9:16`**, split into **strip tiles** (typically **2** per design page), then stitch to `{page}.png` |
 | Optional tall single frame | **`gemini-3-pro-image` + `2K` + `1:8`** only — do **not** use Flash at 2K/1:8 for balloon text (frequent text errors) |
@@ -54,7 +54,7 @@ Read from locked `overview.md` (defaults if unspecified). Cut heights/gutters co
    - `images/{nnn}-{episode-slug}/{page}-a.yaml` → `{page}-a.png`
    - `images/{nnn}-{episode-slug}/{page}-b.yaml` → `{page}-b.png`
    - (If a page needs >2 tiles: `-c`, `-d`, … — still `1K` + `9:16` + Flash unless Pro path is locked.)
-3. Stitch tiles top→bottom into `images/{nnn}-{episode-slug}/{page}.png` before episode-scroll stitch.
+3. Stitch tiles top→bottom into `images/{nnn}-{episode-slug}/{page}.png` (page-level tile stitch only — do **not** auto-run episode-scroll stitch).
 4. Each tile YAML gets its own approval + generate call (image-generation skill rules).
 
 **Tile continuity:** Tile B’s `design` must state it continues the same page immediately below tile A (same width, style, cast/location refs, outside-cut fill). Do not re-introduce page chrome or restart cut numbering as on-image labels.
@@ -85,9 +85,9 @@ Goal: Generate durable identity and spatial anchors so later page images stay co
 
 | Layer | Include in reference images | Exclude (cut direction) |
 |-------|----------------------------|-------------------------|
-| Character | Face/body; lasting body change; outfit + **identity gear** (weapons, shields, accessories) per state | Expression, mood, transient pose |
-| Location | **Set/stage** structure per position/view/state | Time/season/weather; one-off camera |
-| Staging | Continuing-situation **blocking** (café L/R, OR stations, meeting seats, …) — **2–3** views of the same map | Expression; reseating/L-R flip without Design change |
+| Character | Static look + lasting body/equipment identity — **turnaround** sheet (front/side/back + key accessories) per state; YAML from character md | Expression, mood, transient pose |
+| Location | Static/physical set — **multi-view** Scene List (front/left/right or fixture-sides); YAML from location md | Time/weather; ambient extras (→ staging) |
+| Staging | Episode-first WHO–WHERE (+ props/ambient/situation env) — **default 1× establishing**; CU/OTS via Direction | Expression; reseat without Design; OTS/CU as staging refs |
 
 ### 0.1 Generation order (per catalogs)
 
@@ -96,13 +96,13 @@ Goal: Generate durable identity and spatial anchors so later page images stay co
 3. Location base: `images/locations/{location-slug}.yaml/.png`
 4. Location position/view: `images/locations/{location-slug}-{position-slug}-{view-slug}.yaml/.png`
 5. Location state variants: `images/locations/{location-slug}-{position-slug}-{view-slug}-{state-slug}.yaml/.png`
-6. **Staging ensemble refs** (after cast + location PNGs exist):  
-   `images/stagings/{staging-slug}-{establishing|reverse|detail}.yaml/.png`  
-   — typically **2–3** images; each must enforce the staging blocking map using character + location reference images
+6. **Staging establishing** (after cast + location PNGs exist):  
+   `images/stagings/{staging-slug}-establishing.yaml/.png`  
+   — **required default (one image)**; optional reverse/detail only if staging md lists them with lock purpose. Must inject Character + Location PNGs in `params.references`. Lean prompt: WHO–WHERE–WHAT only (`workflow/reference-models.md` §4.2–4.3).
 
 ### 0.2.1 Sample: reference image YAML structure
 
-**Character base** (`images/characters/{character-slug}.yaml`):
+**Character base** (`images/characters/{character-slug}.yaml`) — concretize `characters/{slug}.md` base state:
 
 ```yaml
 type: image
@@ -110,15 +110,17 @@ model: gemini-3.1-flash-image
 
 params:
   prompt: |
-    {webtoon-ready character description in English}
-    A full-color webtoon / vertical comic character reference sheet...
-    Include identity gear exactly (clothes, accessories, named weapons/shields). Neutral expression; no dramatic acting pose.
+    {webtoon-ready character description in English — concretized from character md}
+    A full-color webtoon / vertical comic CHARACTER TURNAROUND reference sheet on one image:
+    front view, side view, and back view of the SAME outfit/look, plus key accessories/identity gear
+    (clothes, armor, weapons, shields, glasses, etc.) clearly readable. Neutral expression; no dramatic acting pose.
   size: 1K
   aspectRatio: "1:1"
   seed: null
 
 output: "./images/characters/{character-slug}.png"
 ```
+
 
 **Location base** (`images/locations/{location-slug}.yaml`):
 
@@ -137,7 +139,7 @@ params:
 output: "./images/locations/{location-slug}.png"
 ```
 
-**Staging establishing** (`images/stagings/{staging-slug}-establishing.yaml`):
+**Staging establishing** (`images/stagings/{staging-slug}-establishing.yaml`) — lean WHO–WHERE–WHAT; refs required:
 
 ```yaml
 type: image
@@ -145,10 +147,10 @@ model: gemini-3.1-flash-image
 
 params:
   prompt: |
-    Using the provided character and location reference images, compose a STAGING REFERENCE
-    (continuing-situation blocking lock) for a webtoon scene (café / OR / meeting / formation / etc.).
-    Lock who sits/stands where exactly as designed; preserve left/right and stations; neutral expressions; no balloons.
-    Wide establishing view of the full group placement.
+    Using ONLY the provided character and location reference images, compose ONE canonical STAGING
+    establishing lock (webtoon). WHO left/center/right, WHERE on the set, WHAT pose/facing.
+    Include situation props/ambient/environment from the staging md. Do NOT re-describe face/hair/outfit/
+    wall logos already in the refs. Neutral expressions; no balloons; no metadata text.
   references:
     - path: "./images/locations/...."
     - path: "./images/characters/...."
@@ -159,16 +161,19 @@ params:
 output: "./images/stagings/{staging-slug}-establishing.png"
 ```
 
-### 0.2 Per-image YAML approval (MANDATORY)
+### 0.2 Per-image YAML approval (MANDATORY — never auto-generate)
+
+**Hard gate:** Do **not** call image generate until the user has seen the full YAML and given an **explicit approval command** (e.g. “생성해줘”, “만들어줘”, “approve”). Never chain autonomous generate calls across assets.
 
 For each reference image:
 1. Create image-generation YAML that reflects the approved Design notes.
-   - `message`: identity/structure/blocking consistency only (no story/balloon detail dump)
-   - `design`: visual implementation only (character identity gear, set structure, or staging seats; no on-image text)
+   - `message`: identity/structure/blocking consistency only
+   - `design`: visual implementation only; **design ↔ prompt fidelity** — every proper noun / engraved logo / gear detail in `design` must appear in `params.prompt` (no genericizing)
+   - Staging: lean WHO–WHERE–WHAT; Character+Location paths in `params.references` (required)
 2. Show the full YAML to the user and request explicit approval.
 3. Only after explicit approval, call the MCP image generation.
 4. Verify visual quality (do not treat it as story redesign).
-5. For stagings: verify seating matches the blocking table across all 2–3 views.
+5. For stagings: verify L/C/R + props match the staging md on the establishing PNG.
 ---
 
 ## Phase 1: Page Image Generation (Cuts + Balloons + Captions)
@@ -203,14 +208,14 @@ For each **strip tile** (default path) or single page frame (Pro path):
      - `title`: `{episode-slug} / Page {idx} / tile {a|b|…}` (or `/ Page {idx}` for Pro single frame)
      - `message`: page/tile story meaning/emotion/beat only (1–2 sentences)
      - `design`: **IMPORTANT** block (required) + **illustration-guide tokens** + cuts in this tile + balloon/caption map + gutters + color/mood + staging cites + tile continuity note
-2. Show YAML to user for explicit review and approval
-3. On explicit approval only → call MCP generate
+2. Show YAML to user for explicit review and approval — **do not generate until explicit approval command**
+3. On explicit approval only → call MCP generate (never auto-chain)
 4. Verify:
    - cut order and gutters match lock (across tiles after stitch)
    - balloon/caption accuracy and readability (exact strings; no particle changes)
    - **typography/chrome matches `illustration-guide.md`** (not a one-off lettering style)
    - **no** cut labels / “CUT 1” / panel index text on the image
-   - width/vertical-strip feel suitable for locked target width (resize/crop at export to 690–800px width as needed)
+   - width/vertical-strip feel suitable for locked target width (resize/crop at export to overview width, default **768px**, as needed)
 5. After all tiles for a page are approved: stitch `{page}-a.png` + `{page}-b.png` (+ …) → `{page}.png`
 
 ### 1.2 Prompt pattern (mandatory for every tile/page YAML)
@@ -233,7 +238,7 @@ IMPORTANT:
 - All balloon text must be rendered EXACTLY as written below, character by character. Do not add, omit, or alter any particle.
 - Cut order from top to bottom must be preserved
 - Clear gutters between cuts
-- DO NOT render any labels, cut numbers, or words like "CUT 1", "CUT 2", "CUT 3" anywhere on the image. No panel numbering, no index text, no captions other than the specified balloon text.
+- NO METADATA TEXT ON IMAGE. Do not draw episode titles, page numbers, cut numbers, panel labels, header/footer text, or watermarks (NO "Episode", NO "Page", NO "Cut", NO "Top Panel", NO "CUT 1"). Render ONLY the specified speech balloons and story captions.
 - Suitable for smartphone vertical reading
 - Do NOT invent new balloon fonts, caption boxes, or panel chrome not listed in the series illustration guide
 
@@ -243,7 +248,7 @@ CUTS (top → bottom) — this tile only:
    Balloons:
    - {type} from {speaker}: "{verbatim text}" at {placement} — apply locked recipe for {type}
    Captions:
-   - "{verbatim text}" at {placement} — apply locked caption recipe   <!-- omit section if Captions: 없음; never invent caption text -->
+   - "{verbatim text}" at {placement} — apply locked caption recipe   <!-- omit section if Captions: none; never invent caption text -->
    Gutter after: class {tight|normal|wide|pause}, ~{px} empty vertical space
 2. ...
 
@@ -268,14 +273,19 @@ TEXT RULES:
 
 ---
 
-## Phase 2: Stitch Episode Scroll
+## Phase 2: Stitch Episode Scroll (user-requested only)
 
-1. Ensure each page has a stitched `{page}.png` (from `{page}-a` + `{page}-b` + … on the default path, or the Pro single frame).
-2. After all pages for the episode are approved, concatenate page PNGs **top → bottom** into:
-   - `images/{nnn}-{episode-slug}/episode-scroll.png`
-3. Optionally resize the scroll (or each page) to **target width** (690px or overview width) while preserving aspect.
-4. If the user/portal needs split upload files, export additional slices (e.g. max height ~1280px) **without changing art** — document slice boundaries next to the files if useful.
-5. Show the stitched scroll (or a clear multi-page preview path) to the user for review before G4.
+**Hard rule:** Do **not** auto-stitch (or re-stitch) the episode scroll when page images are created or updated. Page-level tile stitch (`{page}-a` + `{page}-b` → `{page}.png`) is part of Phase 1; episode-scroll stitch is a separate, explicit step.
+
+1. Prerequisites: every page has a final `{page}.png` (from tile stitch on the default path, or the Pro single frame).
+2. Run this phase **only on explicit user request** (e.g. “스크롤 스티치해줘”, “episode-scroll 만들어줘”) after page images for the episode are complete — never as a side effect of regenerating a page.
+3. On request, concatenate page PNGs **top → bottom** into:
+   - `images/{nnn}-{episode-slug}/{nnn}-{episode-slug}.png`
+4. Optionally resize the scroll (or each page) to **target width** (**768px** default, or overview lock) while preserving aspect.
+5. If the user/portal needs split upload files, export additional slices (e.g. max height ~1280px) **without changing art** — document slice boundaries next to the files if useful.
+6. Show the stitched scroll to the user for review before G4.
+
+If an existing `{nnn}-{episode-slug}.png` is stale after page edits: leave it, note that it is out of date, and re-stitch **only** when the user asks again.
 
 If stitch reveals a **design** problem (wrong cut order, missing beat): rollback to Stage ② — do not “fix” in stitch.
 
@@ -289,7 +299,7 @@ If stitch reveals a **design** problem (wrong cut order, missing beat): rollback
    - regenerate only the affected image(s) with stronger guide tokens in YAML
    - do not change locked story/text
    - max 2 retries per image
-   - re-stitch if pages changed
+   - do **not** auto re-stitch the episode scroll — mark it stale if it exists; re-run Phase 2 only on explicit user request
 4. If inconsistencies indicate a **Design gap** (including incomplete `illustration-guide.md`):
    - rollback to Stage ②
    - re-evaluate and regenerate affected assets
@@ -301,7 +311,7 @@ If stitch reveals a **design** problem (wrong cut order, missing beat): rollback
 Confirm with user:
 1. All reference images — quality acceptable? Style matches `illustration-guide.md`?
 2. All page images — tiles stitched; cuts, balloons, captions faithful to lock (exact text; no CUT/panel labels); **lettering/chrome consistent across pages**?
-3. Episode scroll — continuous vertical read feels right?
+3. Episode scroll — continuous vertical read feels right? (only if user requested Phase 2 stitch)
 4. Final result in `output/{webtoon-slug}-final/` — ready to deliver?
 
 **Do not deliver until G4 is approved.**

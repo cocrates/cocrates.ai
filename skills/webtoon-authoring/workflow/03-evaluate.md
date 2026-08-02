@@ -21,8 +21,8 @@ For each `episodes/{nnn}-{episode-slug}.md`:
    - **`illustration-guide.md` exists** with art style + vertical chrome + balloon/caption typography sections (missing or empty → ❌)
    - **Flat cut schema only:** zero matches for `###### Cut story`, `###### Composition`, `###### Illustration guide`, `###### Balloons`, `###### Captions`, `###### Gutter` (and hybrids that nest Balloons/Gutter under Illustration guide)
    - Every cut field uses `- **Field:**` with colon **inside** bold (reject `**Field**:` and bare `- Location:`)
-   - Every `##### Cut` has required fields present: Cut story, Purpose/Size class/Height/Shape, Staging, Characters, Location, Direction, Balloons, Captions, Gutter (values may be `없음`)
-   - Balloon/caption tables (when not `없음`) use 2-space indent under the field
+   - Every `##### Cut` has required fields present: Cut story, Purpose/Size class/Height/Shape, Staging, Characters, Location, Direction, Balloons, Captions, Gutter (values may be `none`)
+   - Balloon/caption tables (when not `none`) use 2-space indent under the field
    - **Size class ↔ Height:** standard ≈400–600px; tall/long ≥1,200px; compact &lt;400px sparingly — contradiction is ❌ (`workflow/cut-composition.md`)
    - **Cast roster:** episode `**Characters:**` list ↔ union of cut `- **Characters:**` (ghost = roster without on-cut and without mention tag → ❌; on-cut missing from roster → ❌). Mention-only must be tagged `(언급)` (or equivalent)
    - **Page / cut counts:** Craft Notes page count == measured `### Page` headings; cut count == measured `##### Cut` headings
@@ -47,10 +47,10 @@ For each `episodes/{nnn}-{episode-slug}.md`:
      - size classes vary with drama (not flat unless intentional)
 
 4. Check **Reference Model Integrity** (see `workflow/reference-models.md`):
-   - Characters: each cut’s state (or base) is in catalogs; **identity gear** (weapon/outfit/accessories) does not silently swap; expression/mood/pose only in Direction
-   - Locations: each cut’s location + position + view (+ state) is in catalogs; state only for lasting **set** change; time/season/weather are cut direction
-   - Stagings: every multi-cut ensemble with fixed seating/formation cites a staging; cast states + location anchor match the staging file; planned ref views listed
-   - Cuts in a staging span do not reseat characters without a Design update
+   - Characters: each cut’s state (or base) is in catalogs; **identity gear** does not silently swap; co-cast **visual contrast**; taxonomy obeyed; expression only in Direction
+   - Locations: every `- **Location:**` is a **catalog path** `slug / position / view (state)` — **no free text**; path ∈ Scene List; location PNG neutral (no weather/time); off-frame architecture not prompted
+   - Stagings: mandatory rule (§4) — multi-cut ensemble cannot use `Staging: none`; header binds catalog character states + location path; **establishing** default (no OTS/CU as staging refs); cast/location cross-verify
+   - Cuts in a staging span do not reseat without Design update; situation environment on staging when span-locked
 
 5. Check **Scene Continuity & Visual Consistency**:
    - Continuous cut/page runs keep the same character state / location scene / state / staging blocking
@@ -88,7 +88,7 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 | `illustration-guide.md` present (art + chrome + balloon/caption typography) | ✅ / ⚠️ / ❌ | {file} |
 | Flat cut schema only (no `######` cut subsections / hybrid nesting) | ✅ / ⚠️ / ❌ | {file / line} |
 | Field notation `- **Field:**` (colon inside bold) | ✅ / ⚠️ / ❌ | {page.cut} |
-| Required cut fields present (incl. Characters/Captions/Shape; `없음` OK) | ✅ / ⚠️ / ❌ | {page.cut} |
+| Required cut fields present (incl. Characters/Captions/Shape; `none` OK) | ✅ / ⚠️ / ❌ | {page.cut} |
 | Balloon/caption tables 2-space indented when present | ✅ / ⚠️ / ❌ | {page.cut} |
 | Size class ↔ Height ranges agree | ✅ / ⚠️ / ❌ | {page.cut} |
 | Cast roster ↔ cut Characters (no ghosts; mention-only tagged) | ✅ / ⚠️ / ❌ | {roster vs cuts} |
@@ -122,25 +122,29 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 | Every cut names character state (or base) | ✅ / ⚠️ / ❌ | {page.cut + character-slug} |
 | State is lasting body + outfit/identity gear only | ✅ / ⚠️ / ❌ | {page.cut} |
 | Identity gear does not silently swap across cuts | ✅ / ⚠️ / ❌ | {page.cut range} |
+| Co-appearing majors have ≥2-axis visual contrast + ID keywords | ✅ / ⚠️ / ❌ | {characters} |
+| World taxonomy obeyed (when defined) | ✅ / ⚠️ / ❌ / n/a | {world-bible vs Direction} |
 | Expression/mood/pose only in cut guide | ✅ / ⚠️ / ❌ | {page.cut} |
 
 ### 3.2 Location reference model (= set/stage)
 | Check | Result | Evidence |
 |-------|--------|----------|
-| Every cut names location + position + view | ✅ / ⚠️ / ❌ | {page.cut} |
+| Every cut Location is catalog path (no free text) | ✅ / ⚠️ / ❌ | {page.cut} |
+| Path ∈ Scene List (position × view × state) | ✅ / ⚠️ / ❌ | {page.cut} |
 | Location state only for lasting set change | ✅ / ⚠️ / ❌ | {page.cut} |
-| Time/season/weather/camera mood are cut direction | ✅ / ⚠️ / ❌ | {page.cut} |
+| Location refs are neutral (no weather/time baked in) | ✅ / ⚠️ / ❌ | {location YAML/PNG notes} |
+| Span environment on staging; one-off on Direction | ✅ / ⚠️ / ❌ | {page.cut / staging} |
 | Continuous scenes keep position/view/state consistent | ✅ / ⚠️ / ❌ | {page range} |
 
 ### 3.3 Staging reference model (= continuing-situation continuity)
 | Check | Result | Evidence |
 |-------|--------|----------|
-| Each continuing situation with fixed placement has a staging | ✅ / ⚠️ / ❌ | {café/OR/meeting/dinner span + staging-slug} |
-| Staging has Situation props / table dressing map when shared objects exist | ✅ / ⚠️ / ❌ | {staging file} |
-| Staging has 2–3 planned ref views (blocking + props visible) | ✅ / ⚠️ / ❌ | {staging file} |
+| Mandatory staging rule satisfied (`none` only when allowed) | ✅ / ⚠️ / ❌ | {multi-cut ensemble spans} |
+| Header binds catalog character states + location path | ✅ / ⚠️ / ❌ | {staging file} |
+| Props / ambient / situation environment maps when needed | ✅ / ⚠️ / ❌ | {staging file} |
+| Canonical establishing only by default (no OTS/CU staging refs) | ✅ / ⚠️ / ❌ | {staging file} |
 | Cuts cite staging + matching cast/location | ✅ / ⚠️ / ❌ | {page.cut} |
-| No L/R flip, seat shuffle, or OR station drift without Design reseat | ✅ / ⚠️ / ❌ | {page.cut range} |
-| No wholesale food/menu/prop teleport across cuts in the same staging | ✅ / ⚠️ / ❌ | {page.cut range} |
+| No L/R flip, seat shuffle, or prop teleport without Design | ✅ / ⚠️ / ❌ | {page.cut range} |
 
 ### 3.4 Direction Completeness
 | Check | Result | Evidence |
