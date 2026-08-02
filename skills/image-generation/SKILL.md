@@ -48,7 +48,7 @@ A Forward
   5 Revise            update YAML; keep fields consistent; regenerate if needed
 
 B From existing media (understand → YAML → regenerate)
-  analyze image → draft message/design from findings → Write YAML (refs source)
+  analyze image and/or its generation YAML → draft message/design → Write YAML (refs source)
   → review/approve → Generate → Review / Revise as in A
 ```
 
@@ -62,15 +62,20 @@ Mark only the MCP block with `# --- cocrates-google-genai ---`.
 
 Default: `images/{slug}.yaml`, `output: "./{slug}.png"` beside it. Relative paths resolve against **that YAML's directory**. Optional series layout: `characters/`, `locations/`.
 
+**`params.references` rule (default YAML):** When the asset was produced from a generation request YAML, list that **`.yaml` / `.yml` / `.json`** path — MCP resolves it to that file’s `output` media. Use a **media file** path only when there is no generation YAML (raw photo, stock, export without a request file). Prefer YAML so generate and analyze share the same contract graph.
+
 ---
 
 ## Understand & revise from media
 
 When the user asks to interpret / analyze / evaluate / Q&A an **existing** image (not only a just-generated one):
 
-1. **Analyze** — MCP `analyze` with `inputs: [image path|URL]` and a prompt for the user’s question (description, critique, fidelity, Q&A). Present `{ text, interactionId }`. Follow up with `continue_interaction` as needed.
+1. **Analyze** — MCP `analyze`:
+   - Prefer `inputs: [generation YAML]` when one exists (MCP loads that YAML’s `output` media, inlines the request + referenced YAMLs recursively; `prompt` optional — server adds a default fidelity checklist).
+   - Else `inputs: [image path|URL]` with a non-empty prompt for the user’s question.
+   Present `{ text, interactionId }`. Follow up with `continue_interaction` as needed.
 2. **Material for YAML** — from the analysis (and user intent), draft `message` + `design` (keep/change vs source). Confirm with the user before locking.
-3. **Write YAML** — full request YAML; cite the source image in `design` and, when editing in place, in `params.references` as a ref. Prefer a new slug or explicit overwrite path.
+3. **Write YAML** — full request YAML; cite the source in `design` and, when editing in place, in `params.references` (prefer source **YAML** if it exists; else the media file). Prefer a new slug or explicit overwrite path.
 4. **Review / approve** → **Generate** → **Review / Revise** (Phases 2–5).
 
 Do not skip the YAML gate: analysis text alone is not a generation contract. Apply only user-agreed edits into YAML before regenerate.
@@ -115,7 +120,7 @@ Agree in chat (then encode in YAML `design`) — **shape the approved message in
 | Style / lighting / mood | Medium, light quality, tone |
 | On-image text | Exact strings, placement |
 | Format | Model (Flash/Pro), size, aspect |
-| Refs | Source YAML or files; what to keep vs change |
+| Refs | Prefer source **YAML** paths (else media); what to keep vs change |
 
 **Fit test:** From the design brief alone, could you sketch the picture? Does every design choice serve `message`? Thin briefs (subject + style only) are not enough.
 
@@ -165,7 +170,7 @@ User-facing picture brief in the user's language — primary YAML review object.
 | `type` | `image` |
 | `model` | `gemini-3.1-flash-image` (default) or `gemini-3-pro-image` |
 | `params.prompt` | English prompt derived from `design` |
-| `params.references` | Ordered `{path, type?}` refs (**image only**; omit `type` or set `image`) |
+| `params.references` | Ordered `{path, type?}` — **prefer generation YAML**; else image media (`type` omit/`image`) |
 | `params.size` / `aspectRatio` / `seed` | Format |
 | `output` | Default `./{slug}.png` |
 
@@ -177,14 +182,15 @@ Recommend Pro for brand/text/layout fidelity or complex multi-character work. Do
 
 - Prompt: subject → action → setting → composition → style → lighting → details → on-image text; concrete English; ~100–250 words.
 - Bind refs with `the provided image` or `Image 1` / `Image 2` … matching `params.references` order; names only after binding.
-- Resolve YAML-sourced refs via source `output` → verify on disk → path relative to **this** YAML; if missing, search and get user approval before locking.
+- **Default path = YAML:** if `a.yaml` produced `a.png`, put `./a.yaml` (not `./a.png`) in `params.references`. MCP reads that YAML’s `output` and uses the media. Relative paths resolve against **this** YAML’s directory; nested YAML refs resolve against **each** owning YAML’s directory.
+- Preflight: referenced YAML must exist; its `output` media must exist on disk. For raw media refs, the media file must exist. If missing, search and get user approval before locking.
 - Multi-ref: ref map → SCENE → optional TEXT OVERLAY. Max ~14 refs (Nano Banana 2: up to 19).
 
 | Param | Notes |
 |-------|-------|
 | `size` | `0.5K` (Flash only), `1K` (default), `2K`, `4K` |
 | `aspectRatio` | Default `1:1` unless purpose implies otherwise |
-| `references` | Ordered `{path}`; order = `Image N`. **Not** `images` |
+| `references` | Ordered `{path}` — **YAML first**, media only if no YAML; order = `Image N`. **Not** `images` |
 
 ### YAML gate
 
@@ -197,7 +203,7 @@ Present **`design`** (and refs); note model/size/aspect/output. Ask approval; **
 MCP **`cocrates-google-genai`** (GetMcpTools; `mcp_auth` if needed).
 
 1. YAML on disk.
-2. Preflight every `params.references[].path` against **this YAML's directory**; on fail, stop and ask — do not `generate`.
+2. Preflight every `params.references[].path` against **this YAML's directory** (YAML refs → file exists; MCP also requires that YAML’s `output` media on disk); on fail, stop and ask — do not `generate`.
 3. `generate` with `filePath` → report `files` (or `download` if background).
 
 Then Phase 4.
@@ -210,11 +216,11 @@ Then Phase 4.
 
 **Optional AI analyze** — only on explicit request (e.g. *analyze*, *evaluate*, *AI review*, *평가해줘*). Never auto-run after generate. *(Architect / automation agents that remapped this gate: always run analyze with the checklist below.)*
 
-1. Resolve the artifact path from YAML `output` (relative to the YAML directory); verify on disk. Prefer an absolute path (or a path valid against the MCP process CWD).
+1. Prefer analyzing via the **request YAML** (MCP loads `output` media and recursively includes referenced YAMLs). Verify the YAML and its `output` on disk. Optionally add extra media paths if the user wants a side-by-side compare (1–10 `inputs` total; at most one generation YAML).
 2. Call MCP **`analyze`**:
-   - `inputs`: `[artifact path]` plus **reference images used in the YAML** when present (location/character/staging) so geometry can be compared (1–10 total).
+   - `inputs`: `[this request YAML]` (preferred) — or `[artifact path]` (+ optional media) when there is no YAML / raw-media Q&A. Do **not** also list YAML refs as separate media; the server walks `params.references` YAML paths.
    - `model`: omit unless the user overrides (default `gemini-3.5-flash`)
-   - `prompt`: evaluation brief in the **user's language**, grounded in approved `message` + `design` (and `summary` if present). **Quote** camera/POV, must-show, and must-hide/occlusion constraints from `design` — do not rely on a vague “evaluate this image.” Ask for a structured report covering **all** of:
+   - `prompt`: optional when a generation YAML is in `inputs` (server adds a default fidelity checklist). When providing one, use the **user's language**, grounded in approved `message` + `design` (and `summary` if present). **Quote** camera/POV, must-show, and must-hide/occlusion constraints from `design` — do not rely on a vague “evaluate this image.” Ask for a structured report covering **all** of:
      1. **Intent fit** — does the image match the designed intent (`design` / prompt realization)?
      2. **Message delivery** — is `message` (story/beats) clearly conveyed?
      3. **Spatial geometry (mandatory when the design implies place/camera)** — each item **PASS/FAIL + visual evidence**:
@@ -250,10 +256,10 @@ message: |
   짧은 화면 속 글이 어린 독자를 위한 대사 비트를 나른다.
 
 design: |
-  참조 (params.references 순서):
-  1. characters/hero-adventure.yaml → ./characters/hero-adventure.png — 영웅 외형/복장 유지
-  2. characters/sidekick.yaml → ./characters/sidekick.png — 조수 외형 유지
-  3. locations/plaza-peaceful.yaml → ./locations/plaza-peaceful.png — 광장 유지
+  참조 (params.references 순서 — YAML; MCP가 각 output 미디어 사용):
+  1. ./characters/hero-adventure.yaml — 영웅 외형/복장 유지
+  2. ./characters/sidekick.yaml — 조수 외형 유지
+  3. ./locations/plaza-peaceful.yaml — 광장 유지
   장면: 조수가 영웅에게 달려감; 영웅은 놀람; 먼지/위험. 텍스트 오버레이. 4:3, 1K.
 
 # --- cocrates-google-genai ---
@@ -268,9 +274,9 @@ params:
     from image 2 in the plaza from image 3. Soft digital painting, pastel outlines.
     TEXT OVERLAY: short narration/dialogue without covering faces.
   references:
-    - path: "./characters/hero-adventure.png"
-    - path: "./characters/sidekick.png"
-    - path: "./locations/plaza-peaceful.png"
+    - path: "./characters/hero-adventure.yaml"
+    - path: "./characters/sidekick.yaml"
+    - path: "./locations/plaza-peaceful.yaml"
   size: 1K
   aspectRatio: "4:3"
   seed: null
@@ -287,5 +293,6 @@ output: "./page04.png"
 - Defaulting `message` / `design` / `title` to English when the user writes in another language
 - Inconsistent `design` / prompt / `references`; non-English prompt
 - Using `params.images` (removed — use `params.references`)
+- Preferring media paths in `params.references` when a generation YAML exists (use the YAML)
 - Guessing ref paths; generate after failed preflight
 - Inventing unrequested content; ignoring refs; Flash-only options on Pro

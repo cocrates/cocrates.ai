@@ -48,7 +48,7 @@ A Forward
   5 Revise            update YAML; keep fields consistent; regenerate if needed
 
 B From existing media (understand → YAML → regenerate)
-  analyze video → draft message/design from findings → Write YAML (refs source)
+  analyze video and/or its generation YAML → draft message/design → Write YAML (refs source)
   → review/approve → Generate → Review / Revise as in A
 ```
 
@@ -62,15 +62,20 @@ Mark only the MCP block with `# --- cocrates-google-genai ---`.
 
 Default: `videos/{slug}.yaml`, `output: "./{slug}.mp4"` beside it. Relative paths resolve against **that YAML's directory**.
 
+**`params.references` rule (default YAML):** When the asset was produced from a generation request YAML, list that **`.yaml` / `.yml` / `.json`** path — MCP resolves it to that file’s `output` media (and infers Omni task from the resolved media types). Use a **media file** path only when there is no generation YAML. Prefer YAML so generate and analyze share the same contract graph.
+
 ---
 
 ## Understand & revise from media
 
 When the user asks to interpret / analyze / evaluate / Q&A an **existing** video:
 
-1. **Analyze** — MCP `analyze` with `inputs: [video path|URL]` (YouTube/http allowed when public) and a prompt for the user’s question. Present `{ text, interactionId }`. Follow up with `continue_interaction` as needed.
+1. **Analyze** — MCP `analyze`:
+   - Prefer `inputs: [generation YAML]` when one exists (MCP loads that YAML’s `output` clip and inlines referenced YAMLs; `prompt` optional).
+   - Else `inputs: [video path|URL]` (YouTube/http allowed when public) with a prompt for the user’s question.
+   Present `{ text, interactionId }`. Follow up with `continue_interaction` as needed.
 2. **Material for YAML** — from the analysis (and user intent), draft `message` + `design` (motion, shot plan, audio, keep/change). Confirm before locking.
-3. **Write YAML** — full request YAML; cite the source in `design` and in `params.references` when using it as first frame / style / edit ref.
+3. **Write YAML** — full request YAML; cite the source in `design` and in `params.references` when using it as first frame / style / edit ref (**prefer source YAML** if it exists; else media).
 4. **Review / approve** → **Generate** → **Review / Revise** (Phases 2–5).
 
 Do not skip the YAML gate. Apply only user-agreed edits into YAML before regenerate.
@@ -116,7 +121,7 @@ Agree in chat (then encode in YAML `design`) — **shape the approved message in
 | Setting / light / mood | Place, environment motion, lighting, tone |
 | Audio | Music, ambience, dialogue, or `No dialogue` |
 | Timing | Beats / cuts aligned with duration (e.g. `[0-3s]…`) |
-| Refs & roles | First frame vs subject/style refs; source paths |
+| Refs & roles | First frame vs subject/style refs; prefer source **YAML** paths (else media) |
 | Format | `durationSeconds`, `aspectRatio` (`16:9` / `9:16`); Omni `task` is inferred from refs (do not put `params.task` in YAML) |
 
 **Fit test:** From the design brief alone, could you storyboard the clip second-by-second (motion + camera + audio)? Does every design choice serve `message`?
@@ -166,7 +171,7 @@ User-facing motion brief in the user's language — primary YAML review object. 
 | `type` | `video` |
 | `model` | `gemini-omni-flash-preview` |
 | `params.prompt` | English motion prompt from `design` |
-| `params.references` | Ordered `{path, type?}` refs (`image` / `video` / `audio`) |
+| `params.references` | Ordered `{path, type?}` — **prefer generation YAML**; else `image` / `video` / `audio` media |
 | `params.durationSeconds` | e.g. `8` |
 | `params.aspectRatio` | `"16:9"` or `"9:16"` |
 | `params.seed` | `null` or int |
@@ -179,7 +184,7 @@ User-facing motion brief in the user's language — primary YAML review object. 
 ### Prompt & references
 
 - Prompt: subject → action over time → setting motion → camera → light/mood → **shot plan** → audio → timing/text → in-prompt avoidances (`No dialogue`). Say `single continuous shot` when needed (Omni often prefers multi-shot). Edits: short + `Keep everything else the same`.
-- Resolve refs like image-generation (source YAML `output`, verify, search + approve if moved).
+- **Default path = YAML:** if `cafe-portrait.yaml` produced `cafe-portrait.png`, put `./cafe-portrait.yaml` in `params.references` (not the `.png`). MCP resolves to that YAML’s `output`. Relative paths resolve against **this** YAML’s directory; nested YAML refs against each owning YAML’s directory. Raw media only when no generation YAML exists.
 - Bind with `<FIRST_FRAME>`, `<IMAGE_REF_0>`… and/or `Image N` + explicit role. Max ~10 refs via `params.references`.
 
 ### YAML gate
@@ -190,7 +195,7 @@ Present **`design`**; note duration/aspect/output (and inferred task from refs);
 
 ## Phase 3 — Generate
 
-MCP **`cocrates-google-genai`**. Preflight `params.references` against this YAML's directory; on fail do not generate. Then `generate` / `download`. Do not treat empty `files` as success.
+MCP **`cocrates-google-genai`**. Preflight `params.references` against this YAML's directory (YAML refs → file + its `output` media; media refs → file); on fail do not generate. Then `generate` / `download`. Do not treat empty `files` as success.
 
 Do not promise: audio-ref upload, extension/interpolation, or a separate negative-prompt field.
 
@@ -204,11 +209,11 @@ Then Phase 4.
 
 **Optional AI analyze** — only on explicit request (e.g. *analyze*, *evaluate*, *AI review*, *평가해줘*). Never auto-run after generate.
 
-1. Resolve the artifact path from YAML `output` (relative to the YAML directory); verify on disk. Prefer an absolute path (or a path valid against the MCP process CWD).
+1. Prefer analyzing via the **request YAML** (MCP loads `output` clip and recursively includes referenced YAMLs). Verify the YAML and its `output` on disk. Optionally add first-frame/ref media if the user wants a comparison (1–10 `inputs`; at most one generation YAML).
 2. Call MCP **`analyze`**:
-   - `inputs`: `[artifact path]` (1–10; may include first-frame/refs if the user wants a comparison)
+   - `inputs`: `[this request YAML]` (preferred) — or `[artifact path]` when there is no YAML / raw-video Q&A
    - `model`: omit unless the user overrides (default `gemini-3.5-flash`)
-   - `prompt`: evaluation brief in the **user's language**, grounded in approved `message` + `design` (and `summary` if present). Ask for a structured report covering **all** of:
+   - `prompt`: optional when a generation YAML is in `inputs`. When providing one, use the **user's language**, grounded in approved `message` + `design` (and `summary` if present). Ask for a structured report covering **all** of:
      1. **Intent fit** — does the clip match the designed motion intent (`design` / shot plan / camera / audio)?
      2. **Message delivery** — is `message` (story/beats over time) clearly conveyed?
      3. **Functional** — missing motion, wrong task/ref roles, dialogue/music errors, duration/aspect issues
@@ -237,7 +242,7 @@ message: |
   나레이션이 아니라, 장면이 사람이 있는 것처럼 느껴져야 한다.
 
 design: |
-  참조: ./cafe-portrait.png를 시작 프레임. 신원·프레이밍 유지.
+  참조: ./cafe-portrait.yaml을 시작 프레임 (YAML → output PNG). 신원·프레이밍 유지.
   모션: 제스처, 미소 비트, 라떼 물방울. 단일 연속 미디엄 샷.
   로파이 카페 BGM; 대사 없음. 8초, 16:9.
 
@@ -252,7 +257,7 @@ params:
     iced latte. Warm window light; subtle handheld medium shot. Sound: soft
     lo-fi cafe music, distant cups. No dialogue.
   references:
-    - path: "./cafe-portrait.png"
+    - path: "./cafe-portrait.yaml"
       type: image
   durationSeconds: 8
   aspectRatio: "16:9"
@@ -271,5 +276,6 @@ output: "./cafe-call.mp4"
 - Still captions without motion/camera/audio; vague `make it move`
 - Guessing ref paths; failed preflight; aspect ratios other than `16:9` / `9:16`
 - Inventing unrequested cast/cuts/dialogue/music; mis-tagging first frame vs ref
+- Preferring media paths in `params.references` when a generation YAML exists (use the YAML)
 - Putting `params.task` in YAML (ignored; task is inferred from references only)
 - Using `params.images` (removed — use `params.references`)

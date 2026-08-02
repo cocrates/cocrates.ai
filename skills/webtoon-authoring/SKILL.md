@@ -13,10 +13,10 @@ description: >-
   images via the image-generation skill; stitches pages into one long episode
   scroll. Webtoon structure is **series → episode → page → cut**; location
   consistency uses **location → position → view → state**; multi-cut
-  seating/formation continuity uses **stagings**. Page width is fixed (690px);
-  height varies by cut layout. For children's picture books with fixed-size
-  pages, use picture-book-authoring; for long-form prose fiction, use
-  novel-authoring; for a standalone image, use image-generation.
+  seating/formation continuity uses **stagings**. Page width is fixed (768px
+  default); height varies by cut layout. For children's picture books with
+  fixed-size pages, use picture-book-authoring; for long-form prose fiction,
+  use novel-authoring; for a standalone image, use image-generation.
 metadata:
   agent: cocrates
 ---
@@ -31,7 +31,7 @@ Generate complete vertical-scroll webtoons — from concept through design, eval
 |---|---|---|
 | Reading | Page turn | Vertical scroll |
 | Episode output | Separate fixed-size pages | Pages stitched into **one long vertical image** |
-| Page size | Uniform | **Width fixed (690px); height variable** |
+| Page size | Uniform | **Width fixed (768px default); height variable** |
 | Unit of art | Full-page illustration | **Cuts (panels)** with gutters between them |
 | Text | Narration/dialogue as page overlay | **Speech balloons** + optional **narration/caption** |
 | Color | Style-dependent | **Color by default** (smartphone display) |
@@ -121,7 +121,7 @@ All webtoon artifacts are authored under `{project-root}/`:
 │       ├── {00}.yaml
 │       ├── {00}.png
 │       ├── ...
-│       └── episode-scroll.png          # pages stitched top→bottom
+│       └── episode-scroll.png          # pages stitched top→bottom (user-requested only)
 └── output/
     └── {webtoon-slug}-final/
 ```
@@ -136,14 +136,14 @@ series → episode → page → cut
 |------|------|
 | **Series** | Episode list / overall arc (`series.md`) |
 | **Episode** | Generation & evaluation unit; ultimately **one long vertical scroll image** |
-| **Page** | Variable-height strip segment (fixed width 690px); several pages concatenate into the episode scroll |
+| **Page** | Variable-height strip segment (fixed width **768px** default); several pages concatenate into the episode scroll |
 | **Cut** | Panel inside a page; art + balloons + optional narration; gutters between cuts |
 
 **Canvas defaults** (portal-oriented; confirm with user / target portal):
 
 | Spec | Default | Notes |
 |------|---------|--------|
-| Width | **690–800px** | Lock exact width in `overview.md` (690 common; some portals ~760–800; ~1080 only if required) |
+| Width | **768px** | Default; lock exact width in `overview.md` (690–800 common portal range; ~1080 only if required) |
 | Height | **Variable** | Sum of cut heights + gutters; not a fixed page size |
 | Cut height classes | See `workflow/cut-composition.md` | standard ~400–600px; tall/long ~1,200–2,000px+; action = open/diagonal + tight gutters |
 | Gutter classes | See `workflow/cut-composition.md` | normal ~150–300px; pause ~500–1,000px+ for silence/time |
@@ -166,7 +166,7 @@ Upload portals often split tall files (e.g. max ~1280px height per file). Design
 | **① Define** | Define what webtoon to create; lock Validation Criteria + canvas specs | G1: Overview approval |
 | **② Design** | World, characters, locations, episodes/pages/cuts (story + craft) | G2: Full design approval |
 | **③ Evaluate** | Criteria + craft + **required critic personas** (Target Reader first); revise design if needed | G3: Evaluation approval = **story lock** |
-| **④ Generate** | Reference images → page images → stitch episode scroll | G4: Final result approval |
+| **④ Generate** | Reference images → page images → episode-scroll stitch **on user request** | G4: Final result approval |
 
 **Boundary:** Stages ①–③ own story and design. Stage ④ owns image YAML, pixels, and stitch only. Crossing that boundary for story/structure changes requires explicit rollback.
 
@@ -216,7 +216,7 @@ See `workflow/03-evaluate.md`.
 ## Stage 4: Generate
 See `workflow/04-generate.md`.
 
-- Reference images (characters/locations/**stagings**) → page images (cuts + balloons + narration) → episode vertical stitch — **every YAML applies `illustration-guide.md`**
+- Reference images (characters/locations/**stagings**) → page images (cuts + balloons + narration) → episode-scroll stitch **only on explicit user request** after pages are complete — **every YAML applies `illustration-guide.md`**
 - Each image YAML requires explicit user approval before generate
 - G4: Do not deliver final output without user approval
 
@@ -255,7 +255,8 @@ See `workflow/04-generate.md`.
 - **Inventing per-page balloon fonts, caption boxes, or panel chrome** not defined in `illustration-guide.md`
 - Omitting the mandatory **IMPORTANT** block from page-image YAML `design` (exact balloon text; cut order; clear gutters; no CUT/panel labels; smartphone vertical reading)
 - Using **`gemini-3.1-flash-image` with `2K` + `1:8`** for pages with balloons/captions (use default Flash + `1K` + `9:16` tiles, or Pro + `2K` + `1:8` when a single tall frame is required)
-- Delivering an episode without stitching approved pages into the episode scroll (unless user explicitly wants pages only)
+- Delivering an episode without stitching approved pages into the episode scroll when the user has requested it (pages-only delivery is fine until then)
+- **Auto-stitching or re-stitching `episode-scroll.png` whenever page images change** — run Phase 2 only on explicit user request after page images are complete
 - **Nested cut subsections (`###### Cut story`, `###### Composition`, `###### Illustration guide`, `###### Balloons`, …)** — canonical episode cut schema is flat `- **Field:**` lists under `##### Cut {n}` only (see `workflow/02-design.md`)
 - **Omitting required cut fields** when empty (establishing shots still need `- **Characters:** 없음 …`; Captions/Balloons/Staging always present, value may be `없음`)
 - **Ghost cast** — listing a character in the episode roster without on-cut appearance or an explicit mention-only tag
@@ -280,6 +281,6 @@ See `workflow/04-generate.md`.
 - G3 story lock approved
 - All reference images generated and approved with explicit user confirmation (Phase 0: characters, locations, stagings)
 - All page images generated with balloons/narration and approved with explicit user confirmation (Phase 1) — each YAML applying `illustration-guide.md`
-- Episode scroll stitched and reviewed (Phase 2)
+- Episode scroll stitched and reviewed (Phase 2) — **only after explicit user request**; not as a side effect of page edits
 - Consistency review completed (Phase 3)
 - Final assembly approved by user (G4)

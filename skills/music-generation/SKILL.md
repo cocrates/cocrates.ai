@@ -51,7 +51,7 @@ A Forward
   5 Revise            update YAML; keep fields consistent; regenerate if needed
 
 B From existing media (understand → YAML → regenerate)
-  analyze audio (and/or reuse prior speech/audio analysis)
+  analyze audio and/or its generation YAML (or reuse prior speech/audio analysis)
   → draft message/design (+ lyrics) → Write YAML → review/approve
   → Generate → Review / Revise as in A
 ```
@@ -66,15 +66,20 @@ Mark only the MCP block with `# --- cocrates-google-genai ---`.
 
 Default: `music/{slug}.yaml`, `output: "./{slug}.mp3"` beside it. Optional `lyricsOutput: "./{slug}.lyrics.txt"`. Relative paths resolve against **that YAML's directory**. Refs: e.g. `music/refs/…`.
 
+**`params.references` rule (default YAML):** Mood refs are **images**. When a mood image was produced from a generation YAML, list that **`.yaml`** path — MCP resolves it to the YAML’s `output` image. Use a **media file** only when there is no generation YAML (raw photo/stock). Prefer YAML so generate and analyze share the same contract graph.
+
 ---
 
 ## Understand & revise from media
 
 When the user asks to interpret / analyze / evaluate existing **music or audio** to make or revise a track ([audio understanding](https://ai.google.dev/gemini-api/docs/audio) — mood, instruments, non-verbal texture, structure, lyrics):
 
-1. **Analyze** — MCP `analyze` with `inputs: [audio path|URL]` (or reuse findings from a prior speech-generation analysis). Prompt for genre/mood/structure/lyrics as needed. Present `{ text, interactionId }`.
+1. **Analyze** — MCP `analyze`:
+   - Prefer `inputs: [generation YAML]` when revising a prior Lyria request (MCP loads that YAML’s `output` audio and inlines referenced YAMLs; `prompt` optional).
+   - Else `inputs: [audio path|URL]` (or reuse findings from a prior speech-generation analysis) with a prompt for genre/mood/structure/lyrics as needed.
+   Present `{ text, interactionId }`.
 2. **Material for YAML** — draft `message` + `design` (+ `lyrics` if sung). Confirm keep/change vs source before locking.
-3. **Write YAML** — full Lyria request; cite the source in `design` (Lyria has no audio-ref edit — encode the desired sound in prompt/lyrics; optional mood **references** images only).
+3. **Write YAML** — full Lyria request; cite the source in `design` (Lyria has no audio-ref edit — encode the desired sound in prompt/lyrics; optional mood **references** — prefer image **YAML** when available, else media).
 4. **Review / approve** → **Generate** → **Review / Revise**.
 
 If the primary deliverable is revised **spoken TTS**, use **speech-generation** instead. Do not skip the YAML gate.
@@ -120,7 +125,7 @@ Agree in chat (then encode in YAML `design`) — **shape the approved message in
 | Vocals | Instrumental only vs sung; lyric language |
 | Structure | `[Verse]` / `[Chorus]` / … and/or `[m:ss - m:ss]` (esp. Pro) |
 | Lyrics | User-supplied (→ `params.lyrics`) vs model-written theme |
-| Images | Up to **10** mood refs via `params.references`; how they inspire the sound |
+| Images | Up to **10** mood refs via `params.references` — prefer image **YAML**, else media; how they inspire the sound |
 | Format | `mp3` (default) or `wav` (mainly Pro) |
 
 **Defaults:** unclear / loop / preview → **Clip**; full song, multi-section custom lyrics, detailed timeline → **Pro**. Recommend Clip first to lock the brief, then upgrade.
@@ -170,7 +175,7 @@ User-facing music brief in the user's language — primary YAML review object. *
 | `model` | `lyria-3-clip-preview` or `lyria-3-pro-preview` |
 | `params.prompt` | English musical direction from `design` (+ timeline if Pro) |
 | `params.lyrics` | Optional section-tagged custom lyrics |
-| `params.references` | Ordered `{path}` mood image refs (max 10; **image only**) |
+| `params.references` | Ordered `{path}` mood image refs (max 10; **prefer YAML**, else image media) |
 | `params.outputFormat` | `mp3` (default) or `wav` |
 | `params.lyricsOutput` | Optional path for returned lyrics/structure text |
 | `output` | Default `./{slug}.mp3` (or `.wav`) |
@@ -184,7 +189,7 @@ User-facing music brief in the user's language — primary YAML review object. *
 - Custom lyrics → `params.lyrics` with `[Verse 1]`, `[Chorus]`, … — not unlabeled prose dumped into `prompt`.
 - Non-English sung lyrics: write **prompt in that language** so pronunciation matches.
 - Clip may say “30-second” but output is **always** 30s.
-- Resolve image paths against this YAML’s directory; verify on disk; search + user approve if moved.
+- Resolve ref paths against this YAML’s directory; for YAML refs, that YAML’s `output` image must exist; for raw media, the file must exist; search + user approve if moved.
 - Music-ready test: could a producer recreate from the prompt alone?
 
 ### YAML gate
@@ -198,7 +203,7 @@ Present **`design`**; note Clip vs Pro, vocals/lyrics, references, format/output
 MCP **`cocrates-google-genai`** (GetMcpTools; `mcp_auth` if needed).
 
 1. YAML on disk (`type: music`).
-2. Preflight every `params.references[].path` against **this YAML's directory**; on fail, stop and ask — do not `generate`.
+2. Preflight every `params.references[].path` against **this YAML's directory** (YAML refs → file + its `output` image; media refs → file); on fail, stop and ask — do not `generate`.
 3. `generate` with `filePath` → report `files` (audio; plus lyrics file if `lyricsOutput` set). Do not treat empty `files` as success.
 
 Lyria is **single-turn** — do not rely on `continue_interaction` to “fix the chorus”; revise the YAML instead.
@@ -213,11 +218,11 @@ Then Phase 4.
 
 **Optional AI analyze** — only on explicit request (e.g. *analyze*, *evaluate*, *AI review*, *평가해줘*). Never auto-run after generate.
 
-1. Resolve the artifact path from YAML `output` (relative to the YAML directory); verify on disk. Prefer an absolute path (or a path valid against the MCP process CWD).
+1. Prefer analyzing via the **request YAML** (MCP loads `output` audio and recursively includes referenced YAMLs). Verify the YAML and its `output` on disk. Optionally add mood images if the user wants a comparison (1–10 `inputs`; at most one generation YAML).
 2. Call MCP **`analyze`**:
-   - `inputs`: `[artifact path]` (1–10; may include mood images if the user wants a comparison)
+   - `inputs`: `[this request YAML]` (preferred) — or `[artifact path]` when there is no YAML / raw-audio Q&A
    - `model`: omit unless the user overrides (default `gemini-3.5-flash`)
-   - `prompt`: evaluation brief in the **user's language**, grounded in approved `message` + `design` (and `summary` if present). Ask for a structured report covering **all** of:
+   - `prompt`: optional when a generation YAML is in `inputs`. When providing one, use the **user's language**, grounded in approved `message` + `design` (and `summary` if present). Ask for a structured report covering **all** of:
      1. **Intent fit** — does the track match the designed musical intent (`design` / genre / groove / vocals / structure)?
      2. **Message delivery** — is `message` (story / purpose / mood arc) clearly conveyed?
      3. **Functional** — wrong Clip/Pro length expectations, missing sections, lyric mishaps, ref misuse
@@ -282,7 +287,8 @@ message: |
   천천히 다가오는 스케일의 정적.
 
 design: |
-  Pro, 참조 기반 인스트루멘탈 앰비언트. 타임라인: 패드 → 드문 퍼커션 →
+  Pro, 참조 기반 인스트루멘탈 앰비언트. 무드 참조: ./refs/desert-sunset.yaml
+  (YAML 없으면 ./refs/desert-sunset.jpg). 타임라인: 패드 → 드문 퍼커션 →
   피크 → 피아노 페이드. mp3.
 
 # --- cocrates-google-genai ---
@@ -297,7 +303,7 @@ params:
     [0:20 - 1:00] Add sparse percussion and rising strings
     [1:00 - 1:30] Peak, then fade to piano alone
   references:
-    - path: "./refs/desert-sunset.jpg"
+    - path: "./refs/desert-sunset.yaml"   # or "./refs/desert-sunset.jpg" if no YAML
   outputFormat: mp3
 output: "./desert-dusk.mp3"
 ```
@@ -326,5 +332,6 @@ output: "./desert-dusk.mp3"
 - Unlabeled custom lyrics mixed into direction; famous-artist voice / copyrighted lyrics
 - Pro-only multi-minute expectations on Clip without warning it stays 30s
 - Claiming in-place conversational edit of a generated file via Lyria follow-up
-- Guessing image paths; >10 reference images; inventing requirements that contradict the brief
+- Guessing ref paths; >10 reference images; inventing requirements that contradict the brief
+- Preferring media paths in `params.references` when a generation YAML exists (use the YAML)
 - Using `params.images` (removed — use `params.references`)
