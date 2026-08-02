@@ -201,9 +201,9 @@ Load Structure Mode from `overview.md` / `series.md`. Chapter List source for Ar
 {Every scene for this episode — mandatory fields per scene. See Key Events rules.}
 
 ##### Scene 1 — {title}
-**POV:** {character} | **Location:** {architecture location} | **When:** {story time or relative (“same evening”)}
+**POV:** {character} | **Location:** {location-slug[+facet] — catalog path, not free text} | **When:** {story time or relative (“same evening”)}
 **On stage:** {characters present}
-**Staging:** {staging-slug or none — required when relative placement must hold across scenes; see `workflow/reference-models.md`}
+**Staging:** {staging-slug or none — mandatory when ≥2 scenes + (≥2 cast or fixture placement); see `workflow/reference-models.md` §4}
 
 - **Situation:** {starting state — one line}
 - **Beat:** {what happens — causal flow, concrete actions; not script}
@@ -590,7 +590,8 @@ Stage ⑤ must **not** invent plot. Confirm:
 - [ ] Every episode has ≥ 1 scene under Key Events
 - [ ] Every scene has: POV | Location | When | On stage | Staging (or none) | Situation | Beat | Turn | Function | Sensory-emotional | Dialogue intent (or none) | Transition out | Est. length
 - [ ] Characters Appearing ↔ On stage union (no ghosts; mention-only tagged)
-- [ ] Continuing situations cite staging; no silent L/R or seat drift (`workflow/reference-models.md`)
+- [ ] Continuing situations cite staging per mandatory rule; no silent L/R or seat drift (`workflow/reference-models.md` §4)
+- [ ] Location cites are catalog paths/facets (no free-text places)
 - [ ] Beats are concrete (actions/events), not mood-only
 - [ ] Scene Transition out → next Situation is intelligible; last episode Out matches Chapter Closing hook
 - [ ] Seeds/Hold and motifs are placeable from scene fields (or optional Seed/Motif touch)

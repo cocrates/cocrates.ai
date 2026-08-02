@@ -34,7 +34,7 @@ For each segment:
 2. **Schema / structural integrity first** (mechanical — any ❌ blocks G3):
    - **Flat clip schema only:** zero `#### Clip message`, `#### Direction guide`, `#### Required tracks`, `#### Hook to next clip`
    - Every field uses `- **Field:**` (colon inside bold)
-   - Every `### Clip` has required fields (Clip message, Visual, References, Direction, On-screen text, four Tracks lines, Hook to next) — values may be `없음`/`no`
+   - Every `### Clip` has required fields (Clip message, Visual, References, Direction, On-screen text, four Tracks lines, Hook to next) — values may be `none`/`no`
    - Cast roster ↔ References/on-clip cast when catalogs exist (no ghosts)
    - Craft Notes clip count == measured `### Clip` headings; Segment List synced or exception noted
 3. **Craft / completeness**
@@ -44,9 +44,10 @@ For each segment:
    - Track choices match the message (e.g. long narration → still/hold + speech, not forced 10s motion)
    - Motion clips planned &lt;~10s; TTS-led clips may be ~30s
 5. **Reference integrity** (if catalogs exist) — see `workflow/reference-models.md`
-   - Character identity gear does not silently swap; expression is clip direction
-   - Location states are lasting set changes only (not time/weather)
-   - Continuing multi-clip situations cite **stagings**; no L/R or station drift
+   - Character identity gear does not silently swap; expression is clip direction; co-cast contrast when needed
+   - Location cites are catalog paths only; location refs neutral (not time/weather); lasting set changes only as states
+   - Continuing multi-clip ensembles cite **stagings** (mandatory rule); establishing default; no L/R drift; no OTS/CU as staging refs
+   - Explicit approval before every generate; design↔prompt fidelity
    - Clips only use declared entities/states
    - Expression/pose/camera are clip direction, not reference-state abuse
    - If references.md says none: confirm no hidden identity-drift risk (or escalate to add a catalog)
@@ -73,7 +74,7 @@ For each segment:
 |-------|--------|----------|
 | Flat clip schema only (no nested `####` clip subsections) | ✅ / ⚠️ / ❌ | |
 | Field notation `- **Field:**` (colon inside bold) | ✅ / ⚠️ / ❌ | |
-| Required clip fields present (`없음`/`no` OK) | ✅ / ⚠️ / ❌ | |
+| Required clip fields present (`none`/`no` OK) | ✅ / ⚠️ / ❌ | |
 | Cast roster ↔ on-clip refs (when catalogs exist) | ✅ / ⚠️ / ❌ / N/A | |
 | Craft Notes clip count == measured `### Clip` count | ✅ / ⚠️ / ❌ | |
 | Segment List clips match measured (or exception) | ✅ / ⚠️ / ❌ / N/A | |

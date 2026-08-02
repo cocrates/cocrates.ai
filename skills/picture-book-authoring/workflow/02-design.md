@@ -51,7 +51,7 @@ In Stage ④ these become “reference images” via the image-generation skill;
 - Lighting / time / weather / mood shifts
 - Transient elements (passerby, bird flying by)
 
-**When staging is required:** The same situation spans multiple pages and relative positions **or situation props** must not flip/teleport (café facing seats, **family dinner food layout**, picnic spread, play-mat toys, OR, meeting, …). Write `stagings.md` + `stagings/{slug}.md` **including Situation props / table dressing**, then generate 2–3 ensemble refs in Phase 0. Character + empty location alone do not lock seats / L-R / **tonight’s meal**.
+**When staging is required:** The same situation spans multiple pages and relative positions, **situation props**, and/or **ambient occupancy** must not flip/teleport (café facing seats, street walk with crowd/cars, **family dinner food layout**, picnic spread, play-mat toys, OR, meeting, …). Write episode-first `stagings.md` + `stagings/{slug}.md` **including Situation props / ambient**, then generate multi-view ensemble refs in Phase 0. Character + empty location alone do not lock seats / L-R / **tonight’s meal** / ambient. Same location ≠ reuse prior episode staging (`workflow/reference-models.md` §4.1).
 
 ---
 
@@ -110,17 +110,19 @@ In Stage ④ these become “reference images” via the image-generation skill;
 - {other-character-slug}: ...
 
 ## Reference Models (appearance change + state list)
-{Each state maps to one reference image — generated via image-generation in Stage ④ Phase 0}
+{Static look for a story span. Each state → one turnaround reference image in Stage ④ Phase 0}
+{Document each state concretely; YAML concretizes this md — no invention}
 
-- base: {definition of default outfit / gear}
-- {state-slug}: {what changes (outfit / gear / carried items) + face/body rules stay}
+- base: {concrete default outfit + identity gear — face/body anchors + clothes + key accessories}
+- {state-slug}: {concrete lasting change: growth/accident OR outfit/gear (armor/weapons/shields/glasses/accessories); what stays vs differs}
 - {state-slug}: ...
 
 Reference model rules:
-- state = lasting body change + equipment identity (outfit / accessories / weapons / shields / carried items) — do not swap identity gear page-to-page
+- state = lasting body change + equipment identity (outfit / armor / accessories / weapons / shields / glasses / carried items) — do not swap identity gear page-to-page
 - Face / body / fixed anchors stay the same across all states
 - Expression / pose / action / emotion are not states → direct in the page illustration guide
-- If outfit/gear changes mid-story, add a new state slug
+- If outfit/gear changes mid-story, add a new state slug with concrete description
+- Each image = **one turnaround sheet** (front + side + back + key accessories) for that state
 ```
 
 ```markdown
@@ -149,8 +151,9 @@ Reference model rules:
 - Type: {world / region / city / building / room / outdoor / ...}
 - Narrative role: {why this place matters to the story}
 
-## Spatial Layout
+## Spatial Layout (static / physical — empty set)
 - Structure / layout: {spatial layout — rooms, corridors, open areas, landmarks}
+- Physical detail examples: {street → buildings, signage, lights, crosswalk, façades; café → seats, counter, fixed décor, fixtures}
 - Scale feel: {size impression — cramped / vast / intimate / etc.}
 
 ## Sensory Environment
@@ -201,18 +204,22 @@ Reference model rules:
 
 ### 2.3b Staging Catalog Design (continuing-situation continuity)
 
-**When:** The same situation spans multiple pages and relative positions **or situation props** must not flip — café dialogue, **family dinner**, picnic, play mat, OR, meeting, etc. **One staging per situation.** Canonical: `workflow/reference-models.md` §4.
+**When:** The same situation spans multiple pages and relative positions, **situation props**, and/or **ambient occupancy** must not flip — café dialogue, street walk-and-talk, **family dinner**, picnic, play mat, OR, meeting, etc. **One staging per situation.** Canonical: `workflow/reference-models.md` §4 / §4.1.
+
+**Episode-first (preferred):** Define staging **with the episode**. Same location ≠ reuse prior staging. Prefer a new episode-appropriate staging; may need **extra location Scene List rows**.
+
+**Mandatory:** ≥2 pages in the same situation **and** (≥2 named cast **or** fixture-relative placement) → staging required. `Staging: none` only for single-page establishing / no fixed placement.
 
 1. Write `stagings.md` index
-2. Write `stagings/{staging-slug}.md`:
-   - seats / stations / L-R + facing
-   - **Situation props / table dressing** map (meal layout, cups, toys, shared objects — locked look + placement)
-   - Continuity rules: allowed progressive change (bowl empties) vs forbidden wholesale swap
-3. Plan 2–3 reference views (establishing / reverse / detail) that show **blocking + props**
-4. Confirm cast character states and location position/view/state exist in catalogs
+2. Write `stagings/{staging-slug}.md` (name by episode situation):
+   - Header binds catalog `Location: slug / position / view (state)` + each `character-slug (state: …)`
+   - seats / L-R + facing; props; ambient; situation environment when span-locked
+   - Continuity rules
+3. Plan **canonical establishing** (default **one** PNG). Optional reverse/detail only with stated purpose — **never** OTS/CU as staging refs
+4. Confirm cast states and location paths exist (add missing views first)
 
 If a continuing situation has no staging → stop, add staging, then resume.  
-If a meal/picnic/play scene has staging but **empty props map** → stop, add props map (empty table ≠ tonight’s dinner).
+If a meal/picnic/play scene has staging but **empty props map** → stop, add props map.
 
 ---
 
@@ -247,7 +254,7 @@ For each `episodes/{nnn}-{episode-slug}.md`, design **all pages**:
 **Field notation (fixed):**
 
 - Always `- **Field:** value` — colon **inside** the bold markers (correct: `**Location:**`; wrong: `**Location**:` or `- Location:`).
-- Empty values still require the field: use `없음` (optionally with a reason), e.g. `- **Staging:** 없음`.
+- Empty values still require the field: use `none` (optionally with a reason), e.g. `- **Staging:** none`.
 
 #### Episode header: Cast roster
 
@@ -262,16 +269,16 @@ Rules: on-page ⊆ roster; ghost cast forbidden; mention-only tagged `(언급)` 
 
 **Every episode must start with `### Page 0` (Cover).** Page 0 is mandatory — not optional. Story body pages are `### Page 1` … `### Page {N}`.
 
-Each `### Page {N}` **must** include every field below (value may be `없음`):
+Each `### Page {N}` **must** include every field below (value may be `none`):
 
 | Field | Rule |
 |-------|------|
 | `- **Page story:**` | Beat this page alone carries (Stage ④ message basis) |
-| `- **Staging:**` | `{slug} — ref view: …` or `없음` |
-| `- **Characters:**` | slugs + `(state: …)` or `없음 (establishing / …)` |
+| `- **Staging:**` | `{slug} — ref view: …` or `none` |
+| `- **Characters:**` | slugs + `(state: …)` or `none (establishing / …)` |
 | `- **Location:**` | `{location} / {position} / {view} (state: …)` |
 | `- **Direction:**` | lighting / time / weather / mood / camera / expression / pose — page-specific, not reference model |
-| `- **Rendering text:**` | Exact overlay text (locked rendering language) or `없음` |
+| `- **Rendering text:**` | Exact overlay text (locked rendering language) or `none` |
 | `- **Text carries:**` | What text delivers |
 | `- **Picture carries:**` | What the image delivers |
 | `- **Page-turn hook:**` | Curiosity/tension; final page: `resolution / afterimage` |
@@ -285,7 +292,7 @@ Page 0 uses the **same flat fields** as body pages, with cover-specific values:
 | Field | Cover rule |
 |-------|------------|
 | `- **Page story:**` | Must read as a **cover**: invite the child to open the book — world + hero + adventure mood. Do **not** advance interior plot beats or spoil the climax. |
-| `- **Staging:**` | Usually `없음` (hero establishing pose, not a continuing-situation map) |
+| `- **Staging:**` | Usually `none` (hero establishing pose, not a continuing-situation map) |
 | `- **Characters:**` | Protagonist (and cover-worthy companions only) with state |
 | `- **Location:**` | Establishing location that sells the world |
 | `- **Direction:**` | Inviting / heroic cover pose; **title safe zone** (space reserved for title); lighting/mood for shelf appeal |
@@ -337,7 +344,7 @@ YAML image prompts stay English; overlay strings keep the target-language wordin
 
 ### Page 0
 - **Page story:** Cover — {world + hero + adventure mood that invites opening the book; no interior plot spoiler}
-- **Staging:** 없음
+- **Staging:** none
 - **Characters:** {protagonist-slug} (state: {state-slug or base})  <!-- + cover companions if needed -->
 - **Location:** {location-slug} / {position-slug} / {view-slug} (state: {state-slug or base})
 - **Direction:** {heroic/inviting pose; title safe zone; lighting/mood for cover appeal}
@@ -348,11 +355,11 @@ YAML image prompts stay English; overlay strings keep the target-language wordin
 
 ### Page {N}
 - **Page story:** {setting, situation, emotion, beat — imaginable standalone}
-- **Staging:** {staging-slug — ref view: establishing|reverse|detail | 없음}
-- **Characters:** {character-slug} (state: {state-slug or base})  <!-- or: 없음 (establishing) -->
+- **Staging:** {staging-slug — ref view: establishing|reverse|detail | none}
+- **Characters:** {character-slug} (state: {state-slug or base})  <!-- or: none (establishing) -->
 - **Location:** {location-slug} / {position-slug} / {view-slug} (state: {state-slug or base})
 - **Direction:** {lighting / time / weather / mood, camera, expression / pose}
-- **Rendering text:** {exact overlay — storybook voice; locked language | 없음}
+- **Rendering text:** {exact overlay — storybook voice; locked language | none}
 - **Text carries:** {…}
 - **Picture carries:** {…}
 - **Page-turn hook:** {curiosity / tension | final: resolution / afterimage}
@@ -386,7 +393,7 @@ Additional checks:
 - Location **position/view/state** cited by pages exist in catalogs
 - Continuing situations cite a **staging**; staging cast states and location anchor match catalogs; **props/table dressing map present** when the situation has shared objects
 - Expression / time / weather are page direction, not new reference states; progressive prop depletion only per Continuity rules
-- Every page has all required fields (value may be `없음`)
+- Every page has all required fields (value may be `none`)
 
 ---
 

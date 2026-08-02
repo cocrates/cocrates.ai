@@ -211,7 +211,7 @@ For detailed procedure, see `workflow/04-generate.md`.
 - **Omitting Page 0 cover** from any episode (design or generate) — every episode must have `### Page 0` and `images/.../00.*`
 - Treating Page 0 as a story-body page (plot prose overlay instead of title; climax spoilers on the cover)
 - **Nested page subsections** (`#### Page story`, `#### Illustration guide`, …) — canonical episode page schema is flat `- **Field:**` lists under `### Page {N}` only (see `workflow/02-design.md`)
-- **Omitting required page fields** when empty (use `없음`; Staging/Characters always present)
+- **Omitting required page fields** when empty (use `none`; Staging/Characters always present)
 - **Ghost cast** — roster without on-page appearance or mention-only tag
 - Writing Craft Notes / `series.md` page counts that disagree with measured `### Page` headings (incl. Page 0) without a documented exception
 - Using field notation other than `- **Field:**` (colon must be inside bold)

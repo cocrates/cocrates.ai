@@ -21,7 +21,7 @@ For each `episodes/{nnn}-{episode-slug}.md`:
    - **`illustration-guide.md` exists** with art style + layout + typography/text-role sections (missing or empty → ❌)
    - **Flat page schema only:** zero matches for `#### Page story`, `#### Illustration guide`, `#### Rendering text`, `#### Text–image split`, `#### Page-turn hook`
    - Every page field uses `- **Field:**` with colon **inside** bold
-   - Every `### Page` has required fields: Page story, Staging, Characters, Location, Direction, Rendering text, Text carries, Picture carries, Page-turn hook (values may be `없음`)
+   - Every `### Page` has required fields: Page story, Staging, Characters, Location, Direction, Rendering text, Text carries, Picture carries, Page-turn hook (values may be `none`)
    - **`### Page 0` exists** as the first page heading (cover) — missing Page 0 → ❌
    - **Cast roster** ↔ page Characters (ghost / missing on-page → ❌; mention-only tagged)
    - Craft Notes page count == measured `### Page` headings (incl. Page 0); `series.md` matches or exception noted
@@ -42,17 +42,11 @@ For each `episodes/{nnn}-{episode-slug}.md`:
    - Direction notes title safe zone (or equivalent space for title)
    - Page-turn hook invites into Page 1
 
-4. Check **Reference Model Integrity** (core of picture-book scene consistency):
-   - Character reference model (= state) integrity
-     - Each page names a **state** (or base) defined in `characters/{character-slug}.md`
-     - Expression / posture / action / emotion stay in Direction (page image direction), not as reference-model states
-     - Character state updates only when the story has a lasting physical / outfit change
-     - **Outfit chronology:** if state goes bath→dressed, drying/towel pages must come **before** dressed pages
-   - Location reference model (= state) integrity
-     - Each page names a location with **scene axes (position + view)** and that scene’s **state (base or state-slug)** from `locations/{location-slug}.md`
-     - Lighting / time / weather / mood / camera tightness / transient elements are page direction, not reference-model state
-     - **Visibility coverage (`workflow/reference-models.md` §3.1):** every must-see architectural/fixture element on the page is already visible in the cited position×view ref Description/PNG — missing door/wall/fixture → ❌ add Scene List row + ref; do **not** invent in Generate
-     - Permanent physical change (new building / wall destroyed) → new state
+4. Check **Reference Model Integrity** (core of picture-book scene consistency — `workflow/reference-models.md`):
+   - Character: state in catalogs; identity gear stable; co-cast **visual contrast**; taxonomy; expression only in Direction
+   - Location: every page Location is a **catalog path** (no free text) ∈ Scene List; **neutral** set (no weather/time in location PNG); visibility coverage §3.1
+   - Staging: mandatory for multi-page ensembles; header binds catalog states + location path; **establishing** default (no OTS/CU staging refs); props/ambient/situation environment when needed
+   - Same staging span: seats/L-R + props stay recognizable
 
 5. Check **Scene Continuity & Visual Consistency**:
    - Spans treated as “the same scene” keep the same character state / location scene (position+view) / state
@@ -88,7 +82,7 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 | `illustration-guide.md` present (art + layout + typography roles) | ✅ / ⚠️ / ❌ | {file} |
 | Flat page schema only (no nested `####` page subsections) | ✅ / ⚠️ / ❌ | {file / line} |
 | Field notation `- **Field:**` (colon inside bold) | ✅ / ⚠️ / ❌ | {page} |
-| Required page fields present (value `없음` OK) | ✅ / ⚠️ / ❌ | {page} |
+| Required page fields present (value `none` OK) | ✅ / ⚠️ / ❌ | {page} |
 | `### Page 0` cover heading present (first page) | ✅ / ⚠️ / ❌ | {heading} |
 | Cast roster ↔ page Characters (no ghosts; mention-only tagged) | ✅ / ⚠️ / ❌ | {roster vs pages} |
 | Craft Notes page count == measured `### Page` count (incl. Page 0) | ✅ / ⚠️ / ❌ | {n vs n} |
@@ -114,34 +108,30 @@ For each `episodes/{nnn}-{episode-slug}.md`:
 |-------|--------|----------|
 | Every page names character state (or base) | ✅ / ⚠️ / ❌ | {page + character-slug} |
 | State reflects physical change only (outfit / gear / carried items) | ✅ / ⚠️ / ❌ | {page} |
+| Co-appearing majors have ≥2-axis visual contrast | ✅ / ⚠️ / ❌ | {characters} |
+| World taxonomy obeyed (when defined) | ✅ / ⚠️ / ❌ / n/a | {world-bible} |
 | Expression / posture / action stay in page guide, not as state | ✅ / ⚠️ / ❌ | {page} |
-| State updates only when physical change occurs | ✅ / ⚠️ / ❌ | {page} |
 
 ### 3.2 Location reference model (= state) + scene definition
 | Check | Result | Evidence |
 |-------|--------|----------|
-| Every page names location + position + view | ✅ / ⚠️ / ❌ | {page} |
-| Scene List Description names what is visible in that PNG | ✅ / ⚠️ / ❌ | {location file} |
-| **Visibility coverage:** page must-see architecture/fixtures ⊆ cited position×view ref | ✅ / ⚠️ / ❌ | {page + ref} |
-| No “invent missing door/wall in Generate” workaround | ✅ / ⚠️ / ❌ | {page} |
-| Lighting / time / weather / mood / camera / framing are not reference-model state (view = “what is visible”) | ✅ / ⚠️ / ❌ | {page} |
-| Outside-window change rule is correct
-|  - Transient (temporary / reversible) change is not a state | ✅ / ⚠️ / ❌ | {page + example} |
-|  - Physical-structure change (new building / wall destroyed, …) → new state | ✅ / ⚠️ / ❌ | {page + example} |
+| Every page Location is catalog path (no free text) | ✅ / ⚠️ / ❌ | {page} |
+| Path ∈ Scene List; Description names what is visible | ✅ / ⚠️ / ❌ | {location file} |
+| **Visibility coverage:** must-see fixtures ⊆ cited position×view ref | ✅ / ⚠️ / ❌ | {page + ref} |
+| Location refs neutral (no weather/time baked in) | ✅ / ⚠️ / ❌ | {location notes} |
+| Span environment on staging; one-off on Direction | ✅ / ⚠️ / ❌ | {page / staging} |
 | Continuous scene spans keep position / view / state consistent | ✅ / ⚠️ / ❌ | {page range} |
-
 
 ### 3.3 Staging reference model (= continuing-situation continuity)
 | Check | Result | Evidence |
 |-------|--------|----------|
-| Continuing situations have a staging | ✅ / ⚠️ / ❌ | {span + staging-slug} |
-| Staging has Situation props / table dressing map when shared objects exist (meal, picnic, toys, cups, …) | ✅ / ⚠️ / ❌ | {staging file} |
-| Staging Continuity rules distinguish progressive change vs wholesale prop swap | ✅ / ⚠️ / ❌ | {staging file} |
-| Staging plans 2–3 reference views that show blocking + props | ✅ / ⚠️ / ❌ | {staging file} |
-| Pages cite the staging (ref view named) | ✅ / ⚠️ / ❌ | {page} |
-| No unauthorized L/R · seat · station swaps | ✅ / ⚠️ / ❌ | {page range} |
-| No wholesale food/menu/prop teleport across pages in the same staging | ✅ / ⚠️ / ❌ | {page range} |
-| Progressive prop notes in Direction only if Continuity rules allow | ✅ / ⚠️ / ❌ | {page} |
+| Mandatory staging rule satisfied (`none` only when allowed) | ✅ / ⚠️ / ❌ | {multi-page ensemble spans} |
+| Header binds catalog character states + location path | ✅ / ⚠️ / ❌ | {staging file} |
+| Props / ambient / situation environment maps when needed | ✅ / ⚠️ / ❌ | {staging file} |
+| Canonical establishing only by default (no OTS/CU staging refs) | ✅ / ⚠️ / ❌ | {staging file} |
+| Pages cite the staging | ✅ / ⚠️ / ❌ | {page} |
+| No unauthorized L/R · seat · prop teleport | ✅ / ⚠️ / ❌ | {page range} |
+| Progressive prop notes in Direction only if Continuity allows | ✅ / ⚠️ / ❌ | {page} |
 
 ### 3.4 Direction Completeness
 | Check | Result | Evidence |

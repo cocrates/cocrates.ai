@@ -197,7 +197,7 @@ See `workflow/05-assemble.md` for the detailed procedure.
 - Assembling with `src` paths that were not G4-approved (or G5a segment outputs for final)
 - Delivering final mp4 before G5
 - **Nested clip subsections** (`#### Clip message`, `#### Direction guide`, …) — canonical clip schema is flat `- **Field:**` lists under `### Clip {N}` only (see `workflow/02-design.md`)
-- **Omitting required clip fields** when empty (use `없음` / `no`)
+- **Omitting required clip fields** when empty (use `none` / `no`)
 - **Ghost cast** when catalogs exist — roster without on-clip refs or mention-only tag
 - Writing Craft Notes / Segment List clip counts that disagree with measured `### Clip` headings without a documented exception
 - Using field notation other than `- **Field:**` (colon must be inside bold)

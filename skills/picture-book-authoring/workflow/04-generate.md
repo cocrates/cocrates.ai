@@ -38,8 +38,8 @@ Goal: Generate reference models (character · location · staging — `workflow/
 
 **Required reading before any YAML:** `{project-root}/illustration-guide.md` (§1 Art style). Apply the same medium / palette / line / proportion tokens to every reference image. Full rules: `workflow/illustration-guide.md`.
 
-**Included:** Character face/body/outfit·gear (per state), location set structure (per state), staging ensemble blocking **+ situation props/table dressing** (2–3 views).
-**Excluded:** Expression/pose, lighting/time/weather/mood, one-off camera, transient elements — page direction (progressive prop depletion only if staging Continuity rules allow).
+**Included:** Character turnarounds; neutral multi-view locations; staging **establishing** (default one; Character+Location refs required; lean WHO–WHERE–WHAT). YAML concretizes approved md; design↔prompt fidelity; explicit approval before every generate.
+**Excluded:** Expression/pose; weather/time in location PNGs; OTS/CU as staging refs; metadata labels on page images.
 
 ### 0.1 Generation order (per catalogs)
 
@@ -48,11 +48,11 @@ Goal: Generate reference models (character · location · staging — `workflow/
 3. Location base references: `images/locations/{location-slug}.yaml/.png`
 4. Location position/view references: `images/locations/{location-slug}-{position-slug}-{view-slug}.yaml/.png`
 5. Location state variants: `images/locations/{location-slug}-{position-slug}-{view-slug}-{state-slug}.yaml/.png`
-6. Staging ensemble refs (2–3 views): `images/stagings/{staging-slug}-{establishing|reverse|detail}.yaml/.png` — must show **blocking + locked situation props** (not empty tables); see `workflow/reference-models.md` §4
+6. Staging establishing (default one): `images/stagings/{staging-slug}-establishing.yaml/.png` — Character+Location in `params.references`; lean WHO–WHERE–WHAT; optional reverse/detail only if md lists them (`workflow/reference-models.md` §4.2–4.3)
 
 ### 0.2.1 Sample: reference image YAML structure
 
-**Character base YAML structure** (`images/characters/{character-slug}.yaml`):
+**Character base YAML structure** (`images/characters/{character-slug}.yaml`) — concretize `characters/{slug}.md` base state:
 
 ```yaml
 type: image
@@ -60,8 +60,10 @@ model: gemini-3.1-flash-image
 
 params:
   prompt: |
-    {picture-ready character description in English}
-    A children's book illustration style character reference sheet...
+    {picture-ready character description in English — concretized from character md}
+    A children's book illustration CHARACTER TURNAROUND reference sheet on one image:
+    front view, side view, and back view of the SAME outfit/look, plus key accessories/identity gear
+    clearly readable. Neutral expression; no dramatic acting pose.
   size: 1K
   aspectRatio: "1:1"
   seed: null
@@ -103,17 +105,19 @@ params:
 output: "./images/locations/{location-slug}-{position-slug}-{view-slug}.png"
 ```
 
-### 0.2 Per-image YAML approval (MANDATORY)
+### 0.2 Per-image YAML approval (MANDATORY — never auto-generate)
+
+**Hard gate:** Do **not** call image generate until the user has seen the full YAML and given an **explicit approval command**. Never chain autonomous generate calls.
 
 For each reference image:
 1. Create image-generation YAML that reflects the approved Design notes.
    - YAML `title/message/design` role boundary:
-     - `message`: only the reference image’s “meaning (identity / structure consistency)” briefly (no story / layout / font-detail duplication)
-     - `design`: only the reference image’s “visual implementation” (character face/body/outfit state, location physical-structure state, framing anchors; **for stagings: seats/L-R + situation props/table dressing**; no on-image story text)
+     - `message`: only the reference image’s “meaning (identity / structure consistency)” briefly
+     - `design`: visual implementation; **design ↔ prompt fidelity** for proper nouns / logos / gear; staging = lean WHO–WHERE–WHAT + Character/Location in `params.references`
 2. Show the full YAML to the user and request explicit approval.
 3. Only after explicit approval, call the MCP image generation.
 4. Verify visual quality (do not treat it as story redesign).
-5. For stagings: verify seating **and** props match the staging maps across all 2–3 views (same meal layout / toy spread, etc.).
+5. For stagings: verify L/C/R + props on the establishing PNG.
 
 ---
 

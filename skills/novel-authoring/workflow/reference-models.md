@@ -4,131 +4,355 @@
 
 **Shared model:** Same three layers as `webtoon-authoring`, `picture-book-authoring`, and `video-authoring` (character, location, staging). Continuity unit here = **scene** (within episode/chapter).
 
-**Prose medium:** Novels do **not** generate reference PNGs. Reference models are **design locks** — appearance/equipment states, set structure, and blocking maps that prose and continuity must obey. Materialize them as catalog fields and scene cites, not images.
+**Prose medium:** Novels do **not** generate reference PNGs or image YAML. Reference models are **design locks** — appearance/equipment states, set structure, and blocking maps that prose and continuity must obey. The same catalog-path, staging-mandatory, and header-binding rules apply as cite/check rules (no Phase 0 images).
 
-Reference models raise **descriptive and spatial consistency**. They are not the whole scene — they are durable identity and placement anchors that generation must obey.
-
----
+Reference models raise **descriptive and spatial consistency**. They are durable identity and placement anchors that generation must obey.
 
 ## 1. Three layers
 
 | Layer | What it locks | Artifact | Materialization |
 |-------|---------------|----------|-----------------|
-| **Character** | Who they look like + lasting body change + **equipment identity** | `characters/{slug}.md` states | Prose + continuity state — no PNG |
-| **Location** | The **set / stage** (physical space) | `locations/{slug}.md` (+ optional position/view notes) | Prose description lock |
-| **Staging** | **Who is where** relative to whom in a continuing multi-scene situation | `stagings/{slug}.md` | Scene fields cite staging; blocking map in Design |
+| **Character** | Static look + lasting body change + **equipment identity** | `characters/{slug}.md` states (concrete) | Prose + continuity — no PNG |
+| **Location** | The **set / stage** (static/physical; multi-aspect; **neutral**) | `locations/{slug}.md` (+ facets) | Prose description lock — no PNG |
+| **Staging** | WHO–WHERE (+ props / ambient / situation environment) — chapter-first | `stagings/{slug}.md` | Blocking map in Design; cite in scenes — no PNG |
 
-Expression, mood, transient gesture, time of day, season, weather, and one-off camera-like focus are **not** reference models — direct them in the scene beat / sensory-emotional cues.
+Expression, mood, transient pose, and **one-off** camera/time/weather are **not** reference models — direct them in scene direction. Situation-spanning environment (rain through a café scene, etc.) may lock on **staging** (§3 / §4).
 
 ---
 
 ## 2. Character reference model
 
+A character reference locks the **static look** the character must keep for a span of story time — face/body identity **and** the outfit/equipment identity of that span. It is not a performance pose sheet.
+
 **Included (must stay consistent until a new state is defined):**
 
-- Face / body / silhouette identity (as described to the reader)
+- Face / body / silhouette identity
 - **Lasting physical change**: growth, aging beats, scars, injury aftermath, permanent deformity
-- **Equipment identity**: clothes, accessories, weapons, shields, signature carried items  
-  - Example: if they fight with a specific sword, **do not swap to a different sword across scenes** without a designed state change (new weapon = new state + continuity update)
+- **Equipment identity** (outfit in the broad sense): clothes, armor, weapons, shields, glasses, accessories, signature carried items  
+  - Example: if they fight with a specific sword, **do not swap to a different sword across cuts** without a designed state change (new weapon = new state)
 
-**Excluded (per-scene direction only):**
+**Excluded (per-cut direction only):**
 
-- Facial expression in the moment
+- Facial expression
 - Mood / atmosphere of the performance
-- Transient pose and action
-- Temporary props that are not identity gear
+- Transient pose and action (sitting lean, mid-swing, pointing)
+- Temporary props that are not identity gear (a random coffee cup for one gag beat — unless it becomes recurring identity)
 
-**New character state when:** outfit/identity gear changes, or lasting body change occurs.  
+### 2.1 States in the character md (concrete)
+
+Document under `characters/{slug}.md`, in this order:
+
+1. **`base`** — default outfit + identity gear (the look they maintain until a designed change)
+2. **Additional states** — each lasting change gets its own slug and a **concrete written description** in the md (not a one-line label):
+   - Growth / aging / accident aftermath / permanent body change
+   - Outfit or equipment change (new armor, different weapon, glasses on/off as lasting identity, new accessories, etc.)
+
+Each additional state must spell out what stays the same (face/body anchors) and what differs (outfit/gear/body). Vague “armor version” is not enough.
+
+**New character state / reference image when:** outfit or identity gear changes, or lasting body change occurs.  
 **Do not create a new state for:** expression, emotion, or a one-off pose.
 
-Document states under each `characters/{slug}.md` (e.g. `base`, `armor`, `injured-aftermath`). Continuity (`story-so-far`) must track the active state.
+### 2.2 md → Design prose → reference image (Architecture / Design lock)
+
+1. Lock the concrete appearance text in the character md (base + each state).
+2. For every state that needs an image, write image-generation Design prose by **concretizing that md text** (do not invent gear missing from the md).
+3. Generate **one multi-aspect prose description reference image per state**: a single sheet that shows **front, side, and back** of the same look, plus **key accessories / identity gear** clearly readable. Do not rely on a front-only portrait when later cuts need silhouette or gear from other angles.
+
+Filename: `images/characters/{character-slug}.png` (base) / `images/characters/{character-slug}-{state-slug}.png`.
+
+### 2.3 Visual contrast (mandatory when cast co-appears)
+
+Major characters who share scenes must be distinguishable on **≥2 axes** among: hair style, hair color, face/silhouette shape, signature outfit. Document contrast in `characters.md` / profiles. In staging and cut prompts, append **identification keywords** per character (e.g. `brown curly bob`, `black short straight hair`) so generators do not fuse or swap faces.
+
+### 2.4 World taxonomy (when the bible defines entity classes)
+
+If `world-bible.md` defines species/tech classes (e.g. android vs humanoid, mage vs mundane), every character profile and scene direction must obey that taxonomy. Do not mix class-forbidden traits (e.g. human facial acting on a class that has no face).
+
+### 2.5 Recurring brand / logo marks (optional catalog asset)
+
+Marks that repeat on chests, walls, signs (hospital emblem, faction badge, …) are **not** reinvented per Design prose. Create a standalone logo reference first (e.g. `images/locations/{brand}-logo.png` or `images/brand/…`), then inject it as the first `cited character/location profiles` entry when generating any character/location asset that must show that mark.
 
 ---
 
 ## 3. Location reference model (= set / stage)
 
-**Included:** Physical structure and layout; fixed set dressing; permanent set damage or rebuild.
+A location reference locks **static / physical** characteristics of the place — the empty set — not who is acting there.
 
-**Excluded (per-scene direction):** Time of day, season, weather; lighting mood as transient; passersby; one-scene framing emphasis.
+**Included (describe concretely in `locations/{slug}.md`):**
 
-**New location state when:** the set permanently changes.  
-**Do not create a new location state for:** noon→night, rain, autumn alone.
+- Physical structure and layout (walls, furniture placement of the set, landmarks)
+- Fixed set dressing that defines the place
+- Permanent set damage or rebuild (fire gutting, new building next door that stays)
 
-Who sits where across many scenes → **staging**, not location alone.
+**Examples of what to write (not exhaustive):**
+
+- **Street:** buildings along the block, storefronts/signage, traffic lights, crosswalk, pavement markings, façade materials, fixed street furniture
+- **Café:** interior layout, seating types/placement, counter, fixed décor, permanent fixtures and set props that belong to the café as a place
+
+**Excluded from location refs (never bake into location prose lock):**
+
+- Time of day, season, weather (rain, fog, sunset drama)
+- Dramatic / situational lighting (sirens, red alert wash) — unless a **permanent fixture** of the set
+- Transient occupancy (passersby) — **staging** ambient when continuity matters
+- One-off camera for a single cut
+
+Location prose locks are **neutral reusable sets** (typically clear daylight / neutral interior light) so many episodes can share them.
+
+**Where dynamic environment goes:**
+
+| Span | Put environment here |
+|------|----------------------|
+| Holds for the whole continuing situation (e.g. rain outside the café for the whole dialogue) | **Staging** (situation environment) |
+| One cut / one beat only | Cut **Direction** |
+
+**New location state / reference image when:** the set permanently changes (new construction, destruction, major redecoration that sticks).  
+**Do not create a new location state for:** noon→night, rain, autumn leaves, temporary open curtains alone.
+
+### 3.1 Multi-view 2D (mandatory — one image cannot hold a full 3D space)
+
+A reference prose lock only shows what is **in frame**. Plan **multiple 2D views** of the same location:
+
+| Naming style | Examples |
+|--------------|----------|
+| Cardinal / facing | front, left, right, reverse |
+| Fixture-side | window-side, bed-side, door-side, counter-side, hallway-outside-door |
+
+`position` / `view` are framing anchors for **what part of the set is visible**; they are not a substitute for staging (who sits where).
+
+Architecture/fixtures **off-camera in that prose lock cannot be invented** in a later cut/page prompt.
+
+**Failure mode:** Cut needs a door/hallway, but the only ref is an interior prose lock without a door → inventing the door in Design prose breaks images. **Fix:** add a Scene List row (position×view) that shows the door and generate that ref first.
+
+| Rule | Do | Don’t |
+|------|----|-------|
+| Cut needs element X visible | Cite a `position × view` whose prose lock already shows X | Prompt “add a door/wall” missing from the ref |
+| Same room, different facing | Add another Scene List row + prose lock | Stretch one interior ref to cover opposite walls |
+| Character vs fixtures | Place only on stations allowed by staging + cited view | Put someone behind a faucet/sink the view never defined |
+
+One generic `{location}.png` is **not enough** when the episode uses multiple framings of the same room.
+
+### 3.2 md → Design prose → reference image (Architecture / Design lock)
+
+1. Lock concrete physical description + Scene List rows in the location md.
+2. For each needed position×view×state, write Design prose by **concretizing that row’s description** (no weather/time drama in location prompts).
+3. Generate one prose lock per Scene List row.
+4. Do **not** prompt architecture/fixtures that are **outside this view’s frame** (avoids hallucinated walls/windows).
+
+### 3.3 Strict Location path cite (hard rule)
+
+Every scene’s **Location:** **must** be a catalog path — free-text place names are forbidden.
+
+```text
+<!-- Forbidden -->
+- **Location:** 한국대학병원 / 별관 로봇 센터 / 외부 전경
+
+<!-- Required -->
+- **Location:** {location-slug} / {position-slug} / {view-slug} (state: {base|state-slug})
+```
+
+If the episode needs a new angle: **add a Scene List row** to `locations/{slug}.md` (and Architecture / Design lock prose lock) **before** citing it in the scene. G2/G3 must verify: every scene Location ⊆ some Scene List row.
 
 ---
 
-## 4. Staging reference model (continuing-situation blocking)
+## 4. Staging reference model (continuing-situation continuity)
 
-**Rule of thumb:** If a **situation continues across multiple scenes** (or dense beats) and relative positions must not flip in description, make **one staging for that situation**.
+Staging locks the **dynamic story situation** on top of approved character + location refs: named cast placement and action setup, **situation props**, and (when needed) **ambient occupancy** that must not reinvent itself cut-to-cut.
 
-| Situation | What must not flip scene-to-scene |
-|-----------|-----------------------------------|
-| Meeting / briefing | Who sits in which seat |
-| Café / restaurant dialogue | Who is left vs right across the table |
-| Operating room / procedure | Surgeon / nurse / patient stations |
-| Classroom / courtroom | Desk/bench order |
+**Rule of thumb:** If a **situation continues across multiple cuts** and the reader would notice if seats, situation props, **or** the ambient crowd/background density suddenly changed, make **one staging for that situation** and keep it until the situation ends or Design intentionally changes it.
+
+Staging is not “meeting-room only.” It locks **who is where relative to whom**, the **situation’s key props / table dressing**, and optional **ambient extras** while the scene keeps going.
+
+**Same location ≠ same staging.** A street at rush hour vs empty night, or a café during a phone call vs a packed lunch rush, need different stagings even when they cite the same location slug. Prefer defining staging **with the chapter** that needs it (§4.1).
+
+**Failure mode (must prevent):** Dinner continues across cuts, but the food on the table is a completely different meal each page → looks unfinished. Same for toys on a play mat, picnic spread, classroom desk objects that belong to that scene.
+
+### When staging is mandatory (hard rule)
+
+**Require a staging** when **all** of the following hold:
+
+1. The situation spans **≥2 scenes** in the same place/situation, **and**
+2. Either **≥2 named characters** appear, **or** relative placement vs set fixtures matters (bench, table, counter, vehicle seats, …)
+
+**`Staging: none` allowed only for:** single-scene establishing / empty set / no fixed relative placement needed. Long multi-scene ensemble scenes with `Staging: none` are a **hard fail** at G2/G3.
+
+Create a staging whenever multi-scene continuity would otherwise drift, for example:
+
+| Situation | What must not flip / teleport cut-to-cut |
+|-----------|--------------------------------------------|
+| Meeting / briefing | Who sits in which seat; shared papers/whiteboard state if visible |
+| Café / restaurant dialogue | Who is left vs right; cups/plates/order on the table |
+| **Dinner / meal** | Seat order **and** food layout (dishes, bowls, shared plates) |
+| Picnic / snack on a blanket | Who sits where; picnic spread contents |
+| Operating room / procedure | Surgeon / nurse / patient positions; instrument tray layout |
+| Classroom / courtroom | Desk/bench order; books/props that define the beat |
+| Play / toy scene | Who sits/stands where; toy arrangement on the floor/table |
 | Confrontation / standoff | Who stands left / right / center |
 | Vehicle / cockpit | Who sits where |
+| Street walk-and-talk | Cast order + ambient pedestrians/cars when continuous |
+| Stage / performance lineup | Fixed formation |
 
-Character profiles + empty location profiles do **not** lock relative placement. Without staging, prose drifts (L/R flips, seat swaps).
+**Two people opposite at a café:** left/right must stay stable — and their cups/plates should not teleport or morph into unrelated dishes without Design.
 
-**One staging per continuing situation.**
+**Meal across cuts:** seating stays; the **same meal layout** stays (progressive eating/emptying is OK if continuity rules allow; a wholly new menu is not).
+
+Character refs + empty location refs alone do **not** lock relative placement, situation props, or ambient extras. Without staging, generators drift (seat swaps, L/R flips, **food/toys/props reinvented**, crowd/cars morphing).
+
+**One staging per continuing situation.** A later café date, a different dinner, or a reseated meeting → new staging slug (or an explicit Design update), not silent prompt improvisation.
+
+### 4.1 Episode-first staging (preferred)
+
+Prefer defining staging **as part of episode design**, not by default-reusing a catalog staging from another episode just because the location matches.
+
+| Prefer | Avoid |
+|--------|--------|
+| Episode-appropriate new staging for this story beat / time of day / occupancy | Blind reuse of `cafe-a-b-first-date` for a different night’s phone-call scene |
+| Explicit cite when the **same continuity span** truly continues | Assuming “same café location” preserves blocking, props, and ambient |
+
+When drafting the episode:
+
+1. List continuing situations in the episode md (or a linked `stagings/{slug}.md` created for this chapter).
+2. Write the staging md with blocking + props + ambient for **this** episode’s content.
+3. If framings need architecture not yet in the location Scene List, **add location position×view rows** (and Architecture / Design lock refs) before locking cuts — staging often reveals missing location views.
+
+Catalog files still live under `stagings/` (indexed from `stagings.md`); ownership is **episode-driven**.
 
 ### What a staging is
 
-1. A **location** anchor  
-2. A **cast list** with each character’s **appearance state**  
-3. A **blocking map**: seat/spot/station + facing  
-4. Continuity rules: who may leave/move; when blocking resets  
+A staging composes:
 
-### What staging locks vs what scenes still vary
+1. A **location** anchor — **catalog path only:** `{location-slug} / {position} / {view} (state: …)`  
+2. A **cast list** with each character’s **appearance state** — `{character-slug} (state: …)` must exist in `characters/`  
+3. A **blocking map**: seat/spot/station + facing (Viewer's Left / Center / Right)  
+4. A **situation props / table dressing map** when continuity matters  
+5. **Ambient occupancy** when continuity matters  
+6. **Situation environment** when weather/time/dramatic light must hold for the whole span (rain, dusk wash, alert lighting) — **not** baked into location prose lock  
+7. Continuity rules  
+
+**Cross-verify (hard):** every slug/state in the staging header exists in character/location catalogs. Unknown cast or free-text location → fail Design.
+
+**Examples:** street walk-and-talk with passersby/cars; café phone call with mug + other patrons + optional rain-on-windows for the span.
+
+### 4.2 Canonical staging reference image (default: one establishing)
+
+Staging’s job is to lock **ensemble placement in space** — not to catalog every scene camera.
+
+| Allowed as staging ref | Forbidden as staging ref |
+|------------------------|--------------------------|
+| **`establishing`** (required default — one wide ensemble lock) | `over-shoulder`, `close-up`, `detail` used as a **cut angle** catalog |
+| **`reverse`** (optional — only if reverse-shot L/R must be locked) | Any one-off cut framing |
+| **`detail`** (optional — only to lock a **prop cluster**, not a CU face) | Registering every scene’s camera as a staging view |
+
+**Architecture / Design lock:** Generate **exactly one** `…-establishing.png` by default. Add reverse/detail only when the staging md lists them with a stated lock purpose.
+
+**Manuscript cuts:** Attach Character + Location + Staging **establishing** under `cited character/location profiles`. Derive CU / OTS / tighter cameras in cut **Direction** — do **not** invent new staging refs for those angles.
+
+### What staging locks vs what cuts still vary
 
 | Locked by staging | Still free per scene |
-|-------------------|----------------------|
+|-------------------|--------------------|
 | Who occupies which seat / station / spot | Expression, mood |
-| Relative left/right/center order | Gesture within the spot (if Design allows) |
-| Facing / orientation of the group | Narrative focus / “camera” emphasis as long as L/R stays true |
-| Active appearance state per character | Dialogue, sensory cues, weather/time grade |
+| Relative left/right/center order | Gesture within the spot |
+| Facing / orientation of the group | Camera tightness (CU / OTS / wide) **as long as L/R, stations, props stay recognizable** |
+| Character appearance state per person | Progressive prop change if Continuity allows |
+| Situation props / ambient / situation environment (when locked) | One-off environment only if **not** locked on staging → Direction |
+
+If someone permanently changes place, leaves, or the table is cleared/reset for a new course that replaces the whole layout, either:
+
+- update the staging (new staging slug or documented beat change), or  
+- end the staging continuity and start a new staging for the new situation
 
 ### Design artifact
 
-`stagings.md` + `stagings/{staging-slug}.md`:
+`stagings.md` (index) + `stagings/{staging-slug}.md` — authored when the **episode** needs the situation (§4.1):
 
 ```markdown
 # {Staging title}
 
 ## Situation
-- Kind: {café dialogue / OR / meeting / …}
-- Continuity span: {chapter/episode/scene range}
+- Kind: {street walk-and-talk / café phone call / family dinner / …}
+- Owning chapter/episode: {nnn-…}
+- Continuity span: {from page.cut → to page.cut}
 
-## Location anchor
-- Location: {location-slug}
+## Location anchor (catalog path only)
+- Location: {location-slug} / {position-slug} / {view-slug} (state: {base|state-slug})
+- Extra location views needed: {none | Scene List rows to add first}
+
+## Cast (catalog binding — required)
+- {character-slug-1} (state: {state-name})
+- {character-slug-2} (state: {state-name})
 
 ## Cast & blocking
-| character-slug | appearance state | seat/spot/station | facing | notes |
-|----------------|------------------|-------------------|--------|-------|
-| {slug} | {base\|…} | table-left / … | toward partner | … |
+| character-slug | appearance state | seat/spot/station (L/C/R) | facing | notes |
+|----------------|------------------|---------------------------|--------|-------|
+| {slug} | {base\|…} | viewer-left / center / … | toward partner | … |
+
+## Situation props / table dressing (locked)
+| prop | placement | description | notes |
+|------|-----------|-------------|-------|
+| {mug} | right of {slug} | blue mug | … |
+
+## Ambient occupancy (when locked)
+| ambient | placement / density | description | notes |
+|---------|---------------------|-------------|-------|
+| {passersby} | mid-ground | 3–4 pedestrians | … |
+
+## Situation environment (when locked for the span)
+- {e.g. rain on windows + dim overcast interior — NOT in location prose lock}
 
 ## Continuity rules
-- Fixed until: {event}
-- Allowed mid-situation moves: {…}
-- Forbidden drift: {no L/R swap; no silent reseat}
+- Fixed until: {…}
+- Allowed progressive prop change: {…}
+- Forbidden drift: {no L/R swap; no wholesale prop swap; no ambient teleport}
+
+## Canonical staging reference image
+- establishing (required): {one-sentence ensemble lock — who L/C/R + key props/ambient}
+- reverse (optional): {only if needed — purpose}
+- detail (optional): {only prop-cluster lock — purpose}
+
+{Default Architecture / Design lock output: images/stagings/{staging-slug}-establishing.png only}
 ```
 
-Slug tip: `cafe-a-b-first-date`, `or-appendectomy-team`, `boardroom-budget-meeting`.
+Slug tip: `ep003-street-walk-talk`, `ep005-cafe-phone-call`.
 
-### Citing stagings in scene design
+### 4.3 Lean staging prompts (WHO–WHERE–WHAT)
 
-In chapter Key Events / scenes:
+When writing staging Design prose `design` / `prompt`:
+
+- **Do:** WHO & WHERE (L/C/R), WHAT (pose/facing), added props, ambient, situation environment.
+- **Do not:** re-describe face, hair, outfit, wall logos, chest emblems already in Character/Location refs (re-describing causes misplaced logos).
+- **Do not:** fake negative controls like `NO WINDOWS` — omit off-frame elements instead.
+- **Must:** put Character + Location prose locks in `cited character/location profiles` — never generate staging from text alone.
+
+### Generation (Architecture / Design lock)
+
+Order:
+
+1. Brand/logo refs (if any) → Character multi-aspect prose descriptions → Location multi-views (incl. staging-required extras)  
+2. **Staging establishing** (required) using those prose locks in `cited character/location profiles`  
+3. Optional reverse/detail only if listed in the staging md  
+
+**Staging establishing prompt** shows locked props/ambient/environment and L/C/R blocking — not an empty set. Design prose concretizes the staging md.
+
+### Citing stagings in cut design
 
 ```text
-**On stage:** {cast}
-**Staging:** {staging-slug}   # required when relative placement must hold
-**Location:** {location-slug}
+- **Staging:** {staging-slug} — ref view: establishing   # default; reverse|detail only if those prose locks exist
+- **Characters:** {slug} (state: …)   # must match staging cast
+- **Location:** {location-slug} / {position} / {view} (state: …)   # catalog path; must match staging anchor (or a listed extra view)
+- **Direction:** {expression / CU|OTS|gesture / one-off weather if not on staging; progressive prop note}
 ```
 
-Do not reseat or L/R-flip in prose without updating Design (staging) and continuity.
+Do not invent seats, L/R flips, or wholesale prop swaps in the scene prompt. Update Design first.
+
+### Page/tile image generation (Manuscript)
+
+When a cut cites a staging:
+
+1. Attach Character + Location + Staging **establishing** under `cited character/location profiles` (plus reverse/detail only if cited).
+2. Design prose `design` keeps seats/L-R + props/ambient; camera tightness from Direction.
+3. Do not rebuild the table from Location alone.
+4. **design ↔ prompt fidelity:** every proper noun, engraved logo text, and gear detail in `design` must appear in `params.prompt` — no genericizing away.
+5. **No metadata on image:** do not put episode title, page/cut numbers, or panel labels in the prompt as drawable text (see `04-generate.md` IMPORTANT block).
 
 ---
 
@@ -136,63 +360,72 @@ Do not reseat or L/R-flip in prose without updating Design (staging) and continu
 
 | Situation | Reference layer |
 |-----------|-----------------|
-| Same face/outfit/sword across chapters | Character state |
-| New armor / different sword / scar after battle | New character state + continuity |
-| Angry face / crying in one beat | Scene direction (not a ref) |
-| Café as empty set | Location |
-| Night rain outside the same room | Scene direction |
-| Room burned; stays ruined | New location state |
-| Café pair A left / B right across scenes | **Staging** |
-| OR stations across procedure scenes | **Staging** |
-| New situation later | **New staging** |
+| Same face/outfit/sword across the episode | Character state (multi-aspect prose description) |
+| New armor / scar after battle | New character state |
+| Co-appearing cast look alike | Character **visual contrast** (§2.3) |
+| Recurring hospital/faction emblem | Standalone **logo** ref (§2.5) |
+| Angry face / CU / OTS | Scene direction (not a staging ref) |
+| Café / street as empty physical set | Location (neutral multi-view Scene List) |
+| Free-text location in cut | **Forbidden** — catalog path only (§3.3) |
+| Rain for whole café dialogue | **Staging** situation environment |
+| One-cut dusk grade | Scene direction |
+| Café pair L/R across many cuts | **Staging** (+ establishing prose lock) |
+| Multi-cut ensemble with `Staging: none` | **Hard fail** (§4 mandatory) |
+| Register OTS/CU as staging views | **Forbidden** (§4.2) |
+| New chapter same café different beat | **New chapter staging** |
 
 ---
 
-## 6. Completeness (before architecture / chapter approval)
+## 6. Completeness (before G2 / G3)
 
-- [ ] Every lasting outfit/gear/body change has a character state
-- [ ] Identity gear does not silently swap across scenes
-- [ ] Location states exist only for lasting set changes
-- [ ] Every continuing situation with fixed relative placement has a staging
-- [ ] Scenes in that span cite the staging; expressions stay in scene direction
-- [ ] L/R, seats, and role stations do not flip without a Design staging update
-- [ ] Story design co-locked catalogs: staging + character states + location states designed with the story; existing refs reused; new refs added to catalogs before cite (§7)
+- [ ] Character states concrete; multi-aspect prose description planned; co-cast **visual contrast** ≥2 axes
+- [ ] World taxonomy obeyed in profiles + Direction (when defined)
+- [ ] Recurring logos modularized when used
+- [ ] Location = neutral static set; no weather/time in location prose lock
+- [ ] Every cut **Location:** is a catalog `slug / position / view (state)` path (§3.3)
+- [ ] Scene List covers needed multi-views; no off-frame architecture in prompts
+- [ ] Staging mandatory rule satisfied; headers bind catalog character states + location path
+- [ ] Staging has establishing-only by default; no cut-angle ref list
+- [ ] Props / ambient / situation environment maps when needed
+- [ ] Lean staging prompts (WHO–WHERE–WHAT); Character+Location in staging `cited character/location profiles`
+- [ ] design ↔ prompt fidelity for proper nouns / engravings
+- [ ] n/a (prose)
+- [ ] Explicit user approval before architecture/chapter lock
 
 ---
 
 ## 7. Story design co-locks catalogs (mandatory loop)
 
-Designing the **story** (scenes / pages / cuts / clips) is not separate from designing **staging**, **character states**, and **location states**. They are designed together.
+Designing the **story** is not separate from designing **staging**, **character states**, and **location states** — **staging especially with the chapter**.
 
 ### While drafting story units
 
-For each continuing situation and each story beat, explicitly decide:
-
-1. **Staging** — If relative placement must hold across units → cite an existing staging **or** create `stagings/{slug}.md` (one per situation).
-2. **Character appearance state** — Outfit/gear/lasting body for everyone on stage → cite an existing character state **or** add a new state to `characters/{slug}.md`.
-3. **Location set state** — Which set (position/view/state as applicable) → cite an existing location row **or** add position/view/state to `locations/{slug}.md`.
+1. **Staging** — If mandatory (§4) → create/cite episode-appropriate staging (prefer new; reuse only same continuity span). Bind catalog paths + states.
+2. **Character appearance state** — cite or add with concrete description + contrast keywords.
+3. **Location** — cite existing Scene List row **or add row first**; never free-text.
 
 ### Reuse vs add
 
 | Need | Already in catalog? | Action |
 |------|---------------------|--------|
-| Character look / outfit / gear | Yes | Cite that **state** (or base) |
-| Character look / outfit / gear | No | **Add** state to character catalog (user-visible Design update), then cite |
-| Location set / lasting set change | Yes | Cite location (+ position/view/state) |
-| Location set / lasting set change | No | **Add** to location catalog, then cite |
-| Who-is-where for a continuing situation | Yes | Cite that **staging** |
-| Who-is-where for a continuing situation | No | **Add** staging (+ ensure cast states & location anchor exist), then cite |
+| Character look / outfit / gear | Yes / No | Cite state / **Add** concrete state |
+| Location path | Yes | Cite `slug / position / view (state)` |
+| Location path | No | **Add Scene List row** (+ prose lock plan), then cite |
+| This episode’s continuing situation | Same span | Cite staging |
+| This episode’s continuing situation | Only prior episode same location | **New chapter staging** |
+| Staging missing for multi-scene ensemble | — | **Add** staging before locking cuts |
 
 ### Hard rules
 
-- Do **not** invent outfit, gear, set damage, seats, or L/R only inside the story unit. Update catalogs first, then resume story design.
-- Staging cast rows must use **existing** (or newly added) character states; staging location anchor must use **existing** (or newly added) location refs.
-- Expression / mood / time / weather / one-off gesture stay in the story unit — they are **not** new reference states.
-- After adding catalogs, re-check every story unit that should cite them.
+- Do **not** invent outfit, seats, L/R, props, ambient, or free-text locations only inside the scene. Update catalogs first.
+- Staging cast/location must cross-verify to catalogs.
+- Expression / one-off camera / one-off weather stay in Direction unless locked as situation environment on staging.
+- **md → Design prose:** Architecture / Design lock Design prose concretizes md; staging always references Character+Location prose locks.
+- Never proceed past gates without **explicit user approval**.
 
 ### Mini checklist (per story stretch)
 
-- [ ] Continuing situations have staging cites (or explicit “none — single beat / no fixed placement”)
-- [ ] Every on-stage character has a catalogued appearance state
-- [ ] Every place used has a catalogued set (and state if lasting change)
-- [ ] New states/stagings were added to Design files before locking the story unit
+- [ ] Location cites are catalog paths
+- [ ] Mandatory stagings exist; `none` only when allowed
+- [ ] Staging headers bind existing states/paths
+- [ ] Establishing staging ref planned (not a cut-angle farm)

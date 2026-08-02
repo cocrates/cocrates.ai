@@ -55,25 +55,25 @@ Create `characters/{name-slug}.md` for each character who will appear in early c
 ```markdown
 # {Character Name}
 
-## 기본 정보
+## Basic Info
 - Role: {protagonist / antagonist / ...}
 - Core Drive: {what they want most}
 - Central Conflict: {what prevents them from getting it}
 - Arc Direction: {positive / negative / flat — brief description}
 
-## 외형 및 거동 특징
+## Appearance & Behavior Traits
 - 외형(Appearance): {face/height/build/unique visual traits — fixed identity}
 - 습관/거동(Behavior): {signature gestures, posture habits, movement style}
 - 말투/표현(Voice): {speech patterns, recurring phrases, emotional tell}
 - 반복되는 단서(Signature cues): {what readers notice consistently}
 
 ## Reference models (appearance + equipment states)
-{Canonical: `workflow/reference-models.md` — same three layers as webtoon/picture-book/video}
-- base: {default outfit + identity gear (named weapons, accessories, …)}
-- {state-slug}: {lasting body change and/or outfit/gear change}
-Rules: state = lasting physical/equipment identity only; expression/mood/transient pose are scene direction; do not silently swap identity gear across scenes.
+{Canonical: `workflow/reference-models.md` — static look for a story span; prose lock only (no PNG)}
+- base: {concrete default outfit + identity gear — clothes, armor, weapons, shields, glasses, accessories}
+- {state-slug}: {concrete lasting change: growth/accident aftermath OR outfit/gear; what stays vs differs}
+Rules: document each state concretely; state = lasting physical/equipment identity only; expression/mood/transient pose are scene direction; do not silently swap identity gear across scenes.
 
-## 주요 인물과의 관계
+## Key Relationships
 - {Other Character A} ↔ {Character Name}: {relationship type, power dynamic, key tension seed}
 - {Other Character B} ↔ {Character Name}: ...
 ```
@@ -100,42 +100,48 @@ Create `locations/{name-slug}.md` for each location used in early chapters, usin
 ```markdown
 # {Location Name}
 
-## 기본 정보
-- 유형: {world / region / city / building / room / outdoor / ...}
-- 서사적 역할: {why this place matters to the story}
+## Basic Info
+- Type: {world / region / city / building / room / outdoor / ...}
+- Narrative Role: {why this place matters to the story}
 - Role as set/stage: {physical structure that must stay recognizable; lasting damage → new state — see `workflow/reference-models.md`}
-- 핵심 이벤트: {notable events that happen here}
+- Key Events: {notable events that happen here}
 
-## 공간 구성
-- 구조/레이아웃: {spatial layout — rooms, corridors, open areas, landmarks}
-- 규모감: {size impression — cramped / vast / intimate / etc.}
+## Spatial Composition (static / physical — empty set)
+- Structure/Layout: {spatial layout — rooms, corridors, open areas, landmarks}
+- Physical detail examples: {street → buildings, signs, traffic lights, crosswalks, exterior walls; café → seating, counter, fixed interior, props}
+- Multi-facet anchors (when needed): {front/left/right or window-side/bed-side/door-side — do not pack the entire 3D space into one paragraph}
+- Sense of Scale: {size impression — cramped / vast / intimate / etc.}
 
-## 감각 환경
-- 조명: {natural light / artificial / dim / harsh / flickering / ...}
-- 온도/습도: {cold / warm / humid / dry / seasonal shift}
-- 냄새: {dominant scent — dust, food, chemicals, nature, decay, ...}
-- 소리/소음: {ambient sound — silence, traffic, machinery, birdsong, echoes, ...}
-- 질감/촉감: {what surfaces feel like if touched — rough stone, polished wood, ...}
+## Sensory Environment
+- Lighting: {natural light / artificial / dim / harsh / flickering / ...}
+- Temperature/Humidity: {cold / warm / humid / dry / seasonal shift}
+- Smell: {dominant scent — dust, food, chemicals, nature, decay, ...}
+- Sound/Noise: {ambient sound — silence, traffic, machinery, birdsong, echoes, ...}
+- Texture/Touch: {what surfaces feel like if touched — rough stone, polished wood, ...}
 
-## 분위기 노트
-{이 장소가 주는 심리적 인상 — 안전 / 위협 / 향수 / 고립 / ...}
+## Atmosphere Notes
+{psychological impression this place conveys — safety / threat / nostalgia / isolation / ...}
 ```
 
 ---
 
 ## `stagings.md` + `stagings/{slug}.md` (Continuing-situation blocking)
 
-**When:** a situation continues across multiple scenes and relative placement must not flip (café L/R, OR stations, meeting seats, standoffs, …). **One staging per situation.** Full rules: `workflow/reference-models.md`.
+**When:** a situation continues across multiple scenes and relative placement, props, and/or ambient must not flip (café L/R, street walk-and-talk, OR stations, meeting seats, …). **One staging per situation.** Full rules: `workflow/reference-models.md` §4 / §4.1.
+
+**Chapter/episode-first (preferred):** Define staging with the chapter that needs it. Same location ≠ reuse prior staging.
+
+**Mandatory:** ≥2 scenes in the same situation **and** (≥2 named cast **or** fixture-relative placement) → staging required. `Staging: none` only for single-scene / no fixed placement.
 
 ```markdown
 # Stagings
 
-| Slug | Situation | Location | Cast | Span |
-|------|-----------|----------|------|------|
-| {staging-slug} | {café / OR / meeting / …} | {location} | {A, B} | ch/ep/scene range |
+| Slug | Situation | Owning chapter | Location path | Cast | Span |
+|------|-----------|----------------|---------------|------|------|
+| {staging-slug} | {street walk / café call / …} | {nnn-…} | {loc[+facet]} | {A, B} | ch/ep/scene range |
 ```
 
-Per staging file: location anchor, cast + appearance states, seat/spot/station + facing, continuity rules (forbidden L/R swap / reseat).
+Per staging file: catalog-bound location + character states, seat/spot + facing, props/ambient/situation environment when locked, continuity rules. No PNG — prose blocking map only.
 
 Gate artifacts for this stage include `stagings.md` when any continuing situation needs blocking.
 

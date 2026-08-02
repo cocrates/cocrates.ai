@@ -25,7 +25,7 @@
 
 A **reference model** defines visual identity that must hold across clips. Stage ④ materializes it as reference images.
 
-**Shared three-layer model** (when characters/locations apply): `workflow/reference-models.md` — **character** (body + equipment identity), **location** (set/stage), **staging** (who is where in a continuing multi-clip situation: café L/R, OR stations, meeting seats, …). One staging per continuing situation; typically 2–3 ensemble reference views.
+**Shared three-layer model** (when characters/locations apply): `workflow/reference-models.md` — character turnarounds + contrast/taxonomy; location **neutral** multi-view + **catalog-path cites only**; staging **segment-first**, mandatory for multi-clip ensembles, **default 1× establishing** (no OTS/CU as staging refs), lean WHO–WHERE–WHAT, Character+Location in refs. Explicit approval before every generate.
 
 Concrete the intent analysis from Define:
 
@@ -104,7 +104,7 @@ Clip detail lives in `segments/*.md`.
 
 **Only the flat clip schema is allowed.** Every clip is a `### Clip {N} — {slug}` heading followed by a **flat** `- **Field:**` list. Do **not** use nested `#### Clip message`, `#### Direction guide`, `#### Required tracks`, or `#### Hook to next clip` subsections (nested or hybrid layouts).
 
-**Field notation (fixed):** Always `- **Field:** value` — colon **inside** bold (correct: `**Visual:**`; wrong: `**Visual**:` or `- Visual:`). Empty values still require the field (`없음` / `no` as appropriate).
+**Field notation (fixed):** Always `- **Field:** value` — colon **inside** bold (correct: `**Visual:**`; wrong: `**Visual**:` or `- Visual:`). Empty values still require the field (`none` / `no` as appropriate).
 
 #### Segment / sequence cast roster (when catalogs exist)
 
@@ -123,9 +123,9 @@ Each `### Clip {N}` **must** include every field below:
 |-------|------|
 | `- **Clip message:**` | Beat this clip alone carries (Stage ④ message basis) |
 | `- **Visual:**` | still / motion from keyframe / hold / … |
-| `- **References:**` | kind/slug/state; staging/{slug}+view when placement must hold; or `없음` |
+| `- **References:**` | kind/slug/state; staging/{slug}+view when placement must hold; or `none` |
 | `- **Direction:**` | camera / action / expression — clip-specific |
-| `- **On-screen text:**` | exact copy in target language, or `없음` |
+| `- **On-screen text:**` | exact copy in target language, or `none` |
 | `- **Tracks — image:**` | yes/no |
 | `- **Tracks — video:**` | yes/no |
 | `- **Tracks — voice:**` | yes/no (+ script summary when yes) |
@@ -155,9 +155,9 @@ Craft Notes **Clip count** = measured `### Clip` headings; Long Segment List app
 ### Clip {N} — {slug}
 - **Clip message:** {story/info/emotion — imaginable standalone}
 - **Visual:** {still image / motion from keyframe / hold frame / …}
-- **References:** {kind/slug/state or staging/{slug}+view | 없음}
+- **References:** {kind/slug/state or staging/{slug}+view | none}
 - **Direction:** {camera / action / expression / …}
-- **On-screen text:** {exact copy in target language | 없음}
+- **On-screen text:** {exact copy in target language | none}
 - **Tracks — image:** {yes/no}
 - **Tracks — video:** {yes/no}
 - **Tracks — voice:** {yes/no — script summary}
