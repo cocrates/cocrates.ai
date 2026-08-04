@@ -1,0 +1,810 @@
+{
+  "sidebar.novelMagyoSidebar.doc.001-죽은-천마-망나니로-눈을-뜨다": {
+    "message": "1화. 죽은 천마 망나니로 눈을 뜨다",
+    "description": "Sidebar label for magyo novel chapter 001-죽은-천마-망나니로-눈을-뜨다"
+  },
+  "sidebar.novelMagyoSidebar.doc.002-보약이라는-이름의-독": {
+    "message": "2화. 보약이라는 이름의 독",
+    "description": "Sidebar label for magyo novel chapter 002-보약이라는-이름의-독"
+  },
+  "sidebar.novelMagyoSidebar.doc.003-뼈를-다시-엮다": {
+    "message": "3화. 뼈를 다시 엮다",
+    "description": "Sidebar label for magyo novel chapter 003-뼈를-다시-엮다"
+  },
+  "sidebar.novelMagyoSidebar.doc.004-정파-놈들-수준": {
+    "message": "4화. 정파 놈들 수준",
+    "description": "Sidebar label for magyo novel chapter 004-정파-놈들-수준"
+  },
+  "sidebar.novelMagyoSidebar.doc.005-망나니의-눈에-마교-교주가-들어앉다": {
+    "message": "5화. 망나니의 눈에 마교 교주가 들어앉다",
+    "description": "Sidebar label for magyo novel chapter 005-망나니의-눈에-마교-교주가-들어앉다"
+  },
+  "sidebar.novelMagyoSidebar.doc.006-살아난-시한폭탄": {
+    "message": "6화. 살아난 시한폭탄",
+    "description": "Sidebar label for magyo novel chapter 006-살아난-시한폭탄"
+  },
+  "sidebar.novelMagyoSidebar.doc.007-김충의-손": {
+    "message": "7화. 김충의 손",
+    "description": "Sidebar label for magyo novel chapter 007-김충의-손"
+  },
+  "sidebar.novelMagyoSidebar.doc.008-역으로-뒤집다": {
+    "message": "8화. 역으로 뒤집다",
+    "description": "Sidebar label for magyo novel chapter 008-역으로-뒤집다"
+  },
+  "sidebar.novelMagyoSidebar.doc.009-독의-처방전": {
+    "message": "9화. 독의 처방전",
+    "description": "Sidebar label for magyo novel chapter 009-독의-처방전"
+  },
+  "sidebar.novelMagyoSidebar.doc.010-가회의-날": {
+    "message": "10화. 가회의 날",
+    "description": "Sidebar label for magyo novel chapter 010-가회의-날"
+  },
+  "sidebar.novelMagyoSidebar.doc.011-증거-따위-필요-없고": {
+    "message": "11화. 증거 따위 필요 없고",
+    "description": "Sidebar label for magyo novel chapter 011-증거-따위-필요-없고"
+  },
+  "sidebar.novelMagyoSidebar.doc.012-내-주먹이-명분이다": {
+    "message": "12화. 내 주먹이 명분이다",
+    "description": "Sidebar label for magyo novel chapter 012-내-주먹이-명분이다"
+  },
+  "sidebar.novelMagyoSidebar.doc.013-장로들의-분노와-태의의-규칙": {
+    "message": "13화. 장로들의 분노와 태의의 규칙",
+    "description": "Sidebar label for magyo novel chapter 013-장로들의-분노와-태의의-규칙"
+  },
+  "sidebar.novelMagyoSidebar.doc.014-남궁세가의-새-질서": {
+    "message": "14화. 남궁세가의 새 질서",
+    "description": "Sidebar label for magyo novel chapter 014-남궁세가의-새-질서"
+  },
+  "sidebar.novelMagyoSidebar.doc.015-청소-완료-보고": {
+    "message": "15화. 청소 완료 보고",
+    "description": "Sidebar label for magyo novel chapter 015-청소-완료-보고"
+  },
+  "sidebar.novelMagyoSidebar.doc.016-형의-사과": {
+    "message": "16화. 형의 사과",
+    "description": "Sidebar label for magyo novel chapter 016-형의-사과"
+  },
+  "sidebar.novelMagyoSidebar.doc.017-완벽한-형의-정체": {
+    "message": "17화. 완벽한 형의 정체",
+    "description": "Sidebar label for magyo novel chapter 017-완벽한-형의-정체"
+  },
+  "sidebar.novelMagyoSidebar.doc.018-비자금-장부": {
+    "message": "18화. 비자금 장부",
+    "description": "Sidebar label for magyo novel chapter 018-비자금-장부"
+  },
+  "sidebar.novelMagyoSidebar.doc.019-정적-암살-기록": {
+    "message": "19화. 정적 암살 기록",
+    "description": "Sidebar label for magyo novel chapter 019-정적-암살-기록"
+  },
+  "sidebar.novelMagyoSidebar.doc.020-강호-전체에-뿌리다": {
+    "message": "20화. 강호 전체에 뿌리다",
+    "description": "Sidebar label for magyo novel chapter 020-강호-전체에-뿌리다"
+  },
+  "sidebar.novelMagyoSidebar.doc.021-스승과-문파의-배신": {
+    "message": "21화. 스승과 문파의 배신",
+    "description": "Sidebar label for magyo novel chapter 021-스승과-문파의-배신"
+  },
+  "sidebar.novelMagyoSidebar.doc.022-사회적-매장-1": {
+    "message": "22화. 사회적 매장 1",
+    "description": "Sidebar label for magyo novel chapter 022-사회적-매장-1"
+  },
+  "sidebar.novelMagyoSidebar.doc.023-사회적-매장-2": {
+    "message": "23화. 사회적 매장 2",
+    "description": "Sidebar label for magyo novel chapter 023-사회적-매장-2"
+  },
+  "sidebar.novelMagyoSidebar.doc.024-아버지의-침묵": {
+    "message": "24화. 아버지의 침묵",
+    "description": "Sidebar label for magyo novel chapter 024-아버지의-침묵"
+  },
+  "sidebar.novelMagyoSidebar.doc.025-남궁혁의-몰락": {
+    "message": "25화. 남궁혁의 몰락",
+    "description": "Sidebar label for magyo novel chapter 025-남궁혁의-몰락"
+  },
+  "sidebar.novelMagyoSidebar.doc.026-태의의-조건": {
+    "message": "26화. 태의의 조건",
+    "description": "Sidebar label for magyo novel chapter 026-태의의-조건"
+  },
+  "sidebar.novelMagyoSidebar.doc.027-가문의-균형": {
+    "message": "27화. 가문의 균형",
+    "description": "Sidebar label for magyo novel chapter 027-가문의-균형"
+  },
+  "sidebar.novelMagyoSidebar.doc.028-청년-태의의-입지": {
+    "message": "28화. 청년 태의의 입지",
+    "description": "Sidebar label for magyo novel chapter 028-청년-태의의-입지"
+  },
+  "sidebar.novelMagyoSidebar.doc.029-맹주실의-대화": {
+    "message": "29화. 맹주실의 대화",
+    "description": "Sidebar label for magyo novel chapter 029-맹주실의-대화"
+  },
+  "sidebar.novelMagyoSidebar.doc.030-다음-표적": {
+    "message": "30화. 다음 표적",
+    "description": "Sidebar label for magyo novel chapter 030-다음-표적"
+  },
+  "sidebar.novelMagyoSidebar.doc.031-시선을-밖으로": {
+    "message": "31화. 시선을 밖으로",
+    "description": "Sidebar label for magyo novel chapter 031-시선을-밖으로"
+  },
+  "sidebar.novelMagyoSidebar.doc.032-점창파의-수탈": {
+    "message": "32화. 점창파의 수탈",
+    "description": "Sidebar label for magyo novel chapter 032-점창파의-수탈"
+  },
+  "sidebar.novelMagyoSidebar.doc.033-청성파의-정의-사칭": {
+    "message": "33화. 청성파의 정의 사칭",
+    "description": "Sidebar label for magyo novel chapter 033-청성파의-정의-사칭"
+  },
+  "sidebar.novelMagyoSidebar.doc.034-돈-내놔라": {
+    "message": "34화. 돈 내놔라",
+    "description": "Sidebar label for magyo novel chapter 034-돈-내놔라"
+  },
+  "sidebar.novelMagyoSidebar.doc.035-문파를-엎겠다": {
+    "message": "35화. 문파를 엎겠다",
+    "description": "Sidebar label for magyo novel chapter 035-문파를-엎겠다"
+  },
+  "sidebar.novelMagyoSidebar.doc.036-역수탈의-시작": {
+    "message": "36화. 역수탈의 시작",
+    "description": "Sidebar label for magyo novel chapter 036-역수탈의-시작"
+  },
+  "sidebar.novelMagyoSidebar.doc.037-억울하면-실력으로": {
+    "message": "37화. 억울하면 실력으로",
+    "description": "Sidebar label for magyo novel chapter 037-억울하면-실력으로"
+  },
+  "sidebar.novelMagyoSidebar.doc.038-정파의-눈빛": {
+    "message": "38화. 정파의 눈빛",
+    "description": "Sidebar label for magyo novel chapter 038-정파의-눈빛"
+  },
+  "sidebar.novelMagyoSidebar.doc.039-무림맹-청년단": {
+    "message": "39화. 무림맹 청년단",
+    "description": "Sidebar label for magyo novel chapter 039-무림맹-청년단"
+  },
+  "sidebar.novelMagyoSidebar.doc.040-가난한-소문파의-협객": {
+    "message": "40화. 가난한 소문파의 협객",
+    "description": "Sidebar label for magyo novel chapter 040-가난한-소문파의-협객"
+  },
+  "sidebar.novelMagyoSidebar.doc.041-무도대회-준비": {
+    "message": "41화. 무도대회 준비",
+    "description": "Sidebar label for magyo novel chapter 041-무도대회-준비"
+  },
+  "sidebar.novelMagyoSidebar.doc.042-맹주-아들의-특권": {
+    "message": "42화. 맹주 아들의 특권",
+    "description": "Sidebar label for magyo novel chapter 042-맹주-아들의-특권"
+  },
+  "sidebar.novelMagyoSidebar.doc.043-법과-명분을-역이용": {
+    "message": "43화. 법과 명분을 역이용",
+    "description": "Sidebar label for magyo novel chapter 043-법과-명분을-역이용"
+  },
+  "sidebar.novelMagyoSidebar.doc.044-합법적으로-패다": {
+    "message": "44화. 합법적으로 패다",
+    "description": "Sidebar label for magyo novel chapter 044-합법적으로-패다"
+  },
+  "sidebar.novelMagyoSidebar.doc.045-청년단의-절반": {
+    "message": "45화. 청년단의 절반",
+    "description": "Sidebar label for magyo novel chapter 045-청년단의-절반"
+  },
+  "sidebar.novelMagyoSidebar.doc.046-대문파의-항의": {
+    "message": "46화. 대문파의 항의",
+    "description": "Sidebar label for magyo novel chapter 046-대문파의-항의"
+  },
+  "sidebar.novelMagyoSidebar.doc.047-맹주실-압박": {
+    "message": "47화. 맹주실 압박",
+    "description": "Sidebar label for magyo novel chapter 047-맹주실-압박"
+  },
+  "sidebar.novelMagyoSidebar.doc.048-시험의-밤": {
+    "message": "48화. 시험의 밤",
+    "description": "Sidebar label for magyo novel chapter 048-시험의-밤"
+  },
+  "sidebar.novelMagyoSidebar.doc.049-청년단-최고-위치": {
+    "message": "49화. 청년단 최고 위치",
+    "description": "Sidebar label for magyo novel chapter 049-청년단-최고-위치"
+  },
+  "sidebar.novelMagyoSidebar.doc.050-맞아-근데-어쩌냐": {
+    "message": "50화. 맞아 근데 어쩌냐",
+    "description": "Sidebar label for magyo novel chapter 050-맞아-근데-어쩌냐"
+  },
+  "sidebar.novelMagyoSidebar.doc.051-변방-순찰-명목": {
+    "message": "51화. 변방 순찰 명목",
+    "description": "Sidebar label for magyo novel chapter 051-변방-순찰-명목"
+  },
+  "sidebar.novelMagyoSidebar.doc.052-첫-임무": {
+    "message": "52화. 첫 임무",
+    "description": "Sidebar label for magyo novel chapter 052-첫-임무"
+  },
+  "sidebar.novelMagyoSidebar.doc.053-마을-입구의-피투성이": {
+    "message": "53화. 마을 입구의 피투성이",
+    "description": "Sidebar label for magyo novel chapter 053-마을-입구의-피투성이"
+  },
+  "sidebar.novelMagyoSidebar.doc.054-보수도-안-나오는데": {
+    "message": "54화. 보수도 안 나오는데",
+    "description": "Sidebar label for magyo novel chapter 054-보수도-안-나오는데"
+  },
+  "sidebar.novelMagyoSidebar.doc.055-무인이-약자를-지키는-데-이유가-필요한가요": {
+    "message": "55화. 무인이 약자를 지키는 데 이유가 필요한가요",
+    "description": "Sidebar label for magyo novel chapter 055-무인이-약자를-지키는-데-이유가-필요한가요"
+  },
+  "sidebar.novelMagyoSidebar.doc.056-가식-떨지-마라": {
+    "message": "56화. 가식 떨지 마라",
+    "description": "Sidebar label for magyo novel chapter 056-가식-떨지-마라"
+  },
+  "sidebar.novelMagyoSidebar.doc.057-눈빛이-진짜임을-알다": {
+    "message": "57화. 눈빛이 진짜임을 알다",
+    "description": "Sidebar label for magyo novel chapter 057-눈빛이-진짜임을-알다"
+  },
+  "sidebar.novelMagyoSidebar.doc.058-삼류-검법-개조": {
+    "message": "58화. 삼류 검법 개조",
+    "description": "Sidebar label for magyo novel chapter 058-삼류-검법-개조"
+  },
+  "sidebar.novelMagyoSidebar.doc.059-이렇게-찔러야-한-번에-목이-잘리지": {
+    "message": "59화. 이렇게 찔러야 한 번에 목이 잘리지",
+    "description": "Sidebar label for magyo novel chapter 059-이렇게-찔러야-한-번에-목이-잘리지"
+  },
+  "sidebar.novelMagyoSidebar.doc.060-눈치-없는-제자": {
+    "message": "60화. 눈치 없는 제자",
+    "description": "Sidebar label for magyo novel chapter 060-눈치-없는-제자"
+  },
+  "sidebar.novelMagyoSidebar.doc.061-사파-밀정의-습격": {
+    "message": "61화. 사파 밀정의 습격",
+    "description": "Sidebar label for magyo novel chapter 061-사파-밀정의-습격"
+  },
+  "sidebar.novelMagyoSidebar.doc.062-목숨을-건-청운-잔혹한-천마": {
+    "message": "62화. 목숨을 건 청운 잔혹한 천마",
+    "description": "Sidebar label for magyo novel chapter 062-목숨을-건-청운-잔혹한-천마"
+  },
+  "sidebar.novelMagyoSidebar.doc.063-약초-자생지": {
+    "message": "63화. 약초 자생지",
+    "description": "Sidebar label for magyo novel chapter 063-약초-자생지"
+  },
+  "sidebar.novelMagyoSidebar.doc.064-마교-내통-누명": {
+    "message": "64화. 마교 내통 누명",
+    "description": "Sidebar label for magyo novel chapter 064-마교-내통-누명"
+  },
+  "sidebar.novelMagyoSidebar.doc.065-무림맹의-묵살": {
+    "message": "65화. 무림맹의 묵살",
+    "description": "Sidebar label for magyo novel chapter 065-무림맹의-묵살"
+  },
+  "sidebar.novelMagyoSidebar.doc.066-억울함의-끝": {
+    "message": "66화. 억울함의 끝",
+    "description": "Sidebar label for magyo novel chapter 066-억울함의-끝"
+  },
+  "sidebar.novelMagyoSidebar.doc.067-조사관-난입": {
+    "message": "67화. 조사관 난입",
+    "description": "Sidebar label for magyo novel chapter 067-조사관-난입"
+  },
+  "sidebar.novelMagyoSidebar.doc.068-뇌물을-건네다": {
+    "message": "68화. 뇌물을 건네다",
+    "description": "Sidebar label for magyo novel chapter 068-뇌물을-건네다"
+  },
+  "sidebar.novelMagyoSidebar.doc.069-뇌물-줬으니-죄를-인정했네": {
+    "message": "69화. 뇌물 줬으니 죄를 인정했네",
+    "description": "Sidebar label for magyo novel chapter 069-뇌물-줬으니-죄를-인정했네"
+  },
+  "sidebar.novelMagyoSidebar.doc.070-진짜-밀통-장부": {
+    "message": "70화. 진짜 밀통 장부",
+    "description": "Sidebar label for magyo novel chapter 070-진짜-밀통-장부"
+  },
+  "sidebar.novelMagyoSidebar.doc.071-기밀-창고-습격": {
+    "message": "71화. 기밀 창고 습격",
+    "description": "Sidebar label for magyo novel chapter 071-기밀-창고-습격"
+  },
+  "sidebar.novelMagyoSidebar.doc.072-암시장-거래-기록": {
+    "message": "72화. 암시장 거래 기록",
+    "description": "Sidebar label for magyo novel chapter 072-암시장-거래-기록"
+  },
+  "sidebar.novelMagyoSidebar.doc.073-상소문-유포": {
+    "message": "73화. 상소문 유포",
+    "description": "Sidebar label for magyo novel chapter 073-상소문-유포"
+  },
+  "sidebar.novelMagyoSidebar.doc.074-정파-도리": {
+    "message": "74화. 정파 도리",
+    "description": "Sidebar label for magyo novel chapter 074-정파-도리"
+  },
+  "sidebar.novelMagyoSidebar.doc.075-네-목-끊는-데는-마교-도리로-해주마": {
+    "message": "75화. 네 목 끊는 데는 마교 도리로 해주마",
+    "description": "Sidebar label for magyo novel chapter 075-네-목-끊는-데는-마교-도리로-해주마"
+  },
+  "sidebar.novelMagyoSidebar.doc.076-비무제-개막": {
+    "message": "76화. 비무제 개막",
+    "description": "Sidebar label for magyo novel chapter 076-비무제-개막"
+  },
+  "sidebar.novelMagyoSidebar.doc.077-창천일검-제갈운": {
+    "message": "77화. 창천일검 제갈운",
+    "description": "Sidebar label for magyo novel chapter 077-창천일검-제갈운"
+  },
+  "sidebar.novelMagyoSidebar.doc.078-금지된-약물": {
+    "message": "78화. 금지된 약물",
+    "description": "Sidebar label for magyo novel chapter 078-금지된-약물"
+  },
+  "sidebar.novelMagyoSidebar.doc.079-존대의-가면": {
+    "message": "79화. 존대의 가면",
+    "description": "Sidebar label for magyo novel chapter 079-존대의-가면"
+  },
+  "sidebar.novelMagyoSidebar.doc.080-은밀한-가해": {
+    "message": "80화. 은밀한 가해",
+    "description": "Sidebar label for magyo novel chapter 080-은밀한-가해"
+  },
+  "sidebar.novelMagyoSidebar.doc.081-혈도-파괴": {
+    "message": "81화. 혈도 파괴",
+    "description": "Sidebar label for magyo novel chapter 081-혈도-파괴"
+  },
+  "sidebar.novelMagyoSidebar.doc.082-청운의-위기": {
+    "message": "82화. 청운의 위기",
+    "description": "Sidebar label for magyo novel chapter 082-청운의-위기"
+  },
+  "sidebar.novelMagyoSidebar.doc.083-난입-등록": {
+    "message": "83화. 난입 등록",
+    "description": "Sidebar label for magyo novel chapter 083-난입-등록"
+  },
+  "sidebar.novelMagyoSidebar.doc.084-초고속-박살": {
+    "message": "84화. 초고속 박살",
+    "description": "Sidebar label for magyo novel chapter 084-초고속-박살"
+  },
+  "sidebar.novelMagyoSidebar.doc.085-결승-진출": {
+    "message": "85화. 결승 진출",
+    "description": "Sidebar label for magyo novel chapter 085-결승-진출"
+  },
+  "sidebar.novelMagyoSidebar.doc.086-그게-끝이냐": {
+    "message": "86화. 그게 끝이냐",
+    "description": "Sidebar label for magyo novel chapter 086-그게-끝이냐"
+  },
+  "sidebar.novelMagyoSidebar.doc.087-약침-폭로": {
+    "message": "87화. 약침 폭로",
+    "description": "Sidebar label for magyo novel chapter 087-약침-폭로"
+  },
+  "sidebar.novelMagyoSidebar.doc.088-관중석-한복판에-꽂다": {
+    "message": "88화. 관중석 한복판에 꽂다",
+    "description": "Sidebar label for magyo novel chapter 088-관중석-한복판에-꽂다"
+  },
+  "sidebar.novelMagyoSidebar.doc.089-제갈세가의-비자금": {
+    "message": "89화. 제갈세가의 비자금",
+    "description": "Sidebar label for magyo novel chapter 089-제갈세가의-비자금"
+  },
+  "sidebar.novelMagyoSidebar.doc.090-구파일방의-영약-횡령": {
+    "message": "90화. 구파일방의 영약 횡령",
+    "description": "Sidebar label for magyo novel chapter 090-구파일방의-영약-횡령"
+  },
+  "sidebar.novelMagyoSidebar.doc.091-남의-돈-뺏는-건-내-전문이지": {
+    "message": "91화. 남의 돈 뺏는 건 내 전문이지",
+    "description": "Sidebar label for magyo novel chapter 091-남의-돈-뺏는-건-내-전문이지"
+  },
+  "sidebar.novelMagyoSidebar.doc.092-귀시장-잠입": {
+    "message": "92화. 귀시장 잠입",
+    "description": "Sidebar label for magyo novel chapter 092-귀시장-잠입"
+  },
+  "sidebar.novelMagyoSidebar.doc.093-지하-조직의-암호": {
+    "message": "93화. 지하 조직의 암호",
+    "description": "Sidebar label for magyo novel chapter 093-지하-조직의-암호"
+  },
+  "sidebar.novelMagyoSidebar.doc.094-도박장-판-쓸기": {
+    "message": "94화. 도박장 판 쓸기",
+    "description": "Sidebar label for magyo novel chapter 094-도박장-판-쓸기"
+  },
+  "sidebar.novelMagyoSidebar.doc.095-경매장-털이": {
+    "message": "95화. 경매장 털이",
+    "description": "Sidebar label for magyo novel chapter 095-경매장-털이"
+  },
+  "sidebar.novelMagyoSidebar.doc.096-흑야차의-암살자": {
+    "message": "96화. 흑야차의 암살자",
+    "description": "Sidebar label for magyo novel chapter 096-흑야차의-암살자"
+  },
+  "sidebar.novelMagyoSidebar.doc.097-천마위압": {
+    "message": "97화. 천마위압",
+    "description": "Sidebar label for magyo novel chapter 097-천마위압"
+  },
+  "sidebar.novelMagyoSidebar.doc.098-지분-70퍼센트는-내-거다": {
+    "message": "98화. 지분 70퍼센트는 내 거다",
+    "description": "Sidebar label for magyo novel chapter 098-지분-70퍼센트는-내-거다"
+  },
+  "sidebar.novelMagyoSidebar.doc.099-무림맹-이름으로-풀다": {
+    "message": "99화. 무림맹 이름으로 풀다",
+    "description": "Sidebar label for magyo novel chapter 099-무림맹-이름으로-풀다"
+  },
+  "sidebar.novelMagyoSidebar.doc.100-송덕비": {
+    "message": "100화. 송덕비",
+    "description": "Sidebar label for magyo novel chapter 100-송덕비"
+  },
+  "sidebar.novelMagyoSidebar.doc.101-늙은-장로들의-연합": {
+    "message": "101화. 늙은 장로들의 연합",
+    "description": "Sidebar label for magyo novel chapter 101-늙은-장로들의-연합"
+  },
+  "sidebar.novelMagyoSidebar.doc.102-청문회-소환": {
+    "message": "102화. 청문회 소환",
+    "description": "Sidebar label for magyo novel chapter 102-청문회-소환"
+  },
+  "sidebar.novelMagyoSidebar.doc.103-불가의-자비": {
+    "message": "103화. 불가의 자비",
+    "description": "Sidebar label for magyo novel chapter 103-불가의-자비"
+  },
+  "sidebar.novelMagyoSidebar.doc.104-무공-출처-질타": {
+    "message": "104화. 무공 출처 질타",
+    "description": "Sidebar label for magyo novel chapter 104-무공-출처-질타"
+  },
+  "sidebar.novelMagyoSidebar.doc.105-맹주의-방관": {
+    "message": "105화. 맹주의 방관",
+    "description": "Sidebar label for magyo novel chapter 105-맹주의-방관"
+  },
+  "sidebar.novelMagyoSidebar.doc.106-압박의-끝": {
+    "message": "106화. 압박의 끝",
+    "description": "Sidebar label for magyo novel chapter 106-압박의-끝"
+  },
+  "sidebar.novelMagyoSidebar.doc.107-품속의-장부": {
+    "message": "107화. 품속의 장부",
+    "description": "Sidebar label for magyo novel chapter 107-품속의-장부"
+  },
+  "sidebar.novelMagyoSidebar.doc.108-소림-혜경-대사님": {
+    "message": "108화. 소림 혜경 대사님",
+    "description": "Sidebar label for magyo novel chapter 108-소림-혜경-대사님"
+  },
+  "sidebar.novelMagyoSidebar.doc.109-무당파-명진-도인님": {
+    "message": "109화. 무당파 명진 도인님",
+    "description": "Sidebar label for magyo novel chapter 109-무당파-명진-도인님"
+  },
+  "sidebar.novelMagyoSidebar.doc.110-청문회장의-멘붕": {
+    "message": "110화. 청문회장의 멘붕",
+    "description": "Sidebar label for magyo novel chapter 110-청문회장의-멘붕"
+  },
+  "sidebar.novelMagyoSidebar.doc.111-늙은이들-조용히-은퇴하고": {
+    "message": "111화. 늙은이들 조용히 은퇴하고",
+    "description": "Sidebar label for magyo novel chapter 111-늙은이들-조용히-은퇴하고"
+  },
+  "sidebar.novelMagyoSidebar.doc.112-산으로-돌아가라": {
+    "message": "112화. 산으로 돌아가라",
+    "description": "Sidebar label for magyo novel chapter 112-산으로-돌아가라"
+  },
+  "sidebar.novelMagyoSidebar.doc.113-국경-침범": {
+    "message": "113화. 국경 침범",
+    "description": "Sidebar label for magyo novel chapter 113-국경-침범"
+  },
+  "sidebar.novelMagyoSidebar.doc.114-세-원본의-대조": {
+    "message": "114화. 세 원본의 대조",
+    "description": "Sidebar label for magyo novel chapter 114-세-원본의-대조"
+  },
+  "sidebar.novelMagyoSidebar.doc.115-명분이-없다": {
+    "message": "115화. 명분이 없다",
+    "description": "Sidebar label for magyo novel chapter 115-명분이-없다"
+  },
+  "sidebar.novelMagyoSidebar.doc.116-단독-침투": {
+    "message": "116화. 단독 침투",
+    "description": "Sidebar label for magyo novel chapter 116-단독-침투"
+  },
+  "sidebar.novelMagyoSidebar.doc.117-소리-소문-없이": {
+    "message": "117화. 소리 소문 없이",
+    "description": "Sidebar label for magyo novel chapter 117-소리-소문-없이"
+  },
+  "sidebar.novelMagyoSidebar.doc.118-경비병-제압": {
+    "message": "118화. 경비병 제압",
+    "description": "Sidebar label for magyo novel chapter 118-경비병-제압"
+  },
+  "sidebar.novelMagyoSidebar.doc.119-본거지-한복판": {
+    "message": "119화. 본거지 한복판",
+    "description": "Sidebar label for magyo novel chapter 119-본거지-한복판"
+  },
+  "sidebar.novelMagyoSidebar.doc.120-혈랑의-침실": {
+    "message": "120화. 혈랑의 침실",
+    "description": "Sidebar label for magyo novel chapter 120-혈랑의-침실"
+  },
+  "sidebar.novelMagyoSidebar.doc.121-손가락을-자르고": {
+    "message": "121화. 손가락을 자르고",
+    "description": "Sidebar label for magyo novel chapter 121-손가락을-자르고"
+  },
+  "sidebar.novelMagyoSidebar.doc.122-사흘-줄-테니-철수해라": {
+    "message": "122화. 사흘 줄 테니 철수해라",
+    "description": "Sidebar label for magyo novel chapter 122-사흘-줄-테니-철수해라"
+  },
+  "sidebar.novelMagyoSidebar.doc.123-인질-해방": {
+    "message": "123화. 인질 해방",
+    "description": "Sidebar label for magyo novel chapter 123-인질-해방"
+  },
+  "sidebar.novelMagyoSidebar.doc.124-사과문": {
+    "message": "124화. 사과문",
+    "description": "Sidebar label for magyo novel chapter 124-사과문"
+  },
+  "sidebar.novelMagyoSidebar.doc.125-현장-대조": {
+    "message": "125화. 현장 대조",
+    "description": "Sidebar label for magyo novel chapter 125-현장-대조"
+  },
+  "sidebar.novelMagyoSidebar.doc.126-운송-경로-추적": {
+    "message": "126화. 운송 경로 추적",
+    "description": "Sidebar label for magyo novel chapter 126-운송-경로-추적"
+  },
+  "sidebar.novelMagyoSidebar.doc.127-세금-부과": {
+    "message": "127화. 세금 부과",
+    "description": "Sidebar label for magyo novel chapter 127-세금-부과"
+  },
+  "sidebar.novelMagyoSidebar.doc.128-관가-직속-통제-기구": {
+    "message": "128화. 관가 직속 통제 기구",
+    "description": "Sidebar label for magyo novel chapter 128-관가-직속-통제-기구"
+  },
+  "sidebar.novelMagyoSidebar.doc.129-과거-행적-조사": {
+    "message": "129화. 과거 행적 조사",
+    "description": "Sidebar label for magyo novel chapter 129-과거-행적-조사"
+  },
+  "sidebar.novelMagyoSidebar.doc.130-착복-장부": {
+    "message": "130화. 착복 장부",
+    "description": "Sidebar label for magyo novel chapter 130-착복-장부"
+  },
+  "sidebar.novelMagyoSidebar.doc.131-공식-대조와-책임표-상태-갱신": {
+    "message": "131화. 공식 대조와 책임표 상태 갱신",
+    "description": "Sidebar label for magyo novel chapter 131-공식-대조와-책임표-상태-갱신"
+  },
+  "sidebar.novelMagyoSidebar.doc.131-어린-기생들": {
+    "message": "131화. 어린 기생들",
+    "description": "Sidebar label for magyo novel chapter 131-어린-기생들"
+  },
+  "sidebar.novelMagyoSidebar.doc.132-공식-제출과-이의-접수": {
+    "message": "132화. 공식 제출과 이의 접수",
+    "description": "Sidebar label for magyo novel chapter 132-공식-제출과-이의-접수"
+  },
+  "sidebar.novelMagyoSidebar.doc.133-관군의-칼": {
+    "message": "133화. 관군의 칼",
+    "description": "Sidebar label for magyo novel chapter 133-관군의-칼"
+  },
+  "sidebar.novelMagyoSidebar.doc.134-현장-재확인-대조표": {
+    "message": "134화. 현장 재확인 대조표",
+    "description": "Sidebar label for magyo novel chapter 134-현장-재확인-대조표"
+  },
+  "sidebar.novelMagyoSidebar.doc.135-장부를-얼굴에-던지다": {
+    "message": "135화. 장부를 얼굴에 던지다",
+    "description": "Sidebar label for magyo novel chapter 135-장부를-얼굴에-던지다"
+  },
+  "sidebar.novelMagyoSidebar.doc.136-관무쌍청-몰라": {
+    "message": "136화. 관무쌍청 몰라",
+    "description": "Sidebar label for magyo novel chapter 136-관무쌍청-몰라"
+  },
+  "sidebar.novelMagyoSidebar.doc.137-야반도주": {
+    "message": "137화. 야반도주",
+    "description": "Sidebar label for magyo novel chapter 137-야반도주"
+  },
+  "sidebar.novelMagyoSidebar.doc.138-무림의-자존심": {
+    "message": "138화. 무림의 자존심",
+    "description": "Sidebar label for magyo novel chapter 138-무림의-자존심"
+  },
+  "sidebar.novelMagyoSidebar.doc.139-젊은-무사들의-집결": {
+    "message": "139화. 젊은 무사들의 집결",
+    "description": "Sidebar label for magyo novel chapter 139-젊은-무사들의-집결"
+  },
+  "sidebar.novelMagyoSidebar.doc.140-왜-자꾸-찾아와": {
+    "message": "140화. 왜 자꾸 찾아와",
+    "description": "Sidebar label for magyo novel chapter 140-왜-자꾸-찾아와"
+  },
+  "sidebar.novelMagyoSidebar.doc.141-청운의-설득": {
+    "message": "141화. 청운의 설득",
+    "description": "Sidebar label for magyo novel chapter 141-청운의-설득"
+  },
+  "sidebar.novelMagyoSidebar.doc.142-신무단-결성": {
+    "message": "142화. 신무단 결성",
+    "description": "Sidebar label for magyo novel chapter 142-신무단-결성"
+  },
+  "sidebar.novelMagyoSidebar.doc.143-마교식-지옥-훈련": {
+    "message": "143화. 마교식 지옥 훈련",
+    "description": "Sidebar label for magyo novel chapter 143-마교식-지옥-훈련"
+  },
+  "sidebar.novelMagyoSidebar.doc.144-불평의-끝": {
+    "message": "144화. 불평의 끝",
+    "description": "Sidebar label for magyo novel chapter 144-불평의-끝"
+  },
+  "sidebar.novelMagyoSidebar.doc.145-한-달의-변화": {
+    "message": "145화. 한 달의 변화",
+    "description": "Sidebar label for magyo novel chapter 145-한-달의-변화"
+  },
+  "sidebar.novelMagyoSidebar.doc.146-신처럼-추앙받다": {
+    "message": "146화. 신처럼 추앙받다",
+    "description": "Sidebar label for magyo novel chapter 146-신처럼-추앙받다"
+  },
+  "sidebar.novelMagyoSidebar.doc.147-잔당-일망타진": {
+    "message": "147화. 잔당 일망타진",
+    "description": "Sidebar label for magyo novel chapter 147-잔당-일망타진"
+  },
+  "sidebar.novelMagyoSidebar.doc.148-민초들의-구원자": {
+    "message": "148화. 민초들의 구원자",
+    "description": "Sidebar label for magyo novel chapter 148-민초들의-구원자"
+  },
+  "sidebar.novelMagyoSidebar.doc.149-위기감의-시작": {
+    "message": "149화. 위기감의 시작",
+    "description": "Sidebar label for magyo novel chapter 149-위기감의-시작"
+  },
+  "sidebar.novelMagyoSidebar.doc.150-빈칸을-지키는-절차": {
+    "message": "150화. 빈칸을 지키는 절차",
+    "description": "Sidebar label for magyo novel chapter 150-빈칸을-지키는-절차"
+  },
+  "sidebar.novelMagyoSidebar.doc.151-냄새를-맡은-교주": {
+    "message": "151화. 냄새를 맡은 교주",
+    "description": "Sidebar label for magyo novel chapter 151-냄새를-맡은-교주"
+  },
+  "sidebar.novelMagyoSidebar.doc.152-마교-특유의-연락망": {
+    "message": "152화. 마교 특유의 연락망",
+    "description": "Sidebar label for magyo novel chapter 152-마교-특유의-연락망"
+  },
+  "sidebar.novelMagyoSidebar.doc.153-밀사-급습": {
+    "message": "153화. 밀사 급습",
+    "description": "Sidebar label for magyo novel chapter 153-밀사-급습"
+  },
+  "sidebar.novelMagyoSidebar.doc.154-기밀-지도": {
+    "message": "154화. 기밀 지도",
+    "description": "Sidebar label for magyo novel chapter 154-기밀-지도"
+  },
+  "sidebar.novelMagyoSidebar.doc.155-현장-포획": {
+    "message": "155화. 현장 포획",
+    "description": "Sidebar label for magyo novel chapter 155-현장-포획"
+  },
+  "sidebar.novelMagyoSidebar.doc.156-자백-무공": {
+    "message": "156화. 자백 무공",
+    "description": "Sidebar label for magyo novel chapter 156-자백-무공"
+  },
+  "sidebar.novelMagyoSidebar.doc.157-정파-장로의-착복": {
+    "message": "157화. 정파 장로의 착복",
+    "description": "Sidebar label for magyo novel chapter 157-정파-장로의-착복"
+  },
+  "sidebar.novelMagyoSidebar.doc.158-마교-수뇌부의-고스톱": {
+    "message": "158화. 마교 수뇌부의 고스톱",
+    "description": "Sidebar label for magyo novel chapter 158-마교-수뇌부의-고스톱"
+  },
+  "sidebar.novelMagyoSidebar.doc.159-분노": {
+    "message": "159화. 분노",
+    "description": "Sidebar label for magyo novel chapter 159-분노"
+  },
+  "sidebar.novelMagyoSidebar.doc.160-밀통-장부": {
+    "message": "160화. 밀통 장부",
+    "description": "Sidebar label for magyo novel chapter 160-밀통-장부"
+  },
+  "sidebar.novelMagyoSidebar.doc.161-판을-짜다": {
+    "message": "161화. 판을 짜다",
+    "description": "Sidebar label for magyo novel chapter 161-판을-짜다"
+  },
+  "sidebar.novelMagyoSidebar.doc.162-한-번에-터뜨리기": {
+    "message": "162화. 한 번에 터뜨리기",
+    "description": "Sidebar label for magyo novel chapter 162-한-번에-터뜨리기"
+  },
+  "sidebar.novelMagyoSidebar.doc.163-친정": {
+    "message": "163화. 친정",
+    "description": "Sidebar label for magyo novel chapter 163-친정"
+  },
+  "sidebar.novelMagyoSidebar.doc.164-십만대산-침투": {
+    "message": "164화. 십만대산 침투",
+    "description": "Sidebar label for magyo novel chapter 164-십만대산-침투"
+  },
+  "sidebar.novelMagyoSidebar.doc.165-충신들과의-접선": {
+    "message": "165화. 충신들과의 접선",
+    "description": "Sidebar label for magyo novel chapter 165-충신들과의-접선"
+  },
+  "sidebar.novelMagyoSidebar.doc.166-가짜-교주의-배신": {
+    "message": "166화. 가짜 교주의 배신",
+    "description": "Sidebar label for magyo novel chapter 166-가짜-교주의-배신"
+  },
+  "sidebar.novelMagyoSidebar.doc.167-천마전-난입": {
+    "message": "167화. 천마전 난입",
+    "description": "Sidebar label for magyo novel chapter 167-천마전-난입"
+  },
+  "sidebar.novelMagyoSidebar.doc.168-정파의-남궁태의가-아니냐": {
+    "message": "168화. 정파의 남궁태의가 아니냐",
+    "description": "Sidebar label for magyo novel chapter 168-정파의-남궁태의가-아니냐"
+  },
+  "sidebar.novelMagyoSidebar.doc.169-천마신공-원형": {
+    "message": "169화. 천마신공 원형",
+    "description": "Sidebar label for magyo novel chapter 169-천마신공-원형"
+  },
+  "sidebar.novelMagyoSidebar.doc.170-살기의-정체": {
+    "message": "170화. 살기의 정체",
+    "description": "Sidebar label for magyo novel chapter 170-살기의-정체"
+  },
+  "sidebar.novelMagyoSidebar.doc.171-교주님이-돌아오셨다": {
+    "message": "171화. 교주님이 돌아오셨다",
+    "description": "Sidebar label for magyo novel chapter 171-교주님이-돌아오셨다"
+  },
+  "sidebar.novelMagyoSidebar.doc.172-숙청": {
+    "message": "172화. 숙청",
+    "description": "Sidebar label for magyo novel chapter 172-숙청"
+  },
+  "sidebar.novelMagyoSidebar.doc.173-마교-완전-접수": {
+    "message": "173화. 마교 완전 접수",
+    "description": "Sidebar label for magyo novel chapter 173-마교-완전-접수"
+  },
+  "sidebar.novelMagyoSidebar.doc.174-더블-라이프-완성": {
+    "message": "174화. 더블 라이프 완성",
+    "description": "Sidebar label for magyo novel chapter 174-더블-라이프-완성"
+  },
+  "sidebar.novelMagyoSidebar.doc.175-가회의-단죄": {
+    "message": "175화. 가회의 단죄",
+    "description": "Sidebar label for magyo novel chapter 175-가회의-단죄"
+  },
+  "sidebar.novelMagyoSidebar.doc.176-남궁진의-가식-폭로": {
+    "message": "176화. 남궁진의 가식 폭로",
+    "description": "Sidebar label for magyo novel chapter 176-남궁진의-가식-폭로"
+  },
+  "sidebar.novelMagyoSidebar.doc.177-부자-결투": {
+    "message": "177화. 부자 결투",
+    "description": "Sidebar label for magyo novel chapter 177-부자-결투"
+  },
+  "sidebar.novelMagyoSidebar.doc.178-새로운-가주": {
+    "message": "178화. 새로운 가주",
+    "description": "Sidebar label for magyo novel chapter 178-새로운-가주"
+  },
+  "sidebar.novelMagyoSidebar.doc.179-썩은-장로들의-반격": {
+    "message": "179화. 썩은 장로들의 반격",
+    "description": "Sidebar label for magyo novel chapter 179-썩은-장로들의-반격"
+  },
+  "sidebar.novelMagyoSidebar.doc.180-관가와-사파-용병": {
+    "message": "180화. 관가와 사파 용병",
+    "description": "Sidebar label for magyo novel chapter 180-관가와-사파-용병"
+  },
+  "sidebar.novelMagyoSidebar.doc.181-신무단-마교-정예": {
+    "message": "181화. 신무단 마교 정예",
+    "description": "Sidebar label for magyo novel chapter 181-신무단-마교-정예"
+  },
+  "sidebar.novelMagyoSidebar.doc.182-본산-포위": {
+    "message": "182화. 본산 포위",
+    "description": "Sidebar label for magyo novel chapter 182-본산-포위"
+  },
+  "sidebar.novelMagyoSidebar.doc.183-정의를-외치며": {
+    "message": "183화. 정의를 외치며",
+    "description": "Sidebar label for magyo novel chapter 183-정의를-외치며"
+  },
+  "sidebar.novelMagyoSidebar.doc.184-협은-포장지였을-뿐이다": {
+    "message": "184화. 협은 포장지였을 뿐이다",
+    "description": "Sidebar label for magyo novel chapter 184-협은-포장지였을-뿐이다"
+  },
+  "sidebar.novelMagyoSidebar.doc.185-무공-폐출": {
+    "message": "185화. 무공 폐출",
+    "description": "Sidebar label for magyo novel chapter 185-무공-폐출"
+  },
+  "sidebar.novelMagyoSidebar.doc.186-강호에서-축출": {
+    "message": "186화. 강호에서 축출",
+    "description": "Sidebar label for magyo novel chapter 186-강호에서-축출"
+  },
+  "sidebar.novelMagyoSidebar.doc.187-십만-대군": {
+    "message": "187화. 십만 대군",
+    "description": "Sidebar label for magyo novel chapter 187-십만-대군"
+  },
+  "sidebar.novelMagyoSidebar.doc.188-강호의-공포": {
+    "message": "188화. 강호의 공포",
+    "description": "Sidebar label for magyo novel chapter 188-강호의-공포"
+  },
+  "sidebar.novelMagyoSidebar.doc.189-소집": {
+    "message": "189화. 소집",
+    "description": "Sidebar label for magyo novel chapter 189-소집"
+  },
+  "sidebar.novelMagyoSidebar.doc.190-정마-통합-군단의-출격": {
+    "message": "190화. 정마 통합 군단의 출격",
+    "description": "Sidebar label for magyo novel chapter 190-정마-통합-군단의-출격"
+  },
+  "sidebar.novelMagyoSidebar.doc.191-청운이-이끄는-전장": {
+    "message": "191화. 청운이 이끄는 전장",
+    "description": "Sidebar label for magyo novel chapter 191-청운이-이끄는-전장"
+  },
+  "sidebar.novelMagyoSidebar.doc.192-어깨를-맞대고": {
+    "message": "192화. 어깨를 맞대고",
+    "description": "Sidebar label for magyo novel chapter 192-어깨를-맞대고"
+  },
+  "sidebar.novelMagyoSidebar.doc.193-최종-보스": {
+    "message": "193화. 최종 보스",
+    "description": "Sidebar label for magyo novel chapter 193-최종-보스"
+  },
+  "sidebar.novelMagyoSidebar.doc.194-남궁세가-검법과-천마신공": {
+    "message": "194화. 남궁세가 검법과 천마신공",
+    "description": "Sidebar label for magyo novel chapter 194-남궁세가-검법과-천마신공"
+  },
+  "sidebar.novelMagyoSidebar.doc.195-산산조각": {
+    "message": "195화. 산산조각",
+    "description": "Sidebar label for magyo novel chapter 195-산산조각"
+  },
+  "sidebar.novelMagyoSidebar.doc.196-천하무림연합": {
+    "message": "196화. 천하무림연합",
+    "description": "Sidebar label for magyo novel chapter 196-천하무림연합"
+  },
+  "sidebar.novelMagyoSidebar.doc.197-약자를-지키는-무인": {
+    "message": "197화. 약자를 지키는 무인",
+    "description": "Sidebar label for magyo novel chapter 197-약자를-지키는-무인"
+  },
+  "sidebar.novelMagyoSidebar.doc.198-청운의-후일담": {
+    "message": "198화. 청운의 후일담",
+    "description": "Sidebar label for magyo novel chapter 198-청운의-후일담"
+  },
+  "sidebar.novelMagyoSidebar.doc.199-대단원의-술잔": {
+    "message": "199화. 대단원의 술잔",
+    "description": "Sidebar label for magyo novel chapter 199-대단원의-술잔"
+  },
+  "sidebar.novelMagyoSidebar.doc.200-내-이름을-팔아": {
+    "message": "200화. 내 이름을 팔아",
+    "description": "Sidebar label for magyo novel chapter 200-내-이름을-팔아"
+  },
+  "sidebar.novelMagyoSidebar.doc.마교-교주가-정파-맹주로-사기-친다": {
+    "message": "마교 교주가 정파 맹주로 사기 친다",
+    "description": "Sidebar label for magyo novel chapter 마교-교주가-정파-맹주로-사기-친다"
+  }
+}

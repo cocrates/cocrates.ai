@@ -1,6 +1,7 @@
 import {
   existsSync,
   mkdirSync,
+  readdirSync,
   readFileSync,
   writeFileSync,
 } from 'node:fs';
@@ -11,6 +12,10 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const rootDir = join(__dirname, '..');
 
 const enManuscriptDir = join(rootDir, 'examples/rejected-future/i18n/us/manuscripts');
+const magyoManuscriptDir = join(
+  rootDir,
+  'examples/마교-교주가-정파-맹주로-사기-친다/manuscripts',
+);
 const nonKoLocales = ['en', 'zh-Hans', 'id'];
 
 const koToEnFilename = {
@@ -36,6 +41,8 @@ const koToEnFilename = {
   '019-충돌.md': '019-Collision.md',
   '020-평화.md': '020-Peace.md',
 };
+
+const MAGYO_INTRO_ID = '마교-교주가-정파-맹주로-사기-친다';
 
 function parseEnglishFilename(filename) {
   const base = filename.replace(/\.md$/, '');
@@ -65,12 +72,48 @@ function englishSidebarLabel(filename) {
   return `Chapter ${chapterNumber}. ${title}`;
 }
 
+function parseMagyoFilename(filename) {
+  const base = filename.replace(/\.md$/, '');
+
+  if (base === MAGYO_INTRO_ID) {
+    return {chapterNumber: null, title: '마교 교주가 정파 맹주로 사기 친다'};
+  }
+
+  const numberedMatch = base.match(/^(\d{3})-(.+)$/);
+  if (numberedMatch) {
+    return {
+      chapterNumber: Number.parseInt(numberedMatch[1], 10),
+      title: numberedMatch[2].replace(/-/g, ' '),
+    };
+  }
+
+  return {chapterNumber: null, title: base.replace(/-/g, ' ')};
+}
+
+function magyoSidebarLabel(filename) {
+  const {chapterNumber, title} = parseMagyoFilename(filename);
+
+  if (chapterNumber === null) {
+    return title;
+  }
+
+  return `${chapterNumber}화. ${title}`;
+}
+
 function injectPaginationLabel(content, label) {
   const frontMatterMatch = content.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?/);
 
   if (frontMatterMatch) {
+    const existing = frontMatterMatch[1];
     const body = content.slice(frontMatterMatch[0].length);
-    return `---\npagination_label: ${JSON.stringify(label)}\n---\n${body}`;
+    if (/^pagination_label:/m.test(existing)) {
+      const updated = existing.replace(
+        /^pagination_label:.*$/m,
+        `pagination_label: ${JSON.stringify(label)}`,
+      );
+      return `---\n${updated}\n---\n${body}`;
+    }
+    return `---\npagination_label: ${JSON.stringify(label)}\n${existing}\n---\n${body}`;
   }
 
   return `---\npagination_label: ${JSON.stringify(label)}\n---\n${content}`;
@@ -80,7 +123,7 @@ function ensureDir(path) {
   mkdirSync(path, {recursive: true});
 }
 
-function syncNovelI18n() {
+function syncRejectedFutureI18n() {
   for (const locale of nonKoLocales) {
     const pluginDir = join(rootDir, `i18n/${locale}/docusaurus-plugin-content-docs-novel`);
     const targetDir = join(pluginDir, 'current');
@@ -117,8 +160,56 @@ function syncNovelI18n() {
       'utf8',
     );
   }
+}
 
-  console.log(`Synced novel i18n manuscripts for: ${nonKoLocales.join(', ')}`);
+function syncMagyoI18n() {
+  const magyoFiles = readdirSync(magyoManuscriptDir).filter((filename) =>
+    filename.endsWith('.md'),
+  );
+
+  for (const locale of nonKoLocales) {
+    const pluginDir = join(
+      rootDir,
+      `i18n/${locale}/docusaurus-plugin-content-docs-novel-magyo`,
+    );
+    const targetDir = join(pluginDir, 'current');
+    ensureDir(targetDir);
+
+    const sidebarTranslations = {};
+
+    for (const filename of magyoFiles) {
+      const docId = filename.replace(/\.md$/, '');
+      const sourcePath = join(magyoManuscriptDir, filename);
+      const targetPath = join(targetDir, filename);
+      const paginationLabel = magyoSidebarLabel(filename);
+      const content = readFileSync(sourcePath, 'utf8');
+
+      writeFileSync(
+        targetPath,
+        injectPaginationLabel(content, paginationLabel),
+        'utf8',
+      );
+
+      sidebarTranslations[`sidebar.novelMagyoSidebar.doc.${docId}`] = {
+        message: paginationLabel,
+        description: `Sidebar label for magyo novel chapter ${docId}`,
+      };
+    }
+
+    writeFileSync(
+      join(pluginDir, 'current.json'),
+      `${JSON.stringify(sidebarTranslations, null, 2)}\n`,
+      'utf8',
+    );
+  }
+}
+
+function syncNovelI18n() {
+  syncRejectedFutureI18n();
+  syncMagyoI18n();
+  console.log(
+    `Synced novel i18n manuscripts for: ${nonKoLocales.join(', ')} (rejected-future + magyo)`,
+  );
 }
 
 syncNovelI18n();

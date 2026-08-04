@@ -74,6 +74,16 @@ const config: Config = {
         numberPrefixParser: false,
       },
     ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'novel-magyo',
+        path: 'examples/마교-교주가-정파-맹주로-사기-친다/manuscripts',
+        routeBasePath: 'novel/마교-교주가-정파-맹주로-사기-친다',
+        sidebarPath: './sidebarsNovelMagyo.ts',
+        numberPrefixParser: false,
+      },
+    ],
   ],
 
   themeConfig: {
