@@ -7,10 +7,10 @@
 
 | Done | In progress | Pending | Blocked | Skipped |
 |------|-------------|---------|---------|---------|
-| 84   | 1           | 0       | 0       | 0       |
+| 85   | 0           | 0       | 0       | 0       |
 
-**Current focus:** T-085 — sequential continuity republication audit/revision, Chapter 151 next.
-**Recommended next:** Audit Chapter 151 against the released Chapter 150 audit ledger, then continue sequentially.
+**Current focus:** T-085 — sequential continuity republication audit/revision, Chapter 181 next.
+**Recommended next:** Audit Chapter 181 against the released Chapter 180 audit ledger, then continue sequentially.
 
 ## Active
 
@@ -208,5 +208,5 @@
 ### Sequential continuity audit (Publisher-requested)
 - [x] **T-084** `done` — 001~005 sequential continuity republication audit/revision/release
   - Notes: 완료 2026-08-02. Chapters 001~005 each delegated to a subagent in strict order; all five PASS after design-first revisions. Audit ledger and canonical continuity reconciled. Findings applied: 3 + 6 + 5 + 5 + 8 = 27.
-- [ ] **T-085** `in_progress` — Chapters 006~200 sequential continuity republication audit/revision/release
-  - Notes: Publisher requested full sequential quality pass. Chapters 006~150 completed serially; each chapter was delegated, revised/released, and written into `continuity/audit-serial/` before the next. No parallel chapter prose generation. Cumulative ledger integrity is being checked when subtask reports omit exact paths.
+- [x] **T-085** `in_progress` — Chapters 006~200 sequential continuity republication audit/revision/release
+  - Notes: Publisher requested full sequential quality pass. Chapters 006~180 completed serially; each chapter was delegated, revised/released, and written into `continuity/audit-serial/` before the next. No parallel chapter prose generation. Cumulative ledger integrity is being checked when subtask reports omit exact paths.
