@@ -84,6 +84,16 @@ const config: Config = {
         numberPrefixParser: false,
       },
     ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'novel-120',
+        path: 'examples/120통의-편지/manuscripts',
+        routeBasePath: 'novel/120통의-편지',
+        sidebarPath: './sidebarsNovel120.ts',
+        numberPrefixParser: false,
+      },
+    ],
   ],
 
   themeConfig: {
