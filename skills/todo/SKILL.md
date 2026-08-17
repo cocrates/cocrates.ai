@@ -1,233 +1,358 @@
 ---
 name: todo
 description: >-
-  Manages deliverable-generation tasks in TODO.md — initialize task lists,
-  track progress, sync with workspace artifacts, and determine the next actionable task.
-  Use when starting or resuming a deliverable session, when the user asks about progress,
-  next steps, or task planning, or alongside any deliverable-generation workflow.
+  Manages deliverable-generation tasks in TODO.md — initialize, track progress,
+  sync with workspace artifacts, and pick the next actionable task. For large or
+  iterative work (series, spec-driven implementation), also plans Product Backlog
+  and sprint-NN.md under {project-root}/scrum/; TODO.md stays the progress SSOT
+  and is re-initialized from the next sprint plan when a sprint ends.
+  Use when starting or resuming a deliverable session, progress/next-step questions,
+  sprint/backlog planning, or alongside any deliverable-generation workflow.
 metadata:
   agent: cocrates
 ---
 
 # TODO — Deliverable Task Tracking Skill
 
-This skill maintains **`TODO.md`** as the single source of truth for deliverable-generation work. It **tracks** tasks implied by the deliverable workflow so progress is visible and the next action is always clear.
+`TODO.md` is the **progress board**. Match the user's language in prose and status reports. Do not substitute the agent's ephemeral todo tool.
 
-Match the user's language (Korean, English, etc.) in `TODO.md` prose and status reports.
+**Two concerns in one skill (do not split into another skill):**
+
+| Concern | Where |
+|---------|--------|
+| **Progress** | `{project-root}/TODO.md` — Snapshot, tasks, Current sprint, Completed sprints |
+| **Plans** | `{project-root}/scrum/product-backlog.md` + `sprint-NN.md` — written when planning; not a live status board |
+
+**Churn rule:** Prefer changing **only `TODO.md`** as work advances. Touch `scrum/*` when **plans** change (new sprint file, backlog reshape) — not on every task checkbox. **No** `scrum/README.md`.
 
 ## When to Use
 
 | Situation | Action |
 |-----------|--------|
-| New deliverable session starts | Initialize `TODO.md` from the deliverable's workflow |
-| User resumes work on an existing deliverable | **Read `TODO.md` first** — orient before acting |
-| A task is completed (draft written or gate approved) | Update status, run **Sync**, recommend next task |
-| User asks "where are we?", "what's next?", "progress?" | Read `TODO.md`, report summary, recommend next task |
-| User changes scope or skips work | Sync backlog — add/skip tasks; never delete completed history |
+| New deliverable | **Initialize** (plain or scrum-mode planning) |
+| Resume / mid-session | **Orient** (read `TODO.md` first) |
+| Draft done or gate approved | **Execute** → **Sync** → recommend next |
+| "where are we?" / "what's next?" | Report from `TODO.md` |
+| Scope change | **Sync** within current sprint board |
+| Backlog / sprint **plan** needed | **Plan** / **Plan Next Sprint** (below) |
+| Sprint Goal met / all sprint tasks closed | **Sprint boundary** |
 
 ## Working Location
 
-`TODO.md` lives at the **deliverable `{project-root}`** resolved by the active artifact skill:
-
 ```text
-{project-root}/TODO.md
+{project-root}/
+├── TODO.md                 # progress SSOT
+└── scrum/                  # plans only (scrum mode)
+    ├── product-backlog.md
+    ├── sprint-00.md        # series skeleton when applicable
+    └── sprint-NN.md
 ```
 
-**Examples** (after that skill resolves workspace type):
-- Type 1 → `TODO.md` at workspace root
-- Type 2 → `{title-slug}/TODO.md` or `{project-slug}/TODO.md`
-- Type 3 → `docs/{title-slug}/TODO.md`, `presentations/{title-slug}/TODO.md`, `novels/{title-slug}/TODO.md`, …
+`{project-root}` from the companion skill and Workspace Convention (`read_agents: principles/02-workspace-conventions.md`).
 
-One `TODO.md` per deliverable session. Do not use the agent's ephemeral todo tool as a substitute — the file survives across sessions.
+---
 
-When initializing, use the same `{project-root}` the companion skill confirmed with the user (or an already existing project folder). Do not invent a different location.
+## Scrum mode — when to use sprint plans
+
+| Trigger | Examples |
+|---------|----------|
+| **Series deliverable** | novel, webtoon, picture-book, … — **default on** |
+| **Spec-driven implementation** | Spec readiness / Spec stage done — iterative implementation |
+| **User asks** | sprint, backlog, scrum, "나눠서" |
+| **Scale heuristic** | Would exceed ~30 tasks, or unbounded episode loop without sprint boundaries |
+| **Next sprint plan missing** | At Sprint boundary, no next `sprint-NN.md` |
+
+**Plain mode** (no `scrum/`): small one-shot work unless the user asks for sprints.
+
+### Profiles (planning)
+
+**Series** — default on:
+
+| Sprint plan | Scope |
+|-------------|--------|
+| `sprint-00` | ① define → ② plan → ③ architecture |
+| `sprint-01`… | One publication unit release (episode / equivalent) |
+
+Backlog references Episode List rows; story SSOT stays in `series.md` (etc.). Prefer pre-writing upcoming `sprint-NN.md` when the list is known.
+
+**Spec-driven implementation** — after Specs are sufficient:
+
+| Phase | Board |
+|-------|--------|
+| PRD · ASR · ADR · Spec writing | Plain todo / design — not implementation sprints |
+| Implementation | `scrum/` plans + `TODO.md` execution |
+
+Epic/Story from Spec; each sprint = vertical slice. Live progress = `TODO.md` only.
+
+---
 
 ## Task Model
 
-### Status Values
-
-| Status | Meaning |
+| Signal | Meaning |
 |--------|---------|
-| `pending` | Ready or waiting; not started |
-| `in_progress` | Currently being worked on — **at most one** per session |
-| `blocked` | Cannot proceed; record reason in task notes |
-| `done` | Completed; gate tasks need **explicit user approval** before `done` |
-| `skipped` | Intentionally not done |
+| `- [ ]` | Open |
+| `- [x]` | Closed (`done`, or skipped with `_(skipped)_`) |
+| Snapshot **Current focus** | Single in-progress open task (at most one) |
+| `_(blocked: …)_` | Open but blocked |
+| `_(skipped)_` | Closed without doing the work |
 
-### Task ID Convention
+Checkbox + Current focus only — no `` `pending` `` / `` `in_progress` `` / `` `done` `` tokens on headlines.
 
-- Format: `T-{nnn}` — three digits, zero-padded (`T-001`, `T-012`)
-- IDs are **stable** — never renumber or reuse IDs after creation
-- New tasks append the next available ID
-
-### Task Fields
-
-Every task line encodes:
+**IDs:** `T-{nnn}` stable **within a board**; never renumber/reuse on that board. Append under `## Tasks`. Across sprint rewrites, IDs may restart at `T-001` (plans stay in `scrum/sprint-NN.md`).
 
 ```text
-- [ ] **T-00n** `status` — {short title}
-  - Phase: {workflow phase name or "cross-cutting"}
-  - Artifact: `{relative path}` or —
-  - Depends: T-00m ✓, T-00k
-  - Notes: {optional — blockers, decisions, approval date}
+- [ ] **T-00n** — {short title}
+  - Phase: {phase or "cross-cutting"}
+  - Artifact: `{path}` or —
+  - Depends: T-00m, T-00k
+  - Notes: {optional}
 ```
 
-Checkbox mirrors status: `[x]` = `done` or `skipped`; `[ ]` = everything else.
+**Types:** draft · gate · unit · research · sync
 
-### Task Types
-
-| Type | Description | Done when |
-|------|-------------|-----------|
-| **draft** | Produce or update an artifact file | File written; presented to user |
-| **gate** | User review & explicit approval | User approves in dialogue |
-| **unit** | Granular work inside a phase | Unit artifact approved or batch-approved |
-| **research** | Cross-cutting reference material | Findings saved and presented |
-| **sync** | Reconcile TODO with workspace reality | Backlog matches actual artifacts |
+---
 
 ## TODO.md Structure
 
-Use this skeleton when creating or rebuilding the file:
+### Plain mode
 
 ```markdown
 # TODO: {Title}
 
+> **Project type:** `{type}`
 > **Project root:** `{project-root}`
 > **Updated:** {YYYY-MM-DD}
 
 ## Snapshot
+…
 
-| Done | In progress | Pending | Blocked | Skipped |
-|------|-------------|---------|---------|---------|
-| {n}  | {n}         | {n}     | {n}     | {n}     |
+## Tasks
+…
 
+## Notes
+…
+```
+
+### Scrum mode
+
+```markdown
+# TODO: {Title}
+
+> **Project type:** `{type}`
+> **Project root:** `{project-root}`
+> **Updated:** {YYYY-MM-DD}
+> **Current sprint:** sprint-{NN} — [{goal}](./scrum/sprint-{NN}.md)
+> **Product Backlog:** [`scrum/product-backlog.md`](./scrum/product-backlog.md)
+
+## Snapshot
+
+| Done | Open | Blocked | Skipped |
+|------|------|---------|---------|
+| {n}  | {n}  | {n}     | {n}     |
+
+**Sprint goal:** {one line}
 **Current focus:** {T-id or "—"}
 **Recommended next:** {T-id} — {one-line description}
 
-## Active
+## Tasks
 
-{at most one in_progress task, expanded}
+- [ ] **T-001** — {title}
+  - Phase: …
+  - Artifact: …
+  - Depends: —
+  - Notes: …
 
-## Backlog
+## Completed sprints
 
-{grouped by workflow phase; pending and blocked tasks}
-
-## Completed
-
-{collapsed or abbreviated list of done/skipped — keep last 10 visible, rest summarized}
+| Sprint | Goal | Closed |
+|--------|------|--------|
+| 00 | {one-liner} | {YYYY-MM-DD} |
 
 ## Notes
 
-{scope decisions, skipped phases, batch-approval agreements, open questions}
+{sprint-local — deferrals, carry-over}
 ```
 
-Keep **Snapshot** counts accurate — recompute whenever statuses change.
+**Hard rules:** Compact **Completed sprints** only (no full closed task dumps). No `scrum/README.md`. Execution-time edits ≈ **`TODO.md` only**.
+
+**Identity:** `type` after Project type; title after `# TODO: `; workspace = Project root. **`session.status` (principles):** scrum 모드 → header **Current sprint**의 `sprint-NN`을 **`S-NN`**으로 투영 (예: `sprint-07` → `S-07`); plain 모드 → Snapshot **Current focus** T-id. Keep Current sprint / Current focus accurate so the session title stays correct.
+
+**Edit discipline:** Short unique `edit_file` anchors; typical change = one headline + Snapshot lines. Append new tasks at end of `## Tasks`. **Exception:** intentional full-board rewrite at Sprint boundary.
+
+**Inserting new tasks (avoid `old_string_not_found`):** `edit_file` cannot "insert beside" — it **replaces** an existing span. For a new task, `old_string` = the **last existing task block** (or the `## Tasks` heading + first task if appending after an empty section is wrong — use the last real task). `new_string` = that same block **plus** the new task lines. Never set `old_string` to only the new `- [ ] **T-0nn**` text (it is not on disk yet → `old_string_not_found`).
+
+```text
+# WRONG — new content as old_string
+old_string: - [ ] **T-015** `pending` — Design ep 007
+new_string: - [ ] **T-015** `pending` — Design ep 007
+  - Phase: …
+
+# RIGHT — expand from last existing task
+old_string:
+- [x] **T-014** `done` — Release ep 006
+  - Phase: sprint-06
+  - Artifact: `continuity/story-so-far.md`
+  - Depends: T-013 ✓
+  - Notes: released
+
+new_string:
+- [x] **T-014** `done` — Release ep 006
+  - Phase: sprint-06
+  - Artifact: `continuity/story-so-far.md`
+  - Depends: T-013 ✓
+  - Notes: released
+- [ ] **T-015** `pending` — Design ep 007
+  - Phase: sprint-07
+  - Artifact: `episodes/007-….md`
+  - Depends: T-014 ✓
+  - Notes: —
+```
+
+Same pattern for Snapshot count bumps: `old_string` = current Snapshot lines that exist; `new_string` = updated counts (not a brand-new Snapshot invented as the anchor).
+
+**Batch edits (same model step):** When Snapshot counts, Current focus, and task checkbox/Notes all change together — prefer **one** `edit_file` covering them, or **several non-overlapping `edit_file` calls in the same tool round** (parallel). Do **not** spend separate model rounds for "Snapshot only" then "task checkbox only" when both were already known. Same-file parallel edits only if each `old_string` remains valid after the others (disjoint regions); otherwise one combined edit / `write_file`.
+
+**`old_string_not_found` with whitespace-only mismatch:** If `first_mismatch.expected` vs `.found` differ only by indent/spaces, copy **`found`** verbatim into the next `old_string`. After **two** consecutive failures on the same path in one turn, switch to **`write_file`** for the board (or the whole design artifact) instead of more micro-anchors.
+
+---
+
+## Plan file templates (`scrum/`)
+
+### product-backlog.md
+
+Update when **scope/plan** changes — not on each task completion.
+
+```markdown
+# Product Backlog — {Title}
+
+> **Updated:** {YYYY-MM-DD}
+> **Execution board:** [`../TODO.md`](../TODO.md)
+
+## Stories
+
+- **PB-001** — {title}
+  - Band: {epic or sprint-00 / episode}
+  - Artifact: `{path or —}`
+  - Depends: —
+  - Notes: …
+```
+
+No progress checkboxes. **Series:** `PB-000` + episode-mapped stories. **Spec-driven:** Band = Epic; cite `spec/….md §…`.
+
+### sprint-NN.md
+
+Zero-pad (`sprint-00.md`, …). Leave DoD/Demo unchanged during execution.
+
+```markdown
+# Sprint {NN} — {short goal title}
+
+> **Product Backlog:** [`product-backlog.md`](./product-backlog.md)
+> **Execution board:** [`../TODO.md`](../TODO.md)
+
+## Sprint Goal
+{1–3 sentences}
+
+## Scope
+
+| Band | Stories |
+|------|---------|
+| … | PB-xxx … |
+
+**Out of sprint:** {next slice}
+
+## Planned work
+
+| ID | Story |
+|----|-------|
+| PB-xxx | … |
+
+## Definition of Done
+1. …
+2. …
+
+## Demo Checklist
+- …   # plain bullets — mirror as gate tasks on TODO.md
+```
+
+---
 
 ## Core Workflows
 
 ### 1. Initialize
 
-Trigger: user starts a new deliverable; `{project-root}` resolved or about to be created.
+1. Resolve `{project-root}` and companion workflow.
+2. If **scrum mode** triggers: choose profile → create `scrum/` + `product-backlog.md` + first `sprint-NN.md` → seed `TODO.md` from that plan (empty Completed sprints).
+3. Else: seed phase-level tasks; optional phases `[x]` + `_(skipped)_`.
+4. Current focus = first open task; tell the user (final turn includes `session` per principles).
 
-1. Identify `{project-root}` (via the companion skill's Resolve Project Root rules) and the deliverable's workflow (stages, artifacts, gates).
-2. Use [templates.md](templates.md) as a starting point; adapt phases and tasks to the specific deliverable.
-3. Customize:
-   - Mark optional phases `skipped` when the user has already decided to omit them
-   - Add **unit tasks** when scope is known early; otherwise leave coarse phase-level tasks and expand during **Sync**
-4. Write `TODO.md` with all tasks `pending` except the first task → `in_progress`.
-5. Tell the user the task plan exists and state the first focus task.
+### 2. Orient
 
-Do **not** wait for every unit to be known upfront — start with phase-level tasks; expand during **Sync**.
-
-### 2. Orient (session start)
-
-**Always run before working on a deliverable**, even mid-conversation:
-
-1. Read `{project-root}/TODO.md`. If missing, run **Initialize**.
-2. Verify **Snapshot** against filesystem (quick check: does the `in_progress` artifact exist? are `done` gate artifacts present?).
-3. If drift detected, run **Sync** before recommending next work.
-4. Report to user:
-   - Current phase and focus task
-   - Progress counts
-   - Recommended next task with rationale
+1. Read `TODO.md` (missing → Initialize).
+2. If Current sprint set: optionally skim that `sprint-NN.md` Goal/DoD — not the full backlog unless planning.
+3. Drift vs disk → Sync.
+4. Report focus, counts, recommended next.
 
 ### 3. Execute
 
-While working on deliverable tasks:
-
-1. **Start:** set exactly one task to `in_progress`; clear any stale `in_progress` on other tasks.
-2. **Draft complete:** mark draft task `done`; create or activate the matching **gate** task as `in_progress` or next `pending`.
-3. **Gate approved:** mark gate `done`.
-4. **Unit batch:** when user approves a batch, mark all corresponding unit + gate tasks `done` in one update.
-5. Update **Snapshot**, **Current focus**, **Recommended next**, and **Updated** date on every status change.
-6. **Run Sync** (see below) before selecting the next task.
+1. Exactly one Current focus.
+2. Draft done → `[x]`; focus gate or next.
+3. Gate approved → `[x]` only with explicit user approval.
+4. Batch approval → flip matching headlines in place.
+5. Refresh Snapshot + `Updated` → **Sync**.
+6. Scrum mode and sprint done → **Sprint boundary**.
 
 ### 4. Sync
 
-**Primary trigger:** a task is marked `done` — run Sync as the last step of **Execute**, before recommending the next task.
+1. Compare disk to current `## Tasks`.
+2. Append missing; skip removed scope with `[x]` + `_(skipped)_`.
+3. Recompute Snapshot.
+4. Do not pull future episodes/Epics onto this board.
 
-**Secondary triggers:** orient detects drift between `TODO.md` and workspace; user changes scope.
+### 5. Plan / Plan Next Sprint (scrum mode)
 
-1. Review the just-completed task and its artifacts — does completion reveal new units or phases not yet in the backlog?
-2. List artifacts on disk vs tasks in backlog.
-3. **Add** missing unit or phase tasks with new IDs.
-4. **Skip** removed scope — mark `skipped`, do not delete.
-5. **Never** remove or rewrite `done` / `skipped` history.
-6. Recompute **Snapshot**, **Current focus**, and **Recommended next**.
-7. Record a `sync`-type task entry only when reconciliation itself was non-trivial; mark it `done` when finished.
+**Plan:** Load companion artifacts → fill backlog → write/update `sprint-NN.md` → seed or switch `TODO.md` only when that sprint should be active.
 
-### 5. Report Progress
+**Plan Next:** When the next `sprint-NN.md` is missing (or user pre-plans): pick next Stories → **create** `sprint-NN.md`. Do not record completion in plan files — that is `TODO.md`.
 
-When the user asks for status or at natural breakpoints (gate approved, phase complete):
+### 6. Sprint boundary (scrum mode)
+
+1. Append **Completed sprints** row; drop closed task list from the board.
+2. Find next `scrum/sprint-*.md`.
+3. Exists → rewrite `TODO.md` Tasks + Snapshot + Current sprint (keep Completed table).
+4. Missing → **Plan Next Sprint** → then rewrite `TODO.md`.
+5. Do not edit backlog/closed sprint files merely to mark done.
+
+### 7. Report Progress
 
 ```markdown
 ### Progress — {Title}
 
-- **Phase:** {current workflow phase}
+- **Sprint:** {sprint-NN or "—"} — {goal}
+- **Phase:** {phase}
 - **Done:** {done}/{total} ({percent}%)
-- **In progress:** {T-id} — {title}
-- **Recommended next:** {T-id} — {title} ({why it's unblocked})
-
-{optional: blocked items, skipped phases, risks}
+- **Current focus:** {T-id} — {title}
+- **Recommended next:** {T-id} — {title} ({why})
 ```
 
-Match the user's language in report prose when they communicate in a language other than English.
+## Next-Task Selection
 
-## Next-Task Selection Rules
+1. Current focus open and not blocked → continue.
+2. Unblocked blocked task → clear suffix, select it.
+3. First `[ ]` whose Depends are all `[x]`.
+4. Prefer gate over new draft when draft closed and gate open.
+5. Else ID order within phase; research may run while a gate waits (if asked).
+6. No open tasks + scrum mode → **Sprint boundary** (unless backlog idle → deliverable complete).
 
-Apply in order; pick the **first** match:
+## Completion
 
-1. If a task is `in_progress` and not blocked → **continue it** (do not switch without user consent).
-2. Else if a `blocked` task has its blocker resolved → set `pending`, then select it.
-3. Else first `pending` task where **all Depends are `done` or `skipped`**.
-4. Prefer **gate** tasks over new **draft** tasks when a draft is done but gate is still `pending` — approval before new work.
-5. Within a phase, respect numeric ID order unless dependencies say otherwise.
-6. **Research** tasks are parallelizable — may run while a gate waits for user, if the user requested research.
+**Plain:** All non-skipped `[x]`; final gate `[x]`; open = 0; focus `—`.
 
-When multiple valid next tasks exist, present the recommended one and mention alternatives.
-
-## Gate Invariant
-
-A phase is not complete in `TODO.md` until its **gate task** is `done`. Never mark a gate `done` without explicit user approval.
+**Scrum:** No remaining in-scope backlog Stories and final sprint board closed; focus `—`. Phase incomplete until its gate is `[x]`. Do not start the next phase draft while the previous gate is open **in the same sprint**.
 
 ## Prohibitions
 
-- Tracking deliverable work only in chat or the agent todo tool — **write `TODO.md`**
-- Multiple `in_progress` tasks without user-approved parallel work
-- Marking gate tasks `done` without explicit user approval
-- Deleting completed tasks to "clean up"
-- Renumbering task IDs
-- Starting a new phase's draft while the previous phase's gate is still `pending`
-- Skipping **Sync** after marking a task `done`
-
-## Completion Criteria
-
-The deliverable session's TODO is complete when:
-
-- All non-skipped tasks are `done`
-- The deliverable meets its defined completion criteria
-- Final gate (user confirms deliverable complete) is recorded as `done`
-- **Snapshot** shows 0 `pending`, 0 `in_progress`, 0 `blocked`
-
-## Additional Resources
-
-- Starter template and unit-expansion pattern: [templates.md](templates.md)
+- Separate `scrum` skill / `read_skills` scrum — this file is complete
+- `scrum/README.md` or progress under `scrum/`
+- Full closed-sprint task lists on `TODO.md`
+- Mixing Spec/ADR authoring into implementation sprint boards
+- Inventing episode plot in backlog Notes (point to story artifacts)

@@ -17,6 +17,10 @@ const magyoManuscriptDir = join(
   'examples/마교-교주가-정파-맹주로-사기-친다/manuscripts',
 );
 const novel120ManuscriptDir = join(rootDir, 'examples/120통의-편지/manuscripts');
+const novelAbeojiManuscriptDir = join(
+  rootDir,
+  'examples/아버지를-죽인-건-나다/manuscripts',
+);
 const nonKoLocales = ['en', 'zh-Hans', 'id'];
 
 const koToEnFilename = {
@@ -45,6 +49,7 @@ const koToEnFilename = {
 
 const MAGYO_INTRO_ID = '마교-교주가-정파-맹주로-사기-친다';
 const NOVEL_120_INTRO_ID = '120통의-편지';
+const NOVEL_ABEOJI_INTRO_ID = '아버지를-죽인-건-나다';
 
 function parseEnglishFilename(filename) {
   const base = filename.replace(/\.md$/, '');
@@ -122,6 +127,34 @@ function parseNovel120Filename(filename) {
 
 function novel120SidebarLabel(filename) {
   const {chapterNumber, title} = parseNovel120Filename(filename);
+
+  if (chapterNumber === null) {
+    return title;
+  }
+
+  return `${chapterNumber}화. ${title}`;
+}
+
+function parseNovelAbeojiFilename(filename) {
+  const base = filename.replace(/\.md$/, '');
+
+  if (base === NOVEL_ABEOJI_INTRO_ID) {
+    return {chapterNumber: null, title: '아버지를 죽인 건 나다'};
+  }
+
+  const numberedMatch = base.match(/^(\d{3})-(.+)$/);
+  if (numberedMatch) {
+    return {
+      chapterNumber: Number.parseInt(numberedMatch[1], 10),
+      title: numberedMatch[2].replace(/-/g, ' '),
+    };
+  }
+
+  return {chapterNumber: null, title: base.replace(/-/g, ' ')};
+}
+
+function novelAbeojiSidebarLabel(filename) {
+  const {chapterNumber, title} = parseNovelAbeojiFilename(filename);
 
   if (chapterNumber === null) {
     return title;
@@ -276,12 +309,55 @@ function syncNovel120I18n() {
   }
 }
 
+function syncNovelAbeojiI18n() {
+  const novelAbeojiFiles = readdirSync(novelAbeojiManuscriptDir).filter(
+    (filename) => filename.endsWith('.md'),
+  );
+
+  for (const locale of nonKoLocales) {
+    const pluginDir = join(
+      rootDir,
+      `i18n/${locale}/docusaurus-plugin-content-docs-novel-abeoji`,
+    );
+    const targetDir = join(pluginDir, 'current');
+    ensureDir(targetDir);
+
+    const sidebarTranslations = {};
+
+    for (const filename of novelAbeojiFiles) {
+      const docId = filename.replace(/\.md$/, '');
+      const sourcePath = join(novelAbeojiManuscriptDir, filename);
+      const targetPath = join(targetDir, filename);
+      const paginationLabel = novelAbeojiSidebarLabel(filename);
+      const content = readFileSync(sourcePath, 'utf8');
+
+      writeFileSync(
+        targetPath,
+        injectPaginationLabel(content, paginationLabel),
+        'utf8',
+      );
+
+      sidebarTranslations[`sidebar.novelAbeojiSidebar.doc.${docId}`] = {
+        message: paginationLabel,
+        description: `Sidebar label for abeoji novel chapter ${docId}`,
+      };
+    }
+
+    writeFileSync(
+      join(pluginDir, 'current.json'),
+      `${JSON.stringify(sidebarTranslations, null, 2)}\n`,
+      'utf8',
+    );
+  }
+}
+
 function syncNovelI18n() {
   syncRejectedFutureI18n();
   syncMagyoI18n();
   syncNovel120I18n();
+  syncNovelAbeojiI18n();
   console.log(
-    `Synced novel i18n manuscripts for: ${nonKoLocales.join(', ')} (rejected-future + magyo + 120)`,
+    `Synced novel i18n manuscripts for: ${nonKoLocales.join(', ')} (rejected-future + magyo + 120 + abeoji)`,
   );
 }
 

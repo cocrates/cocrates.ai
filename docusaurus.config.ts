@@ -94,6 +94,16 @@ const config: Config = {
         numberPrefixParser: false,
       },
     ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'novel-abeoji',
+        path: 'examples/아버지를-죽인-건-나다/manuscripts',
+        routeBasePath: 'novel/아버지를-죽인-건-나다',
+        sidebarPath: './sidebarsNovelAbeoji.ts',
+        numberPrefixParser: false,
+      },
+    ],
   ],
 
   themeConfig: {

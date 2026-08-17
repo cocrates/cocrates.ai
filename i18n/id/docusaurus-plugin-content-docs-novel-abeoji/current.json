@@ -1,0 +1,486 @@
+{
+  "sidebar.novelAbeojiSidebar.doc.001-죽기-전날": {
+    "message": "1화. 죽기 전날",
+    "description": "Sidebar label for abeoji novel chapter 001-죽기-전날"
+  },
+  "sidebar.novelAbeojiSidebar.doc.002-두-번째-기회": {
+    "message": "2화. 두 번째 기회",
+    "description": "Sidebar label for abeoji novel chapter 002-두-번째-기회"
+  },
+  "sidebar.novelAbeojiSidebar.doc.003-아버지의-칼끝": {
+    "message": "3화. 아버지의 칼끝",
+    "description": "Sidebar label for abeoji novel chapter 003-아버지의-칼끝"
+  },
+  "sidebar.novelAbeojiSidebar.doc.004-회합의-손님": {
+    "message": "4화. 회합의 손님",
+    "description": "Sidebar label for abeoji novel chapter 004-회합의-손님"
+  },
+  "sidebar.novelAbeojiSidebar.doc.005-먼저-친-배신자": {
+    "message": "5화. 먼저 친 배신자",
+    "description": "Sidebar label for abeoji novel chapter 005-먼저-친-배신자"
+  },
+  "sidebar.novelAbeojiSidebar.doc.006-죽음의-명부": {
+    "message": "6화. 죽음의 명부",
+    "description": "Sidebar label for abeoji novel chapter 006-죽음의-명부"
+  },
+  "sidebar.novelAbeojiSidebar.doc.007-후계자의-자리": {
+    "message": "7화. 후계자의 자리",
+    "description": "Sidebar label for abeoji novel chapter 007-후계자의-자리"
+  },
+  "sidebar.novelAbeojiSidebar.doc.008-지하의-문": {
+    "message": "8화. 지하의 문",
+    "description": "Sidebar label for abeoji novel chapter 008-지하의-문"
+  },
+  "sidebar.novelAbeojiSidebar.doc.009-불탄-기록": {
+    "message": "9화. 불탄 기록",
+    "description": "Sidebar label for abeoji novel chapter 009-불탄-기록"
+  },
+  "sidebar.novelAbeojiSidebar.doc.010-가환의-침묵": {
+    "message": "10화. 가환의 침묵",
+    "description": "Sidebar label for abeoji novel chapter 010-가환의-침묵"
+  },
+  "sidebar.novelAbeojiSidebar.doc.011-협박문의-조각": {
+    "message": "11화. 협박문의 조각",
+    "description": "Sidebar label for abeoji novel chapter 011-협박문의-조각"
+  },
+  "sidebar.novelAbeojiSidebar.doc.012-불이-난-날": {
+    "message": "12화. 불이 난 날",
+    "description": "Sidebar label for abeoji novel chapter 012-불이-난-날"
+  },
+  "sidebar.novelAbeojiSidebar.doc.013-장로의-표": {
+    "message": "13화. 장로의 표",
+    "description": "Sidebar label for abeoji novel chapter 013-장로의-표"
+  },
+  "sidebar.novelAbeojiSidebar.doc.014-열흘-앞선-칼": {
+    "message": "14화. 열흘 앞선 칼",
+    "description": "Sidebar label for abeoji novel chapter 014-열흘-앞선-칼"
+  },
+  "sidebar.novelAbeojiSidebar.doc.015-남궁가의-손님": {
+    "message": "15화. 남궁가의 손님",
+    "description": "Sidebar label for abeoji novel chapter 015-남궁가의-손님"
+  },
+  "sidebar.novelAbeojiSidebar.doc.016-옛-전장의-물자": {
+    "message": "16화. 옛 전장의 물자",
+    "description": "Sidebar label for abeoji novel chapter 016-옛-전장의-물자"
+  },
+  "sidebar.novelAbeojiSidebar.doc.017-내-이름의-봉인": {
+    "message": "17화. 내 이름의 봉인",
+    "description": "Sidebar label for abeoji novel chapter 017-내-이름의-봉인"
+  },
+  "sidebar.novelAbeojiSidebar.doc.018-완성품": {
+    "message": "18화. 완성품",
+    "description": "Sidebar label for abeoji novel chapter 018-완성품"
+  },
+  "sidebar.novelAbeojiSidebar.doc.019-떠나라는-명령": {
+    "message": "19화. 떠나라는 명령",
+    "description": "Sidebar label for abeoji novel chapter 019-떠나라는-명령"
+  },
+  "sidebar.novelAbeojiSidebar.doc.020-두-번째-협박": {
+    "message": "20화. 두 번째 협박",
+    "description": "Sidebar label for abeoji novel chapter 020-두-번째-협박"
+  },
+  "sidebar.novelAbeojiSidebar.doc.021-같은-편의-적": {
+    "message": "21화. 같은 편의 적",
+    "description": "Sidebar label for abeoji novel chapter 021-같은-편의-적"
+  },
+  "sidebar.novelAbeojiSidebar.doc.022-죽이라는-명령": {
+    "message": "22화. 죽이라는 명령",
+    "description": "Sidebar label for abeoji novel chapter 022-죽이라는-명령"
+  },
+  "sidebar.novelAbeojiSidebar.doc.023-닮은-글씨": {
+    "message": "23화. 닮은 글씨",
+    "description": "Sidebar label for abeoji novel chapter 023-닮은-글씨"
+  },
+  "sidebar.novelAbeojiSidebar.doc.024-두-번째-문양": {
+    "message": "24화. 두 번째 문양",
+    "description": "Sidebar label for abeoji novel chapter 024-두-번째-문양"
+  },
+  "sidebar.novelAbeojiSidebar.doc.025-죽을-날을-아는-사람": {
+    "message": "25화. 죽을 날을 아는 사람",
+    "description": "Sidebar label for abeoji novel chapter 025-죽을-날을-아는-사람"
+  },
+  "sidebar.novelAbeojiSidebar.doc.026-앞당겨진-죽음": {
+    "message": "26화. 앞당겨진 죽음",
+    "description": "Sidebar label for abeoji novel chapter 026-앞당겨진-죽음"
+  },
+  "sidebar.novelAbeojiSidebar.doc.027-독을-견디는-몸": {
+    "message": "27화. 독을 견디는 몸",
+    "description": "Sidebar label for abeoji novel chapter 027-독을-견디는-몸"
+  },
+  "sidebar.novelAbeojiSidebar.doc.028-빚으로-맺은-동맹": {
+    "message": "28화. 빚으로 맺은 동맹",
+    "description": "Sidebar label for abeoji novel chapter 028-빚으로-맺은-동맹"
+  },
+  "sidebar.novelAbeojiSidebar.doc.029-원액의-이름": {
+    "message": "29화. 원액의 이름",
+    "description": "Sidebar label for abeoji novel chapter 029-원액의-이름"
+  },
+  "sidebar.novelAbeojiSidebar.doc.030-폐위된-가주": {
+    "message": "30화. 폐위된 가주",
+    "description": "Sidebar label for abeoji novel chapter 030-폐위된-가주"
+  },
+  "sidebar.novelAbeojiSidebar.doc.031-미워해야-산다": {
+    "message": "31화. 미워해야 산다",
+    "description": "Sidebar label for abeoji novel chapter 031-미워해야-산다"
+  },
+  "sidebar.novelAbeojiSidebar.doc.032-목숨의-값": {
+    "message": "32화. 목숨의 값",
+    "description": "Sidebar label for abeoji novel chapter 032-목숨의-값"
+  },
+  "sidebar.novelAbeojiSidebar.doc.033-가짜-쿠데타": {
+    "message": "33화. 가짜 쿠데타",
+    "description": "Sidebar label for abeoji novel chapter 033-가짜-쿠데타"
+  },
+  "sidebar.novelAbeojiSidebar.doc.034-아버지의-시험": {
+    "message": "34화. 아버지의 시험",
+    "description": "Sidebar label for abeoji novel chapter 034-아버지의-시험"
+  },
+  "sidebar.novelAbeojiSidebar.doc.035-떨리는-칼": {
+    "message": "35화. 떨리는 칼",
+    "description": "Sidebar label for abeoji novel chapter 035-떨리는-칼"
+  },
+  "sidebar.novelAbeojiSidebar.doc.036-거래-장부": {
+    "message": "36화. 거래 장부",
+    "description": "Sidebar label for abeoji novel chapter 036-거래-장부"
+  },
+  "sidebar.novelAbeojiSidebar.doc.037-사라진-아이들": {
+    "message": "37화. 사라진 아이들",
+    "description": "Sidebar label for abeoji novel chapter 037-사라진-아이들"
+  },
+  "sidebar.novelAbeojiSidebar.doc.038-또-하나의-아들": {
+    "message": "38화. 또 하나의 아들",
+    "description": "Sidebar label for abeoji novel chapter 038-또-하나의-아들"
+  },
+  "sidebar.novelAbeojiSidebar.doc.039-내부자의-거래": {
+    "message": "39화. 내부자의 거래",
+    "description": "Sidebar label for abeoji novel chapter 039-내부자의-거래"
+  },
+  "sidebar.novelAbeojiSidebar.doc.040-혼례-행렬의-칼": {
+    "message": "40화. 혼례 행렬의 칼",
+    "description": "Sidebar label for abeoji novel chapter 040-혼례-행렬의-칼"
+  },
+  "sidebar.novelAbeojiSidebar.doc.041-아버지가-맺은-동맹": {
+    "message": "41화. 아버지가 맺은 동맹",
+    "description": "Sidebar label for abeoji novel chapter 041-아버지가-맺은-동맹"
+  },
+  "sidebar.novelAbeojiSidebar.doc.042-첫-번째-표적": {
+    "message": "42화. 첫 번째 표적",
+    "description": "Sidebar label for abeoji novel chapter 042-첫-번째-표적"
+  },
+  "sidebar.novelAbeojiSidebar.doc.043-살려준-대가": {
+    "message": "43화. 살려준 대가",
+    "description": "Sidebar label for abeoji novel chapter 043-살려준-대가"
+  },
+  "sidebar.novelAbeojiSidebar.doc.044-바뀐-배신-날짜": {
+    "message": "44화. 바뀐 배신 날짜",
+    "description": "Sidebar label for abeoji novel chapter 044-바뀐-배신-날짜"
+  },
+  "sidebar.novelAbeojiSidebar.doc.045-살인의-칼자루": {
+    "message": "45화. 살인의 칼자루",
+    "description": "Sidebar label for abeoji novel chapter 045-살인의-칼자루"
+  },
+  "sidebar.novelAbeojiSidebar.doc.046-두-번째-시체": {
+    "message": "46화. 두 번째 시체",
+    "description": "Sidebar label for abeoji novel chapter 046-두-번째-시체"
+  },
+  "sidebar.novelAbeojiSidebar.doc.047-지키려-한-이름": {
+    "message": "47화. 지키려 한 이름",
+    "description": "Sidebar label for abeoji novel chapter 047-지키려-한-이름"
+  },
+  "sidebar.novelAbeojiSidebar.doc.048-빈-무덤": {
+    "message": "48화. 빈 무덤",
+    "description": "Sidebar label for abeoji novel chapter 048-빈-무덤"
+  },
+  "sidebar.novelAbeojiSidebar.doc.049-봉인된-서찰": {
+    "message": "49화. 봉인된 서찰",
+    "description": "Sidebar label for abeoji novel chapter 049-봉인된-서찰"
+  },
+  "sidebar.novelAbeojiSidebar.doc.050-살아-있는-배신자": {
+    "message": "50화. 살아 있는 배신자",
+    "description": "Sidebar label for abeoji novel chapter 050-살아-있는-배신자"
+  },
+  "sidebar.novelAbeojiSidebar.doc.051-첫-번째-조건": {
+    "message": "51화. 첫 번째 조건",
+    "description": "Sidebar label for abeoji novel chapter 051-첫-번째-조건"
+  },
+  "sidebar.novelAbeojiSidebar.doc.052-죽여야-하는-아들": {
+    "message": "52화. 죽여야 하는 아들",
+    "description": "Sidebar label for abeoji novel chapter 052-죽여야-하는-아들"
+  },
+  "sidebar.novelAbeojiSidebar.doc.053-금고의-문": {
+    "message": "53화. 금고의 문",
+    "description": "Sidebar label for abeoji novel chapter 053-금고의-문"
+  },
+  "sidebar.novelAbeojiSidebar.doc.054-장로의-목걸이": {
+    "message": "54화. 장로의 목걸이",
+    "description": "Sidebar label for abeoji novel chapter 054-장로의-목걸이"
+  },
+  "sidebar.novelAbeojiSidebar.doc.055-부정하지-않는-사람": {
+    "message": "55화. 부정하지 않는 사람",
+    "description": "Sidebar label for abeoji novel chapter 055-부정하지-않는-사람"
+  },
+  "sidebar.novelAbeojiSidebar.doc.056-목을-베라는-요구": {
+    "message": "56화. 목을 베라는 요구",
+    "description": "Sidebar label for abeoji novel chapter 056-목을-베라는-요구"
+  },
+  "sidebar.novelAbeojiSidebar.doc.057-검은-피": {
+    "message": "57화. 검은 피",
+    "description": "Sidebar label for abeoji novel chapter 057-검은-피"
+  },
+  "sidebar.novelAbeojiSidebar.doc.058-같은-문양": {
+    "message": "58화. 같은 문양",
+    "description": "Sidebar label for abeoji novel chapter 058-같은-문양"
+  },
+  "sidebar.novelAbeojiSidebar.doc.059-실패한-아버지": {
+    "message": "59화. 실패한 아버지",
+    "description": "Sidebar label for abeoji novel chapter 059-실패한-아버지"
+  },
+  "sidebar.novelAbeojiSidebar.doc.060-명단의-동맹": {
+    "message": "60화. 명단의 동맹",
+    "description": "Sidebar label for abeoji novel chapter 060-명단의-동맹"
+  },
+  "sidebar.novelAbeojiSidebar.doc.061-빚을-갚는-자": {
+    "message": "61화. 빚을 갚는 자",
+    "description": "Sidebar label for abeoji novel chapter 061-빚을-갚는-자"
+  },
+  "sidebar.novelAbeojiSidebar.doc.062-남궁가의-밤": {
+    "message": "62화. 남궁가의 밤",
+    "description": "Sidebar label for abeoji novel chapter 062-남궁가의-밤"
+  },
+  "sidebar.novelAbeojiSidebar.doc.063-두-아들-중-하나": {
+    "message": "63화. 두 아들 중 하나",
+    "description": "Sidebar label for abeoji novel chapter 063-두-아들-중-하나"
+  },
+  "sidebar.novelAbeojiSidebar.doc.064-최후통첩": {
+    "message": "64화. 최후통첩",
+    "description": "Sidebar label for abeoji novel chapter 064-최후통첩"
+  },
+  "sidebar.novelAbeojiSidebar.doc.065-흑풍루주의-친필": {
+    "message": "65화. 흑풍루주의 친필",
+    "description": "Sidebar label for abeoji novel chapter 065-흑풍루주의-친필"
+  },
+  "sidebar.novelAbeojiSidebar.doc.066-서명": {
+    "message": "66화. 서명",
+    "description": "Sidebar label for abeoji novel chapter 066-서명"
+  },
+  "sidebar.novelAbeojiSidebar.doc.067-피로-쓴-계약": {
+    "message": "67화. 피로 쓴 계약",
+    "description": "Sidebar label for abeoji novel chapter 067-피로-쓴-계약"
+  },
+  "sidebar.novelAbeojiSidebar.doc.068-사당의-혈인": {
+    "message": "68화. 사당의 혈인",
+    "description": "Sidebar label for abeoji novel chapter 068-사당의-혈인"
+  },
+  "sidebar.novelAbeojiSidebar.doc.069-아버지의-선택": {
+    "message": "69화. 아버지의 선택",
+    "description": "Sidebar label for abeoji novel chapter 069-아버지의-선택"
+  },
+  "sidebar.novelAbeojiSidebar.doc.070-죽은-스승": {
+    "message": "70화. 죽은 스승",
+    "description": "Sidebar label for abeoji novel chapter 070-죽은-스승"
+  },
+  "sidebar.novelAbeojiSidebar.doc.071-미래-일지": {
+    "message": "71화. 미래 일지",
+    "description": "Sidebar label for abeoji novel chapter 071-미래-일지"
+  },
+  "sidebar.novelAbeojiSidebar.doc.072-찢긴-페이지": {
+    "message": "72화. 찢긴 페이지",
+    "description": "Sidebar label for abeoji novel chapter 072-찢긴-페이지"
+  },
+  "sidebar.novelAbeojiSidebar.doc.073-살아-있는-어머니": {
+    "message": "73화. 살아 있는 어머니",
+    "description": "Sidebar label for abeoji novel chapter 073-살아-있는-어머니"
+  },
+  "sidebar.novelAbeojiSidebar.doc.074-목소리의-열쇠": {
+    "message": "74화. 목소리의 열쇠",
+    "description": "Sidebar label for abeoji novel chapter 074-목소리의-열쇠"
+  },
+  "sidebar.novelAbeojiSidebar.doc.075-마지막-명령": {
+    "message": "75화. 마지막 명령",
+    "description": "Sidebar label for abeoji novel chapter 075-마지막-명령"
+  },
+  "sidebar.novelAbeojiSidebar.doc.076-가짜-본거지": {
+    "message": "76화. 가짜 본거지",
+    "description": "Sidebar label for abeoji novel chapter 076-가짜-본거지"
+  },
+  "sidebar.novelAbeojiSidebar.doc.077-내-이름의-명령": {
+    "message": "77화. 내 이름의 명령",
+    "description": "Sidebar label for abeoji novel chapter 077-내-이름의-명령"
+  },
+  "sidebar.novelAbeojiSidebar.doc.078-가까운-칼": {
+    "message": "78화. 가까운 칼",
+    "description": "Sidebar label for abeoji novel chapter 078-가까운-칼"
+  },
+  "sidebar.novelAbeojiSidebar.doc.079-스스로-한-맹세": {
+    "message": "79화. 스스로 한 맹세",
+    "description": "Sidebar label for abeoji novel chapter 079-스스로-한-맹세"
+  },
+  "sidebar.novelAbeojiSidebar.doc.080-조작된-죽음": {
+    "message": "80화. 조작된 죽음",
+    "description": "Sidebar label for abeoji novel chapter 080-조작된-죽음"
+  },
+  "sidebar.novelAbeojiSidebar.doc.081-세-번째-조건": {
+    "message": "81화. 세 번째 조건",
+    "description": "Sidebar label for abeoji novel chapter 081-세-번째-조건"
+  },
+  "sidebar.novelAbeojiSidebar.doc.082-두-개의-피": {
+    "message": "82화. 두 개의 피",
+    "description": "Sidebar label for abeoji novel chapter 082-두-개의-피"
+  },
+  "sidebar.novelAbeojiSidebar.doc.083-죽였다고-고백하다": {
+    "message": "83화. 죽였다고 고백하다",
+    "description": "Sidebar label for abeoji novel chapter 083-죽였다고-고백하다"
+  },
+  "sidebar.novelAbeojiSidebar.doc.084-계약의-배신자": {
+    "message": "84화. 계약의 배신자",
+    "description": "Sidebar label for abeoji novel chapter 084-계약의-배신자"
+  },
+  "sidebar.novelAbeojiSidebar.doc.085-각성의-대가": {
+    "message": "85화. 각성의 대가",
+    "description": "Sidebar label for abeoji novel chapter 085-각성의-대가"
+  },
+  "sidebar.novelAbeojiSidebar.doc.086-첫-본거지": {
+    "message": "86화. 첫 본거지",
+    "description": "Sidebar label for abeoji novel chapter 086-첫-본거지"
+  },
+  "sidebar.novelAbeojiSidebar.doc.087-이동하는-감옥": {
+    "message": "87화. 이동하는 감옥",
+    "description": "Sidebar label for abeoji novel chapter 087-이동하는-감옥"
+  },
+  "sidebar.novelAbeojiSidebar.doc.088-전쟁의-계곡": {
+    "message": "88화. 전쟁의 계곡",
+    "description": "Sidebar label for abeoji novel chapter 088-전쟁의-계곡"
+  },
+  "sidebar.novelAbeojiSidebar.doc.089-두-번째-인질": {
+    "message": "89화. 두 번째 인질",
+    "description": "Sidebar label for abeoji novel chapter 089-두-번째-인질"
+  },
+  "sidebar.novelAbeojiSidebar.doc.090-칼을-막은-아버지": {
+    "message": "90화. 칼을 막은 아버지",
+    "description": "Sidebar label for abeoji novel chapter 090-칼을-막은-아버지"
+  },
+  "sidebar.novelAbeojiSidebar.doc.091-사흘의-약속": {
+    "message": "91화. 사흘의 약속",
+    "description": "Sidebar label for abeoji novel chapter 091-사흘의-약속"
+  },
+  "sidebar.novelAbeojiSidebar.doc.092-아버지가-고른-동료": {
+    "message": "92화. 아버지가 고른 동료",
+    "description": "Sidebar label for abeoji novel chapter 092-아버지가-고른-동료"
+  },
+  "sidebar.novelAbeojiSidebar.doc.093-후계자-제안": {
+    "message": "93화. 후계자 제안",
+    "description": "Sidebar label for abeoji novel chapter 093-후계자-제안"
+  },
+  "sidebar.novelAbeojiSidebar.doc.094-주인으로-등록된-아이": {
+    "message": "94화. 주인으로 등록된 아이",
+    "description": "Sidebar label for abeoji novel chapter 094-주인으로-등록된-아이"
+  },
+  "sidebar.novelAbeojiSidebar.doc.095-흑풍루주의-얼굴": {
+    "message": "95화. 흑풍루주의 얼굴",
+    "description": "Sidebar label for abeoji novel chapter 095-흑풍루주의-얼굴"
+  },
+  "sidebar.novelAbeojiSidebar.doc.096-회귀의-대가": {
+    "message": "96화. 회귀의 대가",
+    "description": "Sidebar label for abeoji novel chapter 096-회귀의-대가"
+  },
+  "sidebar.novelAbeojiSidebar.doc.097-잊힌-아버지": {
+    "message": "97화. 잊힌 아버지",
+    "description": "Sidebar label for abeoji novel chapter 097-잊힌-아버지"
+  },
+  "sidebar.novelAbeojiSidebar.doc.098-본가로-돌아온-전쟁": {
+    "message": "98화. 본가로 돌아온 전쟁",
+    "description": "Sidebar label for abeoji novel chapter 098-본가로-돌아온-전쟁"
+  },
+  "sidebar.novelAbeojiSidebar.doc.099-기억-없는-가주": {
+    "message": "99화. 기억 없는 가주",
+    "description": "Sidebar label for abeoji novel chapter 099-기억-없는-가주"
+  },
+  "sidebar.novelAbeojiSidebar.doc.100-아버지의-마지막-설계": {
+    "message": "100화. 아버지의 마지막 설계",
+    "description": "Sidebar label for abeoji novel chapter 100-아버지의-마지막-설계"
+  },
+  "sidebar.novelAbeojiSidebar.doc.101-한-번-더-돌아갈-수-있다": {
+    "message": "101화. 한 번 더 돌아갈 수 있다",
+    "description": "Sidebar label for abeoji novel chapter 101-한-번-더-돌아갈-수-있다"
+  },
+  "sidebar.novelAbeojiSidebar.doc.102-어머니의-부탁": {
+    "message": "102화. 어머니의 부탁",
+    "description": "Sidebar label for abeoji novel chapter 102-어머니의-부탁"
+  },
+  "sidebar.novelAbeojiSidebar.doc.103-되찾은-기억": {
+    "message": "103화. 되찾은 기억",
+    "description": "Sidebar label for abeoji novel chapter 103-되찾은-기억"
+  },
+  "sidebar.novelAbeojiSidebar.doc.104-풀린-봉인": {
+    "message": "104화. 풀린 봉인",
+    "description": "Sidebar label for abeoji novel chapter 104-풀린-봉인"
+  },
+  "sidebar.novelAbeojiSidebar.doc.105-독을-나누다": {
+    "message": "105화. 독을 나누다",
+    "description": "Sidebar label for abeoji novel chapter 105-독을-나누다"
+  },
+  "sidebar.novelAbeojiSidebar.doc.106-첫-살인의-기록": {
+    "message": "106화. 첫 살인의 기록",
+    "description": "Sidebar label for abeoji novel chapter 106-첫-살인의-기록"
+  },
+  "sidebar.novelAbeojiSidebar.doc.107-살려낸-아이": {
+    "message": "107화. 살려낸 아이",
+    "description": "Sidebar label for abeoji novel chapter 107-살려낸-아이"
+  },
+  "sidebar.novelAbeojiSidebar.doc.108-마지막-거래": {
+    "message": "108화. 마지막 거래",
+    "description": "Sidebar label for abeoji novel chapter 108-마지막-거래"
+  },
+  "sidebar.novelAbeojiSidebar.doc.109-남겨진-피": {
+    "message": "109화. 남겨진 피",
+    "description": "Sidebar label for abeoji novel chapter 109-남겨진-피"
+  },
+  "sidebar.novelAbeojiSidebar.doc.110-묶인-두-사람": {
+    "message": "110화. 묶인 두 사람",
+    "description": "Sidebar label for abeoji novel chapter 110-묶인-두-사람"
+  },
+  "sidebar.novelAbeojiSidebar.doc.111-무공을-버린-칼": {
+    "message": "111화. 무공을 버린 칼",
+    "description": "Sidebar label for abeoji novel chapter 111-무공을-버린-칼"
+  },
+  "sidebar.novelAbeojiSidebar.doc.112-최후의-명령": {
+    "message": "112화. 최후의 명령",
+    "description": "Sidebar label for abeoji novel chapter 112-최후의-명령"
+  },
+  "sidebar.novelAbeojiSidebar.doc.113-처형대의-아버지": {
+    "message": "113화. 처형대의 아버지",
+    "description": "Sidebar label for abeoji novel chapter 113-처형대의-아버지"
+  },
+  "sidebar.novelAbeojiSidebar.doc.114-시간을-건-대가": {
+    "message": "114화. 시간을 건 대가",
+    "description": "Sidebar label for abeoji novel chapter 114-시간을-건-대가"
+  },
+  "sidebar.novelAbeojiSidebar.doc.115-마지막-칼": {
+    "message": "115화. 마지막 칼",
+    "description": "Sidebar label for abeoji novel chapter 115-마지막-칼"
+  },
+  "sidebar.novelAbeojiSidebar.doc.116-내가-죽인-아버지": {
+    "message": "116화. 내가 죽인 아버지",
+    "description": "Sidebar label for abeoji novel chapter 116-내가-죽인-아버지"
+  },
+  "sidebar.novelAbeojiSidebar.doc.117-복수의-칼끝": {
+    "message": "117화. 복수의 칼끝",
+    "description": "Sidebar label for abeoji novel chapter 117-복수의-칼끝"
+  },
+  "sidebar.novelAbeojiSidebar.doc.118-흑풍루주의-심판": {
+    "message": "118화. 흑풍루주의 심판",
+    "description": "Sidebar label for abeoji novel chapter 118-흑풍루주의-심판"
+  },
+  "sidebar.novelAbeojiSidebar.doc.119-아버지와-아들": {
+    "message": "119화. 아버지와 아들",
+    "description": "Sidebar label for abeoji novel chapter 119-아버지와-아들"
+  },
+  "sidebar.novelAbeojiSidebar.doc.120-회귀하지-않는-내일": {
+    "message": "120화. 회귀하지 않는 내일",
+    "description": "Sidebar label for abeoji novel chapter 120-회귀하지-않는-내일"
+  },
+  "sidebar.novelAbeojiSidebar.doc.아버지를-죽인-건-나다": {
+    "message": "아버지를 죽인 건 나다",
+    "description": "Sidebar label for abeoji novel chapter 아버지를-죽인-건-나다"
+  }
+}
