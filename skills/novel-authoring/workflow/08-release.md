@@ -1,81 +1,80 @@
 # Stage ⑧ — Release
 
-**Prerequisites:** Manuscript evaluation passed; user approves release
+**Prerequisites:** Manuscript evaluation passed (stage ⑦, main gate); user approves release
 
-**Gate:** Continuity files updated; chapter locked
+**Gate:** Continuity files updated; episode locked
 
-**Next stage:** `04-chapter-design.md` for next chapter
+**Next stage:** `04-episode-design.md` for next episode
 
 ---
 
 ## Procedure
 
-Mark chapter complete. **Released chapters should not be revised** unless user explicitly requests republication.
+Mark episode complete. **Released episodes should not be revised** unless user explicitly requests republication.
 
 1. Confirm user explicitly approves release
-2. Update `evaluations/{nnn}-{chapter-slug}.md` → Release section with date
-3. **Update continuity files** (critical for next chapter). Prefer extracting from **approved design Key Events + manuscript outcomes**, not free paraphrase of long prose:
+2. Update `evaluations/{nnn}-{episode-slug}-manuscript.md` → Release section with date
+   - **Release date = calendar date of this approval** (session “today”). **Forbidden:** copy `TODO.md` `Updated:` / sprint header / backlog dates into Release.
+3. **Update continuity files** (critical for next episode). Prefer extracting from **approved design Key Events + manuscript outcomes**, not free paraphrase of long prose:
 
-Keep `unresolved-threads.md` and `story-so-far.md` **Current Unresolved Threads** in sync (same thread ids/status).
+Open threads live in `continuity/story-so-far.md` → **Current Unresolved Threads**.
 
-### `continuity/{nnn}-{chapter-slug}-summary.md`
+### `continuity/{nnn}-{episode-slug}-summary.md`
 
 ```markdown
-# Chapter {nnn}: {Title} — Summary
+# Episode {nnn}: {Title} — Summary
 
-## Episodes Covered
-| Ep | Title | Key Events |
+## Scenes Covered
+| Sc | Title | Key Events |
 |----|-------|------------|
 
-## Key Events (Chapter Level)
+## Key Events (Episode Level)
 ## Character State Changes
 ## Location State Changes
 ## New Unresolved Threads
 ## Resolved Threads
-## Narrative Hooks for Next Chapter
+## Narrative Hooks for Next Episode
 ```
 
 ### `continuity/story-so-far.md` (upsert)
+
+**SSOT for open threads** — maintain **Current Unresolved Threads** here only (status + window + notes). When updating, anchor on the last existing row or section head and append the new row (not a full-file overwrite). Do not invent the original text that is only the new row.
 
 ```markdown
 # Story So Far — {Title}
 
 ## Active Characters
-| Character | Current State | Last Chapter | Key Changes |
+| Character | Current State | Last Episode | Key Changes |
 
 ## Active Locations
 | Location | Current State | Last Changed In | Notes |
 
 ## Major Events (Timeline)
-| Chapter | Ep | Story time (if known) | Key Event |
+| Episode | Sc | Story time (if known) | Key Event |
 
 ## Current Unresolved Threads
-| Thread | Set Up In | Notes |
+| Thread | Set Up In | Status | Expected Window | Notes |
+|--------|-----------|--------|-----------------|-------|
+| {id or short label} | Ep {nnn} | open / advanced / held / resolved | {window or —} | {carry note} |
 ```
 
-### `continuity/unresolved-threads.md` (upsert)
+On release: add/update/resolve rows in this table from the episode’s New/Resolved Threads + manuscript outcomes.
 
-```markdown
-# Unresolved Plot Threads
+4. Provide **continuity briefing** to user (states, open threads, next-episode obligation from Out hook)
 
-| Thread | Chapter Set Up | Current Status | Expected Resolution Window |
-```
-
-4. Provide **continuity briefing** to user (states, open threads, next-chapter obligation from Closing hook)
-
-5. Proceed to stage ④ for next chapter — read `04-chapter-design.md` + `consistency.md`; load continuity files
+5. Proceed to stage ④ for next episode — load `04-episode-design.md`; then **Selective artifact load**: Phase A indexes → Phase B Appearing/used details + continuity (`story-so-far` + **this** episode’s new summary as the prior for N+1). Do not reload every prior episode design or the full catalog.
 
 ---
 
 ## Series-Level Review (Optional)
 
-After multiple chapters or a complete part:
+After multiple episodes or a complete arc:
 
-- `evaluations/part-{nnn}-{part-slug}.md`
+- `evaluations/arc-{arc-slug}.md`
 - `evaluations/series.md`
 
 ---
 
-## Gate
+## Gate G8 (Release Approval)
 
-Chapter locked. Continuity synced. Ready for next chapter design.
+Episode locked. Continuity synced. Ready for next episode design.

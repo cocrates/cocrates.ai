@@ -1,159 +1,122 @@
 ---
 name: novel-authoring
 description: >-
-  Creates long-form novels and serialized fiction — full-length novels, series,
-  web novels, and any other narrative fiction. Select when the user asks to
-  write, draft, compose, or author a novel, story, fiction, series, web novel,
-  or any narrative fiction work. Covers the full pipeline from series conception
-  through chapter-by-chapter generation with integrated critique and revision.
-  Enforces plot structure by mode (short: series.md chapter lists; series: parts/ + chapter catalogs;
-  then chapter → episode → scene design),
-  reader engagement design, exposition budget, seed discipline, literary craft,
-  and reader-discovered meaning (show don't conclude; avoid emotion/message over-delivery).
-  Chapter design (episode/scene sections in one chapter.md) is bound to approved architecture
-  and continuity. Default workflow: one chapter at a time with mandatory user approval at
-  each step. Chapter is the publication unit; episodes/scenes are design sections inside the chapter file.
-  Pipeline rules in SKILL.md; per-stage procedures in workflow/; cross-layer sync in
-  workflow/consistency.md. For general non-narrative documents, use document-authoring instead.
+  Creates serialized narrative fiction — novels and web novels — episode by
+  episode. Select when the user asks to write, draft, compose, or author a novel,
+  story, fiction, series, web novel, or any narrative fiction work. Runs
+  Define → Plan → Architecture → Episode Design → Evaluate/Revise → Generate →
+  Evaluate/Revise → Release with mandatory approval gates; builds series-level
+  world, characters, and locations at architecture, then incrementally expands
+  (prefer add over modify) during episode design; locks approved episode design
+  before manuscript generation. Structure is series → episode → scene; episode
+  is the publication/release unit. Default workflow: architecture complete for
+  the series, then one episode at a time. Manuscript evaluation is the main
+  quality gate; design evaluation is recommended before prose. Prose-only — no
+  illustration or image generation in this skill. Pipeline and shared protocols
+  in SKILL.md; stage procedures in workflow/01–08. For general non-narrative
+  documents, use document-authoring instead.
 metadata:
   agent: cocrates
 ---
 
-# Novel Authoring — Long-Form Fiction Generation Skill
+# Novel Authoring — Serialized Fiction Generation Skill
 
-Produces **complete narrative fiction** — from a single short story to a multi-volume epic — through a structured, stage-gated pipeline. Each stage produces artifact files; each requires **explicit user approval** before proceeding.
+Produces **complete narrative fiction** — from a single short story to a multi-episode web novel — through a structured, stage-gated pipeline. Each stage produces artifact files; each requires **explicit user approval** before proceeding.
 
-**Publication unit:** **Chapter.** Episodes/scenes are design-only sections inside that chapter's design file (④ must be manuscript-ready before ⑤).
+**Publication unit:** **Episode.** Scenes are design-only sections inside that episode’s design file (④ must be generation-ready before ⑥).
 
-**Setup:** ① lock Structure Mode + chapter-scale plan → ② `series.md` → ③ architecture → chapter loop ④→⑥→⑤→⑥→⑧. Layer sync: [`consistency.md`](workflow/consistency.md).
+**No illustrations:** This skill generates **prose only**. Do not generate reference PNGs, image YAML, or in-novel illustrations. Covers or other still art require a **separate user request** via `image-generation`.
+
+**Setup (once):** ① define → ② plan (`series.md`) → ③ **series-level** architecture → **episode loop** ④ design → ⑤ evaluate design (recommended) → ⑥ manuscript → ⑦ evaluate manuscript (main gate) → ⑧ release. Cross-layer sync: § Consistency.
 
 ---
 
 ## How to Use This Skill
 
-**This file (`SKILL.md`)** — always loaded. Contains pipeline rules, chapter loop, approval gates, and global constraints. **Read on every session** when working on a novel.
+**This file** — pipeline rules, approval gates, global constraints, and shared protocols (Consistency, Reference Models, Revision, Research). Orient here each session. It does **not** replace numbered stage workflows.
 
-**Workflow files (`workflow/`)** — read **at the start of each stage** for step-by-step procedure, templates, and checklists. Re-read when resuming that stage.
+**Stage workflows** — `novel-authoring/workflow/01`–`08` only. Read the matching stage file **before** starting or resuming that stage. Do not design, evaluate, generate, revise, or release from memory or a prior-turn summary.
 
-| Stage | Purpose | Workflow | Gate artifact |
-|-------|---------|----------|---------------|
-| ① define | Lock scope, genre, criteria; **chapter-scale planning only** | [`01-define.md`](workflow/01-define.md) | `overview.md` |
-| ② plan | Series blueprint — **short:** parts + chapter lists in `series.md`; **series:** Part Catalog only | [`02-plan.md`](workflow/02-plan.md) | `series.md` |
-| ③ architecture | Characters, locations, **stagings**, world, chapter catalogs; **series mode:** `parts/` chapter lists | [`03-architecture.md`](workflow/03-architecture.md) | `characters.md`, `locations.md`, `stagings.md`, `world-bible.md`, `chapters/` (+ `parts/` if series) |
-| (any) | Shared reference-model rules (character / location / staging) | [`reference-models.md`](workflow/reference-models.md) | Design locks (prose; no PNG) |
-| ④ chapter design | Chapter design — episode/scene sections in one file | [`04-chapter-design.md`](workflow/04-chapter-design.md) | `chapters/{nnn}-{chapter-slug}.md` |
-| ⑤ generation | Chapter prose locked to design + architecture + continuity | [`05-generation.md`](workflow/05-generation.md) | `manuscripts/{nnn}-{chapter-slug}.md` |
-| ⑥ evaluation | Design and/or manuscript validation + critique | [`06-evaluation.md`](workflow/06-evaluation.md) | `evaluations/{nnn}-{chapter-slug}.md` |
-| ⑦ revision | Design-first fixes + consistency cascade | [`07-revision.md`](workflow/07-revision.md) | Updated design/manuscript (+ higher files if needed) |
-| ⑧ release | Lock chapter; update continuity | [`08-release.md`](workflow/08-release.md) | Continuity files |
-| (any) | Optional research | [`research.md`](workflow/research.md) | `docs/{topic}.md` |
-| (any) | **Consistency cascade** when any approved layer changes | [`consistency.md`](workflow/consistency.md) | Updated higher→lower files + re-run gates |
+**Hard rule — no stage without its workflow:**
+1. State the stage (e.g. *"Stage ④ — episode design."*).
+2. Read the workflow that stage’s `workflow/0N-….md`.
+3. Only then produce or edit artifacts for that stage.
 
-### Default Chapter Loop
+**Selective artifact load (hard):** Never dump every profile, prior episode, or continuity file “for context.”
 
-Unless the user explicitly requests batching:
+1. **Index pass (first):** `overview.md`, `series.md`, `characters.md`, `locations.md`, `world-bible.md`, `stagings.md` — enough to know what exists.
+2. **Detail pass:** only paths this stage needs (Appearing cast, used locations, cited stagings, current episode/manuscript/eval target; ep 002+ → `continuity/story-so-far.md` + **immediate prior** summary only).
+
+Stage Load sections in `04` / `05` / `06` / `07` implement this. Do not invent a fuller dump.
+
+| Stage | Purpose | Workflow | Approval gate | Gate artifact |
+|-------|---------|--------------------------|---------------|---------------|
+| ① define | Scope, genre, criteria; **episode-scale only** | `01-define.md` | **G1** | `overview.md` |
+| ② plan | Episode List + series arc | `02-plan.md` | **G2** | `series.md` |
+| ③ architecture | World, cast, places — **series foundation** | `03-architecture.md` | **G3** | `world-bible.md`, `characters*`, `locations*` |
+| ④ episode design | Episode + scenes + **situation stagings** | `04-episode-design.md` | **G4** | `episodes/{nnn}-{slug}.md`, `stagings*` as needed |
+| ⑤ evaluate (design) | Design validation + critique — **recommended** | `05-evaluate-design.md` | **G5** | `evaluations/{nnn}-{slug}-design.md` |
+| ⑥ generation | Prose locked to design + architecture + continuity | `06-generate.md` | **G6** | `manuscripts/{nnn}-{slug}.md` |
+| ⑦ evaluate (manuscript) | **Main gate** — manuscript validation + critique | `07-evaluate-manuscript.md` | **G7** | `evaluations/{nnn}-{slug}-manuscript.md` |
+| ⑧ release | Lock episode; update continuity | `08-release.md` | **G8** | Continuity files |
+
+**Gate IDs match stages (G1–G8).** Do not reuse a gate number for a different stage.
+
+### Default Episode Loop
+
+Unless the user explicitly requests **design-ahead** (designs only, not manuscripts):
 
 ```
-④ design chapter N (single chapter.md with episode sections) → user approves
-  → ⑥ evaluate design (recommended) → user selects revisions
-    → ⑦ revise design (if needed) → user approves
-      → ⑤ write chapter manuscript → user approves
-        → ⑥ evaluate manuscript → user selects revisions
-          → ⑦ revise (if needed) → user approves
-            → ⑧ release + update continuity
-              → ④ design chapter N+1 → ...
-```
-
-```mermaid
-graph TD
-    subgraph setup ["Series setup (once)"]
-        A["① define"] --> B["② plan"]
-        B --> C["③ architecture"]
-    end
-    C --> D["④ chapter design"]
-    D --> E{"⑥ design eval"}
-    E -->|"revise"| F["⑦ revision"]
-    F --> D
-    E -->|"approved"| G["⑤ generation"]
-    G --> H["⑥ manuscript eval"]
-    H --> I{"issues?"}
-    I -->|"revise"| F
-    I -->|"approved"| J["⑧ release"]
-    J --> K["next chapter"]
-    K --> D
-    J -.->|"updates"| CONT["continuity/"]
-    CONT -.->|"loads"| D
-    CONT -.->|"loads"| G
+④ design episode N → G4
+  → ⑤ evaluate design (recommended) → revise if needed → G5
+    → ⑥ write manuscript → Design-Fidelity + Prose Quality Floor → G6
+      → ⑦ evaluate manuscript (required) → revise if needed → G7
+        → ⑧ release + continuity → G8
+          → ④ design episode N+1 → ...
 ```
 
 **Hard rules:**
-- Do not start chapter N+1 until chapter N is **released** (⑧ complete)
-- Every artifact requires **explicit user approval** before proceeding
-- **Design evaluation before manuscript** is strongly recommended — fixing structure at design stage is more efficient than revising prose
-- Batching and design-ahead are **opt-in only** — each chapter still needs individual approval before its manuscript
+- No **manuscript** for episode N+1 until N is **released** (G8) — **no exceptions**
+- No episode N+1 **design** until N released (unless user requests design-ahead)
+- Every artifact needs **explicit user approval**
+- **⑤ recommended** — user may skip to ⑥ after G4
+- **⑥** — pass Design-Fidelity + Prose Quality Floor before G6 (`06-generate.md`)
+- **⑦ mandatory** before release (`07-evaluate-manuscript.md`)
+- Architecture expands **additively** during ④ for local gaps (§ Consistency). Stage ③ is series foundation, not first-episode stubs.
 
 ### Approval Applies To
 
-- `overview.md`, `series.md`, architecture files
-- Each `chapters/{nnn}-{chapter-slug}.md` (includes episode/scene design sections)
-- Each `manuscripts/{nnn}-{chapter-slug}.md`
-- Each `evaluations/{nnn}-{chapter-slug}.md` and revision decisions
-- Release confirmation (stage ⑧)
-- Any new character, location, or world rule (architecture update first, then cascade)
-- Consistency Cascade file set when a higher layer changes ([`consistency.md`](workflow/consistency.md))
-
-### Design-Ahead (Opt-In)
-
-Only when the user requests designing multiple chapters before writing manuscripts:
-
-- Each chapter design loads continuity as of the last **released** chapter
-- Each design requires individual approval before its manuscript
-- Earlier designs may be revised after later ones reveal conflicts — use [`consistency.md`](consistency.md) cascade; do not leave sibling chapter designs disagreeing with the Chapter List source
+- `overview.md`, `series.md`, architecture, each episode design, each manuscript, evaluations, release
+- Any **new** character, location, world rule, or staging (approve before citing)
+- Any **modifying** architecture/staging change (user acknowledges impact)
+- Consistency Cascade file set when a higher layer changes
 
 ### Agent Procedure
 
-1. **State the current stage** (e.g., *"Stage ④ — chapter design."*)
-2. **Read the workflow file** for that stage before producing artifacts
-3. **Write artifacts to files** — never leave deliverables in chat only
-4. **Present and wait** for explicit user approval before advancing
-5. After ⑧ release → continuity briefing → `04-chapter-design.md` for next chapter
-6. On mid-flight changes → [`consistency.md`](workflow/consistency.md) cascade before continuing
+1. **Orient** — use `todo` skill; read `{project-root}/TODO.md` (scrum Initialize if series and `scrum/` missing)
+2. State the current stage
+3. Read the stage’s workflow — every time
+4. Write artifacts to disk — never chat-only deliverables
+5. Present and wait for explicit approval; update todo on draft/gate progress
+6. After G8 → continuity briefing → sprint boundary → next ④ (reload continuity)
+7. Mid-flight changes → § Consistency cascade before continuing
 
 ---
 
 ## Structure & Artifacts
 
-**Plot hierarchy:** `Series → Part → Chapter → Episode (design) → Scene (design)`
-
-- **Chapter** = publication / manuscript unit
-- **Episode / Scene** = design-only sections inside `chapters/{nnn}-{slug}.md` (④) — no nested episode folders for new work
-- **Consistency across layers:** see [`consistency.md`](workflow/consistency.md) (source-of-truth stack + cascade on change)
-- **Reference models (prose):** character / location / staging locks in [`reference-models.md`](workflow/reference-models.md) — same three layers as webtoon/picture-book/video; no PNG materialization. While designing chapter scenes, **co-design** staging + character states + location states — **reuse** when present, **add** when missing (§7).
-
-### Structure Mode
-
-| Mode | Guideline | `series.md` (②) | `parts/` |
-|------|-----------|-----------------|---------|
-| **Short** | ~1 volume, under ~20 chapters | Part Composition + **Chapter List** | Do not create |
-| **Series** | Multi-part / long-form | Part Catalog only (no chapter rows) | Required (③ Chapter Lists) |
-
-Lock Mode in `overview.md`. Episode count is decided only at ④.
-
-### Files by stage
+**Plot hierarchy:** `Series → Episode → Scene (design)`
 
 | Level | Artifact | Stage |
 |-------|----------|-------|
 | Constraints | `overview.md` | ① |
 | Series | `series.md` | ② |
-| Part | short: in `series.md`; series: `parts/` | ② / ③ |
-| Chapter catalog → design | `chapters/{nnn}-{slug}.md` | ③ thin → ④ full |
-| Prose | `manuscripts/{nnn}-{slug}.md` | ⑤ |
-| Continuity | `continuity/*` | ⑧ write; ④/⑤/⑥ load |
-| Evaluation | `evaluations/{nnn}-{slug}.md` | ⑥–⑧ |
-
-**Gate order:** Short: ② (Chapter List) → ③ catalogs + world/cast → ④ designs. Series: ② Part Catalog → ③ `parts/` + catalogs → ④.
-
-**Always:** Before ④ run Prior-Design Consistency; before ⑤ run Design-Fidelity; on any correction run the [cascade](workflow/consistency.md). Detail procedures stay in stage workflows — do not invent parallel rules in chat.
+| World / cast / place | `world-bible.md` · `characters*` · `locations*` | ③ (+ additive ④) |
+| Situation staging | `stagings.md` · `stagings/*` | ④ (with episode) |
+| Episode design | `episodes/{nnn}-{slug}.md` | ④ |
+| Prose | `manuscripts/{nnn}-{slug}.md` | ⑥ |
+| Evaluation | `evaluations/*-design.md` · `*-manuscript.md` | ⑤ / ⑦ |
+| Continuity | `continuity/*` | ⑧ write; ④/⑥/⑦ load |
 
 ## Resolve Project Root
 
@@ -180,83 +143,238 @@ Workspace layouts fall into three types. **Inspect the workspace first**, then m
 
 ## Working Location
 
-All artifacts under `{project-root}/`:
+**Scaffold at ①:** when creating `{project-root}/`, also create `world/`, `characters/`, `locations/`, `stagings/`, `episodes/`, `manuscripts/`, `evaluations/`, `continuity/`, `scrum/` in **one** tool round. Details: `01-define.md` § Project scaffold.
 
 ```
 {project-root}/
-├── overview.md              # ① (includes Structure Mode)
-├── series.md                # ② short: parts + Chapter List; series: Part Catalog only
-├── parts/                   # ③ series mode only — omit in short mode
-│   ├── 001-{part-slug}.md
-│   └── ...
-├── chapters/                # ③ catalog / ④ design (one file per chapter)
-│   ├── 001-{chapter-slug}.md   # chapter + Episodes + Scenes (Key Events)
-│   └── ...
-├── characters.md            # ③
-├── characters/              # ③/④
-├── locations.md             # ③
-├── locations/               # ③/④
-├── stagings.md              # ③ continuing-situation blocking
-├── stagings/                # ③/④
-├── world-bible.md           # ③
-├── world/                   # ③/④
-├── docs/                    # optional
-├── manuscripts/             # ⑤
-│   ├── 001-{chapter-slug}.md
-│   └── ...
-├── continuity/              # ⑧ (loaded at ④/⑤)
-├── evaluations/             # ⑥/⑦/⑧
-│   ├── 001-{chapter-slug}.md
-│   └── ...
-└── ...
+├── TODO.md · scrum/
+├── overview.md · series.md
+├── world-bible.md · world/
+├── characters.md · characters/
+├── locations.md · locations/
+├── stagings.md · stagings/          # ④
+├── episodes/ · manuscripts/ · evaluations/ · continuity/
+└── docs/                            # optional research
 ```
 
-**Naming:** `{nnn}` = 001, 002, 003 … (always 3 digits) | `{slug}` = URL-friendly slug
+### Task tracking (todo + scrum)
 
-Episode numbers are **local headings** inside the parent chapter file (`### Episode 001`). No nested `chapters/{slug}/` episode folder; no top-level `episodes/` directory.
+| Sprint | Scope |
+|--------|--------|
+| `sprint-00` | ① → ② → ③ |
+| `sprint-01`… | One episode release (④→⑧, + additive architecture as needed) |
+
+Story plan stays in `series.md`. Orient `TODO.md` first (use `todo` skill).
 
 ---
 
 ## Dialogue Rules
 
-1. State current stage; read that stage's workflow (+ [`consistency.md`](workflow/consistency.md) when changing shared lore/plot)
-2. Stage ①: one question at a time; chapters only (never episode planning); lock Structure Mode
-3. Present artifacts; wait for explicit approval; match user language
-4. After release, prompt next chapter and wait
-5. Propose design evaluation after ④; run **required persona sets** in `06-evaluation.md` (Target Reader + Genre Critic + Plot Expert + Reader-Editor on design; Target Reader + Genre Critic + Reader-Editor + Literary Critic on manuscript; ch 001 adds Setting/Lore; prestige adds Literary Awards Juror)
-6. Critique → **design** → prose (never patch plot/structure in prose alone)
-7. Honor Structure Mode; run load + Consistency/Fidelity gates at ④/⑤; on edits use Consistency Cascade and tell the user which files synced
+1. State stage; read the workflow before any stage action
+2. Stage ①: one question at a time; episodes only (never scene planning)
+3. After G8, prompt next episode and wait
+4. Propose ⑤ after G4; **always** run ⑦ before release
+5. Critique → **design** → prose; prefer **add** over **modify** on architecture gaps
+6. Load gates at ④/⑥; Consistency Cascade on higher-layer edits
 
 ---
 
 ## Prohibitions
 
-**Structure / gates:**
-- Episode planning at ①; episode counts in `series.md` / `parts/` / chapter catalogs
-- Wrong Structure Mode layout (short with `parts/`; series with chapter rows in `series.md`)
-- Treating chapter-count estimates as fixed contracts
-- Nested `chapters/{slug}/` episode files; "Episode Detail" that duplicates Key Events
-- ④ without Pre-Design Load / Consistency Gate; ⑤ without Pre-Generation Load / Design-Fidelity Gate
-- Manuscript or Index-only design that skipped Manuscript Readiness
-- Chapter N+1 before N released (unless user batches); skipping user approval; chat-only artifacts
-- Publishing/evaluating at episode level; unlocking released chapters without explicit republication
-- **Alternate scene layouts** — inventing nested scene subsections or non-canonical Key Events field sets (see `workflow/04-chapter-design.md` canonical scene schema)
-- **Omitting required scene fields** (use `none` where empty is valid)
-- **Ghost cast** — Characters Appearing without On stage presence or mention-only tag
-- Field notation other than `**Field:**` / `- **Field:**` (colon must be inside bold)
+Global hard stops. Stage-specific MUST NOTs live in the matching workflow — this list is not a substitute for loading that workflow.
 
-**Consistency (see `consistency.md`):**
-- Inventing cast/places/world rules in ④/⑤
-- Changing a lower artifact that contradicts a higher one without cascade + approval
-- Patching plot/structure in manuscript without updating chapter design first
-- Ignoring continuity on ch 002+
+### Workflow & deliverables
+- Enter any stage without reading that stage’s `01`–`08` workflow
+- Chat-only design, manuscript, or evaluation (no gate artifact on disk)
+- Paste skill/workflow text into `episodes/`, `manuscripts/`, or `evaluations/`
 
-**Craft:** Over-seeding ch 001; Hold in manuscript; info-dump / catalog world-building; opening without Opening Question; >2 POV inserts/episode without design; thematic closing monologue; cartoon villains; over-labeled POV emotion; quoted dialogue in Key Events
+### Structure & order
+- Scene planning at ①; scene counts in `series.md` / `overview.md`
+- Episode design before approved ② + ③ series-level architecture
+- Treating ③ as first-episode-only stubs
+- Marking G4 done because the user asked only for ⑤
+- Manuscript (⑥) before approved ④ (+ recommended ⑤)
+- Episode N+1 **manuscript** before N released
+- Nested `episodes/{slug}/` scene files; non-canonical episode filenames
+- English-alias catalog/staging filenames when names are Non-Latin (e.g. `characters/han-seo-yun.md` instead of `characters/한서윤.md`)
+- Image generation / reference PNGs / illustration YAML as part of this skill
+- Authoring `stagings*` as Stage ③ gate deliverables
+
+### Design fidelity & catalogs (summary)
+- Invent catalog facts in Key Events or prose without architecture approval
+- Cite missing Architecture paths; mark Load ✅ for missing files; index-only rows without profiles
+- Free-text locations; cite `+ facet` not listed under **Multi-facet anchors**
+- Ghost cast / Dialogue speakers absent from On stage; Appearing ≠ On stage union
+- Soften/harden Hook evidence across body surfaces; Out creep beyond Summary + Hook to Next
+- Present under-length, repeated, pasted, author-meta, or **installment-meta** manuscript (body cites this work’s own episode/part/화 numbers as time or place, e.g. “In episode 001 I didn’t see that scratch.”); skip Design-Fidelity or Prose Quality Floor
+- Stage ⑤ editing `episodes/` (return to ④; Adjudication stays Pending until a later ⑤ turn)
+
+**Full checklists, Gate Evidence, forecast math, Path existence, Floor rows:** `04`–`07` only.
 
 ---
 
 ## Completion Criteria
 
-**Per chapter:** ③ architecture (chapter catalog) → ④ design (single chapter.md: chapter + episodes + scenes; **canonical scene schema**) → ⑥ design evaluation (**Schema Integrity** pass) → ⑤ manuscript → ⑥ manuscript evaluation → ⑦ revisions → ⑧ release + continuity updated
+**Per episode:** ④ → [⑤] → ⑥ → ⑦ → revisions → ⑧ + continuity
 
-**Work complete:** Chapter List source complete (`series.md` in short mode; all `parts/` in series mode) → all chapters designed and released → user final approval
+**Work complete:** Episode List complete → all episodes designed and released → user final approval
+
+---
+
+# Shared protocols
+
+## Consistency — Cross-Stage Protocol
+
+**Not a numbered stage.** Apply when starting ②–④, revising (⑤/⑦ loops), discovering a catalog gap in ④, or changing any approved artifact.
+
+### Glossary
+
+| Term | Meaning |
+|------|---------|
+| **Episode List source** | `series.md` Episode List (Summary + Hook to Next) |
+| **Architecture layer** | `world-bible.md`, `world/*`, `characters*`, `locations*` (③; expand at ④) |
+| **Episode design** | `episodes/{nnn}-{slug}.md` — Alignment, Scene Index, Key Events |
+| **Scene Index** | TOC inside episode design (not a location facet list) |
+| **Staging** | Situation stage (`stagings*`) — authored in **④** |
+| **Design Consistency Gate** / **Generation Readiness** | Stage ④ checks — `04-episode-design.md` |
+| **Design-Fidelity Gate** / **Prose Quality Floor** | Stage ⑥/⑦ — `06-generate.md` / `07-evaluate-manuscript.md` |
+| **Additive / Modify / Retcon** | Prefer add; modify cascades; retcon needs republication |
+
+### Source-of-truth stack (top wins)
+
+```
+overview.md
+  → series.md
+    → world-bible.md + world/* + characters* + locations*
+      → stagings* + episodes/{nnn}-*.md
+        → evaluations/*
+          → manuscripts/*
+continuity/*   [after ⑧; binds ④/⑥/⑦ for ep 002+]
+```
+
+| Change… | Update first | Then sync |
+|---------|--------------|-----------|
+| Scale, validation | `overview.md` | Episode List |
+| Arc / Episode List row | `series.md` | conflicting designs |
+| **New** cast / place / world / staging | architecture or `stagings*` (additive) | cite in design |
+| **Modify** approved profile/rule | warn → approve → **cascade** | open designs/MS; released only via republication |
+| Scene beats / seeds | episode design | manuscript — never prose-only for plot |
+| Released past | don’t — unless republication | design → MS → re-release → continuity |
+
+### Incremental architecture
+
+- **③:** series-level foundation from the full Episode List (cold reader can outline the novel). **No stagings at ③.**
+- **④:** compose approved catalogs; **author stagings**; fill local gaps with additive expands. Gap → stop → expand → approve → resume. Location `+ facet` cites require **Multi-facet anchors** labels (`04-episode-design.md`). Missing facet → **Extend** — do not relocate onto an already-used facet to dodge the gap.
+
+### Additive-first (A/B/C/D)
+
+| Type | Examples | Default |
+|------|----------|---------|
+| **A — Add** | New character, location, world aspect, character **state**, staging | Add → approve → cite |
+| **B — Extend** | New Multi-facet anchors label; additive subsection | Append → approve → cite |
+| **C — Modify** | Rename, rewrite core drive/rule/layout readers already saw | Stop → impact → cascade |
+| **D — Retcon** | Contradict `continuity/*` or released MS | Republication path only |
+
+When a gap appears: propose **A or B** first. Filenames: kebab-case in the work’s language; Non-Latin kept — no English alias files.
+
+### Episode design ↔ architecture sync
+
+1. Selective load (indexes → Appearing/used/cited)
+2. Gap → classify A/B/C/D → architecture edit **before** more Key Events
+3. User approves → record Prior Design Alignment + Architecture References
+4. Re-run Design Consistency + Generation Readiness
+5. C/D → Cascade checklist before continuing
+
+### Cascade checklist
+
+```markdown
+## Consistency Cascade
+- Change: {what}
+- Type: Add / Extend / Modify / Retcon
+- Prior episodes affected: {none | list + republication?}
+- Highest file updated: {path} — user approved: ✅/⬜
+- [ ] overview.md
+- [ ] series.md
+- [ ] world-bible.md / world/* / characters* / locations*
+- [ ] stagings*
+- [ ] episodes/{nnn}
+- [ ] manuscripts/{nnn} (after design sync)
+- [ ] continuity/* (⑧ or republication)
+- Gates re-run: Design Consistency / Generation Readiness / Design-Fidelity — {which}
+```
+
+### What not to duplicate here
+
+Full Design Consistency / Design-Fidelity / Floor **tables**, forecast math, Path existence, craft anti-patterns → stage workflows only.
+
+---
+
+## Reference Models (Identity + Staging Continuity)
+
+**Not a numbered stage.** Prose design locks only — **no PNG / image YAML** in this skill.
+
+### Three layers
+
+| Layer | Locks | Artifact | When |
+|-------|-------|----------|------|
+| **Character** | Identity + wardrobe/equipment **states** | `characters/{slug}.md` | ③ (+ states at ④) |
+| **Location** | Empty set (neutral, static); citeable **Multi-facet anchors** | `locations/{slug}.md` | ③ (+ facets at ④) |
+| **Staging** | Who-is-where for one situation: cited states, seats, situation props, ambient, situation environment | `stagings/{slug}.md` | **④ only** |
+
+Staging **cites** character states — it does not invent outfits/weapons. Same location ≠ same staging. Expression, one-off weather/camera → scene direction (or staging situation environment when the span must hold).
+
+**Mandatory staging:** ≥2 scenes in the same situation **and** (≥2 named cast **or** fixture-relative placement). `Staging: none` only for single-scene / no fixed placement — fail **G4** if violated. Procedures, templates, situation examples: `04-episode-design.md` § Staging.
+
+**Location cites:** catalog path only; every `+ facet` must be an exact **Multi-facet anchors** label (layout / Internal facets / Sensory prose alone is not citeable). Co-appearing major cast: distinguishable on ≥2 visual axes. Full state/facet rules: `03-architecture.md` + `04-episode-design.md`.
+
+**Story design co-locks catalogs:** gap in cast/place/state/staging/facet → stop → add/extend architecture or staging → approve → resume. Prefer add over modify (§ Consistency). Do not “fix” a missing facet by parking the scene on a sibling facet already used by the previous scene.
+
+---
+
+## Revision — Cross-Stage Protocol
+
+**Not a numbered stage.** After ⑤ or ⑦. Design before prose for plot/cast/place/world changes. Prefer additive architecture.
+
+| Kind | First file |
+|------|------------|
+| **A** — Prose craft only | `manuscripts/` |
+| **B** — Episode design | `episodes/{nnn}-*.md` (+ MS if exists) |
+| **C** — Higher plot/list | `series.md` → design → MS |
+| **D** — New lore/cast/place/facet/staging | Add architecture / staging → cite |
+| **D′** — Modify lore/cast | Stop — Consistency C → cascade |
+| **E** — Continuity / released | Prefer unreleased fix; else republication |
+| **F** — Carry-⑥ only | No ④ edit — record for generation |
+| **G** — Eval Skip | Status **Skip** — never leave Pending |
+
+**Carry vs design (hard):**
+- **Carry-⑥** = generation-time only (Hold, POV limits, do-not-narrate, motif-touch reminders). Does **not** rewrite design fields.
+- Findings that need design-field changes (closing image/beat, crowded Out, adjacent scenes on the same Location facet, observable character cost, scene separation) → Status **Pending** (Kind **B**), not Carry-⑥.
+- User says “apply recommendations / 권고 반영”: ask Kind **B** vs **F** in one line, **or** default Med+ design-field findings to **B**.
+- After Kind **B**/**D** revision: **re-run** Schema + Consistency + Adjudication on the **revised** design body; mark applied rows **Applied-④**; sync design Gate **G4**, eval Gate **G5**, and `TODO.md` in the **same** approval turn. **Forbidden:** flip G4/G5 to Approved without rewriting the eval against the revised file.
+
+**Cite-gap fix (hard):** Missing citeable Location `+ facet` → **stop → Extend Multi-facet anchors → approve → cite**. **Forbidden** as default: relocate a scene onto an already-used facet to avoid Extend — especially when that makes two **adjacent** scenes share the same facet.
+
+**Procedure:** user selects findings → classify → highest layer first → cascade → re-run gates (design → Consistency + Readiness; MS → Design-Fidelity + Floor) → update the active evaluation file → present for approval.
+
+Design updates: keep Scene Index ↔ `## Scenes` in sync; refresh Prior Design Alignment if higher files changed. Critique→fix mapping details: `05-evaluate-design.md` / `07-evaluate-manuscript.md` revision loops.
+
+---
+
+## Research — Independent Activity
+
+**Not a fixed stage.** May run during ①–⑦. Save `{project-root}/docs/{topic-slug}.md`:
+
+```markdown
+# Research: {Topic}
+
+## Summary
+{Key findings}
+
+## Sources
+{Attribution}
+
+## Application Notes
+{Which artifact absorbs this — overview / series / world / character / location / episode design}
+```
+
+Applying research is not automatic: update the correct design/architecture file first, then cascade per § Consistency. Do not sneak new world rules only into manuscript prose.

@@ -3,38 +3,90 @@ name: spec-driven-generation
 description: >-
   Produces deliverables — software, documents, images, presentations, and
   other artifacts — strictly from Spec documents in {project-root}/spec/.
-  Select when the user asks to build, create, or generate from a spec, from
-  all specs, or "according to the specification"; when spec-writing hands off
-  to generation; or when generation is requested but no ready spec exists yet
-  (then enter Step 0 Spec Readiness Gate: resolve/create {project-root} if needed,
-  approve PRD, identify/review ASRs via ASR.md, approve ADRs, write Specs
-  through adr-writing and spec-writing, then generate).
+  Unifies spec-writing, generation, and verification into a single pipeline.
+  Select when the user asks to build, create, or generate from a spec; when
+  spec-writing is needed to consolidate decisions; when verifying an artifact
+  against a spec; or when generation is requested but no ready spec exists yet
+  (then enter Step 0 to find the correct entry point).
 metadata:
   agent: cocrates
 ---
 
-# Spec-Driven Generation — Artifact Production Skill
+# Spec-Driven Generation — Unified Artifact Production Skill
 
-This skill **produces final artifacts from Spec documents**. The Spec is the **sole source of truth** for what to build — not the original user prompt, not ADR files, and not assumptions the agent fills in silently.
+This skill **produces, specifies, and verifies final artifacts** from a structured pipeline. The Spec is the **sole source of truth** for what to build — not the original user prompt, not ADR files, and not assumptions the agent fills in silently.
 
 Deliverables include **software, documents, images, presentations, blog series, reports**, and any other finished work the Spec describes.
 
+## How to Use This Skill
+
+**This file (`SKILL.md`)** — always loaded. Contains the pipeline, Step 0 (Readiness Gate), ASR framework, project layout, rules, and global constraints.
+
+**Workflow files (`workflow/`)** — read **at the start of each stage** for step-by-step procedure, templates, and checklists. Re-read when resuming that stage.
+
+| Step | Purpose | Workflow | Gate artifact |
+|------|---------|----------|---------------|
+| **① PRD Creation** | Define product scope, goals, constraints | [`01-prd-creation.md`](workflow/01-prd-creation.md) | `{project-root}/spec/PRD.md` |
+| **② ASR Identification** | Discover and register Architecturally Significant Requirements | [`02-asr-identification.md`](workflow/02-asr-identification.md) | `{project-root}/spec/ASR.md` |
+| **③ ASR Review → ADR** | Review ASRs, route to Direct Input or ADR analysis | [`03-asr-review.md`](workflow/03-asr-review.md) | `{project-root}/adr/{concern-slug}.md` |
+| **④ Spec Writing** | Consolidate decisions into self-contained Spec documents | [`04-spec-writing.md`](workflow/04-spec-writing.md) | `{project-root}/spec/{requirement-slug}.md` |
+| **⑤ Generation** | Produce artifact strictly from Spec | [`05-generation.md`](workflow/05-generation.md) | Generated artifact(s) |
+| **⑥ Verification** | Check artifact against Spec; find undocumented ASRs | [`06-verification.md`](workflow/06-verification.md) | `{project-root}/verification/{requirement-slug}.md` |
+
+### Pipeline Flow
+
+```mermaid
+graph TD
+    S0["Step 0: Readiness Gate"]
+    S1["① PRD Creation"]
+    S2["② ASR Identification"]
+    S3["③ ASR Review"]
+    ADR{"ADR needed?"}
+    S4["④ Spec Writing"]
+    S5["⑤ Generation"]
+    S6["⑥ Verification"]
+    PASS{"Pass?"}
+    FIX["Update Spec / Re-run ADR"]
+
+    S0 -->|"Gate 1 fail"| S1
+    S0 -->|"Gate 2 fail"| S2
+    S0 -->|"Gate 3 fail"| S3
+    S0 -->|"Gate 4 fail"| ADR
+    S0 -->|"Gate 5 fail"| S4
+    S0 -->|"All pass"| S5
+
+    S1 -->|"Next"| S2
+    S2 -->|"Next"| S3
+    S3 -->|"Direct Input"| S4
+    S3 -->|"Complex trade-off"| ADR
+    ADR -->|"Approved"| S4
+    S4 -->|"Next"| S5
+    S5 -->|"Next"| S6
+    S6 -->|"Pass"| DONE["Done"]
+    S6 -->|"Fail: deviation or undocumented ASR"| FIX
+    FIX -->|"Update Spec"| S4
+    FIX -->|"Complex gap"| ADR
+    ADR -->|"Approved"| S4
+    FIX -->|"Fix artifact only"| S5
+```
+
+**Forward path after entry:** ① → ② → ③ → (ADR if needed) → ④ → ⑤ → ⑥
+
+**Post-verification loop:** ⑥ fail → update Spec or run ADR → re-generate (⑤) → re-verify (⑥)
+
+---
+
 ## Resolve Project Root
 
-Before writing Spec / ADR / verification files, resolve **`{project-root}`** — the folder that holds this deliverable.
+Before writing any files, resolve **`{project-root}`** — the folder that holds this deliverable.
 
 Workspace layouts fall into three types. **Inspect the workspace first**, then match:
 
 | Type | When | `{project-root}` |
 |------|------|------------------|
-| **1** | Workspace *is* the single project (no nested project folder) | `.` (workspace root) |
+| **1** | Workspace *is* the single project | `.` (workspace root) |
 | **2** | Workspace holds multiple peer projects | `{project-slug}/` |
 | **3** | Workspace groups projects by kind | `{kind}/{project-slug}/` (e.g. `apps/{project-slug}/`) |
-
-**Examples:**
-- Type 1 → `spec/PRD.md` at workspace root
-- Type 2 → `{project-slug}/spec/PRD.md`
-- Type 3 → `apps/{project-slug}/spec/PRD.md` (kind folder as used in the workspace)
 
 **Rules:**
 1. Infer the type from existing structure (e.g. `spec/` at root, peer project folders, or kind folders such as `apps/`, `services/`). Prefer an **existing** matching folder over creating a new one.
@@ -42,7 +94,7 @@ Workspace layouts fall into three types. **Inspect the workspace first**, then m
 3. If the project folder already exists, use it — do not recreate or relocate silently.
 4. **`{project-slug}`:** English **kebab-case** (e.g. `jsondb`, `item-catalog-api`). Derive from the product or deliverable name; confirm if ambiguous. Type 1 has no slug folder.
 
-This skill owns project-folder creation when generation starts and `{project-root}` is missing (after user confirmation).
+---
 
 ## Project Folder Layout
 
@@ -61,9 +113,14 @@ All Spec / ADR / verification work for a deliverable lives under **`{project-roo
 └── … (generated artifacts and other project files)
 ```
 
-- **`{project-root}/spec/ASR.md`:** Living registry of Architecturally Significant Requirements — tracks identification, review, design, and approval. Owned and maintained by this skill (updated by `adr-writing` / `spec-writing` / `spec-driven-verification` when they touch ASRs). It is **not** a generation Spec — do not treat it as sole input for artifact production.
+- **`{project-root}/spec/ASR.md`:** Living registry of Architecturally Significant Requirements. Maintained by this skill (updated during Steps 2–4 and 6). **Not** a generation Spec — exclude when loading Spec content for production.
+- **`{project-root}/spec/PRD.md`:** Product anchor — high-level scope, goals, global constraints.
+- **`{project-root}/spec/{requirement-slug}.md`:** Modular, self-contained Spec for one deliverable or requirement scope. **Sole input** for generation (⑤) and verification (⑥).
+- **`{project-root}/adr/`:** Architecture Decision Records — decision audit trail, not required reading for generation.
+- **`{project-root}/verification/`:** Verification reports — one per Spec.
 - Place `spec/`, `adr/`, and `verification/` under `{project-root}` only. Keep `ASR.md` only at `{project-root}/spec/ASR.md`.
-- **On generation request:** After resolving (and confirming if creating) `{project-root}`, ensure `spec/` exists before writing PRD or Spec files.
+
+---
 
 ## Core Principle: Spec as Quality Contract
 
@@ -74,53 +131,22 @@ The Spec exists to capture every **ASR (Architecturally Significant Requirement)
 - **What bar** applies — constraints, acceptance criteria, explicit quality expectations
 - **What is excluded** — out-of-scope items that would otherwise be guessed at
 
-Unstated ASRs force silent defaults — and defaults degrade quality. **Step 0 (Spec Readiness Gate)** exists to surface those choices **before** generation, not to document them after the fact.
+Unstated ASRs force silent defaults — and defaults degrade quality. **Step 0** exists to surface those choices **before** generation, not to document them after the fact.
 
-### Workflow Nature: Non-linear Lifecycle
+### ASR vs ADR vs Spec vs Generation vs Verification
 
-Every generation request **starts at Step 0 (Spec Readiness Gate)** once to find the correct entry step. After that, steps advance **forward** (1 → 2 → 3 → ADR approval → 4 → 5) without re-checking earlier gates.
-- The overall lifecycle (**PRD → ASR → ADR → Spec → Generation → Verification**) can still loop when gaps appear later.
-- Gaps discovered during *Generation* or failures during *Verification* re-enter **Step 0** only to resume at the appropriate remediation step.
+| | ASR (`ASR.md`) | ADR | Spec | Generation (⑤) | Verification (⑥) |
+|---|-----|------|------|-------------------------|---------------------------|
+| **Unit** | One architecturally significant requirement | One concern (one question) | One deliverable or requirement scope | One or more artifacts per Spec | One or more artifacts per Spec |
+| **Purpose** | Track what must be decided and its lifecycle | Compare alternatives; record approval | State decided requirements self-contained | **Produce** the artifact | **Confirm** the artifact matches the Spec |
+| **Reader needs** | Know what is open, reviewing, designed, or approved | Understand options and tradeoffs | Understand what to build | Receive the finished work | Know what passed, failed, or was decided |
+| **Role in pipeline** | Decision backlog & status board | Design review for open ASRs | **Sole input** for generation & verification | Execution | Audit |
 
-**ASR vs ADR vs Spec vs generation:**
+### ASR ↔ ADR cardinality (many-to-many)
 
-| | ASR (`ASR.md`) | ADR | Spec | Generation (this skill) |
-|---|-----|------|------|-------------------------|
-| **Unit** | One architecturally significant requirement | One concern (one question) | One deliverable or requirement scope | One or more artifacts per Spec |
-| **Purpose** | Track what must be decided and its lifecycle | Compare alternatives; record approval | State decided requirements self-contained | **Produce** the artifact |
-| **Reader needs** | Know what is open, reviewing, designed, or approved | Understand options and tradeoffs | Understand what to build | Receive the finished work |
-| **Role in pipeline** | Decision backlog & status board | Design review for open ASRs | **Sole input** for generation | Execution |
-
-**ASR ↔ ADR cardinality (many-to-many):**
 - **One ASR → many ADRs:** A single ASR may require several design reviews (e.g. *Storage Model* → partitioning ADR + indexing ADR + consistency ADR).
 - **One ADR → many ASRs:** A single ADR may resolve or partially address multiple related ASRs when the concern spans them.
 - Always record both sides: list Related ADRs on each ASR in `ASR.md`, and list Related ASRs on each ADR file.
-
-Match the user's language (Korean, English, etc.) in user-facing messages. Artifact content follows the language implied by the Spec unless the Spec states otherwise.
-
----
-
-## Spec Input Scope
-
-Generation reads from **`{project-root}/spec/`**.
-
-```
-{project-root}/spec/
-├── ASR.md
-├── PRD.md
-└── {requirement-slug}.md
-```
-
-`ASR.md` is the decision-status registry. Generation input Specs are `PRD.md` and `{requirement-slug}.md` only — **exclude `ASR.md`** when loading Spec content for production.
-### Multi-Spec & Multi-ASR Strategy
-
-In large-scale projects, specifications must be broken down into multiple, **independent spec files** based on domain or component boundaries to maintain clarity and modularity. 
-
-When dealing with a complex, multi-spec environment, do not focus on the generation or writing order of the files themselves. Instead, **focus on the structural dependencies between ASRs**, tracked in `{project-root}/spec/ASR.md`:
-
-1. **Map ASR Dependencies:** Analyze which foundational decisions must happen first (e.g., *Storage Model* must be decided before *API Surface*, which must be decided before *Client UI*). Record the order under **Dependency Order** in `ASR.md`.
-2. **Sequential Review Path:** Present a recommended, step-by-step evaluation path to the user based on these ASR dependencies. Guide the user to review and resolve one ASR at a time; open ADRs as needed (many-to-many).
-3. **Delegation to Spec-Writing:** The actual formatting and markdown documentation of independent specs are delegated strictly to the **`spec-writing`** skill; keep ASR statuses current in `ASR.md` throughout.
 
 ---
 
@@ -157,160 +183,72 @@ Track each ASR in `ASR.md` with exactly one status:
 
 Status transitions: `identified` → `reviewing` → `designed` → `approved`. Use `deferred` only with explicit user agreement.
 
-### ASR.md File
-
-Create or update **`{project-root}/spec/ASR.md`** whenever ASRs are identified, reviewed, designed, or approved.
-
-```markdown
-# Architecturally Significant Requirements
-
-Living registry for {project-slug}. Status of each ASR must stay current.
-
-## Summary
-
-| ID | Title | Category | Status | Related ADRs | Spec |
-|----|-------|----------|--------|--------------|------|
-| ASR-001 | {short title} | {category} | identified \| reviewing \| designed \| approved \| deferred | adr/{slug}.md, … | spec/{file}.md |
-| ASR-002 | … | … | … | — | — |
-
-## Dependency Order (recommended review path)
-
-1. ASR-00x → ASR-00y → …
-{List IDs in the order structural dependencies require.}
-
-## ASR Detail
-
-### ASR-001 — {Title}
-
-- **Category:** {from universal categories}
-- **Status:** identified | reviewing | designed | approved | deferred
-- **Statement:** {What must be decided — one clear requirement/concern}
-- **Why it matters:** {Impact if left to silent default}
-- **Depends on:** ASR-00x (optional)
-- **Related ADRs:** (many-to-many — zero or more)
-  - `{project-root}/adr/{concern-slug}.md` — {proposed \| approved} — {how it relates}
-- **Resolution path:** direct-input | adr | mixed
-- **Resolution:** {Filled when designed/approved — concrete outcome, not ADR pointers alone}
-- **Spec:** `{project-root}/spec/{file}.md` — {section} (once encoded)
-- **Notes:** {optional}
-```
-
-**Maintenance rules:**
-1. Assign stable IDs (`ASR-001`, `ASR-002`, …). Never reuse IDs.
-2. Update **Summary** and **ASR Detail** together — do not leave the table stale.
-3. When opening an ADR for an ASR, set status to `reviewing` and append the ADR path under **Related ADRs**.
-4. When an ADR is approved (or Direct Input settles the ASR), set status to `designed`, fill **Resolution**. Spec sync and `approved` happen in **Step 4** after user confirmation of the Spec.
-5. One ASR may list multiple ADRs; one ADR may appear under multiple ASRs — keep both sides in sync with `adr-writing`.
-
 ### ASR Decision Pathways (Based on User Context)
 
-When evaluating open ASRs (Step 3), do not force an ADR for every single concern. Match the user's domain expertise and context:
-1. **Direct Input Route (High Context):** If the problem is straightforward, has a natural default, or the user has clear preferences, ask direct questions. Let them dictate the choice, update `ASR.md` to `designed` (fill **Resolution**), then proceed — Spec sync is **Step 4**.
-2. **ADR Analysis Route (Low Context / Complex Trade-offs):** If the user is unsure of the solution, or if the problem involves complex architectural trade-offs (e.g., competing tech stacks, structural patterns), set the ASR to `reviewing` and trigger **`adr-writing`**. Link every new ADR back to the relevant ASR ID(s). Multiple ADRs may be opened for one ASR; one ADR may cover multiple ASRs. After user approval → **Step 4** (do not invent approval).
+When evaluating open ASRs (Step ③), do not force an ADR for every single concern. Match the user's domain expertise and context:
+
+1. **Direct Input Route (High Context):** If the problem is straightforward, has a natural default, or the user has clear preferences, ask direct questions. Let them dictate the choice, update `ASR.md` to `designed` (fill **Resolution**), then proceed — Spec sync is **Step ④**.
+2. **ADR Analysis Route (Low Context / Complex Trade-offs):** If the user is unsure of the solution, or if the problem involves complex architectural trade-offs (e.g., competing tech stacks, structural patterns), set the ASR to `reviewing` and trigger **`adr-writing`**. Link every new ADR back to the relevant ASR ID(s). Multiple ADRs may be opened for one ASR; one ADR may cover multiple ASRs. After user approval → **Step ④** (do not invent approval).
+
+### Multi-Spec & Multi-ASR Strategy
+
+In large-scale projects, specifications must be broken down into multiple, **independent spec files** based on domain or component boundaries to maintain clarity and modularity.
+
+When dealing with a complex, multi-spec environment, do not focus on the generation or writing order of the files themselves. Instead, **focus on the structural dependencies between ASRs**, tracked in `{project-root}/spec/ASR.md`:
+
+1. **Map ASR Dependencies:** Analyze which foundational decisions must happen first (e.g., *Storage Model* must be decided before *API Surface*, which must be decided before *Client UI*). Record the order under **Dependency Order** in `ASR.md`.
+2. **Sequential Review Path:** Present a recommended, step-by-step evaluation path to the user based on these ASR dependencies. Guide the user to review and resolve one ASR at a time; open ADRs as needed (many-to-many).
+3. **Delegation to Spec Writing:** The actual formatting and markdown documentation of independent specs are handled in **Step ④ (Spec Writing)**; keep ASR statuses current in `ASR.md` throughout.
 
 ---
 
-## Workflow
+## Step 0. Spec Readiness Gate
 
-**Begin at Step 0 once** to locate the first incomplete gate, then jump to that step. **After a step finishes, proceed to the next step** — do not re-enter Step 0 between Steps 1–5. Re-enter Step 0 only on a new generation request or when the post-generation defect loop needs to resume work.
-
-```
-Step 0 Spec Readiness Gate (entry only)
-  ├─ Gate 1 fail → Step 1
-  ├─ Gate 2 fail → Step 2
-  ├─ Gate 3 fail → Step 3
-  ├─ Gate 4 fail → ADR approval → Step 4
-  ├─ Gate 5 fail → Step 4
-  └─ All pass   → Step 5
-
-Forward path after entry:
-  Step 1 → Step 2 → Step 3 → (ADR approval if needed) → Step 4 → Step 5
-```
-
-### Step 0. Spec Readiness Gate
-
-Resolve `{project-root}` first (inspect workspace type; confirm slug/location if creating). If `{project-root}` is missing and is not the workspace root (Type 2/3), create it after user confirmation (and `spec/`) before evaluating gates that require files.
+**Always start here.** Resolve `{project-root}` first (inspect workspace type; confirm slug/location if creating). If `{project-root}` is missing and is not the workspace root (Type 2/3), create it after user confirmation (and `spec/`) before evaluating gates that require files.
 
 Evaluate gates **in order**; stop at the **first** failure and jump there. Do not re-run this gate sequence after each subsequent step.
 
 | Gate | Check | Pass criteria | On fail |
 |------|-------|---------------|---------|
-| **Gate 1** | PRD approved? | `{project-root}/spec/PRD.md` exists and the user has explicitly approved it | → **Step 1** |
-| **Gate 2** | ASRs identified for the PRD? | Blocking ASRs from the PRD, user context, and universal categories are registered in `ASR.md` (at least `identified`); **Dependency Order** is filled | → **Step 2** |
-| **Gate 3** | ASRs all reviewed? | No blocking ASR remains `identified` (each is `reviewing` or beyond, or explicitly `deferred`) | → **Step 3** |
-| **Gate 4** | ADRs all approved? | Every ADR linked from blocking ASRs is `approved` (or the ASR used Direct Input with no open ADR). No Related ADR remains `proposed` | → Pause for user ADR approval via `adr-writing` (do **not** invent approval). When approved → **Step 4** |
-| **Gate 5** | Spec created? | Requirement Specs (`PRD.md` + needed `{requirement-slug}.md`, not `ASR.md`) encode approved resolutions and are **sufficient** for the deliverables in the PRD | → **Step 4** |
+| **Gate 1** | PRD approved? | `{project-root}/spec/PRD.md` exists and the user has explicitly approved it | → **Step ①** |
+| **Gate 2** | ASRs identified for the PRD? | Blocking ASRs from the PRD, user context, and universal categories are registered in `ASR.md` (at least `identified`); **Dependency Order** is filled | → **Step ②** |
+| **Gate 3** | ASRs all reviewed? | No blocking ASR remains `identified` (each is `reviewing` or beyond, or explicitly `deferred`) | → **Step ③** |
+| **Gate 4** | ADRs all approved? | Every ADR linked from blocking ASRs is `approved` (or the ASR used Direct Input with no open ADR). No Related ADR remains `proposed` | → Pause for user ADR approval via `adr-writing` (do **not** invent approval). When approved → **Step ④** |
+| **Gate 5** | Spec created? | Requirement Specs (`PRD.md` + needed `{requirement-slug}.md`, not `ASR.md`) encode approved resolutions and are **sufficient** for the deliverables in the PRD | → **Step ④** |
 
-**All gates pass → Step 5.**
+**All gates pass → Step ⑤.**
 
 Do not rely on rigid ASR counts; assess fitness for purpose.
 
-### Step 1. PRD Creation
+### Post-Generation Defect Loop
 
-1. **Identify Goal:** Artifact type, target audience, and core function.
-2. **Create Project Folder:** Ensure `{project-root}` and `{project-root}/spec/` exist (confirm location/name with the user before creating a new folder).
-3. **Document PRD:** Write or update **`{project-root}/spec/PRD.md`** (product anchor — high-level scope, goals, global constraints).
-4. **Initialize ASR Registry:** Create **`{project-root}/spec/ASR.md`** if missing (template above), even before ASRs are fully discovered.
-5. **Obtain PRD Approval:** Present the PRD and get explicit user approval.
-
-**Next → Step 2.**
-
-### Step 2. ASR Creation (Identification)
-
-1. Identify ASRs from the approved PRD, user context, and universal categories.
-2. Register each as `identified` in `ASR.md` (ID, title, category, statement, why it matters).
-3. Fill **Dependency Order**; present the recommended review path to the user.
-
-**Next → Step 3.**
-
-### Step 3. ASR Review → ADR Creation
-
-Review blocking ASRs in **Dependency Order**, one ASR (or dependency branch) at a time:
-
-1. Set the active ASR to `reviewing`.
-2. Route via **ASR Decision Pathways**:
-   - **Direct Input:** User chooses; set ASR to `designed`; fill **Resolution**.
-   - **ADR Analysis:** Hand off to `adr-writing` with the ASR ID(s). One ASR may spawn multiple ADRs; one ADR may list multiple ASR IDs. Keep Related ADRs / Related ASRs bidirectional. Leave ASR `reviewing` until linked ADRs are approved.
-3. Document resolutions in `ASR.md` as they settle — do not wait to batch every ASR before recording.
-
-When all blocking ASRs have a resolution path complete (Direct Input → `designed`, or ADRs created):
-- If any Related ADR is still `proposed`: pause for **user ADR approval** (same as Gate 4). Do **not** invent approval.
-- When all linked ADRs are `approved` (or no open ADRs remain): set affected ASRs to `designed` with concrete **Resolution**.
-
-**Next → Step 4.**
-
-### Step 4. Spec Creation
-
-1. Hand off to **`spec-writing`** to encode `designed` / approved ASR resolutions into `{project-root}/spec/{requirement-slug}.md` (and update `PRD.md` if needed).
-2. Specs must be self-contained — copy decided outcomes in full; never substitute ADR links for requirements.
-3. After Spec sync and user confirmation, mark related ASRs `approved` in `ASR.md`.
-
-**Next → Step 5.**
-
-### Step 5. Generate from Spec
-
-1. **Load Spec(s):** Read `PRD.md` and in-scope `{requirement-slug}.md` (**exclude `ASR.md`**). Keep in working memory: Requirement, Decisions, Requirements, Constraints, Out of Scope. Spec overrides conversation history; if the latest user message contradicts the Spec, ask which source to follow.
-2. **Generate:** Produce the artifact **strictly from the Spec** — every Requirements bullet, honor Decisions / Constraints / Out of Scope, no silent extras, follow project conventions when Spec is silent.
-3. **Report and Hand Off:** Output paths, brief Requirements checklist, recommend **`spec-driven-verification`** → `{project-root}/verification/{requirement-slug}.md`.
-
-### Post-Generation Feedback & Defect Handling Loop
-
-If verification fails, or the user finds quality issues after generation, **never patch the artifact directly**:
+If verification fails (⑥), or the user finds quality issues after generation, **never patch the artifact directly**:
 
 1. **Root Cause:** Register or reopen the ASR in `ASR.md`.
-2. **Re-enter Step 0** once to resume at the correct remediation step (then advance forward through Steps 1–5 as needed).
-3. **Regenerate:** Complete through Step 5 against the updated Spec only.
+2. **Re-enter Step 0** once to resume at the correct remediation step (then advance forward through ①–⑥ as needed).
+3. **Regenerate:** Complete through ⑤ against the updated Spec only.
 
 ---
 
-## Socratic Dialogue Rules (For Gatekeeping & Gaps)
+## Agent Procedure
 
-Use when Step 0 routes into incomplete work, or during Steps 1–4 clarification.
+1. **State the current step** (e.g., *"Step ② — ASR Identification."*)
+2. **Read the workflow file** for that step before producing artifacts
+3. **Write artifacts to files** — never leave deliverables in chat only
+4. **Present and wait** for explicit user approval before advancing
+5. After Step ⑥ (verification) → if pass, done; if fail, loop via Step 0
+6. On mid-flight changes → update ASR.md / Spec before continuing
 
-1. **State the Current Step:** Tell the user the step (e.g., Step 3, ASR-00x review) and cite the ASR ID from `ASR.md`.
+---
+
+## Dialogue Rules
+
+1. **State the Current Step:** Tell the user the step and cite the ASR ID from `ASR.md` when relevant.
 2. **Reduce User Fatigue:** When asking about open ASRs, always propose a recommended default or best-practice option based on project context (e.g., *"We recommend X because of Y. Shall we proceed with this, or do you have another preference?"*). Do not ask open-ended questions without guidance.
 3. **One Question at a Time:** Focus on one ASR (or one dependency branch) at a time to keep the conversation structured.
-4. **Immediate Documentation:** Update `ASR.md` as statuses change; sync Spec in Step 4 before advancing to Step 5.
+4. **Immediate Documentation:** Update `ASR.md` as statuses change; sync Spec in Step ④ before advancing to Step ⑤.
+5. **Handle Verification Feedback Loop:** If the user arrives with a verification report (⑥), focus the dialogue strictly on deciding whether to update the Spec contract or force an artifact fix.
+6. Match the user's language (Korean, English, etc.) in user-facing messages. Artifact content follows the language implied by the Spec unless the Spec states otherwise.
 
 ---
 
@@ -321,22 +259,28 @@ Use when Step 0 routes into incomplete work, or during Steps 1–4 clarification
 - Identifying ASRs in conversation only — without registering them in `{project-root}/spec/ASR.md`.
 - Leaving ASR status stale after Direct Input, ADR open/approve, or Spec sync.
 - Writing Spec / ADR / verification files outside `{project-root}` (including placing `ASR.md` outside `{project-root}/spec/`).
-- Skipping resolve/create of `{project-root}` when it does not yet exist on a generation request (or creating it without user confirmation of location and name).
-- Reading **`{project-root}/adr/`** files as a substitute for Spec content during generation.
+- Skipping resolve/create of `{project-root}` when it does not yet exist on a generation request.
+- Reading **`{project-root}/adr/`** files as a substitute for Spec content during generation or verification.
 - Treating the original prompt as authoritative when it **contradicts** the Spec.
 - Adding requirements, features, or scope not explicitly stated or implied by the Spec.
 - Patching or editing generated artifacts directly without updating `{project-root}/spec/PRD.md` or `{project-root}/spec/*.md` first during a defect loop.
 - Asking a flat checklist of open questions without providing recommendations or considering ASR dependencies.
 - Silently merging conflicting Specs.
+- Verifying against conversation history or ADR files instead of the Spec.
+- Cursory or summary-only verification without item-by-item artifact evidence.
+- Ignoring Out of Scope violations or treating undocumented ASRs as automatically approved.
+- Applying artifact fixes silently before the user has reviewed the verification report.
+- Spec bullets that point to `{project-root}/adr/` or conversation history instead of stating the specification fully.
+- Handing off to generation with ADR files marked as required reading.
+- Adding `Status`, `Approved`, or other lifecycle approval state fields in Spec files.
+- Bundling multiple independent deliverables into a single Spec document.
 
 ---
 
 ## Completion Criteria
 
 - **Step 0** used once at entry (or defect resume): first failing gate selected; then Steps advance forward without re-gating.
-- PRD approved → ASRs identified → blocking ASRs reviewed → linked ADRs approved (or Direct Input) → Specs synced → generation (Steps 1–5).
+- PRD approved → ASRs identified → blocking ASRs reviewed → linked ADRs approved (or Direct Input) → Specs synced → generation → verification (①–⑥).
 - `{project-root}` resolved (and created after confirmation when needed); `PRD.md` and `ASR.md` maintained; Related ADR ↔ ASR links bidirectional.
-- Deliverable produced at agreed paths strictly following Spec **Requirements**, **Decisions**, and **Constraints** (Step 5).
-- User informed of outputs, mapped back to Spec bullets, and offered **`spec-driven-verification`**.
-
-This skill owns production from Spec and the ASR registry; **`spec-driven-verification`** owns checking the result against the Spec.
+- Deliverable produced at agreed paths strictly following Spec **Requirements**, **Decisions**, and **Constraints** (⑤).
+- Verification report saved, deviations and undocumented ASRs categorized, and user offered the reverse traceability loop (⑥).

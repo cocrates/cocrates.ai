@@ -14,7 +14,7 @@ metadata:
 
 # TODO — Deliverable Task Tracking Skill
 
-`TODO.md` is the **progress board**. Match the user's language in prose and status reports. Do not substitute the agent's ephemeral todo tool.
+`TODO.md` is the **progress board**. Match the user's language in prose and status reports. Do not substitute the agent's built-in `todowrite` tool — `TODO.md` on disk is the source of truth.
 
 **Two concerns in one skill (do not split into another skill):**
 
@@ -23,7 +23,7 @@ metadata:
 | **Progress** | `{project-root}/TODO.md` — Snapshot, tasks, Current sprint, Completed sprints |
 | **Plans** | `{project-root}/scrum/product-backlog.md` + `sprint-NN.md` — written when planning; not a live status board |
 
-**Churn rule:** Prefer changing **only `TODO.md`** as work advances. Touch `scrum/*` when **plans** change (new sprint file, backlog reshape) — not on every task checkbox. **No** `scrum/README.md`.
+**Churn rule:** Prefer changing **only `TODO.md`** as work advances. Touch `scrum/*` when **plans** change (new sprint file, backlog reshape) — not on every task checkbox.
 
 ## When to Use
 
@@ -48,23 +48,23 @@ metadata:
     └── sprint-NN.md
 ```
 
-`{project-root}` from the companion skill and Workspace Convention (`read_agents: principles/02-workspace-conventions.md`).
+`{project-root}` comes from the companion skill and Workspace Convention (`read_agents: principles/02-workspace-conventions.md`).
 
 ---
 
-## Scrum mode — when to use sprint plans
+## Scrum Mode — When to Use Sprint Plans
 
 | Trigger | Examples |
 |---------|----------|
-| **Series deliverable** | novel, webtoon, picture-book, … — **default on** |
+| **Series deliverable** | novel, webtoon, picture-book — **default on** |
 | **Spec-driven implementation** | Spec readiness / Spec stage done — iterative implementation |
-| **User asks** | sprint, backlog, scrum, "나눠서" |
+| **User asks** | "sprint", "backlog", "scrum", "split it up" |
 | **Scale heuristic** | Would exceed ~30 tasks, or unbounded episode loop without sprint boundaries |
 | **Next sprint plan missing** | At Sprint boundary, no next `sprint-NN.md` |
 
 **Plain mode** (no `scrum/`): small one-shot work unless the user asks for sprints.
 
-### Profiles (planning)
+### Sprint Profiles
 
 **Series** — default on:
 
@@ -88,6 +88,8 @@ Epic/Story from Spec; each sprint = vertical slice. Live progress = `TODO.md` on
 
 ## Task Model
 
+### States and Signals
+
 | Signal | Meaning |
 |--------|---------|
 | `- [ ]` | Open |
@@ -108,7 +110,15 @@ Checkbox + Current focus only — no `` `pending` `` / `` `in_progress` `` / `` 
   - Notes: {optional}
 ```
 
-**Types:** draft · gate · unit · research · sync
+### Task Types
+
+| Type | Purpose |
+|------|---------|
+| `draft` | Writing or generating an artifact (e.g. design, chapter, spec) |
+| `gate` | Approval checkpoint requiring explicit user sign-off before proceeding |
+| `unit` | Atomic work unit within a larger phase (e.g. one component, one section) |
+| `research` | Investigation or information gathering; may run in parallel with waits |
+| `sync` | Keeping artifacts consistent (e.g. updating continuity, reconciling state) |
 
 ---
 
@@ -173,50 +183,18 @@ Checkbox + Current focus only — no `` `pending` `` / `` `in_progress` `` / `` 
 {sprint-local — deferrals, carry-over}
 ```
 
-**Hard rules:** Compact **Completed sprints** only (no full closed task dumps). No `scrum/README.md`. Execution-time edits ≈ **`TODO.md` only**.
+### Session Status Projection
 
-**Identity:** `type` after Project type; title after `# TODO: `; workspace = Project root. **`session.status` (principles):** scrum 모드 → header **Current sprint**의 `sprint-NN`을 **`S-NN`**으로 투영 (예: `sprint-07` → `S-07`); plain 모드 → Snapshot **Current focus** T-id. Keep Current sprint / Current focus accurate so the session title stays correct.
+The agent's `session.status` (per Agent principles) is derived from the board:
 
-**Edit discipline:** Short unique `edit_file` anchors; typical change = one headline + Snapshot lines. Append new tasks at end of `## Tasks`. **Exception:** intentional full-board rewrite at Sprint boundary.
+- **Scrum mode** → extract the `sprint-NN` value from the header's **Current sprint** and project it as `S-NN` (e.g. `sprint-07` → `S-07`).
+- **Plain mode** → use the Snapshot **Current focus** T-id.
 
-**Inserting new tasks (avoid `old_string_not_found`):** `edit_file` cannot "insert beside" — it **replaces** an existing span. For a new task, `old_string` = the **last existing task block** (or the `## Tasks` heading + first task if appending after an empty section is wrong — use the last real task). `new_string` = that same block **plus** the new task lines. Never set `old_string` to only the new `- [ ] **T-0nn**` text (it is not on disk yet → `old_string_not_found`).
-
-```text
-# WRONG — new content as old_string
-old_string: - [ ] **T-015** `pending` — Design ep 007
-new_string: - [ ] **T-015** `pending` — Design ep 007
-  - Phase: …
-
-# RIGHT — expand from last existing task
-old_string:
-- [x] **T-014** `done` — Release ep 006
-  - Phase: sprint-06
-  - Artifact: `continuity/story-so-far.md`
-  - Depends: T-013 ✓
-  - Notes: released
-
-new_string:
-- [x] **T-014** `done` — Release ep 006
-  - Phase: sprint-06
-  - Artifact: `continuity/story-so-far.md`
-  - Depends: T-013 ✓
-  - Notes: released
-- [ ] **T-015** `pending` — Design ep 007
-  - Phase: sprint-07
-  - Artifact: `episodes/007-….md`
-  - Depends: T-014 ✓
-  - Notes: —
-```
-
-Same pattern for Snapshot count bumps: `old_string` = current Snapshot lines that exist; `new_string` = updated counts (not a brand-new Snapshot invented as the anchor).
-
-**Batch edits (same model step):** When Snapshot counts, Current focus, and task checkbox/Notes all change together — prefer **one** `edit_file` covering them, or **several non-overlapping `edit_file` calls in the same tool round** (parallel). Do **not** spend separate model rounds for "Snapshot only" then "task checkbox only" when both were already known. Same-file parallel edits only if each `old_string` remains valid after the others (disjoint regions); otherwise one combined edit / `write_file`.
-
-**`old_string_not_found` with whitespace-only mismatch:** If `first_mismatch.expected` vs `.found` differ only by indent/spaces, copy **`found`** verbatim into the next `old_string`. After **two** consecutive failures on the same path in one turn, switch to **`write_file`** for the board (or the whole design artifact) instead of more micro-anchors.
+Keep Current sprint / Current focus accurate so the session title stays correct.
 
 ---
 
-## Plan file templates (`scrum/`)
+## Plan File Templates (`scrum/`)
 
 ### product-backlog.md
 
@@ -314,15 +292,17 @@ Zero-pad (`sprint-00.md`, …). Leave DoD/Demo unchanged during execution.
 
 **Plan Next:** When the next `sprint-NN.md` is missing (or user pre-plans): pick next Stories → **create** `sprint-NN.md`. Do not record completion in plan files — that is `TODO.md`.
 
-### 6. Sprint boundary (scrum mode)
+### 6. Sprint Boundary (scrum mode)
 
-1. Append **Completed sprints** row; drop closed task list from the board.
+1. Append **Completed sprints** row to the table; remove the full closed task list from `## Tasks` (keep only the summary row).
 2. Find next `scrum/sprint-*.md`.
-3. Exists → rewrite `TODO.md` Tasks + Snapshot + Current sprint (keep Completed table).
-4. Missing → **Plan Next Sprint** → then rewrite `TODO.md`.
-5. Do not edit backlog/closed sprint files merely to mark done.
+3. **Exists:** Rewrite `TODO.md` — replace `## Tasks` with that sprint's planned work, reset Snapshot counts, update **Current sprint** header. Keep the **Completed sprints** table intact.
+4. **Missing:** Run **Plan Next Sprint** first, then rewrite `TODO.md` as above.
+5. Do not edit backlog or closed sprint files to mark tasks done — completion lives in `TODO.md` only.
 
 ### 7. Report Progress
+
+Use the Snapshot section as the source. Format as:
 
 ```markdown
 ### Progress — {Title}
@@ -351,8 +331,4 @@ Zero-pad (`sprint-00.md`, …). Leave DoD/Demo unchanged during execution.
 
 ## Prohibitions
 
-- Separate `scrum` skill / `read_skills` scrum — this file is complete
-- `scrum/README.md` or progress under `scrum/`
 - Full closed-sprint task lists on `TODO.md`
-- Mixing Spec/ADR authoring into implementation sprint boards
-- Inventing episode plot in backlog Notes (point to story artifacts)

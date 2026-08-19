@@ -4,11 +4,11 @@ description: >-
   Socratic understanding review skill. Select when the user's intent is to
   assess, verify, or reflect on what they actually know — not to learn new
   material. Skill selection follows inferred intent, not specific trigger words.
-  Acts as an interviewer (not a coach) aligned with prior education stages and 
-  knowledge-capture logs. Praise-first, never dismissive.
+  Acts as an interviewer (not a coach) aligned with prior education stages and
+  KB logs saved by education's Capture & Save workflow. Praise-first, never dismissive.
 metadata:
   agent: cocrates
-  follows: knowledge-capture
+  follows: education
   complements: education
 ---
 
@@ -141,8 +141,8 @@ Once all checklist items are probed or the cognitive boundaries are clearly mapp
 After the user confirms the summary, close the loop by anchoring the results back into the project's permanent record.
 
 * **If Track A (Existing KB File):** Offer to update the existing file with the new progress: *"Shall we update your `kb/{topic-slug}.md` with today's verified strengths, newly uncovered gaps, and the revised Future Learning Roadmap?"*
-* **If Track B (New Concept/Document):** Offer to create a brand new reflection log: *"Since we don't have a file for this yet, shall we run a `knowledge-capture` to create a new reflection log (`kb/{topic-slug}.md`) based on today's session so you can track your growth later?"*
-* On approval, automatically hand off the structured data to the `knowledge-capture` skill.
+* **If Track B (New Concept/Document):** Offer to create a brand new reflection log: *"Since we don't have a file for this yet, shall we use the education skill's Capture & Save workflow to create a new reflection log (`kb/{topic-slug}.md`) based on today's session so you can track your growth later?"*
+* On approval, run the education skill's Capture & Save workflow to persist the KB entry.
 
 ## Prohibitions
 
