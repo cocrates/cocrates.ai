@@ -179,6 +179,11 @@ Write `evaluations/{nnn}-{episode-slug}-design.md` (separate from manuscript eva
 | Hook evidence strength (internal) | ✅ / ❌ | {**Quotes from body surfaces** — Hook + Summary + Out + closing Turn + Seeds. Soften/harden **in body** → ❌. Checklist Gate Evidence alone softer/harder while body matches Hook → Schema ✅ + Med Pending hygiene finding — **not** Schema ❌} |
 | Hook scope (no Out creep) | ✅ / ❌ | {Last Transition/Out must not invent chase/faction/second reveal absent from Summary **and** Hook; >2 independent Out obligations → ❌ or Med finding} |
 | No design-paste / meta-only scenes | ✅ / ❌ | {identical Beat or Unit budget lines across scenes; repeated outline loop in one scene; scene with no dramatic event → ❌} |
+| Timeline Anchor present & prior-close quoted (ep 002+) | ✅ / ❌ / N/A | {Ep 001: N/A. Else: Anchor quotes prior summary close; Scene 1 When chains — vague “same morning” without anchor → ❌} |
+| Arithmetic Lock: header sum = scene Est. sum | ✅ / ❌ | {mandatory two-line Evidence + Arithmetic Lock block; fields ≠ header → ❌} |
+| Recognition cast: recall names tagged mention-only | ✅ / ❌ / N/A | {N/A if no off-stage names. Else: every recall/recognition name `(mention-only)` in Appearing} |
+| Knowledge path cited for every “knows/reveals” beat | ✅ / ❌ / N/A | {N/A if none. Else: profile path or verification Beat — empty Conflicts + no path → ❌} |
+| Adjacent scenes: Distinct Turn non-overlapping | ✅ / ❌ | {Scene Index Distinct Turn column; adjacent duplicate verb+object → ❌ or Med Pending unless Key Events clearly separate} |
 
 ## Structure & Arc Checks
 | Check | Result | Evidence |
@@ -237,7 +242,7 @@ Write `evaluations/{nnn}-{episode-slug}-design.md` (separate from manuscript eva
 | Sensory-emotional pairing | | |
 | Dialogue voices + Dialogue intent | | |
 | Reader-discovered meaning | | {Theme in Hold, not closing monologue?} |
-| Antagonist plausibility | | |
+| Antagonist plausibility | ✅ / ❌ / N/A | {knowledge hooks need verification Beats; one-off return without profile range → ❌; N/A if no antagonist claim} |
 | Closing image specified | | |
 
 ## Literary Awards Juror Checks (Design)
@@ -283,12 +288,21 @@ Do **not** duplicate empty Defect / Reader impact / Severity / Proposed fix bloc
 |--------|---------|
 | **Pending** | Apply? = yes — **Stage ④ (or ③)** must edit design/architecture (closing image field, crowded Out, adjacent same-facet separation, observable character-cost beat, body Hook, Unit-product); blocks Generation-ready |
 | **Skip** | Apply? = no — rejected / not applying |
-| **Carry-⑥** | Apply? = yes — **generation constraint only** (Hold, POV limits, “do not narrate X”, **episode-level motif placement without scene Motif-touch fields**). Design file need not change for handoff; does **not** block Generation-ready. **Do not** use Carry-⑥ for crowded closing, scene-function separation, or personal-cost beats that belong in Key Events |
+| **Carry-⑥** | Apply? = yes — **generation constraint only** (Hold, POV limits, “do not narrate X”, **episode-level motif placement without scene Motif-touch fields**). Design file need not change for handoff; does **not** block Generation-ready. **Do not** use Carry-⑥ for crowded closing, **scene-function separation**, **When / Timeline Anchor**, **mention-only tagging**, **knowledge-path gaps**, **Distinct Turn overlap**, or personal-cost beats that belong in Key Events |
 | **Applied-④** | Former Pending/Carry already absorbed into the revised design body this loop — Evidence cites updated fields; does **not** block Generation-ready |
 
 Writing “applied” / “all fixed” while `episodes/` is unchanged — or editing `episodes/` during ⑤ — is forbidden.
 
-**Adjudication Status:** `Apply? = yes` + design/architecture / Unit-product / **body** Hook / closing / adjacent-facet / cost-beat fix → Status `Pending`. `Apply? = no` → **`Skip`**. Generation-time Holds / POV / motif-touch reminders / checklist-Evidence-only hygiene after body already matches Hook → prefer **`Carry-⑥`** or a **narrow Pending** one-line Evidence fix — **do not** escalate checklist-only Hook wording into Schema Hook ❌. Do not leave rejected findings as Pending. Do not put pure generation constraints as Pending.
+**Adjudication Status:** `Apply? = yes` + design/architecture / Unit-product / **body** Hook / closing / adjacent-facet / cost-beat / **Timeline Anchor** / **mention-only** / **Distinct Turn** / **knowledge-path** fix → Status **`Pending`**. `Apply? = no` → **`Skip`**. Generation-time Holds / POV / motif-touch reminders / checklist-Evidence-only hygiene after body already matches Hook → prefer **`Carry-⑥`** or a **narrow Pending** one-line Evidence fix — **do not** escalate checklist-only Hook wording into Schema Hook ❌. Do not leave rejected findings as Pending. Do not put pure generation constraints as Pending.
+
+#### Carry-⑥ vs Pending (default classification)
+
+| Finding type | Default Status |
+|--------------|----------------|
+| Motif placement, Hold reminders, prose rhythm, “do not over-explain X” | **Carry-⑥** |
+| Scene 3 vs 4 function separation, When vagueness, mention-only, Distinct Turn overlap | **Pending** (Kind **B** — ④) |
+| Unit arithmetic, Hook body drift, knowledge path, return range, Timeline Anchor | **Pending** (Kind **B** / **D**) |
+| Gate Evidence wording only (body already aligned) | **Pending** one-line fix **or** Carry-⑥ if generation-ready |
 
 **User “권고 반영” / apply recommendations:** Prefer Kind **B** (④) for Med+ design-field findings. After the design body changes, **re-run this entire Schema + Adjudication** on the revised file; set Status **Applied-④**; sync design `## Gate G4` with the user’s re-approval in the same turn. **Forbidden:** flip Gate G5 to Approved without rewriting the eval against the revised design.
 

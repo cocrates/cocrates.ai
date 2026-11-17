@@ -41,7 +41,7 @@ Check for an existing installation:
 
 | Signal | Location |
 |--------|----------|
-| Plugin configured | `OPENCODE_CONFIG/opencode.jsonc` contains `@cocrates/cocrates-harness` in the `plugin` array |
+| Plugin configured | `OPENCODE_CONFIG/opencode.jsonc` contains `@cocrates/cocrates-harness` in the `plugins` array |
 | Plugin cached | `~/.cache/opencode/packages/` contains a directory matching `*cocrates-harness*` |
 | Node.js available | `node --version` and `npm --version` succeed (LTS; Node **>= 20** preferred) |
 | MCP packages installed | `npm list -g --depth=0` shows `@cocrates/google-genai-mcp`, `@cocrates/elk-mcp`, and `@cocrates/video-edit-mcp` |
@@ -62,7 +62,7 @@ The CLI command adds `"@cocrates/cocrates-harness"` to `opencode.jsonc` automati
 ```jsonc
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": [
+  "plugins": [
     "@cocrates/cocrates-harness"
   ],
   "mcp": {
@@ -274,7 +274,7 @@ Always show explicit version numbers from `npm list -g` and `npm view`. On every
    ```
 
 3. Confirm the file still has:
-   - `"plugin"` entry for `@cocrates/cocrates-harness`
+   - `"plugins"` entry for `@cocrates/cocrates-harness`
    - `"mcp"."cocrates-google-genai"` with `type: "local"` and `command: ["google-genai-mcp"]`
    - `"mcp"."cocrates-elk"` with `type: "local"` and `command: ["elk-mcp"]`
    - `"mcp"."cocrates-video-edit"` with `type: "local"` and `command: ["video-edit-mcp"]`

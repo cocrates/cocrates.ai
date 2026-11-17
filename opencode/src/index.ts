@@ -1,39 +1,43 @@
-import { type Plugin } from '@opencode-ai/plugin';
+import { Plugin } from '@opencode/plugin';
 import { registerAgents } from './agents/index.js';
 
-export const CocratesPlugin: Plugin = async ({ client, directory, project }) => {
-  await client.app.log({
-    body: {
-      service: 'cocrates-harness',
-      level: 'info',
-      message: 'Cocrates Harness plugin initialized',
-      extra: {
-        directory,
-        projectId: project.id,
-      },
-    },
-  });
+export default Plugin.define({
+  id: 'cocrates-harness',
+  async setup(ctx) {
+    console.log(
+      `[cocrates-harness] initialized (opencode ${ctx.app.version}, dir=${ctx.location.directory})`,
+    );
 
-  return {
-    config: async (config) => {
-      registerAgents(config);
-    },
-    event: async ({ event }) => {
-      if (event.type === 'session.created') {
-        await client.app.log({
-          body: {
-            service: 'cocrates-harness',
-            level: 'debug',
-            message: 'New session created',
-            extra: {
-              sessionId: event.properties.info.id,
-            },
-          },
-        });
+    await ctx.agent.transform((editor) => {
+      registerAgents(editor);
+    });
+
+    const controller = new AbortController();
+    void (async () => {
+      try {
+        for await (const event of ctx.event.subscribe({
+          signal: controller.signal,
+        })) {
+          if (event.type === 'session.created') {
+            console.debug('[cocrates-harness] session.created', {
+              sessionId: event.data.sessionID,
+            });
+          }
+        }
+      } catch (error) {
+        if (!controller.signal.aborted) throw error;
       }
-    },
-  };
-};
+    })();
 
-export { registerAgents, parseAgentMd, specToAgentConfig, getAgentSlugs, loadAgentSpec } from './agents/index.js';
+    return () => controller.abort();
+  },
+});
+
+export {
+  registerAgents,
+  parseAgentMd,
+  specToAgentConfig,
+  getAgentSlugs,
+  loadAgentSpec,
+} from './agents/index.js';
 export type { AgentSpec, AgentMode } from './agents/index.js';

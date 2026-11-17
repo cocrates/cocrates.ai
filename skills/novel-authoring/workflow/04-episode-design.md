@@ -39,8 +39,8 @@ Episode design **composes** approved `series.md` + series-level architecture + c
 3. Create **`episodes/{nnn}-{episode-slug}.md`** from the `series.md` row — **that exact path only** (see [Canonical episode path](#canonical-episode-path)). **Size discipline:** Key Events stay compact bullets. **Default: one complete write** when the episode fits this turn’s the output limit. Skeleton → per-scene update only if a single write would clearly exceed that budget (or after a length-limit truncate).
 4. Draft Purpose / Episode Arc / Scene Index so they **match** `series.md` Summary + Hook to Next. **Signature clauses** of the Summary must land as **concrete Beats in specific scenes** (not diluted across overlapping scenes). Record needed higher-level changes as stop/ask — not silent drift.
 5. Under `## Scenes`, write one **complete** `### Scene {n} — {Title}` section per Index row (every mandatory field).
-6. Walk scene transitions top-to-bottom: no orphan scenes, no unexplained jumps, **no duplicate Beat/outline sentences across or inside scenes**.
-7. Run **Hook alignment check** (below) + **Unit product recompute** (below) + **Design Consistency Gate** (with **Gate Evidence**), then **Generation Readiness**.
+6. Walk scene transitions top-to-bottom: no orphan scenes, no unexplained jumps, **no duplicate Beat/outline sentences across or inside scenes**. **Ep 002+:** fill **Timeline Anchor** before finalizing Scene 1 `When`. Run **recognition cast scan** (below) and **Knowledge & Return preflight** (below) before gates.
+7. Run **Hook alignment check** (below) + **Unit product recompute** (below) + **Arithmetic Lock** (below) + **Design Consistency Gate** (with **Gate Evidence**), then **Generation Readiness**.
 8. Present the episode design for approval only if both gates pass — one-line status: *"Load ✅ · Consistency ✅ · Readiness ✅"*. Do **not** present while Locations / Length / Hook Evidence is missing or arithmetic fails.
 9. **Recommend** design evaluation (`05-evaluate-design.md`) before manuscript generation — the user may decline and proceed to ⑥.
 
@@ -162,11 +162,19 @@ Non-Latin labels keep their script — **do not** invent English aliases (e.g. r
 ## Episode Arc
 {How tension builds and resolves across all scenes}
 
+## Timeline Anchor (Ep 002+ — mandatory; Ep 001: write N/A)
+| Anchor | Value |
+|--------|-------|
+| Prior episode closes at | {quote from `continuity/{n-1}-summary` — time + state} |
+| This episode opens at | {must chain from prior close; no vague “same morning” alone} |
+| Rules in play | {none \| grace/deadline + which scene triggers expiry} |
+| Cross-scene time direction | {forward only \| flashback at Scene X — cite When} |
+
 ## Scene Index
-| Sc | Title | Function in Episode Arc |
-|----|-------|------------------------|
-| 1 | {Title} | {one line} |
-| 2 | ... | ... |
+| Sc | Title | Function in Episode Arc | Distinct Turn (one line) |
+|----|-------|------------------------|--------------------------|
+| 1 | {Title} | {one line} | {unique observable turn — not shared with adjacent scenes} |
+| 2 | ... | ... | ... |
 
 ## Episode Hooks
 - **In:** {from prior episode / series opening}
@@ -297,6 +305,37 @@ Optional when needed (same `- **Field:**` notation):
 
 If Scene N ends at time T and Scene N+1 is earlier than T (flashback, rewind, alternate body), When on N+1 must name that jump — not merely “earlier the same night” without stating which timeline.
 
+**Ep 002+ hard rule:** Scene 1 `When` must reference **Timeline Anchor** (prior close → this open). Vague “same day morning” without anchoring to the prior episode’s closing time/state → **When / timeline ❌**.
+
+**Adjacent scenes:** if Scene N and N+1 share the same calendar moment, each `When` must still state the **elapsed beat** (e.g. “minutes after Scene 1’s document signing”) — not only “same afternoon.”
+
+### Recognition cast scan (mandatory before gates)
+
+Build the set: **Characters Appearing** ∪ every proper name in Summary, Hooks, Seeds, Closing, and every scene’s Beat / Turn / Dialogue intent / Sensory-emotional.
+
+For each name **not** on any scene’s On stage and not acting in the present:
+- Tag **`(mention-only)`** in Characters Appearing **and** in Summary `Characters:` line when cited.
+- Scene 4-style **recognition / recall** of a character → mention-only + Beat must say **memory / off-stage** (not present action).
+
+Missing mention-only when a name appears only in recall/recognition → **Characters Appearing ↔ On stage ❌**.
+
+### Knowledge & Return preflight (mandatory before gates)
+
+| Question | Pass when |
+|----------|-----------|
+| Who claims to **know / reveal / recognize** what? | Profile Relationships / Drive / role cites access path **or** Conflicts escalates |
+| Does an antagonist’s ending hook need secret knowledge? | Scene Beat includes observable **verification action** (document check, sealed record, authority) — not exposition-only |
+| Does a cast member return after a one-off or limited tag? | Profile lists **return range** (episodes) and role; design cites it |
+| Does a rule event (grace, deadline, ban) fire this episode? | Timeline Anchor names which scene triggers it; no contradiction with `story-so-far` |
+
+Fail → stop → architecture Extend (profile return range, knowledge path) **or** revise Beats — do not hand off to ⑥.
+
+### Distinct Turn (adjacent scenes — mandatory)
+
+Scene Index **Distinct Turn** column: one line per scene — the **unique observable change** that scene owns.
+
+**Fail G4** when adjacent scenes N and N+1 share the same Distinct Turn verb + object (e.g. both “almost open the letter” / “discover the theft”) unless Functions differ with clearly separate Turns in Key Events. Prefer splitting tension (Scene 3 = trust test; Scene 4 = physical discovery + pursuit choice) at design time — **not** Carry-⑥ alone.
+
 ### Required vs excluded
 
 | Required | Exclude |
@@ -425,6 +464,8 @@ Quote `series.md` **Hook to Next** (and Summary signature clauses). Then verify 
 
 **Profile-backed claims:** if a character “knows / recognizes / reveals” a fact about another, that relationship or knowledge must appear in the character profile (Relationships / Drive / Arc) **or** Conflicts must escalate “profile lacks basis → stop/add architecture.” Do not plant identity threats with zero catalog support.
 
+**Recognition hooks:** if the Hook or closing Turn depends on a character **recognizing** another’s action/signature/style, the recognized character must be **mention-only** in Appearing and the Beat must ground recognition in **prior on-page or profile-backed memory** — not a new apparition.
+
 ### MAY / MUST NOT
 
 **MAY:** Select approved characters/locations; apply world rules; plan scenes, hooks, engagement in one file — within Episode List Summary and continuity.
@@ -463,7 +504,11 @@ Quote `series.md` **Hook to Next** (and Summary signature clauses). Then verify 
 - Approve a meta-only scene (no dramatic event — only “this leads to the next episode”)
 - Hand off to stage ⑥ when Design Consistency Gate or Generation Readiness fails
 - Ship Scene Index–only designs (TOC without Key Events)
-- Claim Estimated Length Pass when header addends ≠ scene `Est. length` fields
+- Claim Estimated Length Pass when header addends ≠ scene `Est. length` fields (header ≠ scene Est. sum → **Consistency ❌** — not Schema-only)
+- Present Ep 002+ design without **Timeline Anchor** filled and chained to prior summary
+- Leave recall/recognition names untagged (missing `(mention-only)`)
+- Stack adjacent scenes with duplicate **Distinct Turn** lines in Scene Index
+- Hand off antagonist knowledge hooks without Knowledge & Return preflight pass
 - Record **two** `- **Est. length:**` lines in one scene, or leave Est./Unit/Index rows from a deleted scene
 - Record Unit budget as a **range** (`1,650–2,150`) instead of a single `n×pick = subtotal` integer formula
 - Write a Unit budget `= {subtotal}` that does not equal the arithmetic of its `n×pick` terms
@@ -567,6 +612,19 @@ Scale max {M} → sum ≤ M ? ✅/❌
 
 Header addends **are** the scene Est. fields copied up, then re-added. Two different lists (header vs scene fields) → fail.
 
+### Arithmetic Lock (mandatory before G4 — copy into Gate Evidence)
+
+```markdown
+### Arithmetic Lock
+- Scene Est. sum: {s1}+{s2}+… = {N}
+- Header addends: {must equal N}
+- Per scene: Sc{k} written={w} recomputed={r} match={✅/❌}
+- Scale: min ≤ {N} ≤ max = {✅/❌}
+- Gate Evidence unit order: Scene 1→N (never permuted subtotals)
+```
+
+If header addends ≠ Scene Est. sum → **Design Consistency ❌** until fixed. Wrong Unit product on any scene → Length / Forecast ❌.
+
 Episode **Estimated Length** = that **recomputed** sum after each scene passes A+B+C.
 
 **Target band (default Scale 4,000–8,000):** prefer sum ≈ **5,000–7,200**. Sum at Scale max with no headroom → ⚠️ (still pass if ≤ max) — Stage ⑥ has little room and often overshoots; slim units/outline or accept a shorter central-band Est.
@@ -663,7 +721,10 @@ Other gate rows may stay checkbox-style, but Locations / Length / Hook / Summary
 | Unresolved threads | Each active thread is Picks up / Advances / Plants / Holds — none silently dropped; ep 001 has no false Picks up |
 | Characters | Every On-stage name exists in architecture; voice/drive matches profile; arc not reversed without architecture update; **every Dialogue intent / Beat speaker is On stage** (ambient noise ≠ speech) |
 | Locations | **Three Evidence lines (do not merge):** (1) every scene Location ∈ Key Locations table Display/slug; (2) every cited `locations/{slug}.md` path exists (Architecture References — never build path from Display spaces); (3) every `+ facet` is an exact **Multi-facet anchors** label ([Citeable facets](#citeable-facets-hard)). Free-text places fail. Layout-only mentions ≠ anchors. Missing facet → also fail **No silent lore invention**. Path miss ≠ “not in Key Locations” when the index row exists |
-| When / timeline | Scene **When** fields make timeline jumps (flashback, rewind, parallel timeline) explicit to a cold reader |
+| When / timeline | Scene **When** fields make timeline jumps explicit; **Ep 002+ Timeline Anchor** filled and Scene 1 chains from prior summary; grace/deadline rules name triggering scene |
+| Distinct Turn | Scene Index column present; adjacent scenes do not duplicate Distinct Turn; Functions/Turns match |
+| Recognition cast | Recall/recognition-only names tagged `(mention-only)`; no ghost speakers |
+| Knowledge & return | Antagonist/info hooks have profile-backed access or verification Beats; returning cast has profile return range |
 | Staging | Continuing multi-scene situations cite staging; **`stagings/{slug}.md` exists**; blocking matches catalog; cited character states exist |
 | World | Beats do not break world-bible laws/history; exposition only for Plant/Hint |
 | Length / Prose forecast | Typed **integer** unit formula per scene (no range-only); **written Unit product = arithmetic exactly**; **one** Est. per scene; Est ≈ correct subtotal (±20% / nearest 100); recomputed Est. sum satisfies **Scale min ≤ sum ≤ Scale max**; prefer central band; Estimated Length addends = scene Est. fields; Est. inside outline density band; A/B/C not circular; mid-low unit picks preferred; Dialogue intent matches outline speech; no pilot waiver; **Evidence required (per-scene products)** |
@@ -779,7 +840,7 @@ Do not invent outfit, gear, seats, or L/R only inside Key Events. Expression/moo
 | **Dialogue** | Distinct speech pattern per speaker (profile Voice). POV needs said/felt gap where designed. |
 | **POV inserts** | ≤ 1–2 per episode; at turning points; list placement + what reader learns that POV does not. |
 | **Reader-discovered meaning** | Design “what the reader should conclude” — not “what the narrator will say.” Thematic lines go to Hold; specify a closing **image**. |
-| **Antagonist** | Plausible worldview the POV rejects — not moral caricature. |
+| **Antagonist** | Plausible worldview the POV rejects — not moral caricature. **Knowledge hooks** need verification Beats (see Knowledge & Return preflight) — convenience-only reveals fail Literary Craft / Consistency. |
 | **Closing** | Image or action only — no thematic restatement. |
 
 ### Exposition budget
@@ -827,7 +888,10 @@ Stage ⑥ must **not** invent plot. Confirm:
 - [ ] Characters Appearing ↔ On stage union (no ghosts; mention-only tagged) — **every** scene; every Appearing name has a catalog profile (no uncatalogued crowd labels)
 - [ ] **Every speaker** named in Dialogue intent / Beat / outline is on that scene’s On stage (ambient noise ≠ speech — see Cast roster)
 - [ ] Summary / Hooks / Seeds / Closing name only Appearing (or mention-only) cast — no orphan names (e.g. Hook Out names a character never On stage)
-- [ ] Each scene **When** is timeline-clear (jumps / rewinds / flashbacks stated explicitly)
+- [ ] Each scene **When** is timeline-clear; **Ep 002+ Timeline Anchor** filled
+- [ ] Scene Index **Distinct Turn** column; no adjacent duplicate Turns
+- [ ] **Recognition cast scan** + **Knowledge & Return preflight** passed
+- [ ] **Arithmetic Lock** in Gate Evidence; header addends = scene Est. sum
 - [ ] Continuing situations cite staging; **staging profile file exists on disk**; no silent L/R or seat drift (SKILL.md § Reference Models); staging Load is N/A when Staging: none
 - [ ] Location cites use Key Locations **slug** / kebab profile paths (not Display-with-spaces filenames); every `+ facet` is a **Multi-facet anchors** label; **Summary-place facet preflight** passed; **Locations Gate Evidence** has separate index / path / facet lines; every scene Location is in Architecture References; **all cited Architecture paths exist**
 - [ ] Beats are concrete and dense enough to support each Est. / forecast; Summary signature beat is dramatizable from one scene without inventing
@@ -842,12 +906,16 @@ Stage ⑥ must **not** invent plot. Confirm:
 - [ ] Ep 001: Continuity load not falsely checked; Picks up empty
 - [ ] Pre-Design Load used Phase A indexes → Phase B Appearing/used paths only — not a full catalog / `episodes/` / `continuity/` dump
 
-**Fails** if Length budget fails, Unit product ≠ arithmetic, duplicate/orphan Est. lines exist, Est. is outside outline density, any Scene Index row lacks a full scene section, Appearing ≠ On stage union, **Dialogue intent names speakers absent from On stage**, When is ambiguous across a timeline jump, cited paths are missing, **Location facets are not Multi-facet anchors**, Unit budgets are range-only, hook/cast names disagree, **Hook strength drifts across Summary/Out/Turn/Seeds**, **Out invents obligations absent from Summary+Hook**, **Gate Evidence missing for Locations / Length / Hook**, template residue remains, or Load dumped unused profiles. Do not present for Gate G4 while any of those fail.
+**Fails** if Length budget fails, Unit product ≠ arithmetic, duplicate/orphan Est. lines exist, Est. is outside outline density, any Scene Index row lacks a full scene section or **Distinct Turn**, Appearing ≠ On stage union, **missing mention-only tags**, **Timeline Anchor** missing (ep 002+), **Knowledge & Return preflight** fails, **Arithmetic Lock** header ≠ scene sum, **Dialogue intent names speakers absent from On stage**, When is ambiguous across a timeline jump, cited paths are missing, **Location facets are not Multi-facet anchors**, Unit budgets are range-only, hook/cast names disagree, **Hook strength drifts across Summary/Out/Turn/Seeds**, **Out invents obligations absent from Summary+Hook**, **Gate Evidence missing for Locations / Length / Hook**, template residue remains, or Load dumped unused profiles. Do not present for Gate G4 while any of those fail.
 
 ### Pre-approval checklist
 
 - [ ] Pre-Design Load completed; Prior Design Alignment filled
 - [ ] **Summary-place facet preflight** passed (or Conflicts escalated)
+- [ ] **Ep 002+ Timeline Anchor** filled; Scene 1 `When` chains from prior summary
+- [ ] **Recognition cast scan** + **Knowledge & Return preflight** passed
+- [ ] Scene Index **Distinct Turn** column filled; no adjacent duplicate Turns
+- [ ] **Arithmetic Lock** block present; header addends = scene Est. sum
 - [ ] Design Consistency Gate all pass — **Gate Evidence** present for Locations / Length / Hook / Summary
 - [ ] Unit products recomputed exactly; Generation Readiness passed
 - [ ] Episode expanded from `series.md` row; no scene counts in `series.md` / `overview.md`

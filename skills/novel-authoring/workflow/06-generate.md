@@ -69,14 +69,38 @@ Load sources needed for drafting via **Selective artifact load** (SKILL.md). **l
 ## Procedure
 
 1. Complete **Pre-Generation Load** (Phase A indexes → Phase B listed profiles, not catalog dump)
-2. Note `overview.md` **Scale** (default **4,000–8,000**) and the design’s scene Est. length list + sum (must already satisfy Scale min ≤ sum ≤ Scale max from ④/⑤). Est. sum is the **episode manuscript target**.
-3. Draft **scene-by-scene** in Key Events order — prefer one scene per write/edit turn for long episodes
-4. For each scene, honor: POV | Location | When | On stage | Situation → Beat → Turn | Sensory-emotional | Dialogue intent | Transition out | **Paragraph outline** (write in that order) | **Unit budget** / **Est. length** (**land near Est.** — ±20%; do not pad; do not inflate past Est. with confirmation loops)
-5. **Dramatize** Beats: action, dialogue, sensory moment — never paste Summary / Key Events / plan-language / “implies that…” as narration. Each bullet or sentence in the **Paragraph outline** becomes **one paragraph** of prose; target **220–280 characters** per paragraph (density band); a paragraph exceeding **400 characters** without a line break or dialogue shift is too long — split or compress. Do not inflate a single outline bullet into multiple paragraphs.
-6. After full draft, run **Design-Fidelity Gate** + **Prose Quality Floor (generation)** on the file on disk — status: *"Load ✅ · Fidelity ✅ · Prose Floor ✅"*
-7. Present manuscript only if **both** gates pass
-8. If honest dramatization lands **well under** Scale min / scene Est. because Beats were thin → **stop**; revise **④**, do not fill with repetition
-9. If the draft lands **well over** scene Est. (+20%) or **above Scale max** → **compress before presenting** (cut repeated confirmation questions, restated facts, filler sensory stacks). Do **not** invent new plot. If Beats themselves force overshoot because Est. was packed to Scale max → return to **④** and slim the forecast
+2. If Stage ⑤ ran: copy every **Carry-⑥** row into a **Carry-⑥ execution** table (below) — track to G6
+3. Note `overview.md` **Scale** (default **4,000–8,000**) and the design’s scene Est. length list + sum (must already satisfy Scale min ≤ sum ≤ Scale max from ④/⑤). Est. sum is the **episode manuscript target**.
+4. Draft **scene-by-scene** in Key Events order — prefer one scene per write/edit turn for long episodes
+5. For each scene, honor: POV | Location | When | On stage | Situation → Beat → Turn | Sensory-emotional | Dialogue intent | Transition out | **Paragraph outline** (write in that order) | **Unit budget** / **Est. length** (**land near Est.** — ±20%; do not pad; do not inflate past Est. with confirmation loops)
+6. **Dramatize** Beats: action, dialogue, sensory moment — never paste Summary / Key Events / plan-language / “implies that…” as narration. Each bullet or sentence in the **Paragraph outline** becomes **one paragraph** of prose; target **220–280 characters** per paragraph (density band); a paragraph exceeding **400 characters** without a line break or dialogue shift is too long — split or compress. Do not inflate a single outline bullet into multiple paragraphs.
+7. After full draft, run **Design-Fidelity Gate** + **Prose Quality Floor (generation)** + **Meta-block purge** (below) on the file on disk — status: *"Load ✅ · Fidelity ✅ · Prose Floor ✅"*
+8. Present manuscript only if all gates pass
+9. If honest dramatization lands **well under** Scale min / scene Est. because Beats were thin → **stop**; revise **④**, do not fill with repetition
+10. If the draft lands **well over** scene Est. (+20%) or **above Scale max** → **compress before presenting** (cut repeated confirmation questions, restated facts, filler sensory stacks). Do **not** invent new plot. If Beats themselves force overshoot because Est. was packed to Scale max → return to **④** and slim the forecast
+
+### Carry-⑥ execution (mandatory when ⑤ left Carry rows)
+
+At generation start, copy every Adjudication row with Status **Carry-⑥** into working notes:
+
+```markdown
+## Carry-⑥ execution
+| # | Constraint (from design eval) | Done |
+|---|------------------------------|------|
+| 1 | {e.g. Scene 3 = trust test; Scene 4 = scene reconstruction + pursuit} | ⬜ |
+```
+
+Mark each ✅ before Gate G6. Unmarked Carry-⑥ → do not present.
+
+### Explanation dialogue anchor (hard)
+
+When a scene’s Beat is rules / technique / document logic: **no 3+ consecutive dialogue turns** without an **observable anchor** (gesture, prop, body cost, environment shift). Insert anchors from Paragraph outline — do not add new plot.
+
+### Length under-target warning (before G6)
+
+If `(MS − Est) / Est < −15%` after honest dramatization:
+- Record one line: intentional compression **or** return to ④ to lower Est. / add Beat density.
+- Do not present without that line. Unintentional under-length → expand dramatization of existing Beats (not padding).
 
 ### Prose generation rules
 
@@ -103,7 +127,34 @@ Respect the design’s **Seeds**, **Hold**, and **Literary Craft**:
 19. Length — **aim for each scene ≈ Est. (±20%)**; episode total should land **≥ 70% of Scale min** and **≤ Scale max** (Floor still allows ≤ 130% of max as hard fail, but do not present drafts that need that slack). No padding. No confirmation-loop bloat. Under-length after honest dramatization → revise ④. Over-length after honest dramatization → compress at ⑥ first; if design Est. sum was already at/above Scale max with no headroom, slim ④. If design Est. sum was < Scale min, that is a **design** failure — return to ④/⑤ before rewriting prose for length alone
 20. Self-scan before present — search for author-meta / plan-language / **installment-meta** patterns, identical repeated paragraphs, and **restated facts / repeated confirmation questions**; remove or rewrite
 21. Staging vocabulary stays off the page — no `viewer-left` / `viewer-right` / camera or blocking jargon in narration
-22. **No installment meta in the body.** Narration and dialogue must not cite this work’s own Part / Episode / Chapter / 화 numbers as in-world time or place. The file H1 (`# Episode {nnn}: {Title}`) is allowed.
+22. **No installment meta in the body.** Narration and dialogue must not cite this work’s own serial structure as in-world time, place, or memory frame. The file H1 (`# Episode {nnn}: {Title}`) is allowed. See [Installment meta scan](#installment-meta-scan-hard).
+
+### Installment meta scan (hard)
+
+**Fail G6** if body (after H1) uses serial/table-of-contents framing instead of in-world time and memory.
+
+| Pattern class | English examples (fail) | Korean examples (fail) |
+|---------------|-------------------------|------------------------|
+| Numbered installment | “In episode 001…”, “back in Part 1”, “as Scene 2 established”, “episode-05”, `Episode 5` as time marker | `001화에서`, `에피소드 1에서`, `파트 1에서`, `5화에서`, `episode-05` |
+| Ordinal / prior-episode label | “the previous episode”, “last episode”, “in the last chapter”, “what happened in ep 4” | `이전 에피소드`, `지난 화`, `전 화`, `앞 화`, `이전 화` |
+| Production / file slug | `episode-005`, `ep-5`, manuscript filename or path as diegetic reference | `episode-005`, `ep-5` in dialogue or narration |
+
+**Pass:** in-world elapsed time and embodied memory — “three days ago”, “when the debt collector left”, “I still hadn’t seen that scratch then.” / `사흘 전`, `채권 받으러 온 자가 떠난 뒤`, `그때는 그 흠집을 보지 못했다.`
+
+**Exception:** in-universe media that exists **inside the story world** (a numbered broadcast the characters watch) — only if design/architecture requires it. This work’s own episode/part/화 numbering is **never** spoken in the body.
+
+### Meta-block purge (mandatory before G6)
+
+Scan body (after H1) for **production artifacts**. Any hit → **Prose Floor ❌** until removed:
+
+| Class | Examples (any locale) |
+|-------|----------------------|
+| Stage / gate labels | `Gate G6`, `Stage ⑥`, `Load ✅`, `Design-Fidelity` |
+| Eval / workflow dump | `Carry-⑥`, `Adjudication`, pasted checklist tables |
+| Author production notes | `TODO:`, `FIXME:`, fenced workflow instructions |
+| File metadata as prose | `Target: manuscripts/…`, line-count comments |
+
+The manuscript file contains **only** H1 + publishable prose (optional scene-break separators).
 
 ### Author-meta / plan-language scan (locale-aware)
 
@@ -113,7 +164,7 @@ Treat as fail if **body** narration or dialogue uses **author stage direction**,
 |---------------|------------------|---------------------------------------------|
 | Author-meta | “implies that…”, “conveys…”, “confirms that…” as stage notes | `암시한다`, `전달한다`, `확인한다` as stage notes |
 | Plan paste | “decided to declare…”, “planned to…” as undramatized tell | `계획을 세웠다` as undramatized tell |
-| Installment meta | “In episode 001 I didn’t see that scratch.”; “back in Part 1”; “as Scene 2 established” | `001화에서 나는 그 흠집을 보지 못했다.`; `에피소드 1에서`; `파트 1에서`; `지난 화에서` as a time marker |
+| Installment meta | “In episode 001 I didn’t see that scratch.”; “back in Part 1”; “as Scene 2 established”; “the previous episode”; “episode-05”; “in ep 4” | `001화에서 나는 그 흠집을 보지 못했다.`; `에피소드 1에서`; `파트 1에서`; `지난 화에서`; `이전 에피소드`; `전 화`; `5화에서`; `episode-05` |
 
 **Pass:** in-world time and memory — “I didn’t see that scratch then.” / `그때는 그 흠집을 보지 못했다.`
 **Fail:** treating the serial’s table of contents as a place the narrator or characters inhabit.
@@ -143,7 +194,7 @@ Vary sentence length and structure.
 
 - The whole file is **one episode** — no episode subheadings inside.
 - Scene breaks are optional separators for author reference: blank line, `---`, or `* * *` at designed Transition-out points. Adjust to platform style if the user prefers seamless prose.
-- The H1 heading is file metadata. **Installment numbers must not appear in the body** (see rule 22).
+- The H1 heading is file metadata. **Installment numbers, slugs, and ordinal episode labels must not appear in the body** (see Installment meta scan).
 
 ---
 
@@ -185,7 +236,8 @@ Any ❌ blocks presenting the manuscript and blocks stage ⑦ until fixed (revis
 | **No degeneration loop** | Rhythm varies | Same phrase block **≥3×** in close proximity; repeated confirmation of the same fact |
 | **Sensory/catalog discipline** | Details serve the moment | Filler descriptor stacks without new action |
 | **No author-meta** | In-world narration only | Author stage-direction patterns (see scan table above); staging/camera jargon (`viewer-left`, etc.) |
-| **No installment meta in body** | Body never cites this work’s own Part / Episode / Chapter / 화 numbers as time or place | Body contains “In episode 001 I didn’t see that scratch.” / `001화에서 나는 그 흠집을 보지 못했다.` / “in Part 1” / `지난 화에서`. H1 `# Episode {nnn}: {Title}` is **not** a fail |
+| **No installment meta in body** | Body never cites this work’s own Part / Episode / Chapter / 화 / slug / “previous episode” as time or place | See [Installment meta scan](#installment-meta-scan-hard). H1 `# Episode {nnn}: {Title}` is **not** a fail |
+| **No production meta blocks** | Body is H1 + prose only | `Gate`, `Stage`, `Carry-⑥`, `Load ✅`, `TODO:`, eval/workflow paste in body |
 
 **Carry-⑥ closing / soft-craft (hard when ⑤ left Carry or Applied closing constraints):** Before presenting Gate G6, scan the draft ending for the same soft-craft risks Stage ⑦ probes:
 
@@ -208,7 +260,9 @@ Complete Design-Fidelity Gate **and** Prose Quality Floor (generation), then:
 - [ ] Character count vs Scale recorded (load `char_count` or equivalent whole-file length); design Est. sum noted; **(MS−Est)/Est %** noted; totals near Est. (±20%); ≤ Scale max; no pad-to-length; no confirmation-loop bloat
 - [ ] Exposition Budget items dramatized; no uncatalogued proper nouns (gear/place/faction)
 - [ ] No author-meta / plan-language / staging jargon left as narration
-- [ ] No installment meta in the **body** — no “in episode 001” / `001화에서` / “in Part 1” as time or place (H1 heading is allowed)
+- [ ] **Meta-block purge** passed
+- [ ] **Carry-⑥ execution** complete (if ⑤ ran)
+- [ ] No installment meta in body (see Installment meta scan; H1 allowed)
 - [ ] No duplicate multi-sentence blocks
 - [ ] Episode design honored (episode + scenes)
 - [ ] No invented beats or entities

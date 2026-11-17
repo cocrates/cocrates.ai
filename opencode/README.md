@@ -1,12 +1,18 @@
 # Cocrates OpenCode Plugin
 
-Cocrates 저장소의 OpenCode 플러그인입니다. Docusaurus 문서 사이트와 **별도로** 빌드·배포합니다.
+Cocrates 저장소의 OpenCode **V2** 플러그인입니다. Docusaurus 문서 사이트와 **별도로** 빌드·배포합니다.
 
 ## 기능
 
-- `src/agents/prompts/`의 OpenCode 에이전트 명세(md)를 빌드 시 임베드하고, 플러그인 `config` 훅으로 `config.agent`에 등록
-- Frontmatter 전체 지원 (`mode`, `permission`, `tools`, `temperature` 등)
+- `src/agents/prompts/`의 OpenCode 에이전트 명세(md)를 빌드 시 임베드하고, `ctx.agent.transform`으로 에이전트 등록
+- Frontmatter 지원 (`mode`, `permissions`, `description`, `color`, `steps` 등; body → `system`)
 - `session.created` 이벤트 로깅
+
+## OpenCode V2 요구사항
+
+OpenCode **2.x**가 필요합니다. V1 함수형 플러그인 API(`@opencode-ai/plugin`)는 더 이상 로드되지 않습니다.
+
+V2는 default export에 `{ id, setup }` (또는 `{ id, effect }`)가 있어야 합니다. 설정 키도 `plugin` → `plugins`로 바뀌었습니다.
 
 ## 개발
 
@@ -31,18 +37,18 @@ npm run dev
 ```json
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["@cocrates/cocrates-harness"]
+  "plugins": ["@cocrates/cocrates-harness"]
 }
 ```
 
-버전 없이 패키지 이름만 적으면 OpenCode가 `@latest`로 해석합니다. 첫 설치 시점의 버전이 `~/.cache/opencode/packages/`에 캐시되며, npm에 새 버전이 올라와도 **자동 갱신되지 않을 수 있습니다**.
+버전 없이 패키지 이름만 적으면 OpenCode가 `@latest`로 해석합니다. 첫 설치 시점의 버전이 캐시되며, npm에 새 버전이 올라와도 **자동 갱신되지 않을 수 있습니다**.
 
 특정 버전을 고정하려면:
 
 ```json
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["@cocrates/cocrates-harness@0.1.2"]
+  "plugins": ["@cocrates/cocrates-harness@0.2.0"]
 }
 ```
 
@@ -58,24 +64,22 @@ opencode plugin add @cocrates/cocrates-harness -f
 rm -rf ~/.cache/opencode/packages/@cocrates/cocrates-harness@latest
 ```
 
-> `opencode.json`의 `"autoupdate"`는 OpenCode 앱 자체 업데이트용이며, npm 플러그인 갱신과는 별개입니다.
-
 ### 로컬 빌드 결과로
 
 ```bash
 npm run build
 ```
 
-저장소 루트의 `opencode.jsonc`가 로컬 플러그인과 `skills/` 경로를 프로젝트 설정으로 등록합니다. 이 저장소에서 OpenCode를 실행하면 자동으로 적용됩니다.
-
-다른 프로젝트에서 단독으로 쓸 때는 `opencode.json`에 절대 경로로 등록:
+로컬 디렉터리로 등록할 때는 **디렉터리**를 지정합니다 (V2는 단일 `.js` 파일 경로를 건너뜁니다):
 
 ```json
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["file:///home/you/work/cocrates.ai/opencode/dist/index.js"]
+  "plugins": ["/home/you/work/cocrates.ai/opencode"]
 }
 ```
+
+`package.json`의 `exports["."]`가 `dist/index.js`를 가리키므로, 빌드 후 위처럼 디렉터리를 넣으면 됩니다.
 
 ## 배포
 
@@ -88,8 +92,8 @@ npm run build
 `opencode-v*` 태그를 push하면 빌드 산출물이 Release에 첨부됩니다.
 
 ```bash
-git tag opencode-v0.1.4
-git push origin opencode-v0.1.4
+git tag opencode-v0.2.0
+git push origin opencode-v0.2.0
 ```
 
 ### npm 배포

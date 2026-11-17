@@ -3,12 +3,16 @@
  * Generate: npm run generate:agents
  */
 
-import type { Config } from '@opencode-ai/plugin';
 import { getAgentSpecs, getAgentSlugsFromSpecs } from './specs.gen.js';
-import { specToAgentConfig, type AgentSpec } from './parse.js';
+import { applySpecToAgent, type AgentSpec } from './parse.js';
 
-export { parseAgentMd, specToAgentConfig } from './parse.js';
-export type { AgentSpec, AgentMode } from './parse.js';
+export { parseAgentMd, specToAgentConfig, applySpecToAgent } from './parse.js';
+export type { AgentSpec, AgentMode, AgentConfigPatch } from './parse.js';
+
+/** Minimal editor surface used by registerAgents (matches AgentEditor.update). */
+export interface AgentRegistrationEditor {
+  update(id: string, update: (agent: Record<string, unknown>) => void): void;
+}
 
 /** Load agent spec by slug (from embedded specs). */
 export function loadAgentSpec(slug: string): AgentSpec {
@@ -23,14 +27,14 @@ export function getAgentSlugs(): string[] {
 }
 
 /**
- * Register all agents into config.agent.
- * OpenCode plugin config callback receives Config; mutating config.agent is the intended API.
+ * Register all agents via AgentEditor.update (upsert).
+ * Missing agents are created from Agent.Info.default(id).
  */
-export function registerAgents(config: Config): void {
-  config.agent ??= {};
-
+export function registerAgents(editor: AgentRegistrationEditor): void {
   for (const slug of getAgentSlugs()) {
     const spec = loadAgentSpec(slug);
-    config.agent[spec.name] = specToAgentConfig(spec);
+    editor.update(spec.name, (agent) => {
+      applySpecToAgent(agent, spec);
+    });
   }
 }

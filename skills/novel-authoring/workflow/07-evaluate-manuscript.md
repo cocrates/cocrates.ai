@@ -116,7 +116,8 @@ Write `evaluations/{nnn}-{episode-slug}-manuscript.md` (separate from design eva
 | No degeneration loop (same phrase block repeated 3+× in close proximity) | ✅ / ❌ | {Lnn: 「…」; N×; L…} |
 | Sensory/catalog discipline (no **non-advancing** filler descriptor stacks) | ✅ / ❌ | {filler stacks only — designed motif / advancing clue ≠ ❌; Lnn: 「…」} |
 | No author-meta / stage-direction prose | ✅ / ❌ | {locale-aware scan; hit → ❌ with Lnn: 「…」} |
-| No installment meta in body (“in episode 001” / `001화에서` as time/place — H1 heading allowed) | ✅ / ❌ | {body only; hit → ❌ with Lnn: 「…」} |
+| No installment meta in body (numbered / ordinal / slug — H1 allowed) | ✅ / ❌ | {“previous episode”, `episode-05`, `이전 에피소드`, `지난 화`, `001화에서` as time/place — body only} |
+| No production meta blocks in body | ✅ / ❌ | {`Gate`, `Stage`, `Carry-⑥`, eval/workflow paste — H1 + prose only} |
 | Evidence integrity (char count + L quotes) | ✅ / ❌ | {header chars = Floor chars = recompute; every cited L contains its quote; file line count = header} |
 
 ## Consistency Checks (Design Fidelity)
@@ -241,7 +242,7 @@ For **each** persona in the active set (do not replace with a single prose parag
 |--------|------|----------------|
 | **Pending** | `Apply? = yes` — manuscript (or design/architecture) must change before release | **Blocks** Release ready ✅ |
 | **Skip** | `Apply? = no` — rejected / not applying this turn | Does not block |
-| **Carry-⑧** | `Apply? = yes` — constraint only for release notes / next-ep continuity (rare); prose need not change | Does **not** block Release ready (record for ⑧) |
+| **Carry-⑧** | `Apply? = yes` — constraint for release notes / next-ep continuity / **design-record hygiene** (e.g. header Est. ≠ scene sum in design file); prose need not change | Does **not** block Release ready (record for ⑧) |
 
 **Rules:**
 - `Apply? = no` → Status **must be Skip** — never Pending.
@@ -282,7 +283,7 @@ For **each** persona in the active set (do not replace with a single prose parag
 
 **When:** After Load + Design-Fidelity re-check, **before** marking personas or verdicts as passing.
 
-**How to run:** Ensure **`manuscripts/{nnn}-{episode-slug}.md`** is in this turn’s context (load once if missing). Copy **the line count** and **the character count**. Use only L numbers **≤ line_count**. Write `char_count` into Floor Evidence **and** the header — **never** score Length ❌ as “uncounted”; never invent from line×avg. Confirm the header integers match the tool fields before scoring Length ✅. For Uncatalogued nouns, open Appearing character **profiles** (states) before ❌. When writing each `Lnn: 「…」`, confirm the quote sits on that line. Scan for quoted dialogue. Scan for author-meta / plan-language / **installment meta in the body** (see Stage ⑥ locale-aware table — “In episode 001 I didn’t see that scratch.” / `001화에서 나는 그 흠집을 보지 못했다.`). Do **not** fail H1 `# Episode {nnn}: {Title}`. Scan the **full** prose for **every** repeated block. Map `---` (or equivalent) to Scene 1…N spans before claiming scene coverage. Do not invent L numbers from chat memory or use `episodes/` as a stand-in. Compare against the episode design and `overview.md` **Scale**. **Do not** re-read the manuscript after writing the evaluation just to confirm.
+**How to run:** Ensure **`manuscripts/{nnn}-{episode-slug}.md`** is in this turn’s context (load once if missing). Copy **the line count** and **the character count**. Use only L numbers **≤ line_count**. Write `char_count` into Floor Evidence **and** the header — **never** score Length ❌ as “uncounted”; never invent from line×avg. Confirm the header integers match the tool fields before scoring Length ✅. For Uncatalogued nouns, open Appearing character **profiles** (states) before ❌. When writing each `Lnn: 「…」`, confirm the quote sits on that line. Scan for quoted dialogue. Scan for author-meta / plan-language / **installment meta** (numbered episode, “previous episode”, `episode-05`, `이전 에피소드`, `지난 화` — see Stage ⑥ Installment meta scan). Scan for **production meta blocks** (`Gate`, `Stage`, `Carry-⑥`, workflow paste). Do **not** fail H1 `# Episode {nnn}: {Title}`. Scan the **full** prose for **every** repeated block.
 
 ### Evidence rules (hard)
 
@@ -311,8 +312,9 @@ For **each** persona in the active set (do not replace with a single prose parag
 | **No degeneration loop** | Rhythm varies | Same **phrase block** **≥3×** within one scene or adjacent paragraphs; repeated confirmation of the same fact |
 | **Sensory/catalog discipline** | Details serve the moment; designed motif / advancing clue OK | **Non-advancing** filler stacks without new action |
 | **No author-meta / stage-direction prose** | Narration stays in-world | Design-memo sentences as author notes; staging/camera jargon (`viewer-left`, etc.) |
-| **No installment meta in body** | Body never cites this work’s own Part / Episode / Chapter / 화 numbers as time or place | “In episode 001 I didn’t see that scratch.” / `001화에서 나는 그 흠집을 보지 못했다.` / “in Part 1” / `지난 화에서`. H1 `# Episode {nnn}: {Title}` is **not** a fail |
-| **Evidence integrity** | Header chars = Floor chars = recompute; header line count = file N; every `Lnn` contains its 「quote」 and L≤N; scene L ranges match breaks or event landmarks | Fabricated / skipped / **implausible** char count (`{n}` > file length or ≈2× true body); wrong L; L>N; range-only Evidence; “uncounted” Length Evidence |
+| **No installment meta in body** | Body never cites serial structure (numbered episode/part/화, “previous episode”, `episode-NN`, `이전 에피소드`, `지난 화`, etc.) as time or place | See Stage ⑥ Installment meta scan. H1 `# Episode {nnn}: {Title}` is **not** a fail |
+| **No production meta blocks** | Body is H1 + publishable prose only | `Gate`, `Stage`, `Carry-⑥`, `Load ✅`, `TODO:`, eval/workflow paste in body |
+| **Evidence integrity** | Header chars = Floor chars = recompute; header line count = file N; every `Lnn` contains its 「quote」 and L≤N; scene L ranges match breaks or event landmarks | Fabricated / skipped / **implausible** char count; wrong L; L>N; range-only Evidence; “uncounted” Length Evidence |
 
 **Severity:** Any Floor ❌ → `Release ready` **⬜** (and `Prose Quality Floor` ❌). **Content** Floor ❌ → `Manuscript quality` **❌**. **Evidence integrity alone** → repair cites/count in the eval; `Manuscript quality` may stay ✅ if content rows ✅ — still no stage ⑧ until Evidence integrity ✅. Still write persona critique (for revision). Do not write Design-Fidelity Gate as overall Pass when content Floor/fidelity failed; do not put `Manuscript quality` ⚠️.
 
@@ -345,7 +347,7 @@ After adjudication, user selects findings to apply. Follow SKILL.md § Revision:
 - **E — continuity error** → prefer fix unreleased design/manuscript; if released must change → user must approve republication path
 - **F — Carry-⑥** → generation constraint only; no ④ edit required
 - **G — Skip** → `Apply? = no`; do not leave as Pending
-- **Carry-⑧** → release-note only; does not require ⑥ rewrite
+- **Carry-⑧** → release-note / design-record hygiene only (e.g. design Length Gate wording ≠ scene Est. sum); does not require ⑥ rewrite unless prose defect exists
 
 **Structural fixes require design-first updates; prose-only polish is allowed only when Key Events, Seeds/Hold, Prior Design Alignment, and continuity remain true.**
 

@@ -206,7 +206,9 @@ Global hard stops. Stage-specific MUST NOTs live in the matching workflow — th
 - Free-text locations; cite `+ facet` not listed under **Multi-facet anchors**
 - Ghost cast / Dialogue speakers absent from On stage; Appearing ≠ On stage union
 - Soften/harden Hook evidence across body surfaces; Out creep beyond Summary + Hook to Next
-- Present under-length, repeated, pasted, author-meta, or **installment-meta** manuscript (body cites this work’s own episode/part/화 numbers as time or place, e.g. “In episode 001 I didn’t see that scratch.”); skip Design-Fidelity or Prose Quality Floor
+- Present under-length, repeated, pasted, author-meta, **installment-meta** (body cites this work’s own episode/part/화 numbers, slugs like `episode-05`, or ordinal labels like “previous episode” / `이전 에피소드` / `지난 화` as time or place), or **production-meta** blocks in manuscript; skip Design-Fidelity or Prose Quality Floor
+- Approve Ep 002+ episode design (G4) without **Timeline Anchor** chained to prior summary
+- Use **Carry-⑥** for scene-function separation, When/Timeline Anchor fixes, mention-only tagging, or Distinct Turn overlap — default **Pending (Kind B)** at ④
 - Stage ⑤ editing `episodes/` (return to ④; Adjudication stays Pending until a later ⑤ turn)
 
 **Full checklists, Gate Evidence, forecast math, Path existence, Floor rows:** `04`–`07` only.
@@ -215,7 +217,7 @@ Global hard stops. Stage-specific MUST NOTs live in the matching workflow — th
 
 ## Completion Criteria
 
-**Per episode:** ④ → [⑤] → ⑥ → ⑦ → revisions → ⑧ + continuity
+**Per episode:** ④ (incl. Timeline Anchor ep 002+, Arithmetic Lock, Distinct Turn) → [⑤] → ⑥ (incl. installment-meta + meta-block purge) → ⑦ → revisions → ⑧ + continuity
 
 **Work complete:** Episode List complete → all episodes designed and released → user final approval
 
@@ -348,7 +350,7 @@ Staging **cites** character states — it does not invent outfits/weapons. Same 
 
 **Carry vs design (hard):**
 - **Carry-⑥** = generation-time only (Hold, POV limits, do-not-narrate, motif-touch reminders). Does **not** rewrite design fields.
-- Findings that need design-field changes (closing image/beat, crowded Out, adjacent scenes on the same Location facet, observable character cost, scene separation) → Status **Pending** (Kind **B**), not Carry-⑥.
+- Findings that need design-field changes (closing image/beat, crowded Out, adjacent scenes on the same Location facet, **adjacent Distinct Turn overlap**, **Timeline Anchor / When**, **mention-only** tagging, observable character cost, scene separation, knowledge-path / return-range gaps) → Status **Pending** (Kind **B** or **D**), not Carry-⑥.
 - User says “apply recommendations / 권고 반영”: ask Kind **B** vs **F** in one line, **or** default Med+ design-field findings to **B**.
 - After Kind **B**/**D** revision: **re-run** Schema + Consistency + Adjudication on the **revised** design body; mark applied rows **Applied-④**; sync design Gate **G4**, eval Gate **G5**, and `TODO.md` in the **same** approval turn. **Forbidden:** flip G4/G5 to Approved without rewriting the eval against the revised file.
 
